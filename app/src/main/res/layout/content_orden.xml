@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Orden"
+    tools:showIn="@layout/app_bar_orden">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <ListView
+            android:id="@+id/listorden"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Orden"
+            android:layout_marginStart="60dp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/ordsearch"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:inputType="number" />
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="30dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:id="@+id/borden"
+            android:layout_marginStart="135dp"
+            android:layout_marginLeft="30dp" />
+
+
+        <EditText
+            android:id="@+id/contsearch"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="15dp"
+            android:inputType="text|number" />
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="30dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:id="@+id/bcontrato"
+            android:layout_marginStart="330dp"
+            android:layout_marginLeft="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No. de Contrato"
+            android:layout_marginStart="240dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:text="Contrato"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="50dp"
+            android:text="# de Orden"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="320dp"
+            android:text="Status"
+            android:layout_marginTop="50dp"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cambiodom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="220dp"
+            android:layout_toRightOf="@+id/observacion"
+            android:text="Cambio Domicilio"
+            android:textSize="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="450dp"/>
+        <Button
+            android:id="@+id/cambioapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="100dp"
+            android:layout_toRightOf="@+id/observacion"
+            android:text="Cambio Aparato"
+            android:textSize="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="450dp"/>
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

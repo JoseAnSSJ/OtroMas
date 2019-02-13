@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrabajosFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="80dp">
+        android:verticalScrollbarPosition="defaultPosition"
+        android:visibility="visible">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      >
+
+
+
+
+        <TextView
+                android:id="@+id/uno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="0dp"
+                android:text="Clasificacion del problema"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/Sp1"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_below="@+id/uno"
+                android:layout_alignStart="@+id/uno"
+                android:background="@drawable/spinners">
+
+            </Spinner>
+
+            <TextView
+                android:id="@+id/dos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/uno"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="89dp"
+                android:text="Prioridad"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/Sp2"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_below="@+id/dos"
+                android:layout_alignStart="@+id/uno"
+                android:background="@drawable/spinners">
+
+            </Spinner>
+
+            <TextView
+                android:id="@+id/cinco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/uno"
+                android:layout_marginTop="185dp"
+                android:text="Reporte del cliente"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cinco"
+                android:layout_alignStart="@+id/uno"
+                android:hint="Sin internet" />
+
+
+            <TextView
+                android:id="@+id/tres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/uno"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="261dp"
+                android:text="Observaciones"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/observa"
+                android:layout_width="357dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/tres"
+                android:layout_alignStart="@+id/uno"
+                android:hint="procede de una Atencion Telefonica Atendio el Reporte el usuario; SA" />
+
+            <TextView
+                android:id="@+id/cuatro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/uno"
+                android:layout_marginTop="360dp"
+                android:text="Tipo de solucion"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/tiposol"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_below="@+id/cuatro"
+                android:layout_alignStart="@+id/uno"
+                android:background="@drawable/spinners"
+                android:hint="COADI-Cobro De Adeudo Servicio De Internet" />
+
+
+            <TextView
+                android:id="@+id/txtw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="450dp"
+                android:layout_alignStart="@+id/uno"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:text="Problema Real" />
+
+        <EditText
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_below="@+id/txtw"
+            android:layout_alignStart="@+id/uno"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/contorno"
+            android:inputType="text" />
+
+
+    </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>
