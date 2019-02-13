@@ -13,9 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="23dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="-50dp"
         android:text="Número de extenciones por instalar"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_alignTop="@id/txtExtencion"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -24,13 +26,16 @@
         android:textSize="23dp"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:id="@+id/txtExtencion"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aceptar"
-        android:layout_marginTop="150dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:layout_alignTop="@id/txtExtencion"
         android:id="@+id/extencionAceptar"
         />
 </RelativeLayout>
