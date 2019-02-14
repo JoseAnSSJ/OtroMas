@@ -23,6 +23,7 @@ import com.example.pablo.prueba7.Modelos.GetdameSerDELCliresumenResult;
 import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.GetuspConsultaTblClasificacionProblemasListResult;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
+import com.example.pablo.prueba7.Modelos.NoEntregadosModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.Queja;
 
@@ -66,8 +67,10 @@ public class Array {
     public static ArrayList<List<GetSP_StatusAparatosListResult>> dataStaApa;
     public static  ArrayList<List<GetListTipoAparatosByIdArticuloResult>> dataApaTipo;
     public static  ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>> dataApaTipDis;
- public static  ArrayList<List<GetDameDatosCAMDOResult>> dataCAMDO;
+    public static  ArrayList<List<GetDameDatosCAMDOResult>> dataCAMDO;
     public static  ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> dataArbSer;
+    public static  ArrayList<List<NoEntregadosModel>> dataNoent;
+
 
     public static  ArrayList<List<GetMuestraMedioPorServicoContratadoListResult>> dataMedSer;
     public static  ArrayList<List<GetMuestraTipoAparatoListResult>> dataTipoAparatos;

@@ -38,6 +38,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoR
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 import static com.example.pablo.prueba7.Request.Request.contbu;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
+import static com.example.pablo.prueba7.Trabajos.NoEntregadosObject;
 import static com.example.pablo.prueba7.asignacion.jsonArray;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
 import static com.example.pablo.prueba7.asignado.idArticuloasignado;
@@ -914,6 +915,29 @@ public class Services {
                 Request newRequest = chain.request().newBuilder()
                         .addHeader("Authorization", UserModel.Codigo)
                         .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        }).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(Service.class);
+    }
+
+    //////////////Aparatos no entregados/////C//////////
+    public Service sendAparatoNoEntregado() throws JSONException {
+        MediaType JSON = MediaType.parse("application/json; charse=utf-8");
+        final RequestBody body = RequestBody.create(JSON, NoEntregadosObject.toString());
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type","application/json" )
                         .post(body)
                         .build();
                 return chain.proceed(newRequest);

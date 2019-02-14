@@ -36,6 +36,8 @@ public class Constants {
     public static final String URL_GET_ITEC="OrdSer/GetConTecnicoAgenda";
     public static final String URL_GET_ASERVICE="DameSerDelCliFac/GetDameSerDelCliFacList";
 
+    public static final String URL_SEND_NO_ENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
+
 
 
 }

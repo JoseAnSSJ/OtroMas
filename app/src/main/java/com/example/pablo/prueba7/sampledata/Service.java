@@ -24,6 +24,7 @@ import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
+import com.example.pablo.prueba7.Listas.NoEntregadosList;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -96,6 +97,9 @@ public interface Service {
     Call<JSONNombreTecnico>getNom();
     @POST(Constants.URL_GET_ASERVICE)
     Call<JSONServicioAsignado>getServ();
+
+    @POST(Constants.URL_SEND_NO_ENTREGADOS)
+    Call<NoEntregadosList>getent();
 
 }
 
