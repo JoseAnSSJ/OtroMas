@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
@@ -32,11 +33,12 @@ public class asignacion extends AppCompatActivity {
 Array array = new Array();
 Request request = new Request();
 
-    public static Button siguiente, eliminar, aceptarAsignacion,eliminarAparato;
+    public static Button siguiente, eliminar, aceptarAsignacion,eliminarAparato, cancelarAsigancion;
     public static  Button aceptarmedio,cancelarmedio;
     public static ListView Asignacion;
     public static Spinner spinnerMedio;
     public static RelativeLayout layoutMedio;
+
 
 int c,d,e;
 String f;
@@ -52,7 +54,7 @@ String f;
 
     GetMuestraArbolServiciosAparatosPorinstalarListResult modelo = new GetMuestraArbolServiciosAparatosPorinstalarListResult();
 
-    Arbol_Adapter adapter;
+    public static Arbol_Adapter adapter;
 
 
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -68,6 +70,7 @@ String f;
         spinnerMedio = findViewById(R.id.spinnerMedio);
         aceptarAsignacion = findViewById(R.id.aceptarAsignacion);
         layoutMedio = findViewById(R.id.poiuyt);
+        cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
 
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
@@ -140,23 +143,19 @@ aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
                     jsonObject3.put("children", jsonArray3);
                     jsonObject3.put("clv_orden", dat.get(c).clv_orden);
                     jsonArray2.put(c, jsonObject3);
+                    Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
+                    request.getAceptatAsignacino(getApplicationContext());
+                  //  adapter = new Arbol_Adapter(getApplicationContext());
+                 //   Asignacion.setAdapter(adapter);
+                //    Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                    finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(asignacion.this, "Error",Toast.LENGTH_LONG);
                 }
             }
 
 
-
-
-
-
-            request.getAceptatAsignacino(getApplicationContext());
-
-        request.getAceptatAsignacino(getApplicationContext());
-        adapter = new Arbol_Adapter(getApplicationContext());
-        Asignacion.setAdapter(adapter);
-        Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-            finish();
         //       Intent intento=new Intent(asignacion.this,MainActivity.class);
       // startActivity(intento);
 
@@ -213,13 +212,18 @@ eliminarAparato.setOnClickListener(new View.OnClickListener() {
 
 
 
-        adapter = new Arbol_Adapter(getApplicationContext());
+      //  adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
-        Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+      //  Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         siguiente.setEnabled(false);
     }
 });
-
+cancelarAsigancion.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
+});
 
 
     }
