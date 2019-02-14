@@ -37,7 +37,6 @@
 
     <CheckBox
         android:id="@+id/recibi"
-        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="25dp"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
@@ -45,6 +44,7 @@
 
 
         android:layout_marginTop="15dp"
-        android:clickable="false" />
+        android:checked="false"
+        android:clickable="true" />
 </RelativeLayout>
 </RelativeLayout>
