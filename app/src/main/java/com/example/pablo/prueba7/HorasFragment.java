@@ -22,6 +22,7 @@ import java.util.Calendar;
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
     EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
+    public static boolean reporteEjecutada=true, repotteVisita=false;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
@@ -74,7 +75,13 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 
-
+        if(selectDate1.getText()!=null){
+            selectDate2.setEnabled(true);
+            selectDate3.setEnabled(false);
+        }
+        if(selectDate2.getText()!=null){
+            selectDate3.setEnabled(true);
+        }
         return view;
     }
 
@@ -84,12 +91,32 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             case R.id.ejutada:
             {
                 mostrarParticular(false);
+                selectDate.setText("");
+                selectTime.setText("");
+                selectTime.setEnabled(false);
+                selectDate1.setText("");
+                selectDate2.setText("");
+                selectDate3.setText("");
+                selectTime2.setText("");
+                selectTime2.setEnabled(false);
+                reporteEjecutada=false;
+                repotteVisita=true;
 
             }
             break;
             case R.id.visitada:
             {
                 mostrarParticular(true);
+                selectDate.setText("");
+                selectTime.setText("");
+                selectTime.setEnabled(true);
+                selectDate1.setText("");
+                selectDate2.setText("");
+                selectDate3.setText("");
+                selectTime2.setText("");
+                selectTime.setEnabled(true);
+                reporteEjecutada=true;
+                repotteVisita=false;
             }
             break;
         }
@@ -107,7 +134,11 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    selectDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    if(monthOfYear<10){
+                        selectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                    }else {
+                        selectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
                 }
             }, mYear, mMonth, mDay);
@@ -144,7 +175,11 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    selectDate1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    if(monthOfYear<10){
+                        selectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                    }else {
+                        selectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
                 }
             }, mYear, mMonth, mDay);
@@ -164,7 +199,11 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    selectDate2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    if(monthOfYear<10){
+                        selectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                    }else {
+                        selectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
                 }
             }, mYear, mMonth, mDay);
@@ -180,7 +219,11 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    selectDate3.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    if(monthOfYear<10){
+                        selectDate3.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                    }else {
+                        selectDate3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
                 }
 

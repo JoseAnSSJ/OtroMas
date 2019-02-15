@@ -537,7 +537,8 @@ public class Request extends AppCompatActivity {
                         userJson.get("STATUS").getAsString(),
                         userJson.get("Obs").getAsString(),
                         userJson.get("Clv_Orden").getAsInt(),
-                        userJson.get("Clv_TipSer").getAsInt()
+                        userJson.get("Clv_TipSer").getAsInt(),
+                        userJson.get("Fec_Sol").getAsString()
 
                 );
 try{
