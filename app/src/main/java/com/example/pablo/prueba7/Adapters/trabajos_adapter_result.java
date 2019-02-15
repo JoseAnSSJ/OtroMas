@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -31,6 +32,9 @@ public class trabajos_adapter_result extends BaseAdapter {
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
     public static int ClaveTrabajo;
+    public static String trabajoq;
+    public static Integer claveTra;
+    public static boolean statusv;
 
     public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx){
         this.trabajox=trabajox;
@@ -45,6 +49,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public class viewHolder{
         TextView trabajo;
         Button accion;
+        CheckBox recibi;
 
     }
 
@@ -73,6 +78,7 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
+            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibido);
 
             convertView.setTag(holder);
         }
@@ -81,7 +87,21 @@ public class trabajos_adapter_result extends BaseAdapter {
         }
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
+      ///////////
+        if(holder.recibi.isSelected()){
+            statusv=true;
+        }else{
+            statusv=false;
+        }
+       ////////
         ClaveTrabajo = Array.clavex.get(position);
+        trabajoq=Array.trabajox.get(position);
+        claveTra=Array.clvtrab.get(position);
+       // clvor = Integer.valueOf(ordensrc.get(position));
+
+
+
+
 
         holder.accion.setOnClickListener(new View.OnClickListener() {
 

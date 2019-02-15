@@ -36,7 +36,7 @@
         android:textSize="10dp" />
 
     <CheckBox
-        android:id="@+id/recibi"
+        android:id="@+id/recibido"
         android:layout_width="25dp"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"

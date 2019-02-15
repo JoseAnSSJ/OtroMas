@@ -3,6 +3,7 @@ package com.example.pablo.prueba7;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +27,18 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.claveTra;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.statusv;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.trabajoq;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Trabajos extends Fragment{
-    public static JSONObject NoEntregadosObject = new JSONObject();
+    public static JSONObject NoEntregadosObject;
     public static JSONArray NoEntregadosArray=new JSONArray();
     Array array=new Array();
     RelativeLayout layoutAnimado;
@@ -53,37 +60,42 @@ public class Trabajos extends Fragment{
 
 //////////////
         adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx);
+
+
+
         //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
 /////////////
 
-       /* trabajos.setOnClickListener(new View.OnClickListener() {
+        accion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Iterator<List<NoEntregadosModel>> itData = array.dataNoent.iterator();
                 List<NoEntregadosModel> dat = (List<NoEntregadosModel>) itData.next();
-                for(int a=0; a<dat.size(); a++ ){
+          //     for(int a=0; a<Array.dataTrabajos.size(); a++ ){
                     try {
                         NoEntregadosObject = new JSONObject();
-                        NoEntregadosObject.put("Clave", dat.get(a).getClave());
-                        NoEntregadosObject.put("Clv_Orden", dat.get(a).getClvOrden());
-                        NoEntregadosObject.put("Clv_Trabajo", dat.get(a).getClvTrabajo());
-                        NoEntregadosObject.put("Descripcion", dat.get(a).getDescripcion());
-                        NoEntregadosObject.put("Obs", dat.get(a).getDescripcion());
-                        NoEntregadosObject.put("SeRealiza", dat.get(a).getSeRealiza());
-                        NoEntregadosObject.put("recibi", dat.get(a).getRecibi());
+                        NoEntregadosObject.put("Clave", ClaveTrabajo);
+                        NoEntregadosObject.put("Clv_Orden", clvor);
+                        NoEntregadosObject.put("Clv_Trabajo", claveTra);
+                        NoEntregadosObject.put("Descripcion",trabajoq );
+                        NoEntregadosObject.put("Obs", null);
+                        NoEntregadosObject.put("SeRealiza", true);
+                        NoEntregadosObject.put("recibi",true);
 
-                        NoEntregadosArray.put(a,NoEntregadosObject);
+                        NoEntregadosArray.put(NoEntregadosObject);
 
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+                   //  }
+
+
+
 
             }
-        });*/
+        });
 
 
 

@@ -656,6 +656,9 @@ try{
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clavex.add(dat.get(i).getClave());
+                        Array.clvorden.add(dat.get(i).getClvOrden());
+                        Array.clvtrab.add(dat.get(i).getClvTrabajo());
+
                     }
                 }
 
