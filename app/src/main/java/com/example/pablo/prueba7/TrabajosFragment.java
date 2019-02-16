@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +18,8 @@ import com.example.pablo.prueba7.Request.Request;
  */
 public class TrabajosFragment extends Fragment {
     public static Spinner solucion,prioridad,clasific;
-    public  static TextView desc, problm;
+    public static TextView desc, problm;
+    public static EditText problemReal;
     Request request = new Request();
 
 
@@ -40,11 +42,17 @@ public class TrabajosFragment extends Fragment {
         request.getReportes();
 
 
+
+
         solucion = view.findViewById(R.id.tiposol);
+        solucion.getSelectedItemPosition();
         prioridad= view.findViewById(R.id.Sp2);
         desc= view.findViewById(R.id.observa);
         problm= view.findViewById(R.id.report);
         clasific= view.findViewById(R.id.Sp1);
+
+        problemReal= view.findViewById(R.id.probReal);
+        problemReal.setText("  ");
 
         return view;
     }

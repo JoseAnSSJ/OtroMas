@@ -35,6 +35,8 @@ public class Constants {
     public static final String URL_GET_CLASIF="uspConsultaTblClasificacionProblemas/GetuspConsultaTblClasificacionProblemasList";
     public static final String URL_GET_ITEC="OrdSer/GetConTecnicoAgenda";
     public static final String URL_GET_ASERVICE="DameSerDelCliFac/GetDameSerDelCliFacList";
+    public static final String URL_Get_HIHF="OrdSer/GetConHIHF_OrdenQeja";
+    public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
 
 
 

@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.example.pablo.prueba7.Request.Request;
+
 import java.util.Calendar;
 
 
@@ -21,12 +23,14 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
-    EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
+   public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     RadioButton btn1, bt2;
+    Request request = new Request();
+
 
 
     public HorasFragment() {
@@ -41,6 +45,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
 
         TecSec1= view.findViewById(R.id.tecnicosec1);
+        request.getTecSecR(getContext());
 
 
 
@@ -52,8 +57,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         selectDate3 = view.findViewById(R.id.visita31);
 
 
+
         selectTime = view.findViewById(R.id.horai);
         selectTime2 = view.findViewById(R.id.horaf);
+
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
@@ -80,6 +87,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+
         switch (v.getId()) {
             case R.id.ejutada:
             {
@@ -206,6 +215,11 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             }, mHour, mMinute, false);
             timePickerDialog.show();
         }
+        processScreen();
+    }
+
+    private void processScreen() {
+
 
 
     }

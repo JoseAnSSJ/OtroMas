@@ -1,20 +1,18 @@
 package com.example.pablo.prueba7.Request;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
-import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
+import com.example.pablo.prueba7.HorasFragment;
 import com.example.pablo.prueba7.Inicio;
 import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
@@ -40,9 +38,9 @@ import com.example.pablo.prueba7.Listas.JSONServiciosAparatos;
 import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
+import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
-import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -60,6 +58,7 @@ import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinst
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
+import com.example.pablo.prueba7.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
@@ -74,15 +73,12 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
-import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
-import com.example.pablo.prueba7.Trabajos;
 import com.example.pablo.prueba7.TrabajosFragment;
 import com.example.pablo.prueba7.asignacion;
 import com.example.pablo.prueba7.asignado;
 import com.example.pablo.prueba7.sampledata.Service;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import org.json.JSONException;
 
@@ -95,10 +91,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoB;
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
+import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Trabajos.trabajos;
+import static com.example.pablo.prueba7.TrabajosFragment.solucion;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -1248,10 +1245,12 @@ try{
                         datos[j] = dat.get(i).getDESCRIPCION();
                         j = j + 1;
                         //Sol.add(String.valueOf(dat.get(i).getDESCRIPCION()));
+                        Asigna.add(dat.get(i).getDESCRIPCION());
                     }
 
+                    solucion.setPrompt("Select an item");
                     ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    TrabajosFragment.solucion.setAdapter(adapter);
+                    solucion.setAdapter(adapter);
                 }
             }
 
@@ -1430,6 +1429,7 @@ try{
 
         });
     }
+    //////////////////////////////////////servicios asiggnados ///////////////////////////////////////////
     public void getServiciosAsignados() {
         Service service = null;
         try {
@@ -1505,6 +1505,7 @@ try{
 
                         abc=dat.get(i).contratoBueno;
                         getServiciosAsignados();
+
                     }
 
 
@@ -1520,6 +1521,52 @@ try{
         });
 
     }
+    public void getTecSecR(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getTecSecRService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JSONTecSecReport> call = service.getTec();
+        call.enqueue(new Callback<JSONTecSecReport>() {
+
+
+            @Override
+            public void onResponse(Call<JSONTecSecReport> call, Response<JSONTecSecReport> response) {
+                JSONTecSecReport jsonResponse = response.body();
+                array.dataTECSEC = new ArrayList<List<GetMuestraTecnicosAlmacenListResult>>((asList(jsonResponse.getGetMuestraTecnicosAlmacenListResult())));
+                Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata = array.dataTECSEC.iterator();
+                while (itdata.hasNext()) {
+
+                    List<GetMuestraTecnicosAlmacenListResult> dat = itdata.next();
+                    String datos[] = new String[dat.size() + 1];
+                    datos[0] = "Seleccione Tecnico Secundario";
+                    int j = 1;
+
+                    for (int i = 0; i < dat.size(); i++) {
+                        Log.d("descripcion81", String.valueOf(dat.get(i).getNombre()));
+                        datos[j] = dat.get(i).getNombre();
+                        j = j + 1;
+
+                    }
+
+                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                    HorasFragment.TecSec1.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONTecSecReport> call, Throwable t) {
+
+            }
+
+
+        });
+    }
+
 
 
 }

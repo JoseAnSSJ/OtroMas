@@ -120,12 +120,10 @@ public class trabajos_adapter_result extends BaseAdapter {
                     Cmcontext.startActivity(intento);
 
                 }
-
-
-                /*if ((accion.getText().toString().trim().equalsIgnoreCase("null"))){
-                    accion.setEnabled(false);
-                    accion.setText("---");
-                }*/
+                if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
+                    holder.accion.setEnabled(false);
+                    holder.accion.setText("---");
+                }
 
             }
         });
