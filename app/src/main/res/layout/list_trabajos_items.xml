@@ -36,15 +36,16 @@
         android:textSize="10dp" />
 
     <CheckBox
-        android:id="@+id/recibi"
+        android:id="@+id/recibiap"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="25dp"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="320dp"
-
-
-        android:layout_marginTop="15dp"
-        android:clickable="false" />
+        android:layout_marginTop="17dp"
+        android:checked="false"
+        android:clickable="true"
+        android:duplicateParentState="false"
+        android:focusable="auto" />
 </RelativeLayout>
 </RelativeLayout>

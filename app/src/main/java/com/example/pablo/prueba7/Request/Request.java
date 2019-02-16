@@ -9,6 +9,7 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
@@ -671,6 +672,8 @@ try{
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clavex.add(dat.get(i).getClave());
+                        Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                        Array.recibix[i].setChecked(false);
                     }
                 }
 
