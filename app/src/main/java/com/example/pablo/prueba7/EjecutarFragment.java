@@ -58,7 +58,7 @@ public class EjecutarFragment extends Fragment {
 a=0;
                 horaIni = String.valueOf(horas.selectTime.getText());
                 horaFin = String.valueOf(horas.selectTime2.getText());
-                if(horas.ejecutada=true) {
+                if(horas.ejecutada==1) {
                     try {
                         ini = LocalTime.parse(horaIni);
                     }catch (Exception e){
@@ -76,7 +76,7 @@ a=0;
                         ValidacionHoras();
                     }
                 }
-                if(horas.visita==true){
+                if(horas.visita==1){
                     ValidacionVisita();
                 }
 
@@ -128,7 +128,7 @@ public void ValidacionHoras(){
     }else{
         fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
     }
-    if(horas.ejecutada=true) {
+    if(horas.ejecutada==1) {
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(dateEje))) {
                 if(sdf.parse(fecha).after(sdf.parse(dateEje))){
@@ -167,23 +167,23 @@ public void ValidacionVisita(){
         fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
     }
 
-    if(horas.visita==true){
+    if(horas.visita==1){
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
-                    if (ini.isBefore(fin)) {
-                        Toast.makeText(getActivity(), "Hora bienV y Fecha bienV", Toast.LENGTH_LONG).show();
-                    }
-                    if (ini.isAfter(fin)) {
-                        Toast.makeText(getActivity(), "La fecha de visita 1 no puede ser menor a la fecha de solicitud ni mayor a la fecha actual", Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
+
+                }else{
+                    Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
+            }else {
+                Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
             }
         }catch (ParseException e){
-            Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "VisitaFecha mal", Toast.LENGTH_LONG).show();
         }
     }
-    if(horas.visita1==true){
+    if(horas.visita1==1){
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
