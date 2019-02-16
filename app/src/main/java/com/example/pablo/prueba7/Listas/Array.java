@@ -1,5 +1,7 @@
 package com.example.pablo.prueba7.Listas;
 
+import android.widget.CheckBox;
+
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
@@ -51,6 +53,7 @@ public class Array {
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
+    public static CheckBox recibix[];
     //////////////////////////////////////////////////////
 
     public static ArrayList <String>nombreArbol=new ArrayList<>();

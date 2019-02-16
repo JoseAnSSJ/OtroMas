@@ -114,13 +114,24 @@
         android:id="@+id/siguiente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/aceptarAsignacion"
+        android:layout_above="@+id/cancelarAsignacion"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:text="Asignar Aparatos"
         android:enabled="false"
+        />
+    <Button
+        android:id="@+id/cancelarAsignacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/aceptarAsignacion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Cancelar"
         />
     <Button
         android:id="@+id/aceptarAsignacion"
@@ -132,6 +143,8 @@
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
         android:text="Aceptar"
+        android:enabled="false"
         />
+
 
 </RelativeLayout>

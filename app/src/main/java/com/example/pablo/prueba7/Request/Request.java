@@ -7,12 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
+<<<<<<< HEAD
 import com.example.pablo.prueba7.HorasFragment;
+=======
+import com.example.pablo.prueba7.ExtensionesAdi;
+>>>>>>> vicente2
 import com.example.pablo.prueba7.Inicio;
 import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
@@ -143,10 +148,16 @@ public class Request extends AppCompatActivity {
                     }
 
 
+                if(response.code()==200){
+                    Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
+                    getClv_tecnico();
+                    Intent intento = new Intent(context, Inicio.class);
+                    context.startActivity(intento);
 
+                }
                     b = true;
 
-                        getClv_tecnico();
+
 
 
 
@@ -194,9 +205,12 @@ public class Request extends AppCompatActivity {
                    //MainActivity.NombreTec.setText(data.get(0).tecnico);
 
                 }
-
-                getProximaCita();
+                if(response.code()==200){
+                    getProximaCita();
                     getOrdenes();
+
+                }
+
 
 
 
@@ -524,7 +538,8 @@ public class Request extends AppCompatActivity {
                         userJson.get("STATUS").getAsString(),
                         userJson.get("Obs").getAsString(),
                         userJson.get("Clv_Orden").getAsInt(),
-                        userJson.get("Clv_TipSer").getAsInt()
+                        userJson.get("Clv_TipSer").getAsInt(),
+                        userJson.get("Fec_Sol").getAsString()
 
                 );
 try{
@@ -539,16 +554,20 @@ try{
                 }
 
 
+try{
+    if (DeepConsModel.STATUS.equals("E")) {
+        MainActivity.Status.setText("Ejecutada");
 
-                if (DeepConsModel.STATUS.equals("E")) {
-                    MainActivity.Status.setText("Ejecutada");
+    } else if (DeepConsModel.STATUS.equals("P")) {
+        MainActivity.Status.setText("Pendiente");
 
-                } else if (DeepConsModel.STATUS.equals("P")) {
-                    MainActivity.Status.setText("Pendiente");
+    } else if (DeepConsModel.STATUS.equals("V")) {
+        MainActivity.Status.setText("En Visita");
+    }
+}catch (Exception e){
 
-                } else if (DeepConsModel.STATUS.equals("V")) {
-                    MainActivity.Status.setText("En Visita");
-                }
+}
+
             }
 
             @Override
@@ -653,6 +672,8 @@ try{
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clavex.add(dat.get(i).getClave());
+                        Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                        Array.recibix[i].setChecked(false);
                     }
                 }
 
@@ -721,7 +742,7 @@ try{
         });
     }
 ///////////////////////Extenciones Adicionales/////////////////
-    public void getExtencionesAdicionales() {
+    public void getExtencionesAdicionales(final Context context) {
 
         Service service = null;
         try {
@@ -739,6 +760,10 @@ try{
 
                 String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
                 txtExtencion.setText(string);
+                if(response1.code()==200){
+                    Intent intento = new Intent(context, ExtensionesAdi.class);
+                    context.startActivity(intento);
+                }
             }
 
             @Override
@@ -900,7 +925,7 @@ try{
             }
         });
     }
-    public void getCAMDO() {
+    public void getCAMDO(final Context context) {
         Service service = null;
         try {
             service = services.getCAMODOService();
@@ -943,7 +968,10 @@ try{
                         c.CasaOeste.setVisibility(View.VISIBLE);
                     }
 
-
+if(response.code()==200){
+    Intent intento = new Intent(context, CambioDom.class);
+    context.startActivity(intento);
+}
                 }
             }
 
@@ -954,7 +982,7 @@ try{
         });
     }
     /////////////////////////////Arbol Servicios//////////////////////////////
-    public void getArbSer()  {
+    public void getArbSer(final Context context)  {
         Service service = null;
         try {
             service = services.getArbolSerService();
@@ -978,7 +1006,10 @@ try{
                         array.nombreArbol.add(dat.get(i).getNombre());
                     }
                 }
-
+if(response.code()==200){
+    Intent intento25 = new Intent(context, asignacion.class);
+    context.startActivity(intento25);
+}
             }
 
             @Override
@@ -1162,8 +1193,12 @@ try{
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-            Toast.makeText(context, "aparato agregado", Toast.LENGTH_LONG).show();
 
+                if(response.code()==200){
+                    Toast.makeText(context, "aparato agregado", Toast.LENGTH_LONG).show();
+                    finish();
+
+                }
             }
 
             @Override

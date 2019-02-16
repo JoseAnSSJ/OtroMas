@@ -75,7 +75,7 @@ public class Orden extends AppCompatActivity
 
         //* Boton para ir a menu principal
 
-        cambiodom.setOnClickListener(new View.OnClickListener() {
+       /* cambiodom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 request.getCAMDO();
@@ -90,7 +90,7 @@ public class Orden extends AppCompatActivity
                 Intent intent = new Intent(Orden.this, CambioAparato.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         ///////////Busqueda de orden/////////////
 

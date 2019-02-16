@@ -22,7 +22,6 @@
             android:orientation="horizontal">
 
             <RadioButton
-
                 android:id="@+id/ejutada"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
@@ -36,7 +35,7 @@
                 android:id="@+id/visitada"
                 android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:clickable="false"
                 android:focusable="auto"
                 android:text="Ejecutada"
@@ -91,7 +90,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
+                    android:hint="0/0/0"
                     android:textSize="20sp" />
 
 
@@ -102,7 +101,9 @@
                 android:id="@+id/RV"
                 android:layout_width="388dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/RE">
+                android:layout_below="@+id/RE"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,7 +133,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
+                    android:hint="0/0/0"
                     android:textSize="20dp" />
 
 
@@ -147,7 +148,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
+                    android:hint="0/0/0"
                     android:textSize="20dp" />
 
             </RelativeLayout>
@@ -191,6 +192,7 @@
                     android:layout_marginTop="58dp"
                     android:layout_marginBottom="4dp"
                     android:focusable="false"
+android:enabled="false"
                     android:hint="00:00"
                     android:textSize="20dp" />
 

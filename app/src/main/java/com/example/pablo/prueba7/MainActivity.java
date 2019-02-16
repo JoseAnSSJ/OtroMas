@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.getArbSer();
-                Intent intento=new Intent(MainActivity.this,asignacion.class);
-                startActivity(intento);
                 request.getInfoCliente();
                     request.getServicios();
                 if(layoutAnimado.getVisibility()==View.GONE) {
