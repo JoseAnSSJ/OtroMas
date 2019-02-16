@@ -18,6 +18,7 @@ public class EjecutarFragment extends Fragment {
     Button reiniciar;
     Button eject;
     EditText edt1;
+    public static int check;
 
     public EjecutarFragment() {
         // Required empty public constructor
@@ -38,6 +39,7 @@ public class EjecutarFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                processScreen();
 
                 if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
                     reiniciar.setEnabled(true);
@@ -69,6 +71,13 @@ public class EjecutarFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void processScreen() {
+       // check=Orden.ordenes.getCheckedItemPosition();
+        //check=Orden.ordenes.getCheckedItemPosition();
+
+
     }
 
 }
