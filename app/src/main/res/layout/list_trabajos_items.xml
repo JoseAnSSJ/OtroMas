@@ -42,17 +42,10 @@
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="320dp"
-<<<<<<< HEAD
-
-
         android:layout_marginTop="15dp"
         android:clickable="true"
-=======
-        android:layout_marginTop="17dp"
         android:checked="false"
-        android:clickable="true"
         android:duplicateParentState="false"
->>>>>>> vicente2
         android:focusable="auto" />
 </RelativeLayout>
 </RelativeLayout>

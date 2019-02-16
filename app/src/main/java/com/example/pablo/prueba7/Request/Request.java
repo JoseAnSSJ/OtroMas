@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Request;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +14,12 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
-<<<<<<< HEAD
-import com.example.pablo.prueba7.HorasFragment;
-=======
+
 import com.example.pablo.prueba7.ExtensionesAdi;
->>>>>>> vicente2
+import com.example.pablo.prueba7.HorasFragment;
+
+
+
 import com.example.pablo.prueba7.Inicio;
 import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
@@ -78,6 +80,7 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.TrabajosFragment;
 import com.example.pablo.prueba7.asignacion;

@@ -124,10 +124,7 @@ public class trabajos_adapter_result extends BaseAdapter {
                     request.getExtencionesAdicionales(Cmcontext);
 
                 }
-<<<<<<< HEAD
-=======
 
->>>>>>> vicente2
                 if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
                     holder.accion.setEnabled(false);
                     holder.accion.setText("---");

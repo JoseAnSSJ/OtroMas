@@ -23,12 +23,11 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
-<<<<<<< HEAD
+
    public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
-=======
-    EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
+
     public static boolean reporteEjecutada=true, repotteVisita=false;
->>>>>>> vicente2
+
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;

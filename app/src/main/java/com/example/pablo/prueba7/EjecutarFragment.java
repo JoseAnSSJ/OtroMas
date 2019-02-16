@@ -31,15 +31,15 @@ public class EjecutarFragment extends Fragment {
     Button reiniciar;
     Button eject;
     EditText edt1;
-<<<<<<< HEAD
+
     public static int check;
 
-=======
+
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
->>>>>>> vicente2
+
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -60,9 +60,9 @@ public class EjecutarFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
+
                 processScreen();
-=======
+
 a=0;
                 horaIni = String.valueOf(horas.selectTime.getText());
                 horaFin = String.valueOf(horas.selectTime2.getText());
@@ -88,7 +88,7 @@ a=0;
                     ValidacionVisita();
                 }
 
->>>>>>> vicente2
+
 
               /*  if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
                     reiniciar.setEnabled(true);
@@ -121,7 +121,15 @@ a=0;
         });
         return view;
     }
-@RequiresApi(api = Build.VERSION_CODES.O)
+
+    private void processScreen() {
+
+        // check=Orden.ordenes.getCheckedItemPosition();
+        //check=Orden.ordenes.getCheckedItemPosition();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
 public void ValidacionHoras(){
     String dateEje = String.valueOf(horas.selectDate.getText());
     String visita1 = String.valueOf(horas.selectDate1.getText());
@@ -161,7 +169,7 @@ public void ValidacionHoras(){
 
 }
 @RequiresApi(api = Build.VERSION_CODES.O)
-public void ValidacionVisita(){
+public void ValidacionVisita() {
     String visita1 = String.valueOf(horas.selectDate1.getText());
     String visita2 = String.valueOf(horas.selectDate2.getText());
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -170,13 +178,13 @@ public void ValidacionVisita(){
     mesE = c.get(Calendar.MONTH);
     diaE = c.get(Calendar.DAY_OF_MONTH);
 
-    if(mesE<10){
-        fecha = (diaE+1) + "/0" + (mesE + 1) + "/" + añoE;
-    }else{
-        fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
+    if (mesE < 10) {
+        fecha = (diaE + 1) + "/0" + (mesE + 1) + "/" + añoE;
+    } else {
+        fecha = (diaE + 1) + "/" + (mesE + 1) + "/" + añoE;
     }
 
-    if(horas.visita==true){
+    if (horas.visita == true) {
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
@@ -188,34 +196,25 @@ public void ValidacionVisita(){
                     }
                 }
             }
-        }catch (ParseException e){
+        } catch (ParseException e) {
             Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
         }
     }
-    if(horas.visita1==true){
+    if (horas.visita1 == true) {
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
-                    if(sdf.parse(visita1).after(sdf.parse(visita2))){
+                    if (sdf.parse(visita1).after(sdf.parse(visita2))) {
                         Toast.makeText(getActivity(), "Fecha bienV", Toast.LENGTH_LONG).show();
                     }
                     Toast.makeText(getActivity(), "La fecha de visita 2 no puede ser menor a la fecha de visita 1 ni mayor a la fecha actual", Toast.LENGTH_LONG).show();
                 }
             }
-        }catch (ParseException e){
+        } catch (ParseException e) {
             Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
         }
     }
 
-<<<<<<< HEAD
-    private void processScreen() {
-       // check=Orden.ordenes.getCheckedItemPosition();
-        //check=Orden.ordenes.getCheckedItemPosition();
 
 
-    }
-
-=======
-}
->>>>>>> vicente2
-}
+}}
