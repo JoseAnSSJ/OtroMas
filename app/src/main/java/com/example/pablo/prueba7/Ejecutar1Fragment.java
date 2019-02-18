@@ -50,6 +50,7 @@ public class Ejecutar1Fragment extends Fragment {
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
                     List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
                     char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
+                    fecha_sol="";
                     for(int i=0; i<10; i++){
 
                         fecha_sol = fecha_sol+caracteres[i];
