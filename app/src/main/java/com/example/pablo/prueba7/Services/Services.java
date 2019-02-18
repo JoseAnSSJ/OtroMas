@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Services;
 
 
 import com.example.pablo.prueba7.CambioAparato;
+import com.example.pablo.prueba7.Ejecutar1Fragment;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -37,6 +38,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.Spin;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.jsonObject1;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.probm;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.selectD;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.selectT;
@@ -822,13 +824,11 @@ public class Services {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Queja", clvReport);
-        jsonObject.put("Fecha_Ejecucion", selectD);
-        jsonObject.put("TipoSolucion", Spin);
-        jsonObject.put("Solucion", probm);
+
 
 
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -848,55 +848,8 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
-    ///////////////////////tipo prioridad///////////////C/////////////////
-    public Service getPrioridadService() {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-
-                    @Override
-                    public Response intercept(Interceptor.Chain chain) throws IOException {
-                        Request newRequest = chain.request().newBuilder()
-                                .addHeader("Authorization", UserModel.Codigo)
-                                .build();
 
 
-                        return chain.proceed(newRequest);
-                    }
-                }).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
-
-    //////////////////////////clasificacion/////////C///////
-    public Service getClasificacionService() {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-
-                    @Override
-                    public Response intercept(Interceptor.Chain chain) throws IOException {
-                        Request newRequest = chain.request().newBuilder()
-                                .addHeader("Authorization", UserModel.Codigo)
-                                .build();
-
-
-                        return chain.proceed(newRequest);
-                    }
-                }).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
     ///////////////////tecnicoNombre//////////F///////
 
     public Service getNombreService() throws JSONException {
@@ -954,14 +907,14 @@ public class Services {
     public Service getHIHFService() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clave", clvReport);
-
-
+        jsonObject.put("Fecha_Ejecucion", Ejecutar1Fragment.jsonObject1);
+        jsonObject.put("TipoSolucion", Ejecutar1Fragment.jsonObject1);
+        jsonObject.put("Solucion", Ejecutar1Fragment.jsonObject1);
         jsonObject.put("HoraFin", selectT2);
         jsonObject.put("HoraIni", selectT);
 
-
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        final RequestBody body = RequestBody.create(JSON, Ejecutar1Fragment.jsonObject1.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

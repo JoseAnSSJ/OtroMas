@@ -49,7 +49,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
 
         TecSec1= view.findViewById(R.id.tecnicosec1);
-        request.getTecSecR(getContext());
+
 
 
 
@@ -76,6 +76,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
+
+
         selectDate.setOnClickListener(this);
         selectDate1.setOnClickListener(this);
         selectDate2.setOnClickListener(this);

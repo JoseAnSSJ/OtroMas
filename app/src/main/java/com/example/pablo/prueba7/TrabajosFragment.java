@@ -16,7 +16,7 @@ import com.example.pablo.prueba7.Request.Request;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TrabajosFragment extends Fragment {
+public class TrabajosFragment extends Fragment implements View.OnClickListener {
     public static Spinner solucion,prioridad,clasific;
     public static TextView desc, problm;
     public static EditText problemReal;
@@ -36,10 +36,9 @@ public class TrabajosFragment extends Fragment {
         //  request.getServiciosAsignados(getContext());
         request.getnombretec(getContext());
         request.getSolucuion(getContext());
-        request.getPrior(getContext());
-        request.getClasific(getContext());
-        request.getReportesC();
-        request.getReportes();
+        request.getReportesC(getContext());
+        request.getReportes(getContext());
+
 
 
 
@@ -58,6 +57,10 @@ public class TrabajosFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }
 
 

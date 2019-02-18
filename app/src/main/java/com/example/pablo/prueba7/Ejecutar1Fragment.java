@@ -32,6 +32,10 @@ public class Ejecutar1Fragment extends Fragment {
     Button eject;
     Request request = new Request();
     Array array = new Array();
+    public static JSONObject jsonObject1 = new JSONObject();
+    public static JSONObject jsonObject2 = new JSONObject();
+
+
 
     public static JSONArray jsonArray1 = new JSONArray();
     public static  String selectD;
@@ -69,14 +73,14 @@ public class Ejecutar1Fragment extends Fragment {
                 processScreen();
 
 
-
-                JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("Clv_Queja", clvReport);
-                     jsonObject.put("Fecha_Ejecucion", selectD);
-                     jsonObject.put("TipoSolucion", Spin);
-                     jsonObject.put("Solucion", probm);
-                    jsonObject.put("Solucion", probm);
+                    jsonObject1.put("Clv_Queja", clvReport);
+                     jsonObject1.put("Fecha_Ejecucion", selectD);
+                     jsonObject1.put("TipoSolucion", Spin);
+                     jsonObject1.put("Solucion", probm);
+                     jsonObject1.put("Solucion", probm);
+                     jsonObject2.put("Fecha_Ejecucion",selectT2);
+                     jsonObject2.put("Fecha_Ejecucion",selectT);
 
 
 
@@ -84,11 +88,13 @@ public class Ejecutar1Fragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                JSONObject jsonObject1 = new JSONObject();
+
                 try {
-                    jsonObject1.put("Clave", clvReport);
-                    jsonObject1.put("HoraFin",selectT2);
-                    jsonObject1.put("HoraIni",selectT);
+                    jsonObject2.put("Clave", clvReport);
+                    jsonObject2.put("HoraFin",selectT2);
+                    jsonObject2.put("HoraIni",selectT);
+                    jsonObject2.put("HoraIni",selectT);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -101,6 +101,7 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
+import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Trabajos.trabajos;
 import static com.example.pablo.prueba7.TrabajosFragment.solucion;
@@ -1283,7 +1284,7 @@ if(response.code()==200){
                         datos[j] = dat.get(i).getDESCRIPCION();
                         j = j + 1;
                         //Sol.add(String.valueOf(dat.get(i).getDESCRIPCION()));
-                        Asigna.add(dat.get(i).getDESCRIPCION());
+
                     }
 
                     solucion.setPrompt("Select an item");
@@ -1300,7 +1301,7 @@ if(response.code()==200){
     }
     //////////////////////////////////////////Reporte del Cliente//////////////////////////////////////////////////////////////////////
 
-    public void getReportesC() {
+    public void getReportesC(final Context context) {
         Service service = null;
         try {
             service = services.getReporteCService();
@@ -1321,6 +1322,21 @@ if(response.code()==200){
                     for (int i = 0; i < dat.size(); ++i) {
                         Log.d("response40", dat.get(i).getObservaciones());
                         Log.d("response41", dat.get(i).getProblema());
+                        Log.d("response42",dat.get(i).getPrioridad());
+                        Log.d("response43",dat.get(i).getClasificacionProblema());
+
+                        Asigna.add(dat.get(i).getPrioridad());
+                        Asigna1.add(dat.get(i).getClasificacionProblema());
+
+
+
+
+                        ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,Asigna);
+                        TrabajosFragment.prioridad.setAdapter(adapter);
+
+
+                        ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,Asigna1 );
+                        TrabajosFragment.clasific.setAdapter(adapter1);
 
 
                         TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
@@ -1339,94 +1355,8 @@ if(response.code()==200){
         });
 
     }
-    /////////////////////////////////////////////Tipo de Prioridad/////////////////////////////////////////////////
 
-    public void getPrior(final Context context) {
-
-
-        Service service = services.getPrioridadService();
-        Call<JSONPrioridad> call = service.getprior();
-        call.enqueue(new Callback<JSONPrioridad>() {
-
-
-            @Override
-            public void onResponse(Call<JSONPrioridad> call, Response<JSONPrioridad> response) {
-                JSONPrioridad jsonResponse = response.body();
-                array.dataPriori = new ArrayList<List<GetSoftvGetPrioridadQuejaListResult>>((asList(jsonResponse.getGetSoftvGetPrioridadQuejaListResult())));
-                Iterator<List<GetSoftvGetPrioridadQuejaListResult>> itdata = array.dataPriori.
-                        iterator();
-                while (itdata.hasNext()) {
-
-                    List<GetSoftvGetPrioridadQuejaListResult> dat = itdata.next();
-                    String datos[] = new String[dat.size() + 1];
-                    datos[0] = "Seleccione Prioridad";
-                    int j = 1;
-
-                    for (int i = 0; i < dat.size(); i++) {
-                        Log.d("descripcion31", String.valueOf(dat.get(i).descripcion));
-                        datos[j] = dat.get(i).getDescripcion();
-                        j = j + 1;
-
-                    }
-
-                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    TrabajosFragment.prioridad.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JSONPrioridad> call, Throwable t) {
-
-            }
-
-
-        });
-    }
-
-    ////////////////////////////////////////Clasificacion/////////////////////////////////////////////////////////////////////////////
-    public void getClasific(final Context context) {
-
-
-        Service service = services.getClasificacionService();
-        Call<JSONClasificacionProblm> call = service.getclas();
-        call.enqueue(new Callback<JSONClasificacionProblm>() {
-
-
-            @Override
-            public void onResponse(Call<JSONClasificacionProblm> call, Response<JSONClasificacionProblm> response) {
-                JSONClasificacionProblm jsonResponse = response.body();
-
-
-                array.dataClasf = new ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>((asList(jsonResponse.getGetuspConsultaTblClasificacionProblemasListResult())));
-                Iterator<List<GetuspConsultaTblClasificacionProblemasListResult>> itdata = array.dataClasf.
-                        iterator();
-                while (itdata.hasNext()) {
-
-                    List<GetuspConsultaTblClasificacionProblemasListResult> dat = itdata.next();
-                    String datos[] = new String[dat.size() + 1];
-                    datos[0] = "Seleccione un Problema";
-                    int j = 1;
-
-                    for (int i = 0; i < dat.size(); i++) {
-                        Log.d("descripcion32", String.valueOf(dat.get(i).descripcion));
-                        datos[j] = dat.get(i).getDescripcion();
-                        j = j + 1;
-
-                    }
-
-                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    TrabajosFragment.clasific.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JSONClasificacionProblm> call, Throwable t) {
-
-            }
-
-
-        });
-    }
+  /////////////////Nombre Tecnico//////
 
     public void getnombretec(Context context) {
         Service service = null;
@@ -1448,6 +1378,7 @@ if(response.code()==200){
                     List<GetConTecnicoAgendaResult> dat = (List<GetConTecnicoAgendaResult>) itData.next();
                     for (int i = 0; i < dat.size(); ++i) {
                         Log.d("response50", dat.get(i).getTecnico());
+
 
 
 
@@ -1509,7 +1440,7 @@ if(response.code()==200){
 
         });
     }
-    public void getReportes() {
+    public void getReportes(final Context context) {
         Service service = null;
         try {
             service = services.getMediosReportes();
@@ -1543,6 +1474,8 @@ if(response.code()==200){
 
                         abc=dat.get(i).contratoBueno;
                         getServiciosAsignados();
+                        getTecSecR(context);
+
 
                     }
 
@@ -1593,6 +1526,8 @@ if(response.code()==200){
 
                     ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     HorasFragment.TecSec1.setAdapter(adapter);
+
+
                 }
             }
 
