@@ -58,6 +58,7 @@ Request request = new Request();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
         // Inflate the layout for this fragment
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.activity_hora, container, false);
         Obs = view.findViewById(R.id.obs);
 
@@ -140,6 +141,7 @@ Request request = new Request();
                     selectTime.setEnabled(false);
                     selectDate1.setText("");
                     selectDate2.setText("");
+                    selectDate2.setEnabled(false);
                     selectTime2.setText("");
                     selectTime2.setEnabled(false);
                     ejecutada=0;

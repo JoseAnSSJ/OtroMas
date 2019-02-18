@@ -43,6 +43,7 @@ public class EjecutarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
         // Inflate the layout for this fragment
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
@@ -130,7 +131,7 @@ public void ValidacionHoras(){
     }
     if(horas.ejecutada==1) {
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(dateEje))) {
+            if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje))) {
                 if(sdf.parse(fecha).after(sdf.parse(dateEje))){
                     if (ini.isBefore(fin)) {
                         Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
@@ -169,7 +170,7 @@ public void ValidacionVisita(){
 
     if(horas.visita==1){
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
+            if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
                     Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
 
@@ -180,7 +181,7 @@ public void ValidacionVisita(){
                 Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
             }
         }catch (ParseException e){
-            Toast.makeText(getActivity(), "VisitaFecha mal", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "VisitaFecha mal"+e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     if(horas.visita1==1){

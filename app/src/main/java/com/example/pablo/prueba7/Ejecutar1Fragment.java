@@ -50,7 +50,6 @@ public class Ejecutar1Fragment extends Fragment {
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
                     List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
                     char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
-       // String fecha_sol="";
                     for(int i=0; i<10; i++){
 
                         fecha_sol = fecha_sol+caracteres[i];
@@ -113,7 +112,7 @@ public class Ejecutar1Fragment extends Fragment {
         }
         if(horas.reporteEjecutada==1) {
             try {
-                if (sdf.parse(fecha_sol).after(sdf.parse(dateEje))) {
+                if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
                     if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
                         if (rini.isBefore(rfin)) {
                             Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
@@ -151,7 +150,7 @@ public class Ejecutar1Fragment extends Fragment {
 
         if(horas.repotteVisita==1){
             try {
-                if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
+                if (sdf.parse(fecha_sol).before(sdf.parse(visita1))) {
                     if (sdf.parse(rfecha).after(sdf.parse(visita1))) {
                         Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
 
@@ -167,7 +166,7 @@ public class Ejecutar1Fragment extends Fragment {
         }
         if(horas.reporteVisita1==1){
             try {
-                if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
+                if (sdf.parse(fecha_sol).after(sdf.parse(visita1))) {
                     if (sdf.parse(rfecha).after(sdf.parse(visita1))) {
                         if(sdf.parse(visita1).after(sdf.parse(visita2))){
                             Toast.makeText(getActivity(), "Fecha bienV", Toast.LENGTH_LONG).show();
