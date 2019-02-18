@@ -7,15 +7,15 @@ import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import java.util.List;
 
 public class JSONTecSec {
-    @SerializedName("GetMuestraRelOrdenesTecnicosListResult")
-    @Expose
-    private List<GetMuestraRelOrdenesTecnicosListResult> GetMuestraRelOrdenesTecnicosListResult = null;
+  @SerializedName("GetMuestraRelOrdenesTecnicosListResult")
+  @Expose
+  private List<GetMuestraRelOrdenesTecnicosListResult> GetMuestraRelOrdenesTecnicosListResult = null;
 
-    public List<GetMuestraRelOrdenesTecnicosListResult> GetMuestraRelOrdenesTecnicosListResult() {
-        return GetMuestraRelOrdenesTecnicosListResult;
-    }
+  public List<GetMuestraRelOrdenesTecnicosListResult> GetMuestraRelOrdenesTecnicosListResult() {
+    return GetMuestraRelOrdenesTecnicosListResult;
+  }
 
-    public void setMuestraRelOrdenesTecnicosListResult(List<GetMuestraRelOrdenesTecnicosListResult> getMuestraRelOrdenesTecnicosListResult) {
-        this.GetMuestraRelOrdenesTecnicosListResult = getMuestraRelOrdenesTecnicosListResult;
-    }
+  public void setMuestraRelOrdenesTecnicosListResult(List<GetMuestraRelOrdenesTecnicosListResult> getMuestraRelOrdenesTecnicosListResult) {
+    this.GetMuestraRelOrdenesTecnicosListResult = getMuestraRelOrdenesTecnicosListResult;
+  }
 }

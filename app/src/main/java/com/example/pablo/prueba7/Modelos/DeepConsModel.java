@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Modelos;
 
 
 public class DeepConsModel {
+    public static int Clv_FACTURA;
     public static int Contrato;
     public static String ContatoCom;
     public static String STATUS;
@@ -9,8 +10,10 @@ public class DeepConsModel {
     public static int Clv_Orden;
     public static int Clv_TipSer;
     public static String Fec_Sol;
+ //   public  static int Clv_TecnicoCuadrilla;
+  //  public  static String ListadeArticulos;
 
-    public DeepConsModel(int Contrato, String ContratoCom, String STATUS, String Obs, Integer Clv_Orden, int clv_TipSer, String fec_Sol){
+    public DeepConsModel(int clv_FACTURA,int Contrato, String ContratoCom, String STATUS, String Obs, Integer Clv_Orden, int clv_TipSer, String fec_Sol){
         this.Contrato = Contrato;
         this.ContatoCom = ContratoCom;
         this.STATUS = STATUS;
@@ -18,6 +21,9 @@ public class DeepConsModel {
         this.Clv_Orden = Clv_Orden;
         this.Clv_TipSer = clv_TipSer;
         this.Fec_Sol = fec_Sol;
+        this.Clv_FACTURA = clv_FACTURA;
+     //   this.Clv_TecnicoCuadrilla = clv_TecnicoCuadrilla;
+      //  this.ListadeArticulos = listadeArticulos;
     }
 
     public static int getContrato() {
@@ -69,4 +75,10 @@ public class DeepConsModel {
     public static void setClv_Orden(int clv_Orden) {
         Clv_Orden = clv_Orden;
     }
+
+    public static void setClv_FACTURA(int clv_FACTURA) {
+        Clv_FACTURA = clv_FACTURA;
+    }
+
+
 }

@@ -29,6 +29,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     RadioButton btn1, bt2;
+    public static String statusHora="E";
 
 
     public HorasFragment() {
@@ -92,6 +93,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 if(btn1.isChecked()==true){
                     reporteEjecutada=0;
                     repotteVisita=1;
+                    statusHora="V";
                 }
 
             }
@@ -102,6 +104,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 if(bt2.isChecked()==true){
                     reporteEjecutada=1;
                     repotteVisita=0;
+                    statusHora="E";
                 }
 
             }
@@ -120,6 +123,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 reportesselectTime2.setEnabled(false);
                 reporteEjecutada=0;
                 repotteVisita=1;
+                statusHora="V";
 
             }
             break;
@@ -136,6 +140,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 reportesselectTime2.setEnabled(true);
                 reporteEjecutada=1;
                 repotteVisita=0;
+                statusHora="E";
             }
             break;
         }

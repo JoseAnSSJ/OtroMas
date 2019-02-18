@@ -8,16 +8,16 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class JSONResponseTecnico {
-    //Lista donde se guarla la informacion que regresa el servidor
-    @SerializedName("Get_ClvTecnicoResult")
-    @Expose
-    private List<Get_ClvTecnicoResult> Get_ClvTecnicoResult = null;
+  //Lista donde se guarla la informacion que regresa el servidor
+  @SerializedName("Get_ClvTecnicoResult")
+  @Expose
+  private List<Get_ClvTecnicoResult> Get_ClvTecnicoResult = null;
 
-    public List<Get_ClvTecnicoResult> Get_ClvTecnicoResult() {
-        return Get_ClvTecnicoResult;
-    }
+  public List<Get_ClvTecnicoResult> Get_ClvTecnicoResult() {
+    return Get_ClvTecnicoResult;
+  }
 
-    public void set_ClvTecnicoResult(List<Get_ClvTecnicoResult> get_ClvTecnicoResult) {
-        this.Get_ClvTecnicoResult = get_ClvTecnicoResult;
-    }
+  public void set_ClvTecnicoResult(List<Get_ClvTecnicoResult> get_ClvTecnicoResult) {
+    this.Get_ClvTecnicoResult = get_ClvTecnicoResult;
+  }
 }

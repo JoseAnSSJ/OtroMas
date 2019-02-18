@@ -35,7 +35,14 @@ public class Constants {
     public static final String URL_GET_CLASIF="uspConsultaTblClasificacionProblemas/GetuspConsultaTblClasificacionProblemasList";
     public static final String URL_GET_ITEC="OrdSer/GetConTecnicoAgenda";
     public static final String URL_GET_ASERVICE="DameSerDelCliFac/GetDameSerDelCliFacList";
-
+//////////////////////////////////////////EjecutarOrdenInstalacion////////////////////////////////////////////
+public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerAparatos";
+    public static final String URL_GET_CHECA_CAMDO="Checa_si_tiene_camdo/GetCheca_si_tiene_camdo";
+    public static final String URL_ADD_REL_ORDUSU="NueRelOrdenUsuario/AddNueRelOrdenUsuario";
+    public static final String URL_GET_MODORDSER="MODORDSER/GetDeepMODORDSER";
+    public static final String URL_GET_GUARDA_HORA="OrdSer/GetGuardaHoraOrden";
+    public static final String URL_GET_GUARDAOrdSerAparatos="SP_GuardaOrdSerAparatos/GetDeepSP_GuardaOrdSerAparatos";
+    public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
 
 
 }

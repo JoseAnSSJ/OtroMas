@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,10 +27,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -38,7 +43,8 @@ import java.util.Calendar;
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
-    public static int ejecutada=1, visita=0, visita1=0;
+   // public static String clv_TecSec_seleccion="-1"
+    public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
@@ -83,6 +89,19 @@ Request request = new Request();
         bt2 = view.findViewById(R.id.visitada);
         /////////////////////////////////////////////////////
         TecSec = view.findViewById(R.id.tecnicosec);
+        TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         ///////////////////GPS//////////////////////////////
         coordenadas = view.findViewById(R.id.txtCoordenadas);
         coordenadas1 =view.findViewById(R.id.txtCoordenadas1);

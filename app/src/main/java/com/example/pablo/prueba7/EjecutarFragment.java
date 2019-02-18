@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Request.Request;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +39,8 @@ public class EjecutarFragment extends Fragment {
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
+    Request request = new Request();
+    public static JSONObject jsonObject = new JSONObject();
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -134,7 +140,9 @@ public void ValidacionHoras(){
             if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje))) {
                 if(sdf.parse(fecha).after(sdf.parse(dateEje))){
                     if (ini.isBefore(fin)) {
-                        Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                            request.getValidaOrdSer(getActivity());
+
                     }
                     if (ini.isAfter(fin)) {
                         Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
