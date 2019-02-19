@@ -679,7 +679,7 @@ try{
                 }
 
                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
-                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+//                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
             }
 
             @Override
@@ -692,8 +692,9 @@ try{
     }
 ////TecnicoSecundario////
     public void getTecSec(final Context context){
-        Array.clv_tecnicoSecundario.clear();
-        Array.clv_tecnicoSecundario.set(0,-1);
+//        Array.clv_tecnicoSecundario.clear();
+
+        Array.clv_tecnicoSecundario.add(0,-1);
         Service service = null;
         try {
             service = services.getTecSecService();
@@ -715,7 +716,8 @@ try{
                     for(int i=0; i< dat.size(); i++){
                         Log.d("responsetecsec", dat.get(i).getNOMBRE());
                         datos[j] = dat.get(i).getNOMBRE();
-                        Array.clv_tecnicoSecundario.set(j,dat.get(i).getCLV_TECNICO());
+                        Array.clv_tecnicoSecundario.add(j,dat.get(i).getCLV_TECNICO());
+
                         j=j+1;
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
