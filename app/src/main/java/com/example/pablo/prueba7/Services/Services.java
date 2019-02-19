@@ -32,19 +32,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.contratoReq;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
-//import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contbueno;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.Spin;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.jsonObject1;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.probm;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.selectD;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.selectT;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.selectT2;
-import static com.example.pablo.prueba7.Request.Request.contbu;
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
+
 import static com.example.pablo.prueba7.asignacion.jsonArray;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
 import static com.example.pablo.prueba7.asignado.idArticuloasignado;
@@ -828,7 +819,7 @@ public class Services {
 
 
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -903,36 +894,6 @@ public class Services {
     }
     //////////////hora inicio, hora fin/////////////////////
 
-
-    public Service getHIHFService() throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clave", clvReport);
-        jsonObject.put("Fecha_Ejecucion", Ejecutar1Fragment.jsonObject1);
-        jsonObject.put("TipoSolucion", Ejecutar1Fragment.jsonObject1);
-        jsonObject.put("Solucion", Ejecutar1Fragment.jsonObject1);
-        jsonObject.put("HoraFin", selectT2);
-        jsonObject.put("HoraIni", selectT);
-
-        MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, Ejecutar1Fragment.jsonObject1.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", UserModel.Codigo)
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit.create(Service.class);
-    }
 
 
     public Service getTecSecRService() throws JSONException {

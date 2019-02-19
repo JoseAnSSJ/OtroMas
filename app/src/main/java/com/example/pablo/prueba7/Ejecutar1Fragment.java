@@ -70,6 +70,7 @@ public class Ejecutar1Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 eject.setEnabled(false);
+
                 processScreen();
 
 
@@ -122,7 +123,7 @@ public class Ejecutar1Fragment extends Fragment {
           selectD3=HorasFragment.selectDate3.getText().toString();
           selectT=HorasFragment.selectTime.getText().toString();
           selectT2=HorasFragment.selectTime2.getText().toString();
-          probm= TrabajosFragment.problemReal.getText().toString();
+          probm= TrabajosFragment.proble.getText().toString();
           Spin= String.valueOf(TrabajosFragment.solucion.getSelectedItem());
 
     }

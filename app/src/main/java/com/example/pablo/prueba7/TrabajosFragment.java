@@ -19,7 +19,7 @@ import com.example.pablo.prueba7.Request.Request;
 public class TrabajosFragment extends Fragment implements View.OnClickListener {
     public static Spinner solucion,prioridad,clasific;
     public static TextView desc, problm;
-    public static EditText problemReal;
+    public static EditText proble;
     Request request = new Request();
 
 
@@ -42,7 +42,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
 
-
+         proble=view.findViewById(R.id.problema);
         solucion = view.findViewById(R.id.tiposol);
         solucion.getSelectedItemPosition();
         prioridad= view.findViewById(R.id.Sp2);
@@ -50,8 +50,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
         problm= view.findViewById(R.id.report);
         clasific= view.findViewById(R.id.Sp1);
 
-        problemReal= view.findViewById(R.id.probReal);
-        problemReal.setText("  ");
+        proble. setText("  ");
 
         return view;
     }
