@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Request.Request;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +43,12 @@ public class EjecutarFragment extends Fragment {
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
+<<<<<<< HEAD
 
+=======
+    Request request = new Request();
+    public static JSONObject jsonObject = new JSONObject();
+>>>>>>> JoseAntonio
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -48,6 +57,7 @@ public class EjecutarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
         // Inflate the layout for this fragment
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
@@ -66,7 +76,7 @@ public class EjecutarFragment extends Fragment {
 a=0;
                 horaIni = String.valueOf(horas.selectTime.getText());
                 horaFin = String.valueOf(horas.selectTime2.getText());
-                if(horas.ejecutada=true) {
+                if(horas.ejecutada==1) {
                     try {
                         ini = LocalTime.parse(horaIni);
                     }catch (Exception e){
@@ -84,7 +94,7 @@ a=0;
                         ValidacionHoras();
                     }
                 }
-                if(horas.visita==true){
+                if(horas.visita==1){
                     ValidacionVisita();
                 }
 
@@ -145,12 +155,14 @@ public void ValidacionHoras(){
     }else{
         fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
     }
-    if(horas.ejecutada=true) {
+    if(horas.ejecutada==1) {
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(dateEje))) {
+            if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje))) {
                 if(sdf.parse(fecha).after(sdf.parse(dateEje))){
                     if (ini.isBefore(fin)) {
-                        Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                            request.getValidaOrdSer(getActivity());
+
                     }
                     if (ini.isAfter(fin)) {
                         Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
@@ -184,23 +196,35 @@ public void ValidacionVisita() {
         fecha = (diaE + 1) + "/" + (mesE + 1) + "/" + añoE;
     }
 
+<<<<<<< HEAD
     if (horas.visita == true) {
+=======
+    if(horas.visita==1){
+>>>>>>> JoseAntonio
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
+            if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {
-                    if (ini.isBefore(fin)) {
-                        Toast.makeText(getActivity(), "Hora bienV y Fecha bienV", Toast.LENGTH_LONG).show();
-                    }
-                    if (ini.isAfter(fin)) {
-                        Toast.makeText(getActivity(), "La fecha de visita 1 no puede ser menor a la fecha de solicitud ni mayor a la fecha actual", Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
+
+                }else{
+                    Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
+            }else {
+                Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
             }
+<<<<<<< HEAD
         } catch (ParseException e) {
             Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
         }
     }
     if (horas.visita1 == true) {
+=======
+        }catch (ParseException e){
+            Toast.makeText(getActivity(), "VisitaFecha mal"+e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    if(horas.visita1==1){
+>>>>>>> JoseAntonio
         try {
             if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
                 if (sdf.parse(fecha).after(sdf.parse(visita1))) {

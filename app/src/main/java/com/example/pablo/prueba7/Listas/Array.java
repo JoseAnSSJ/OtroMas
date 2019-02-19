@@ -66,6 +66,7 @@ public class Array {
     public static  ArrayList<List<Get_ClvTecnicoResult>> datatec;
     public static ArrayList<List<GetBUSCADetOrdSerListResult>> dataTrabajos;
     public static ArrayList<List<GetMuestraRelOrdenesTecnicosListResult>> dataTecSec;
+    public static  ArrayList<Integer> clv_tecnicoSecundario;
     public static ArrayList<List<GetListClienteAparatosResult>> dataCliApa;
     public static ArrayList<List<GetSP_StatusAparatosListResult>> dataStaApa;
     public static  ArrayList<List<GetListTipoAparatosByIdArticuloResult>> dataApaTipo;

@@ -34,6 +34,7 @@ public class Trabajos extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
 
         trabajos=view.findViewById(R.id.listTrabajos);

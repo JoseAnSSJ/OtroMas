@@ -69,7 +69,7 @@ public class GetQuejasListResult {
     private Object fechaCaptura;
     @SerializedName("Fecha_Ejecucion")
     @Expose
-    private Object fechaEjecucion;
+    private String fechaEjecucion;
     @SerializedName("Fecha_Soliciutud")
     @Expose
     private String fechaSoliciutud;
@@ -335,11 +335,11 @@ public class GetQuejasListResult {
         this.fechaCaptura = fechaCaptura;
     }
 
-    public Object getFechaEjecucion() {
+    public String getFechaEjecucion() {
         return fechaEjecucion;
     }
 
-    public void setFechaEjecucion(Object fechaEjecucion) {
+    public void setFechaEjecucion(String fechaEjecucion) {
         this.fechaEjecucion = fechaEjecucion;
     }
 

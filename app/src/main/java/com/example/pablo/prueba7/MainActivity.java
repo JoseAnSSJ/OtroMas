@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         //* Swipe
 
+
+
+
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -107,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
     public class PagerAdapter extends FragmentPagerAdapter {
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }

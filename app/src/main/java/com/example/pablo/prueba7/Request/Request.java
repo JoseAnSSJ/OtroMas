@@ -52,10 +52,12 @@ import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
+import com.example.pablo.prueba7.Modelos.GetCheca_si_tiene_CAMDOModel;
 import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
 import com.example.pablo.prueba7.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.example.pablo.prueba7.Modelos.GetDameSerDelCliFacListResult;
+import com.example.pablo.prueba7.Modelos.GetDeepMODORDSERModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -144,7 +146,8 @@ public class Request extends AppCompatActivity {
                         UserModel user = new UserModel(
                                 userJson.get("Usuario").getAsString(),
                                 userJson.get("Token").getAsString(),
-                                userJson.get("Codigo").getAsString()
+                                userJson.get("Codigo").getAsString(),
+                                userJson.get("IdUsuario").getAsInt()
                         );
 
                     }catch (Exception e){
@@ -536,7 +539,7 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject userJson = response.body().getAsJsonObject("GetDeepConsultaOrdSerResult");
                 DeepConsModel user = new DeepConsModel(
-
+                        userJson.get("Clv_FACTURA").getAsInt(),
                         userJson.get("Contrato").getAsInt(),
                         userJson.get("ContratoCom").getAsString(),
                         userJson.get("STATUS").getAsString(),
@@ -544,6 +547,7 @@ public class Request extends AppCompatActivity {
                         userJson.get("Clv_Orden").getAsInt(),
                         userJson.get("Clv_TipSer").getAsInt(),
                         userJson.get("Fec_Sol").getAsString()
+
 
                 );
 try{
@@ -682,7 +686,7 @@ try{
                 }
 
                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
-                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+//                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
             }
 
             @Override
@@ -695,7 +699,9 @@ try{
     }
 ////TecnicoSecundario////
     public void getTecSec(final Context context){
+//        Array.clv_tecnicoSecundario.clear();
 
+        Array.clv_tecnicoSecundario.add(0,-1);
         Service service = null;
         try {
             service = services.getTecSecService();
@@ -717,6 +723,8 @@ try{
                     for(int i=0; i< dat.size(); i++){
                         Log.d("responsetecsec", dat.get(i).getNOMBRE());
                         datos[j] = dat.get(i).getNOMBRE();
+                        Array.clv_tecnicoSecundario.add(j,dat.get(i).getCLV_TECNICO());
+
                         j=j+1;
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
@@ -745,7 +753,6 @@ try{
             }
         });
     }
-///////////////////////Extenciones Adicionales/////////////////
     public void getExtencionesAdicionales(final Context context) {
 
         Service service = null;
@@ -1492,6 +1499,7 @@ if(response.code()==200){
         });
 
     }
+<<<<<<< HEAD
     public void getTecSecR(final Context context) {
 
         Service service = null;
@@ -1540,8 +1548,233 @@ if(response.code()==200){
         });
     }
 
+=======
+//////////////////////////////////////////////////////////////////////////////////////////////////
+public void getValidaOrdSer(final Context context) {
+
+    Service service = null;
+    try {
+        service = services.getValidaOrdSerService();
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+    Call<JsonObject> call = service.getVALIOrdSer();
+    call.enqueue(new Callback<JsonObject>() {
 
 
+        @Override
+        public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+            String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+            if(response1.code()==200){
+                if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
+                    getChecaCAMDO(context);
+                }else{
+                    Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+>>>>>>> JoseAntonio
+
+        @Override
+        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+        }
+    });
+}
+    public void getChecaCAMDO(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getChecaCAMDOService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getChecaCAMDO();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                JsonObject jsonObject = response1.body().getAsJsonObject("GetCheca_si_tiene_camdoResult");
+              //  String string = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+               // txtExtencion.setText(string);
+                GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
+                        jsonObject.get("Error").getAsString()
+                );
+
+
+                if(response1.code()==200){
+                    if(checa.Error.equals("0")){
+                        getAddRelOrdUsu(context);
+                    }else{
+                        Toast.makeText(context,"Error"+checa.Error,Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    public void getAddRelOrdUsu(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getADDRELORDUSUService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getADDRELORDUSU();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult"));
+                if(response1.code()==200){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult")).equals(-1)){
+                        getDeepMODORDSER(context);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getDeepMODORDSER(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getDeppMODORDSERService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getMODORDSER();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                JsonObject jsonObject = response1.body().getAsJsonObject("GetDeepMODORDSERResult");
+                GetDeepMODORDSERModel checa = new GetDeepMODORDSERModel(
+                        jsonObject.get("BaseIdUser").getAsInt()
+                );
+
+
+                if(response1.code()==200){
+                    if(checa.getBaseIdUser()==0){
+                        getGuardaHora(context);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getGuardaHora(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaHoraService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGuardaHora();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
+                if(response1.code()==200){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)){
+                        getGuardaOrdSerAparatos(context);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getGuardaOrdSerAparatos(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaOrdSerAparatosService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                //String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+                if(response1.code()==200){
+                  addLlenaBitacora(context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void addLlenaBitacora(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaOrdSerAparatosService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+                if(response1.code()==200){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals(-1)){
+                        Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
 }
 
 
