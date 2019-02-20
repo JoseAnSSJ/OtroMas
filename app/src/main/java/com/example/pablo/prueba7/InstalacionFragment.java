@@ -43,7 +43,7 @@ import java.util.List;
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
-   // public static String clv_TecSec_seleccion="-1"
+   public static String latitud, longitud;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
@@ -390,7 +390,8 @@ Request request = new Request();
 
             loc.getLatitude();
             loc.getLongitude();
-
+            latitud= String.valueOf(loc.getLatitude());
+            longitud = String.valueOf(loc.getLongitude());
             String Text1 = "Coordenadas" ;
             String Text2 =  "\n Lat = " + loc.getLatitude();
             String Text3 = "\n Long = " + loc.getLongitude();

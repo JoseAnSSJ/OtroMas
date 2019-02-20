@@ -534,18 +534,34 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject userJson = response.body().getAsJsonObject("GetDeepConsultaOrdSerResult");
-                DeepConsModel user = new DeepConsModel(
-                        userJson.get("Clv_FACTURA").getAsInt(),
-                        userJson.get("Contrato").getAsInt(),
-                        userJson.get("ContratoCom").getAsString(),
-                        userJson.get("STATUS").getAsString(),
-                        userJson.get("Obs").getAsString(),
-                        userJson.get("Clv_Orden").getAsInt(),
-                        userJson.get("Clv_TipSer").getAsInt(),
-                        userJson.get("Fec_Sol").getAsString()
+                try{
+                    DeepConsModel user = new DeepConsModel(
+                            userJson.get("Clv_FACTURA").getAsInt(),
+                            userJson.get("Contrato").getAsInt(),
+                            userJson.get("ContratoCom").getAsString(),
+                            userJson.get("STATUS").getAsString(),
+                            userJson.get("Obs").getAsString(),
+                            userJson.get("Clv_Orden").getAsInt(),
+                            userJson.get("Clv_TipSer").getAsInt(),
+                            userJson.get("Fec_Sol").getAsString()
 
 
-                );
+                    );
+                }catch (Exception e){
+                    DeepConsModel user = new DeepConsModel(
+                            userJson.get("Clv_FACTURA").getAsInt(),
+                            userJson.get("Contrato").getAsInt(),
+                            userJson.get("ContratoCom").getAsString(),
+                            userJson.get("STATUS").getAsString(),
+                            userJson.get("Obs").getAsJsonNull().toString(),
+                            userJson.get("Clv_Orden").getAsInt(),
+                            userJson.get("Clv_TipSer").getAsInt(),
+                            userJson.get("Fec_Sol").getAsString()
+
+
+                    );
+                }
+
 try{
     MainActivity.Contrato.setText(String.valueOf(DeepConsModel.getContatoCom()));
 }catch (Exception e){
@@ -1768,13 +1784,53 @@ public void getValidaOrdSer(final Context context) {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
-              //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+                int IS=0;
+                //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if(response1.code()==200){
                     if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")){
-                        Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                        Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
+                            List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
+                            for(int a=0; a<dat.size(); a++){
+                                if(dat.get(a).getClvTrabajo()==1270||dat.get(a).getClvTrabajo()==1271||dat.get(a).getClvTrabajo()==1272){
+                                    IS=1;
+                                }
+                            }
+                        if(IS==1){
+                            GuardaCoordenadas(context);
+                        }else{
+                            Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                        }
 
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void GuardaCoordenadas(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaCoordenadasService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGuardaCoordenadas();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+                if(response1.code()==200){
+                        Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+
                 }
             }
 

@@ -1195,9 +1195,9 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
-        jsonObject.put("Contrato", clvor);
-        jsonObject.put("Latitud", "Se generó la");
-        jsonObject.put("Longitud", "Se generó la");
+        jsonObject.put("Contrato", DeepConsModel.Contrato);
+        jsonObject.put("Latitud", InstalacionFragment.latitud);
+        jsonObject.put("Longitud", InstalacionFragment.longitud);
         jsonObject1.put("ObjCoorCli", jsonObject);
 
 
