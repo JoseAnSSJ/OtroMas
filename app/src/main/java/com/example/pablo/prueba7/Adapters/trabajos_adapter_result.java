@@ -124,11 +124,17 @@ public class trabajos_adapter_result extends BaseAdapter {
                     request.getExtencionesAdicionales(Cmcontext);
 
                 }
+                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase(" ISDIG - Instalacion de Television Digital")) {
+                    Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
+                    request.getExtencionesAdicionales(Cmcontext);
+
+                }
 
                 if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
                     holder.accion.setEnabled(false);
                     holder.accion.setText("---");
                 }
+
 
             }
         });
