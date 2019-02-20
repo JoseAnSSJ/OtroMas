@@ -118,6 +118,7 @@ public class Request extends AppCompatActivity {
     public static boolean b = false;
 
     public static String datos[];
+    public static Integer juan[];
 
 
 
@@ -693,8 +694,9 @@ try{
 ////TecnicoSecundario////
     public void getTecSec(final Context context){
 //        Array.clv_tecnicoSecundario.clear();
-
+        Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0,-1);
+
         Service service = null;
         try {
             service = services.getTecSecService();
@@ -1646,7 +1648,7 @@ public void getValidaOrdSer(final Context context) {
 
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult"));
                 if(response1.code()==200){
-                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult")).equals(-1)){
+                    if(string1.equals("-1")){
                         getDeepMODORDSER(context);
                     }
                 }
@@ -1709,9 +1711,9 @@ public void getValidaOrdSer(final Context context) {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
+             //   String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
                 if(response1.code()==200){
-                    if(String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals("0")){
                         getGuardaOrdSerAparatos(context);
                     }
                 }
@@ -1755,22 +1757,23 @@ public void getValidaOrdSer(final Context context) {
 
         Service service = null;
         try {
-            service = services.getGuardaOrdSerAparatosService();
+            service = services.getAddLlenaBitacoraService();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+        Call<JsonObject> call = service.getLLENABITACORA_ORD();
         call.enqueue(new Callback<JsonObject>() {
 
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+              //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if(response1.code()==200){
-                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals(-1)){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")){
                         Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+
                     }
                 }
             }

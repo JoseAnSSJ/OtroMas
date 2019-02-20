@@ -94,6 +94,7 @@ String f;
                 Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento=new Intent(asignacion.this,asignado.class);
                 startActivity(intento);
+                finish();
 
             }
         });
@@ -212,7 +213,7 @@ eliminarAparato.setOnClickListener(new View.OnClickListener() {
 
 
 
-      //  adapter = new Arbol_Adapter(getApplicationContext());
+        adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
       //  Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         siguiente.setEnabled(false);

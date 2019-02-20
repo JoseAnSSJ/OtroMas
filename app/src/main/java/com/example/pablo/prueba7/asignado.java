@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Adapters.Servicios_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
@@ -170,9 +171,20 @@ public class asignado extends AppCompatActivity {
                 ////////////
 
                 asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
-            finish();
-            //    Intent intento=new Intent(asignado.this,asignacion.class);
-            //    startActivity(intento);
+              //  asignacion.adapter = new Arbol_Adapter(getApplicationContext());
+              //  asignacion.Asignacion.setAdapter(adapter);
+                Intent intento=new Intent(asignado.this,asignacion.class);
+                startActivity(intento);
+                int d=0;
+                for(int a=0; a<dat4.size(); a++){
+                    if(dat4.get(a).children.size()>0){
+                        d=d+1;
+                    }
+                }
+                if(d==dat4.size()){
+                    asignacion.aceptarAsignacion.setEnabled(true);
+                }
+                finish();
 
             }
         });

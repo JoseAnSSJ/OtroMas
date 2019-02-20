@@ -184,11 +184,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                    if(minutes<10){
-                        reportesselectTime.setText(hourOfDay + ":0" + minutes);
+                    if(hourOfDay<10){
+                        if(minutes<10){
+                            reportesselectTime.setText("0"+hourOfDay + ":0" + minutes);
+                        }else{
+                            reportesselectTime.setText("0"+hourOfDay + ":" + minutes);
+                        }
                     }else{
-                        reportesselectTime.setText(hourOfDay + ":" + minutes);
+                        if(minutes<10){
+                            reportesselectTime.setText(hourOfDay + ":0" + minutes);
+                        }else{
+                            reportesselectTime.setText(hourOfDay + ":" + minutes);
+                        }
                     }
+
 
                 }
             }, mHour, mMinute, false);
@@ -288,10 +297,18 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    if(minute<10){
-                        reportesselectTime2.setText(hourOfDay + ":0" + minute);
+                    if(hourOfDay<10){
+                        if(minute<10){
+                            reportesselectTime2.setText("0"+hourOfDay + ":0" + minute);
+                        }else{
+                            reportesselectTime2.setText("0"+hourOfDay + ":" + minute);
+                        }
                     }else{
-                        reportesselectTime2.setText(hourOfDay + ":" + minute);
+                        if(minute<10){
+                            reportesselectTime2.setText(hourOfDay + ":0" + minute);
+                        }else{
+                            reportesselectTime2.setText(hourOfDay + ":" + minute);
+                        }
                     }
                 }
             }, mHour, mMinute, false);

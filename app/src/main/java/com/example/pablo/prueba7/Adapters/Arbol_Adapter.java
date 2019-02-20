@@ -105,7 +105,7 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         ///////////////
-        asignacion.aceptarAsignacion.setEnabled(false);
+       // asignacion.aceptarAsignacion.setEnabled(false);
         a=0;
         if(dat.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
@@ -132,12 +132,15 @@ public class Arbol_Adapter extends BaseAdapter {
                 array.children.add(hijo);
                 ArrayAdapter arrayAdapter1 = new ArrayAdapter(mcontext, android.R.layout.simple_list_item_checked,array.children);
                 holder.listaAparatos.setAdapter(arrayAdapter1);
-
+                if(array.children.size()==dat.size()){
+                    asignacion.aceptarAsignacion.setEnabled(true);
+                    asignacion.siguiente.setEnabled(true);
+                }
                 holder.listaAparatos.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 holder.listaAparatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position3, long id) {
-                        int e= Math.toIntExact(id);
+
                         if(holder.listaAparatos.isItemChecked(position3)==true){
                             Arbol_Adapter.DeletMedio.clear();
                             String abc= String.valueOf(position);
@@ -173,13 +176,13 @@ int d=0;
             if(dat.get(c).Detalle!=""){
                 d=d+1;
             }
-            if(d==dat.size()){
-                asignacion.siguiente.setEnabled(true);
+            if(d!=dat.size()){
+
             }else{
-                asignacion.siguiente.setEnabled(false);
+                asignacion.siguiente.setEnabled(true);
             }
      }
-     if(trabajos_adapter_result.isnet==1){
+    /* if(trabajos_adapter_result.isnet==1){
          for(int e=0; e<dat.size();e++){
              if(dat.get(e).IdMedio==1){
                  f=1;
@@ -197,7 +200,7 @@ int d=0;
      }
      if(h==1){
          asignacion.aceptarAsignacion.setEnabled(true);
-     }
+     }*/
 
         ////////////////////
         asignacion.eliminar.setOnClickListener(new View.OnClickListener() {

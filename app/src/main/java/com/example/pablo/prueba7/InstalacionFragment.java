@@ -223,11 +223,20 @@ Request request = new Request();
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                if(minutes<10){
-                    selectTime.setText(hourOfDay + ":0" + minutes);
-                }else{
-                    selectTime.setText(hourOfDay + ":" + minutes);
-                }
+               if(hourOfDay<10){
+                   if(minutes<10){
+                       selectTime.setText("0"+hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText("0"+hourOfDay + ":" + minutes);
+                   }
+               }else {
+                   if(minutes<10){
+                       selectTime.setText(hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText(hourOfDay + ":" + minutes);
+                   }
+               }
+
 
                 }
             }, mHour, mMinute, false);
@@ -300,10 +309,18 @@ Request request = new Request();
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    if(minute<10){
-                        selectTime2.setText(hourOfDay + ":0" + minute);
-                    }else{
-                        selectTime2.setText(hourOfDay + ":" + minute);
+                    if(hourOfDay<10){
+                        if(minute<10){
+                            selectTime2.setText("0"+hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText("0"+hourOfDay + ":" + minute);
+                        }
+                    }else {
+                        if(minute<10){
+                            selectTime2.setText(hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText(hourOfDay + ":" + minute);
+                        }
                     }
                 }
             }, mHour, mMinute, false);

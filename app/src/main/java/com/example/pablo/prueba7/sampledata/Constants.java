@@ -42,6 +42,7 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     public static final String URL_GET_MODORDSER="MODORDSER/GetDeepMODORDSER";
     public static final String URL_GET_GUARDA_HORA="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_GUARDAOrdSerAparatos="SP_GuardaOrdSerAparatos/GetDeepSP_GuardaOrdSerAparatos";
+    public static final String URL_GET_GUARDA_COORDENADAS="CLIENTES_New/GetGuardaCoordendasCli";
     public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
 
 

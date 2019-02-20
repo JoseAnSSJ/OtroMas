@@ -7,15 +7,15 @@ import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
 import java.util.List;
 
 public class JSONApaTipo {
-    @SerializedName("GetListTipoAparatosByIdArticuloResult")
-    @Expose
-    private List<GetListTipoAparatosByIdArticuloResult> GetListTipoAparatosByIdArticuloResult = null;
+  @SerializedName("GetListTipoAparatosByIdArticuloResult")
+  @Expose
+  private List<GetListTipoAparatosByIdArticuloResult> GetListTipoAparatosByIdArticuloResult = null;
 
-    public List<GetListTipoAparatosByIdArticuloResult> GetListTipoAparatosByIdArticuloResult() {
-        return GetListTipoAparatosByIdArticuloResult;
-    }
+  public List<GetListTipoAparatosByIdArticuloResult> GetListTipoAparatosByIdArticuloResult() {
+    return GetListTipoAparatosByIdArticuloResult;
+  }
 
-    public void setListTipoAparatosByIdArticuloResult(List<GetListTipoAparatosByIdArticuloResult> getListTipoAparatosByIdArticuloResult) {
-        this.GetListTipoAparatosByIdArticuloResult = getListTipoAparatosByIdArticuloResult;
-    }
+  public void setListTipoAparatosByIdArticuloResult(List<GetListTipoAparatosByIdArticuloResult> getListTipoAparatosByIdArticuloResult) {
+    this.GetListTipoAparatosByIdArticuloResult = getListTipoAparatosByIdArticuloResult;
+  }
 }

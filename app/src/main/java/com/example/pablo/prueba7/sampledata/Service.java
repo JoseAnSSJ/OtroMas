@@ -111,5 +111,7 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getGUARDAOrdSerAparatos();
     @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
     Call<JsonObject> getLLENABITACORA_ORD();
+    @POST(Constants.URL_GET_GUARDA_COORDENADAS)
+    Call<JsonObject> getGuardaCoordenadas();
 }
 

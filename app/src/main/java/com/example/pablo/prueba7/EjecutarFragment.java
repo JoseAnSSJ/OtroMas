@@ -74,7 +74,7 @@ a=0;
                     }
                     try {
                         fin = LocalTime.parse(horaFin);
-                        ValidacionHoras();
+
                     }catch (Exception e){
                         Toast.makeText(getActivity(), "Ingrese Horas", Toast.LENGTH_LONG).show();
                         a=1;
@@ -137,8 +137,8 @@ public void ValidacionHoras(){
     }
     if(horas.ejecutada==1) {
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje))) {
-                if(sdf.parse(fecha).after(sdf.parse(dateEje))){
+            if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<0) {
+                if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<0){
                     if (ini.isBefore(fin)) {
                       //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                             request.getValidaOrdSer(getActivity());
