@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
+import com.example.pablo.prueba7.Request.Request;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +27,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.pablo.prueba7.Post.RecibiAparato.jsonObject;
+
 
 
 /**
@@ -31,9 +40,11 @@ public class EjecutarFragment extends Fragment {
     Button reiniciar;
     Button eject;
     EditText edt1;
+    //RecibiAparato RA =new RecibiAparato();
+    Request request =new Request();
 
     public static int check;
-
+public static JsonArray aprec_JASON=new  JsonArray();
 
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
@@ -56,14 +67,20 @@ public class EjecutarFragment extends Fragment {
         reiniciar.setEnabled(false);
 
         eject.setOnClickListener(new View.OnClickListener() {
+
+
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 
+                request.send_aparat();
+                /////////////////////
+
+             ///////////////////
 
                 processScreen();
 
-a=0;
+                a=0;
                 horaIni = String.valueOf(horas.selectTime.getText());
                 horaFin = String.valueOf(horas.selectTime2.getText());
                 if(horas.ejecutada=true) {

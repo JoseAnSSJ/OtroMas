@@ -15,7 +15,10 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.Request.Request;
+
+import org.json.JSONException;
 
 
 /**
@@ -28,6 +31,7 @@ public class Trabajos extends Fragment{
     public static Button accion;
     public static trabajos_adapter_result adaptertrabajos;
     public static ListView trabajos;
+    RecibiAparato rec=new RecibiAparato();
     public Trabajos() {
     }
 
@@ -44,10 +48,12 @@ public class Trabajos extends Fragment{
         // TrabajosAdapter trabadapt=new TrabajosAdapter();
         // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
 
-        adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx);
+        adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx,Array.recibix);
         //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
 
         //////////////////////////////////////////
+
+
 
         return view;
     }

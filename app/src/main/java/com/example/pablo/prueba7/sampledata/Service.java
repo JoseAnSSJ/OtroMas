@@ -26,6 +26,7 @@ import com.example.pablo.prueba7.Listas.JSONStatusApa;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
+import com.example.pablo.prueba7.Listas.NoEntregadosList;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -102,6 +103,9 @@ public interface Service {
     Call<JSONHIHF>getHiHf();
     @POST(Constants.URL_GET_TSECR)
     Call<JSONTecSecReport>getTec();
+
+    @POST(Constants.URL_SEND_NOENTREGADOS)
+    Call<JsonObject>noent();
 
 
 }

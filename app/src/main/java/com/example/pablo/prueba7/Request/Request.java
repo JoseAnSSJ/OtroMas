@@ -80,6 +80,7 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.TrabajosFragment;
@@ -101,6 +102,7 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
+import static com.example.pablo.prueba7.Listas.Array.recibix;
 import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Trabajos.trabajos;
 import static com.example.pablo.prueba7.TrabajosFragment.solucion;
@@ -114,6 +116,8 @@ public class Request extends AppCompatActivity {
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
+    public static Integer cont=0;
+    RecibiAparato RAP =new RecibiAparato();
     String a="Seleccione tecnico secundario";
     Arbol_Adapter adapter;
 
@@ -667,6 +671,7 @@ try{
                 Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
                 Array.trabajox.clear();
                 Array.accionx.clear();
+
                 while (itData.hasNext()) {
                     List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                     for (int i = 0; i < dat.size(); i++) {
@@ -674,11 +679,26 @@ try{
 
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
+                        Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.clavex.add(dat.get(i).getClave());
-                        Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
-                        Array.recibix[i].setChecked(false);
+                        Array.recibix.add(Boolean.FALSE);
+
+
+                        // Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                        //Array.recibix[i].setChecked(false);
+                        cont=cont+1;
                     }
                 }
+                /////////
+               // recibix=new CheckBox[cont];
+
+               //     for (int i = 0; i < cont; i++) {
+                  //      recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                    //    recibix[i].setChecked(false);
+                    //}
+
+                //////////
+
 
                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
                 trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
@@ -1605,9 +1625,48 @@ if(response.code()==200){
         });
     }
 
+    //////////////////////////
+    public void send_aparat() {
+
+        Service service = null;
+        try {
+            service = RAP.recibiapar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.noent();
+        call.enqueue(new Callback<JsonObject>() {
 
 
-}
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("objSP_InsertaTbl_NoEntregados"));
+                if (response1.code() == 200) {
+
+                    Toast.makeText(getApplicationContext(),
+                            "Envio de aparato exitoso", Toast.LENGTH_SHORT);
+                    //if (String.valueOf(response1.body().getAsJsonPrimitive("objSP_InsertaTbl_NoEntregados")).equals(0)) {
 
 
+                   // } else {
+                      //  Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
 
+                   // }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),
+                            "Envio de aparato NO exitoso", Toast.LENGTH_SHORT);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+    }

@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.MainActivity;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Trabajos;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -32,6 +35,7 @@ public class ordenes_adapter_result extends BaseAdapter {
     ArrayList<String>nombresrc;
     ArrayList<String>statusrc;
     Request request=new Request();
+
 
     public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc){
 
@@ -99,14 +103,11 @@ public class ordenes_adapter_result extends BaseAdapter {
             public void onClick(View v) {
                 Intent intento1 = new Intent(mContext, MainActivity.class);
                 mContext.startActivity(intento1);
-                clvor = Integer.valueOf(ordensrc.get(position));
-
-
+                clvor = Integer.valueOf(Array.ordensrc.get(position));
 
 
                 request.getDeepCons();
                 request.getTrabajos();
-
 
 
 

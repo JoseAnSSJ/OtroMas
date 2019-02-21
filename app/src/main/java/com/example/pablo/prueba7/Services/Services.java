@@ -8,6 +8,7 @@ import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.asignacion;
 import com.example.pablo.prueba7.sampledata.Constants;
 import com.example.pablo.prueba7.sampledata.Service;
@@ -35,7 +36,8 @@ import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.contrato
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
 //import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contbueno;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
-import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.Clave;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.clvTra;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.Spin;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.probm;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.selectD;
@@ -56,6 +58,7 @@ public class Services {
     public static String cont;
 
     public String abc = "Basic: " + Login.enco;
+
 
     /////////TOKEN///C////
     public Service getClientService() {
@@ -519,7 +522,7 @@ public class Services {
     public Service getCAMODOService() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("clv_orden", clvorden);
-        jsonObject.put("Clave", ClaveTrabajo);
+        jsonObject.put("Clave", clvTra);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -730,7 +733,7 @@ public class Services {
     public Service getExtencionAdiService() throws JSONException {
         ////////
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clave", ClaveTrabajo);
+        jsonObject.put("Clave", Clave);
         jsonObject.put("Clv_Orden", clvor);
         jsonObject.put("Contrato", DeepConsModel.Contrato);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
@@ -1005,6 +1008,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
+
 }
 
 

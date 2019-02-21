@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +17,24 @@ import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Orden;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Trabajos;
 import com.example.pablo.prueba7.asignacion;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+import static com.example.pablo.prueba7.Listas.Array.clavex;
+
+import static com.example.pablo.prueba7.Listas.Array.recibix;
+import static com.example.pablo.prueba7.Post.RecibiAparato.jsonArrayap;
+import static com.example.pablo.prueba7.Post.RecibiAparato.jsonObject;
 
 import static com.example.pablo.prueba7.Trabajos.trabajos;
 
@@ -32,11 +45,19 @@ public class trabajos_adapter_result extends BaseAdapter {
     Context context;
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
-    public static int ClaveTrabajo, isnet;
+    ArrayList<Boolean>recibix;
+    public static int Clave, isnet,clvTra;
+    public static boolean stat;
+    RecibiAparato RA =new RecibiAparato();
+    //public static Boolean[]recib=new Boolean[Array.accionx.size()];
+    public static String descr;
+    public static int x=0;
+    RecibiAparato Ra =new RecibiAparato();
 
-    public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx){
+    public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx,ArrayList<Boolean>recibix){
         this.trabajox=trabajox;
         this.accionx=accionx;
+        this.recibix=recibix;
         Cmcontext=context;
         inflatertrab=LayoutInflater.from(Cmcontext);
         inflatertrab=LayoutInflater.from(context);
@@ -67,7 +88,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
         if (convertView == null) {
             holder = new viewHolder();
@@ -77,21 +98,73 @@ public class trabajos_adapter_result extends BaseAdapter {
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+
             convertView.setTag(holder);
         }
         else {
             holder=(viewHolder)convertView.getTag();
         }
+
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
+        holder.recibi.setChecked(Array.recibix.get(position));
 
-        ClaveTrabajo = Array.clavex.get(position);
+        /////////////
+       // clvor = Integer.valueOf(Array.ordensrc.get(position));
 
+
+        holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    stat=Boolean.valueOf(Array.recibix.get(position));
+                    Clave =Integer.valueOf( clavex.get(position));
+                    clvTra=Integer.valueOf(Array.clv_trabajox.get(position));
+                    descr=String.valueOf(Array.trabajox.get(position));
+
+                    stat=true;
+
+                     try{
+                        jsonObject = new JSONObject();
+                        jsonObject.put("Clave", Clave);
+                        jsonObject.put("Clv_Orden", clvor);
+                        jsonObject.put("Clv_Trabajo", clvTra);
+                        jsonObject.put("Descripcion", descr);
+                        jsonObject.put("Obs", null);
+                        jsonObject.put("SeRealiza", true);
+                        jsonObject.put("recibi", stat);
+                    }
+                     catch (JSONException e) {
+                         e.printStackTrace();
+                     }
+                    x++;
+
+                 Ra.agregaap();
+
+                  /*  try {
+                        RA.recibiapar();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }*/
+                }
+            }
+
+
+
+
+
+
+        });
+
+        ///////////
         holder.accion.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
                 isnet=0;
+
                 Request request = new Request();
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
                     request.getArbSer(Cmcontext);

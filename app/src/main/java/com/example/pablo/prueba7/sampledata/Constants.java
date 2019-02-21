@@ -38,6 +38,6 @@ public class Constants {
     public static final String URL_Get_HIHF="OrdSer/GetConHIHF_OrdenQeja";
     public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
 
-
+    public static final String URL_SEND_NOENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
 
 }
