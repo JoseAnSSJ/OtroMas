@@ -113,5 +113,9 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getLLENABITACORA_ORD();
     @POST(Constants.URL_GET_GUARDA_COORDENADAS)
     Call<JsonObject> getGuardaCoordenadas();
+    @POST(Constants.URL_GET_CONSULTA_IP)
+    Call<JsonObject> getConsultaIp();
+    @POST(Constants.URL_GET_REINTENTA_COMANDO)
+    Call<JsonObject> getReintentaComando();
 }
 

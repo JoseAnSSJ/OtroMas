@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Request.Request;
 
@@ -35,11 +37,13 @@ public class EjecutarFragment extends Fragment {
     Button reiniciar;
     Button eject;
     EditText edt1;
+    public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
     Request request = new Request();
+    ReintentarComando RC = new ReintentarComando();
     public static JSONObject jsonObject = new JSONObject();
     public EjecutarFragment() {
         // Required empty public constructor
@@ -54,6 +58,7 @@ public class EjecutarFragment extends Fragment {
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
         edt1 = view.findViewById(R.id.status);
+        msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
 
         reiniciar.setEnabled(false);
 
@@ -98,21 +103,13 @@ a=0;
                     reiniciar.setEnabled(false);
                 }
                 eject.setEnabled(false);
-                reiniciar.setOnClickListener(new View.OnClickListener() {
+                */reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("EXITOSO")) {
-                            eject.setEnabled(true);
-                        }
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
-                            eject.setEnabled(false);
-                        }
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("PENDIENTE")) {
-                            eject.setEnabled(false);
-                        }
+                        request.ReintentarComando(getActivity());
+                        reiniciar.setEnabled(false);
                     }
-                });*/
+                });
 
 
             }
@@ -141,7 +138,14 @@ public void ValidacionHoras(){
                 if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<0){
                     if (ini.isBefore(fin)) {
                       //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                        eject.setEnabled(false);
                             request.getValidaOrdSer(getActivity());
+                          /*  if(request.reintentarComando=true){
+                                reiniciar.setEnabled(true);
+                            }*/
+                          if(RC.b==1){
+                              getActivity().finish();
+                          }
 
                     }
                     if (ini.isAfter(fin)) {

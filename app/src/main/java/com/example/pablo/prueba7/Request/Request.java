@@ -46,6 +46,7 @@ import com.example.pablo.prueba7.Listas.QuejasList;
 import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
+import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetCheca_si_tiene_CAMDOModel;
@@ -78,6 +79,7 @@ import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.ReintentarComando;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Trabajos;
 import com.example.pablo.prueba7.TrabajosFragment;
@@ -106,9 +108,10 @@ import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
     Services services = new Services();
+    ReintentarComando RC = new ReintentarComando();
     Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico;
+    public static String clave_tecnico, msgComando="";
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
@@ -118,7 +121,7 @@ public class Request extends AppCompatActivity {
     public static boolean b = false;
 
     public static String datos[];
-    public static Integer juan[];
+    public static boolean reintentarComando=false;
 
 
 
@@ -1829,8 +1832,73 @@ public void getValidaOrdSer(final Context context) {
 
                 //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if(response1.code()==200){
-                        Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                    ConsultaIp();
+                        RC.reintentarComando(context);
 
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void ConsultaIp() {
+
+        Service service = null;
+        try {
+            service = services.getConsultaIpService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getConsultaIp();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                JsonObject userJson = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
+                ConsultaIpModel user = new ConsultaIpModel(
+                        userJson.get("AplicaReintentar").getAsBoolean(),
+                        userJson.get("Msg").getAsString()
+                );
+                reintentarComando = user.AplicaReintentar;
+                msgComando = user.Msg;
+                if(response1.code()==200){
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void ReintentarComando(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getReintentarComandoService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getReintentaComando();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
+                if(response1.code()==200){
+                    ConsultaIp();
+                    RC.reintentarComando(context);
                 }
             }
 
