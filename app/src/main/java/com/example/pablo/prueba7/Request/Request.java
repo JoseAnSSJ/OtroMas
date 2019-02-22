@@ -1,20 +1,20 @@
 package com.example.pablo.prueba7.Request;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
-import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
+import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.Inicio;
 import com.example.pablo.prueba7.InstalacionFragment;
@@ -78,16 +78,12 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
-import com.example.pablo.prueba7.R;
-import com.example.pablo.prueba7.ReintentarComando;
 import com.example.pablo.prueba7.Services.Services;
-import com.example.pablo.prueba7.Trabajos;
 import com.example.pablo.prueba7.TrabajosFragment;
 import com.example.pablo.prueba7.asignacion;
 import com.example.pablo.prueba7.asignado;
 import com.example.pablo.prueba7.sampledata.Service;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import org.json.JSONException;
 
@@ -100,15 +96,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoB;
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
-import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
-import static com.example.pablo.prueba7.Trabajos.trabajos;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
     Services services = new Services();
-    ReintentarComando RC = new ReintentarComando();
+
     Array array = new Array();
     CambioDom c = new CambioDom();
     public static String clave_tecnico, msgComando="";
@@ -117,11 +110,12 @@ public class Request extends AppCompatActivity {
     public static Long abc;
     String a="Seleccione tecnico secundario";
     Arbol_Adapter adapter;
-
+    public int reintentaB;
     public static boolean b = false;
-
+int ciclo, cicloa;
     public static String datos[];
-    public static boolean reintentarComando=false;
+    public static String reintentarComando;
+    JsonObject jsonConsultaIp;
 
 
 
@@ -1829,12 +1823,11 @@ public void getValidaOrdSer(final Context context) {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                reintentaB=0;
 
                 //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if(response1.code()==200){
-                    ConsultaIp();
-                        RC.reintentarComando(context);
-
+                    ConsultaIp(context);
 
                 }
             }
@@ -1845,7 +1838,7 @@ public void getValidaOrdSer(final Context context) {
             }
         });
     }
-    public void ConsultaIp() {
+    public void ConsultaIp(final Context context) {
 
         Service service = null;
         try {
@@ -1855,32 +1848,58 @@ public void getValidaOrdSer(final Context context) {
         }
 
         Call<JsonObject> call = service.getConsultaIp();
-        call.enqueue(new Callback<JsonObject>() {
+            call.enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                    jsonConsultaIp = new JsonObject();
+                    jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
+                    ConsultaIpModel user = new ConsultaIpModel(
+                            jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
+                            jsonConsultaIp.get("Msg").getAsString()
+                    );
+                    reintentarComando = String.valueOf(user.AplicaReintentar);
+                    msgComando = user.Msg;
+
+                    if(response1.code()==200){
+
+                        for(int a=0;a<1;a++){
+
+                            if(reintentarComando.equals("true")){
+                                EjecutarFragment.reiniciar.setEnabled(true);
+                                EjecutarFragment.msgEjecutarOrd.setText(Request.msgComando);
+                            }else{
+                                if(msgComando.length()>3){
+                                    EjecutarFragment.msgEjecutarOrd.setText(msgComando);
+                                    Login.esperar(5);
+                                    ((Activity)context).finish();
+                                }else{
+                                    Login.esperar(3);
+                                    retry(call);
+                                }
+                            }
+                        }
 
 
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                JsonObject userJson = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
-                ConsultaIpModel user = new ConsultaIpModel(
-                        userJson.get("AplicaReintentar").getAsBoolean(),
-                        userJson.get("Msg").getAsString()
-                );
-                reintentarComando = user.AplicaReintentar;
-                msgComando = user.Msg;
-                if(response1.code()==200){
 
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    Log.d("error", t.getMessage());
+                }
 
-            }
-        });
+                public  void retry(Call<JsonObject> call){
+                    call.clone().enqueue(this);
+                }
+            });
+
+
     }
-    public void ReintentarComando(final Context context) {
 
+    public void ReintentarComando(final Context context) {
+        reintentaB=0;
         Service service = null;
         try {
             service = services.getReintentarComandoService();
@@ -1895,10 +1914,8 @@ public void getValidaOrdSer(final Context context) {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-                //  String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if(response1.code()==200){
-                    ConsultaIp();
-                    RC.reintentarComando(context);
+                    ConsultaIp(context);
                 }
             }
 
@@ -1908,6 +1925,7 @@ public void getValidaOrdSer(final Context context) {
             }
         });
     }
+
 }
 
 

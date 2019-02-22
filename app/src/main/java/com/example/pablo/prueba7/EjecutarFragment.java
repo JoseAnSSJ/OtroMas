@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.Services.Services;
+import com.example.pablo.prueba7.sampledata.Service;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,13 +32,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EjecutarFragment extends Fragment {
-
-    Button reiniciar;
+    Services services = new Services();
+    public static Button reiniciar;
     Button eject;
     EditText edt1;
     public static TextView msgEjecutarOrd;
@@ -43,8 +51,9 @@ public class EjecutarFragment extends Fragment {
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
     Request request = new Request();
-    ReintentarComando RC = new ReintentarComando();
     public static JSONObject jsonObject = new JSONObject();
+    JsonObject jsonConsultaIp;
+    Reintentar reintentar = new Reintentar();
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -57,7 +66,6 @@ public class EjecutarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
-        edt1 = view.findViewById(R.id.status);
         msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
 
         reiniciar.setEnabled(false);
@@ -91,19 +99,7 @@ a=0;
                 if(horas.visita==1){
                     ValidacionVisita();
                 }
-
-
-              /*  if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
-                    reiniciar.setEnabled(true);
-                }
-                if ((edt1.getText().toString().trim()).equalsIgnoreCase("PENDIENTE")) {
-                    reiniciar.setEnabled(true);
-                }
-                if ((edt1.getText().toString().trim()).equalsIgnoreCase("EXITOSO")) {
-                    reiniciar.setEnabled(false);
-                }
-                eject.setEnabled(false);
-                */reiniciar.setOnClickListener(new View.OnClickListener() {
+                reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         request.ReintentarComando(getActivity());
@@ -139,13 +135,13 @@ public void ValidacionHoras(){
                     if (ini.isBefore(fin)) {
                       //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                         eject.setEnabled(false);
-                            request.getValidaOrdSer(getActivity());
-                          /*  if(request.reintentarComando=true){
-                                reiniciar.setEnabled(true);
-                            }*/
-                          if(RC.b==1){
-                              getActivity().finish();
-                          }
+                           request.getValidaOrdSer(getActivity());
+
+
+
+
+
+
 
                     }
                     if (ini.isAfter(fin)) {

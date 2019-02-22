@@ -220,7 +220,9 @@ int d=0;
         holder.medio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                asignacion.aceptarAsignacion.setVisibility(View.GONE);
+                asignacion.cancelarAsigancion.setVisibility(View.GONE);
+                asignacion.siguiente.setVisibility(View.GONE);
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat1 =  itData1.next();
                 clv_unicaNet = dat1.get(position).getClv_UnicaNet();
@@ -246,7 +248,9 @@ int d=0;
                 } else {
 
 
-
+                    asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+                    asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+                    asignacion.siguiente.setVisibility(View.VISIBLE);
 
                     layoutMedio.setVisibility(View.GONE);
                     Asignacion.setVisibility(View.VISIBLE);
@@ -265,6 +269,9 @@ int d=0;
         asignacion.cancelarmedio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+                asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+                asignacion.siguiente.setVisibility(View.VISIBLE);
                 layoutMedio.setVisibility(View.GONE);
                 Asignacion.setVisibility(View.VISIBLE);
                 siguiente.setEnabled(true);
