@@ -24,27 +24,14 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
-<<<<<<< HEAD
-
-   public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
-
-    public static boolean reporteEjecutada=true, repotteVisita=false;
-
-=======
     public static EditText reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
-    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0;
->>>>>>> JoseAntonio
+    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     RadioButton btn1, bt2;
-<<<<<<< HEAD
-    Request request = new Request();
-
-=======
-    public static String statusHora="E";
->>>>>>> JoseAntonio
+    public static String statusHora="E",dia,mes,ano;
 
 
     public HorasFragment() {
@@ -60,7 +47,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
 
         TecSec1= view.findViewById(R.id.tecnicosec1);
-
+        TecSec1.getSelectedItem();
 
 
 
@@ -72,43 +59,25 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         reportesselectDate3 = view.findViewById(R.id.visita31);
 
 
-<<<<<<< HEAD
-
-        selectTime = view.findViewById(R.id.horai);
-        selectTime2 = view.findViewById(R.id.horaf);
-
-=======
-        reportesselectTime = view.findViewById(R.id.horai);
-        reportesselectTime2 = view.findViewById(R.id.horaf);
->>>>>>> JoseAntonio
+        reportesselectTime = view.findViewById(R.id.horai11);
+        reportesselectTime2 = view.findViewById(R.id.horaf11);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
-        contenedorParticular = view.findViewById(R.id.RE);
-        contenedorCorporativo = view.findViewById(R.id.RV);
+        contenedorParticular = view.findViewById(R.id.RE1);
+        contenedorCorporativo = view.findViewById(R.id.RV1);
 
-        btn1 = view.findViewById(R.id.ejutada);
-        bt2 = view.findViewById(R.id.visitada);
+        btn1 = view.findViewById(R.id.ejutada1);
+        bt2 = view.findViewById(R.id.visitada1);
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
-<<<<<<< HEAD
-
-
-        selectDate.setOnClickListener(this);
-        selectDate1.setOnClickListener(this);
-        selectDate2.setOnClickListener(this);
-        selectDate3.setOnClickListener(this);
-        selectTime.setOnClickListener(this);
-        selectTime2.setOnClickListener(this);
-=======
         reportesselectDate.setOnClickListener(this);
         reportesselectDate1.setOnClickListener(this);
         reportesselectDate2.setOnClickListener(this);
         reportesselectDate3.setOnClickListener(this);
         reportesselectTime.setOnClickListener(this);
         reportesselectTime2.setOnClickListener(this);
->>>>>>> JoseAntonio
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 
@@ -121,9 +90,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-<<<<<<< HEAD
-
-=======
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -146,7 +112,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
             }
         });
->>>>>>> JoseAntonio
         switch (v.getId()) {
             case R.id.ejutada:
             {
@@ -199,11 +164,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             reportesselectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            dia="0"+dayOfMonth;
+                            mes="0"+(monthOfYear+1);
+                            ano= String.valueOf(year);
                         }else{
                             reportesselectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            dia= String.valueOf(dayOfMonth);
+                            mes="0"+(monthOfYear+1);
+                            ano= String.valueOf(year);
                         }
                     }else {
                         reportesselectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        dia= String.valueOf(dayOfMonth);
+                        mes= String.valueOf((monthOfYear+1));
+                        ano= String.valueOf(year);
                     }
 
                 }
@@ -311,7 +285,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
             },mYear,mMonth,mDay);
             datePickerDialog.show();
-            }
+        }
 
         if (v == reportesselectTime2) {
 
@@ -335,11 +309,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-        processScreen();
-    }
-
-    private void processScreen() {
-
 
 
     }
@@ -350,5 +319,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);
     }
 }
+
 
 

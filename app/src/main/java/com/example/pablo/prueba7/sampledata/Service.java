@@ -98,15 +98,10 @@ public interface Service {
     Call<JSONNombreTecnico>getNom();
     @POST(Constants.URL_GET_ASERVICE)
     Call<JSONServicioAsignado>getServ();
-<<<<<<< HEAD
-    @POST(Constants.URL_Get_HIHF)
-    Call<JSONHIHF>getHiHf();
     @POST(Constants.URL_GET_TSECR)
     Call<JSONTecSecReport>getTec();
 
-
-=======
-///////////////////EjecucionInstalacion/////////////////
+    ///////////////////EjecucionInstalacion/////////////////
 @POST(Constants.URL_GET_VALI_OrdSer)
 Call<JsonObject> getVALIOrdSer();
     @POST(Constants.URL_GET_CHECA_CAMDO)
@@ -121,6 +116,17 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getGUARDAOrdSerAparatos();
     @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
     Call<JsonObject> getLLENABITACORA_ORD();
->>>>>>> JoseAntonio
+
+
+    /////////////////////EjecutarReportes/////////////////
+    @POST(Constants.URL_Get_HIHF)
+    Call<JsonObject>getHiHf();
+    @POST(Constants.URL_GET_UPDATE)
+    Call<JsonObject>getLLenaReporte();
+    @POST(Constants.URL_GET_VALIDA)
+    Call<JsonObject>getValidaRep();
+
+
+
 }
 

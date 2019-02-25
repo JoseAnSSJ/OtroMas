@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,11 +14,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
-<<<<<<< HEAD
-import com.example.pablo.prueba7.Modelos.GetMUESTRATRABAJOSQUEJASListResult;
-=======
+
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
->>>>>>> JoseAntonio
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.Service;
@@ -26,10 +24,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
+import static com.example.pablo.prueba7.Services.Services.clavequeja;
+import static com.example.pablo.prueba7.Services.Services.opcion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,35 +47,12 @@ public class Ejecutar1Fragment extends Fragment {
 
     Button eject;
     Request request = new Request();
-<<<<<<< HEAD
-    Array array = new Array();
-    public static JSONObject jsonObject1 = new JSONObject();
-    public static JSONObject jsonObject2 = new JSONObject();
-
-
-
-    public static JSONArray jsonArray1 = new JSONArray();
-    public static  String selectD;
-    public static  String selectD1;
-    public static  String selectD2;
-    public static  String selectD3;
-    public static  String selectT;
-    public static  String selectT2;
-    public static  String probm;
-    public static  String Spin;
-
-
-
-
-
-
-    public static JSONObject jsonObject3 = new JSONObject();
-=======
     HorasFragment horas = new HorasFragment();
     int rañoE, rmesE, rdiaE,ra;
     public static LocalTime rini,rfin;
     public static String rhoraIni,rhoraFin, rfecha, fecha_sol="";
->>>>>>> JoseAntonio
+    public static String hora1I, horafin,solution;
+    public static Date datetime;
     public Ejecutar1Fragment() {
         // Required empty public constructor
     }
@@ -86,58 +64,35 @@ public class Ejecutar1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
         eject = view.findViewById(R.id.ejec);
+        hora1I=HorasFragment.reportesselectTime.getText().toString();
+        horafin=HorasFragment.reportesselectTime2.getText().toString();
+        solution=TrabajosFragment.proble.getText().toString();
+
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
-                    List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
-                    char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
-                    fecha_sol="";
-                    for(int i=0; i<10; i++){
+        List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
+        char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
+        fecha_sol="";
+        for(int i=0; i<10; i++){
 
-                        fecha_sol = fecha_sol+caracteres[i];
-                    }
+            fecha_sol = fecha_sol+caracteres[i];
+        }
+
         eject.setOnClickListener(new View.OnClickListener() {
-<<<<<<< HEAD
-
-            @Override
-            public void onClick(View v) {
-                eject.setEnabled(false);
-
-                processScreen();
-
-
-                try {
-                    jsonObject1.put("Clv_Queja", clvReport);
-                     jsonObject1.put("Fecha_Ejecucion", selectD);
-                     jsonObject1.put("TipoSolucion", Spin);
-                     jsonObject1.put("Solucion", probm);
-                     jsonObject1.put("Solucion", probm);
-                     jsonObject2.put("Fecha_Ejecucion",selectT2);
-                     jsonObject2.put("Fecha_Ejecucion",selectT);
 
 
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    jsonObject2.put("Clave", clvReport);
-                    jsonObject2.put("HoraFin",selectT2);
-                    jsonObject2.put("HoraIni",selectT);
-                    jsonObject2.put("HoraIni",selectT);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-
-=======
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                request.getGuardaHoraReporte(getContext());
+                request.getGuardaCampos(getContext());
+                Intent intent1 = new Intent(getActivity(), Reportes.class);
+                request.getListQuejas();
+                startActivity(intent1);
+
+
+
                 ra=0;
                 rhoraIni = String.valueOf(horas.reportesselectTime.getText());
                 rhoraFin = String.valueOf(horas.reportesselectTime2.getText());
@@ -164,13 +119,9 @@ public class Ejecutar1Fragment extends Fragment {
                 }
 
 
-                
->>>>>>> JoseAntonio
+
 
             }
-
-
-
         });
 
 
@@ -178,20 +129,6 @@ public class Ejecutar1Fragment extends Fragment {
         return view;
     }
 
-<<<<<<< HEAD
-    public void processScreen() {
-          selectD = HorasFragment.selectDate.getText().toString();
-          selectD1=HorasFragment.selectDate1.getText().toString();
-          selectD2=HorasFragment.selectDate2.getText().toString();
-          selectD3=HorasFragment.selectDate3.getText().toString();
-          selectT=HorasFragment.selectTime.getText().toString();
-          selectT2=HorasFragment.selectTime2.getText().toString();
-          probm= TrabajosFragment.proble.getText().toString();
-          Spin= String.valueOf(TrabajosFragment.solucion.getSelectedItem());
-
-    }
-
-=======
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.reportesselectDate.getText());
@@ -213,7 +150,8 @@ public class Ejecutar1Fragment extends Fragment {
                 if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
                     if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
                         if (rini.isBefore(rfin)) {
-                            Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+
                         }
                         if (rini.isAfter(rfin)) {
                             Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
@@ -276,7 +214,6 @@ public class Ejecutar1Fragment extends Fragment {
                 Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
             }
         }
->>>>>>> JoseAntonio
 
 
     }

@@ -72,7 +72,7 @@ public class GetQuejasListResult {
     private String fechaEjecucion;
     @SerializedName("Fecha_Soliciutud")
     @Expose
-    private String fechaSoliciutud;
+    public String fechaSoliciutud;
     @SerializedName("HP")
     @Expose
     private Object hP;
@@ -123,7 +123,7 @@ public class GetQuejasListResult {
     private String status;
     @SerializedName("TecnicoCuadrilla")
     @Expose
-    private Long tecnicoCuadrilla;
+    public int tecnicoCuadrilla;
     @SerializedName("TipSer")
     @Expose
     private String tipSer;
@@ -159,7 +159,7 @@ public class GetQuejasListResult {
     private Object visita3;
     @SerializedName("clvPrioridadQueja")
     @Expose
-    private Long clvPrioridadQueja;
+    public int clvPrioridadQueja;
     @SerializedName("clvProblema")
     @Expose
     private Long clvProblema;
@@ -479,13 +479,7 @@ public class GetQuejasListResult {
         this.status = status;
     }
 
-    public Long getTecnicoCuadrilla() {
-        return tecnicoCuadrilla;
-    }
 
-    public void setTecnicoCuadrilla(Long tecnicoCuadrilla) {
-        this.tecnicoCuadrilla = tecnicoCuadrilla;
-    }
 
     public String getTipSer() {
         return tipSer;
@@ -575,13 +569,7 @@ public class GetQuejasListResult {
         this.visita3 = visita3;
     }
 
-    public Long getClvPrioridadQueja() {
-        return clvPrioridadQueja;
-    }
 
-    public void setClvPrioridadQueja(Long clvPrioridadQueja) {
-        this.clvPrioridadQueja = clvPrioridadQueja;
-    }
 
     public Long getClvProblema() {
         return clvProblema;
