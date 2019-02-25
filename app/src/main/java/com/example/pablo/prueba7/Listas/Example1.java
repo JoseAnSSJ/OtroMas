@@ -17,7 +17,5 @@ public class Example1 {
         return getDameListadoOrdenesAgendadasResult;
     }
 
-    public void setGetDameListadoOrdenesAgendadasResult(List<GetDameListadoOrdenesAgendadasResult> getDameListadoOrdenesAgendadasResult) {
-        this.getDameListadoOrdenesAgendadasResult = getDameListadoOrdenesAgendadasResult;
-    }
+
 }

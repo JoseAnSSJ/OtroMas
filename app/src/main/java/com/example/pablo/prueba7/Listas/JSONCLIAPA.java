@@ -7,15 +7,13 @@ import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import java.util.List;
 
 public class JSONCLIAPA {
-    @SerializedName("GetListClienteAparatosResult")
-    @Expose
-    private List<GetListClienteAparatosResult> GetListClienteAparatosResult = null;
+  @SerializedName("GetListClienteAparatosResult")
+  @Expose
+  private List<GetListClienteAparatosResult> GetListClienteAparatosResult = null;
 
-    public List<GetListClienteAparatosResult> GetListClienteAparatosResult() {
-        return GetListClienteAparatosResult;
-    }
+  public List<GetListClienteAparatosResult> GetListClienteAparatosResult() {
+    return GetListClienteAparatosResult;
+  }
 
-    public void setListClienteAparatosResult(List<GetListClienteAparatosResult> getListClienteAparatosResult) {
-        this.GetListClienteAparatosResult = getListClienteAparatosResult;
-    }
+
 }

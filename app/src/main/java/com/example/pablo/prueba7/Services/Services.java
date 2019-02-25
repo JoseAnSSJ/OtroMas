@@ -3,6 +3,8 @@ package com.example.pablo.prueba7.Services;
 
 
 import com.example.pablo.prueba7.CambioAparato;
+import com.example.pablo.prueba7.HorasFragment;
+import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -31,13 +33,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.contratoReq;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
-//import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contbueno;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
-import static com.example.pablo.prueba7.Request.Request.contbu;
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.asignacion.jsonArray;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
 import static com.example.pablo.prueba7.asignado.idArticuloasignado;
@@ -46,7 +44,7 @@ import static com.example.pablo.prueba7.asignado.idArticuloasignado;
 public class Services {
     public static int claveTecnico;
     public static int opcion;
-    public static int clvorden=0;
+    public static int clvorden=0, clave_orden;
     public static int clavequeja=0;
     public static String cont;
 
@@ -512,7 +510,7 @@ public class Services {
     //////////////Cambio de Domicilio/////C//////////
     public Service getCAMODOService() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_orden", clvorden);
+        jsonObject.put("clv_orden", clvor);
         jsonObject.put("Clave", ClaveTrabajo);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -924,6 +922,377 @@ public class Services {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        return retrofit.create(Service.class);
+    }
+    /////////////////////////////////////////////////////////////////////
+    public Service getValidaOrdSerService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("CLV_ORDEN", clvorden);
+        jsonObject.put("Clv_Tecnico", claveTecnico);
+        jsonObject.put("OP2", 0);
+        jsonObject.put("OPCION", "M");
+        jsonObject.put("STATUS", HorasFragment.statusHora);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getChecaCAMDOService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getADDRELORDUSUService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
+        jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject1.put("objNueRelOrdenUsuario", jsonObject);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getDeppMODORDSERService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+        jsonObject.put("ClvTecnico", claveTecnico);
+        jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+        jsonObject.put("Contrato",  DeepConsModel.Contrato);
+        jsonObject.put("FecEje", InstalacionFragment.selectDate.getText());
+        jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+        jsonObject.put("Impresa", 1);
+        jsonObject.put("ListadeArticulos", "");
+        jsonObject.put("Obs", DeepConsModel.Obs);
+        jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+        jsonObject.put("Visita1", "");
+        jsonObject.put("Visita2", "");
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getGuardaHoraService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Clv_orden", clvor);
+        jsonObject.put("horaFin", InstalacionFragment.selectTime2.getText());
+        jsonObject.put("horaInicio", InstalacionFragment.selectTime.getText());
+        jsonObject.put("opcion", 1);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getGuardaOrdSerAparatosService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("Op", "M");
+        jsonObject.put("Op2", 0);
+        jsonObject.put("Status", HorasFragment.statusHora);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getAddLlenaBitacoraService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("DescripcionMov", "Se generó la");
+        jsonObject1.put("objSP_LLena_Bitacora_Ordenes", jsonObject);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getGuardaCoordenadasService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("Contrato", DeepConsModel.Contrato);
+        jsonObject.put("Latitud", InstalacionFragment.latitud);
+        jsonObject.put("Longitud", InstalacionFragment.longitud);
+        jsonObject1.put("ObjCoorCli", jsonObject);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getConsultaIpService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("contrato", DeepConsModel.Contrato);
+        jsonObject1.put("ObjNodo", jsonObject);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getReintentarComandoService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("contrato", DeepConsModel.Contrato);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
         return retrofit.create(Service.class);
     }
 }

@@ -1,9 +1,6 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,12 +38,11 @@ public class Arbol_Adapter extends BaseAdapter {
     Request request = new Request();
     LayoutInflater inflater;
     Context mcontext;
-    public static int clv_unicaNet, clv_Medio, posi, d;
-    int b=0;
+    public static int clv_unicaNet, clv_Medio, posi, d, f,h;
     public static int c=0;
     public static String dato;
     Array array = new Array();
-    public static int a=0, ciclo;
+    public static int a=0;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
 
@@ -58,7 +53,7 @@ public class Arbol_Adapter extends BaseAdapter {
     }
 
     public static class viewHolder{
-        public static TextView nombre, servicio;
+        public static TextView nombre;
         public static Button medio;
         ListView listaAparatos;
         CheckBox checkBox;
@@ -81,8 +76,7 @@ public class Arbol_Adapter extends BaseAdapter {
         return position;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
 
@@ -105,6 +99,7 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         ///////////////
+
         a=0;
         if(dat.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
@@ -131,15 +126,17 @@ public class Arbol_Adapter extends BaseAdapter {
                 array.children.add(hijo);
                 ArrayAdapter arrayAdapter1 = new ArrayAdapter(mcontext, android.R.layout.simple_list_item_checked,array.children);
                 holder.listaAparatos.setAdapter(arrayAdapter1);
-
+                if(array.children.size()==dat.size()){
+                    asignacion.aceptarAsignacion.setEnabled(true);
+                    asignacion.siguiente.setEnabled(true);
+                }
                 holder.listaAparatos.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 holder.listaAparatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position3, long id) {
-                        int e= Math.toIntExact(id);
+
                         if(holder.listaAparatos.isItemChecked(position3)==true){
                             Arbol_Adapter.DeletMedio.clear();
-                           // DeletChildren.clear();
                             String abc= String.valueOf(position);
                             DeletChildren.add(Integer.valueOf(dat.get(position).children.get(position3).getClv_Aparato()+abc));
                         }
@@ -147,7 +144,7 @@ public class Arbol_Adapter extends BaseAdapter {
                             DeletChildren.clear();
                            }
 
-                        Log.d("asdasd", String.valueOf(DeletChildren));
+
 
 
                     }
@@ -167,28 +164,40 @@ public class Arbol_Adapter extends BaseAdapter {
         }
 
 int d=0;
+        f=0;
+        h=0;
      for(int c=0; c<dat.size(); c++){
             if(dat.get(c).Detalle!=""){
                 d=d+1;
             }
-            if(d==dat.size()){
-                asignacion.siguiente.setEnabled(true);
+            if(d!=dat.size()){
+
             }else{
-                asignacion.siguiente.setEnabled(false);
+                asignacion.siguiente.setEnabled(true);
             }
      }
+    /* if(trabajos_adapter_result.isnet==1){
+         for(int e=0; e<dat.size();e++){
+             if(dat.get(e).IdMedio==1){
+                 f=1;
+             }
+         }
+     }
+     if(f==1){
+         asignacion.aceptarAsignacion.setEnabled(true);
+     }else{
+         for(int g=0; g<dat.size();g++){
+             if(dat.get(g).children.size()>0){
+                 h=h+1;
+             }
+         }
+     }
+     if(h==1){
+         asignacion.aceptarAsignacion.setEnabled(true);
+     }*/
 
         ////////////////////
-        asignacion.eliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-             //   holder.medio.setVisibility(View.VISIBLE);
-             //   clv_Medio = 0;
-             //   clv_unicaNet = 0;
-
-            }
-        });
 
         final int[] m = {1};
         ////////////////////////////////
@@ -196,7 +205,9 @@ int d=0;
         holder.medio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                asignacion.aceptarAsignacion.setVisibility(View.GONE);
+                asignacion.cancelarAsigancion.setVisibility(View.GONE);
+                asignacion.siguiente.setVisibility(View.GONE);
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat1 =  itData1.next();
                 clv_unicaNet = dat1.get(position).getClv_UnicaNet();
@@ -222,7 +233,9 @@ int d=0;
                 } else {
 
 
-
+                    asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+                    asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+                    asignacion.siguiente.setVisibility(View.VISIBLE);
 
                     layoutMedio.setVisibility(View.GONE);
                     Asignacion.setVisibility(View.VISIBLE);
@@ -241,6 +254,9 @@ int d=0;
         asignacion.cancelarmedio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+                asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+                asignacion.siguiente.setVisibility(View.VISIBLE);
                 layoutMedio.setVisibility(View.GONE);
                 Asignacion.setVisibility(View.VISIBLE);
                 siguiente.setEnabled(true);

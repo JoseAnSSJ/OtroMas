@@ -3,7 +3,6 @@ package com.example.pablo.prueba7;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Intent;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -77,13 +76,6 @@ public class Login extends AppCompatActivity {
                 enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
                     request.getReviews(getApplicationContext());
                 Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
-
-                if (request.b=true) {
-
-                    Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_LONG).show();
-                   Intent intento = new Intent(Login.this, Inicio.class);
-                    startActivity(intento);
-                }
             }
         });
 

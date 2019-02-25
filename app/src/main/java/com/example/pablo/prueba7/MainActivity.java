@@ -1,6 +1,6 @@
 package com.example.pablo.prueba7;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,19 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.Request.Request;
 
 
-import org.json.JSONException;
-
-import static com.example.pablo.prueba7.Request.Request.datos;
 import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
 
@@ -60,9 +55,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.getArbSer();
-                Intent intento=new Intent(MainActivity.this,asignacion.class);
-                startActivity(intento);
                 request.getInfoCliente();
                     request.getServicios();
                 if(layoutAnimado.getVisibility()==View.GONE) {
@@ -81,8 +73,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         //* Swipe
 
+
+
+
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager =  findViewById(R.id.pager);
 
 
         mViewPager.setAdapter(adapter);
@@ -110,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
     public class PagerAdapter extends FragmentPagerAdapter {
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }

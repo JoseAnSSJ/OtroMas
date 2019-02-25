@@ -34,6 +34,7 @@ public class Trabajos extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
 
         trabajos=view.findViewById(R.id.listTrabajos);
@@ -45,7 +46,7 @@ public class Trabajos extends Fragment{
         // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
 
         adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx);
-        //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+        trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
 
         //////////////////////////////////////////
 

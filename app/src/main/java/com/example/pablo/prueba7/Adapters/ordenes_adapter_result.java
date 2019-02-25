@@ -13,14 +13,11 @@ import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Trabajos;
+
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Trabajos.trabajos;
 
-import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
-import static com.example.pablo.prueba7.Trabajos.trabajos;
 
 public class ordenes_adapter_result extends BaseAdapter {
 
@@ -78,10 +75,10 @@ public class ordenes_adapter_result extends BaseAdapter {
 
             convertView=inflater.inflate(R.layout.ordenes_list_items,null);
 
-            holder.status=(TextView)convertView.findViewById(R.id.statusv);
-            holder.orden=(Button)convertView.findViewById(R.id.ordenv);
-            holder.contrato1=(TextView)convertView.findViewById(R.id.contratov);
-            holder.nombre=(TextView)convertView.findViewById(R.id.nombrev);
+            holder.status=convertView.findViewById(R.id.statusv);
+            holder.orden=convertView.findViewById(R.id.ordenv);
+            holder.contrato1=convertView.findViewById(R.id.contratov);
+            holder.nombre=convertView.findViewById(R.id.nombrev);
 
             convertView.setTag(holder);
         }
