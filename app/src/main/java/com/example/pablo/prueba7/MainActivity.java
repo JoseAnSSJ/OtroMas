@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.getArbSer();
-                Intent intento=new Intent(MainActivity.this,asignacion.class);
-                startActivity(intento);
                 request.getInfoCliente();
                     request.getServicios();
                 if(layoutAnimado.getVisibility()==View.GONE) {
@@ -80,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         });
 
         //* Swipe
+
+
+
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
     public class PagerAdapter extends FragmentPagerAdapter {
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }

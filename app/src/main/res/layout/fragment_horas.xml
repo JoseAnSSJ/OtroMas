@@ -23,7 +23,7 @@
 
             <RadioButton
 
-                android:id="@+id/ejutada"
+                android:id="@+id/ejutada1"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
@@ -33,14 +33,15 @@
                 android:visibility="visible" />
 
             <RadioButton
-                android:id="@+id/visitada"
+                android:id="@+id/visitada1"
                 android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:clickable="false"
                 android:focusable="auto"
                 android:text="Ejecutada"
-                android:visibility="visible" />
+                android:visibility="visible"
+                />
 
         </RadioGroup>
 
@@ -64,7 +65,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/RE"
+                android:id="@+id/RE1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -83,15 +84,15 @@
 
                 <EditText
                     android:id="@+id/ejecureal1"
-                    android:layout_width="144dp"
+                    android:layout_width="168dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="200dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="40dp"
+                    android:layout_marginEnd="16dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
+                    android:inputType="date"
                     android:textSize="20sp" />
 
 
@@ -99,10 +100,12 @@
 
 
             <RelativeLayout
-                android:id="@+id/RV"
+                android:id="@+id/RV1"
                 android:layout_width="match_parent"
                 android:layout_height="193dp"
-                android:layout_below="@+id/RE">
+                android:layout_below="@+id/RE1"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +148,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
                     android:textSize="20dp" />
 
 
@@ -159,8 +161,8 @@
                     android:layout_marginStart="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
+                    android:enabled="false"
                     android:focusable="false"
-                    android:hint="_/_/_"
                     android:textSize="20dp" />
                 <EditText
                     android:id="@+id/visita31"
@@ -171,9 +173,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="200dp"
                     android:layout_marginTop="10dp"
+                    android:enabled="false"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
-                    android:hint="_/_/_"
                     android:textSize="20dp"/>
 
             </RelativeLayout>
@@ -181,7 +183,7 @@
             <RelativeLayout
                 android:layout_width="376dp"
                 android:layout_height="105dp"
-                android:layout_below="@+id/RV"
+                android:layout_below="@+id/RV1"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp">
@@ -208,7 +210,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/horaf"
+                    android:id="@+id/horaf11"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_alignParentStart="true"
@@ -223,7 +225,7 @@
 
 
                 <EditText
-                    android:id="@+id/horai"
+                    android:id="@+id/horai11"
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_alignParentStart="true"

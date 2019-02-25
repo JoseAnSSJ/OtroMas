@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -25,10 +27,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -36,7 +42,9 @@ import java.util.Calendar;
  */
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
-    EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
+    public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
+   // public static String clv_TecSec_seleccion="-1"
+    public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
@@ -56,10 +64,11 @@ Request request = new Request();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
         // Inflate the layout for this fragment
+        super.onActivityCreated(onSaveInstanceState);
         View view = inflater.inflate(R.layout.activity_hora, container, false);
         Obs = view.findViewById(R.id.obs);
 
-            request.getTecSec(getContext());
+            //request.getTecSec(getContext());
 
 
         //////////// acciones de botones de hora y fecha//////
@@ -80,6 +89,19 @@ Request request = new Request();
         bt2 = view.findViewById(R.id.visitada);
         /////////////////////////////////////////////////////
         TecSec = view.findViewById(R.id.tecnicosec);
+        TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         ///////////////////GPS//////////////////////////////
         coordenadas = view.findViewById(R.id.txtCoordenadas);
         coordenadas1 =view.findViewById(R.id.txtCoordenadas1);
@@ -91,6 +113,7 @@ Request request = new Request();
         } else {
             locationStart();
         }
+
         //////////////////////////////////////////////////
 
 
@@ -108,16 +131,55 @@ Request request = new Request();
 
 
     public void onClick(View view) {
+        btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(btn1.isChecked()==true){
+                    ejecutada=0;
+                    visita=1;
+                }
+
+            }
+        });
+        bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(bt2.isChecked()==true){
+                    ejecutada=1;
+                    visita=0;
+                }
+
+            }
+        });
         switch (view.getId()) {
             case R.id.ejutada:
                 {
                     mostrarParticular(false);
-
+                    selectDate.setText("");
+                    selectTime.setText("");
+                    selectTime.setEnabled(false);
+                    selectDate1.setText("");
+                    selectDate2.setText("");
+                    selectDate2.setEnabled(false);
+                    selectTime2.setText("");
+                    selectTime2.setEnabled(false);
+                    ejecutada=0;
+                    visita=1;
                 }
                 break;
             case R.id.visitada:
                  {
                     mostrarParticular(true);
+                     selectDate.setText("");
+                     selectTime.setText("");
+                     selectTime.setEnabled(true);
+                     selectDate1.setText("");
+                     selectDate2.setText("");
+                     selectTime2.setText("");
+                     selectTime2.setEnabled(true);
+                     ejecutada=1;
+                     visita=0;
+
                 }
                 break;
         }
@@ -134,8 +196,16 @@ Request request = new Request();
 
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    if(monthOfYear<10){
+                        if(dayOfMonth<10){
+                            selectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else {
+                            selectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
+                    }else {
+                        selectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
-                    selectDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                 }
             }, mYear, mMonth, mDay);
@@ -153,8 +223,12 @@ Request request = new Request();
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+                if(minutes<10){
+                    selectTime.setText(hourOfDay + ":0" + minutes);
+                }else{
+                    selectTime.setText(hourOfDay + ":" + minutes);
+                }
 
-                    selectTime.setText(hourOfDay + " : " + minutes);
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
@@ -172,7 +246,15 @@ Request request = new Request();
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    selectDate1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    if(monthOfYear<10){
+                        if(dayOfMonth<10){
+                            selectDate1.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else{
+                            selectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
+                    }else {
+                        selectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
 
                 }
             }, mYear, mMonth, mDay);
@@ -192,8 +274,15 @@ Request request = new Request();
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    selectDate2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
+                    if(monthOfYear<10){
+                        if(dayOfMonth<10){
+                            selectDate2.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else{
+                            selectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
+                    }else {
+                        selectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
                 }
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -211,7 +300,11 @@ Request request = new Request();
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    selectTime2.setText(hourOfDay + " : " + minute);
+                    if(minute<10){
+                        selectTime2.setText(hourOfDay + ":0" + minute);
+                    }else{
+                        selectTime2.setText(hourOfDay + ":" + minute);
+                    }
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();

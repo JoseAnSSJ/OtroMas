@@ -42,7 +42,7 @@ public class Arbol_Adapter extends BaseAdapter {
     Request request = new Request();
     LayoutInflater inflater;
     Context mcontext;
-    public static int clv_unicaNet, clv_Medio, posi, d;
+    public static int clv_unicaNet, clv_Medio, posi, d, f,h;
     int b=0;
     public static int c=0;
     public static String dato;
@@ -105,6 +105,7 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         ///////////////
+        asignacion.aceptarAsignacion.setEnabled(false);
         a=0;
         if(dat.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
@@ -139,7 +140,6 @@ public class Arbol_Adapter extends BaseAdapter {
                         int e= Math.toIntExact(id);
                         if(holder.listaAparatos.isItemChecked(position3)==true){
                             Arbol_Adapter.DeletMedio.clear();
-                           // DeletChildren.clear();
                             String abc= String.valueOf(position);
                             DeletChildren.add(Integer.valueOf(dat.get(position).children.get(position3).getClv_Aparato()+abc));
                         }
@@ -167,6 +167,8 @@ public class Arbol_Adapter extends BaseAdapter {
         }
 
 int d=0;
+        f=0;
+        h=0;
      for(int c=0; c<dat.size(); c++){
             if(dat.get(c).Detalle!=""){
                 d=d+1;
@@ -176,6 +178,25 @@ int d=0;
             }else{
                 asignacion.siguiente.setEnabled(false);
             }
+     }
+     if(trabajos_adapter_result.isnet==1){
+         for(int e=0; e<dat.size();e++){
+             if(dat.get(e).IdMedio==1){
+                 f=1;
+             }
+         }
+     }
+     if(f==1){
+         asignacion.aceptarAsignacion.setEnabled(true);
+     }else{
+         for(int g=0; g<dat.size();g++){
+             if(dat.get(g).children.size()>0){
+                 h=h+1;
+             }
+         }
+     }
+     if(h==1){
+         asignacion.aceptarAsignacion.setEnabled(true);
      }
 
         ////////////////////

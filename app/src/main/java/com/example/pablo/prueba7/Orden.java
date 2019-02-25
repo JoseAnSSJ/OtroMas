@@ -40,8 +40,9 @@ public class Orden extends AppCompatActivity
     Request request = new Request();
     ordenes_adapter_result adapterord;
     Button cambiodom, cambioapa,ordenb,contratob;
-    ListView ordenes;
+  public static   ListView ordenes;
     EditText ordsearch,contsearch;
+
     Request rqs=new Request();
 
 
@@ -74,7 +75,7 @@ public class Orden extends AppCompatActivity
 
         //* Boton para ir a menu principal
 
-        cambiodom.setOnClickListener(new View.OnClickListener() {
+       /* cambiodom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 request.getCAMDO();
@@ -89,7 +90,7 @@ public class Orden extends AppCompatActivity
                 Intent intent = new Intent(Orden.this, CambioAparato.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         ///////////Busqueda de orden/////////////
 
