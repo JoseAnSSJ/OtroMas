@@ -25,29 +25,18 @@ public class GetConTecnicoAgendaResult {
         this.baseIdUser = baseIdUser;
     }
 
-    public Object getBaseRemoteIp() {
-        return baseRemoteIp;
-    }
 
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
     }
 
-    public Long getClvTecnico() {
-        return clvTecnico;
-    }
 
-    public void setClvTecnico(Long clvTecnico) {
-        this.clvTecnico = clvTecnico;
-    }
 
     public String getTecnico() {
         return tecnico;
     }
 
-    public void setTecnico(String tecnico) {
-        this.tecnico = tecnico;
-    }
+
 
 }
 

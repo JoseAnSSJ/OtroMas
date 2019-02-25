@@ -43,7 +43,7 @@ Request request = new Request();
 int c,d,e;
 String f;
 
-    children dataChild= new children();
+
 
     public static JSONArray jsonArray = new JSONArray();
     public static JSONArray jsonArray2 = new JSONArray();
@@ -52,7 +52,6 @@ String f;
     public static JSONObject jsonObject3 = new JSONObject();
     public static JSONObject jsonObject4 = new JSONObject();
 
-    GetMuestraArbolServiciosAparatosPorinstalarListResult modelo = new GetMuestraArbolServiciosAparatosPorinstalarListResult();
 
     public static Arbol_Adapter adapter;
 
@@ -111,7 +110,7 @@ aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             Array.dataArbSer.get(0).get(a).setClv_orden(clvor);
         }
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-            List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+            List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat =  itData.next();
 
             for(int c=0; c<dat.size(); c++){
                 jsonObject3 = new JSONObject();
@@ -146,9 +145,6 @@ aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
                     jsonArray2.put(c, jsonObject3);
                     Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
                     request.getAceptatAsignacino(getApplicationContext());
-                  //  adapter = new Arbol_Adapter(getApplicationContext());
-                 //   Asignacion.setAdapter(adapter);
-                //    Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                     finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,8 +153,6 @@ aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             }
 
 
-        //       Intent intento=new Intent(asignacion.this,MainActivity.class);
-      // startActivity(intento);
 
     }
 });
@@ -166,7 +160,7 @@ eliminarAparato.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat =  itData.next();
 
         while(Arbol_Adapter.DeletChildren.isEmpty()==false) {
             for (c = 0; c < dat.size(); c++) {
@@ -181,7 +175,6 @@ eliminarAparato.setOnClickListener(new View.OnClickListener() {
                             if (Integer.parseInt(abc) == (Arbol_Adapter.DeletChildren.get(0))) {
                                 dat.get(c).children.remove(d);
                                 Arbol_Adapter.DeletChildren.remove(0);
-                                //  e = e + 1;
                             }
                         } catch (Exception x) {
 
@@ -215,7 +208,6 @@ eliminarAparato.setOnClickListener(new View.OnClickListener() {
 
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
-      //  Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         siguiente.setEnabled(false);
     }
 });

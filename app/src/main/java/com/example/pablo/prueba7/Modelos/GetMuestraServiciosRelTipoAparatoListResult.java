@@ -22,17 +22,11 @@ public class GetMuestraServiciosRelTipoAparatoListResult {
         return baseIdUser;
     }
 
-    public Integer getClv_UnicaNet() {
-        return clv_UnicaNet;
-    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setClv_UnicaNet(Integer clv_UnicaNet) {
-        this.clv_UnicaNet = clv_UnicaNet;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

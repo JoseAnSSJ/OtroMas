@@ -1,9 +1,6 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +39,10 @@ public class Arbol_Adapter extends BaseAdapter {
     LayoutInflater inflater;
     Context mcontext;
     public static int clv_unicaNet, clv_Medio, posi, d, f,h;
-    int b=0;
     public static int c=0;
     public static String dato;
     Array array = new Array();
-    public static int a=0, ciclo;
+    public static int a=0;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
 
@@ -58,7 +53,7 @@ public class Arbol_Adapter extends BaseAdapter {
     }
 
     public static class viewHolder{
-        public static TextView nombre, servicio;
+        public static TextView nombre;
         public static Button medio;
         ListView listaAparatos;
         CheckBox checkBox;
@@ -81,8 +76,7 @@ public class Arbol_Adapter extends BaseAdapter {
         return position;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
 
@@ -105,7 +99,7 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         ///////////////
-       // asignacion.aceptarAsignacion.setEnabled(false);
+
         a=0;
         if(dat.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
@@ -150,7 +144,7 @@ public class Arbol_Adapter extends BaseAdapter {
                             DeletChildren.clear();
                            }
 
-                        Log.d("asdasd", String.valueOf(DeletChildren));
+
 
 
                     }
@@ -203,16 +197,7 @@ int d=0;
      }*/
 
         ////////////////////
-        asignacion.eliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-             //   holder.medio.setVisibility(View.VISIBLE);
-             //   clv_Medio = 0;
-             //   clv_unicaNet = 0;
-
-            }
-        });
 
         final int[] m = {1};
         ////////////////////////////////

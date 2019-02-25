@@ -25,20 +25,8 @@ public class GetuspConsultaTblClasificacionProblemasListResult {
         this.baseIdUser = baseIdUser;
     }
 
-    public Object getBaseRemoteIp() {
-        return baseRemoteIp;
-    }
-
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
-    }
-
-    public Long getClvProblema() {
-        return clvProblema;
-    }
-
-    public void setClvProblema(Long clvProblema) {
-        this.clvProblema = clvProblema;
     }
 
     public String getDescripcion() {

@@ -9,19 +9,6 @@ public class ConsultaIpModel {
         this.Msg = msg;
     }
 
-    public boolean isAplicaReintentar() {
-        return AplicaReintentar;
-    }
 
-    public String getMsg() {
-        return Msg;
-    }
 
-    public void setAplicaReintentar(boolean aplicaReintentar) {
-        AplicaReintentar = aplicaReintentar;
-    }
-
-    public void setMsg(String msg) {
-        Msg = msg;
-    }
 }

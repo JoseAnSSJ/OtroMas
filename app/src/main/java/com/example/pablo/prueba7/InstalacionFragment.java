@@ -28,13 +28,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
+
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+
 
 
 /**

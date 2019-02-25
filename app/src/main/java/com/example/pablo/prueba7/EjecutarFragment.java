@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,34 +13,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Services.Services;
-import com.example.pablo.prueba7.sampledata.Service;
 import com.google.gson.JsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EjecutarFragment extends Fragment {
-    Services services = new Services();
+
     public static Button reiniciar;
     Button eject;
     EditText edt1;
@@ -51,9 +41,6 @@ public class EjecutarFragment extends Fragment {
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
     Request request = new Request();
-    public static JSONObject jsonObject = new JSONObject();
-    JsonObject jsonConsultaIp;
-    Reintentar reintentar = new Reintentar();
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -115,8 +102,6 @@ a=0;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public void ValidacionHoras(){
     String dateEje = String.valueOf(horas.selectDate.getText());
-    String visita1 = String.valueOf(horas.selectDate1.getText());
-    String visita2 = String.valueOf(horas.selectDate2.getText());
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     final Calendar c = Calendar.getInstance();
     añoE = c.get(Calendar.YEAR);
@@ -133,7 +118,6 @@ public void ValidacionHoras(){
             if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<0) {
                 if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<0){
                     if (ini.isBefore(fin)) {
-                      //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                         eject.setEnabled(false);
                            request.getValidaOrdSer(getActivity());
 
@@ -151,7 +135,6 @@ public void ValidacionHoras(){
                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
             } else {
-                //  (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje)))
                 Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
             }
         } catch (ParseException e) {

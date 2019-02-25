@@ -15,7 +15,4 @@ public class JSONStatusApa {
     return GetSP_StatusAparatosListResult;
   }
 
-  public void setSP_StatusAparatosListResult(List<GetSP_StatusAparatosListResult> getSP_StatusAparatosListResult) {
-    this.GetSP_StatusAparatosListResult = getSP_StatusAparatosListResult;
-  }
 }

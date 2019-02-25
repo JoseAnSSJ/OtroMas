@@ -72,10 +72,6 @@ public class children {
         return Clv_Aparato;
     }
 
-    public Integer getContratoNet() {
-        return ContratoNet;
-    }
-
     public String getDetalle() {
         return Detalle;
     }
@@ -84,9 +80,6 @@ public class children {
         return Nombre;
     }
 
-    public String getTipo() {
-        return Tipo;
-    }
 
     public String getType() {
         return Type;
@@ -96,12 +89,6 @@ public class children {
         return baseIdUser;
     }
 
-    public Integer getBaseRemoteIp() {
-        return baseRemoteIp;
-    }
 
-    public Integer getClv_UnicaNet() {
-        return clv_UnicaNet;
-    }
 }
 
