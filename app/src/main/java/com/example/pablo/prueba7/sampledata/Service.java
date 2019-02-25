@@ -28,7 +28,6 @@ import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -116,6 +115,7 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getGUARDAOrdSerAparatos();
     @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
     Call<JsonObject> getLLENABITACORA_ORD();
+<<<<<<< HEAD
 
 
     /////////////////////EjecutarReportes/////////////////
@@ -128,5 +128,13 @@ Call<JsonObject> getVALIOrdSer();
 
 
 
+=======
+    @POST(Constants.URL_GET_GUARDA_COORDENADAS)
+    Call<JsonObject> getGuardaCoordenadas();
+    @POST(Constants.URL_GET_CONSULTA_IP)
+    Call<JsonObject> getConsultaIp();
+    @POST(Constants.URL_GET_REINTENTA_COMANDO)
+    Call<JsonObject> getReintentaComando();
+>>>>>>> master
 }
 

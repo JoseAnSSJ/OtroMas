@@ -29,7 +29,7 @@ public class CambioAparato extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
-        done = (Button) findViewById(R.id.done);
+        done =  findViewById(R.id.done);
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);

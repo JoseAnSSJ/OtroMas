@@ -9,19 +9,9 @@ public class GetSP_StatusAparatosListResult {
         this.Concepto = concepto;
     }
 
-    public String getClv_StatusCableModem() {
-        return Clv_StatusCableModem;
-    }
-
     public String getConcepto() {
         return Concepto;
     }
 
-    public void setClv_StatusCableModem(String clv_StatusCableModem) {
-        Clv_StatusCableModem = clv_StatusCableModem;
-    }
 
-    public void setConcepto(String concepto) {
-        Concepto = concepto;
-    }
 }

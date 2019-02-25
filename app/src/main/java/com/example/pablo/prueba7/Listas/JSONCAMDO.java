@@ -15,7 +15,4 @@ public class JSONCAMDO {
         return GetDameDatosCAMDOResult;
     }
 
-    public void setDameDatosCAMDOResult(List<GetDameDatosCAMDOResult> getDameDatosCAMDOResult) {
-        this.GetDameDatosCAMDOResult = getDameDatosCAMDOResult();
-    }
 }

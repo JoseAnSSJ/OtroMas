@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
+<<<<<<< HEAD
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+=======
+>>>>>>> master
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.Service;
@@ -69,6 +71,7 @@ public class Ejecutar1Fragment extends Fragment {
         solution=TrabajosFragment.proble.getText().toString();
 
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
+<<<<<<< HEAD
         List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
         char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
         fecha_sol="";
@@ -76,6 +79,12 @@ public class Ejecutar1Fragment extends Fragment {
 
             fecha_sol = fecha_sol+caracteres[i];
         }
+=======
+                    List<GetQuejasListResult> dat =  itData.next();
+                    char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
+                    fecha_sol="";
+                    for(int i=0; i<10; i++){
+>>>>>>> master
 
         eject.setOnClickListener(new View.OnClickListener() {
 
@@ -132,8 +141,6 @@ public class Ejecutar1Fragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.reportesselectDate.getText());
-        String visita1 = String.valueOf(horas.reportesselectDate1.getText());
-        String visita2 = String.valueOf(horas.reportesselectDate2.getText());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         final Calendar c = Calendar.getInstance();
         rañoE = c.get(Calendar.YEAR);
@@ -160,7 +167,6 @@ public class Ejecutar1Fragment extends Fragment {
                         Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    //  (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje)))
                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
             } catch (ParseException e) {

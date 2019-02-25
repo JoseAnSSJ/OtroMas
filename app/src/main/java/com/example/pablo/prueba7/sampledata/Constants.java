@@ -2,7 +2,6 @@ package com.example.pablo.prueba7.sampledata;
 
 public class Constants {
     public static final String NEW_URL="http://192.168.50.100:8082/SoftvWCFService.svc/";
-    public static final String NEW_URL1="http://192.168.50.100:8081/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
@@ -46,11 +45,17 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     public static final String URL_GET_MODORDSER="MODORDSER/GetDeepMODORDSER";
     public static final String URL_GET_GUARDA_HORA="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_GUARDAOrdSerAparatos="SP_GuardaOrdSerAparatos/GetDeepSP_GuardaOrdSerAparatos";
+    public static final String URL_GET_GUARDA_COORDENADAS="CLIENTES_New/GetGuardaCoordendasCli";
     public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
+<<<<<<< HEAD
 
     ///////////////////////////////////////EjecutarReportes/////////////////
     public static final String URL_Get_HIHF="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_UPDATE="Quejas/UpdateQuejas";
     public static final String URL_GET_VALIDA="ValidaQuejaCompaniaAdic/GetDeepValidaQuejaCompaniaAdic";
+=======
+    public static final String URL_GET_CONSULTA_IP="OrdSer/GetConsultaIpPorContrato";
+    public static final String URL_GET_REINTENTA_COMANDO="OrdSer/GetReintentarComando";
+>>>>>>> master
 
 }

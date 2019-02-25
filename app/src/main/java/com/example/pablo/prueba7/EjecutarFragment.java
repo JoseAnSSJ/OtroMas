@@ -10,21 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.Services.Services;
+import com.google.gson.JsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.ExecutionException;
+
 
 
 /**
@@ -32,15 +32,15 @@ import java.util.concurrent.ExecutionException;
  */
 public class EjecutarFragment extends Fragment {
 
-    Button reiniciar;
+    public static Button reiniciar;
     Button eject;
     EditText edt1;
+    public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();
     public static String horaIni,horaFin, fecha;
     Request request = new Request();
-    public static JSONObject jsonObject = new JSONObject();
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -53,7 +53,7 @@ public class EjecutarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
-        edt1 = view.findViewById(R.id.status);
+        msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
 
         reiniciar.setEnabled(false);
 
@@ -74,7 +74,7 @@ public class EjecutarFragment extends Fragment {
                     }
                     try {
                         fin = LocalTime.parse(horaFin);
-                        ValidacionHoras();
+
                     }catch (Exception e){
                         Toast.makeText(getActivity(), "Ingrese Horas", Toast.LENGTH_LONG).show();
                         a=1;
@@ -86,39 +86,20 @@ public class EjecutarFragment extends Fragment {
                 if(horas.visita==1){
                     ValidacionVisita();
                 }
-
-
-              /*  if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
-                    reiniciar.setEnabled(true);
-                }
-                if ((edt1.getText().toString().trim()).equalsIgnoreCase("PENDIENTE")) {
-                    reiniciar.setEnabled(true);
-                }
-                if ((edt1.getText().toString().trim()).equalsIgnoreCase("EXITOSO")) {
-                    reiniciar.setEnabled(false);
-                }
-                eject.setEnabled(false);
                 reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("EXITOSO")) {
-                            eject.setEnabled(true);
-                        }
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("ERROR")) {
-                            eject.setEnabled(false);
-                        }
-                        if ((edt1.getText().toString().trim()).equalsIgnoreCase("PENDIENTE")) {
-                            eject.setEnabled(false);
-                        }
+                        request.ReintentarComando(getActivity());
+                        reiniciar.setEnabled(false);
                     }
-                });*/
+                });
 
 
             }
         });
         return view;
     }
+<<<<<<< HEAD
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.selectDate.getText());
@@ -142,6 +123,35 @@ public class EjecutarFragment extends Fragment {
                         if (ini.isBefore(fin)) {
                             //  Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                             request.getValidaOrdSer(getActivity());
+=======
+@RequiresApi(api = Build.VERSION_CODES.O)
+public void ValidacionHoras(){
+    String dateEje = String.valueOf(horas.selectDate.getText());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    final Calendar c = Calendar.getInstance();
+    añoE = c.get(Calendar.YEAR);
+    mesE = c.get(Calendar.MONTH);
+    diaE = c.get(Calendar.DAY_OF_MONTH);
+
+    if(mesE<10){
+        fecha = (diaE+1) + "/0" + (mesE + 1) + "/" + añoE;
+    }else{
+        fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
+    }
+    if(horas.ejecutada==1) {
+        try {
+            if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<0) {
+                if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<0){
+                    if (ini.isBefore(fin)) {
+                        eject.setEnabled(false);
+                           request.getValidaOrdSer(getActivity());
+
+
+
+
+
+
+>>>>>>> master
 
                         }
                         if (ini.isAfter(fin)) {
@@ -154,7 +164,11 @@ public class EjecutarFragment extends Fragment {
                     //  (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje)))
                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
+<<<<<<< HEAD
             } catch (ParseException e) {
+=======
+            } else {
+>>>>>>> master
                 Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
             }
         }

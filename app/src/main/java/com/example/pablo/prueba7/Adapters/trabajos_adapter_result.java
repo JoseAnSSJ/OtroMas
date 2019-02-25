@@ -13,23 +13,20 @@ import android.widget.Toast;
 
 
 import com.example.pablo.prueba7.CambioAparato;
-import com.example.pablo.prueba7.CambioDom;
-import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Trabajos;
-import com.example.pablo.prueba7.asignacion;
+
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Trabajos.trabajos;
+
 
 public class trabajos_adapter_result extends BaseAdapter {
 
     LayoutInflater inflatertrab;
     Context Cmcontext;
-    Context context;
+
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
     public static int ClaveTrabajo, isnet;
@@ -74,9 +71,15 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
+<<<<<<< HEAD
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+=======
+            holder.trabajo=convertView.findViewById(R.id.trabajov);
+            holder.accion=convertView.findViewById(R.id.accionv);
+
+>>>>>>> master
             convertView.setTag(holder);
         }
         else {

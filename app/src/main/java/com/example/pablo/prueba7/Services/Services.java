@@ -41,6 +41,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.observacion1;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
+<<<<<<< HEAD
 
 import static com.example.pablo.prueba7.Ejecutar1Fragment.fecha_sol;
 import static com.example.pablo.prueba7.Ejecutar1Fragment.solution;
@@ -48,6 +49,8 @@ import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
 import static com.example.pablo.prueba7.Request.Request.tecC;
 import static com.example.pablo.prueba7.TrabajosFragment.solucion;
+=======
+>>>>>>> master
 import static com.example.pablo.prueba7.asignacion.jsonArray;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
 import static com.example.pablo.prueba7.asignado.idArticuloasignado;
@@ -56,8 +59,13 @@ import static com.example.pablo.prueba7.asignado.idArticuloasignado;
 public class Services {
     public static int claveTecnico;
     public static int opcion;
+<<<<<<< HEAD
     public static int clvorden = 0;
     public static int clavequeja = 0;
+=======
+    public static int clvorden=0, clave_orden;
+    public static int clavequeja=0;
+>>>>>>> master
     public static String cont;
 
     public String abc = "Basic: " + Login.enco;
@@ -523,7 +531,7 @@ public class Services {
     //////////////Cambio de Domicilio/////C//////////
     public Service getCAMODOService() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_orden", clvorden);
+        jsonObject.put("clv_orden", clvor);
         jsonObject.put("Clave", ClaveTrabajo);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -972,7 +980,7 @@ public class Services {
     public Service getChecaCAMDOService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
@@ -1005,11 +1013,13 @@ public class Services {
     public Service getADDRELORDUSUService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
         jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject1.put("objNueRelOrdenUsuario", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
 
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
@@ -1088,9 +1098,9 @@ public class Services {
     public Service getGuardaHoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
-        jsonObject.put("horafin", InstalacionFragment.selectTime2.getText());
-        jsonObject.put("horainicio", InstalacionFragment.selectTime.getText());
+        jsonObject.put("Clv_orden", clvor);
+        jsonObject.put("horaFin", InstalacionFragment.selectTime2.getText());
+        jsonObject.put("horaInicio", InstalacionFragment.selectTime.getText());
         jsonObject.put("opcion", 1);
 
 
@@ -1126,9 +1136,9 @@ public class Services {
     public Service getGuardaOrdSerAparatosService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
-        jsonObject.put("OP", "M");
-        jsonObject.put("OP2", 0);
+        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("Op", "M");
+        jsonObject.put("Op2", 0);
         jsonObject.put("Status", HorasFragment.statusHora);
 
 
@@ -1164,9 +1174,118 @@ public class Services {
     public Service getAddLlenaBitacoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("DescripcionMov", "Se generó la");
+        jsonObject1.put("objSP_LLena_Bitacora_Ordenes", jsonObject);
 
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getGuardaCoordenadasService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("Contrato", DeepConsModel.Contrato);
+        jsonObject.put("Latitud", InstalacionFragment.latitud);
+        jsonObject.put("Longitud", InstalacionFragment.longitud);
+        jsonObject1.put("ObjCoorCli", jsonObject);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getConsultaIpService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.put("contrato", DeepConsModel.Contrato);
+        jsonObject1.put("ObjNodo", jsonObject);
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getReintentarComandoService() throws JSONException {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("contrato", DeepConsModel.Contrato);
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());

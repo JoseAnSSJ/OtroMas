@@ -34,7 +34,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trabajos2, container, false);
         //  request.getServiciosAsignados(getContext());
-        request.getnombretec(getContext());
+        request.getnombretec();
         request.getSolucuion(getContext());
         request.getReportesC(getContext());
         request.getReportes(getContext());

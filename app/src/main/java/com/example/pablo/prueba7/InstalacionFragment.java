@@ -28,13 +28,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
+
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+
 
 
 /**
@@ -43,7 +42,7 @@ import java.util.List;
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
-   // public static String clv_TecSec_seleccion="-1"
+   public static String latitud, longitud;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
@@ -223,11 +222,20 @@ Request request = new Request();
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                if(minutes<10){
-                    selectTime.setText(hourOfDay + ":0" + minutes);
-                }else{
-                    selectTime.setText(hourOfDay + ":" + minutes);
-                }
+               if(hourOfDay<10){
+                   if(minutes<10){
+                       selectTime.setText("0"+hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText("0"+hourOfDay + ":" + minutes);
+                   }
+               }else {
+                   if(minutes<10){
+                       selectTime.setText(hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText(hourOfDay + ":" + minutes);
+                   }
+               }
+
 
                 }
             }, mHour, mMinute, false);
@@ -300,10 +308,18 @@ Request request = new Request();
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    if(minute<10){
-                        selectTime2.setText(hourOfDay + ":0" + minute);
-                    }else{
-                        selectTime2.setText(hourOfDay + ":" + minute);
+                    if(hourOfDay<10){
+                        if(minute<10){
+                            selectTime2.setText("0"+hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText("0"+hourOfDay + ":" + minute);
+                        }
+                    }else {
+                        if(minute<10){
+                            selectTime2.setText(hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText(hourOfDay + ":" + minute);
+                        }
                     }
                 }
             }, mHour, mMinute, false);
@@ -373,7 +389,8 @@ Request request = new Request();
 
             loc.getLatitude();
             loc.getLongitude();
-
+            latitud= String.valueOf(loc.getLatitude());
+            longitud = String.valueOf(loc.getLongitude());
             String Text1 = "Coordenadas" ;
             String Text2 =  "\n Lat = " + loc.getLatitude();
             String Text3 = "\n Long = " + loc.getLongitude();

@@ -87,11 +87,14 @@ public class Array {
     public static ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>dataClasf;
     public static ArrayList<List<GetConTecnicoAgendaResult>>dataNom;
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
+<<<<<<< HEAD
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
     public static ArrayList<String> Asigna= new ArrayList<String>();
     public static ArrayList<String> Asigna1= new ArrayList<String>();
     public static ArrayList<String> Asigna2= new ArrayList<String>();
+=======
+>>>>>>> master
 
 
 }

@@ -2,8 +2,6 @@ package com.example.pablo.prueba7;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,20 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Request.Request;
 
-import org.json.JSONException;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
@@ -52,7 +45,7 @@ public class Orden extends AppCompatActivity
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_orden);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -73,24 +66,7 @@ public class Orden extends AppCompatActivity
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
 /////////////////////////////////////////////
 
-        //* Boton para ir a menu principal
 
-       /* cambiodom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                request.getCAMDO();
-                Intent intent = new Intent(Orden.this, CambioDom.class);
-                startActivity(intent);
-            }
-        });
-
-        cambioapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Orden.this, CambioAparato.class);
-                startActivity(intent);
-            }
-        });*/
 
         ///////////Busqueda de orden/////////////
 
@@ -163,19 +139,19 @@ public class Orden extends AppCompatActivity
         //////////////////////////////////////////////
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -211,8 +187,6 @@ public class Orden extends AppCompatActivity
             clvorden=0;
             opcion=1;
             request.getListOrd();
-            //request.getTrabajos();
-            //request.getDeepCons();
             startActivity(intent1);
 
 
