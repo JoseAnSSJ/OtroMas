@@ -3,8 +3,6 @@ package com.example.pablo.prueba7.Modelos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class GetBUSCADetOrdSerListResult {
 
     @SerializedName("BaseIdUser")
@@ -33,7 +31,7 @@ public class GetBUSCADetOrdSerListResult {
     private Object obs;
     @SerializedName("SeRealiza")
     @Expose
-    private Boolean seRealiza;
+    private Boolean seRealiza=false;
 
     public Integer getBaseIdUser() {
         return baseIdUser;
@@ -103,8 +101,9 @@ public class GetBUSCADetOrdSerListResult {
         return seRealiza;
     }
 
-    public void setSeRealiza(Boolean seRealiza) {
+    public boolean setSeRealiza(Boolean seRealiza) {
         this.seRealiza = seRealiza;
+        return false;
     }
 
 }

@@ -29,33 +29,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.Clave;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.clvTra;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.cont;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.descr;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.stat;
-import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.x;
+
 import static com.example.pablo.prueba7.Listas.Array.recibix;
+import static com.example.pablo.prueba7.Trabajos.conta;
+import static com.example.pablo.prueba7.asignacion.jsonObject2;
 
 
 public class RecibiAparato {
 
 
     //List<NoEntregadosModel>noent=new ArrayList<NoEntregadosModel>(1);
-    public static  JSONObject jsonObject2 = new JSONObject();
+
     public static  JSONObject jsonObject = new JSONObject();
     public static JSONArray jsonArrayap = new JSONArray();
     //public static JsonArray jsonArrayap = jsonObject.getJSONArray("objSP_InsertaTbl_NoEntregados");
 
-    public void agregaap( ){
-        try {
 
-      for(int i=0;i<x;i++){
-          jsonArrayap.put(x,jsonObject);
-      }
-      jsonObject2.put("objSP_InsertaTbl_NoEntregados",jsonArrayap);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Service recibiapar() throws JSONException {
 

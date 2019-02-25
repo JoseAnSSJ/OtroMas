@@ -676,12 +676,13 @@ try{
                     List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("response11", dat.get(i).getDescripcion());
+                        dat.get(i).setSeRealiza(false);
 
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.clavex.add(dat.get(i).getClave());
-                        Array.recibix.add(Boolean.FALSE);
+                        Array.recibix.add(dat.get(i).getSeRealiza());
 
 
                         // Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
@@ -1029,9 +1030,9 @@ if(response.code()==200){
                         array.nombreArbol.add(dat.get(i).getNombre());
                     }
                 }
-if(response.code()==200){
-    Intent intento25 = new Intent(context, asignacion.class);
-    context.startActivity(intento25);
+             if(response.code()==200){
+             Intent intento25 = new Intent(context, asignacion.class);
+             context.startActivity(intento25);
 }
             }
 
@@ -1627,6 +1628,7 @@ if(response.code()==200){
 
     //////////////////////////
     public void send_aparat() {
+       // adaptertrabajos.norec();
 
         Service service = null;
         try {
@@ -1638,26 +1640,13 @@ if(response.code()==200){
         Call<JsonObject> call = service.noent();
         call.enqueue(new Callback<JsonObject>() {
 
-
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("objSP_InsertaTbl_NoEntregados"));
                 if (response1.code() == 200) {
+                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_InsertaTbl_NoEntregadosResult")).equals(0)) {
 
-                    Toast.makeText(getApplicationContext(),
-                            "Envio de aparato exitoso", Toast.LENGTH_SHORT);
-                    //if (String.valueOf(response1.body().getAsJsonPrimitive("objSP_InsertaTbl_NoEntregados")).equals(0)) {
-
-
-                   // } else {
-                      //  Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
-
-                   // }
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),
-                            "Envio de aparato NO exitoso", Toast.LENGTH_SHORT);
+                    }
                 }
 
             }

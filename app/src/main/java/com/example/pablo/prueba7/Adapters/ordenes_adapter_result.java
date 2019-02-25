@@ -78,6 +78,7 @@ public class ordenes_adapter_result extends BaseAdapter {
 
 
         if (convertView == null) {
+
             holder = new viewHolder();
 
             convertView=inflater.inflate(R.layout.ordenes_list_items,null);
