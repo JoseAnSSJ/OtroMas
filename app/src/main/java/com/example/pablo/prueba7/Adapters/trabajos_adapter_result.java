@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +43,6 @@ public class trabajos_adapter_result extends BaseAdapter {
     public class viewHolder{
         TextView trabajo;
         Button accion;
-        CheckBox recibi;
 
     }
 
@@ -71,15 +69,9 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
-<<<<<<< HEAD
-            holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
-            holder.accion=(Button)convertView.findViewById(R.id.accionv);
-            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
-=======
             holder.trabajo=convertView.findViewById(R.id.trabajov);
             holder.accion=convertView.findViewById(R.id.accionv);
 
->>>>>>> master
             convertView.setTag(holder);
         }
         else {
@@ -87,7 +79,6 @@ public class trabajos_adapter_result extends BaseAdapter {
         }
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
-
         ClaveTrabajo = Array.clavex.get(position);
 
         holder.accion.setOnClickListener(new View.OnClickListener() {
@@ -128,18 +119,14 @@ public class trabajos_adapter_result extends BaseAdapter {
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                     request.getExtencionesAdicionales(Cmcontext);
 
-                }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase(" ISDIG - Instalacion de Television Digital")) {
-                    Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
-                    request.getExtencionesAdicionales(Cmcontext);
 
                 }
 
-                if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
-                    holder.accion.setEnabled(false);
-                    holder.accion.setText("---");
-                }
 
+                /*if ((accion.getText().toString().trim().equalsIgnoreCase("null"))){
+                    accion.setEnabled(false);
+                    accion.setText("---");
+                }*/
 
             }
         });

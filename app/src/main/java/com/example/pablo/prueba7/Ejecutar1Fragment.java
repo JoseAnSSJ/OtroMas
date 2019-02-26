@@ -1,7 +1,6 @@
 package com.example.pablo.prueba7;
 
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,26 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
-<<<<<<< HEAD
-
-import com.example.pablo.prueba7.Modelos.DeepConsModel;
-=======
->>>>>>> master
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.sampledata.Service;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.opcion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,8 +34,6 @@ public class Ejecutar1Fragment extends Fragment {
     int rañoE, rmesE, rdiaE,ra;
     public static LocalTime rini,rfin;
     public static String rhoraIni,rhoraFin, rfecha, fecha_sol="";
-    public static String hora1I, horafin,solution;
-    public static Date datetime;
     public Ejecutar1Fragment() {
         // Required empty public constructor
     }
@@ -66,42 +45,18 @@ public class Ejecutar1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
         eject = view.findViewById(R.id.ejec);
-        hora1I=HorasFragment.reportesselectTime.getText().toString();
-        horafin=HorasFragment.reportesselectTime2.getText().toString();
-        solution=TrabajosFragment.proble.getText().toString();
-
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
-<<<<<<< HEAD
-        List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
-        char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
-        fecha_sol="";
-        for(int i=0; i<10; i++){
-
-            fecha_sol = fecha_sol+caracteres[i];
-        }
-=======
                     List<GetQuejasListResult> dat =  itData.next();
                     char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
                     fecha_sol="";
                     for(int i=0; i<10; i++){
->>>>>>> master
 
+                        fecha_sol = fecha_sol+caracteres[i];
+                    }
         eject.setOnClickListener(new View.OnClickListener() {
-
-
-
-
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                request.getGuardaHoraReporte(getContext());
-                request.getGuardaCampos(getContext());
-                Intent intent1 = new Intent(getActivity(), Reportes.class);
-                request.getListQuejas();
-                startActivity(intent1);
-
-
-
                 ra=0;
                 rhoraIni = String.valueOf(horas.reportesselectTime.getText());
                 rhoraFin = String.valueOf(horas.reportesselectTime2.getText());
@@ -128,7 +83,7 @@ public class Ejecutar1Fragment extends Fragment {
                 }
 
 
-
+                
 
             }
         });
@@ -157,8 +112,7 @@ public class Ejecutar1Fragment extends Fragment {
                 if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
                     if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
                         if (rini.isBefore(rfin)) {
-                            //Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                         }
                         if (rini.isAfter(rfin)) {
                             Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
