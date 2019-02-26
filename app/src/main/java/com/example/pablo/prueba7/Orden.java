@@ -33,8 +33,9 @@ public class Orden extends AppCompatActivity
     Request request = new Request();
     ordenes_adapter_result adapterord;
     Button cambiodom, cambioapa,ordenb,contratob;
-    ListView ordenes;
+  public static   ListView ordenes;
     EditText ordsearch,contsearch;
+
     Request rqs=new Request();
 
 

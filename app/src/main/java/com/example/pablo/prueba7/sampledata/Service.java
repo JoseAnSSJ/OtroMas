@@ -12,6 +12,7 @@ import com.example.pablo.prueba7.Listas.JSONArbolServicios;
 import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONClasificacionProblm;
+import com.example.pablo.prueba7.Listas.JSONHIHF;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONPrioridad;
@@ -23,6 +24,7 @@ import com.example.pablo.prueba7.Listas.JSONServiciosAparatos;
 import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
+import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
@@ -95,7 +97,10 @@ public interface Service {
     Call<JSONNombreTecnico>getNom();
     @POST(Constants.URL_GET_ASERVICE)
     Call<JSONServicioAsignado>getServ();
-///////////////////EjecucionInstalacion/////////////////
+    @POST(Constants.URL_GET_TSECR)
+    Call<JSONTecSecReport>getTec();
+
+    ///////////////////EjecucionInstalacion/////////////////
 @POST(Constants.URL_GET_VALI_OrdSer)
 Call<JsonObject> getVALIOrdSer();
     @POST(Constants.URL_GET_CHECA_CAMDO)
@@ -110,6 +115,13 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getGUARDAOrdSerAparatos();
     @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
     Call<JsonObject> getLLENABITACORA_ORD();
+    /////////////////////EjecutarReportes/////////////////
+    @POST(Constants.URL_Get_HIHF)
+    Call<JsonObject>getHiHf();
+    @POST(Constants.URL_GET_UPDATE)
+    Call<JsonObject>getLLenaReporte();
+    @POST(Constants.URL_GET_VALIDA)
+    Call<JsonObject>getValidaRep();
     @POST(Constants.URL_GET_GUARDA_COORDENADAS)
     Call<JsonObject> getGuardaCoordenadas();
     @POST(Constants.URL_GET_CONSULTA_IP)

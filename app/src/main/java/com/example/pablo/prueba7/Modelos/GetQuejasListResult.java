@@ -72,7 +72,7 @@ public class GetQuejasListResult {
     private String fechaEjecucion;
     @SerializedName("Fecha_Soliciutud")
     @Expose
-    private String fechaSoliciutud;
+    public String fechaSoliciutud;
     @SerializedName("HP")
     @Expose
     private Object hP;
@@ -123,7 +123,7 @@ public class GetQuejasListResult {
     private String status;
     @SerializedName("TecnicoCuadrilla")
     @Expose
-    private Long tecnicoCuadrilla;
+    public int tecnicoCuadrilla;
     @SerializedName("TipSer")
     @Expose
     private String tipSer;
@@ -159,7 +159,7 @@ public class GetQuejasListResult {
     private Object visita3;
     @SerializedName("clvPrioridadQueja")
     @Expose
-    private Long clvPrioridadQueja;
+    public int clvPrioridadQueja;
     @SerializedName("clvProblema")
     @Expose
     private Long clvProblema;
@@ -221,6 +221,43 @@ public class GetQuejasListResult {
         this.status = status;
     }
 
+<<<<<<< HEAD
+
+
+    public String getTipSer() {
+        return tipSer;
+    }
+
+    public void setTipSer(String tipSer) {
+        this.tipSer = tipSer;
+    }
+
+    public Object getTipoSolucion() {
+        return tipoSolucion;
+    }
+
+    public void setTipoSolucion(Object tipoSolucion) {
+        this.tipoSolucion = tipoSolucion;
+    }
+
+    public Object getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Object turno) {
+        this.turno = turno;
+    }
+
+    public String getTurnoAge() {
+        return turnoAge;
+    }
+
+    public void setTurnoAge(String turnoAge) {
+        this.turnoAge = turnoAge;
+    }
+
+=======
+>>>>>>> master
     public Object getUsuario() {
         return usuario;
     }
@@ -245,6 +282,38 @@ public class GetQuejasListResult {
         this.visita2 = visita2;
     }
 
+<<<<<<< HEAD
+    public Object getVisita3() {
+        return visita3;
+    }
+
+    public void setVisita3(Object visita3) {
+        this.visita3 = visita3;
+    }
+
+
+
+    public Long getClvProblema() {
+        return clvProblema;
+    }
+
+    public void setClvProblema(Long clvProblema) {
+        this.clvProblema = clvProblema;
+    }
+
+    public Object getClvLlamada() {
+        return clvLlamada;
+    }
+
+    public void setClvLlamada(Object clvLlamada) {
+        this.clvLlamada = clvLlamada;
+    }
+
+
+
+
+=======
+>>>>>>> master
 
 
 }
