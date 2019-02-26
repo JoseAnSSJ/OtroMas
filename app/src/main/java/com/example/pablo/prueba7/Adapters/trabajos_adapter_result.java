@@ -7,23 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.pablo.prueba7.CambioAparato;
-import com.example.pablo.prueba7.CambioDom;
-import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Orden;
 import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Trabajos;
-import com.example.pablo.prueba7.asignacion;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +34,7 @@ import java.util.List;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 
+
 import static com.example.pablo.prueba7.Listas.Array.recibix;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 import static com.example.pablo.prueba7.Post.RecibiAparato.jsonArrayap;
@@ -42,11 +42,12 @@ import static com.example.pablo.prueba7.Post.RecibiAparato.jsonObject;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
 import static java.util.Arrays.asList;
 
+
 public class trabajos_adapter_result extends BaseAdapter {
 
     LayoutInflater inflatertrab;
     Context Cmcontext;
-    Context context;
+
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
     ArrayList<Boolean>recibix;
@@ -74,7 +75,6 @@ public class trabajos_adapter_result extends BaseAdapter {
     public class viewHolder{
         TextView trabajo;
         Button accion;
-        CheckBox recibi;
 
     }
 
@@ -102,9 +102,11 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
+
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+
 
             convertView.setTag(holder);
         }
@@ -116,6 +118,7 @@ public class trabajos_adapter_result extends BaseAdapter {
         holder.accion.setText(Array.accionx.get(position));
         holder.recibi.setChecked(Array.recibix.get(position));
 
+        ClaveTrabajo = Array.clavex.get(position);
 
 
         /////////////
@@ -181,6 +184,8 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                     holder.recibi.setChecked(false);
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
+                   // request.getDeepCAPAT(Cmcontext);
+
 
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
@@ -188,7 +193,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                     request.getExtencionesAdicionales(Cmcontext);
 
-                }
+
 
                 if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
                     holder.accion.setText("---");
@@ -200,7 +205,14 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                     request.getArbSer(Cmcontext);
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
 
+
                 }
+
+
+                /*if ((accion.getText().toString().trim().equalsIgnoreCase("null"))){
+                    accion.setEnabled(false);
+                    accion.setText("---");
+                }*/
 
             }
         });

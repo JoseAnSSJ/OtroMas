@@ -8,13 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-
-import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Calendar;
 
@@ -23,18 +22,14 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
-
-   public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2, selectDate3;
-
-    public static boolean reporteEjecutada=true, repotteVisita=false;
-
+    public static EditText reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
+    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     RadioButton btn1, bt2;
-    Request request = new Request();
-
+    public static String statusHora="E";
 
 
     public HorasFragment() {
@@ -45,26 +40,24 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
 
         TecSec1= view.findViewById(R.id.tecnicosec1);
-        request.getTecSecR(getContext());
 
 
 
 
         //////////// acciones de botones de hora y fecha//////
-        selectDate = view.findViewById(R.id.ejecureal1);
-        selectDate1 = view.findViewById(R.id.visita11);
-        selectDate2 = view.findViewById(R.id.visita21);
-        selectDate3 = view.findViewById(R.id.visita31);
+        reportesselectDate = view.findViewById(R.id.ejecureal1);
+        reportesselectDate1 = view.findViewById(R.id.visita11);
+        reportesselectDate2 = view.findViewById(R.id.visita21);
+        reportesselectDate3 = view.findViewById(R.id.visita31);
 
 
-
-        selectTime = view.findViewById(R.id.horai);
-        selectTime2 = view.findViewById(R.id.horaf);
-
+        reportesselectTime = view.findViewById(R.id.horai);
+        reportesselectTime2 = view.findViewById(R.id.horaf);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
@@ -76,65 +69,84 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
-        selectDate.setOnClickListener(this);
-        selectDate1.setOnClickListener(this);
-        selectDate2.setOnClickListener(this);
-        selectDate3.setOnClickListener(this);
-        selectTime.setOnClickListener(this);
-        selectTime2.setOnClickListener(this);
+        reportesselectDate.setOnClickListener(this);
+        reportesselectDate1.setOnClickListener(this);
+        reportesselectDate2.setOnClickListener(this);
+        reportesselectDate3.setOnClickListener(this);
+        reportesselectTime.setOnClickListener(this);
+        reportesselectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 
-        if(selectDate1.getText()!=null){
-            selectDate2.setEnabled(true);
-            selectDate3.setEnabled(false);
-        }
-        if(selectDate2.getText()!=null){
-            selectDate3.setEnabled(true);
-        }
+        reportesselectDate2.setEnabled(false);
+        reportesselectDate3.setEnabled(false);
+
         return view;
     }
 
     @Override
     public void onClick(View v) {
 
+        btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(btn1.isChecked()==true){
+                    reporteEjecutada=0;
+                    repotteVisita=1;
+                    statusHora="V";
+                }
 
+            }
+        });
+        bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(bt2.isChecked()==true){
+                    reporteEjecutada=1;
+                    repotteVisita=0;
+                    statusHora="E";
+                }
+
+            }
+        });
         switch (v.getId()) {
             case R.id.ejutada:
             {
                 mostrarParticular(false);
-                selectDate.setText("");
-                selectTime.setText("");
-                selectTime.setEnabled(false);
-                selectDate1.setText("");
-                selectDate2.setText("");
-                selectDate3.setText("");
-                selectTime2.setText("");
-                selectTime2.setEnabled(false);
-                reporteEjecutada=false;
-                repotteVisita=true;
+                reportesselectDate.setText("");
+                reportesselectTime.setText("");
+                reportesselectTime.setEnabled(false);
+                reportesselectDate1.setText("");
+                reportesselectDate2.setText("");
+                reportesselectDate3.setText("");
+                reportesselectTime2.setText("");
+                reportesselectTime2.setEnabled(false);
+                reporteEjecutada=0;
+                repotteVisita=1;
+                statusHora="V";
 
             }
             break;
             case R.id.visitada:
             {
                 mostrarParticular(true);
-                selectDate.setText("");
-                selectTime.setText("");
-                selectTime.setEnabled(true);
-                selectDate1.setText("");
-                selectDate2.setText("");
-                selectDate3.setText("");
-                selectTime2.setText("");
-                selectTime.setEnabled(true);
-                reporteEjecutada=true;
-                repotteVisita=false;
+                reportesselectDate.setText("");
+                reportesselectTime.setText("");
+                reportesselectTime.setEnabled(true);
+                reportesselectDate1.setText("");
+                reportesselectDate2.setText("");
+                reportesselectDate3.setText("");
+                reportesselectTime2.setText("");
+                reportesselectTime2.setEnabled(true);
+                reporteEjecutada=1;
+                repotteVisita=0;
+                statusHora="E";
             }
             break;
         }
 
 
-        if (v == selectDate) {
+        if (v == reportesselectDate) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -147,16 +159,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                     if(monthOfYear<10){
-                        selectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        if(dayOfMonth<10){
+                            reportesselectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else{
+                            reportesselectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
                     }else {
-                        selectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        reportesselectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                     }
 
                 }
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
-        if (v == selectTime) {
+        if (v == reportesselectTime) {
 
 // Get Current Time
             final Calendar c = Calendar.getInstance();
@@ -168,14 +184,27 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+                    if(hourOfDay<10){
+                        if(minutes<10){
+                            reportesselectTime.setText("0"+hourOfDay + ":0" + minutes);
+                        }else{
+                            reportesselectTime.setText("0"+hourOfDay + ":" + minutes);
+                        }
+                    }else{
+                        if(minutes<10){
+                            reportesselectTime.setText(hourOfDay + ":0" + minutes);
+                        }else{
+                            reportesselectTime.setText(hourOfDay + ":" + minutes);
+                        }
+                    }
 
-                    selectTime.setText(hourOfDay + " : " + minutes);
+
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
         }
 
-        if (v  == selectDate1) {
+        if (v  == reportesselectDate1) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -188,9 +217,13 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                     if(monthOfYear<10){
-                        selectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        if(dayOfMonth<10){
+                            reportesselectDate1.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else{
+                            reportesselectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
                     }else {
-                        selectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        reportesselectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                     }
 
                 }
@@ -199,7 +232,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         }
 
 
-        if (v == selectDate2) {
+        if (v == reportesselectDate2) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -212,9 +245,13 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                     if(monthOfYear<10){
-                        selectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        if(dayOfMonth<10){
+                            reportesselectDate2.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else {
+                            reportesselectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
                     }else {
-                        selectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        reportesselectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                     }
 
                 }
@@ -222,7 +259,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             datePickerDialog.show();
         }
 
-        if (v == selectDate3) {
+        if (v == reportesselectDate3) {
             final Calendar c =Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -232,9 +269,13 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     if(monthOfYear<10){
-                        selectDate3.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        if(dayOfMonth<10){
+                            reportesselectDate3.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }else{
+                            reportesselectDate3.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                        }
                     }else {
-                        selectDate3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        reportesselectDate3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                     }
 
                 }
@@ -243,7 +284,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             datePickerDialog.show();
             }
 
-        if (v == selectTime2) {
+        if (v == reportesselectTime2) {
 
 // Get Current Time
             final Calendar c = Calendar.getInstance();
@@ -256,16 +297,23 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    selectTime2.setText(hourOfDay + " : " + minute);
+                    if(hourOfDay<10){
+                        if(minute<10){
+                            reportesselectTime2.setText("0"+hourOfDay + ":0" + minute);
+                        }else{
+                            reportesselectTime2.setText("0"+hourOfDay + ":" + minute);
+                        }
+                    }else{
+                        if(minute<10){
+                            reportesselectTime2.setText(hourOfDay + ":0" + minute);
+                        }else{
+                            reportesselectTime2.setText(hourOfDay + ":" + minute);
+                        }
+                    }
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-        processScreen();
-    }
-
-    private void processScreen() {
-
 
 
     }

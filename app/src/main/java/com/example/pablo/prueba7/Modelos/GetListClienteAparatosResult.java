@@ -26,23 +26,14 @@ public class GetListClienteAparatosResult {
         return idArticulo;
     }
 
-    public  void setControNet(int ControNet) {
-        ControNet = ControNet;
-    }
 
     public  void setDescripcion(String Descripcion) {
         Descripcion = Descripcion;
     }
 
-    public  void setIdArticulo(int idArticulo) {
-        idArticulo = idArticulo;
-    }
 
     public String getMac() {
         return Mac;
     }
 
-    public void setMac(String mac) {
-        Mac = mac;
-    }
 }

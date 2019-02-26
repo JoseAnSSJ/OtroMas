@@ -16,7 +16,7 @@ public class GetBUSCADetOrdSerListResult {
     private String accion;
     @SerializedName("Clave")
     @Expose
-    private Integer clave;
+    public Integer clave;
     @SerializedName("Clv_Orden")
     @Expose
     public Integer clvOrden;
@@ -41,9 +41,6 @@ public class GetBUSCADetOrdSerListResult {
         this.baseIdUser = baseIdUser;
     }
 
-    public Object getBaseRemoteIp() {
-        return baseRemoteIp;
-    }
 
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
@@ -53,33 +50,17 @@ public class GetBUSCADetOrdSerListResult {
         return accion;
     }
 
-    public void setAccion(String accion) {
-        this.accion = accion;
-    }
 
     public Integer getClave() {
         return clave;
     }
 
-    public void setClave(Integer clave) {
-        this.clave = clave;
-    }
 
-    public Integer getClvOrden() {
-        return clvOrden;
-    }
-
-    public void setClvOrden(Integer clvOrden) {
-        this.clvOrden = clvOrden;
-    }
 
     public Integer getClvTrabajo() {
         return clvTrabajo;
     }
 
-    public void setClvTrabajo(Integer clvTrabajo) {
-        this.clvTrabajo = clvTrabajo;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -97,6 +78,7 @@ public class GetBUSCADetOrdSerListResult {
         this.obs = obs;
     }
 
+
     public Boolean getSeRealiza() {
         return seRealiza;
     }
@@ -105,5 +87,6 @@ public class GetBUSCADetOrdSerListResult {
         this.seRealiza = seRealiza;
         return false;
     }
+
 
 }

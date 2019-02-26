@@ -12,7 +12,6 @@ import com.example.pablo.prueba7.Listas.JSONArbolServicios;
 import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONClasificacionProblm;
-import com.example.pablo.prueba7.Listas.JSONHIHF;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONPrioridad;
@@ -24,12 +23,10 @@ import com.example.pablo.prueba7.Listas.JSONServiciosAparatos;
 import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
-import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.NoEntregadosList;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -107,6 +104,31 @@ public interface Service {
     @POST(Constants.URL_SEND_NOENTREGADOS)
     Call<JsonObject>noent();
 
-
+///////////////////EjecucionInstalacion/////////////////
+@POST(Constants.URL_GET_VALI_OrdSer)
+Call<JsonObject> getVALIOrdSer();
+    @POST(Constants.URL_GET_CHECA_CAMDO)
+    Call<JsonObject> getChecaCAMDO();
+    @POST(Constants.URL_ADD_REL_ORDUSU)
+    Call<JsonObject> getADDRELORDUSU();
+    @POST(Constants.URL_GET_MODORDSER)
+    Call<JsonObject> getMODORDSER();
+    @POST(Constants.URL_GET_GUARDA_HORA)
+    Call<JsonObject> getGuardaHora();
+    @POST(Constants.URL_GET_GUARDAOrdSerAparatos)
+    Call<JsonObject> getGUARDAOrdSerAparatos();
+    @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
+    Call<JsonObject> getLLENABITACORA_ORD();
+    @POST(Constants.URL_GET_GUARDA_COORDENADAS)
+    Call<JsonObject> getGuardaCoordenadas();
+    @POST(Constants.URL_GET_CONSULTA_IP)
+    Call<JsonObject> getConsultaIp();
+    @POST(Constants.URL_GET_REINTENTA_COMANDO)
+    Call<JsonObject> getReintentaComando();
+    ///////////////////////////////////
+    @POST(Constants.URL_GET_CAPAT)
+    Call<JsonObject> getCAPAT();
+    @POST(Constants.URL_GET_DEEP_CAPAT)
+    Call<JsonObject> getDeepCAPAT();
 }
 
