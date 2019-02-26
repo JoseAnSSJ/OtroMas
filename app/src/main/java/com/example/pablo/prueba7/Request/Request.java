@@ -12,6 +12,10 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
+
+import com.example.pablo.prueba7.ExtensionesAdi;
+import com.example.pablo.prueba7.HorasFragment;
+
 import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.HorasFragment;
@@ -98,6 +102,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
+
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -960,30 +965,41 @@ try{
                             userJson.get("TipoAparatoAsignar").getAsInt(),
                             userJson.get("StatusEntrega").getAsString()
                     );
-                    ////
-                    getCliApa(context);
-                    ////
-                    getStatusApa(context);
-                    ///
-                    Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
-                    List<GetListClienteAparatosResult> dat = itdata.next();
-                    CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
-                    CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
-                    getApaTipo(context);
-                    //////////////////////
-                    Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
-                    List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
-                    CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
-                    getApaTipDis(context);
+
+                    if(response.code()==200){
+                        Intent intento = new Intent(context, CambioAparato.class);
+                        context.startActivity(intento);
+                        ////
+                        getCliApa(context);
+                        CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+
+                        ////
+                        getStatusApa(context);
+                        CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+                        ///
+                        Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+                        List<GetListClienteAparatosResult> dat = itdata.next();
+                        CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                        CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                        getApaTipo(context);
+                        CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
+
+                        //////////////////////
+                        Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
+                        List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
+                        CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                        getApaTipDis(context);
+                        CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
+                    }
 
 
                 }catch (Exception e){
+                    if(response.code()==200){
+                        Intent intento = new Intent(context, CambioAparato.class);
+                        context.startActivity(intento);
+                    }
+                }
 
-                }
-                if(response.code()==200){
-                 //  Intent intento = new Intent(context, CambioAparato.class);
-                 //   context.startActivity(intento);
-                }
 
 
 
