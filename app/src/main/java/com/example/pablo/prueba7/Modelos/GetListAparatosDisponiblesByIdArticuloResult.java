@@ -14,6 +14,9 @@ public class GetListAparatosDisponiblesByIdArticuloResult {
     return Descripcion;
   }
 
+  public int getClv_Aparato() {
+    return Clv_Aparato;
+  }
 
   public void setDescripcion(String descripcion) {
     Descripcion = descripcion;

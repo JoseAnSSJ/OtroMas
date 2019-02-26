@@ -115,9 +115,6 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getGUARDAOrdSerAparatos();
     @POST(Constants.URL_ADD_LLENA_BITACORA_ORD)
     Call<JsonObject> getLLENABITACORA_ORD();
-<<<<<<< HEAD
-
-
     /////////////////////EjecutarReportes/////////////////
     @POST(Constants.URL_Get_HIHF)
     Call<JsonObject>getHiHf();
@@ -125,16 +122,16 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject>getLLenaReporte();
     @POST(Constants.URL_GET_VALIDA)
     Call<JsonObject>getValidaRep();
-
-
-
-=======
     @POST(Constants.URL_GET_GUARDA_COORDENADAS)
     Call<JsonObject> getGuardaCoordenadas();
     @POST(Constants.URL_GET_CONSULTA_IP)
     Call<JsonObject> getConsultaIp();
     @POST(Constants.URL_GET_REINTENTA_COMANDO)
     Call<JsonObject> getReintentaComando();
->>>>>>> master
+    ///////////////////////////////////
+    @POST(Constants.URL_GET_CAPAT)
+    Call<JsonObject> getCAPAT();
+    @POST(Constants.URL_GET_DEEP_CAPAT)
+    Call<JsonObject> getDeepCAPAT();
 }
 

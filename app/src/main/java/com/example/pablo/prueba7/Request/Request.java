@@ -12,18 +12,13 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
-<<<<<<< HEAD
 
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.HorasFragment;
 
-
-
-=======
 import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.HorasFragment;
->>>>>>> master
 import com.example.pablo.prueba7.Inicio;
 import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
@@ -52,6 +47,7 @@ import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
+import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
@@ -97,19 +93,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
-<<<<<<< HEAD
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Listas.Array.Asigna2;
 import static com.example.pablo.prueba7.TrabajosFragment.solucion;
-=======
->>>>>>> master
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -213,15 +207,6 @@ public class Request extends AppCompatActivity {
 
                     services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
 
-<<<<<<< HEAD
-                    //MainActivity.NombreTec.setText(data.get(0).tecnico);
-=======
-                /*  try{
-                      MainActivity.NombreTec.setText(data.get(0).tecnico);
-                  }catch (Exception e){
-                      MainActivity.NombreTec.setText("");
-                  }*/
->>>>>>> master
 
                 }
                 if (response.code() == 200) {
@@ -579,17 +564,11 @@ public class Request extends AppCompatActivity {
 
                     );
                 }
-
-<<<<<<< HEAD
                 );
                 try {
                     MainActivity.Contrato.setText(String.valueOf(DeepConsModel.getContatoCom()));
                 } catch (Exception e) {
-=======
-try{
-    MainActivity.Contrato.setText(String.valueOf(DeepConsModel.getContatoCom()));
-}catch (Exception e){
->>>>>>> master
+
 
                 }
                 try {
@@ -707,13 +686,8 @@ try{
             @Override
             public void onResponse(Call<Example3> call, Response<Example3> response) {
                 Example3 jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataTrabajos = new ArrayList<List<GetBUSCADetOrdSerListResult>>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));
-                Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
-=======
                 Array.dataTrabajos =  new ArrayList<>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));
                 Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
->>>>>>> master
                 Array.trabajox.clear();
                 Array.accionx.clear();
                 while (itData.hasNext()) {
@@ -729,12 +703,9 @@ try{
                     }
                 }
 
-<<<<<<< HEAD
-                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
-//                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
-=======
 
->>>>>>> master
+                 trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
+              trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
             }
 
             @Override
@@ -745,20 +716,12 @@ try{
         });
 
     }
-<<<<<<< HEAD
 
-    ////TecnicoSecundario////
-    public void getTecSec(final Context context) {
-//        Array.clv_tecnicoSecundario.clear();
-
-//        Array.clv_tecnicoSecundario.add(0,-1);
-=======
 ////TecnicoSecundario////
     public void getTecSec(final Context context){
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0,-1);
 
->>>>>>> master
         Service service = null;
         try {
             service = services.getTecSecService();
@@ -770,15 +733,9 @@ try{
             @Override
             public void onResponse(Call<JSONTecSec> call, Response<JSONTecSec> response) {
                 JSONTecSec jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataTecSec = new ArrayList<List<GetMuestraRelOrdenesTecnicosListResult>>(asList(jsonResponse.GetMuestraRelOrdenesTecnicosListResult()));
-                Iterator<List<GetMuestraRelOrdenesTecnicosListResult>> itdata = array.dataTecSec.iterator();
-                while (itdata.hasNext()) {
-=======
                 Array.dataTecSec = new ArrayList<>(asList(jsonResponse.GetMuestraRelOrdenesTecnicosListResult()));
                 Iterator<List<GetMuestraRelOrdenesTecnicosListResult>> itdata = Array.dataTecSec.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetMuestraRelOrdenesTecnicosListResult> dat = itdata.next();
                     datos = new String[dat.size() + 1];
                     int j = 1;
@@ -795,15 +752,8 @@ try{
                     InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
 
 
-<<<<<<< HEAD
-                    // ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    //.TecSec.setAdapter(adapter1);
-
-
-=======
               /*      ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     HorasFragment.TecSec1.setAdapter(adapter1);*/
->>>>>>> master
                 }
 
 
@@ -863,15 +813,9 @@ try{
             @Override
             public void onResponse(Call<JSONCLIAPA> call, Response<JSONCLIAPA> response) {
                 JSONCLIAPA jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataCliApa = new ArrayList<List<GetListClienteAparatosResult>>(asList(jsonResponse.GetListClienteAparatosResult()));
-                Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
-                while (itdata.hasNext()) {
-=======
                 Array.dataCliApa = new ArrayList<>(asList(jsonResponse.GetListClienteAparatosResult()));
                 Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetListClienteAparatosResult> dat = itdata.next();
                     String datos[] = new String[dat.size() + 1];
                     datos[0] = "Seleccione Aparato";
@@ -883,6 +827,7 @@ try{
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.aparato.setAdapter(adapter);
+
 
                 }
             }
@@ -902,15 +847,10 @@ try{
             @Override
             public void onResponse(Call<JSONStatusApa> call, Response<JSONStatusApa> response) {
                 JSONStatusApa jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataStaApa = new ArrayList<List<GetSP_StatusAparatosListResult>>(asList(jsonResponse.GetSP_StatusAparatosListResult()));
-                Iterator<List<GetSP_StatusAparatosListResult>> itdata = array.dataStaApa.iterator();
-                while (itdata.hasNext()) {
-=======
+
                 Array.dataStaApa = new ArrayList<>(asList(jsonResponse.GetSP_StatusAparatosListResult()));
                 Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetSP_StatusAparatosListResult> dat = itdata.next();
                     String datos[] = new String[dat.size() + 1];
                     datos[0] = "Seleccione Estado";
@@ -923,6 +863,7 @@ try{
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.estado.setAdapter(adapter);
+
                 }
 
             }
@@ -951,15 +892,10 @@ try{
             public void onResponse(Call<JSONApaTipo> call, Response<JSONApaTipo> response) {
 
                 JSONApaTipo jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataApaTipo = new ArrayList<List<GetListTipoAparatosByIdArticuloResult>>(asList(jsonResponse.GetListTipoAparatosByIdArticuloResult()));
-                Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = array.dataApaTipo.iterator();
-                while (itdata.hasNext()) {
-=======
+
                 Array.dataApaTipo = new ArrayList<>(asList(jsonResponse.GetListTipoAparatosByIdArticuloResult()));
                 Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = Array.dataApaTipo.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetListTipoAparatosByIdArticuloResult> dat = itdata.next();
                     String datos[] = new String[dat.size() + 1];
                     datos[0] = "Seleccione Tipo de Aparato";
@@ -997,15 +933,9 @@ try{
             @Override
             public void onResponse(Call<JSONApaTipDis> call, Response<JSONApaTipDis> response) {
                 JSONApaTipDis jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataApaTipDis = new ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>>(asList(jsonResponse.GetListAparatosDisponiblesByIdArticuloResult()));
-                Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata = array.dataApaTipDis.iterator();
-                while (itdata.hasNext()) {
-=======
                 Array.dataApaTipDis = new ArrayList<>(asList(jsonResponse.GetListAparatosDisponiblesByIdArticuloResult()));
                 Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata = Array.dataApaTipDis.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetListAparatosDisponiblesByIdArticuloResult> dat = itdata.next();
                     String datos[] = new String[dat.size() + 1];
                     datos[0] = "Seleccine Aparato Disponible";
@@ -1026,6 +956,70 @@ try{
             }
         });
     }
+    public void getDeepCAPAT(final Context context) {
+
+        Services restApiAdapter = new Services();
+        Service service = restApiAdapter.getDeepCAPATService();
+        Call<JsonObject> call = service.getDeepCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //Peticion de datos sobre el Json "LogOnResult"
+                try {
+                    JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
+
+                    CambioAparatoDeepModel user = new CambioAparatoDeepModel(
+                            userJson.get("AparatoAsignar").getAsInt(),
+                            userJson.get("AparatoCliente").getAsInt(),
+                            userJson.get("TipoAparatoAsignar").getAsInt(),
+                            userJson.get("StatusEntrega").getAsString()
+                    );
+
+                    if(response.code()==200){
+                        Intent intento = new Intent(context, CambioAparato.class);
+                        context.startActivity(intento);
+                        ////
+                        getCliApa(context);
+                        CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+
+                        ////
+                        getStatusApa(context);
+                        CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+                        ///
+                        Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+                        List<GetListClienteAparatosResult> dat = itdata.next();
+                        CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                        CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                        getApaTipo(context);
+                        CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
+
+                        //////////////////////
+                        Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
+                        List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
+                        CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                        getApaTipDis(context);
+                        CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
+                    }
+
+
+                }catch (Exception e){
+                    if(response.code()==200){
+                        Intent intento = new Intent(context, CambioAparato.class);
+                        context.startActivity(intento);
+                    }
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
 
     public void getCAMDO(final Context context) {
         Service service = null;
@@ -1039,15 +1033,9 @@ try{
             @Override
             public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
                 JSONCAMDO jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
-                Iterator<List<GetDameDatosCAMDOResult>> itdata = array.dataCAMDO.iterator();
-                while (itdata.hasNext()) {
-=======
                 Array.dataCAMDO = new ArrayList<>(asList(jsonResponse.getDameDatosCAMDOResult()));
                 Iterator<List<GetDameDatosCAMDOResult>> itdata = Array.dataCAMDO.iterator();
                 while (itdata.hasNext()){
->>>>>>> master
                     List<GetDameDatosCAMDOResult> dat = itdata.next();
                     String datos[] = new String[dat.size()];
                     for (int i = 0; i < dat.size(); i++) {
@@ -1104,19 +1092,12 @@ try{
         call.enqueue(new Callback<JSONArbolServicios>() {
             @Override
             public void onResponse(Call<JSONArbolServicios> call, Response<JSONArbolServicios> response) {
-<<<<<<< HEAD
 
-                array.nombreArbol.clear();
-                JSONArbolServicios jsonResponse = response.body();
-                array.dataArbSer = new ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
-                Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-=======
                 
                 Array.nombreArbol.clear();
                 JSONArbolServicios jsonResponse = response.body();
                 Array.dataArbSer =  new ArrayList<>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
->>>>>>> master
                 while (itData.hasNext()) {
                     List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
 
@@ -1154,13 +1135,8 @@ try{
             public void onResponse(Call<JSONMediosSer> call, Response<JSONMediosSer> response) {
                 Array.medio.clear();
                 JSONMediosSer jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataMedSer = new ArrayList<List<GetMuestraMedioPorServicoContratadoListResult>>(asList(jsonResponse.GetMuestraMedioPorServicoContratadoListResult()));
-                Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itData = array.dataMedSer.iterator();
-=======
                 Array.dataMedSer =  new ArrayList<>(asList(jsonResponse.GetMuestraMedioPorServicoContratadoListResult()));
                 Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itData = Array.dataMedSer.iterator();
->>>>>>> master
                 while (itData.hasNext()) {
                     List<GetMuestraMedioPorServicoContratadoListResult> dat =  itData.next();
                     Array.medio.add("Selecionar Medio");
@@ -1198,15 +1174,10 @@ try{
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
                 Array.tipoAparato.clear();
                 JSONTipoAparatos jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataTipoAparatos = new ArrayList<List<GetMuestraTipoAparatoListResult>>(asList(jsonResponse.GetMuestraTipoAparatoListResult()));
-                Iterator<List<GetMuestraTipoAparatoListResult>> itData = array.dataTipoAparatos.iterator();
-                array.tipoAparato.add("Seleccione aparato");
-=======
+
                 Array.dataTipoAparatos =  new ArrayList<>(asList(jsonResponse.GetMuestraTipoAparatoListResult()));
                 Iterator<List<GetMuestraTipoAparatoListResult>> itData = Array.dataTipoAparatos.iterator();
                 Array.tipoAparato.add("Seleccione aparato");
->>>>>>> master
                 while (itData.hasNext()) {
                     List<GetMuestraTipoAparatoListResult> dat =  itData.next();
 
@@ -1244,13 +1215,9 @@ try{
             public void onResponse(Call<JSONAparatosDisponibles> call, Response<JSONAparatosDisponibles> response) {
                 Array.aparatoDisponibles.clear();
                 JSONAparatosDisponibles jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataAparatosDisponibles = new ArrayList<List<GetMuestraAparatosDisponiblesListResult>>(asList(jsonResponse.GetMuestraAparatosDisponiblesListResult()));
-                Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData = array.dataAparatosDisponibles.iterator();
-=======
+
                 Array.dataAparatosDisponibles =  new ArrayList<>(asList(jsonResponse.GetMuestraAparatosDisponiblesListResult()));
                 Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData = Array.dataAparatosDisponibles.iterator();
->>>>>>> master
                 while (itData.hasNext()) {
                     List<GetMuestraAparatosDisponiblesListResult> dat =  itData.next();
 
@@ -1287,13 +1254,9 @@ try{
             public void onResponse(Call<JSONServiciosAparatos> call, Response<JSONServiciosAparatos> response) {
                 Array.serviciosAparatos.clear();
                 JSONServiciosAparatos jsonResponse = response.body();
-<<<<<<< HEAD
-                array.dataserviciosAparatos = new ArrayList<List<GetMuestraServiciosRelTipoAparatoListResult>>(asList(jsonResponse.GetMuestraServiciosRelTipoAparatoListResult()));
-                Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
-=======
+
                 Array.dataserviciosAparatos =  new ArrayList<>(asList(jsonResponse.GetMuestraServiciosRelTipoAparatoListResult()));
                 Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = Array.dataserviciosAparatos.iterator();
->>>>>>> master
                 while (itData.hasNext()) {
                     List<GetMuestraServiciosRelTipoAparatoListResult> dat =  itData.next();
 
@@ -1422,11 +1385,8 @@ try{
 
                         j = j + 1;
 
-<<<<<<< HEAD
                         clvQ=dat.get(i).getCLVTRABAJO();
 
-=======
->>>>>>> master
                     }
 
 
@@ -1478,10 +1438,9 @@ try{
                         TrabajosFragment.prioridad.setAdapter(adapter);
 
 
-<<<<<<< HEAD
                         ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna1);
                         TrabajosFragment.clasific.setAdapter(adapter1);
-=======
+
         });
 
     }
@@ -1490,29 +1449,6 @@ try{
     public void getPrior(final Context context) {
 
 
-        Service service = services.getPrioridadService();
-        Call<JSONPrioridad> call = service.getprior();
-        call.enqueue(new Callback<JSONPrioridad>() {
-
-
-            @Override
-            public void onResponse(Call<JSONPrioridad> call, Response<JSONPrioridad> response) {
-                JSONPrioridad jsonResponse = response.body();
-                Array.dataPriori = new ArrayList<>((asList(jsonResponse.getGetSoftvGetPrioridadQuejaListResult())));
-                Iterator<List<GetSoftvGetPrioridadQuejaListResult>> itdata = Array.dataPriori.
-                        iterator();
-                while (itdata.hasNext()) {
->>>>>>> master
-
-
-                        TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
-                        TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
-
-                    }
-                }
-
-<<<<<<< HEAD
-=======
 
         Service service = services.getClasificacionService();
         Call<JSONClasificacionProblm> call = service.getclas();
@@ -1544,7 +1480,6 @@ try{
                     ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     TrabajosFragment.clasific.setAdapter(adapter);
                 }
->>>>>>> master
             }
 
             @Override
@@ -1556,13 +1491,9 @@ try{
 
     }
 
-<<<<<<< HEAD
     /////////////////Nombre Tecnico//////
 
-    public void getnombretec(Context context) {
-=======
     public void getnombretec() {
->>>>>>> master
         Service service = null;
         try {
             service = services.getNombreService();
@@ -1796,13 +1727,9 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 JsonObject jsonObject = response1.body().getAsJsonObject("GetCheca_si_tiene_camdoResult");
-<<<<<<< HEAD
-                //  String string = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
-                // txtExtencion.setText(string);
-                GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
-=======
+
                              GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
->>>>>>> master
+
                         jsonObject.get("Error").getAsString()
                 );
 
@@ -1841,12 +1768,8 @@ try{
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult"));
-<<<<<<< HEAD
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult")).equals(-1)) {
-=======
+
                 if(response1.code()==200){
->>>>>>> master
                         getDeepMODORDSER(context);
                 }
             }
@@ -1880,12 +1803,7 @@ try{
                 );
 
 
-<<<<<<< HEAD
-                if (response1.code() == 200) {
-                    if (checa.getBaseIdUser() == 0) {
-=======
                 if(response1.code()==200){
->>>>>>> master
                         getGuardaHora(context);
                 }
             }
@@ -1913,14 +1831,9 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-<<<<<<< HEAD
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)) {
-=======
+
 
                 if(response1.code()==200){
->>>>>>> master
                         getGuardaOrdSerAparatos(context);
                 }
             }
@@ -1948,14 +1861,9 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-<<<<<<< HEAD
-                //String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
-                if (response1.code() == 200) {
-                    addLlenaBitacora(context);
-=======
+
                 if(response1.code()==200){
                   addLlenaBitacora(context);
->>>>>>> master
                 }
             }
 
@@ -2024,7 +1932,7 @@ try{
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 reintentaB=0;
 
-<<<<<<< HEAD
+
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals(-1)) {
@@ -2103,11 +2011,9 @@ try{
 
 
                     }
-=======
                 if(response1.code()==200){
                     ConsultaIp(context);
 
->>>>>>> master
                 }
             }
 
@@ -2117,36 +2023,19 @@ try{
             }
         });
     }
-<<<<<<< HEAD
 
-    ///////////////////guardar campos///////////
-    public void getGuardaCampos(final Context context) {
 
-        Service service = null;
-        try {
-            service = services.getGuardaInfoReportes();
-=======
     public void ConsultaIp(final Context context) {
 
         Service service = null;
         try {
             service = services.getConsultaIpService();
->>>>>>> master
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-<<<<<<< HEAD
-        Call<JsonObject> call = service.getLLenaReporte();
-        call.enqueue(new Callback<JsonObject>() {
 
-
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-            Log.d("wer","asd");
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
-=======
+  
         Call<JsonObject> call = service.getConsultaIp();
             call.enqueue(new Callback<JsonObject>() {
                 @Override
@@ -2178,11 +2067,6 @@ try{
                                 }
                             }
                         }
-
-
->>>>>>> master
-
-
                     }
                 }
 
@@ -2226,6 +2110,34 @@ try{
             }
         });
     }
+    public void SetCambioAparato() {
+
+        Service service = null;
+        try {
+            service = services.getCAPATService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    Log.d("asd", response1.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }
 
