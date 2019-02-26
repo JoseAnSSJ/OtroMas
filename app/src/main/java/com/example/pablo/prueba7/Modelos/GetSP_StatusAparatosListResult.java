@@ -13,5 +13,7 @@ public class GetSP_StatusAparatosListResult {
         return Concepto;
     }
 
-
+    public String getClv_StatusCableModem() {
+        return Clv_StatusCableModem;
+    }
 }

@@ -45,5 +45,8 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
     public static final String URL_GET_CONSULTA_IP="OrdSer/GetConsultaIpPorContrato";
     public static final String URL_GET_REINTENTA_COMANDO="OrdSer/GetReintentarComando";
+    /////////////////////////////////////////////////
+    public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
+    public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
 
 }

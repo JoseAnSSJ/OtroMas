@@ -116,5 +116,10 @@ Call<JsonObject> getVALIOrdSer();
     Call<JsonObject> getConsultaIp();
     @POST(Constants.URL_GET_REINTENTA_COMANDO)
     Call<JsonObject> getReintentaComando();
+    ///////////////////////////////////
+    @POST(Constants.URL_GET_CAPAT)
+    Call<JsonObject> getCAPAT();
+    @POST(Constants.URL_GET_DEEP_CAPAT)
+    Call<JsonObject> getDeepCAPAT();
 }
 

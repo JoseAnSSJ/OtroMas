@@ -45,6 +45,7 @@ import com.example.pablo.prueba7.Listas.QuejasList;
 import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
+import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
@@ -90,6 +91,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -817,6 +819,7 @@ try{
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.aparato.setAdapter(adapter);
 
+
                 }
             }
 
@@ -849,6 +852,7 @@ try{
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.estado.setAdapter(adapter);
+
                 }
 
             }
@@ -934,6 +938,63 @@ try{
 
             @Override
             public void onFailure(Call<JSONApaTipDis> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getDeepCAPAT(final Context context) {
+
+        Services restApiAdapter = new Services();
+        Service service = restApiAdapter.getDeepCAPATService();
+        Call<JsonObject> call = service.getDeepCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //Peticion de datos sobre el Json "LogOnResult"
+                try {
+                    JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
+
+                    CambioAparatoDeepModel user = new CambioAparatoDeepModel(
+                            userJson.get("AparatoAsignar").getAsInt(),
+                            userJson.get("AparatoCliente").getAsInt(),
+                            userJson.get("TipoAparatoAsignar").getAsInt(),
+                            userJson.get("StatusEntrega").getAsString()
+                    );
+                    ////
+                    getCliApa(context);
+                    CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                    ////
+                    getStatusApa(context);
+                    CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+                    ///
+                    Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+                    List<GetListClienteAparatosResult> dat = itdata.next();
+                    CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                    CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                    getApaTipo(context);
+                    CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
+                    //////////////////////
+                    Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
+                    List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
+                    CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                    getApaTipDis(context);
+                    CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
+
+
+                }catch (Exception e){
+
+                }
+                if(response.code()==200){
+                 //  Intent intento = new Intent(context, CambioAparato.class);
+                 //   context.startActivity(intento);
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
@@ -1906,6 +1967,34 @@ public void getValidaOrdSer(final Context context) {
             }
         });
     }
+    public void SetCambioAparato() {
+
+        Service service = null;
+        try {
+            service = services.getCAPATService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    Log.d("asd", response1.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }
 

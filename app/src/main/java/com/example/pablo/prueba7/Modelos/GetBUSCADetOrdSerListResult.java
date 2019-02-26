@@ -18,7 +18,7 @@ public class GetBUSCADetOrdSerListResult {
     private String accion;
     @SerializedName("Clave")
     @Expose
-    private Integer clave;
+    public Integer clave;
     @SerializedName("Clv_Orden")
     @Expose
     public Integer clvOrden;
