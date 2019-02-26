@@ -962,23 +962,19 @@ try{
                     );
                     ////
                     getCliApa(context);
-                    CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
                     ////
                     getStatusApa(context);
-                    CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
                     ///
                     Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
                     List<GetListClienteAparatosResult> dat = itdata.next();
                     CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
                     CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
                     getApaTipo(context);
-                    CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
                     //////////////////////
                     Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
                     List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
                     CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
                     getApaTipDis(context);
-                    CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
 
 
                 }catch (Exception e){

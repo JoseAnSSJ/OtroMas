@@ -44,6 +44,11 @@ public class CambioAparato extends AppCompatActivity {
         ab=CambioAparatoDeepModel.AparatoAsignar;
         if(ab!=null){
             request.getDeepCAPAT(getApplicationContext());
+            Login.esperar(2);
+            CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+            CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+            CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
+            CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
 
 
         }else{
