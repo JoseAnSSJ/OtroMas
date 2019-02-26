@@ -50,6 +50,11 @@ public class Array {
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
+
+    public static ArrayList<Integer>clv_trabajox=new ArrayList<>();
+    public static ArrayList<Boolean> recibix =  new ArrayList<Boolean>();
+    public static ArrayList<Boolean> recibixnew =  new ArrayList<Boolean>();
+
     //////////////////////////////////////////////////////
 
     public static ArrayList <String>nombreArbol=new ArrayList<>();

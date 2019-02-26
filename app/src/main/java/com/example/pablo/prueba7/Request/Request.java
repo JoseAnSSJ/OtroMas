@@ -82,6 +82,9 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
+import com.example.pablo.prueba7.R;
+
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.TrabajosFragment;
 import com.example.pablo.prueba7.asignacion;
@@ -103,6 +106,12 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
 
+import static com.example.pablo.prueba7.Listas.Array.Asigna;
+import static com.example.pablo.prueba7.Listas.Array.recibix;
+import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
+import static com.example.pablo.prueba7.Trabajos.trabajos;
+import static com.example.pablo.prueba7.TrabajosFragment.solucion;
+
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -114,6 +123,8 @@ public class Request extends AppCompatActivity {
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
+    public static Integer cont=0;
+    RecibiAparato RAP =new RecibiAparato();
     String a="Seleccione tecnico secundario";
     Arbol_Adapter adapter;
     public int reintentaB;
@@ -690,16 +701,36 @@ try{
                 Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                 Array.trabajox.clear();
                 Array.accionx.clear();
+
                 while (itData.hasNext()) {
                     List<GetBUSCADetOrdSerListResult> dat =  itData.next();
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("response11", dat.get(i).getDescripcion());
+                        dat.get(i).setSeRealiza(false);
 
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
+                        Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.clavex.add(dat.get(i).getClave());
+                        Array.recibix.add(dat.get(i).getSeRealiza());
+
+
+                        // Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                        //Array.recibix[i].setChecked(false);
+                        cont=cont+1;
+
                     }
                 }
+                /////////
+               // recibix=new CheckBox[cont];
+
+               //     for (int i = 0; i < cont; i++) {
+                  //      recibix[i]=(CheckBox) findViewById(R.id.recibiap);
+                    //    recibix[i].setChecked(false);
+                    //}
+
+                //////////
+
 
 
             }
@@ -1091,9 +1122,9 @@ if(response.code()==200){
                         Array.nombreArbol.add(dat.get(i).getNombre());
                     }
                 }
-if(response.code()==200){
-    Intent intento25 = new Intent(context, asignacion.class);
-    context.startActivity(intento25);
+             if(response.code()==200){
+             Intent intento25 = new Intent(context, asignacion.class);
+             context.startActivity(intento25);
 }
             }
 
@@ -1980,7 +2011,6 @@ public void getValidaOrdSer(final Context context) {
         });
     }
     public void SetCambioAparato() {
-
         Service service = null;
         try {
             service = services.getCAPATService();
@@ -2007,8 +2037,34 @@ public void getValidaOrdSer(final Context context) {
         });
     }
 
+    public void send_aparat() {
+       // adaptertrabajos.norec();
+        Service service = null;
+        try {
+            service = RAP.recibiapar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-}
+        Call<JsonObject> call = service.noent();
+        call.enqueue(new Callback<JsonObject>() {
 
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
+                if (response1.code() == 200) {
+                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_InsertaTbl_NoEntregadosResult")).equals(0)) {
 
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+    }

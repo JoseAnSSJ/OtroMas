@@ -14,6 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
+import com.example.pablo.prueba7.Request.Request;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Services.Services;
 import com.google.gson.JsonObject;
@@ -26,15 +32,22 @@ import java.time.LocalTime;
 import java.util.Calendar;
 
 
+import static com.example.pablo.prueba7.Post.RecibiAparato.jsonObject;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
+
+
 public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
     Button eject;
     EditText edt1;
+    //RecibiAparato RA =new RecibiAparato();
+    Request request =new Request();
+
+    public static int check;
+public static JsonArray aprec_JASON=new  JsonArray();
+
     public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
@@ -58,11 +71,21 @@ public class EjecutarFragment extends Fragment {
         reiniciar.setEnabled(false);
 
         eject.setOnClickListener(new View.OnClickListener() {
+
+
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 
-a=0;
+                request.send_aparat();
+                /////////////////////
+
+             ///////////////////
+
+                processScreen();
+
+                a=0;
+
                 horaIni = String.valueOf(horas.selectTime.getText());
                 horaFin = String.valueOf(horas.selectTime2.getText());
                 if(horas.ejecutada==1) {

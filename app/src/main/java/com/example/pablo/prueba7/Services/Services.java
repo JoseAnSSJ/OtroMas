@@ -10,6 +10,7 @@ import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Post.RecibiAparato;
 import com.example.pablo.prueba7.asignacion;
 import com.example.pablo.prueba7.sampledata.Constants;
 import com.example.pablo.prueba7.sampledata.Service;
@@ -35,6 +36,15 @@ import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.Clave;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.clvTra;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.Spin;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.probm;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.selectD;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.selectT;
+import static com.example.pablo.prueba7.Ejecutar1Fragment.selectT2;
+import static com.example.pablo.prueba7.Request.Request.contbu;
+import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 import static com.example.pablo.prueba7.asignacion.jsonArray;
 import static com.example.pablo.prueba7.asignacion.jsonObject2;
@@ -49,6 +59,7 @@ public class Services {
     public static String cont;
 
     public String abc="Basic: "+Login.enco;
+
 
     /////////TOKEN///C////
     public Service getClientService() {
@@ -1372,6 +1383,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
+
 }
 
 
