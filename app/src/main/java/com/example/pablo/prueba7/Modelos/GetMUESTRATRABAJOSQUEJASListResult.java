@@ -12,14 +12,14 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
     private Object baseRemoteIp;
     @SerializedName("CLV_TRABAJO")
     @Expose
-    public  String cLVTRABAJO;
+    public  int cLVTRABAJO;
     @SerializedName("DESCRIPCION")
     @Expose
     public  String dESCRIPCION;
     @SerializedName("TipSer")
     @Expose
     private Object tipSer;
-    public GetMUESTRATRABAJOSQUEJASListResult(String clv_trabajo, String descripcion){
+    public GetMUESTRATRABAJOSQUEJASListResult(int clv_trabajo, String descripcion){
         this.cLVTRABAJO = clv_trabajo;
         this.dESCRIPCION = descripcion;
     }
@@ -36,6 +36,17 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
         this.baseRemoteIp = baseRemoteIp;
     }
 
+<<<<<<< HEAD
+    public int getCLVTRABAJO() {
+        return cLVTRABAJO;
+    }
+
+    public void setCLVTRABAJO(int cLVTRABAJO) {
+        this.cLVTRABAJO = cLVTRABAJO;
+    }
+
+=======
+>>>>>>> master
     public String getDESCRIPCION() {
         return dESCRIPCION;
     }
