@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Request;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,6 +15,7 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
 
+import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.HorasFragment;
 
@@ -45,8 +47,10 @@ import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
+import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
+import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetCheca_si_tiene_CAMDOModel;
@@ -107,14 +111,17 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico;
+    public static String clave_tecnico,msgComando="";
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
     public static String Obs;
     public static int clvP;
     public static int tecC;
+    public int reintentaB;
         public static Integer clvQ;
+    public static String reintentarComando;
+    JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
     Arbol_Adapter adapter;
 
@@ -1760,22 +1767,33 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getGuardaOrdSerAparatosService();
+            service = services.getAddLlenaBitacoraService();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+        Call<JsonObject> call = service.getLLENABITACORA_ORD();
         call.enqueue(new Callback<JsonObject>() {
 
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                int IS=0;
+                if(response1.code()==200){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")){
+                        Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
+                        List<GetBUSCADetOrdSerListResult> dat =  itData.next();
+                        for(int a=0; a<dat.size(); a++){
+                            if(dat.get(a).getClvTrabajo()==1270||dat.get(a).getClvTrabajo()==1271||dat.get(a).getClvTrabajo()==1272){
+                                IS=1;
+                            }
+                        }
+                        if(IS==1){
+                            GuardaCoordenadas(context);
+                        }else{
+                            Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                        }
 
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals(-1)) {
-                        Toast.makeText(context, "Exito", Toast.LENGTH_LONG);
                     }
                 }
             }
@@ -1891,7 +1909,153 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+    public void GuardaCoordenadas(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaCoordenadasService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGuardaCoordenadas();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                reintentaB=0;
+
+                if(response1.code()==200){
+                    ConsultaIp(context);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void ConsultaIp(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getConsultaIpService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getConsultaIp();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                jsonConsultaIp = new JsonObject();
+                jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
+                ConsultaIpModel user = new ConsultaIpModel(
+                        jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
+                        jsonConsultaIp.get("Msg").getAsString()
+                );
+                reintentarComando = String.valueOf(user.AplicaReintentar);
+                msgComando = user.Msg;
+
+                if(response1.code()==200){
+
+                    for(int a=0;a<1;a++){
+
+                        if(reintentarComando.equals("true")){
+                            EjecutarFragment.reiniciar.setEnabled(true);
+                            EjecutarFragment.msgEjecutarOrd.setText(Request.msgComando);
+                        }else{
+                            if(msgComando.length()>3){
+                                EjecutarFragment.msgEjecutarOrd.setText(msgComando);
+                                Login.esperar(5);
+                                ((Activity)context).finish();
+                            }else{
+                                Login.esperar(3);
+                                retry(call);
+                            }
+                        }
+                    }
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("error", t.getMessage());
+            }
+
+            public  void retry(Call<JsonObject> call){
+                call.clone().enqueue(this);
+            }
+        });
+
+
+    }
+
+    public void ReintentarComando(final Context context) {
+        reintentaB=0;
+        Service service = null;
+        try {
+            service = services.getReintentarComandoService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getReintentaComando();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    ConsultaIp(context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void SetCambioAparato() {
+
+        Service service = null;
+        try {
+            service = services.getCAPATService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    Log.d("asd", response1.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 }
+
 
 
 

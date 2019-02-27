@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -32,9 +33,10 @@ import java.util.concurrent.ExecutionException;
  */
 public class EjecutarFragment extends Fragment {
 
-    Button reiniciar;
+    public static Button reiniciar;
     Button eject;
     EditText edt1;
+    public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;
     public static LocalTime ini,fin;
     InstalacionFragment horas = new InstalacionFragment();

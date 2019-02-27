@@ -88,8 +88,8 @@ public class Ejecutar1Fragment extends Fragment {
                 request.getGuardaHoraReporte(getContext());
                 request.getGuardaCampos(getContext());
                 Intent intent1 = new Intent(getActivity(), Reportes.class);
-                request.getListQuejas();
                 startActivity(intent1);
+                request.getListQuejas();
 
 
 
