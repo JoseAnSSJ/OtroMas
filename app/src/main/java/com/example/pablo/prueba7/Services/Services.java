@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Services;
 
 
 import com.example.pablo.prueba7.CambioAparato;
+import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.HorasFragment;
 import com.example.pablo.prueba7.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
@@ -928,7 +929,7 @@ public class Services {
     public Service getValidaOrdSerService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("CLV_ORDEN", clvorden);
+        jsonObject.put("CLV_ORDEN", DeepConsModel.Clv_Orden);
         jsonObject.put("Clv_Tecnico", claveTecnico);
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
@@ -964,7 +965,7 @@ public class Services {
     public Service getChecaCAMDOService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
@@ -997,7 +998,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
         jsonObject.put("Status", HorasFragment.statusHora);
         jsonObject1.put("objNueRelOrdenUsuario", jsonObject);
@@ -1079,9 +1080,9 @@ public class Services {
     public Service getGuardaHoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_orden", clvor);
-        jsonObject.put("horaFin", InstalacionFragment.selectTime2.getText());
-        jsonObject.put("horaInicio", InstalacionFragment.selectTime.getText());
+        jsonObject.put("Clv_orden", DeepConsModel.Clv_Orden);
+        jsonObject.put("horaInicio", EjecutarFragment.horaIni);
+        jsonObject.put("horaFin", EjecutarFragment.horaFin);
         jsonObject.put("opcion", 1);
 
 
@@ -1116,7 +1117,7 @@ public class Services {
     public Service getGuardaOrdSerAparatosService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("Op", "M");
         jsonObject.put("Op2", 0);
         jsonObject.put("Status", HorasFragment.statusHora);
@@ -1154,7 +1155,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("DescripcionMov", "Se generó la");
         jsonObject1.put("objSP_LLena_Bitacora_Ordenes", jsonObject);
 
@@ -1300,7 +1301,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("ClvAparato", CambioAparato.clvAparatoCAPAT);
-        jsonObject.put("ClvOrden", clvor);
+        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("ContratoNet", CambioAparato.contrato);
         jsonObject.put("Status", CambioAparato.statusAparato);
         jsonObject.put("Trabajo", "CAPAT");

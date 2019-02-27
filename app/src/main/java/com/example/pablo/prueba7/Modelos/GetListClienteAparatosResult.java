@@ -5,13 +5,19 @@ public class GetListClienteAparatosResult {
     public  String Descripcion;
     public  int idArticulo;
     public String Mac;
+    public int Clv_Aparato;
 
-    public GetListClienteAparatosResult (int ControlNet, String Descripcion, int idArticulo, String mac){
+    public GetListClienteAparatosResult (int ControlNet, String Descripcion, int idArticulo, String mac, int clv_Aparato){
         this.ControNet = ControlNet;
         this.Descripcion = Descripcion;
         this.idArticulo = idArticulo;
         this.Mac = mac;
+        this.Clv_Aparato = clv_Aparato;
 
+    }
+
+    public int getClv_Aparato() {
+        return Clv_Aparato;
     }
 
     public  int getControNet() {

@@ -76,8 +76,8 @@ Request request = new Request();
         selectDate2 = view.findViewById(R.id.visita2);
 
 
-        selectTime = view.findViewById(R.id.horai);
-        selectTime2 = view.findViewById(R.id.horaf);
+        selectTime = view.findViewById(R.id.horaiO);
+        selectTime2 = view.findViewById(R.id.horafO);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////

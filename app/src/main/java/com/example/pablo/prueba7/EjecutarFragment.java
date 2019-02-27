@@ -33,7 +33,7 @@ import java.util.Calendar;
 public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
-    Button eject;
+    public static Button eject;
     EditText edt1;
     public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;
@@ -109,24 +109,17 @@ public void ValidacionHoras(){
     diaE = c.get(Calendar.DAY_OF_MONTH);
 
     if(mesE<10){
-        fecha = (diaE+1) + "/0" + (mesE + 1) + "/" + añoE;
+        fecha = (diaE) + "/0" + (mesE + 1) + "/" + añoE;
     }else{
-        fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
+        fecha = (diaE) + "/" + (mesE + 1) + "/" + añoE;
     }
     if(horas.ejecutada==1) {
         try {
-            if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<0) {
-                if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<0){
+            if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<1) {
+                if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<1){
                     if (ini.isBefore(fin)) {
                         eject.setEnabled(false);
                            request.getValidaOrdSer(getActivity());
-
-
-
-
-
-
-
                     }
                     if (ini.isAfter(fin)) {
                         Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();

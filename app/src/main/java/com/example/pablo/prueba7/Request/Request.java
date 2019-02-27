@@ -82,6 +82,7 @@ import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Orden;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.TrabajosFragment;
 import com.example.pablo.prueba7.asignacion;
@@ -676,6 +677,7 @@ try{
 /////////////////////////////informacion trabajos//////////////////////////////
     public void getTrabajos()  {
         Service service = null;
+
         try {
             service = services.getTrabajoService();
         } catch (JSONException e) {
@@ -690,6 +692,7 @@ try{
                 Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                 Array.trabajox.clear();
                 Array.accionx.clear();
+                Array.clavex.clear();
                 while (itData.hasNext()) {
                     List<GetBUSCADetOrdSerListResult> dat =  itData.next();
                     for (int i = 0; i < dat.size(); i++) {
@@ -823,6 +826,11 @@ try{
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.aparato.setAdapter(adapter);
+                    try{
+                        CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                    }catch (Exception e){
+
+                    }
 
 
                 }
@@ -857,7 +865,11 @@ try{
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.estado.setAdapter(adapter);
+try{
+    CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+}catch (Exception e){
 
+}
                 }
 
             }
@@ -900,6 +912,11 @@ try{
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.tipoAparato.setAdapter(adapter);
                 }
+                try {
+                    CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
+                }catch (Exception e){
+
+                }
             }
 
             @Override
@@ -938,6 +955,11 @@ try{
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.aparatoAsignar.setAdapter(adapter);
+                    try{
+                        CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
+                    }catch (Exception e){
+
+                    }
                 }
             }
 
@@ -956,48 +978,35 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
-                try {
+                    CambioAparatoDeepModel.StatusEntrega="";
                     JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
-
+                try {
                     CambioAparatoDeepModel user = new CambioAparatoDeepModel(
                             userJson.get("AparatoAsignar").getAsInt(),
                             userJson.get("AparatoCliente").getAsInt(),
                             userJson.get("TipoAparatoAsignar").getAsInt(),
                             userJson.get("StatusEntrega").getAsString()
                     );
-
-                    if(response.code()==200){
-                        Intent intento = new Intent(context, CambioAparato.class);
-                        context.startActivity(intento);
-                        ////
                         getCliApa(context);
-                        CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
-
-                        ////
                         getStatusApa(context);
-                        CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
                         ///
                         Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
                         List<GetListClienteAparatosResult> dat = itdata.next();
                         CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
                         CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
                         getApaTipo(context);
-                        CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar));
 
                         //////////////////////
                         Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
                         List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
                         CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
                         getApaTipDis(context);
-                        CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar));
-                    }
+
 
 
                 }catch (Exception e){
-                    if(response.code()==200){
-                        Intent intento = new Intent(context, CambioAparato.class);
-                        context.startActivity(intento);
-                    }
+                        getCliApa(context);
+                        getStatusApa(context);
                 }
 
 
@@ -1658,6 +1667,7 @@ public void getValidaOrdSer(final Context context) {
                 if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
                     getChecaCAMDO(context);
                 }else{
+                    EjecutarFragment.eject.setEnabled(true);
                     Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
                 }
             }
@@ -1850,7 +1860,9 @@ public void getValidaOrdSer(final Context context) {
                         if(IS==1){
                             GuardaCoordenadas(context);
                         }else{
-                            Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                            Intent intent = new Intent(context, Orden.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivity(intent);
                         }
 
                     }
@@ -1979,7 +1991,7 @@ public void getValidaOrdSer(final Context context) {
             }
         });
     }
-    public void SetCambioAparato() {
+    public void SetCambioAparato(final Context context) {
 
         Service service = null;
         try {
@@ -1996,7 +2008,10 @@ public void getValidaOrdSer(final Context context) {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
                 if(response1.code()==200){
-                    Log.d("asd", response1.body().toString());
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+
                 }
             }
 
