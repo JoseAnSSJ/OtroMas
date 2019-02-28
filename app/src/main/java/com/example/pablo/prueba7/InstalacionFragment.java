@@ -42,6 +42,8 @@ import java.util.Calendar;
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
+   // public static String clv_TecSec_seleccion="-1"
+
    public static String latitud, longitud;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -351,7 +353,7 @@ Request request = new Request();
             return;
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, Local);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
+        //mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
 
         coordenadas.setText("Localización agregada");
 //        direccion.setText("");

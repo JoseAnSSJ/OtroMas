@@ -34,6 +34,7 @@ public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
     public static Button eject;
+
     EditText edt1;
     public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE,a;

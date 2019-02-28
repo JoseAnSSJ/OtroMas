@@ -57,6 +57,12 @@ public class Ejecutar1Fragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                request.getGuardaHoraReporte(getContext());
+                request.getGuardaCampos(getContext());
+                Intent intent1 = new Intent(getActivity(), Reportes.class);
+                startActivity(intent1);
+                request.getListQuejas();
+
                 ra=0;
                 rhoraIni = String.valueOf(horas.reportesselectTime.getText());
                 rhoraFin = String.valueOf(horas.reportesselectTime2.getText());

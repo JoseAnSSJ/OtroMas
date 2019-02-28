@@ -13,6 +13,7 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.CambioAparato;
 import com.example.pablo.prueba7.CambioDom;
 
+import com.example.pablo.prueba7.EjecutarFragment;
 import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.HorasFragment;
 
@@ -50,6 +51,7 @@ import com.example.pablo.prueba7.Login;
 import com.example.pablo.prueba7.MainActivity;
 import com.example.pablo.prueba7.MainReportes;
 import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
+
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
@@ -111,11 +113,18 @@ public class Request extends AppCompatActivity {
 
 //    Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico, msgComando="";
+    public static String clave_tecnico,msgComando="";
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
-    String a="Seleccione tecnico secundario";
+    public static String Obs;
+    public static int clvP;
+    public static int tecC;
+    public int reintentaB;
+        public static Integer clvQ;
+    public static String reintentarComando;
+    JsonObject jsonConsultaIp;
+    String a = "Seleccione tecnico secundario";
     Arbol_Adapter adapter;
     public int reintentaB;
     public static boolean b = false;
@@ -2022,8 +2031,154 @@ public void getValidaOrdSer(final Context context) {
         });
     }
 
+    public void GuardaCoordenadas(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaCoordenadasService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGuardaCoordenadas();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                reintentaB=0;
+
+                if(response1.code()==200){
+                    ConsultaIp(context);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void ConsultaIp(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getConsultaIpService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getConsultaIp();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                jsonConsultaIp = new JsonObject();
+                jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
+                ConsultaIpModel user = new ConsultaIpModel(
+                        jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
+                        jsonConsultaIp.get("Msg").getAsString()
+                );
+                reintentarComando = String.valueOf(user.AplicaReintentar);
+                msgComando = user.Msg;
+
+                if(response1.code()==200){
+
+                    for(int a=0;a<1;a++){
+
+                        if(reintentarComando.equals("true")){
+                            EjecutarFragment.reiniciar.setEnabled(true);
+                            EjecutarFragment.msgEjecutarOrd.setText(Request.msgComando);
+                        }else{
+                            if(msgComando.length()>3){
+                                EjecutarFragment.msgEjecutarOrd.setText(msgComando);
+                                Login.esperar(5);
+                                ((Activity)context).finish();
+                            }else{
+                                Login.esperar(3);
+                                retry(call);
+                            }
+                        }
+                    }
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("error", t.getMessage());
+            }
+
+            public  void retry(Call<JsonObject> call){
+                call.clone().enqueue(this);
+            }
+        });
+
+
+    }
+
+    public void ReintentarComando(final Context context) {
+        reintentaB=0;
+        Service service = null;
+        try {
+            service = services.getReintentarComandoService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getReintentaComando();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    ConsultaIp(context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void SetCambioAparato() {
+
+        Service service = null;
+        try {
+            service = services.getCAPATService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+
+                if(response1.code()==200){
+                    Log.d("asd", response1.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 }
+
 
 
 
