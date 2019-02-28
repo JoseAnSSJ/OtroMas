@@ -25,9 +25,6 @@ public class GetDameSerDelCliFacListResult {
         this.baseIdUser = baseIdUser;
     }
 
-    public Object getBaseRemoteIp() {
-        return baseRemoteIp;
-    }
 
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
@@ -45,8 +42,5 @@ public class GetDameSerDelCliFacListResult {
         return servicio;
     }
 
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
-    }
 
 }

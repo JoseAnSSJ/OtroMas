@@ -7,19 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+=======
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.example.pablo.prueba7.CambioAparato;
+>>>>>>> josue1
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
+<<<<<<< HEAD
 import org.json.JSONException;
 import org.json.JSONObject;
+=======
+>>>>>>> josue1
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,14 +40,18 @@ import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
+<<<<<<< HEAD
 import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
 import static com.example.pablo.prueba7.Services.Services.jsonObject;
+=======
+
+>>>>>>> josue1
 
 public class trabajos_adapter_result extends BaseAdapter {
 
     LayoutInflater inflatertrab;
     Context Cmcontext;
-    Context context;
+
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
     ArrayList<Boolean>recibix;
@@ -65,7 +80,6 @@ public class trabajos_adapter_result extends BaseAdapter {
     public class viewHolder{
         TextView trabajo;
         Button accion;
-        CheckBox recibi;
 
     }
 
@@ -93,9 +107,14 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
+<<<<<<< HEAD
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+=======
+            holder.trabajo=convertView.findViewById(R.id.trabajov);
+            holder.accion=convertView.findViewById(R.id.accionv);
+>>>>>>> josue1
 
             convertView.setTag(holder);
         }
@@ -105,6 +124,7 @@ public class trabajos_adapter_result extends BaseAdapter {
 
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
+<<<<<<< HEAD
         holder.recibi.setChecked(Array.recibix.get(position));
 
 
@@ -145,6 +165,8 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
 
 
+=======
+>>>>>>> josue1
         ClaveTrabajo = Array.clavex.get(position);
 
         ///////////
@@ -179,7 +201,11 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
+<<<<<<< HEAD
                     // request.getDeepCAPAT(Cmcontext);
+=======
+                   // request.getDeepCAPAT(Cmcontext);
+>>>>>>> josue1
 
 
                 }

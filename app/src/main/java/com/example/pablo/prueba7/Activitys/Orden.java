@@ -22,6 +22,10 @@ import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Activitys/Orden.java
+=======
+
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Orden.java
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -33,9 +37,8 @@ public class Orden extends AppCompatActivity
     Request request = new Request();
     ordenes_adapter_result adapterord;
     Button cambiodom, cambioapa,ordenb,contratob;
-  public static   ListView ordenes;
+    ListView ordenes;
     EditText ordsearch,contsearch;
-
     Request rqs=new Request();
 
 
@@ -45,7 +48,7 @@ public class Orden extends AppCompatActivity
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_orden);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -66,24 +69,7 @@ public class Orden extends AppCompatActivity
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
 /////////////////////////////////////////////
 
-        //* Boton para ir a menu principal
 
-       /* cambiodom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                request.getCAMDO();
-                Intent intent = new Intent(Orden.this, CambioDom.class);
-                startActivity(intent);
-            }
-        });
-
-        cambioapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Orden.this, CambioAparato.class);
-                startActivity(intent);
-            }
-        });*/
 
         ///////////Busqueda de orden/////////////
 
@@ -156,19 +142,19 @@ public class Orden extends AppCompatActivity
         //////////////////////////////////////////////
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -204,8 +190,6 @@ public class Orden extends AppCompatActivity
             clvorden=0;
             opcion=1;
             request.getListOrd();
-            //request.getTrabajos();
-            //request.getDeepCons();
             startActivity(intent1);
 
 

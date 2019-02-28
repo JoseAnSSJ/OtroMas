@@ -1,7 +1,6 @@
 package com.example.pablo.prueba7.Fragments;
 
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,9 +17,12 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
 
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Fragments/Ejecutar1Fragment.java
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+=======
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Ejecutar1Fragment.java
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -38,8 +40,6 @@ public class Ejecutar1Fragment extends Fragment {
     int rañoE, rmesE, rdiaE,ra;
     public static LocalTime rini,rfin;
     public static String rhoraIni,rhoraFin, rfecha, fecha_sol="";
-    public static String hora1I, horafin,solution;
-    public static Date datetime;
     public Ejecutar1Fragment() {
         // Required empty public constructor
     }
@@ -50,30 +50,27 @@ public class Ejecutar1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Fragments/Ejecutar1Fragment.java
         eject = view.findViewById(R.id.ejec1);
         hora1I=HorasFragment.reportesselectTime.getText().toString();
         horafin=HorasFragment.reportesselectTime2.getText().toString();
         solution= TrabajosFragment.proble.getText().toString();
 
+=======
+        eject = view.findViewById(R.id.ejec);
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Ejecutar1Fragment.java
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
-        List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
-        char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
-        fecha_sol="";
-        for(int i=0; i<10; i++){
+                    List<GetQuejasListResult> dat =  itData.next();
+                    char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
+                    fecha_sol="";
+                    for(int i=0; i<10; i++){
 
-            fecha_sol = fecha_sol+caracteres[i];
-        }
-
+                        fecha_sol = fecha_sol+caracteres[i];
+                    }
         eject.setOnClickListener(new View.OnClickListener() {
-
-
-
-
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-
-
 
                 ra=0;
                 rhoraIni = String.valueOf(horas.reportesselectTime.getText());
@@ -101,7 +98,7 @@ public class Ejecutar1Fragment extends Fragment {
                 }
 
 
-
+                
 
             }
         });
@@ -114,8 +111,11 @@ public class Ejecutar1Fragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.reportesselectDate.getText());
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Fragments/Ejecutar1Fragment.java
        // String visita1 = String.valueOf(horas.reportesselectDate1.getText());
         //String visita2 = String.valueOf(horas.reportesselectDate2.getText());
+=======
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Ejecutar1Fragment.java
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         final Calendar c = Calendar.getInstance();
         rañoE = c.get(Calendar.YEAR);
@@ -132,6 +132,7 @@ public class Ejecutar1Fragment extends Fragment {
                 if (sdf.parse(fecha_sol).compareTo(sdf.parse(dateEje))<1)  {
                     if(sdf.parse(rfecha).compareTo(sdf.parse(dateEje))<1){
                         if (rini.isBefore(rfin)) {
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Fragments/Ejecutar1Fragment.java
                             request.getGuardaHoraReporte(getContext());
                             request.getGuardaCampos(getContext());
                             Intent intent1 = new Intent(getActivity(), Reportes.class);
@@ -140,6 +141,9 @@ public class Ejecutar1Fragment extends Fragment {
 
                             //Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
 
+=======
+                            Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Ejecutar1Fragment.java
                         }
                         if (rini.isAfter(rfin)) {
                             Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
@@ -148,7 +152,6 @@ public class Ejecutar1Fragment extends Fragment {
                         Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    //  (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje)))
                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
             } catch (ParseException e) {

@@ -45,7 +45,11 @@ public class CambioAparato extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Activitys/CambioAparato.java
         request.getDeepCAPAT(getApplicationContext());
+=======
+            request.getDeepCAPAT(getApplicationContext());
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/CambioAparato.java
 
 
 
@@ -125,19 +129,36 @@ public class CambioAparato extends AppCompatActivity {
 
             }
         });
-    }
+        aparatoAsignar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0){
+                    Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata1 = Array.dataApaTipDis.iterator();
+                    List<GetListAparatosDisponiblesByIdArticuloResult> dat1 = itdata1.next();
+                    clvAparatoCAPAT=dat1.get(position-1).getClv_Aparato();
+                }
+            }
 
-    public static int obtenerPosicionAC(int abc){
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+public static int obtenerPosicionAC(int abc){
         int position=0;
-        Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+    Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
         List<GetListClienteAparatosResult> dat = itdata.next();
+<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Activitys/CambioAparato.java
         for(int i=0; i<dat.size(); i++){
+=======
+    for(int i=0; i<dat.size(); i++){
+>>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/CambioAparato.java
             if(dat.get(i).Clv_Aparato==abc){
                 position = i+1;
             }
         }
         return position;
-    }
+}
+
     public static int obtenerPosicionSA(Spinner spinner, String abc){
         int position=0;
         Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();

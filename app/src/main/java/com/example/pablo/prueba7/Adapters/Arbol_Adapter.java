@@ -129,7 +129,11 @@ public class Arbol_Adapter extends BaseAdapter {
                 holder.listaAparatos.setAdapter(arrayAdapter1);
                 if(array.children.size()==dat.size()){
                     asignacion.aceptarAsignacion.setEnabled(true);
+<<<<<<< HEAD
                     siguiente.setEnabled(true);
+=======
+                    asignacion.siguiente.setEnabled(true);
+>>>>>>> josue1
                 }
                 holder.listaAparatos.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 holder.listaAparatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -174,7 +178,11 @@ int d=0;
             if(d!=dat.size()){
 
             }else{
+<<<<<<< HEAD
                 siguiente.setEnabled(true);
+=======
+                asignacion.siguiente.setEnabled(true);
+>>>>>>> josue1
             }
      }
     /* if(trabajos_adapter_result.isnet==1){
@@ -208,7 +216,11 @@ int d=0;
             public void onClick(View v) {
                 asignacion.aceptarAsignacion.setVisibility(View.GONE);
                 asignacion.cancelarAsigancion.setVisibility(View.GONE);
+<<<<<<< HEAD
                 siguiente.setVisibility(View.GONE);
+=======
+                asignacion.siguiente.setVisibility(View.GONE);
+>>>>>>> josue1
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat1 =  itData1.next();
                 clv_unicaNet = dat1.get(position).getClv_UnicaNet();
@@ -236,7 +248,11 @@ int d=0;
 
                     asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
                     asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
                     siguiente.setVisibility(View.VISIBLE);
+=======
+                    asignacion.siguiente.setVisibility(View.VISIBLE);
+>>>>>>> josue1
 
                     layoutMedio.setVisibility(View.GONE);
                     Asignacion.setVisibility(View.VISIBLE);
@@ -257,7 +273,11 @@ int d=0;
             public void onClick(View v) {
                 asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
                 asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
                 siguiente.setVisibility(View.VISIBLE);
+=======
+                asignacion.siguiente.setVisibility(View.VISIBLE);
+>>>>>>> josue1
                 layoutMedio.setVisibility(View.GONE);
                 Asignacion.setVisibility(View.VISIBLE);
                 siguiente.setEnabled(true);

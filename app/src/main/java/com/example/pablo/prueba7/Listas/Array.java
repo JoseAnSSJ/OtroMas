@@ -1,7 +1,5 @@
 package com.example.pablo.prueba7.Listas;
 
-import android.widget.CheckBox;
-
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
@@ -16,7 +14,6 @@ import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinst
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
-import com.example.pablo.prueba7.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
@@ -53,6 +50,7 @@ public class Array {
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
+<<<<<<< HEAD
     public static ArrayList<Integer>clv_trabajox=new ArrayList<>();
     public static ArrayList<Boolean>recibixnew=new ArrayList<>();
     public static ArrayList<Boolean> recibix =  new ArrayList<Boolean>();
@@ -61,6 +59,8 @@ public class Array {
 
 
     // public static CheckBox recibix[];
+=======
+>>>>>>> josue1
     //////////////////////////////////////////////////////
 
     public static ArrayList <String>nombreArbol=new ArrayList<>();
@@ -95,11 +95,6 @@ public class Array {
     public static ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>dataClasf;
     public static ArrayList<List<GetConTecnicoAgendaResult>>dataNom;
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
-
-    public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
-    public static ArrayList<String> Asigna= new ArrayList<String>();
-    public static ArrayList<String> Asigna1= new ArrayList<String>();
-    public static ArrayList<String> Asigna2= new ArrayList<String>();
 
 
 }
