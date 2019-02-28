@@ -14,6 +14,13 @@ public class TrabajosSer {
     public static String descripcion;
 
 
+    public String getAccion() {
+        return accion;
+    }
+
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
 
     public String getDescripcion() {
         return descripcion;

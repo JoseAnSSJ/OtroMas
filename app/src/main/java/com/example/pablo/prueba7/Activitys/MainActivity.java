@@ -1,9 +1,5 @@
 package com.example.pablo.prueba7.Activitys;
 
-<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Activitys/MainActivity.java
-=======
-
->>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/MainActivity.java
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -85,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        mViewPager =  findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
 
 
         mViewPager.setAdapter(adapter);
@@ -114,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
     public class PagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }

@@ -34,9 +34,9 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reportess);
-        info=findViewById(R.id.info);
-        layoutAnimado =  findViewById(R.id.animado);
-        hzScrollView=findViewById(R.id.scv);
+        info=(Button)findViewById(R.id.info);
+        layoutAnimado = (RelativeLayout) findViewById(R.id.animado);
+        hzScrollView=(ScrollView)findViewById(R.id.scv);
         Nombre1= findViewById(R.id.infonombre1);
         Direccion1= findViewById(R.id.infodireccion1);
         NombreTec1= findViewById(R.id.tecnico1);
@@ -45,6 +45,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         ciudad1=findViewById(R.id.infoempresa1);
 
         setTitle(null);
+        //request.getTecSec(this);
 
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         //* Swipe
 
         MainReportes.PagerAdapter adapter = new MainReportes.PagerAdapter(getSupportFragmentManager());
-        mViewPager =  findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
 
 
         mViewPager.setAdapter(adapter);

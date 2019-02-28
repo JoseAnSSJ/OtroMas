@@ -46,12 +46,7 @@ public class Trabajos extends Fragment{
         // TrabajosAdapter trabadapt=new TrabajosAdapter();
         // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
 
-<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Fragments/Trabajos.java
         adaptertrabajos = new trabajos_adapter_result(getActivity().getApplicationContext(), Array.trabajox, Array.accionx, recibix);        //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
-=======
-        adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx);
-        trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
->>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/Trabajos.java
 
         //////////////////////////////////////////
 

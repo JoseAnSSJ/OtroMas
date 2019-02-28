@@ -26,6 +26,13 @@ public class GetMuestraTipoAparatoListResult {
         this.nombre = nombre;
     }
 
+    public void setIdArticulo(Integer idArticulo) {
+        this.idArticulo = idArticulo;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public String getCategoria() {
         return categoria;

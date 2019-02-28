@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-
 import com.example.pablo.prueba7.Adapters.Servicios_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
@@ -27,10 +26,6 @@ import com.example.pablo.prueba7.Request.Request;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-<<<<<<< HEAD:app/src/main/java/com/example/pablo/prueba7/Activitys/asignado.java
-=======
-
->>>>>>> josue1:app/src/main/java/com/example/pablo/prueba7/asignado.java
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +41,7 @@ public class asignado extends AppCompatActivity {
     Array array = new Array();
     public static int idArticuloasignado, clveAparatoSpinner;
     public static String detalleSpinner, nombreSpinner;
+    public static Servicios_Adapter adapter;
     CheckBox checkBox;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
     public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
@@ -55,8 +51,8 @@ public class asignado extends AppCompatActivity {
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignado);
-        escanear =  findViewById(R.id.escanear);
-        codigo =  findViewById(R.id.codigo);
+        escanear = (Button) findViewById(R.id.escanear);
+        codigo = (TextView) findViewById(R.id.codigo);
         spinnerAparato=findViewById(R.id.tipo_aparato);
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
@@ -96,7 +92,10 @@ public class asignado extends AppCompatActivity {
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
                                 }
 
-                            }
+                            for(int a=0; a<selectedStrings.size(); a++){
+
+                                Log.d("asdasd", String.valueOf(selectedStrings.get(a)));
+                            }}
 
                     });
 
@@ -168,18 +167,9 @@ public class asignado extends AppCompatActivity {
                 ////////////
 
                 asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
-                Intent intento=new Intent(asignado.this,asignacion.class);
-                startActivity(intento);
-                int d=0;
-                for(int a=0; a<dat4.size(); a++){
-                    if(dat4.get(a).children.size()>0){
-                        d=d+1;
-                    }
-                }
-                if(d==dat4.size()){
-                    asignacion.aceptarAsignacion.setEnabled(true);
-                }
-                finish();
+            finish();
+            //    Intent intento=new Intent(asignado.this,asignacion.class);
+            //    startActivity(intento);
 
             }
         });

@@ -27,6 +27,9 @@ public class GetDameListadoOrdenesAgendadasResult {
         return clvOrden;
     }
 
+    public void setClvOrden(Integer clvOrden) {
+        this.clvOrden = clvOrden;
+    }
 
     public String getContrato() {
         return contrato;

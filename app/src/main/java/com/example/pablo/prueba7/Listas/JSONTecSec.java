@@ -15,5 +15,7 @@ public class JSONTecSec {
     return GetMuestraRelOrdenesTecnicosListResult;
   }
 
-
+  public void setMuestraRelOrdenesTecnicosListResult(List<GetMuestraRelOrdenesTecnicosListResult> getMuestraRelOrdenesTecnicosListResult) {
+    this.GetMuestraRelOrdenesTecnicosListResult = getMuestraRelOrdenesTecnicosListResult;
+  }
 }
