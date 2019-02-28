@@ -3,11 +3,11 @@ package com.example.pablo.prueba7.Modelos;
 public class ProximaCitaModel {
     public  String Calle;
     public int Clave;
-    public String Colonia;
-    public String Contrato;
-    public String Hora;
+    public  String Colonia;
+    public  String Contrato;
+    public  String Hora;
     public  String NUMERO;
-    public String Tipo;
+    public  String Tipo;
 
 
     public ProximaCitaModel(String Calle, int Clave, String Colonia, String Contrato, String Hora, String NUMERO, String Tipo){

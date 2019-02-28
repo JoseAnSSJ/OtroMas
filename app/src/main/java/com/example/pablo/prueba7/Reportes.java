@@ -134,15 +134,6 @@ public class Reportes extends AppCompatActivity
 
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,7 +155,7 @@ public class Reportes extends AppCompatActivity
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-            request.getProximaCita();
+            request.getProximaCita(getApplicationContext());
             request.getOrdenes();
 
         } else if (id == R.id.Ordenes) {
@@ -192,11 +183,6 @@ public class Reportes extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //Bloquear el boton de atras
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-        }
-        return false;
-    }
+
 }
 

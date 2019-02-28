@@ -21,7 +21,7 @@
             android:name=".Inicio"
             android:label="Inicio"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"
             >
 
@@ -30,7 +30,7 @@
             android:name=".Orden"
             android:label="@string/title_activity_orden"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Reportes"
@@ -41,12 +41,12 @@
             android:name=".Configuracion"
             android:label="@string/title_activity_configuracion"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"
             ></activity>
 
         <activity android:name=".MainActivity"
-            android:configChanges="screenSize|orientation"
+            android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
             ></activity>
         <activity android:name=".asignacion"
             android:theme="@style/AppTheme.NoActionBar"

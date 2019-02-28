@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -58,7 +59,7 @@ public class Ejecutar1Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 request.getGuardaHoraReporte(getContext());
-                request.getGuardaCampos(getContext());
+             //   request.getGuardaCampos(getContext());
                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                 startActivity(intent1);
                 request.getListQuejas();

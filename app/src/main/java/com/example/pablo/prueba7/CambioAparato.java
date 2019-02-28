@@ -127,17 +127,19 @@ public class CambioAparato extends AppCompatActivity {
         aparatoAsignar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0){
+                if (position != 0) {
                     Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata1 = Array.dataApaTipDis.iterator();
                     List<GetListAparatosDisponiblesByIdArticuloResult> dat1 = itdata1.next();
-                    clvAparatoCAPAT=dat1.get(position-1).getClv_Aparato();
+                    clvAparatoCAPAT = dat1.get(position - 1).getClv_Aparato();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-
+            }
+        });
+    }
 public static int obtenerPosicionAC(int abc){
         int position=0;
     Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();

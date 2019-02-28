@@ -64,14 +64,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/proximotrabajo"
+            android:id="@+id/proximoTrabajo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="60dp"
             android:layout_marginTop="0dp"
-            android:text="xxxxxxxxxx" />
+             />
 
         <TextView
             android:layout_width="wrap_content"

@@ -55,11 +55,8 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     /////////////////////////////////////////////////
     public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
     public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
+    public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
 
-
-    /////////////////////////////////////////////////
-    public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
-    public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
 
 
 }

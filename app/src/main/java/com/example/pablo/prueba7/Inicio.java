@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Request.Request;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -45,12 +46,13 @@ public class Inicio extends AppCompatActivity
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         pieChart =findViewById(R.id.pastel);
-        trabajo= findViewById(R.id.proximotrabajo);
+        trabajo= findViewById(R.id.proximoTrabajo);
         direccion = findViewById(R.id.direccion);
         setSupportActionBar(toolbar);
 //Clase error
         Error.Errores(this);
-
+            trabajo.setText(request.sigueinteTrabajo);
+            direccion.setText(request.siguenteDireccion);
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,7 +65,7 @@ public class Inicio extends AppCompatActivity
         ///////////////////////////////////////////////////////////////
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -71,7 +73,7 @@ public class Inicio extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,7 +94,7 @@ public class Inicio extends AppCompatActivity
             Intent intent1 = new Intent(Inicio.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-            request.getProximaCita();
+            request.getProximaCita(getApplicationContext());
                 request.getOrdenes();
 
 
@@ -122,12 +124,7 @@ public class Inicio extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //Bloquear el boton de atras
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-        }
-        return false;
-    }
+
 
     //Grafica de pastel
     public static void Grafica(){

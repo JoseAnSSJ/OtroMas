@@ -29,7 +29,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     RadioButton btn1, bt2;
-    public static String statusHora="E";
+    public static String statusHora="E",dia,mes,ano;
+
 
 
     public HorasFragment() {
@@ -161,11 +162,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             reportesselectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            dia="0"+dayOfMonth;
+                            mes="0"+(monthOfYear+1);
+                            ano= String.valueOf(year);
                         }else{
                             reportesselectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            dia= String.valueOf(dayOfMonth);
+                            mes="0"+(monthOfYear+1);
+                            ano= String.valueOf(year);
                         }
                     }else {
                         reportesselectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        dia= String.valueOf(dayOfMonth);
+                        mes= String.valueOf((monthOfYear+1));
+                        ano= String.valueOf(year);
                     }
 
                 }

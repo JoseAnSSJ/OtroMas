@@ -14,6 +14,7 @@ import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinst
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
+import com.example.pablo.prueba7.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
@@ -83,6 +84,9 @@ public class Array {
     public static ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>dataClasf;
     public static ArrayList<List<GetConTecnicoAgendaResult>>dataNom;
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
-
+    public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
+    public static ArrayList<String> Asigna= new ArrayList<String>();
+    public static ArrayList<String> Asigna1= new ArrayList<String>();
+    public static ArrayList<String> Asigna2= new ArrayList<String>();
 
 }
