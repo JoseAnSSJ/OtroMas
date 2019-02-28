@@ -17,7 +17,5 @@ public class JSONResponseTecnico {
     return Get_ClvTecnicoResult;
   }
 
-  public void set_ClvTecnicoResult(List<Get_ClvTecnicoResult> get_ClvTecnicoResult) {
-    this.Get_ClvTecnicoResult = get_ClvTecnicoResult;
-  }
+
 }

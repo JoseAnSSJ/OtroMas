@@ -28,13 +28,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
+
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+
 
 
 /**
@@ -44,6 +43,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
    // public static String clv_TecSec_seleccion="-1"
+
    public static String latitud, longitud;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -69,7 +69,7 @@ Request request = new Request();
         View view = inflater.inflate(R.layout.activity_hora, container, false);
         Obs = view.findViewById(R.id.obs);
 
-            //request.getTecSec(getContext());
+            request.getTecSec(getContext());
 
 
         //////////// acciones de botones de hora y fecha//////
@@ -78,8 +78,8 @@ Request request = new Request();
         selectDate2 = view.findViewById(R.id.visita2);
 
 
-        selectTime = view.findViewById(R.id.horai);
-        selectTime2 = view.findViewById(R.id.horaf);
+        selectTime = view.findViewById(R.id.horaiO);
+        selectTime2 = view.findViewById(R.id.horafO);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
@@ -224,11 +224,20 @@ Request request = new Request();
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                if(minutes<10){
-                    selectTime.setText(hourOfDay + ":0" + minutes);
-                }else{
-                    selectTime.setText(hourOfDay + ":" + minutes);
-                }
+               if(hourOfDay<10){
+                   if(minutes<10){
+                       selectTime.setText("0"+hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText("0"+hourOfDay + ":" + minutes);
+                   }
+               }else {
+                   if(minutes<10){
+                       selectTime.setText(hourOfDay + ":0" + minutes);
+                   }else{
+                       selectTime.setText(hourOfDay + ":" + minutes);
+                   }
+               }
+
 
                 }
             }, mHour, mMinute, false);
@@ -301,10 +310,18 @@ Request request = new Request();
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    if(minute<10){
-                        selectTime2.setText(hourOfDay + ":0" + minute);
-                    }else{
-                        selectTime2.setText(hourOfDay + ":" + minute);
+                    if(hourOfDay<10){
+                        if(minute<10){
+                            selectTime2.setText("0"+hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText("0"+hourOfDay + ":" + minute);
+                        }
+                    }else {
+                        if(minute<10){
+                            selectTime2.setText(hourOfDay + ":0" + minute);
+                        }else{
+                            selectTime2.setText(hourOfDay + ":" + minute);
+                        }
                     }
                 }
             }, mHour, mMinute, false);

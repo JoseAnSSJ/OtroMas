@@ -2,7 +2,6 @@ package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,7 @@ Array array = new Array();
                 if(isChecked){
                     selectedStrings.add(String.valueOf(holder.check.getText()));
                 }else{
-                  //  selectedStrings.remove(String.valueOf(holder.check.getText()));
+
                 }
                 if(selectedStrings.size()!=0){
                     for (int a=0; a<selectedStrings.size(); a++){

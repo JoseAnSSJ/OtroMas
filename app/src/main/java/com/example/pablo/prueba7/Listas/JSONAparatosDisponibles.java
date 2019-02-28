@@ -15,7 +15,4 @@ public class JSONAparatosDisponibles {
         return GetMuestraAparatosDisponiblesListResult;
     }
 
-    public void setMuestraAparatosDisponiblesListResult(List<GetMuestraAparatosDisponiblesListResult> getMuestraAparatosDisponiblesListResult) {
-        this.GetMuestraAparatosDisponiblesListResult = getMuestraAparatosDisponiblesListResult;
-    }
 }

@@ -16,7 +16,4 @@ public class JSONTipoAparatos {
         return GetMuestraTipoAparatoListResult;
     }
 
-    public void setMuestraTipoAparatoListResult(List<GetMuestraTipoAparatoListResult> getMuestraTipoAparatoListResult) {
-        this.GetMuestraTipoAparatoListResult = getMuestraTipoAparatoListResult;
-    }
 }

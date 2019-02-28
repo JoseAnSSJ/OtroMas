@@ -1,12 +1,10 @@
 package com.example.pablo.prueba7;
 
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
-
-import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.sampledata.Service;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.opcion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,8 +34,6 @@ public class Ejecutar1Fragment extends Fragment {
     int rañoE, rmesE, rdiaE,ra;
     public static LocalTime rini,rfin;
     public static String rhoraIni,rhoraFin, rfecha, fecha_sol="";
-    public static String hora1I, horafin,solution;
-    public static Date datetime;
     public Ejecutar1Fragment() {
         // Required empty public constructor
     }
@@ -64,24 +45,15 @@ public class Ejecutar1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
         eject = view.findViewById(R.id.ejec);
-        hora1I=HorasFragment.reportesselectTime.getText().toString();
-        horafin=HorasFragment.reportesselectTime2.getText().toString();
-        solution=TrabajosFragment.proble.getText().toString();
-
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
-        List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
-        char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
-        fecha_sol="";
-        for(int i=0; i<10; i++){
+                    List<GetQuejasListResult> dat =  itData.next();
+                    char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
+                    fecha_sol="";
+                    for(int i=0; i<10; i++){
 
-            fecha_sol = fecha_sol+caracteres[i];
-        }
-
+                        fecha_sol = fecha_sol+caracteres[i];
+                    }
         eject.setOnClickListener(new View.OnClickListener() {
-
-
-
-
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
@@ -90,8 +62,6 @@ public class Ejecutar1Fragment extends Fragment {
                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                 startActivity(intent1);
                 request.getListQuejas();
-
-
 
                 ra=0;
                 rhoraIni = String.valueOf(horas.reportesselectTime.getText());
@@ -119,7 +89,7 @@ public class Ejecutar1Fragment extends Fragment {
                 }
 
 
-
+                
 
             }
         });
@@ -132,8 +102,6 @@ public class Ejecutar1Fragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.reportesselectDate.getText());
-        String visita1 = String.valueOf(horas.reportesselectDate1.getText());
-        String visita2 = String.valueOf(horas.reportesselectDate2.getText());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         final Calendar c = Calendar.getInstance();
         rañoE = c.get(Calendar.YEAR);
@@ -150,8 +118,7 @@ public class Ejecutar1Fragment extends Fragment {
                 if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
                     if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
                         if (rini.isBefore(rfin)) {
-                            //Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
                         }
                         if (rini.isAfter(rfin)) {
                             Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
@@ -160,7 +127,6 @@ public class Ejecutar1Fragment extends Fragment {
                         Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    //  (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(dateEje)))
                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
             } catch (ParseException e) {

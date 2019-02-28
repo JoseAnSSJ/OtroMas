@@ -7,29 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.pablo.prueba7.CambioAparato;
-import com.example.pablo.prueba7.CambioDom;
-import com.example.pablo.prueba7.ExtensionesAdi;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Trabajos;
-import com.example.pablo.prueba7.asignacion;
+
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Trabajos.trabajos;
+
 
 public class trabajos_adapter_result extends BaseAdapter {
 
     LayoutInflater inflatertrab;
     Context Cmcontext;
-    Context context;
+
     ArrayList<String>trabajox;
     ArrayList<String>accionx;
     public static int ClaveTrabajo, isnet;
@@ -47,7 +43,6 @@ public class trabajos_adapter_result extends BaseAdapter {
     public class viewHolder{
         TextView trabajo;
         Button accion;
-        CheckBox recibi;
 
     }
 
@@ -74,9 +69,9 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
-            holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
-            holder.accion=(Button)convertView.findViewById(R.id.accionv);
-            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+            holder.trabajo=convertView.findViewById(R.id.trabajov);
+            holder.accion=convertView.findViewById(R.id.accionv);
+
             convertView.setTag(holder);
         }
         else {
@@ -84,7 +79,6 @@ public class trabajos_adapter_result extends BaseAdapter {
         }
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
-
         ClaveTrabajo = Array.clavex.get(position);
 
         holder.accion.setOnClickListener(new View.OnClickListener() {
@@ -117,24 +111,22 @@ public class trabajos_adapter_result extends BaseAdapter {
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
+                   // request.getDeepCAPAT(Cmcontext);
+
 
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                     request.getExtencionesAdicionales(Cmcontext);
 
-                }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase(" ISDIG - Instalacion de Television Digital")) {
-                    Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
-                    request.getExtencionesAdicionales(Cmcontext);
 
                 }
 
-                if ((holder.accion.getText().toString().trim().equalsIgnoreCase("null"))){
-                    holder.accion.setEnabled(false);
-                    holder.accion.setText("---");
-                }
 
+                /*if ((accion.getText().toString().trim().equalsIgnoreCase("null"))){
+                    accion.setEnabled(false);
+                    accion.setText("---");
+                }*/
 
             }
         });

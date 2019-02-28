@@ -19,9 +19,6 @@ public class GetMuestraAparatosDisponiblesListResult {
         return descripcion;
     }
 
-    public void setClv_Aparato(Integer clv_Aparato) {
-        this.clv_Aparato = clv_Aparato;
-    }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;

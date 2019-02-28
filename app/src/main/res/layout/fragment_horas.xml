@@ -23,7 +23,7 @@
 
             <RadioButton
 
-                android:id="@+id/ejutada1"
+                android:id="@+id/ejutada"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
@@ -33,7 +33,7 @@
                 android:visibility="visible" />
 
             <RadioButton
-                android:id="@+id/visitada1"
+                android:id="@+id/visitada"
                 android:layout_width="107dp"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -65,7 +65,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/RE1"
+                android:id="@+id/RE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -84,15 +84,15 @@
 
                 <EditText
                     android:id="@+id/ejecureal1"
-                    android:layout_width="168dp"
+                    android:layout_width="144dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="200dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:focusable="false"
-                    android:inputType="date"
+                    android:hint="_/_/_"
                     android:textSize="20sp" />
 
 
@@ -100,10 +100,10 @@
 
 
             <RelativeLayout
-                android:id="@+id/RV1"
+                android:id="@+id/RV"
                 android:layout_width="match_parent"
                 android:layout_height="193dp"
-                android:layout_below="@+id/RE1"
+                android:layout_below="@+id/RE"
                 android:visibility="gone"
                 >
 
@@ -148,6 +148,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
+                    android:hint="_/_/_"
                     android:textSize="20dp" />
 
 
@@ -163,6 +164,7 @@
                     android:layout_marginEnd="15dp"
                     android:enabled="false"
                     android:focusable="false"
+                    android:hint="_/_/_"
                     android:textSize="20dp" />
                 <EditText
                     android:id="@+id/visita31"
@@ -176,6 +178,7 @@
                     android:enabled="false"
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
+                    android:hint="_/_/_"
                     android:textSize="20dp"/>
 
             </RelativeLayout>
@@ -183,7 +186,7 @@
             <RelativeLayout
                 android:layout_width="376dp"
                 android:layout_height="105dp"
-                android:layout_below="@+id/RV1"
+                android:layout_below="@+id/RV"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp">
@@ -210,7 +213,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/horaf11"
+                    android:id="@+id/horaf"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_alignParentStart="true"
@@ -225,7 +228,7 @@
 
 
                 <EditText
-                    android:id="@+id/horai11"
+                    android:id="@+id/horai"
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_alignParentStart="true"
