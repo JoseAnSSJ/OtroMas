@@ -6,38 +6,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.pablo.prueba7.Listas.Array;
-
-import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.sampledata.Service;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.opcion;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -63,7 +46,7 @@ public class Ejecutar1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
-        eject = view.findViewById(R.id.ejec);
+        eject = view.findViewById(R.id.ejec1);
         hora1I=HorasFragment.reportesselectTime.getText().toString();
         horafin=HorasFragment.reportesselectTime2.getText().toString();
         solution=TrabajosFragment.proble.getText().toString();
@@ -85,11 +68,6 @@ public class Ejecutar1Fragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                request.getGuardaHoraReporte(getContext());
-                request.getGuardaCampos(getContext());
-                Intent intent1 = new Intent(getActivity(), Reportes.class);
-                startActivity(intent1);
-                request.getListQuejas();
 
 
 
@@ -150,6 +128,12 @@ public class Ejecutar1Fragment extends Fragment {
                 if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
                     if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
                         if (rini.isBefore(rfin)) {
+                            request.getGuardaHoraReporte(getContext());
+                            request.getGuardaCampos(getContext());
+                            Intent intent1 = new Intent(getActivity(), Reportes.class);
+                            startActivity(intent1);
+                            request.getListQuejas();
+
                             //Toast.makeText(getActivity(), "Hora bien y Fecha bien", Toast.LENGTH_LONG).show();
 
                         }
@@ -186,8 +170,8 @@ public class Ejecutar1Fragment extends Fragment {
 
         if(horas.repotteVisita==1){
             try {
-                if (sdf.parse(fecha_sol).before(sdf.parse(visita1))) {
-                    if (sdf.parse(rfecha).after(sdf.parse(visita1))) {
+                if (sdf.parse(fecha_sol).compareTo(sdf.parse(visita1))<1) {
+                    if (sdf.parse(rfecha).compareTo(sdf.parse(visita1))<1) {
                         Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
 
                     }else{

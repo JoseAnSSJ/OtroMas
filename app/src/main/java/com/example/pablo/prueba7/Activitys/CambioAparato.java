@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -24,58 +26,44 @@ public class CambioAparato extends AppCompatActivity {
     public static Spinner aparato, estado,tipoAparato, aparatoAsignar;
     public static int idArticulo, contrato, idArticulo2, clvAparatoCAPAT;
     public static String statusAparato;
+    Integer ab;
     Request request = new Request();
     Array array = new Array();
-    Button done;
+    Button aceptarCambioAparato;
 
     @Override
     protected void onCreate(@Nullable Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
-        done = (Button) findViewById(R.id.done);
+        aceptarCambioAparato =  findViewById(R.id.aceptarCambioAparato);
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
-        request.getCliApa(getApplicationContext());
-        request.getStatusApa(getApplicationContext());
 
 
-        done.setOnClickListener(new View.OnClickListener() {
+
+
+        request.getDeepCAPAT(getApplicationContext());
+
+
+
+
+
+
+        aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(CambioAparato.this, Orden.class);
-                startActivity(intento1);
+                request.SetCambioAparato(getBaseContext());
             }
         });
-        aparato.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if(position!=0){
-                            Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
-                            List<GetListClienteAparatosResult> dat = itdata.next();
-                            idArticulo = dat.get(position-1).getIdArticulo();
-                            contrato = dat.get(position-1).getControNet();
-                            request.getApaTipo(getApplicationContext());
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                }
-        );
-
-        tipoAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0) {
-                    Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = array.dataApaTipo.iterator();
-                    List<GetListTipoAparatosByIdArticuloResult> dat = itdata.next();
-                    idArticulo2 = dat.get(position-1).getIdArticulo();
-                    request.getApaTipDis(getApplicationContext());
+                if(position!=0){
+                    Iterator<List<GetSP_StatusAparatosListResult>> itdata1 = Array.dataStaApa.iterator();
+                    List<GetSP_StatusAparatosListResult> dat1 = itdata1.next();
+                    statusAparato=dat1.get(position-1).getClv_StatusCableModem();
                 }
             }
 
@@ -83,6 +71,7 @@ public class CambioAparato extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
         aparatoAsignar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -142,7 +131,7 @@ public class CambioAparato extends AppCompatActivity {
         Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
         List<GetListClienteAparatosResult> dat = itdata.next();
         for(int i=0; i<dat.size(); i++){
-            if(dat.get(i).idArticulo==abc){
+            if(dat.get(i).Clv_Aparato==abc){
                 position = i+1;
             }
         }
@@ -181,6 +170,10 @@ public class CambioAparato extends AppCompatActivity {
         }
         return position;
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
-
-
