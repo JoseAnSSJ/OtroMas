@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 

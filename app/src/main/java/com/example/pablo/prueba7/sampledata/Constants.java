@@ -60,5 +60,6 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
     public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
 
+    public static final String URL_SEND_NOENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
 
 }

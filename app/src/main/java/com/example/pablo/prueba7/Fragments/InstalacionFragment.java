@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -28,13 +28,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -336,7 +334,7 @@ Request request = new Request();
             return;
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, Local);
-        //mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
+        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
 
         coordenadas.setText("Localización agregada");
 //        direccion.setText("");

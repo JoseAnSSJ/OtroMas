@@ -9,16 +9,13 @@ public class GetListAparatosDisponiblesByIdArticuloResult {
     this.Descripcion = descripcion;
   }
 
-  public int getClv_Aparato() {
-    return Clv_Aparato;
-  }
 
   public String getDescripcion() {
     return Descripcion;
   }
 
-  public void setClv_Aparato(int clv_Aparato) {
-    Clv_Aparato = clv_Aparato;
+  public int getClv_Aparato() {
+    return Clv_Aparato;
   }
 
   public void setDescripcion(String descripcion) {

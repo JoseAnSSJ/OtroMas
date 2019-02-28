@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 
 import android.content.Intent;
@@ -11,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
+import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +53,7 @@ public class Ejecutar1Fragment extends Fragment {
         eject = view.findViewById(R.id.ejec1);
         hora1I=HorasFragment.reportesselectTime.getText().toString();
         horafin=HorasFragment.reportesselectTime2.getText().toString();
-        solution=TrabajosFragment.proble.getText().toString();
+        solution= TrabajosFragment.proble.getText().toString();
 
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
         List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
@@ -110,8 +114,8 @@ public class Ejecutar1Fragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ValidacionHoras(){
         String dateEje = String.valueOf(horas.reportesselectDate.getText());
-        String visita1 = String.valueOf(horas.reportesselectDate1.getText());
-        String visita2 = String.valueOf(horas.reportesselectDate2.getText());
+       // String visita1 = String.valueOf(horas.reportesselectDate1.getText());
+        //String visita2 = String.valueOf(horas.reportesselectDate2.getText());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         final Calendar c = Calendar.getInstance();
         rañoE = c.get(Calendar.YEAR);
@@ -125,8 +129,8 @@ public class Ejecutar1Fragment extends Fragment {
         }
         if(horas.reporteEjecutada==1) {
             try {
-                if (sdf.parse(fecha_sol).before(sdf.parse(dateEje))) {
-                    if(sdf.parse(rfecha).after(sdf.parse(dateEje))){
+                if (sdf.parse(fecha_sol).compareTo(sdf.parse(dateEje))<1)  {
+                    if(sdf.parse(rfecha).compareTo(sdf.parse(dateEje))<1){
                         if (rini.isBefore(rfin)) {
                             request.getGuardaHoraReporte(getContext());
                             request.getGuardaCampos(getContext());

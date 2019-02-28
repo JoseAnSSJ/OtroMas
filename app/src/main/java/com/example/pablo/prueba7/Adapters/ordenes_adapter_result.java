@@ -10,17 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.MainActivity;
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Trabajos;
 
 import java.util.ArrayList;
-
-import static com.example.pablo.prueba7.Trabajos.trabajos;
-
-import static com.example.pablo.prueba7.Trabajos.adaptertrabajos;
-import static com.example.pablo.prueba7.Trabajos.trabajos;
 
 public class ordenes_adapter_result extends BaseAdapter {
 

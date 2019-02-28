@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,9 +20,8 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-
-import org.json.JSONException;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;

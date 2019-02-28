@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloR
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Iterator;

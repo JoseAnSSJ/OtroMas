@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 
 import android.os.Build;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Services.Services;
 import com.google.gson.JsonObject;
@@ -26,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
 
 /**
@@ -62,6 +64,12 @@ public class EjecutarFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                if(recibixnew.size()==0){
+                    Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
+                }else{
+                    request.send_aparat();
+                }
+
 
                 a=0;
                 horaIni = String.valueOf(horas.selectTime.getText());

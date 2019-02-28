@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,13 +21,10 @@ import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinst
 import com.example.pablo.prueba7.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.children;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;

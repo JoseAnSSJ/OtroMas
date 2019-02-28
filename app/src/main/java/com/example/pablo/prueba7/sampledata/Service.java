@@ -134,6 +134,8 @@ public interface Service {
     @POST(Constants.URL_GET_DEEP_CAPAT)
     Call<JsonObject> getDeepCAPAT();
 
+    @POST(Constants.URL_SEND_NOENTREGADOS)
+    Call<JsonObject>noent();
 
 
 }

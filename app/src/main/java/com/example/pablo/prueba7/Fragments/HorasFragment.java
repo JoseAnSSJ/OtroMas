@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 
 import android.app.DatePickerDialog;
@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
-import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.R;
 
 import java.util.Calendar;
 

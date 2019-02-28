@@ -2,19 +2,16 @@ package com.example.pablo.prueba7.Services;
 
 
 
-import com.example.pablo.prueba7.CambioAparato;
-import com.example.pablo.prueba7.Ejecutar1Fragment;
-import com.example.pablo.prueba7.HorasFragment;
-import com.example.pablo.prueba7.InstalacionFragment;
+import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Fragments.HorasFragment;
+import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Login;
+import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
-import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Modelos.UserModel;
-import com.example.pablo.prueba7.TrabajosFragment;
-import com.example.pablo.prueba7.asignacion;
+import com.example.pablo.prueba7.Activitys.asignacion;
 import com.example.pablo.prueba7.sampledata.Constants;
 import com.example.pablo.prueba7.sampledata.Service;
 
@@ -39,18 +36,16 @@ import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
-import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.observacion1;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
-import static com.example.pablo.prueba7.Ejecutar1Fragment.fecha_sol;
-import static com.example.pablo.prueba7.Ejecutar1Fragment.solution;
+import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
 import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
 import static com.example.pablo.prueba7.Request.Request.tecC;
-import static com.example.pablo.prueba7.TrabajosFragment.solucion;
-import static com.example.pablo.prueba7.asignacion.jsonArray;
-import static com.example.pablo.prueba7.asignacion.jsonObject2;
-import static com.example.pablo.prueba7.asignado.idArticuloasignado;
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
+import static com.example.pablo.prueba7.Activitys.asignacion.jsonArray;
+import static com.example.pablo.prueba7.Activitys.asignacion.jsonObject2;
+import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
 
 
 public class Services {
@@ -827,7 +822,7 @@ public class Services {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Queja", clvReport);
-        jsonObject.put("Fecha_Ejecucion",HorasFragment.reportesselectDate.getText());
+        jsonObject.put("Fecha_Ejecucion", HorasFragment.reportesselectDate.getText());
 
 
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
@@ -1239,28 +1234,28 @@ public class Services {
 
     public Service getGuardaInfoReportes() throws JSONException {
         //POST Body Json
-        JSONObject objQuejas= new JSONObject();
+        JSONObject objQuejas = new JSONObject();
         JSONObject jsonObject = new JSONObject();
-        objQuejas.put("Clv_Queja",clvReport.toString());
-        objQuejas.put("Clv_Tecnico",claveTecnico);
-        objQuejas.put("FechaProceso","");
-        objQuejas.put("Fecha_Ejecucion", HorasFragment.ano  +HorasFragment.mes +HorasFragment.dia+" "+HorasFragment.reportesselectTime.getText());
+        objQuejas.put("Clv_Queja", clvReport.toString());
+        objQuejas.put("Clv_Tecnico", claveTecnico);
+        objQuejas.put("FechaProceso", "");
+        objQuejas.put("Fecha_Ejecucion", HorasFragment.ano + HorasFragment.mes + HorasFragment.dia + " " + HorasFragment.reportesselectTime.getText());
         objQuejas.put("HP", "");
         objQuejas.put("HV1", "");
         objQuejas.put("HV2", "");
         objQuejas.put("HV2", "");
         objQuejas.put("IdUsuario", 1);
-        objQuejas.put("Observaciones",Obs);
-        objQuejas.put("Solucion",solution);
-        objQuejas.put("Status",HorasFragment.statusHora);
-        objQuejas.put("TecnicoCuadrilla",tecC);
+        objQuejas.put("Observaciones", Obs);
+        objQuejas.put("Solucion", solution);
+        objQuejas.put("Status", HorasFragment.statusHora);
+        objQuejas.put("TecnicoCuadrilla", tecC);
         objQuejas.put("Visita", false);
         objQuejas.put("Visita1", "");
         objQuejas.put("Visita2", "");
         objQuejas.put("Visita3", "");
-        objQuejas.put("clvPrioridadQueja",clvP);
-        objQuejas.put("clvProblema",solucion.getSelectedItemPosition());
-        jsonObject.put("objQuejas",objQuejas);
+        objQuejas.put("clvPrioridadQueja", clvP);
+        objQuejas.put("clvProblema", solucion.getSelectedItemPosition());
+        jsonObject.put("objQuejas", objQuejas);
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -1290,11 +1285,12 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getValidaInfoReportes() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvQueja", clvReport);
-        jsonObject.put("IdUsuario",1);
+        jsonObject.put("IdUsuario", 1);
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -1324,6 +1320,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getGuardaCoordenadasService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1362,6 +1359,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getConsultaIpService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1398,6 +1396,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getReintentarComandoService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1432,6 +1431,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getCAPATService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1470,7 +1470,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-    public Service getDeepCAPATService()  {
+
+    public Service getDeepCAPATService() {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         try {
@@ -1505,6 +1506,49 @@ public class Services {
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+
+    ///////////////////
+    public static JSONObject jsonObject = new JSONObject();
+    JSONObject jsonObject20 = new JSONObject();
+    public static JSONArray jsonArrayap = new JSONArray();
+    //public static JsonArray jsonArrayap = jsonObject.getJSONArray("objSP_InsertaTbl_NoEntregados");
+
+
+    public Service recibiapar() throws JSONException {
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        //Log.i(jsonArrayap.get(0));
+        try {
+            jsonObject20.put("objSP_InsertaTbl_NoEntregados", jsonArrayap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final RequestBody body = RequestBody.create(JSON, jsonObject20.toString());
+
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+
+                //Modificacion del Header
+                okhttp3.Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body).build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
+                .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         return retrofit.create(Service.class);

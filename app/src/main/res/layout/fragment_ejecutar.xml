@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EjecutarFragment">
+    tools:context=".Fragments.EjecutarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
+  <!-- TODO: Update blank fragment layout -->
 
   <RelativeLayout
       android:layout_width="wrap_content"
@@ -33,10 +32,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="134dp"
+        android:layout_marginTop="70dp"
         android:text="Status Comando"
         android:textSize="20dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="70dp"
+
+        android:hint="Espera"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,16 +53,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="120dp"
         android:text="Resultado:"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/msgEjecutarOrd"
         android:layout_width="247dp"
         android:layout_height="122dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="150dp"
         android:layout_marginBottom="82dp"
         android:background="#2598" />
 
@@ -67,27 +77,21 @@
 
       <Button
           android:id="@+id/restart"
-          android:layout_width="205dp"
-          android:layout_height="60dp"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
           android:layout_gravity="center"
-          android:layout_marginStart="95dp"
-          android:layout_marginTop="350dp"
-          android:layout_marginEnd="-30dp"
-          android:layout_marginBottom="10dp"
+          android:layout_marginTop="290dp"
           android:text="Reiniciar"
+          android:enabled="false" />
+      <Button
+          android:id="@+id/salirEjecutarOrd"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_gravity="center"
+          android:layout_marginTop="340dp"
+          android:text="Salir"
           android:visibility="visible" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="133dp"
-
-        android:hint="Espera"
-        android:textSize="20dp" />
   </RelativeLayout>
-
-
-    </FrameLayout>
+</FrameLayout>

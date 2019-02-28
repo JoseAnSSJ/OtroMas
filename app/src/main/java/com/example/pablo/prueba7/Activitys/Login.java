@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 

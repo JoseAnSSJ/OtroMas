@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.children;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import org.json.JSONArray;
@@ -92,7 +93,7 @@ String f;
                     }
                 }
                 Log.d("numero", String.valueOf(Arbol_Adapter.a));
-                Intent intento=new Intent(asignacion.this,asignado.class);
+                Intent intento=new Intent(asignacion.this, asignado.class);
                 startActivity(intento);
 
             }

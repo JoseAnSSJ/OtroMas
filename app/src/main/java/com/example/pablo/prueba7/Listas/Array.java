@@ -53,7 +53,14 @@ public class Array {
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
-    public static CheckBox recibix[];
+    public static ArrayList<Integer>clv_trabajox=new ArrayList<>();
+    public static ArrayList<Boolean>recibixnew=new ArrayList<>();
+    public static ArrayList<Boolean> recibix =  new ArrayList<Boolean>();
+
+
+
+
+    // public static CheckBox recibix[];
     //////////////////////////////////////////////////////
 
     public static ArrayList <String>nombreArbol=new ArrayList<>();
@@ -73,6 +80,7 @@ public class Array {
     public static  ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>> dataApaTipDis;
  public static  ArrayList<List<GetDameDatosCAMDOResult>> dataCAMDO;
     public static  ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> dataArbSer;
+
 
     public static  ArrayList<List<GetMuestraMedioPorServicoContratadoListResult>> dataMedSer;
     public static  ArrayList<List<GetMuestraTipoAparatoListResult>> dataTipoAparatos;

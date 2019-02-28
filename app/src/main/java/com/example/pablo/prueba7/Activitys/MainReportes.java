@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.Fragments.Ejecutar1Fragment;
+import com.example.pablo.prueba7.Fragments.HorasFragment;
+import com.example.pablo.prueba7.Fragments.MaterialesFragment;
+import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;

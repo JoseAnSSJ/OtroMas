@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 

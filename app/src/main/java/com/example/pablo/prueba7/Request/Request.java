@@ -11,18 +11,19 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
-import com.example.pablo.prueba7.CambioAparato;
-import com.example.pablo.prueba7.CambioDom;
+import com.example.pablo.prueba7.Activitys.CambioDom;
 
-import com.example.pablo.prueba7.EjecutarFragment;
-import com.example.pablo.prueba7.ExtensionesAdi;
-import com.example.pablo.prueba7.HorasFragment;
+import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Fragments.EjecutarFragment;
+import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
+import com.example.pablo.prueba7.Fragments.HorasFragment;
 
 
 
-import com.example.pablo.prueba7.Inicio;
-import com.example.pablo.prueba7.InstalacionFragment;
+import com.example.pablo.prueba7.Activitys.Inicio;
+import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Listas.Example;
 import com.example.pablo.prueba7.Listas.Example1;
@@ -47,9 +48,10 @@ import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
-import com.example.pablo.prueba7.Login;
-import com.example.pablo.prueba7.MainActivity;
-import com.example.pablo.prueba7.MainReportes;
+import com.example.pablo.prueba7.Activitys.Login;
+import com.example.pablo.prueba7.Activitys.MainActivity;
+import com.example.pablo.prueba7.Activitys.MainReportes;
+import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
@@ -83,9 +85,9 @@ import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Services.Services;
-import com.example.pablo.prueba7.TrabajosFragment;
-import com.example.pablo.prueba7.asignacion;
-import com.example.pablo.prueba7.asignado;
+import com.example.pablo.prueba7.Fragments.TrabajosFragment;
+import com.example.pablo.prueba7.Activitys.asignacion;
+import com.example.pablo.prueba7.Activitys.asignado;
 import com.example.pablo.prueba7.sampledata.Service;
 import com.google.gson.JsonObject;
 
@@ -100,11 +102,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.pablo.prueba7.ExtensionesAdi.txtExtencion;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
+import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
+import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
-import static com.example.pablo.prueba7.Listas.Array.Asigna2;
-import static com.example.pablo.prueba7.TrabajosFragment.solucion;
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -119,6 +123,7 @@ public class Request extends AppCompatActivity {
     public static int clvP;
     public static int tecC;
     public int reintentaB;
+
         public static Integer clvQ;
     public static String reintentarComando;
     JsonObject jsonConsultaIp;
@@ -163,6 +168,7 @@ public class Request extends AppCompatActivity {
                     Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
                     getClv_tecnico();
                     Intent intento = new Intent(context, Inicio.class);
+                    intento.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intento);
 
                 }
@@ -684,10 +690,14 @@ public class Request extends AppCompatActivity {
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clavex.add(dat.get(i).getClave());
+                        Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
+                        Array.recibix.add(dat.get(i).getSeRealiza());
+
                         //   Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
                         // Array.recibix[i].setChecked(false);
                     }
                 }
+                trabajos.setAdapter(adaptertrabajos);
 
                 // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
 //                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
@@ -814,6 +824,12 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.aparato.setAdapter(adapter);
+                    try{
+                        CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                    }catch (Exception e){
+
+                    }
+
 
                 }
             }
@@ -848,6 +864,11 @@ public class Request extends AppCompatActivity {
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     CambioAparato.estado.setAdapter(adapter);
+                    try{
+                        CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado,CambioAparatoDeepModel.StatusEntrega));
+                    }catch (Exception e){
+
+                    }
                 }
 
             }
@@ -935,6 +956,57 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JSONApaTipDis> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getDeepCAPAT(final Context context) {
+
+        Services restApiAdapter = new Services();
+        Service service = restApiAdapter.getDeepCAPATService();
+        Call<JsonObject> call = service.getDeepCAPAT();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //Peticion de datos sobre el Json "LogOnResult"
+                CambioAparatoDeepModel.StatusEntrega="";
+                JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
+                try {
+                    CambioAparatoDeepModel user = new CambioAparatoDeepModel(
+                            userJson.get("AparatoAsignar").getAsInt(),
+                            userJson.get("AparatoCliente").getAsInt(),
+                            userJson.get("TipoAparatoAsignar").getAsInt(),
+                            userJson.get("StatusEntrega").getAsString()
+                    );
+                    getCliApa(context);
+                    getStatusApa(context);
+                    ///
+                    Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+                    List<GetListClienteAparatosResult> dat = itdata.next();
+                    CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                    CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato,CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                    getApaTipo(context);
+
+                    //////////////////////
+                    Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
+                    List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
+                    CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar,CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                    getApaTipDis(context);
+
+
+
+                }catch (Exception e){
+                    getCliApa(context);
+                    getStatusApa(context);
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
@@ -1579,15 +1651,15 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
+                if(response1.code()==200){
+                    if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
                         getChecaCAMDO(context);
-                    } else {
-                        Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
+                    }else{
+                        EjecutarFragment.eject.setEnabled(true);
+                        Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
                     }
                 }
             }
-
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
@@ -1653,10 +1725,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult"));
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("AddNueRelOrdenUsuarioResult")).equals(-1)) {
-                        getDeepMODORDSER(context);
-                    }
+                if(response1.code()==200){
+                    getDeepMODORDSER(context);
                 }
             }
 
@@ -1666,6 +1736,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
 
     public void getDeepMODORDSER(final Context context) {
 
@@ -1719,11 +1790,9 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-                String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
-                if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)) {
-                        getGuardaOrdSerAparatos(context);
-                    }
+
+                if(response1.code()==200){
+                    getGuardaOrdSerAparatos(context);
                 }
             }
 
@@ -1791,7 +1860,9 @@ public class Request extends AppCompatActivity {
                         if(IS==1){
                             GuardaCoordenadas(context);
                         }else{
-                            Toast.makeText(context, "Exito",Toast.LENGTH_LONG);
+                            Intent intent = new Intent(context, Orden.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivity(intent);
                         }
 
                     }
@@ -1894,7 +1965,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-            Log.d("wer","asd");
+           // Log.d("wer","asd");
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
 
@@ -1909,6 +1980,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+    ////////////////////////////////////////////////////////////////
     public void GuardaCoordenadas(final Context context) {
 
         Service service = null;
@@ -2025,7 +2097,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    public void SetCambioAparato() {
+    public void SetCambioAparato(Context baseContext) {
 
         Service service = null;
         try {
@@ -2052,9 +2124,42 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+    public void send_aparat() {
+
+        adaptertrabajos.norec();
+
+        Service service = null;
+        try {
+            service = services.recibiapar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.noent();
+        call.enqueue(new Callback<JsonObject>() {
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
 
 
-}
+    }
+
+
+
+
+
+
 
 
 

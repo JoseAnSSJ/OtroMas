@@ -103,8 +103,8 @@ public class GetBUSCADetOrdSerListResult {
         return seRealiza;
     }
 
-    public void setSeRealiza(Boolean seRealiza) {
+    public boolean setSeRealiza(Boolean seRealiza) {
         this.seRealiza = seRealiza;
+        return false;
     }
-
 }

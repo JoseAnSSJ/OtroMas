@@ -1,13 +1,11 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -15,7 +13,10 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+
+import static com.example.pablo.prueba7.Listas.Array.recibix;
 
 
 /**
@@ -45,8 +46,7 @@ public class Trabajos extends Fragment{
         // TrabajosAdapter trabadapt=new TrabajosAdapter();
         // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
 
-        adaptertrabajos =new trabajos_adapter_result(getActivity().getApplicationContext(),Array.trabajox,Array.accionx);
-        //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+        adaptertrabajos = new trabajos_adapter_result(getActivity().getApplicationContext(), Array.trabajox, Array.accionx, recibix);        //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
 
         //////////////////////////////////////////
 
