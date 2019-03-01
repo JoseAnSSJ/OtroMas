@@ -115,7 +115,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico,msgComando="";
+    public static String clave_tecnico,msgComando="",sigueinteTrabajo,siguenteDireccion;;
     public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
@@ -166,12 +166,7 @@ public class Request extends AppCompatActivity {
 
 
                 if (response.code() == 200) {
-                    Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
-                    getClv_tecnico();
-                    Intent intento = new Intent(context, Inicio.class);
-                    intento.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intento);
-
+                    getClv_tecnico(context);
                 }
                 b = true;
 
@@ -186,7 +181,7 @@ public class Request extends AppCompatActivity {
     }
 
     //////////////////Clave Tecnico////////////////////////////
-    public void getClv_tecnico() {
+    public void getClv_tecnico(final Context context) {
         Service service = null;
         try {
             service = services.getTecService();
@@ -220,7 +215,8 @@ public class Request extends AppCompatActivity {
 
                 }
                 if (response.code() == 200) {
-                    getProximaCita();
+                    Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
+                    getProximaCita(context);
                     getOrdenes();
 
                 }
@@ -236,7 +232,7 @@ public class Request extends AppCompatActivity {
     }
 
     ///////////////////Proxima Cita///////////////////////////
-    public void getProximaCita() {
+    public void getProximaCita(final Context context) {
         Service service = null;
         try {
             service = services.getProxService();
@@ -258,9 +254,11 @@ public class Request extends AppCompatActivity {
                         userJson.get("NUMERO").getAsString(),
                         userJson.get("Tipo").getAsString()
                 );
-                Inicio.trabajo.setText("Tipo de trabajo: " + user.Tipo + " Contrato: " + user.Contrato + " Hora: " + user.Hora);
-                Inicio.direccion.setText("Colonia: " + user.Colonia + " Calle: " + user.Calle);
-
+                sigueinteTrabajo= "Tipo de trabajo: " + user.Tipo + " Contrato: " + user.Contrato + " Hora: " + user.Hora;
+                siguenteDireccion = "Colonia: " + user.Colonia + " Calle: " + user.Calle;
+                Intent intento = new Intent(context, Inicio.class);
+                intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intento);
 
             }
 
@@ -342,6 +340,7 @@ public class Request extends AppCompatActivity {
                     Inicio.OEP = 0;
                     Inicio.OO = 0;
                 }
+                getQuejas();
             }
 
             @Override
@@ -468,6 +467,7 @@ public class Request extends AppCompatActivity {
 
                 }
                 Inicio.Grafica();
+
             }
 
             @Override
@@ -479,12 +479,7 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    /////////////////Lista de Ordenes/////////////////////////////
-    /*
 
-    No tiene nada LisOrd
-
-     */
     public void getListOrd() {
 
         Service service = null;
