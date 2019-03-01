@@ -119,11 +119,6 @@ public class Login extends AppCompatActivity {
             System.out.println(e);
         }
     }
-    //Bloquear el boton de atras
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-        }
-        return false;
-    }
+
 
 }
