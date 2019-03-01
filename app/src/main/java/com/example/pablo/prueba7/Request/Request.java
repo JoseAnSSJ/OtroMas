@@ -466,7 +466,7 @@ public class Request extends AppCompatActivity {
                     }
 
                 }
-//                Inicio.Grafica();
+                Inicio.Grafica();
 
             }
 
