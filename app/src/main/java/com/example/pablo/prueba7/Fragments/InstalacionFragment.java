@@ -41,8 +41,8 @@ import java.util.Calendar;
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
-    // public static String clv_TecSec_seleccion="-1"
-    public static String latitud, longitud,diaI,mesI,añoI, diaV1,mesV1,añoV1,diaV2,mesV2,añoV2;
+   // public static String clv_TecSec_seleccion="-1"
+   public static String latitud, longitud,diaI,mesI,añoI, diaV1,mesV1,añoV1,diaV2,mesV2,añoV2;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1,hf,hi;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
@@ -231,13 +231,13 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                    if(minutes<10){
-                        selectTime.setText(hourOfDay + ":0" + minutes);
-                        hi= hourOfDay;
-                    }else{
-                        selectTime.setText(hourOfDay + ":" + minutes);
-                        hi= hourOfDay;
-                    }
+                if(minutes<10){
+                    selectTime.setText(hourOfDay + ":0" + minutes);
+                    hi= hourOfDay;
+                }else{
+                    selectTime.setText(hourOfDay + ":" + minutes);
+                    hi= hourOfDay;
+                }
 
                 }
             }, mHour, mMinute, false);

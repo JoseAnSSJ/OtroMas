@@ -1,4 +1,8 @@
 package com.example.pablo.prueba7.Fragments;
+
+
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -52,29 +56,23 @@ public class EjecutarFragment extends Fragment {
                 }else{
                    request.send_aparat();
                 }*/
-                //**************************************
+              //**************************************
                 final Calendar c = Calendar.getInstance();
                 añoE = c.get(Calendar.YEAR);
                 mesE = c.get(Calendar.MONTH);
                 diaE = c.get(Calendar.DAY_OF_MONTH);
-                if(horas.ejecutada==1){
-                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
-                        eject.setEnabled(false);
-                        request.getValidaOrdSer(getActivity());
-                        if(recibixnew.size()==0){
-                    Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
-                }else{
-                   request.send_aparat();
-                }
-
-                    }
-                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
-                        Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                    }
-                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==2){
-                        Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
-                    }
-                }
+             if(horas.ejecutada==1){
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
+                     eject.setEnabled(false);
+                     request.getValidaOrdSer(getActivity());
+                 }
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
+                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                 }
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==2){
+                     Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                 }
+             }
                 if(horas.visita==1){
                     if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1),Integer.parseInt(InstalacionFragment.mesV1),Integer.parseInt(InstalacionFragment.añoV1),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
                         Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
@@ -97,6 +95,8 @@ public class EjecutarFragment extends Fragment {
                         Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
                     }
                 }
+             ////////*************************
+
                 reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -129,22 +129,22 @@ public class EjecutarFragment extends Fragment {
         }
         //******
         if(Integer.parseInt(añoS)<=añoE){
-            if(Integer.parseInt(mesS)<=mesE){
-                if(Integer.parseInt(diaS)<=diaE){
-                    if(añoE<=añoA){
-                        if(mesE<=mesA){
-                            if(diaE<=diaA){
-                                if(ValidadrHoras(horaI,horaF)){
-                                    a=1;
-                                }
-                                else{
-                                    a=2;
+                if(Integer.parseInt(mesS)<=mesE){
+                    if(Integer.parseInt(diaS)<=diaE){
+                        if(añoE<=añoA){
+                            if(mesE<=mesA){
+                                if(diaE<=diaA){
+                                    if(ValidadrHoras(horaI,horaF)){
+                                        a=1;
+                                    }
+                                    else{
+                                        a=2;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
         }
         return a;
     }
