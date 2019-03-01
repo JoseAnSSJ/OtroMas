@@ -39,6 +39,8 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoR
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSecSelecc1;
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.Clv_Sol;
 import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
 import static com.example.pablo.prueba7.Request.Request.tecC;
@@ -1248,13 +1250,13 @@ public class Services {
         objQuejas.put("Observaciones", Obs);
         objQuejas.put("Solucion", solution);
         objQuejas.put("Status", HorasFragment.statusHora);
-        objQuejas.put("TecnicoCuadrilla", tecC);
+        objQuejas.put("TecnicoCuadrilla", TecSecSelecc1);
         objQuejas.put("Visita", false);
         objQuejas.put("Visita1", "");
         objQuejas.put("Visita2", "");
         objQuejas.put("Visita3", "");
         objQuejas.put("clvPrioridadQueja", clvP);
-        objQuejas.put("clvProblema", solucion.getSelectedItemPosition());
+        objQuejas.put("clvProblema", Clv_Sol);
         jsonObject.put("objQuejas", objQuejas);
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");

@@ -38,7 +38,6 @@ public class Array {
     public static  ArrayList<List<OrdSer>> dataord;
     //////////////////////ARRAY ORDENES//////////////////////
     public static ArrayList<List<GetDameListadoOrdenesAgendadasResult>> dataagenda;
-
     public static ArrayList<String>contratosrc=new ArrayList<>();
     public static ArrayList<String>ordensrc=new ArrayList<>();
     public static ArrayList<String>nombresrc=new ArrayList<>();
@@ -56,13 +55,7 @@ public class Array {
     public static ArrayList<Integer>clv_trabajox=new ArrayList<>();
     public static ArrayList<Boolean>recibixnew=new ArrayList<>();
     public static ArrayList<Boolean> recibix =  new ArrayList<Boolean>();
-
-
-
-
-    // public static CheckBox recibix[];
     //////////////////////////////////////////////////////
-
     public static ArrayList <String>nombreArbol=new ArrayList<>();
     public static ArrayList <String>children=new ArrayList<>();
     public static ArrayList<String>medio=new ArrayList<>();
@@ -78,10 +71,8 @@ public class Array {
     public static ArrayList<List<GetSP_StatusAparatosListResult>> dataStaApa;
     public static  ArrayList<List<GetListTipoAparatosByIdArticuloResult>> dataApaTipo;
     public static  ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>> dataApaTipDis;
- public static  ArrayList<List<GetDameDatosCAMDOResult>> dataCAMDO;
+    public static  ArrayList<List<GetDameDatosCAMDOResult>> dataCAMDO;
     public static  ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> dataArbSer;
-
-
     public static  ArrayList<List<GetMuestraMedioPorServicoContratadoListResult>> dataMedSer;
     public static  ArrayList<List<GetMuestraTipoAparatoListResult>> dataTipoAparatos;
     public static  ArrayList<List<GetMuestraAparatosDisponiblesListResult>> dataAparatosDisponibles;
@@ -91,10 +82,13 @@ public class Array {
     public static ArrayList<List<GetuspBuscaContratoSeparado2ListResult>> dataRep;
     public static ArrayList<List<GetMUESTRATRABAJOSQUEJASListResult>> dataSOL;
     public static ArrayList<List<GetQuejasListResult>>dataReport;
-    public static ArrayList<List<GetSoftvGetPrioridadQuejaListResult>>dataPriori;
-    public static ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>dataClasf;
+    //public static ArrayList<List<GetSoftvGetPrioridadQuejaListResult>>dataPriori;
+    //public static ArrayList<List<GetuspConsultaTblClasificacionProblemasListResult>>dataClasf;
     public static ArrayList<List<GetConTecnicoAgendaResult>>dataNom;
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
+    public static  ArrayList<Integer> Clv_TecSecR;
+    public static  ArrayList<Integer> clv_Soluc;
+
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
     public static ArrayList<String> Asigna= new ArrayList<String>();

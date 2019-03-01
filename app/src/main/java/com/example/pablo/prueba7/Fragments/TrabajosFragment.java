@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
@@ -22,6 +24,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
     public static TextView desc, problm;
     public static  EditText proble;
     Request request = new Request();
+    public static int Clv_Sol=-1;
 
 
     public TrabajosFragment() {
@@ -44,7 +47,25 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
          proble=view.findViewById(R.id.problema);
-        solucion = view.findViewById(R.id.tiposol);
+         solucion = view.findViewById(R.id.tiposol);
+        solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Clv_Sol = Array.clv_Soluc.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
         solucion.getSelectedItemPosition();
 
 

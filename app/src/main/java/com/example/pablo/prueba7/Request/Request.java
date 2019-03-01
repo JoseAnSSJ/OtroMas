@@ -128,6 +128,7 @@ public class Request extends AppCompatActivity {
     public static String reintentarComando;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
+    String f = "Seleccione tipo de solucion";
     Arbol_Adapter adapter;
 
     public static boolean b = false;
@@ -713,10 +714,10 @@ public class Request extends AppCompatActivity {
     }
 
     ////TecnicoSecundario////
-    public void getTecSec(final Context context) {
-//        Array.clv_tecnicoSecundario.clear();
+    public void getTecSec(final Context context){
+        Array.clv_tecnicoSecundario = new ArrayList<Integer>();
+        Array.clv_tecnicoSecundario.add(0,-1);
 
-//        Array.clv_tecnicoSecundario.add(0,-1);
         Service service = null;
         try {
             service = services.getTecSecService();
@@ -728,30 +729,29 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONTecSec> call, Response<JSONTecSec> response) {
                 JSONTecSec jsonResponse = response.body();
-                array.dataTecSec = new ArrayList<List<GetMuestraRelOrdenesTecnicosListResult>>(asList(jsonResponse.GetMuestraRelOrdenesTecnicosListResult()));
-                Iterator<List<GetMuestraRelOrdenesTecnicosListResult>> itdata = array.dataTecSec.iterator();
-                while (itdata.hasNext()) {
+                Array.dataTecSec = new ArrayList<>(asList(jsonResponse.GetMuestraRelOrdenesTecnicosListResult()));
+                Iterator<List<GetMuestraRelOrdenesTecnicosListResult>> itdata = Array.dataTecSec.iterator();
+                while (itdata.hasNext()){
                     List<GetMuestraRelOrdenesTecnicosListResult> dat = itdata.next();
-                    datos = new String[dat.size() + 1];
-                    int j = 1;
+                    datos = new String[dat.size()+1];
+                    int j=1;
                     datos[0] = a;
-                    for (int i = 0; i < dat.size(); i++) {
+                    for(int i=0; i< dat.size(); i++){
                         Log.d("responsetecsec", dat.get(i).getNOMBRE());
                         datos[j] = dat.get(i).getNOMBRE();
-                        Array.clv_tecnicoSecundario.add(j, dat.get(i).getCLV_TECNICO());
+                        Array.clv_tecnicoSecundario.add(j,dat.get(i).getCLV_TECNICO());
 
-                        j = j + 1;
+                        j=j+1;
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                     InstalacionFragment.TecSec.setAdapter(adapter);
                     InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
 
 
-                    // ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    //.TecSec.setAdapter(adapter1);
-
 
                 }
+
+
 
 
             }
@@ -762,7 +762,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getExtencionesAdicionales(final Context context) {
 
         Service service = null;
@@ -1344,6 +1343,8 @@ public class Request extends AppCompatActivity {
 
     ////////////////////////////////////TIPO DE SOLUCION///////////////////////////////////////////////
     public void getSolucuion(final Context context) {
+        Array.clv_Soluc = new ArrayList<Integer>();
+        Array.clv_Soluc.add(0,-1);
 
         Service service = null;
         try {
@@ -1362,18 +1363,20 @@ public class Request extends AppCompatActivity {
                 Iterator<List<GetMUESTRATRABAJOSQUEJASListResult>> itdata = array.dataSOL.iterator();
                 while (itdata.hasNext()) {
                     List<GetMUESTRATRABAJOSQUEJASListResult> dat = itdata.next();
-                    String datos[] = new String[dat.size() + 1];
-                    datos[0] = "Seleccione Tipo Solucion";
-                    int j = 1;
 
+                    datos = new String[dat.size()+1];
+                    int j=1;
+                    datos[0] = f;
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("descripcion", String.valueOf(dat.get(i).dESCRIPCION));
                         Log.d("occ", String.valueOf(dat.get(i).cLVTRABAJO));
-                        datos[j] = dat.get(i).getDESCRIPCION() +   dat.get(i).getCLVTRABAJO();
+                        datos[j] = dat.get(i).getDESCRIPCION();
+
+                        Array.clv_Soluc.add(j,dat.get(i).getCLVTRABAJO());
 
                         j = j + 1;
 
-                        clvQ=dat.get(i).getCLVTRABAJO();
+                        //clvQ=dat.get(i).getCLVTRABAJO();
 
                     }
 
@@ -1585,6 +1588,8 @@ public class Request extends AppCompatActivity {
     }
 
     public void getTecSecR(final Context context) {
+        Array.Clv_TecSecR = new ArrayList<Integer>();
+        Array.Clv_TecSecR.add(0,-1);
 
         Service service = null;
         try {
@@ -1605,13 +1610,14 @@ public class Request extends AppCompatActivity {
                 while (itdata.hasNext()) {
 
                     List<GetMuestraTecnicosAlmacenListResult> dat = itdata.next();
-                    String datos[] = new String[dat.size() + 1];
-                    datos[0] = "Seleccione Tecnico Secundario";
-                    int j = 1;
-
+                    datos = new String[dat.size()+1];
+                    int j=1;
+                    datos[0] = a;
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("descripcion81", String.valueOf(dat.get(i).getNombre()));
                         datos[j] = dat.get(i).getNombre();
+                        Array.Clv_TecSecR.add(j,dat.get(i).getClvTecnico());
+
                         j = j + 1;
 
                     }
@@ -1631,7 +1637,6 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
     public void getValidaOrdSer(final Context context) {

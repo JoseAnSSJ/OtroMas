@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 
 import java.util.Calendar;
@@ -24,8 +26,9 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
+    public static String diaI1,mesI1,añoI1, diaV11,mesV11,añoV11,diaV21,mesV21,añoV21;
     public static EditText reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
-    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc=-1;
+    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc1=-1,hf1,hi1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
@@ -47,8 +50,19 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
 
         TecSec1= view.findViewById(R.id.tecnicosec1);
-        TecSec1.getSelectedItem();
+        TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                TecSecSelecc1 = Array.Clv_TecSecR.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -161,23 +175,23 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                    if(monthOfYear<10){
+                    if(monthOfYear<9){
                         if(dayOfMonth<10){
                             reportesselectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            dia="0"+dayOfMonth;
-                            mes="0"+(monthOfYear+1);
-                            ano= String.valueOf(year);
+                            diaI1="0"+String.valueOf(dayOfMonth);
+                            mesI1="0"+String.valueOf((monthOfYear + 1));
+                            añoI1=String.valueOf(year);
                         }else{
                             reportesselectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            dia= String.valueOf(dayOfMonth);
-                            mes="0"+(monthOfYear+1);
-                            ano= String.valueOf(year);
+                            diaI1=String.valueOf(dayOfMonth);
+                            mesI1="0"+String.valueOf((monthOfYear + 1));
+                            añoI1=String.valueOf(year);
                         }
                     }else {
                         reportesselectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        dia= String.valueOf(dayOfMonth);
-                        mes= String.valueOf((monthOfYear+1));
-                        ano= String.valueOf(year);
+                        diaI1=String.valueOf(dayOfMonth);
+                        mesI1=String.valueOf((monthOfYear + 1));
+                        añoI1=String.valueOf(year);
                     }
 
                 }
@@ -198,8 +212,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
                     if(minutes<10){
                         reportesselectTime.setText(hourOfDay + ":0" + minutes);
+                        hi1= hourOfDay;
                     }else{
                         reportesselectTime.setText(hourOfDay + ":" + minutes);
+                        hi1= hourOfDay;
                     }
 
                 }
@@ -222,11 +238,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             reportesselectDate1.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaI1="0"+String.valueOf(dayOfMonth);
+                            mesI1="0"+String.valueOf((monthOfYear + 1));
+                            añoI1=String.valueOf(year);
                         }else{
                             reportesselectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaI1=String.valueOf(dayOfMonth);
+                            mesI1="0"+String.valueOf((monthOfYear + 1));
+                            añoI1=String.valueOf(year);
                         }
                     }else {
                         reportesselectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaI1=String.valueOf(dayOfMonth);
+                        mesI1=String.valueOf((monthOfYear + 1));
+                        añoI1=String.valueOf(year);
                     }
 
                 }
@@ -250,11 +275,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             reportesselectDate2.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV11="0"+String.valueOf(dayOfMonth);
+                            mesV11="0"+String.valueOf((monthOfYear + 1));
+                            añoV11=String.valueOf(year);
                         }else {
                             reportesselectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV11=String.valueOf(dayOfMonth);
+                            mesV11="0"+String.valueOf((monthOfYear + 1));
+                            añoV11=String.valueOf(year);
                         }
                     }else {
                         reportesselectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaV11=String.valueOf(dayOfMonth);
+                        mesV11=String.valueOf((monthOfYear + 1));
+                        añoV11=String.valueOf(year);
                     }
 
                 }
@@ -274,11 +308,20 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             reportesselectDate3.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV21="0"+String.valueOf(dayOfMonth);
+                            mesV21="0"+String.valueOf((monthOfYear + 1));
+                            añoV21=String.valueOf(year);
                         }else{
                             reportesselectDate3.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV21=String.valueOf(dayOfMonth);
+                            mesV21="0"+String.valueOf((monthOfYear + 1));
+                            añoV21=String.valueOf(year);
                         }
                     }else {
                         reportesselectDate3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaV21=String.valueOf(dayOfMonth);
+                        mesV21=String.valueOf((monthOfYear + 1));
+                        añoV21=String.valueOf(year);
                     }
 
                 }
@@ -302,8 +345,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
                     if(minute<10){
                         reportesselectTime2.setText(hourOfDay + ":0" + minute);
+                        hf1=hourOfDay;
                     }else{
                         reportesselectTime2.setText(hourOfDay + ":" + minute);
+                        hf1=hourOfDay;
                     }
                 }
             }, mHour, mMinute, false);
