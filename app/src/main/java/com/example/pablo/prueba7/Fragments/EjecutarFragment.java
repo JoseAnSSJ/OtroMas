@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Fragments;
 
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -39,10 +40,8 @@ public class EjecutarFragment extends Fragment {
     public static Button eject;
     EditText edt1;
     public static TextView msgEjecutarOrd;
-    int añoE, mesE, diaE,a;
-    public static LocalTime ini,fin;
+    int añoE, mesE, diaE;
     InstalacionFragment horas = new InstalacionFragment();
-    public static String horaIni,horaFin, fecha;
     Request request = new Request();
     public EjecutarFragment() {
         // Required empty public constructor
@@ -61,40 +60,54 @@ public class EjecutarFragment extends Fragment {
         reiniciar.setEnabled(false);
 
         eject.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                if(recibixnew.size()==0){
+              /*  if(recibixnew.size()==0){
                     Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
                 }else{
-                    request.send_aparat();
-                }
-
-
-                a=0;
-                horaIni = String.valueOf(horas.selectTime.getText());
-                horaFin = String.valueOf(horas.selectTime2.getText());
-                if(horas.ejecutada==1) {
-                    try {
-                        ini = LocalTime.parse(horaIni);
-                    }catch (Exception e){
-                        Toast.makeText(getActivity(), "Ingrese Horas", Toast.LENGTH_LONG).show();
-                        a=1;
-                    }
-                    try {
-                        fin = LocalTime.parse(horaFin);
-
-                    }catch (Exception e){
-                        Toast.makeText(getActivity(), "Ingrese Horas", Toast.LENGTH_LONG).show();
-                        a=1;
-                    }
-                    if(a==0){
-                        ValidacionHoras();
-                    }
-                }
+                   request.send_aparat();
+                }*/
+              //**************************************
+                final Calendar c = Calendar.getInstance();
+                añoE = c.get(Calendar.YEAR);
+                mesE = c.get(Calendar.MONTH);
+                diaE = c.get(Calendar.DAY_OF_MONTH);
+             if(horas.ejecutada==1){
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
+                     eject.setEnabled(false);
+                     request.getValidaOrdSer(getActivity());
+                 }
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
+                     Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                 }
+                 if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==2){
+                     Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                 }
+             }
                 if(horas.visita==1){
-                    ValidacionVisita();
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1),Integer.parseInt(InstalacionFragment.mesV1),Integer.parseInt(InstalacionFragment.añoV1),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
+                        Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                    }
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1),Integer.parseInt(InstalacionFragment.mesV1),Integer.parseInt(InstalacionFragment.añoV1),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
+                        Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                    }
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1),Integer.parseInt(InstalacionFragment.mesV1),Integer.parseInt(InstalacionFragment.añoV1),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==2){
+                        Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                    }
                 }
+                if(horas.visita1==1){
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2),Integer.parseInt(InstalacionFragment.mesV2),Integer.parseInt(InstalacionFragment.añoV2),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
+                        Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                    }
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2),Integer.parseInt(InstalacionFragment.mesV2),Integer.parseInt(InstalacionFragment.añoV2),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
+                        Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                    }
+                    if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2),Integer.parseInt(InstalacionFragment.mesV2),Integer.parseInt(InstalacionFragment.añoV2),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==2){
+                        Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                    }
+                }
+             ////////*************************
+
                 reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -108,89 +121,50 @@ public class EjecutarFragment extends Fragment {
         });
         return view;
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void ValidacionHoras(){
-        String dateEje = String.valueOf(horas.selectDate.getText());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        final Calendar c = Calendar.getInstance();
-        añoE = c.get(Calendar.YEAR);
-        mesE = c.get(Calendar.MONTH);
-        diaE = c.get(Calendar.DAY_OF_MONTH);
-
-        if(mesE<10){
-            fecha = (diaE) + "/0" + (mesE + 1) + "/" + añoE;
-        }else{
-            fecha = (diaE) + "/" + (mesE + 1) + "/" + añoE;
+    public int ValidarFechas(int diaE, int mesE, int añoE, String fechaSol, int diaA, int mesA, int añoA, int horaI, int horaF){
+        int a = 0;
+        char[] fechaSol1 = fechaSol.toCharArray();
+        String diaS="";
+        for(int i=0; i<2; i++){
+            diaS = diaS+fechaSol1[i];
         }
-        if(horas.ejecutada==1) {
-            try {
-                if (sdf.parse(DeepConsModel.Fec_Sol).compareTo(sdf.parse(dateEje))<1) {
-                    if(sdf.parse(fecha).compareTo(sdf.parse(dateEje))<1){
-                        if (ini.isBefore(fin)) {
-                            eject.setEnabled(false);
-                            request.getValidaOrdSer(getActivity());
+        //******
+        String mesS="";
+        for(int i=3; i<5; i++){
+            mesS = mesS+fechaSol1[i];
+        }
+        //*****
+        String añoS="";
+        for(int i=6; i<10; i++){
+            añoS = añoS+fechaSol1[i];
+        }
+        //******
+        if(Integer.parseInt(añoS)<=añoE){
+                if(Integer.parseInt(mesS)<=mesE){
+                    if(Integer.parseInt(diaS)<=diaE){
+                        if(añoE<=añoA){
+                            if(mesE<=mesA){
+                                if(diaE<=diaA){
+                                    if(ValidadrHoras(horaI,horaF)){
+                                        a=1;
+                                    }
+                                    else{
+                                        a=2;
+                                    }
+                                }
+                            }
                         }
-                        if (ini.isAfter(fin)) {
-                            Toast.makeText(getActivity(), "La hora fin no puede der igual o mayor a la hora inicio", Toast.LENGTH_LONG).show();
-                        }
-                    }else {
-                        Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
                 }
-            } catch (ParseException e) {
-                Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-            }
         }
-
+        return a;
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void ValidacionVisita(){
-        String visita1 = String.valueOf(horas.selectDate1.getText());
-        String visita2 = String.valueOf(horas.selectDate2.getText());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        final Calendar c = Calendar.getInstance();
-        añoE = c.get(Calendar.YEAR);
-        mesE = c.get(Calendar.MONTH);
-        diaE = c.get(Calendar.DAY_OF_MONTH);
-
-        if(mesE<10){
-            fecha = (diaE+1) + "/0" + (mesE + 1) + "/" + añoE;
-        }else{
-            fecha = (diaE+1) + "/" + (mesE + 1) + "/" + añoE;
+    public boolean ValidadrHoras(int horaInicio, int horaFin){
+        boolean a=false;
+        if(horaInicio<=horaFin){
+            a=true;
         }
-
-        if(horas.visita==1){
-            try {
-                if (sdf.parse(DeepConsModel.Fec_Sol).before(sdf.parse(visita1))) {
-                    if (sdf.parse(fecha).after(sdf.parse(visita1))) {
-                        Toast.makeText(getActivity(), "Fecha bien Visita", Toast.LENGTH_LONG).show();
-
-                    }else{
-                        Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(getActivity(), "La fecha de visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                }
-            }catch (ParseException e){
-                Toast.makeText(getActivity(), "VisitaFecha mal"+e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
-        if(horas.visita1==1){
-            try {
-                if (sdf.parse(DeepConsModel.Fec_Sol).after(sdf.parse(visita1))) {
-                    if (sdf.parse(fecha).after(sdf.parse(visita1))) {
-                        if(sdf.parse(visita1).after(sdf.parse(visita2))){
-                            Toast.makeText(getActivity(), "Fecha bienV", Toast.LENGTH_LONG).show();
-                        }
-                        Toast.makeText(getActivity(), "La fecha de visita 2 no puede ser menor a la fecha de visita 1 ni mayor a la fecha actual", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }catch (ParseException e){
-                Toast.makeText(getActivity(), "Fecha mal, visita", Toast.LENGTH_LONG).show();
-            }
-        }
-
+        return a;
     }
+
 }

@@ -42,8 +42,8 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
     public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
    // public static String clv_TecSec_seleccion="-1"
-   public static String latitud, longitud;
-    public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1;
+   public static String latitud, longitud,diaI,mesI,añoI, diaV1,mesV1,añoV1,diaV2,mesV2,añoV2;
+    public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1,hf,hi;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
@@ -195,14 +195,23 @@ Request request = new Request();
 
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    if(monthOfYear<10){
+                    if(monthOfYear<=9){
                         if(dayOfMonth<10){
                             selectDate.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaI="0"+String.valueOf(dayOfMonth);
+                            mesI="0"+String.valueOf((monthOfYear + 1));
+                            añoI=String.valueOf(year);
                         }else {
                             selectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaI=String.valueOf(dayOfMonth);
+                            mesI="0"+String.valueOf((monthOfYear + 1));
+                            añoI=String.valueOf(year);
                         }
                     }else {
                         selectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaI=String.valueOf(dayOfMonth);
+                        mesI=String.valueOf((monthOfYear + 1));
+                        añoI=String.valueOf(year);
                     }
 
 
@@ -224,8 +233,10 @@ Request request = new Request();
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
                 if(minutes<10){
                     selectTime.setText(hourOfDay + ":0" + minutes);
+                    hi= hourOfDay;
                 }else{
                     selectTime.setText(hourOfDay + ":" + minutes);
+                    hi= hourOfDay;
                 }
 
                 }
@@ -248,11 +259,20 @@ Request request = new Request();
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             selectDate1.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV1="0"+String.valueOf(dayOfMonth);
+                            mesV1="0"+String.valueOf((monthOfYear + 1));
+                            añoV1=String.valueOf(year);
                         }else{
                             selectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV1=String.valueOf(dayOfMonth);
+                            mesV1="0"+String.valueOf((monthOfYear + 1));
+                            añoV1=String.valueOf(year);
                         }
                     }else {
                         selectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaV1=String.valueOf(dayOfMonth);
+                        mesV1=String.valueOf((monthOfYear + 1));
+                        añoV1=String.valueOf(year);
                     }
 
                 }
@@ -276,11 +296,20 @@ Request request = new Request();
                     if(monthOfYear<10){
                         if(dayOfMonth<10){
                             selectDate2.setText("0"+dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV2="0"+String.valueOf(dayOfMonth);
+                            mesV2="0"+String.valueOf((monthOfYear + 1));
+                            añoV2=String.valueOf(year);
                         }else{
                             selectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
+                            diaV2=String.valueOf(dayOfMonth);
+                            mesV2="0"+String.valueOf((monthOfYear + 1));
+                            añoV2=String.valueOf(year);
                         }
                     }else {
                         selectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        diaV2=String.valueOf(dayOfMonth);
+                        mesV2=String.valueOf((monthOfYear + 1));
+                        añoV2=String.valueOf(year);
                     }
                 }
             }, mYear, mMonth, mDay);
@@ -301,8 +330,10 @@ Request request = new Request();
 
                     if(minute<10){
                         selectTime2.setText(hourOfDay + ":0" + minute);
+                        hf=hourOfDay;
                     }else{
                         selectTime2.setText(hourOfDay + ":" + minute);
+                        hf=hourOfDay;
                     }
                 }
             }, mHour, mMinute, false);
