@@ -163,7 +163,7 @@ public class Reportes extends AppCompatActivity
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-            request.getProximaCita();
+            request.getProximaCita(getApplicationContext());
             request.getOrdenes();
 
         } else if (id == R.id.Ordenes) {
@@ -191,11 +191,6 @@ public class Reportes extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //Bloquear el boton de atras
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-        }
-        return false;
-    }
+
 }
 
