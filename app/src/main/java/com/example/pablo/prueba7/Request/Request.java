@@ -352,7 +352,7 @@ public class Request extends AppCompatActivity {
 
     }
 
-    /////////////////Lista de reportes/////////////////////////////
+    /////////////////Lista de ordenes/////////////////////////////
     public void getListQuejas() {
 
         Service service = null;

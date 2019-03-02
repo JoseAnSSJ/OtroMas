@@ -1,9 +1,5 @@
 package com.example.pablo.prueba7.Fragments;
-
-
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Services.Services;
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
@@ -75,6 +61,12 @@ public class EjecutarFragment extends Fragment {
                     if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==1){
                         eject.setEnabled(false);
                         request.getValidaOrdSer(getActivity());
+                        if(recibixnew.size()==0){
+                    Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
+                }else{
+                   request.send_aparat();
+                }
+
                     }
                     if(ValidarFechas(Integer.parseInt(InstalacionFragment.diaI),Integer.parseInt(InstalacionFragment.mesI),Integer.parseInt(InstalacionFragment.añoI),DeepConsModel.Fec_Sol,diaE,mesE+1,añoE,InstalacionFragment.hi,InstalacionFragment.hf)==0){
                         Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
@@ -105,8 +97,13 @@ public class EjecutarFragment extends Fragment {
                         Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
                     }
                 }
-                ////////*************************
-
+                reiniciar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        request.ReintentarComando(getActivity());
+                        reiniciar.setEnabled(false);
+                    }
+                });
 
 
             }

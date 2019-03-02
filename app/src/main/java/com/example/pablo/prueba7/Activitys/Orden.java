@@ -48,9 +48,6 @@ public class Orden extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        cambiodom = findViewById(R.id.cambiodom);
-        cambioapa = findViewById(R.id.cambioapa);
         ordenes=findViewById(R.id.listorden);
         ordenb=findViewById(R.id.borden);
         contratob=findViewById(R.id.bcontrato);
