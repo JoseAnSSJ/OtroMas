@@ -210,7 +210,7 @@ public class Request extends AppCompatActivity {
 
                     services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
 
-                    //MainActivity.NombreTec.setText(data.get(0).tecnico);
+               //     MainActivity.NombreTec.setText(data.get(0).tecnico);
 
                 }
                 if (response.code() == 200) {
@@ -638,16 +638,19 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Example2> call, Response<Example2> response) {
+                ArrayList<String> resumen = new ArrayList<>();
                 Example2 jsonResponse = response.body();
                 array.dataclientes = new ArrayList<List<GetdameSerDELCliresumenResult>>(asList(jsonResponse.getdameSerDELCliresumenResult()));
                 Iterator<List<GetdameSerDELCliresumenResult>> itData = array.dataclientes.iterator();
                 while (itData.hasNext()) {
                     List<GetdameSerDELCliresumenResult> dat = (List<GetdameSerDELCliresumenResult>) itData.next();
                     for (int i = 0; i < dat.size(); i++) {
-                        Log.d("Resumen", dat.get(i).getResumen());
+                        String a="";
+                        a=dat.get(i).getResumen()+'\n';
+                        resumen.add(i,a);
                     }
-                    MainActivity.InfoServicios.setText("    " + dat.get(0).getResumen() + '\n' + "    " + dat.get(1).getResumen() + '\n' +
-                            dat.get(2).getResumen() + '\n' + dat.get(3).getResumen() + '\n' + dat.get(4).getResumen());
+                    MainActivity.InfoServicios.setText(resumen.toString());
+            
                 }
             }
 
