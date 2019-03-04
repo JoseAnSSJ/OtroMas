@@ -33,7 +33,7 @@ public class GetBUSCADetOrdSerListResult {
     private Object obs;
     @SerializedName("SeRealiza")
     @Expose
-    private Boolean seRealiza;
+    private Boolean seRealiza=false;
 
     public Integer getBaseIdUser() {
         return baseIdUser;
