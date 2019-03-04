@@ -13,8 +13,10 @@ public class Materiales extends Fragment {
     private ViewGroup container;
     private Bundle onsavedInstanceState;
 
-    public Materiales() {
-        // Required empty public constructor
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
+        super.onActivityCreated(onSaveInstanceState);
+        View view = inflater.inflate(R.layout.activity_descarga, container, false);
+        return view;
     }
 
 

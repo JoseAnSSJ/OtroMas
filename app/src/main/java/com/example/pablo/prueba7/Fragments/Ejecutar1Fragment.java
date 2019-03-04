@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
@@ -22,9 +21,6 @@ import com.example.pablo.prueba7.Request.Request;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 
@@ -36,9 +32,7 @@ public class Ejecutar1Fragment extends Fragment {
     Button eject;
     Request request = new Request();
     HorasFragment horas = new HorasFragment();
-    int rañoE, rmesE, rdiaE, ra;
-    public static LocalTime rini, rfin;
-    public static String rhoraIni, rhoraFin, rfecha, fecha_sol = "";
+    public static String fecha_sol = "";
     public static String hora1I, horafin, solution;
     public static Date datetime;
     int añoE, mesE, diaE;
@@ -58,7 +52,7 @@ public class Ejecutar1Fragment extends Fragment {
         solution = TrabajosFragment.proble.getText().toString();
 
         Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
-        List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
+        List<GetQuejasListResult> dat =  itData.next();
         char[] caracteres = dat.get(0).getFechaSoliciutud().toCharArray();
         fecha_sol = "";
         for (int i = 0; i < 10; i++) {
@@ -176,6 +170,9 @@ public class Ejecutar1Fragment extends Fragment {
         boolean a = false;
         if (horaInicio <= horaFin) {
             a = true;
+        }
+        if(horaFin==0|| horaFin==0){
+            Toast.makeText(getContext(), "Ingrese horas", Toast.LENGTH_SHORT).show();
         }
         return a;
     }
