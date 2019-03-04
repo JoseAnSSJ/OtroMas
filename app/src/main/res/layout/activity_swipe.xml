@@ -40,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="170dp"
                 android:text="Juan Santillan"
-                android:textStyle="bold"/>
+                android:textColor="#000"
+                />
 
             <Button
                 android:id="@+id/info"
@@ -63,7 +64,8 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="25dp"
                 android:text="Contrato:"
-                android:textStyle="bold" />
+                android:textColor="#000"
+                 />
 
             <TextView
                 android:id="@+id/contrato"
@@ -81,10 +83,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="250dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginStart="233dp"
+                android:layout_marginTop="24dp"
                 android:text="Status:"
-                android:textStyle="bold" />
+                android:textColor="#000"
+               />
 
             <TextView
                 android:id="@+id/status"
@@ -92,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="300dp"
+                android:layout_marginStart="284dp"
                 android:layout_marginTop="25dp"
                 android:hint="Ejecutada" />
 
