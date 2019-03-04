@@ -46,7 +46,7 @@
             ></activity>
 
         <activity android:name=".Activitys.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
+            android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
             ></activity>
         <activity android:name=".Activitys.asignacion"
             android:theme="@style/AppTheme.NoActionBar"
