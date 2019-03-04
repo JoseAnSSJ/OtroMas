@@ -29,31 +29,28 @@ public class Trabajos extends Fragment{
     public static Button accion;
     public static trabajos_adapter_result adaptertrabajos;
     public static ListView trabajos;
+    private LayoutInflater inflater;
+    private ViewGroup container;
+    private Bundle onsavedInstanceState;
+
+
     public Trabajos() {
+        // Required empty public constructor
+
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
-        super.onActivityCreated(onSaveInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
+        this.inflater = inflater;
+        this.container = container;
+        onsavedInstanceState = OnsavedInstanceState;
+        super.onCreate(OnsavedInstanceState);
+
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
-
         trabajos=view.findViewById(R.id.listTrabajos);
-
-
-        ////////////////////////////////////////
-        //trabajos.setAdapter(null);
-        // TrabajosAdapter trabadapt=new TrabajosAdapter();
-        // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
-
         adaptertrabajos = new trabajos_adapter_result(getContext(), Array.trabajox, Array.accionx, recibix);
-
-        //////////////////////////////////////////
-
         return view;
     }
-    ///////////////////Adaptador Trabajos//////////////////////////
-
 }
-///////////////////////////////////////////////
 

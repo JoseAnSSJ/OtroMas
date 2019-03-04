@@ -52,7 +52,9 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     public static Spinner TecSec;
     Request request = new Request();
     RadioButton btn1, bt2;
-
+    private LayoutInflater inflater;
+    private ViewGroup container;
+    private Bundle onsavedInstanceState;
 
 
     public InstalacionFragment() {
@@ -61,21 +63,21 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
+        this.inflater = inflater;
+        this.container = container;
+        onsavedInstanceState = OnsavedInstanceState;
         // Inflate the layout for this fragment
-        super.onActivityCreated(onSaveInstanceState);
+        super.onCreate(OnsavedInstanceState);
+
         View view = inflater.inflate(R.layout.activity_hora, container, false);
         Obs = view.findViewById(R.id.obs);
 
         request.getTecSec(getContext());
-
-
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.ejecureal);
         selectDate1 = view.findViewById(R.id.visita1);
         selectDate2 = view.findViewById(R.id.visita2);
-
-
         selectTime = view.findViewById(R.id.horai);
         selectTime2 = view.findViewById(R.id.horaf);
         ///////////////////////////////////////////////////////
@@ -83,7 +85,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         ///////////contenedores y acciones de radiobuttons////
         contenedorParticular = view.findViewById(R.id.RE);
         contenedorCorporativo = view.findViewById(R.id.RV);
-
         btn1 = view.findViewById(R.id.ejutada);
         bt2 = view.findViewById(R.id.visitada);
         /////////////////////////////////////////////////////
@@ -112,11 +113,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         } else {
             locationStart();
         }
-
-        //////////////////////////////////////////////////
-
-
-        ////////// fecaha, hora y radio buttons/////////
+       ////////// fecaha, hora y radio buttons/////////
         selectDate.setOnClickListener(this);
         selectDate1.setOnClickListener(this);
         selectDate2.setOnClickListener(this);
@@ -127,8 +124,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
         return view;
     }
-
-
     public void onClick(View view) {
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -342,8 +337,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
 
     }
-
-
     private void mostrarParticular(boolean b) {
         contenedorParticular.setVisibility(b ? View.VISIBLE: View.GONE);
         contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);

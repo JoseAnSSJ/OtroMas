@@ -251,6 +251,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="375dp"
                 android:textSize="20dp"
+                android:layout_marginStart="10dp"
                 android:id="@+id/obs"
                 />
             <RelativeLayout

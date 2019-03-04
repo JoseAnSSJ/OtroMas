@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="4dp"
                 android:text="Tecnico:" />
@@ -38,7 +38,7 @@
                 android:id="@+id/tecniconame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
+                android:layout_marginStart="170dp"
                 android:text="Juan Santillan"
                 android:textStyle="bold"/>
 
@@ -48,8 +48,9 @@
                 android:layout_height="35dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boton"
                 android:text="Datos Cliente"
                 android:textSize="6dp"
                 android:textStyle="bold" />
