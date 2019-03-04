@@ -1298,46 +1298,6 @@ public class Request extends AppCompatActivity {
     ////////////////////////////////////////INFO CLIENTE Reportes///////////////////////////////////////
 
 
-  /*  public void getReportes() {
-
-        Service service = null;
-        try {
-            service = services.getMediosReportes();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        assert service != null;
-        Call<JsonObject> call = service.getReport();
-        call.enqueue(new Callback<JsonObject>() {
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-
-                JsonObject userJson = response.body().getAsJsonObject("GetuspBuscaContratoSeparado2ListResult");
-                InfoReportesModel user = new InfoReportesModel(
-                        userJson.get("CALLE").getAsString(),
-                        userJson.get("CIUDAD").getAsString(),
-                        userJson.get("COLONIA").getAsString(),
-                        userJson.get("Nombre").getAsString(),
-                        userJson.get("NUMERO").getAsString(),
-                        userJson.get("Apellido_Paterno").getAsString(),
-                        userJson.get("Apellido_Materno").getAsString()
-
-
-                );
-
-
-             MainReportes.Nombre1.setText(InfoReportesModel.Nombre + "   " + InfoReportesModel.Apellido_Paterno + "   " + InfoReportesModel.Apellido_Materno);
-                MainReportes.Direccion1.setText(InfoReportesModel.CALLE + "   " + InfoReportesModel.NUMERO + "   " + InfoReportesModel.COLONIA);
-
-            }
-
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-
-            }
-        });
-    }*/
 
     ////////////////////////////////////TIPO DE SOLUCION///////////////////////////////////////////////
     public void getSolucuion(final Context context) {

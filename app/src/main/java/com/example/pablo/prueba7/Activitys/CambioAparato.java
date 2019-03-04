@@ -36,7 +36,7 @@ public class CambioAparato extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
-        aceptarCambioAparato =  findViewById(R.id.aceptarCambioAparato);
+        aceptarCambioAparato =  findViewById(R.id.uno);
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
