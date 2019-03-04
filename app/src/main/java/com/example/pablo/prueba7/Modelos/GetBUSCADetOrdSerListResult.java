@@ -3,8 +3,6 @@ package com.example.pablo.prueba7.Modelos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class GetBUSCADetOrdSerListResult {
 
     @SerializedName("BaseIdUser")
@@ -107,4 +105,5 @@ public class GetBUSCADetOrdSerListResult {
         this.seRealiza = seRealiza;
         return false;
     }
+
 }

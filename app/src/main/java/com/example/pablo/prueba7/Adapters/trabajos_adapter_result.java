@@ -66,7 +66,6 @@ public class trabajos_adapter_result extends BaseAdapter {
         TextView trabajo;
         Button accion;
         CheckBox recibi;
-
     }
 
     @Override
@@ -90,7 +89,6 @@ public class trabajos_adapter_result extends BaseAdapter {
         lugar=position;
         if (convertView == null) {
             holder = new viewHolder();
-
             convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
 
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
@@ -126,7 +124,6 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
                recibixnew.add(dat1.get(i).getSeRealiza());
-
             }
 
             if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")
@@ -145,7 +142,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
 
 
-        ClaveTrabajo = Array.clavex.get(position);
+        //ClaveTrabajo = Array.clavex.get(position);
 
         ///////////
         holder.accion.setOnClickListener(new View.OnClickListener() {

@@ -684,6 +684,7 @@ public class Request extends AppCompatActivity {
                     List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("response11", dat.get(i).getDescripcion());
+                        dat.get(i).setSeRealiza(false);
 
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
@@ -691,14 +692,11 @@ public class Request extends AppCompatActivity {
                         Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.recibix.add(dat.get(i).getSeRealiza());
 
-                        //   Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
-                        // Array.recibix[i].setChecked(false);
+
                     }
                 }
                 trabajos.setAdapter(adaptertrabajos);
 
-                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
-//                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
             }
 
             @Override
