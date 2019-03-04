@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
+        if (onSaveInstanceState != null) {
+            //Restore the fragment's instance
+
+            Fragment mcontext = getSupportFragmentManager().getFragment(onSaveInstanceState, "asd");
+
+        }
+
         setContentView(R.layout.activity_swipe);
         info= findViewById(R.id.info);
         layoutAnimado= findViewById(R.id.animado);
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 case 0:
                     return new InstalacionFragment();
                 case 1:
+
                     return new Trabajos();
                 case 2:
                     return new Materiales();

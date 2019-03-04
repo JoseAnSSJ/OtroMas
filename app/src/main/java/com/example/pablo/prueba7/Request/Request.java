@@ -16,6 +16,7 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
@@ -97,6 +98,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,6 +111,7 @@ import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
+import static com.example.pablo.prueba7.Listas.Array.recibix;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -542,18 +545,30 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject userJson = response.body().getAsJsonObject("GetDeepConsultaOrdSerResult");
-                DeepConsModel user = new DeepConsModel(
-                        userJson.get("Clv_FACTURA").getAsInt(),
-                        userJson.get("Contrato").getAsInt(),
-                        userJson.get("ContratoCom").getAsString(),
-                        userJson.get("STATUS").getAsString(),
-                        userJson.get("Obs").getAsString(),
-                        userJson.get("Clv_Orden").getAsInt(),
-                        userJson.get("Clv_TipSer").getAsInt(),
-                        userJson.get("Fec_Sol").getAsString()
+                try {
+                    DeepConsModel user = new DeepConsModel(
+                            userJson.get("Clv_FACTURA").getAsInt(),
+                            userJson.get("Contrato").getAsInt(),
+                            userJson.get("ContratoCom").getAsString(),
+                            userJson.get("STATUS").getAsString(),
+                            userJson.get("Obs").getAsString(),
+                            userJson.get("Clv_Orden").getAsInt(),
+                            userJson.get("Clv_TipSer").getAsInt(),
+                            userJson.get("Fec_Sol").getAsString()
+                    );
+                }catch (Exception e){
+                    DeepConsModel user = new DeepConsModel(
+                            userJson.get("Clv_FACTURA").getAsInt(),
+                            userJson.get("Contrato").getAsInt(),
+                            userJson.get("ContratoCom").getAsString(),
+                            userJson.get("STATUS").getAsString(),
+                            userJson.get("Obs").getAsJsonNull().toString(),
+                            userJson.get("Clv_Orden").getAsInt(),
+                            userJson.get("Clv_TipSer").getAsInt(),
+                            userJson.get("Fec_Sol").getAsString()
+                    );
+                }
 
-
-                );
                 try {
                     MainActivity.Contrato.setText(String.valueOf(DeepConsModel.getContatoCom()));
                 } catch (Exception e) {
@@ -579,6 +594,7 @@ public class Request extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
+
 
             }
 
@@ -685,7 +701,7 @@ public class Request extends AppCompatActivity {
                     List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("response11", dat.get(i).getDescripcion());
-
+                        dat.get(i).setSeRealiza(false);
                         Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                         Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
                         Array.clavex.add(dat.get(i).getClave());
@@ -694,8 +710,15 @@ public class Request extends AppCompatActivity {
 
 
                     }
+                    if(response.code()==200){
+                        trabajos.setAdapter(adaptertrabajos);
+
+
+                    }
+
                 }
-                trabajos.setAdapter(adaptertrabajos);
+
+
 
 
             }
@@ -1524,7 +1547,7 @@ public class Request extends AppCompatActivity {
 
                         abc = dat.get(i).contratoBueno;
                         getServiciosAsignados();
-                        getTecSecR(context);
+
 
 
                     }

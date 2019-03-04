@@ -42,14 +42,16 @@ public class Trabajos extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
+
         this.inflater = inflater;
         this.container = container;
         onsavedInstanceState = OnsavedInstanceState;
-        super.onCreate(OnsavedInstanceState);
+
 
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
         trabajos=view.findViewById(R.id.listTrabajos);
         adaptertrabajos = new trabajos_adapter_result(getContext(), Array.trabajox, Array.accionx, recibix);
+        trabajos.setAdapter(adaptertrabajos);
         return view;
     }
 }
