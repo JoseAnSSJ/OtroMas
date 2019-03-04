@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Calendar;
 
@@ -26,6 +27,7 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class HorasFragment extends Fragment  implements View.OnClickListener{
+    Request request = new Request();
     public static String diaI1,mesI1,añoI1, diaV11,mesV11,añoV11,diaV21,mesV21,añoV21;
     public static EditText reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
     public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc1=-1,hf1,hi1;
@@ -47,7 +49,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         // Inflate the layout for this fragment
 
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
-
+        request.getTecSecR(getContext());
         TecSec1= view.findViewById(R.id.tecnicosec1);
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

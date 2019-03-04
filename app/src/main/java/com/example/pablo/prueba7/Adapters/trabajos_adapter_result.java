@@ -52,6 +52,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     //public static Boolean[]recib=new Boolean[Array.accionx.size()];
     public static String descr;
     public static int cont=0;
+    public static boolean rapg =true;
 
     public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
         this.trabajox=trabajox;
@@ -113,7 +114,7 @@ public class trabajos_adapter_result extends BaseAdapter {
        // clvor = Integer.valueOf(Array.ordensrc.get(position));
 
 
-
+rapg=true;
 holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -137,6 +138,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
                 Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
                 holder.recibi.setChecked(false);
+                rapg=false;
             }
         }
     }

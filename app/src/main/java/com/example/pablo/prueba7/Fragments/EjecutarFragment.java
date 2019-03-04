@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Fragments.InstalacionFragment;
+import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
@@ -54,11 +54,14 @@ public class EjecutarFragment extends Fragment {
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Array.recibixnew.size() == 0) {
-                    Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
-                } else {
-                    request.send_aparat();
+                if(trabajos_adapter_result.rapg==true){
+                    if (Array.recibixnew.size() == 0) {
+                        Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
+                    } else {
+                      //  request.send_aparat();
+                    }
                 }
+
                 //**************************************
                 final Calendar c = Calendar.getInstance();
                 añoE = c.get(Calendar.YEAR);
@@ -67,8 +70,8 @@ public class EjecutarFragment extends Fragment {
                 if (horas.ejecutada == 1) {
                     try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
-                            eject.setEnabled(false);
-                            request.getValidaOrdSer(getActivity());
+                       //     eject.setEnabled(false);
+                       //     request.getValidaOrdSer(getActivity());
                         }
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
                             Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
