@@ -694,14 +694,12 @@ public class Request extends AppCompatActivity {
                         Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.recibix.add(dat.get(i).getSeRealiza());
 
-                        //   Array.recibix[i]=(CheckBox) findViewById(R.id.recibiap);
-                        // Array.recibix[i].setChecked(false);
+
                     }
                 }
                 trabajos.setAdapter(adaptertrabajos);
 
-                // trabajos_adapter_result adaptertrabajos =new trabajos_adapter_result(Trabajos.class,Array.trabajox,Array.accionx);
-//                trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+
             }
 
             @Override

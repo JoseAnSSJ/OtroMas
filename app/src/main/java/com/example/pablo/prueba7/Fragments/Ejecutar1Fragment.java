@@ -50,7 +50,7 @@ public class Ejecutar1Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle OnsavedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
         eject = view.findViewById(R.id.ejec1);

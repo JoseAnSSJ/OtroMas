@@ -46,7 +46,7 @@ public class Trabajos extends Fragment{
         // TrabajosAdapter trabadapt=new TrabajosAdapter();
         // trabajos.setAdapter(trabadapt);    //Asignacion del adapatador a la listView
 
-        adaptertrabajos = new trabajos_adapter_result(getActivity().getApplicationContext(), Array.trabajox, Array.accionx, recibix);        //trabajos.setAdapter(adaptertrabajos);    //Asignacion del adapatador a la listView
+        adaptertrabajos = new trabajos_adapter_result(getContext(), Array.trabajox, Array.accionx, recibix);
 
         //////////////////////////////////////////
 
