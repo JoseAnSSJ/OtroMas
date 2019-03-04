@@ -126,6 +126,7 @@ public class Request extends AppCompatActivity {
     public static int clvP;
     public static int tecC;
     public int reintentaB;
+    public  static ArrayAdapter adapterTecSec,adapterTecSecR;
 
         public static Integer clvQ;
     public static String reintentarComando;
@@ -762,8 +763,13 @@ public class Request extends AppCompatActivity {
 
                         j=j+1;
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    InstalacionFragment.TecSec.setAdapter(adapter);
+
+    adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+    InstalacionFragment.TecSec.setAdapter(adapterTecSec);
+
+
+
+
                     InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
 
 
@@ -1600,9 +1606,11 @@ public class Request extends AppCompatActivity {
                         j = j + 1;
 
                     }
+                    if(adapterTecSecR== null){
+                        adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        HorasFragment.TecSec1.setAdapter(adapterTecSecR);
+                    }
 
-                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                    HorasFragment.TecSec1.setAdapter(adapter);
 
 
                 }
