@@ -17,7 +17,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:text="Descripcion"
+        android:text="Descripción"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -31,7 +31,7 @@
         android:paddingRight="10dp"
         android:layout_marginTop="100dp"
         android:paddingBottom="10dp"
-        android:text="Accion"
+        android:text="Acción"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
         android:layout_marginStart="320dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="1dp"
-        android:text="Recibi"
+        android:text="Recibí"
 
         android:textSize="18dp"
         android:textStyle="bold" />

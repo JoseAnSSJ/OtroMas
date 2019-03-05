@@ -31,7 +31,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="0dp"
-                android:text="Clasificacion del problema"
+                android:text="Clasificación del problema"
                 android:textColor="#000"
                 android:textSize="20dp" />
 
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_marginTop="360dp"
-                android:text="Tipo de solucion"
+                android:text="Tipo de solución"
                 android:textColor="#000"
                 android:textSize="20dp" />
 
@@ -132,7 +132,7 @@
                 android:layout_alignStart="@+id/uno"
                 android:textSize="20dp"
                 android:textColor="#000000"
-                android:text="Problema Real" />
+                android:text="Problema real" />
 
         <EditText
             android:id="@+id/problema"

@@ -32,7 +32,7 @@
             android:layout_marginStart="104dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="4dp"
-            android:text="Tecnico:"
+            android:text="Técnico:"
             android:textColor="#000" />
 
         <TextView
@@ -113,7 +113,7 @@
                 android:layout_marginStart="400dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="161dp"
-                android:text="Informacion del Usuario"
+                android:text="Información del usuario"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -167,7 +167,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="180dp"
-                android:text="Direccion:"
+                android:text="Dirección:"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -189,7 +189,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="250dp"
                 android:layout_marginStart="30dp"
-                android:text="Servicios Asignados"
+                android:text="Servicios asignados"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

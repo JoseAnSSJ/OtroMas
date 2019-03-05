@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/qwe"
                     android:layout_marginTop="50dp"
-                    android:text="Aparato a Cambiar"
+                    android:text="Aparato a cambiar"
                     android:textSize="30dp"
                     android:textStyle="bold"
 
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="190dp"
-                    android:text="Estado del Aparato:"
+                    android:text="Estado del aparato:"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Aparato a Asignar"
+                    android:text="Aparato a asignar"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="80dp"
-                        android:text="Tipo Aparato:"
+                        android:text="Tipo aparato:"
                         android:textSize="25dp"
                         android:textStyle="bold" />
 

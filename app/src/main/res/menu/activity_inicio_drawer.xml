@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="Inicio" />
         <item
-            android:id="@+id/Ordenes"
+            android:id="@+id/Órdenes"
             android:icon="@drawable/ordenes"
             android:title="Ordenes" />
         <item

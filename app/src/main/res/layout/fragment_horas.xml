@@ -79,7 +79,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="18dp"
-                    android:text="Ejecucion"
+                    android:text="Ejecución"
                     android:textSize="20dp" />
 
                 <EditText
@@ -248,7 +248,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="400dp"
-                android:text="Tecnico Secundario"
+                android:text="Técnico secundario"
                 android:textSize="20dp" />
 
             <Spinner

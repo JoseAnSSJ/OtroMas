@@ -32,7 +32,7 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="4dp"
-                android:text="Tecnico:" />
+                android:text="Técnico:" />
 
             <TextView
                 android:id="@+id/tecniconame"
