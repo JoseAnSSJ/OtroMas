@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="10dp"
-            android:text="Servicio Basico De TV De Cable "
+            android:text="---"
             android:textSize="20dp"
             android:textStyle="bold"
             />
@@ -35,7 +35,7 @@
         <Button
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:text="Medio"
+            android:text="@string/medio"
             android:id="@+id/medio"
             android:layout_marginTop="2dp"
             android:layout_marginStart="285dp"
