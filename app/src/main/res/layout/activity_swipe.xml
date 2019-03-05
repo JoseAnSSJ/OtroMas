@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible">
-
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -13,95 +11,81 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="4dp"
-                android:text="Técnico:" />
-
-            <TextView
-                android:id="@+id/tecniconame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="170dp"
-                android:text="Juan Santillan"
-                android:textColor="#000"
-                />
-
-            <Button
-                android:id="@+id/info"
-                android:layout_width="80dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/boton"
-                android:text="Datos Cliente"
-                android:textSize="6dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="25dp"
-                android:text="Contrato:"
-                android:textColor="#000"
-                 />
-
-            <TextView
-                android:id="@+id/contrato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="165dp"
-                android:layout_marginTop="25dp"
-                android:hint="456-453" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="233dp"
-                android:layout_marginTop="24dp"
-                android:text="Status:"
-                android:textColor="#000"
-               />
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="284dp"
-                android:layout_marginTop="25dp"
-                android:hint="Ejecutada" />
-
-
-        </RelativeLayout>
-
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/tecnicoDos" />
+        <TextView
+            android:id="@+id/tecniconame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:text="---"
+            android:textColor="#000"
+            />
+        <Button
+            android:id="@+id/info"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/boton"
+            android:text="@string/datos_Cliente"
+            android:textSize="6dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/contratoDos"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/contrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="25dp"
+            android:hint="---" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="233dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/estatusDos"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="284dp"
+            android:layout_marginTop="25dp"
+            android:hint="---" />
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="1000dp"
@@ -111,7 +95,6 @@
         android:visibility="gone"
         android:id="@+id/scv"
         >
-
         <RelativeLayout
             android:id="@+id/animado"
             android:layout_width="match_parent"
@@ -120,9 +103,7 @@
             android:layout_marginTop="50dp"
             android:background="#c0f2f1"
             android:visibility="gone"
-
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,20 +112,18 @@
                 android:layout_marginStart="400dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="161dp"
-                android:text="Informacion del Usuario"
+                android:text="@string/info_Usuario"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:layout_width="97dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
-                android:text="Empresa:"
+                android:text="@string/empresaDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infoempresa"
                 android:layout_width="match_parent"
@@ -153,9 +132,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="75dp"
-                android:hint="TLAYACAPAN"
+                android:hint="---"
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,10 +141,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="115dp"
-                android:text="Nombre:"
+                android:text="@string/nombreDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infonombre"
                 android:layout_width="match_parent"
@@ -175,9 +152,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="140dp"
-                android:hint="MARIA EMMA"
+                android:hint="---"
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,10 +161,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="180dp"
-                android:text="Direccion:"
+                android:text="@string/direccionDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infodireccion"
                 android:layout_width="match_parent"
@@ -197,9 +172,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="200dp"
-                android:text="xxxxxxxxxxx"
+                android:text="---"
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
@@ -207,10 +181,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="250dp"
                 android:layout_marginStart="30dp"
-                android:text="Servicions Asignados"
+                android:text="@string/servicios_Asignados"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infoservicios"
                 android:layout_width="match_parent"
@@ -219,7 +192,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="270dp"
-                android:text=""
                 android:textSize="20dp" />
         </RelativeLayout>
     </ScrollView>

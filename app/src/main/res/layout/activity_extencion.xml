@@ -5,7 +5,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Extensiones adicionales"
+        android:text="@string/extensiones_Adicionales"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         />
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textSize="23dp"
         android:layout_marginTop="-50dp"
-        android:text="Número de extensiones por instalar"
+        android:text="@string/numero_de_Extensiones"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_alignTop="@id/txtExtencion"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2"
+        android:text="-"
         android:textSize="23dp"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
@@ -32,10 +32,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aceptar"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="50dp"
-        android:layout_alignTop="@id/txtExtencion"
+        android:text="@string/aceptar"
+        android:layout_alignParentBottom="true"
         android:id="@+id/extencionAceptar"
         />
 </RelativeLayout>

@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
         <ListView
             android:id="@+id/listreporte"
             android:layout_width="match_parent"
@@ -20,21 +18,17 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="80dp"
             />
-
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reporte"
+            android:text="@string/reporte"
             android:layout_marginStart="60dp"
             android:textStyle="bold"
             />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No. de Contrato"
+            android:text="@string/n_Contrato"
             android:layout_marginStart="220dp"
             android:textStyle="bold"
             />
@@ -42,33 +36,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="55dp"
             android:layout_marginStart="10dp"
-            android:text="Contrato"
+            android:text="@string/contrato"
             android:textSize="18dp"
             android:textStyle="bold" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="200dp"
-            android:layout_marginTop="50dp"
-            android:text="# de Reporte"
+            android:layout_marginTop="55dp"
+            android:text="@string/n_Reporte"
             android:textSize="18dp"
             android:textStyle="bold" />
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="320dp"
-            android:text="Status"
-            android:layout_marginTop="50dp"
+            android:text="@string/estatus"
+            android:layout_marginTop="55dp"
             android:textSize="18dp"
             android:textStyle="bold" />
-
         <EditText
             android:id="@+id/reportesearch"
             android:layout_width="130dp"
@@ -76,7 +66,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:inputType="number" />
-
         <Button
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -86,8 +75,6 @@
             android:id="@+id/breporte"
             android:layout_marginStart="135dp"
             android:layout_marginLeft="30dp" />
-
-
         <EditText
             android:id="@+id/contsearch"
             android:layout_width="130dp"
@@ -95,7 +82,6 @@
             android:layout_marginStart="200dp"
             android:layout_marginTop="15dp"
             android:inputType="text|number" />
-
         <Button
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -105,7 +91,6 @@
             android:id="@+id/bcontrato"
             android:layout_marginStart="330dp"
             android:layout_marginLeft="30dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,8 +98,5 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="250dp"
             />
-
-
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>

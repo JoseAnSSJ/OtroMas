@@ -196,7 +196,7 @@ public class Orden extends AppCompatActivity
 
                 request.getOrdenes();
 
-        } else if (id == R.id.Ordenes) {
+        } else if (id == R.id.Órdenes) {
             Intent intent1 = new Intent(Orden.this, Orden.class);
             clvorden=0;
             opcion=1;

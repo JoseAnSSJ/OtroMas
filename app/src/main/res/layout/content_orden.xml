@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Orden"
+            android:text="@string/orden"
             android:layout_marginStart="60dp"
             android:textStyle="bold"
             />
@@ -67,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No. de Contrato"
+            android:text="@string/n_Contrato"
             android:layout_marginStart="240dp"
             android:textStyle="bold"
             />
@@ -75,9 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="75dp"
             android:layout_marginStart="10dp"
-            android:text="Contrato"
+            android:text="@string/contrato"
             android:textSize="18dp"
             android:textStyle="bold" />
 
@@ -86,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="220dp"
-            android:layout_marginTop="50dp"
-            android:text="# de Orden"
+            android:layout_marginTop="75dp"
+            android:text="@string/n_Orden"
             android:textSize="18dp"
             android:textStyle="bold" />
 
@@ -97,33 +97,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="320dp"
-            android:text="Status"
-            android:layout_marginTop="50dp"
+            android:text="@string/estatus"
+            android:layout_marginTop="75dp"
             android:textSize="18dp"
             android:textStyle="bold" />
-
-        <!--<Button
-            android:id="@+id/cambiodom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="220dp"
-            android:layout_toRightOf="@+id/observacion"
-            android:text="Cambio Domicilio"
-            android:textSize="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="450dp"/>
-        <Button
-            android:id="@+id/cambioapa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="100dp"
-            android:layout_toRightOf="@+id/observacion"
-            android:text="Cambio Aparato"
-            android:textSize="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="450dp"/>-->
 
 
     </RelativeLayout>

@@ -1606,10 +1606,10 @@ public class Request extends AppCompatActivity {
                         j = j + 1;
 
                     }
-                    if(adapterTecSecR== null){
+
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         HorasFragment.TecSec1.setAdapter(adapterTecSecR);
-                    }
+
 
 
 

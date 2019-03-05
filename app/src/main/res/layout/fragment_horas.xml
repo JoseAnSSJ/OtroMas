@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.HorasFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/rb"
         android:layout_width="match_parent"
@@ -14,24 +12,20 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="89dp">
-
         <RadioGroup
             android:id="@+id/grupo_dias"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
             <RadioButton
-
                 android:id="@+id/ejutada1"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:clickable="false"
                 android:duplicateParentState="false"
-                android:text="Visita"
+                android:text="@string/visita"
                 android:visibility="visible" />
-
             <RadioButton
                 android:id="@+id/visitada1"
                 android:layout_width="107dp"
@@ -39,15 +33,11 @@
                 android:checked="true"
                 android:clickable="false"
                 android:focusable="auto"
-                android:text="Ejecutada"
+                android:text="@string/ejecutada"
                 android:visibility="visible"
                 />
-
         </RadioGroup>
-
-
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -56,14 +46,11 @@
         android:layout_marginTop="120dp"
         android:verticalScrollbarPosition="defaultPosition"
         android:visibility="visible">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="375dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true">
-
-
             <RelativeLayout
                 android:id="@+id/RE1"
                 android:layout_width="wrap_content"
@@ -71,17 +58,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 tools:ignore="NotSibling">
-
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="18dp"
-                    android:text="Ejecución"
+                    android:text="@string/ejecucion"
                     android:textSize="20dp" />
-
                 <EditText
                     android:id="@+id/ejecureal1"
                     android:layout_width="168dp"
@@ -93,12 +77,10 @@
                     android:layout_marginEnd="16dp"
                     android:focusable="false"
                     android:inputType="date"
-                    android:textSize="20sp" />
-
-
+                    android:textSize="20dp"
+                    android:hint="0/0/0"
+                    />
             </RelativeLayout>
-
-
             <RelativeLayout
                 android:id="@+id/RV1"
                 android:layout_width="match_parent"
@@ -106,16 +88,14 @@
                 android:layout_below="@+id/RE1"
                 android:visibility="gone"
                 >
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Visita 1"
+                    android:text="@string/visita1"
                     android:textSize="20dp" />
-
                 <TextView
                     android:id="@+id/visit2"
                     android:layout_width="wrap_content"
@@ -123,9 +103,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="73dp"
-                    android:text="Visita 2"
+                    android:text="@string/visita2"
                     android:textSize="20dp" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
@@ -135,9 +114,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="39dp"
                     android:layout_marginBottom="22dp"
-                    android:text="Visita 3"
+                    android:text="@string/visita3"
                     android:textSize="20dp" />
-
                 <EditText
                     android:id="@+id/visita11"
                     android:layout_width="match_parent"
@@ -149,8 +127,6 @@
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
                     android:textSize="20dp" />
-
-
                 <EditText
                     android:id="@+id/visita21"
                     android:layout_width="match_parent"
@@ -177,9 +153,7 @@
                     android:layout_marginEnd="15dp"
                     android:focusable="false"
                     android:textSize="20dp"/>
-
             </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="376dp"
                 android:layout_height="105dp"
@@ -187,16 +161,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp">
-
                 <TextView
                     android:id="@+id/horabi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="10dp"
-                    android:text="Hora inicio"
+                    android:text="@string/horai"
                     android:textSize="20dp" />
-
                 <TextView
                     android:id="@+id/horabf"
                     android:layout_width="wrap_content"
@@ -206,9 +178,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Hora fin"
+                    android:text="@string/horaf"
                     android:textSize="20dp" />
-
                 <EditText
                     android:id="@+id/horaf11"
                     android:layout_width="match_parent"
@@ -222,8 +193,6 @@
                     android:focusable="false"
                     android:hint="00:00"
                     android:textSize="20dp" />
-
-
                 <EditText
                     android:id="@+id/horai11"
                     android:layout_width="match_parent"
@@ -237,20 +206,15 @@
                     android:focusable="false"
                     android:hint="00:00"
                     android:textSize="20dp" />
-
             </RelativeLayout>
-
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="400dp"
-                android:text="Técnico secundario"
+                android:text="@string/tecnico_Sec"
                 android:textSize="20dp" />
-
             <Spinner
                 android:id="@+id/tecnicosec1"
                 android:layout_width="match_parent"
@@ -258,16 +222,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="432dp"
                 android:background="@drawable/spinners"/>
-
-
-
-
-
-
         </RelativeLayout>
-
     </ScrollView>
-
-
-
 </FrameLayout>

@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent">
-
-
-
-
-
     <!--Primeros datos-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="1000dp">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,15 +14,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cambio de domicilio"
+                android:text="@string/cambio_Domicilio"
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ciudad:"
+                android:text="@string/ciudadDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="85dp"
@@ -46,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Localidad:"
+                android:text="@string/localidadDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="115dp"
@@ -64,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Colonia:"
+                android:text="@string/coloniaDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="145dp"
@@ -82,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calle:"
+                android:text="@string/calleDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="175dp"
@@ -100,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Número:"
+                android:text="@string/numeroDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="205dp"
@@ -118,7 +111,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Número interior:"
+                android:text="@string/numeroIDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="235dp"
@@ -136,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teléfono:"
+                android:text="@string/telefonoDos"
                 android:textSize="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="265dp"
@@ -151,8 +144,6 @@
                 android:layout_marginStart="90dp"
                 android:id="@+id/telefono"
                 />
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
@@ -161,13 +152,11 @@
                 android:layout_marginTop="50dp"
                 android:id="@+id/map"
                 >
-
                 <RelativeLayout
                     android:id="@+id/uno"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/contorno"
-
                     >
                 </RelativeLayout>
                 <RelativeLayout
@@ -194,7 +183,6 @@
                     android:layout_marginEnd="110dp"
                     android:id="@+id/center"
                     >
-
                     <RelativeLayout
                         android:id="@+id/cuatro"
                         android:layout_width="match_parent"
@@ -203,7 +191,6 @@
                         android:layout_centerHorizontal="true"
                         >
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/cinco"
                         android:layout_width="match_parent"
@@ -246,7 +233,6 @@
                             android:id="@+id/casaeste"
                             android:visibility="invisible"
                             />
-
                     </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -261,28 +247,26 @@
                         android:id="@+id/callenorte"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calle Norte"
+                        android:text="@string/calle_Norte"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="100dp"
                         android:layout_centerHorizontal="true"
-
                         />
                     <TextView
                         android:id="@+id/callesur"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calle Sur"
+                        android:text="@string/calle_Sur"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="220dp"
                         android:layout_centerHorizontal="true"
                         />
-
                 </RelativeLayout>
                 <TextView
                     android:id="@+id/calleeste"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Calle Este"
+                    android:text="@string/calle_Este"
                     android:rotation="90"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
@@ -292,7 +276,7 @@
                     android:id="@+id/calleoeste"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Calle Oeste"
+                    android:text="@string/calle_Oeste"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="40dp"
@@ -332,20 +316,12 @@
                         android:layout_centerVertical="true"
                         />
                 </RelativeLayout>
-
-
-
-
-
-
-
-
             </RelativeLayout>
             <Button
                 android:id="@+id/aceptar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aceptar"
+                android:text="@string/aceptar"
                 android:layout_marginTop="700dp"
                 />
         </RelativeLayout>

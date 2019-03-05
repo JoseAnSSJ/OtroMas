@@ -99,7 +99,7 @@ public class Inicio extends AppCompatActivity
 
 
             finish();
-        } else if (id == R.id.Ordenes) {
+        } else if (id == R.id.Órdenes) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
             clvorden=0;
             opcion=1;

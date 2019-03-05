@@ -16,10 +16,12 @@
         android:text="3090-23"
         android:textSize="18dp"
         android:textStyle="bold"
+        android:textColor="#000"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
+
         />
 
     <TextView

@@ -92,7 +92,7 @@ public class Configuracion extends AppCompatActivity
            request.getProximaCita(getApplicationContext());
            request.getOrdenes();
 
-        } else if (id == R.id.Ordenes) {
+        } else if (id == R.id.Órdenes) {
             Intent intent1 = new Intent(Configuracion.this, Orden.class);
             startActivity(intent1);
 

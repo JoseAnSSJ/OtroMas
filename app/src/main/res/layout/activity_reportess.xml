@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible">
-
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -13,9 +11,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -23,7 +18,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,9 +26,8 @@
             android:layout_marginStart="104dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="4dp"
-            android:text="Técnico:"
+            android:text="@string/telefonoDos"
             android:textColor="#000" />
-
         <TextView
             android:id="@+id/tecnico1"
             android:layout_width="wrap_content"
@@ -43,8 +36,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="185dp"
             android:layout_marginTop="10dp"
-            android:text="Juan Santillan" />
-
+            android:text="---" />
         <Button
             android:id="@+id/info"
             android:layout_width="80dp"
@@ -53,11 +45,10 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="15dp"
-            android:text="Datos Cliente"
+            android:text="@string/datos_Cliente"
             android:background="@drawable/boton"
             android:textSize="6dp"
             android:textStyle="bold" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,9 +56,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="103dp"
             android:layout_marginTop="32dp"
-            android:text="Contrato:"
+            android:text="@string/contratoDos"
             android:textColor="#000" />
-
         <TextView
             android:id="@+id/contrato1"
             android:layout_width="wrap_content"
@@ -76,14 +66,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="186dp"
             android:layout_marginTop="33dp"
-            android:hint="456-453" />
-
-
-
-
-
+            android:hint="---" />
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="1000dp"
@@ -93,7 +77,6 @@
         android:visibility="gone"
         android:id="@+id/scv"
         >
-
         <RelativeLayout
             android:id="@+id/animado"
             android:layout_width="match_parent"
@@ -102,9 +85,7 @@
             android:layout_marginTop="50dp"
             android:background="#E1F5FE"
             android:visibility="gone"
-
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,20 +94,18 @@
                 android:layout_marginStart="400dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="161dp"
-                android:text="Información del usuario"
+                android:text="@string/info_Usuario"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:layout_width="97dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
-                android:text="Ciudad:"
+                android:text="@string/ciudadDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infoempresa1"
                 android:layout_width="match_parent"
@@ -135,9 +114,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="75dp"
-                android:hint="    "
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,10 +122,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="115dp"
-                android:text="Nombre:"
+                android:text="@string/nombreDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infonombre1"
                 android:layout_width="match_parent"
@@ -157,9 +133,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="140dp"
-                android:hint="MARIA EMMA"
+                android:hint="---"
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,10 +142,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="180dp"
-                android:text="Dirección:"
+                android:text="@string/direccionDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infodireccion1"
                 android:layout_width="match_parent"
@@ -179,9 +153,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="200dp"
-                android:text="xxxxxxxxxxx"
+                android:text="---"
                 android:textSize="20dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
@@ -189,10 +162,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="250dp"
                 android:layout_marginStart="30dp"
-                android:text="Servicios asignados"
+                android:text="@string/servicios_Asignados"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/infoservicios1"
                 android:layout_width="match_parent"
@@ -201,7 +173,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="270dp"
-                android:text=""
+                android:text="---"
                 android:textSize="20dp" />
         </RelativeLayout>
     </ScrollView>

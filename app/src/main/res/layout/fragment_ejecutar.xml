@@ -4,9 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.EjecutarFragment">
-
-  <!-- TODO: Update blank fragment layout -->
-
   <RelativeLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -15,17 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/animado1">
-
-
       <Button
           android:id="@+id/ejec"
           android:layout_width="match_parent"
           android:layout_height="50dp"
           android:layout_alignParentTop="true"
           android:layout_marginTop="0dp"
-          android:text="Ejecutar" />
+          android:text="@string/ejecutar" />
     </RelativeLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,20 +27,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="44dp"
         android:layout_marginTop="70dp"
-        android:text="Status comando"
+        android:text="@string/estatus_Comando"
         android:textSize="20dp"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="70dp"
-
         android:hint="Espera"
         android:textSize="20dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,10 +45,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="125dp"
         android:layout_marginTop="120dp"
-        android:text="Resultado:"
+        android:text="@string/resultadoDos"
         android:textSize="20dp"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/msgEjecutarOrd"
         android:layout_width="247dp"
@@ -66,22 +56,19 @@
         android:layout_marginTop="150dp"
         android:layout_marginBottom="82dp"
         android:background="#2598" />
-
     <RelativeLayout
         android:id="@+id/animado2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
-
-
       <Button
           android:id="@+id/restart"
           android:layout_width="match_parent"
           android:layout_height="50dp"
           android:layout_gravity="center"
           android:layout_marginTop="290dp"
-          android:text="Reiniciar"
+          android:text="@string/reiniciar"
           android:enabled="false" />
       <Button
           android:id="@+id/salirEjecutarOrd"
@@ -89,9 +76,8 @@
           android:layout_height="50dp"
           android:layout_gravity="center"
           android:layout_marginTop="340dp"
-          android:text="Salir"
+          android:text="@string/salir"
           android:visibility="visible" />
     </RelativeLayout>
-
   </RelativeLayout>
 </FrameLayout>
