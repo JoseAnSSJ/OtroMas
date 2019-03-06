@@ -133,9 +133,13 @@ public interface Service {
     Call<JsonObject> getCAPAT();
     @POST(Constants.URL_GET_DEEP_CAPAT)
     Call<JsonObject> getDeepCAPAT();
-
     @POST(Constants.URL_SEND_NOENTREGADOS)
     Call<JsonObject>noent();
+    /////////////////
+    @POST(Constants.URL_GET_MUESTRABIT)
+    Call<JsonObject> getMuestraBit();
+    @POST(Constants.URL_GET_DETALLEBIT)
+    Call<JsonObject>getDetalleBit();
 
 
 }

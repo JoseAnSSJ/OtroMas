@@ -8,7 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
 import com.example.pablo.prueba7.R;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class CambioDom extends AppCompatActivity {
 
@@ -22,7 +27,7 @@ public class CambioDom extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_domicilio);
         aceptar = findViewById(R.id.aceptar);
-        Ciudad = findViewById(R.id.ciudad);
+        Ciudad = findViewById(R.id.ciudadCAMDO);
         Localidad = findViewById(R.id.localidad);
         Colonia = findViewById(R.id.colonia);
         Calle = findViewById(R.id.Calledom);
@@ -38,6 +43,32 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
 
+        Iterator<List<GetDameDatosCAMDOResult>> itdata = Array.dataCAMDO.iterator();
+            List<GetDameDatosCAMDOResult> dat = itdata.next();
+        Ciudad.setText(dat.get(0).Ciudad);
+        Localidad.setText(dat.get(0).getLocalidad());
+        Colonia.setText(dat.get(0).getColonia());
+        Calle.setText(dat.get(0).getCalle());
+        Numero.setText(String.valueOf(dat.get(0).getNUMERO()));
+        Numero_i.setText(dat.get(0).getNum_int());
+        Telefono.setText(dat.get(0).getTELEFONO());
+        CalleN.setText(dat.get(0).getCalleNorte());
+        CalleS.setText(dat.get(0).getCalleSur());
+        CallleE.setText(dat.get(0).getCalleEste());
+        CalleO.setText(dat.get(0).getCalleOeste());
+
+        if (dat.get(0).getCasa().equals("N")) {
+            CasaNorte.setVisibility(View.VISIBLE);
+        }
+        if (dat.get(0).getCasa().equals("S")) {
+            CasaSur.setVisibility(View.VISIBLE);
+        }
+        if (dat.get(0).getCasa().equals("E")) {
+            CasaEste.setVisibility(View.VISIBLE);
+        }
+        if (dat.get(0).getCasa().equals("O")) {
+            CasaOeste.setVisibility(View.VISIBLE);
+        }
 
 
         aceptar.setOnClickListener(new View.OnClickListener() {

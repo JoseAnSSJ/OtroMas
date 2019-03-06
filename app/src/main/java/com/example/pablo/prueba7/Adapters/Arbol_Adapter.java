@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.asignacion;
+import com.example.pablo.prueba7.Activitys.asignado;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
@@ -84,8 +85,8 @@ public class Arbol_Adapter extends BaseAdapter {
 
 
         holder = new viewHolder();
-        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-        final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
+      //  Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
+      //  final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
         final children dataChild= new children();
         convertView=inflater.inflate(R.layout.activity_aparato_asignado_medio_list,null);
         holder.listaAparatos = convertView.findViewById(R.id.ListaAparatos);
@@ -102,16 +103,16 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         a=0;
-        if(dat.get(position).getIdMedio()==0){
+        if(asignado.dat4.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
             holder.checkBox.setVisibility(View.GONE);
         }else{
 
-            holder.nombre.setText(dat.get(position).getNombre()+" ("+dat.get(position).getDetalle()+")");
+            holder.nombre.setText(asignado.dat4.get(position).getNombre()+" ("+asignado.dat4.get(position).getDetalle()+")");
             holder.medio.setVisibility(View.INVISIBLE);
             holder.checkBox.setVisibility(View.VISIBLE);
 
-        }if(dat.get(position).children.size()==0){
+        }if(asignado.dat4.get(position).children.size()==0){
 
         }else{
 
@@ -120,14 +121,14 @@ public class Arbol_Adapter extends BaseAdapter {
             holder.checkBox.setVisibility(View.GONE);
             Arbol_Adapter.DeletChildren.clear();
 
-            for(d = 0; d<dat.get(position).children.size(); d++){
+            for(d = 0; d<asignado.dat4.get(position).children.size(); d++){
                 c=0;
                 String hijo="";
-                hijo = dat.get(position).children.get(d).Nombre + dat.get(position).children.get(d).getDetalle();
+                hijo = asignado.dat4.get(position).children.get(d).Nombre + asignado.dat4.get(position).children.get(d).getDetalle();
                 array.children.add(hijo);
                 ArrayAdapter arrayAdapter1 = new ArrayAdapter(mcontext, android.R.layout.simple_list_item_checked,array.children);
                 holder.listaAparatos.setAdapter(arrayAdapter1);
-                if(array.children.size()==dat.size()){
+                if(array.children.size()==asignado.dat4.size()){
                     asignacion.aceptarAsignacion.setEnabled(true);
                     siguiente.setEnabled(true);
                 }
@@ -139,7 +140,7 @@ public class Arbol_Adapter extends BaseAdapter {
                         if(holder.listaAparatos.isItemChecked(position3)==true){
                             Arbol_Adapter.DeletMedio.clear();
                             String abc= String.valueOf(position);
-                            DeletChildren.add(Integer.valueOf(dat.get(position).children.get(position3).getClv_Aparato()+abc));
+                            DeletChildren.add(Integer.valueOf(asignado.dat4.get(position).children.get(position3).getClv_Aparato()+abc));
                         }
                         if(holder.listaAparatos.isItemChecked(position3)==false){
                             DeletChildren.clear();
@@ -167,11 +168,11 @@ public class Arbol_Adapter extends BaseAdapter {
 int d=0;
         f=0;
         h=0;
-     for(int c=0; c<dat.size(); c++){
-            if(dat.get(c).Detalle!=""){
+     for(int c=0; c<asignado.dat4.size(); c++){
+            if(asignado.dat4.get(c).Detalle!=""){
                 d=d+1;
             }
-            if(d!=dat.size()){
+            if(d!=asignado.dat4.size()){
 
             }else{
                 siguiente.setEnabled(true);
@@ -278,8 +279,8 @@ int d=0;
                     } catch (Exception e) {
                         clv_Medio = dat2.get(position1 - 1).getIdMedio();
                     }
-                    dat.get(posi).setIdMedio(clv_Medio);
-                    dat.get(posi).setDetalle(dato);
+                    asignado.dat4.get(posi).setIdMedio(clv_Medio);
+                    asignado.dat4.get(posi).setDetalle(dato);
                 }
             }
 
@@ -293,7 +294,7 @@ int d=0;
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                if(holder.checkBox.isChecked()==true){
                       Arbol_Adapter.DeletMedio.clear();
-                       DeletMedio.add(dat.get(position).IdMedio+dat.get(position).Detalle);
+                       DeletMedio.add(asignado.dat4.get(position).IdMedio+asignado.dat4.get(position).Detalle);
                 }if(holder.checkBox.isChecked()==false){
                   Arbol_Adapter.DeletMedio.clear();
 

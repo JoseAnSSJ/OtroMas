@@ -1057,34 +1057,12 @@ public class Request extends AppCompatActivity {
                     for (int i = 0; i < dat.size(); i++) {
                         Log.d("casa", dat.get(i).getCasa());
                     }
-                    c.Ciudad.setText(dat.get(0).getCiudad());
-                    c.Localidad.setText(dat.get(0).getLocalidad());
-                    c.Colonia.setText(dat.get(0).getColonia());
-                    c.Calle.setText(dat.get(0).getCalle());
-                    c.Numero.setText(String.valueOf(dat.get(0).getNUMERO()));
-                    c.Numero_i.setText(dat.get(0).getNum_int());
-                    c.Telefono.setText(dat.get(0).getTELEFONO());
-                    c.CalleN.setText(dat.get(0).getCalleNorte());
-                    c.CalleS.setText(dat.get(0).getCalleSur());
-                    c.CallleE.setText(dat.get(0).getCalleEste());
-                    c.CalleO.setText(dat.get(0).getCalleOeste());
-
-                    if (dat.get(0).getCasa().equals("N")) {
-                        c.CasaNorte.setVisibility(View.VISIBLE);
-                    }
-                    if (dat.get(0).getCasa().equals("S")) {
-                        c.CasaSur.setVisibility(View.VISIBLE);
-                    }
-                    if (dat.get(0).getCasa().equals("E")) {
-                        c.CasaEste.setVisibility(View.VISIBLE);
-                    }
-                    if (dat.get(0).getCasa().equals("O")) {
-                        c.CasaOeste.setVisibility(View.VISIBLE);
-                    }
 
                     if (response.code() == 200) {
                         Intent intento = new Intent(context, CambioDom.class);
                         context.startActivity(intento);
+
+
                     }
                 }
             }
@@ -2143,9 +2121,54 @@ public class Request extends AppCompatActivity {
 
         });
     }
+//////////////
+public void MuestraBit() {
+    Service service = null;
+    service = services.getMuestraBitService();
+
+    Call<JsonObject> call = service.getMuestraBit();
+    call.enqueue(new Callback<JsonObject>() {
+
+        @Override
+        public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+            if (response1.code() == 200) {
+                DetalleBit();
+            }
+        }
+        @Override
+        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+        }
+
+    });
+}
+//////////////////////////////
+public void DetalleBit() {
+
+    adaptertrabajos.norec();
+
+    Service service = null;
+    service = services.getDetalleBitService();
+
+    Call<JsonObject> call = service.getDetalleBit();
+    call.enqueue(new Callback<JsonObject>() {
+
+        @Override
+        public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+            if (response1.code() == 200) {
+                Log.d("asdasd", response1.message());
+            }
+        }
+        @Override
+        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+        }
+
+    });
+}
 
 
-    }
+}
 
 
 

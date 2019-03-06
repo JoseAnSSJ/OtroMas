@@ -520,7 +520,7 @@ public class Services {
     //////////////Cambio de Domicilio/////C//////////
     public Service getCAMODOService() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_orden", clvorden);
+        jsonObject.put("clv_orden", clvor);
         jsonObject.put("Clave", ClaveTrabajo);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -932,7 +932,7 @@ public class Services {
     public Service getValidaOrdSerService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("CLV_ORDEN", clvorden);
+        jsonObject.put("CLV_ORDEN", clvor);
         jsonObject.put("Clv_Tecnico", claveTecnico);
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
@@ -969,7 +969,7 @@ public class Services {
     public Service getChecaCAMDOService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
@@ -1002,7 +1002,7 @@ public class Services {
     public Service getADDRELORDUSUService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
         jsonObject.put("Status", HorasFragment.statusHora);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -1085,7 +1085,7 @@ public class Services {
     public Service getGuardaHoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("horafin", InstalacionFragment.selectTime2.getText());
         jsonObject.put("horainicio", InstalacionFragment.selectTime.getText());
         jsonObject.put("opcion", 1);
@@ -1123,7 +1123,7 @@ public class Services {
     public Service getGuardaOrdSerAparatosService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("OP", "M");
         jsonObject.put("OP2", 0);
         jsonObject.put("Status", HorasFragment.statusHora);
@@ -1161,7 +1161,7 @@ public class Services {
     public Service getAddLlenaBitacoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvorden);
+        jsonObject.put("ClvOrden", clvor);
         jsonObject.put("DescripcionMov", "Se generó la");
 
 
@@ -1551,6 +1551,87 @@ public class Services {
         }).build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    //////////////////
+    public Service getMuestraBitService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ClvTecnico", 20098);
+            jsonObject.put("IdAlmacen", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    //////////////////////////
+    public Service getDetalleBitService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ClvTecnico", 20098);
+            jsonObject.put("ClvTipo", 1204);
+            jsonObject.put("IdAlmacen", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         return retrofit.create(Service.class);
