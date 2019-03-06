@@ -25,6 +25,7 @@ import com.example.pablo.prueba7.Fragments.HorasFragment;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
+import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Listas.Example;
 import com.example.pablo.prueba7.Listas.Example1;
@@ -36,6 +37,8 @@ import com.example.pablo.prueba7.Listas.JSONAparatosDisponibles;
 import com.example.pablo.prueba7.Listas.JSONArbolServicios;
 import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
+import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
+import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
@@ -55,6 +58,8 @@ import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
+import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetCheca_si_tiene_CAMDOModel;
 import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
@@ -471,9 +476,15 @@ public class Request extends AppCompatActivity {
                     }
 
                 }
-                if (response.code() == 200) {
-                    Inicio.Grafica();
+                if(response.code()==200){
+                    try{
+                        Inicio.Grafica();
+                    }catch (Exception e){
+
+                    }
                 }
+
+
 
             }
 
@@ -2124,45 +2135,77 @@ public class Request extends AppCompatActivity {
         });
     }
 //////////////
-public void MuestraBit() {
+public void MuestraBit(final Context context) {
     Service service = null;
     service = services.getMuestraBitService();
 
-    Call<JsonObject> call = service.getMuestraBit();
-    call.enqueue(new Callback<JsonObject>() {
+    Call<JSONDetalleBitacora> call = service.getMuestraBit();
+    call.enqueue(new Callback<JSONDetalleBitacora>() {
 
         @Override
-        public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+        public void onResponse(Call<JSONDetalleBitacora> call, Response<JSONDetalleBitacora> response1) {
             if (response1.code() == 200) {
-                DetalleBit();
+                array.detalleBit.clear();
+                array.detalleBit.add(0,"---Seleccionar---");
+                int j=1;
+                JSONDetalleBitacora jsonResponse = response1.body();
+                array.dataDetBit = new ArrayList<List<DetalleBitacoraModel>>(asList(jsonResponse.detalleBitacoraModel()));
+                Iterator<List<DetalleBitacoraModel>> itData = array.dataDetBit.iterator();
+                while (itData.hasNext()) {
+                    List<DetalleBitacoraModel> dat = itData.next();
+
+                    for (int i = 0; i < dat.size(); i++) {
+                        array.detalleBit.add(j,dat.get(i).Descripcion);
+                        j=j+1;
+                    }
+
+                }
+                ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
+                Materiales.descripcionMat.setAdapter(arrayAdapter);
             }
         }
         @Override
-        public void onFailure(Call<JsonObject> call, Throwable t) {
+        public void onFailure(Call<JSONDetalleBitacora> call, Throwable t) {
 
         }
 
     });
 }
 //////////////////////////////
-public void DetalleBit() {
+public void DetalleBit(final Context context) {
 
-    adaptertrabajos.norec();
+
 
     Service service = null;
     service = services.getDetalleBitService();
 
-    Call<JsonObject> call = service.getDetalleBit();
-    call.enqueue(new Callback<JsonObject>() {
+    Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
+    call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
 
         @Override
-        public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+        public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
             if (response1.code() == 200) {
-                Log.d("asdasd", response1.message());
+                array.descripcionArtBit.clear();
+                array.descripcionArtBit.add(0,"---Seleccionar---");
+                int j=1;
+                JSONDescripcionArticulosBit jsonResponse = response1.body();
+                array.dataDetArtBit = new ArrayList<List<DescripcionArticuloModel>>(asList(jsonResponse.descripcionArticuloModel()));
+                Iterator<List<DescripcionArticuloModel>> itData = array.dataDetArtBit.iterator();
+                while (itData.hasNext()) {
+                    List<DescripcionArticuloModel> dat = itData.next();
+
+                    for (int i = 0; i < dat.size(); i++) {
+                        array.descripcionArtBit.add(j,dat.get(i).Nombre);
+                        j=j+1;
+                    }
+
+                }
+                  ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
+                Materiales.clasificacionMat.setAdapter(arrayAdapter);
             }
         }
         @Override
-        public void onFailure(Call<JsonObject> call, Throwable t) {
+        public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
 
         }
 
