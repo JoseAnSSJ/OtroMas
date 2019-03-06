@@ -2,6 +2,8 @@ package com.example.pablo.prueba7.Listas;
 
 import android.widget.CheckBox;
 
+import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
+import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
@@ -94,6 +96,11 @@ public class Array {
     public static ArrayList<String> Asigna= new ArrayList<String>();
     public static ArrayList<String> Asigna1= new ArrayList<String>();
     public static ArrayList<String> Asigna2= new ArrayList<String>();
+    /////////
+    public static ArrayList<List<DetalleBitacoraModel>>dataDetBit;
+    public static ArrayList<String> detalleBit= new ArrayList<String>();
+    public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;
+    public static ArrayList<String> descripcionArtBit= new ArrayList<String>();
 
 
 }

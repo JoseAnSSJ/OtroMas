@@ -6,66 +6,50 @@
     >
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="110dp"
-        android:text="No. Bitácora "
-        android:textSize="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp" />
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:hint="0"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="150dp" />
-
-    <TextView
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="187dp"
-        android:text="Descripción del artículo "
+        android:layout_marginTop="75dp"
+        android:text="Descripción del artículo"
         android:textSize="20dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp" />
     <Spinner
-        android:layout_width="168dp"
+        android:id="@+id/descripcionArticuloDesc"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="110dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp">
     </Spinner>
 
     <TextView
-        android:layout_width="149dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="187dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"
         android:text="Clasificación de material"
         android:textSize="20dp" />
     <Spinner
-        android:layout_width="168dp"
+        android:id="@+id/clasificacionMatDesc"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="260dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="185dp">
 
     </Spinner>
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="299dp"
         android:layout_alignParentEnd="true"
-        android:text="Agregar" />
+        android:text="@string/agregar" />
 
 </RelativeLayout>
