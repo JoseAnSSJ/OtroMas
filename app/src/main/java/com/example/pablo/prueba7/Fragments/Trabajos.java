@@ -23,8 +23,8 @@ import static com.example.pablo.prueba7.Listas.Array.recibix;
  * A simple {@link Fragment} subclass.
  */
 public class Trabajos extends Fragment{
-    RelativeLayout layoutAnimado;
-    Request request = new Request();
+    private RelativeLayout layoutAnimado;
+    private Request request = new Request();
     public static TextView trabajo;
     public static Button accion;
     public static trabajos_adapter_result adaptertrabajos;
@@ -41,11 +41,10 @@ public class Trabajos extends Fragment{
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        this.inflater = inflater;
-        this.container = container;
-        onsavedInstanceState = OnsavedInstanceState;
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
 
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);

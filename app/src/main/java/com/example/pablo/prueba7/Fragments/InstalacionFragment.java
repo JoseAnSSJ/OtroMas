@@ -47,11 +47,11 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
-    TextView coordenadas, direccion, coordenadas1,coordenadas2;
+    private TextView coordenadas, direccion, coordenadas1,coordenadas2;
     public static TextView Obs;
     public static Spinner TecSec;
-    Request request = new Request();
-    RadioButton btn1, bt2;
+    private Request request = new Request();
+    private RadioButton btn1, bt2;
     private LayoutInflater inflater;
     private ViewGroup container;
     private Bundle onsavedInstanceState;
@@ -63,12 +63,11 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
-        this.inflater = inflater;
-        this.container = container;
-        onsavedInstanceState = OnsavedInstanceState;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        super.onCreate(OnsavedInstanceState);
+
+        setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.activity_hora, container, false);
         Obs = view.findViewById(R.id.obs);

@@ -26,14 +26,15 @@
                 android:text="@string/clasificacion_Problema"
                 android:textColor="#000"
                 android:textSize="20dp" />
+
             <Spinner
                 android:id="@+id/Sp1"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
-                android:background="@drawable/spinners">
-            </Spinner>
+                android:background="@drawable/spinners"
+                android:focusableInTouchMode="false"></Spinner>
             <TextView
                 android:id="@+id/dos"
                 android:layout_width="wrap_content"

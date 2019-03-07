@@ -26,7 +26,7 @@
             android:layout_marginStart="104dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="4dp"
-            android:text="@string/telefonoDos"
+            android:text="@string/tecnicoDos"
             android:textColor="#000" />
         <TextView
             android:id="@+id/tecnico1"

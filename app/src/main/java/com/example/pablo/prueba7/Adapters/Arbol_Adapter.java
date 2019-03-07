@@ -37,13 +37,13 @@ import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.viewHolder.medio;
 
 
 public class Arbol_Adapter extends BaseAdapter {
-    Request request = new Request();
-    LayoutInflater inflater;
-    Context mcontext;
+    private Request request = new Request();
+    private LayoutInflater inflater;
+    private Context mcontext;
     public static int clv_unicaNet, clv_Medio, posi, d, f,h;
     public static int c=0;
     public static String dato;
-    Array array = new Array();
+    private Array array = new Array();
     public static int a=0;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
@@ -57,8 +57,8 @@ public class Arbol_Adapter extends BaseAdapter {
     public static class viewHolder{
         public static TextView nombre;
         public static Button medio;
-        ListView listaAparatos;
-        CheckBox checkBox;
+        private ListView listaAparatos;
+        private CheckBox checkBox;
 
 
     }

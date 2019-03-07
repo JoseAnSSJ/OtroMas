@@ -125,6 +125,7 @@ public class Request extends AppCompatActivity {
     public static String Obs;
     public static int clvP;
     public static int tecC;
+    public static String fechaSl;
     public int reintentaB;
     public  static ArrayAdapter adapterTecSec,adapterTecSecR;
 
@@ -167,8 +168,6 @@ public class Request extends AppCompatActivity {
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Error en el Login(request)", Toast.LENGTH_LONG).show();
                 }
-
-
                 if (response.code() == 200) {
                     getClv_tecnico(context);
                 }
@@ -344,7 +343,9 @@ public class Request extends AppCompatActivity {
                     Inicio.OEP = 0;
                     Inicio.OO = 0;
                 }
-                getQuejas();
+                if (response.code() == 200) {
+                    getQuejas();
+                }
             }
 
             @Override
@@ -387,11 +388,11 @@ public class Request extends AppCompatActivity {
                         Log.d("Nombre", dat.get(i).getNombre());
                         Log.d("Status", dat.get(i).getStatus());
 
+                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
+                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
+                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
 
-                        Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                        Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                        Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                        Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
 
                     }
                 }
@@ -470,7 +471,9 @@ public class Request extends AppCompatActivity {
                     }
 
                 }
-                Inicio.Grafica();
+                if (response.code() == 200) {
+                    Inicio.Grafica();
+                }
 
             }
 
@@ -708,20 +711,9 @@ public class Request extends AppCompatActivity {
                         Array.clavex.add(dat.get(i).getClave());
                         Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                         Array.recibix.add(dat.get(i).getSeRealiza());
-
-
                     }
-                    if(response.code()==200){
-                        trabajos.setAdapter(adaptertrabajos);
-
-
-                    }
-
+                    trabajos.setAdapter(adaptertrabajos);
                 }
-
-
-
-
             }
 
             @Override
@@ -763,10 +755,11 @@ public class Request extends AppCompatActivity {
 
                         j=j+1;
                     }
+                    if (response.code() == 200) {
 
-    adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-    InstalacionFragment.TecSec.setAdapter(adapterTecSec);
-
+                        adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        InstalacionFragment.TecSec.setAdapter(adapterTecSec);
+                    }
 
 
 
@@ -1020,8 +1013,12 @@ public class Request extends AppCompatActivity {
 
 
                 }catch (Exception e){
-                    getCliApa(context);
-                    getStatusApa(context);
+
+
+                    if (response.code() == 200) {
+                        getCliApa(context);
+                        getStatusApa(context);
+                    }
                 }
 
 
@@ -1386,6 +1383,8 @@ public class Request extends AppCompatActivity {
                         Obs = dat.get(i).observaciones;
                         clvP = dat.get(i).clvPrioridadQueja;
                         tecC = dat.get(i).tecnicoCuadrilla;
+                        fechaSl=dat.get(i).fechaSoliciutud;
+                        fechaSl=dat.get(i).fechaSoliciutud;
 
 
                         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna);
@@ -1528,9 +1527,10 @@ public class Request extends AppCompatActivity {
                         MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                         MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
 
-
-                        abc = dat.get(i).contratoBueno;
-                        getServiciosAsignados();
+                        if (response.code() == 200) {
+                            abc = dat.get(i).contratoBueno;
+                            getServiciosAsignados();
+                        }
 
 
 
@@ -1905,7 +1905,9 @@ public class Request extends AppCompatActivity {
                 String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)) {
-                        getValidaReporte(context);
+
+                            getValidaReporte(context);
+
 
 
                     }

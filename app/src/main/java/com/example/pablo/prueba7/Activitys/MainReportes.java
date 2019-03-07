@@ -23,9 +23,9 @@ import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
-    ScrollView hzScrollView;
-    Button info;
-    RelativeLayout layoutAnimado;
+    private ScrollView hzScrollView;
+    private Button info;
+    private RelativeLayout layoutAnimado;
 
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();

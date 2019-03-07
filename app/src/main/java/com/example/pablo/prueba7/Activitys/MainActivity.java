@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
+        setRetainInstance(true);
         if (onSaveInstanceState != null) {
             //Restore the fragment's instance
 
@@ -115,9 +116,17 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         actionBar.addTab(tab);
 
     }
+
+    private void setRetainInstance(boolean b) {
+
+
+
+
+    }
+
     public class PagerAdapter extends FragmentPagerAdapter {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -138,6 +147,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     return null;
             }
         }
+
+
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+
+
         public int getCount() {
             return 4;
         }

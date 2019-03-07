@@ -33,13 +33,12 @@ import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
 import static com.example.pablo.prueba7.Services.Services.jsonObject;
 
 public class trabajos_adapter_result extends BaseAdapter {
-
-    LayoutInflater inflatertrab;
-    Context Cmcontext;
-    Context context;
-    ArrayList<String>trabajox;
-    ArrayList<String>accionx;
-    ArrayList<Boolean>recibix;
+    private LayoutInflater inflatertrab;
+    private Context Cmcontext;
+    private Context context;
+    private ArrayList<String>trabajox;
+    private ArrayList<String>accionx;
+    private ArrayList<Boolean>recibix;
     public static int Clave, isnet,clvTra;
     public static  int lugar;
     public static boolean stat;
@@ -47,7 +46,7 @@ public class trabajos_adapter_result extends BaseAdapter {
 
 
 
-    Request request = new Request();
+    private Request request = new Request();
 
     //public static Boolean[]recib=new Boolean[Array.accionx.size()];
     public static String descr;

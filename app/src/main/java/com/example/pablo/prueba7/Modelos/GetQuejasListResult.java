@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GetQuejasListResult {
+
     @SerializedName("BaseIdUser")
     @Expose
     private Long baseIdUser;
@@ -72,7 +73,7 @@ public class GetQuejasListResult {
     private String fechaEjecucion;
     @SerializedName("Fecha_Soliciutud")
     @Expose
-    public String fechaSoliciutud;
+    public  String fechaSoliciutud;
     @SerializedName("HP")
     @Expose
     private Object hP;
@@ -343,7 +344,7 @@ public class GetQuejasListResult {
         this.fechaEjecucion = fechaEjecucion;
     }
 
-    public String getFechaSoliciutud() {
+    public   String getFechaSoliciutud() {
         return fechaSoliciutud;
     }
 

@@ -19,11 +19,10 @@ public class Materiales extends Fragment {
 
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle OnsavedInstanceState) {
-        this.inflater = inflater;
-        this.container = container;
-        onsavedInstanceState = OnsavedInstanceState;
-        super.onCreate(OnsavedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         View view  = inflater.inflate(R.layout.activity_descarga, container, false);
 
 

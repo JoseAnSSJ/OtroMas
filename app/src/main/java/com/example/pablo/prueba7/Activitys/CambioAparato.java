@@ -27,10 +27,9 @@ public class CambioAparato extends AppCompatActivity {
     public static Spinner aparato, estado,tipoAparato, aparatoAsignar;
     public static int idArticulo, contrato, idArticulo2, clvAparatoCAPAT;
     public static String statusAparato;
-    Integer ab;
-    Request request = new Request();
-    Array array = new Array();
-    Button aceptarCambioAparato;
+    private Request request = new Request();
+    private Array array = new Array();
+    private Button aceptarCambioAparato;
 
     @Override
     protected void onCreate(@Nullable Bundle onSaveInstanceState) {

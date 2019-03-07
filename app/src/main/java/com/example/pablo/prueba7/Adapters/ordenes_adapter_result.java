@@ -19,13 +19,13 @@ import java.util.ArrayList;
 public class ordenes_adapter_result extends BaseAdapter {
 
     public static Integer clvor, contratoReq;
-    LayoutInflater inflater;
-    Context mContext;
-    ArrayList<String> ordensrc;
-    ArrayList<String>contratosrc;
-    ArrayList<String>nombresrc;
-    ArrayList<String>statusrc;
-    Request request=new Request();
+    private LayoutInflater inflater;
+    private Context mContext;
+    private ArrayList<String> ordensrc;
+    private ArrayList<String>contratosrc;
+    private ArrayList<String>nombresrc;
+    private ArrayList<String>statusrc;
+    private Request request=new Request();
 
     public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc){
 
@@ -39,8 +39,8 @@ public class ordenes_adapter_result extends BaseAdapter {
 
     }
     public  class viewHolder{
-        TextView status,contrato1,nombre;
-        Button orden;
+        private TextView status,contrato1,nombre;
+        private Button orden;
     }
 
     @Override

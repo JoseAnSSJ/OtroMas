@@ -26,6 +26,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="4dp"
+            android:textColor="#000"
             android:text="@string/tecnicoDos" />
         <TextView
             android:id="@+id/tecniconame"
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
             android:text="---"
-            android:textColor="#000"
+
             />
         <Button
             android:id="@+id/info"

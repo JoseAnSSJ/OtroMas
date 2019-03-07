@@ -29,12 +29,12 @@ public class Login extends AppCompatActivity {
      *Login
      */
 
-    EditText usurio, contraseña;
-    Button entrar, entrar2;
-    String user;
+    private EditText usurio, contraseña;
+    private Button entrar, entrar2;
+    private String user;
     public static String enco;
     public static String cvl_usuario;
-    Request request = new Request();
+    private Request request = new Request();
 
 
     public final static String CHANNEL_ID = "NOTIFICACION";
@@ -76,7 +76,10 @@ public class Login extends AppCompatActivity {
 
                 user = usurio.getText().toString() + ":" + contraseña.getText().toString();
                 enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
+
+
                     request.getReviews(getApplicationContext());
+
                 Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
             }
         });

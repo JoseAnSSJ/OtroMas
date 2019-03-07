@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.R;
 
 public class ExtensionesAdi extends AppCompatActivity {
-    Button aceptar;
+    private Button aceptar;
     public static TextView txtExtencion;
 
     @Override

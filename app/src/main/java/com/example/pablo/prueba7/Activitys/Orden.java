@@ -30,13 +30,13 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 public class Orden extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener {
-    Request request = new Request();
-    ordenes_adapter_result adapterord;
-    Button cambiodom, cambioapa,ordenb,contratob;
+    private Request request = new Request();
+    private ordenes_adapter_result adapterord;
+    private Button cambiodom, cambioapa,ordenb,contratob;
   public static   ListView ordenes;
-    EditText ordsearch,contsearch;
+    private EditText ordsearch,contsearch;
 
-    Request rqs=new Request();
+   private Request rqs=new Request();
 
 
     @Override

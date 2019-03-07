@@ -35,7 +35,7 @@ public class Inicio extends AppCompatActivity
     public static int OE,OP,OV,OEP,OO,RE,RP,REP,RV,RO;
 
     public static PieChart  pieChart;
-    Request request = new Request();
+    private Request request = new Request();
     public static TextView trabajo, direccion;
 
 

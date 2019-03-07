@@ -23,7 +23,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
     public static Spinner solucion,prioridad,clasific;
     public static TextView desc, problm;
     public static  EditText proble;
-    Request request = new Request();
+    private Request request = new Request();
     public static int Clv_Sol=-1;
 
 
@@ -33,9 +33,10 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSaveInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         View view = inflater.inflate(R.layout.fragment_trabajos2, container, false);
         //  request.getServiciosAsignados(getContext());
         request.getnombretec(getContext());

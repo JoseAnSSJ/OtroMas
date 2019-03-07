@@ -30,11 +30,11 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 
 public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Request request = new Request();
-    ListView reportes;
-    Button breporte,bcontrato;
-    EditText reportesearch,contratosearch;
-    quejas_adapter_result adapterqueja;
+   private Request request = new Request();
+   private ListView reportes;
+   private Button breporte,bcontrato;
+   private EditText reportesearch,contratosearch;
+   private quejas_adapter_result adapterqueja;
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);

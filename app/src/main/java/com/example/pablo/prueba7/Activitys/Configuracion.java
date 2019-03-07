@@ -23,8 +23,8 @@ import com.example.pablo.prueba7.Request.Request;
 
 public class Configuracion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Button CS;
-    Request request = new Request();
+    private Button CS;
+    private Request request = new Request();
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);

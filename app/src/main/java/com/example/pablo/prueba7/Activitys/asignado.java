@@ -32,17 +32,17 @@ import java.util.List;
 
 public class asignado extends AppCompatActivity {
 
-    Button escanear, agragar;
-    TextView codigo;
-    String contents;
+    private Button escanear, agragar;
+    private TextView codigo;
+    private String contents;
     public static ListView serviciosAparato;
     public static Spinner spinnerAparato, spinneraparatoDisponible;
-    Request request = new Request();
-    Array array = new Array();
+    private Request request = new Request();
+    private Array array = new Array();
     public static int idArticuloasignado, clveAparatoSpinner;
     public static String detalleSpinner, nombreSpinner;
     public static Servicios_Adapter adapter;
-    CheckBox checkBox;
+    private CheckBox checkBox;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
     public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
     public static List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
