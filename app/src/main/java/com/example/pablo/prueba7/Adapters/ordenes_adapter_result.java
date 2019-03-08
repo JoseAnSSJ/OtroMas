@@ -92,11 +92,9 @@ public class ordenes_adapter_result extends BaseAdapter {
         holder.orden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(intento1);
                 clvor = Integer.valueOf(ordensrc.get(position));
-                request.getDeepCons();
-                request.getTrabajos(mContext);
+                request.getDeepCons(mContext);
+
 
 
 

@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         setTitle(null);
 
        // NombreTec.setText(nombre_tecnico);
+        Contrato.setText(request.contraroMA);
+        Status.setText(request.statusMA);
+        NombreTec.setText(request.nombre_tecnico);
 
 
 //* Boton de informacion

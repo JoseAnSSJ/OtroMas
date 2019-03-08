@@ -9,22 +9,6 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="80dp">
 
-    <Button
-        android:id="@+id/ejec"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:text="@string/ejecutar" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ejecutarLay"
-        android:visibility="invisible"
-        >
-        android:id="@+id/animado1">
-
       <Button
           android:id="@+id/ejec"
           android:layout_width="101dp"
@@ -34,7 +18,14 @@
           android:textColor="#000"
           android:background="@drawable/boton"
           android:text="@string/ejecutar" />
-    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ejecutarLay"
+        android:visibility="gone"
+        >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +62,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginBottom="82dp"
         android:background="#2598" />
-
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/animado2"
         android:layout_width="match_parent"
@@ -94,7 +85,6 @@
           android:backgroundTint="#2196F3"
           android:enabled="false"
           android:text="@string/reiniciar"
-          android:enabled="false" />
           android:textColor="#000" />
 
       <Button
@@ -117,14 +107,5 @@
           android:visibility="visible" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/salirEjecutarOrd"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/ejec"
-        android:layout_gravity="center"
-        android:layout_marginTop="300dp"
-        android:text="@string/salir"
-        android:visibility="visible" />
   </RelativeLayout>
 </FrameLayout>

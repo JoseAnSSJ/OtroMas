@@ -60,7 +60,11 @@ public class EjecutarFragment extends Fragment {
         ejecutar = view.findViewById(R.id.ejecutarLay);
 
         reiniciar.setEnabled(false);
-
+if(request.isnet==true){
+    ejecutar.setVisibility(View.VISIBLE);
+}else{
+    ejecutar.setVisibility(View.GONE);
+}
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

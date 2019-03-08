@@ -87,6 +87,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         btn1 = view.findViewById(R.id.ejutada);
         bt2 = view.findViewById(R.id.visitada);
         /////////////////////////////////////////////////////
+        Obs.setText(request.obsMA);
         TecSec = view.findViewById(R.id.tecnicosec);
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

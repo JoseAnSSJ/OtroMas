@@ -50,11 +50,7 @@ public class Inicio extends AppCompatActivity
         trabajo= (TextView)findViewById(R.id.proximotrabajo);
         direccion = (TextView)findViewById(R.id.direccion);
         setSupportActionBar(toolbar);
-        trabajo.setText(request.sigueinteTrabajo);
-        direccion.setText(request.siguenteDireccion);
         Error.Errores(this);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -64,6 +60,9 @@ public class Inicio extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ///////////////////////////////////////////////////////////////
+        pieChart.refreshDrawableState();
+        trabajo.setText(request.sigueinteTrabajo);
+        direccion.setText(request.siguenteDireccion);
     }
 
     @Override
@@ -96,7 +95,7 @@ public class Inicio extends AppCompatActivity
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
             request.getProximaCita(getApplicationContext());
-                request.getOrdenes();
+                request.getOrdenes(getApplicationContext());
 
 
             finish();
