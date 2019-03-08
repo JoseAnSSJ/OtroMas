@@ -39,6 +39,7 @@ import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
 import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
+import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
@@ -56,6 +57,7 @@ import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
+import com.example.pablo.prueba7.Modelos.ChecaSiExtencionesModel;
 import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
@@ -86,9 +88,11 @@ import com.example.pablo.prueba7.Modelos.GetdameSerDELCliresumenResult;
 import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
+import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
+import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
@@ -123,8 +127,8 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico,msgComando="",sigueinteTrabajo,siguenteDireccion;;
-    //public static String nombre_tecnico;
+    public static String clave_tecnico,msgComando="",sigueinteTrabajo,siguenteDireccion;
+    public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
     public static String Obs;
@@ -133,8 +137,9 @@ public class Request extends AppCompatActivity {
     public static String fechaSl;
     public int reintentaB;
     public  static ArrayAdapter adapterTecSec,adapterTecSecR;
+    public static boolean pieza=false;
 
-        public static Integer clvQ;
+        public static Integer nExtenciones=0;
     public static String reintentarComando;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
@@ -2135,6 +2140,43 @@ public class Request extends AppCompatActivity {
         });
     }
 //////////////
+
+    public void getChecaExt(final Context context) {
+        Service service = null;
+        service = services.getChecaExtService();
+        Call<JsonObject> call = service.getChecaExt();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    JsonObject userJson = response.body().getAsJsonObject("GetUspChecaSiTieneExtensionesResult");
+                    ChecaSiExtencionesModel user = new ChecaSiExtencionesModel(
+                            userJson.get("BND").getAsInt(),
+                            userJson.get("NUMEXT").getAsInt()
+                    );
+                    if(user.BND==1){
+                        MuestraBit(context);
+                        LlenaExt(context);
+                        nExtenciones=user.BND;
+
+                    }else{
+                        MuestraBit(context);
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
 public void MuestraBit(final Context context) {
     Service service = null;
     service = services.getMuestraBitService();
@@ -2212,7 +2254,130 @@ public void DetalleBit(final Context context) {
     });
 }
 
+    public void LlenaExt(final Context context) {
 
+
+
+        Service service = null;
+        service = services.getLlenaExtService();
+
+        Call<JSONLlenaExtenciones> call = service.getLlenaExt();
+        call.enqueue(new Callback<JSONLlenaExtenciones>() {
+
+            @Override
+            public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
+                if (response1.code() == 200) {
+                    Materiales.extMat.setVisibility(View.VISIBLE);
+                    array.descripcionExt.clear();
+                    array.descripcionExt.add(0,"---Seleccionar---");
+                    int j=1;
+                    JSONLlenaExtenciones jsonResponse = response1.body();
+                    array.dataLlenaExt = new ArrayList<List<LlenaExtencionesModel>>(asList(jsonResponse.llenaExtencionesModel()));
+                    Iterator<List<LlenaExtencionesModel>> itData = array.dataLlenaExt.iterator();
+                    while (itData.hasNext()) {
+                        List<LlenaExtencionesModel> dat = itData.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
+                            j=j+1;
+                        }
+
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
+                    Materiales.spinnerExtMat.setAdapter(arrayAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<JSONLlenaExtenciones> call, Throwable t) {
+
+            }
+
+        });
+    }
+    public void getTipoMat() {
+        Service service = null;
+        service = services.getTipoMatService();
+        Call<JsonObject> call = service.getTipoMat();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
+                    TipoMaterialModel user = new TipoMaterialModel(
+                            userJson.get("Tipo").getAsString()
+                    );
+                    if(user.Tipo.equals("Piezas")){
+                         Materiales.piezasMat.setVisibility(View.VISIBLE);
+                         pieza=true;
+                       // Materiales.metrosMat.setVisibility(View.VISIBLE);
+                    }else{
+                        Materiales.metrosMat.setVisibility(View.VISIBLE);
+                        pieza=false;
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+  /*  public void getValidaPreDes(final Context context) {
+        Service service = null;
+        service = services.getValidaPreService();
+        Call<JsonObject> call = service.addPreDescarga();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                 if(String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult")).equals(1)){
+                     addPreDes(context);
+                 }else{
+                     Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
+                 }
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void addPreDes(final Context context) {
+        Service service = null;
+        service = services.addPreDescargaService();
+        Call<JsonObject> call = service.addPreDescarga();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    if(String.valueOf(response.body().getAsJsonPrimitive("InsertaTblPreDescargaMateialResult")).equals(1)){
+                        Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
+                    }else{
+
+                    }
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }*/
 }
 
 

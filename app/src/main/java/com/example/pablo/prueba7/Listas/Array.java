@@ -28,6 +28,7 @@ import com.example.pablo.prueba7.Modelos.GetdameSerDELCliresumenResult;
 import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.GetuspConsultaTblClasificacionProblemasListResult;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
+import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.Queja;
 
@@ -101,6 +102,8 @@ public class Array {
     public static ArrayList<String> detalleBit= new ArrayList<String>();
     public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;
     public static ArrayList<String> descripcionArtBit= new ArrayList<String>();
+    public static ArrayList<List<LlenaExtencionesModel>>dataLlenaExt;
+    public static ArrayList<String> descripcionExt= new ArrayList<String>();
 
 
 }

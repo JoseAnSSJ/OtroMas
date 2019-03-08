@@ -33,6 +33,7 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static int OE,OP,OV,OEP,OO,RE,RP,REP,RV,RO;
+    public static String tipodeDescarga;
 
     public static PieChart  pieChart;
     private Request request = new Request();
@@ -104,8 +105,7 @@ public class Inicio extends AppCompatActivity
             clvorden=0;
             opcion=1;
             request.getListOrd();
-            //request.getTrabajos();
-            //request.getDeepCons();
+            tipodeDescarga="O";
             startActivity(intent1);
 
             finish();
@@ -114,6 +114,7 @@ public class Inicio extends AppCompatActivity
             clavequeja=0;
             opcion=1;
             request.getListQuejas();
+            tipodeDescarga="Q";
             startActivity(intent1);
             finish();
         } else if (id == R.id.Configuraciones) {

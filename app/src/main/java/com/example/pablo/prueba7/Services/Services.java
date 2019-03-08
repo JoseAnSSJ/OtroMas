@@ -6,9 +6,12 @@ import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 
+import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Activitys.Login;
+import com.example.pablo.prueba7.Modelos.ChecaSiExtencionesModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Activitys.asignacion;
@@ -32,6 +35,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.pablo.prueba7.Activitys.Inicio.tipodeDescarga;
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
@@ -40,9 +44,18 @@ import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTr
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSecSelecc1;
+import static com.example.pablo.prueba7.Fragments.Materiales.EFDM;
+import static com.example.pablo.prueba7.Fragments.Materiales.EIMD;
+import static com.example.pablo.prueba7.Fragments.Materiales.IFDM;
+import static com.example.pablo.prueba7.Fragments.Materiales.IIDM;
+import static com.example.pablo.prueba7.Fragments.Materiales.clvTipoDescMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.extSer;
+import static com.example.pablo.prueba7.Fragments.Materiales.idInventarioMD;
+import static com.example.pablo.prueba7.Fragments.Materiales.totalDM;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.Clv_Sol;
 import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
+import static com.example.pablo.prueba7.Request.Request.nExtenciones;
 import static com.example.pablo.prueba7.Request.Request.tecC;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
 import static com.example.pablo.prueba7.Activitys.asignacion.jsonArray;
@@ -56,6 +69,7 @@ public class Services {
     public static int clvorden = 0;
     public static int clavequeja = 0;
     public static String cont;
+
 
     public String abc = "Basic: " + Login.enco;
 
@@ -1601,8 +1615,226 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("ClvTecnico", 20098);
-            jsonObject.put("ClvTipo", 1204);
+            jsonObject.put("ClvTipo", clvTipoDescMat);
             jsonObject.put("IdAlmacen", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getChecaExtService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("CLVORDEN", clvor);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getLlenaExtService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("CLV_ORDEN", clvor);
+            jsonObject.put("NUMEXT", ChecaSiExtencionesModel.NUMEXT);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getTipoMatService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+
+        try {
+            jsonObject.put("catUnidadClave", 0);
+            jsonObject.put("Tipo", "");
+            jsonObject.put("Articulo", "");
+            jsonObject.put("IdArticulo", Materiales.idArticuloDM);
+            jsonObject1.put("Softv_ObtenTipoMaterialEntity", jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service getValidaPreService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("clvOrden", clvor);
+            jsonObject.put("noArticulo", idInventarioMD);
+            jsonObject.put("NoExt", extSer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", UserModel.Codigo)
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+    public Service addPreDescargaService() {
+        //POST Body Json
+        JSONObject jsonObject = new JSONObject();
+        int escable;
+        if(com.example.pablo.prueba7.Request.Request.pieza==true){
+            escable=0;
+        }else{
+            escable=1;
+        }
+        try {
+            jsonObject.put("contrato", DeepConsModel.Contrato);
+            jsonObject.put("clvOrden", clvor);
+            jsonObject.put("noArticulo",idInventarioMD );
+            jsonObject.put("cantidadUtilizada", totalDM);
+            jsonObject.put("clvTecnico", claveTecnico);
+            jsonObject.put("idAlmacenEmpresa",0 );
+            jsonObject.put("metrajeInicio",IIDM);
+            jsonObject.put("metrajeFin",IFDM );
+            jsonObject.put("esCable",escable);
+            jsonObject.put("tipoDescarga",tipodeDescarga );
+            jsonObject.put("metrajeInicioExterior", EIMD);
+            jsonObject.put("metrajeFinExterior", EFDM);
+            jsonObject.put("NoExt",nExtenciones );
         } catch (JSONException e) {
             e.printStackTrace();
         }

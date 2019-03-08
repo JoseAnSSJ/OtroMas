@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:layout_height="425dp"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     >
@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="75dp"
-        android:text="Descripción del artículo"
+        android:text="@string/descripcion_Articulo"
         android:textSize="20dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp" />
@@ -31,7 +31,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="150dp"
         android:layout_marginLeft="10dp"
-        android:text="Clasificación de material"
+        android:text="@string/clasificaion_Materiales"
         android:textSize="20dp" />
     <Spinner
         android:id="@+id/clasificacionMatDesc"
@@ -43,13 +43,155 @@
         android:layout_marginTop="185dp">
 
     </Spinner>
-
-    <Button
+<RelativeLayout
+    android:id="@+id/extencionMatOculto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/clasificacionMatDesc"
+    android:visibility="gone"
+    >
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="299dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginLeft="10dp"
+        android:text="@string/seleccionExt"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"
+        />
+    <Spinner
+        android:id="@+id/extencionesDescarga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp">
+
+    </Spinner>
+</RelativeLayout>
+<RelativeLayout
+    android:id="@+id/cantidadDM"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="280dp"
+    android:visibility="gone"
+    >
+    <TextView
+        android:id="@+id/txtCantidadDM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cantidad"
+        android:textSize="25dp"
+        />
+
+    <EditText
+        android:id="@+id/piezaMD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/txtCantidadDM"
+        android:inputType="number"
+        />
+</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/metrosDM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/txtInteriorDM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interior"
+            android:textSize="25dp"
+            android:layout_marginTop="35dp"
+            />
+        <TextView
+            android:id="@+id/txtExteriorDM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exterior"
+            android:textSize="25dp"
+            android:layout_marginTop="95dp"
+            />
+        <TextView
+            android:id="@+id/txtInicioDM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inicio"
+            android:textSize="25dp"
+            android:layout_marginStart="150dp"
+            />
+
+        <TextView
+            android:id="@+id/txtFinalDM"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_toEndOf="@+id/txtInicioDM"
+            android:text="@string/fin"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/InicialIDM"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtInicioDM"
+            android:layout_alignEnd="@+id/txtInicioDM"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/txtInteriorDM"
+            android:inputType="number"
+            />
+
+        <EditText
+            android:id="@+id/InicialEDM"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/InicialIDM"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/txtExteriorDM"
+            android:inputType="number"
+            />
+        <EditText
+            android:id="@+id/FinalIDM"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtFinalDM"
+            android:layout_alignEnd="@+id/txtFinalDM"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/InicialIDM"
+            android:inputType="number"
+            />
+
+        <EditText
+            android:id="@+id/FinalEDM"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FinalIDM"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/InicialEDM"
+            android:inputType="number"
+            />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/agregarDM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:text="@string/agregar" />
 
 </RelativeLayout>

@@ -132,20 +132,20 @@ public class CambioAparato extends AppCompatActivity {
     }
 
     public static int obtenerPosicionAC(int abc){
-        int position=0;
-        Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
-        List<GetListClienteAparatosResult> dat = itdata.next();
-        for(int i=0; i<dat.size(); i++){
-            if(dat.get(i).Clv_Aparato==abc){
-                position = i+1;
+            int position=0;
+            Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+            List<GetListClienteAparatosResult> dat = itdata.next();
+            for(int i=0; i<dat.size(); i++){
+                if(dat.get(i).Clv_Aparato==abc){
+                    position = i+1;
+                }
             }
+            return position;
         }
-        return position;
-    }
-    public static int obtenerPosicionSA(Spinner spinner, String abc){
-        int position=0;
-        Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();
-        List<GetSP_StatusAparatosListResult> dat = itdata.next();
+        public static int obtenerPosicionSA(Spinner spinner, String abc){
+            int position=0;
+            Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();
+            List<GetSP_StatusAparatosListResult> dat = itdata.next();
         for(int i=0; i<dat.size(); i++){
             if(dat.get(i).Clv_StatusCableModem.equalsIgnoreCase(abc)){
                 position = i+1;

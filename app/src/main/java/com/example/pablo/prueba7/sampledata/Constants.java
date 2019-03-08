@@ -58,5 +58,11 @@ public class Constants {
     ////////////
     public static final String URL_GET_MUESTRABIT="Muestra_Detalle_Bitacora_2/GetMuestra_Detalle_Bitacora_2List";
     public static final String URL_GET_DETALLEBIT="Muestra_Descripcion_Articulo_2/GetMuestra_Descripcion_Articulo_2List";
+    public static final String URL_GET_CHECAEXT="UspChecaSiTieneExtensiones/GetUspChecaSiTieneExtensiones";
+    public static final String URL_GET_LLENAEXT="UspChecaSiTieneExtensiones/GetUspLlenaComboExtensionesList";
+    public static final String URL_GET_TIPOMAT="OrdSer/GetSoftv_ObtenTipoMaterial";
+    public static final String URL_VALIDAPRE="AplicacionMovil/ValidaExisteTblPreDescargaMaterial";
+    public static final String URL_ADD_PREDESCARGA="AplicacionMovil/InsertaTblPreDescargaMaterial";
+
 
 }
