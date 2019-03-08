@@ -2,8 +2,11 @@ package com.example.pablo.prueba7.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.MainActivity;
+import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -81,7 +86,18 @@ public class EjecutarFragment extends Fragment {
                             Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
                     }
 
                 }
@@ -97,7 +113,17 @@ public class EjecutarFragment extends Fragment {
                             Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
                     }
 
                 }
@@ -113,7 +139,17 @@ public class EjecutarFragment extends Fragment {
                             Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
                     }
                 }
                 ////////*************************

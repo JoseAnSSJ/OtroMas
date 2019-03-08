@@ -7,13 +7,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
             android:id="@+id/ejec1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="297dp"
+            android:layout_height="59dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="67dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginBottom="605dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/ejecutar" />
     </RelativeLayout>
 </FrameLayout>

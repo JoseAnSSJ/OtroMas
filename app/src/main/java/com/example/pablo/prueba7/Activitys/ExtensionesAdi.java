@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.R;
 
 public class ExtensionesAdi extends AppCompatActivity {
-    private Button aceptar;
+    private Button aceptar,salir;
     public static TextView txtExtencion;
 
     @Override
@@ -19,8 +19,17 @@ public class ExtensionesAdi extends AppCompatActivity {
         setContentView(R.layout.activity_extencion);
         aceptar = findViewById(R.id.extencionAceptar);
         txtExtencion = findViewById(R.id.txtExtencion);
+        salir=findViewById(R.id.extencionSalir);
 
-    aceptar.setOnClickListener(new View.OnClickListener() {
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();

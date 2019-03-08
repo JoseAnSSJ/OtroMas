@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CambioDom extends AppCompatActivity {
 
-    Button aceptar;
+    Button aceptar,  regresar;
    public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
    public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
 
@@ -42,6 +42,12 @@ public class CambioDom extends AppCompatActivity {
         CasaSur = findViewById(R.id.casasur);
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
+        regresar=findViewById(R.id.regresa);
+
+
+
+
+
 
         Iterator<List<GetDameDatosCAMDOResult>> itdata = Array.dataCAMDO.iterator();
             List<GetDameDatosCAMDOResult> dat = itdata.next();
@@ -69,6 +75,13 @@ public class CambioDom extends AppCompatActivity {
         if (dat.get(0).getCasa().equals("O")) {
             CasaOeste.setVisibility(View.VISIBLE);
         }
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         aceptar.setOnClickListener(new View.OnClickListener() {

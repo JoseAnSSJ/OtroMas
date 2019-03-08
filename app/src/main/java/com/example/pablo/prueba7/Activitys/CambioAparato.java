@@ -29,10 +29,10 @@ public class CambioAparato extends AppCompatActivity {
     public static String statusAparato;
     private Request request = new Request();
     private Array array = new Array();
-    private Button aceptarCambioAparato;
+    private Button aceptarCambioAparato, Finish;
 
     @Override
-    protected void onCreate(@Nullable Bundle onSaveInstanceState) {
+    protected void onCreate(@Nullable final Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
         aceptarCambioAparato =  findViewById(R.id.uno);
@@ -40,13 +40,18 @@ public class CambioAparato extends AppCompatActivity {
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
-
-
-
-
+        Finish= findViewById(R.id.dos);
         request.getDeepCAPAT(getApplicationContext());
 
 
+
+
+        Finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 

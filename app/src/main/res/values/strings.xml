@@ -88,6 +88,7 @@
     <string name="observaciones">Observaciones</string>
     <string name="tipo_Solucion">Tipo de solución</string>
     <string name="problema_Real">Problema real</string>
+    <string name="Regresar">Regresar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

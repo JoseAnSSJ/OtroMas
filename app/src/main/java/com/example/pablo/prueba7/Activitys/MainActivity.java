@@ -22,7 +22,7 @@ import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.Trabajos;
 
 
-import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
+//import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         InfoServicios= findViewById(R.id.infoservicios);
         setTitle(null);
 
-        NombreTec.setText(nombre_tecnico);
+       // NombreTec.setText(nombre_tecnico);
 
 
 //* Boton de informacion

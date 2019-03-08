@@ -119,7 +119,7 @@ public class Request extends AppCompatActivity {
     Array array = new Array();
     CambioDom c = new CambioDom();
     public static String clave_tecnico,msgComando="",sigueinteTrabajo,siguenteDireccion;;
-    public static String nombre_tecnico;
+    //public static String nombre_tecnico;
     public static Long contbu;
     public static Long abc;
     public static String Obs;
@@ -206,23 +206,23 @@ public class Request extends AppCompatActivity {
                     //Se recorre la lista y se guarla la informacion en el Modelo
                     for (int i = 0; i < data.size(); i++) {
                         Log.d("response9", data.get(i).clv_tecnico);
-                        Log.d("nombre", data.get(i).tecnico);
+///                        Log.d("nombre", data.get(i).tecnico);
 
                     }
                     clave_tecnico = data.get(0).clv_tecnico;
-                    nombre_tecnico = data.get(0).tecnico;
+                    //nombre_tecnico = data.get(0).tecnico;
 
                     services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
 
                //     MainActivity.NombreTec.setText(data.get(0).tecnico);
 
                 }
-                if (response.code() == 200) {
+
                     Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
                     getProximaCita(context);
                     getOrdenes();
 
-                }
+
 
 
             }
