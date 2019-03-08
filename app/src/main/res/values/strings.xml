@@ -88,6 +88,16 @@
     <string name="observaciones">Observaciones</string>
     <string name="tipo_Solucion">Tipo de solución</string>
     <string name="problema_Real">Problema real</string>
+    <string name="seleccionExt">Selecciona la extensión:</string>
+    <string name="clasificacionMate">Clasificación de material:</string>
+    <string name="descripArticu">Descripción del artículo:</string>
+    <string name="cantidad">Cantidad:</string>
+    <string name="exterior">Exterior</string>
+    <string name="interior">Interior</string>
+    <string name="inicio">Inicio</string>
+    <string name="fin">Fin</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

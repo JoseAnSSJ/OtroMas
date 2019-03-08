@@ -58,7 +58,7 @@ public class EjecutarFragment extends Fragment {
                     if (Array.recibixnew.size() == 0) {
                         Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
                     } else {
-                        //  request.send_aparat();
+                          request.send_aparat();
                     }
                 }
 
@@ -70,8 +70,8 @@ public class EjecutarFragment extends Fragment {
                 if (horas.ejecutada == 1) {
                     try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
-                            //     eject.setEnabled(false);
-                            //     request.getValidaOrdSer(getActivity());
+                                 eject.setEnabled(false);
+                                 request.getValidaOrdSer(getActivity());
                         }
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
                             Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();

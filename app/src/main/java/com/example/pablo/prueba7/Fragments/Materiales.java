@@ -5,9 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -21,8 +26,12 @@ public class Materiales extends Fragment {
     private ViewGroup container;
     private Bundle onsavedInstanceState;
     Request request = new Request();
-    public static int clvTipoDescMat;
-    public static Spinner descripcionMat,clasificacionMat;
+    EditText pieza,mII,mIE,mFI,mFE;
+    public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
+    public static int extSer=0;
+    public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
+    public static RelativeLayout extMat, piezasMat,metrosMat;
+    Button agragarDM;
 
     public Materiales() {
         // Required empty public constructor
@@ -36,9 +45,19 @@ public class Materiales extends Fragment {
         onsavedInstanceState = OnsavedInstanceState;
         super.onCreate(OnsavedInstanceState);
         View view  = inflater.inflate(R.layout.activity_descarga, container, false);
-        request.MuestraBit(getContext());
+        request.getChecaExt(getContext());
         descripcionMat = view.findViewById(R.id.descripcionArticuloDesc);
         clasificacionMat = view.findViewById(R.id.clasificacionMatDesc);
+        extMat = view.findViewById(R.id.extencionMatOculto);
+        piezasMat = view.findViewById(R.id.cantidadDM);
+        metrosMat = view.findViewById(R.id.metrosDM);
+        spinnerExtMat = view.findViewById(R.id.extencionesDescarga);
+        agragarDM=view.findViewById(R.id.agregarDM);
+        pieza = view.findViewById(R.id.piezaMD);
+        mII = view.findViewById(R.id.InicialIDM);
+        mFI = view.findViewById(R.id.FinalIDM);
+        mIE = view.findViewById(R.id.InicialEDM);
+        mFE=view.findViewById(R.id.FinalEDM);
 
         descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -48,6 +67,7 @@ public class Materiales extends Fragment {
                         List<DetalleBitacoraModel> dat = itData.next();
                         clvTipoDescMat=dat.get(position-1).catTipoArticuloClave;
                         request.DetalleBit(getContext());
+
                 }
             }
 
@@ -56,8 +76,70 @@ public class Materiales extends Fragment {
 
             }
         });
+        clasificacionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0){
+                    Iterator<List<DescripcionArticuloModel>> itData = Array.dataDetArtBit.iterator();
+                        List<DescripcionArticuloModel> dat = itData.next();
+                        idArticuloDM=dat.get(position-1).IdArticulo;
+                    cantidadDM=dat.get(position-1).Cantidad;
+                    idInventarioMD=dat.get(position-1).IdInventario;
+                    request.getTipoMat();
 
 
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerExtMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0){
+                    extSer=(position-1);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+agragarDM.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+if(request.pieza==true){
+    piezaSer = Integer.parseInt(String.valueOf(pieza.getText()));
+    totalDM = piezaSer;
+    IIDM =0;
+    IFDM =0;
+    EIMD = 0;
+            EFDM=0;
+    if(cantidadDM>=totalDM){
+     //  request.getValidaPreDes(getContext());
+    }else {
+        Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
+    }
+}else {
+    IIDM =Integer.parseInt(String.valueOf(mII.getText()));
+    IFDM =Integer.parseInt(String.valueOf(mFI.getText()));
+    EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
+    EFDM=Integer.parseInt(String.valueOf(mFE.getText()));
+    metros=(IFDM-IIDM)+(EFDM-EIMD);
+    totalDM=metros;
+    if(cantidadDM>=totalDM){
+        //  request.getValidaPreDes(getContext());
+    }else {
+        Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
+    }
+}
+}
+
+});
         return view;
     }
 }
