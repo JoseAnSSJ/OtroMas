@@ -60,6 +60,11 @@ public class CambioAparato extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 request.SetCambioAparato(getBaseContext());
+                if(request.cambioA==true){
+                    finish();
+                }
+
+
             }
         });
         estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

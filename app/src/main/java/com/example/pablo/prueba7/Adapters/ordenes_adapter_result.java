@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.R;
@@ -95,7 +96,10 @@ public class ordenes_adapter_result extends BaseAdapter {
                 mContext.startActivity(intento1);
                 clvor = Integer.valueOf(ordensrc.get(position));
                 request.getDeepCons();
-                request.getTrabajos();
+                request.getTrabajos(mContext);
+
+
+
 
 
 

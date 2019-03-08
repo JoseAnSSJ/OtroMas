@@ -61,6 +61,7 @@ public class Orden extends AppCompatActivity
         cont="";
         adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
+        ordenes.refreshDrawableState();
 /////////////////////////////////////////////
 
         //* Boton para ir a menu principal

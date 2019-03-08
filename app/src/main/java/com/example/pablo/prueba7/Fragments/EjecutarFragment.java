@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
     public static Button eject;
+    EditText edt1;
+    public static View ejecutar;
     public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE;
     private  InstalacionFragment horas = new InstalacionFragment();
@@ -54,6 +57,7 @@ public class EjecutarFragment extends Fragment {
         reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
         msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
+        ejecutar = view.findViewById(R.id.ejecutarLay);
 
         reiniciar.setEnabled(false);
 
