@@ -2387,9 +2387,12 @@ public class Request extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     if(response.code()==200){
-                        if(String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult")).equals(1)){
+                        String dato;
+                        dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
+                        if(dato.equals("0")){
                             addPreDes(context);
-                        }else{
+                        }
+                        if(dato.equals("1")){
                             Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
                         }
 

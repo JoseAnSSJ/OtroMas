@@ -119,7 +119,7 @@ if(request.pieza==true){
     EIMD = 0;
             EFDM=0;
     if(cantidadDM>=totalDM){
-     //  request.getValidaPreDes(getContext());
+       request.getValidaPreDes(getContext());
     }else {
         Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
     }
@@ -131,7 +131,7 @@ if(request.pieza==true){
     metros=(IFDM-IIDM)+(EFDM-EIMD);
     totalDM=metros;
     if(cantidadDM>=totalDM){
-        //  request.getValidaPreDes(getContext());
+          request.getValidaPreDes(getContext());
     }else {
         Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
     }
