@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Fragments;
 
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -107,8 +108,10 @@ public class Ejecutar1Fragment extends Fragment {
                                     @RequiresApi(api = Build.VERSION_CODES.M)
                                     @Override
                                     public void onClick(View v) {
+
                                         Intent intent1 = new Intent(getActivity(), MainReportes.class);
                                         //intent1.setFlags();
+
                                         startActivity(intent1);
                                     }
                                 }).show();
