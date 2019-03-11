@@ -74,12 +74,12 @@
 
       <Button
           android:id="@+id/restart"
-          android:layout_width="100dp"
-          android:layout_height="50dp"
+          android:layout_width="118dp"
+          android:layout_height="wrap_content"
           android:layout_alignParentStart="true"
           android:layout_alignParentTop="true"
           android:layout_gravity="center"
-          android:layout_marginStart="73dp"
+          android:layout_marginStart="55dp"
           android:layout_marginTop="296dp"
           android:background="@drawable/boton"
           android:backgroundTint="#2196F3"
@@ -89,21 +89,21 @@
 
       <Button
           android:id="@+id/salirEjecutarOrd"
-          android:layout_width="111dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignBottom="@+id/restart"
           android:layout_alignParentTop="true"
-          android:backgroundTint="@color/colorAccent"
           android:layout_alignParentEnd="true"
           android:layout_gravity="center"
-          android:layout_marginStart="51dp"
+          android:layout_marginStart="56dp"
           android:layout_marginTop="298dp"
-          android:layout_marginEnd="76dp"
-          android:layout_marginBottom="0dp"
+          android:layout_marginEnd="59dp"
+          android:layout_marginBottom="2dp"
           android:layout_toEndOf="@+id/restart"
           android:background="@drawable/boton"
-          android:textColor="#000"
+          android:backgroundTint="@color/colorAccent"
           android:text="@string/salir"
+          android:textColor="#000"
           android:visibility="visible" />
     </RelativeLayout>
 

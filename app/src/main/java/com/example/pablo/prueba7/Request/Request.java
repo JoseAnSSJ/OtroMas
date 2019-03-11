@@ -410,10 +410,7 @@ public class Request extends AppCompatActivity {
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
 
-                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
+
 
                         }
                     }
@@ -1408,6 +1405,7 @@ public class Request extends AppCompatActivity {
 
                             ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                             solucion.setAdapter(adapter);
+
                         }
                     }
                 }
@@ -1640,7 +1638,7 @@ public class Request extends AppCompatActivity {
                     if(response.code()==200){
                         JSONTecSecReport jsonResponse = response.body();
                         array.dataTECSEC = new ArrayList<List<GetMuestraTecnicosAlmacenListResult>>((asList(jsonResponse.getGetMuestraTecnicosAlmacenListResult())));
-                        Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata = array.dataTECSEC.iterator();
+                        Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata =array.dataTECSEC.iterator();
                         while (itdata.hasNext()) {
 
                             List<GetMuestraTecnicosAlmacenListResult> dat = itdata.next();
@@ -2382,7 +2380,7 @@ public class Request extends AppCompatActivity {
         public void getValidaPreDes(final Context context) {
             Service service = null;
             service = services.getValidaPreService();
-            Call<JsonObject> call = service.addPreDescarga();
+            Call<JsonObject> call = service.getValidaPre();
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

@@ -32,7 +32,7 @@ import java.util.List;
 
 public class asignado extends AppCompatActivity {
 
-    private Button escanear, agragar;
+    private Button escanear, agragar,Regresar;
     private TextView codigo;
     private String contents;
     public static ListView serviciosAparato;
@@ -58,9 +58,18 @@ public class asignado extends AppCompatActivity {
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
         checkBox= findViewById(R.id.chekServicios);
+        Regresar= findViewById(R.id.regresar);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
 
+
+
+        Regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 
@@ -188,7 +197,7 @@ public class asignado extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if (scanningResult != null){
+        if (scanningResult != null) {
             contents = data.getStringExtra("SCAN_RESULT");
             codigo.setText(contents);
             codigo.setVisibility(TextView.VISIBLE);

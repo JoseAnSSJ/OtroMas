@@ -142,7 +142,7 @@
                     android:layout_marginStart="57dp"
                     android:layout_marginTop="280dp"
                     android:background="@drawable/boton"
-                    android:backgroundTint="@color/colorAccent"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="@string/aceptar"
                     android:textColor="#000" />
 

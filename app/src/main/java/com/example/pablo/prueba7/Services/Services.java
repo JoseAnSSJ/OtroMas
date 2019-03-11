@@ -1785,18 +1785,7 @@ public class Services {
             jsonObject.put("contrato", DeepConsModel.Contrato);
             jsonObject.put("clvOrden", clvor);
             jsonObject.put("noArticulo", idInventarioMD);
-            jsonObject.put("NoExt", extSer);
-            jsonObject.put("clvTecnico", claveTecnico);
-            jsonObject.put("cantidadUtilizada", totalDM);
-            jsonObject.put("idAlmacenEmpresa",0 );
-            jsonObject.put("esCable",escable);
-            jsonObject.put("metrajeInicio",IIDM);
-            jsonObject.put("metrajeFin",IFDM );
-            jsonObject.put("tipoDescarga",tipodeDescarga );
-            jsonObject.put("metrajeInicioExterior", EIMD);
-            jsonObject.put("metrajeFinExterior", EFDM);
-            jsonObject.put("NoExt",nExtenciones );
-
+            
 
 
 

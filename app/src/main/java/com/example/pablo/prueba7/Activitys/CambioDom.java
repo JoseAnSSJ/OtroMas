@@ -17,9 +17,9 @@ import java.util.List;
 
 public class CambioDom extends AppCompatActivity {
 
-    Button aceptar,  regresar;
-   public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
-   public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
+    private Button aceptar,  regresar;
+    public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
+    public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
 
 
     @Override
@@ -43,7 +43,6 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
         regresar=findViewById(R.id.regresa);
-
 
 
 
@@ -76,13 +75,6 @@ public class CambioDom extends AppCompatActivity {
             CasaOeste.setVisibility(View.VISIBLE);
         }
 
-        regresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,5 +85,15 @@ public class CambioDom extends AppCompatActivity {
         });
 
 
+        regresar .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+
     }
 }
+
