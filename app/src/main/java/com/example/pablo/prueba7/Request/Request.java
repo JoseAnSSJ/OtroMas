@@ -2382,7 +2382,7 @@ public class Request extends AppCompatActivity {
         public void getValidaPreDes(final Context context) {
             Service service = null;
             service = services.getValidaPreService();
-            Call<JsonObject> call = service.addPreDescarga();
+            Call<JsonObject> call = service.getValidaPre();
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2415,17 +2415,12 @@ public class Request extends AppCompatActivity {
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    Log.d("asd", a);
                     if(response.code()==200){
-                        if(String.valueOf(response.body().getAsJsonPrimitive("InsertaTblPreDescargaMateialResult")).equals(1)){
                             Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
                         }else{
 
                         }
-
-                    }
-
-
-
                 }
 
                 @Override
