@@ -2415,7 +2415,6 @@ public class Request extends AppCompatActivity {
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    Log.d("asd", a);
                     if(response.code()==200){
                             Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
                         }else{
