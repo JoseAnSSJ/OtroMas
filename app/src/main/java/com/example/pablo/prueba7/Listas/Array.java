@@ -1,7 +1,5 @@
 package com.example.pablo.prueba7.Listas;
 
-import android.widget.CheckBox;
-
 import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
@@ -22,14 +20,13 @@ import com.example.pablo.prueba7.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetQuejasListResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
-import com.example.pablo.prueba7.Modelos.GetSoftvGetPrioridadQuejaListResult;
 import com.example.pablo.prueba7.Modelos.Get_ClvTecnicoResult;
 import com.example.pablo.prueba7.Modelos.GetdameSerDELCliresumenResult;
 import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
-import com.example.pablo.prueba7.Modelos.GetuspConsultaTblClasificacionProblemasListResult;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 
 import java.util.ArrayList;
@@ -103,6 +100,7 @@ public class Array {
     public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;
     public static ArrayList<String> descripcionArtBit= new ArrayList<String>();
     public static ArrayList<List<LlenaExtencionesModel>>dataLlenaExt;
+    public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
     public static ArrayList<String> descripcionExt= new ArrayList<String>();
 
 

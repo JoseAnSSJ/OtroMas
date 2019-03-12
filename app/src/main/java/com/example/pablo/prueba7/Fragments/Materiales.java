@@ -28,7 +28,7 @@ public class Materiales extends Fragment {
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
-    public static int extSer=0;
+    public static int extSer;
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static RelativeLayout extMat, piezasMat,metrosMat;
     Button agragarDM;

@@ -18,6 +18,7 @@ import com.example.pablo.prueba7.Listas.JSONHIHF;
 import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
+import com.example.pablo.prueba7.Listas.JSONPreDescarga;
 import com.example.pablo.prueba7.Listas.JSONPrioridad;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
 import com.example.pablo.prueba7.Listas.JSONReportes;
@@ -153,6 +154,8 @@ public interface Service {
     Call<JsonObject> getValidaPre();
     @POST(Constants.URL_ADD_PREDESCARGA)
     Call<JsonObject> addPreDescarga();
+    @POST(Constants.URL_GET_PREDESCARGA)
+    Call<JSONPreDescarga> getPreDescarga();
 
 
 }

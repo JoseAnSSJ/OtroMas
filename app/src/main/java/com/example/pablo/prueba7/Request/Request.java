@@ -16,7 +16,6 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
-import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
@@ -42,6 +41,7 @@ import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
 import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
+import com.example.pablo.prueba7.Listas.JSONPreDescarga;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
 import com.example.pablo.prueba7.Listas.JSONReportes;
 import com.example.pablo.prueba7.Listas.JSONResponseTecnico;
@@ -90,6 +90,7 @@ import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
@@ -104,23 +105,21 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
-import static com.example.pablo.prueba7.Listas.Array.recibix;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -2390,10 +2389,12 @@ public class Request extends AppCompatActivity {
                         String dato;
                         dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
                         if(dato.equals("0")){
-                            addPreDes(context);
+                            getPredescarga();
+                            //addPreDes(context);
                         }
                         if(dato.equals("1")){
-                            Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
+                            getPredescarga();
                         }
 
                     }
@@ -2417,6 +2418,7 @@ public class Request extends AppCompatActivity {
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     if(response.code()==200){
                             Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
+
                         }else{
 
                         }
@@ -2428,6 +2430,32 @@ public class Request extends AppCompatActivity {
                 }
             });
         }
+    public void getPredescarga(){
+        Service service = null;
+        service = services.getPreDescargaService();
+        Call<JSONPreDescarga> call = service.getPreDescarga();
+        call.enqueue(new Callback<JSONPreDescarga>() {
+            @Override
+            public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
+                if(response.code()==200){
+                    JSONPreDescarga jsonResponse = response.body();
+                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
+                   /* Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
+                    while (itdata.hasNext()) {
+                        List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
+                        for (int i = 0; i < dat.size(); i++) {
+
+                        }
+                    }*/
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
+
+            }
+        });
+    }
     }
 
 
