@@ -2391,11 +2391,11 @@ public class Request extends AppCompatActivity {
                         dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
                         if(dato.equals("0")){
                             getPredescarga(context);
-                            //addPreDes(context);
+                            addPreDes(context);
                         }
                         if(dato.equals("1")){
-                           // Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
-                            getPredescarga(context);
+                            Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
+                           // getPredescarga(context);
                         }
 
                     }
@@ -2419,7 +2419,7 @@ public class Request extends AppCompatActivity {
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     if(response.code()==200){
                             Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
-
+                        getPredescarga(context);
                         }else{
 
                         }

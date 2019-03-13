@@ -36,8 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="75dp"
                     android:text="@string/descripArticu"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -281,7 +280,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
 
-                <com.evrencoskun.tableview.TableView
+                <GridView
                     android:id="@+id/tabla"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
