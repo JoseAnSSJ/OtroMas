@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -2389,12 +2390,12 @@ public class Request extends AppCompatActivity {
                         String dato;
                         dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
                         if(dato.equals("0")){
-                            getPredescarga();
+                            getPredescarga(context);
                             //addPreDes(context);
                         }
                         if(dato.equals("1")){
                            // Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
-                            getPredescarga();
+                            getPredescarga(context);
                         }
 
                     }
@@ -2430,23 +2431,41 @@ public class Request extends AppCompatActivity {
                 }
             });
         }
-    public void getPredescarga(){
+    public void getPredescarga(final Context context){
         Service service = null;
         service = services.getPreDescargaService();
         Call<JSONPreDescarga> call = service.getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
+                array.listaTabla.clear();
+                array.listaTabla.add("Clave");
+                array.listaTabla.add("Descripcion");
+                array.listaTabla.add("Cantidad");
+                array.listaTabla.add("Metraje inicial int.");
+                array.listaTabla.add("Metraje final int.");
+                array.listaTabla.add("Metraje inicial ext.");
+                array.listaTabla.add("Metraje final ext.");
                 if(response.code()==200){
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
-                   /* Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
+                    Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
+
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
+                            array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
+                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
+                            array.listaTabla.add(String.valueOf(dat.get(i).contrato));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
 
                         }
-                    }*/
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.listaTabla);
+                    Materiales.tabla.setAdapter(adapter);
                 }
             }
 

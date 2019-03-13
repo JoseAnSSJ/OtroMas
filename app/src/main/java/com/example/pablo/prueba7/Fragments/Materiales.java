@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Fragments;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,13 +26,14 @@ public class Materiales extends Fragment {
 
     private LayoutInflater inflater;
     private ViewGroup container;
+    public static GridView tabla;
     private Bundle onsavedInstanceState;
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
     public static int extSer;
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
-    public static RelativeLayout extMat, piezasMat,metrosMat;
+    public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
 
     public Materiales() {
@@ -47,18 +50,19 @@ public class Materiales extends Fragment {
         request.getChecaExt(getContext());
         descripcionMat = view.findViewById(R.id.descripcionArticuloDesc);
         clasificacionMat = view.findViewById(R.id.clasificacionMatDesc);
-        extMat = view.findViewById(R.id.extencionMatOculto);
-        piezasMat = view.findViewById(R.id.cantidadDM);
-        metrosMat = view.findViewById(R.id.metrosDM);
+        extMat = view.findViewById(R.id.constrain_Extenciones);
+        piezasMat = view.findViewById(R.id.constrain_Cantidad);
+        metrosMat = view.findViewById(R.id.constrain_Metraje);
         spinnerExtMat = view.findViewById(R.id.extencionesDescarga);
-        agragarDM=view.findViewById(R.id.agregarDM);
+        agragarDM=view.findViewById(R.id.agregarMaterial);
         pieza = view.findViewById(R.id.piezaMD);
         mII = view.findViewById(R.id.InicialIDM);
         mFI = view.findViewById(R.id.FinalIDM);
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
-
-        descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        tabla = view.findViewById(R.id.tabla);
+        tabla.setHorizontalSpacing(6);
+    descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0){

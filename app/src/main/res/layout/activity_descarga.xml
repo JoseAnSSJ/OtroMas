@@ -1,197 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout android:layout_height="wrap_content"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     >
-        <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
-        android:text="@string/descripcion_Articulo"
-        android:textSize="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <Spinner
-        android:id="@+id/descripcionArticuloDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="110dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp">
-    </Spinner>
+        <android.support.constraint.ConstraintLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="10dp"
-        android:text="@string/clasificaion_Materiales"
-        android:textSize="20dp" />
-    <Spinner
-        android:id="@+id/clasificacionMatDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="185dp">
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_descargaMateriales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </Spinner>
-<RelativeLayout
-    android:id="@+id/extencionMatOculto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignTop="@id/clasificacionMatDesc"
-    android:visibility="visible"
-    >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="10dp"
-        android:text="@string/seleccionExt"
-        android:textSize="20dp"
-        android:layout_marginTop="25dp"
-        />
-    <Spinner
-        android:id="@+id/extencionesDescarga"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp">
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/descripArticu"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </Spinner>
-</RelativeLayout>
-<RelativeLayout
-    android:id="@+id/cantidadDM"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="280dp"
-    android:visibility="gone"
-    >
-    <TextView
-        android:id="@+id/txtCantidadDM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cantidad"
-        android:textSize="25dp"
-        />
-
-    <EditText
-        android:id="@+id/piezaMD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/txtCantidadDM"
-        android:inputType="number"
-        />
-</RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/metrosDM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        android:visibility="gone"
-        >
-        <TextView
-            android:id="@+id/txtInteriorDM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/interior"
-            android:textSize="25dp"
-            android:layout_marginTop="35dp"
-            />
-        <TextView
-            android:id="@+id/txtExteriorDM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exterior"
-            android:textSize="25dp"
-            android:layout_marginTop="95dp"
-            />
-        <TextView
-            android:id="@+id/txtInicioDM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/inicio"
-            android:textSize="25dp"
-            android:layout_marginStart="150dp"
-            />
-
-        <TextView
-            android:id="@+id/txtFinalDM"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_toEndOf="@+id/txtInicioDM"
-            android:text="@string/fin"
-            android:textSize="25dp" />
-
-        <EditText
-            android:id="@+id/InicialIDM"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtInicioDM"
-            android:layout_alignEnd="@+id/txtInicioDM"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@+id/txtInteriorDM"
-            android:inputType="number"
-            />
-
-        <EditText
-            android:id="@+id/InicialEDM"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/InicialIDM"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_toEndOf="@+id/txtExteriorDM"
-            android:inputType="number"
-            />
-        <EditText
-            android:id="@+id/FinalIDM"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtFinalDM"
-            android:layout_alignEnd="@+id/txtFinalDM"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@+id/InicialIDM"
-            android:inputType="number"
-            />
-
-        <EditText
-            android:id="@+id/FinalEDM"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/FinalIDM"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@+id/InicialEDM"
-            android:inputType="number"
-            />
-    </RelativeLayout>
+                <Spinner
+                    android:id="@+id/descripcionArticuloDesc"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 
-    <Button
-        android:id="@+id/agregarDM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:text="@string/agregar" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/clasificacionMate"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/descripcionArticuloDesc"
+                    app:layout_constraintTop_toBottomOf="@+id/descripcionArticuloDesc" />
+
+                <Spinner
+                    android:id="@+id/clasificacionMatDesc"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_Extenciones"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constrain_descargaMateriales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/seleccionExt"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/extencionesDescarga"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                     />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_Cantidad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Extenciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/cantidad"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/piezaMD"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="number" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_Metraje"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Extenciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/inicio"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    app:layout_constraintStart_toStartOf="@id/textView13"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/fin"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textView13"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/interior"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textView15"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/exterior"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/InicialIDM"
+                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/FinalIDM"
+                    app:layout_constraintStart_toEndOf="@+id/InicialIDM"
+                    app:layout_constraintTop_toBottomOf="@+id/textView14"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/InicialEDM"
+                    app:layout_constraintStart_toEndOf="@+id/textView16"
+                    app:layout_constraintTop_toBottomOf="@+id/InicialIDM"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/FinalEDM"
+                    app:layout_constraintStart_toEndOf="@+id/InicialEDM"
+                    app:layout_constraintTop_toBottomOf="@+id/FinalIDM"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="number" />
+            </android.support.constraint.ConstraintLayout>
+
+            <Button
+                android:id="@+id/agregarMaterial"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal"
+                android:text="@string/agregar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje" />
+<!---->
+
+                <LinearLayout
+
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
+
+                <com.evrencoskun.tableview.TableView
+                    android:id="@+id/tabla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
