@@ -13,27 +13,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
+import org.w3c.dom.Text;
 
+import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
 
 public class Configuracion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Button CS;
+    private TextView nombreConfi;
     private Request request = new Request();
+    NavigationView barra;
+    TextView nombreTec;
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_configuracion);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CS = (Button)findViewById(R.id.CS);
+        CS = (Button)findViewById(R.id.btnCerrarSesion);
+        nombreConfi = findViewById(R.id.nombreTecnico);
+        barra = findViewById(R.id.nav_view);
+        View barra1 = barra.getHeaderView(0);
+        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(request.nombre_tecnico);
         Error.Errores(this);
         //Boton para cerrar sesion
+        nombreConfi.setText(nombre_tecnico);
         CS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

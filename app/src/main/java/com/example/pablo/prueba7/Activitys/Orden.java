@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
@@ -35,7 +36,8 @@ public class Orden extends AppCompatActivity
     private Button cambiodom, cambioapa,ordenb,contratob;
   public static   ListView ordenes;
     private EditText ordsearch,contsearch;
-
+    NavigationView barra;
+    TextView nombreTec;
    private Request rqs=new Request();
 
 
@@ -54,7 +56,10 @@ public class Orden extends AppCompatActivity
         ordsearch=findViewById(R.id.ordsearch);
         contsearch=findViewById(R.id.contsearch);
         Error.Errores(this);
-
+        barra = findViewById(R.id.nav_view);
+        View barra1 = barra.getHeaderView(0);
+        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(request.nombre_tecnico);
         ////////////////////////////////////////
         clvorden=0;
         opcion=1;

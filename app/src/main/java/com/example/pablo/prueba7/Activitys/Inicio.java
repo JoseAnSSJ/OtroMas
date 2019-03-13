@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
@@ -34,10 +35,10 @@ public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static int OE,OP,OV,OEP,OO,RE,RP,REP,RV,RO;
     public static String tipodeDescarga;
-
+        NavigationView barra;
     public static PieChart  pieChart;
     private Request request = new Request();
-    public static TextView trabajo, direccion;
+    public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
 
 
 
@@ -46,9 +47,17 @@ public class Inicio extends AppCompatActivity
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        pieChart =(PieChart)findViewById(R.id.pastel);
-        trabajo= (TextView)findViewById(R.id.proximotrabajo);
-        direccion = (TextView)findViewById(R.id.direccion);
+        pieChart =(PieChart)findViewById(R.id.graficaPastel);
+        tipoTrabajo= (TextView)findViewById(R.id.tipoDeTrabajo);
+        contratoTrabajo = (TextView)findViewById(R.id.contrato);
+        horaTrabajo= (TextView)findViewById(R.id.hora);
+        calleDireccion = (TextView)findViewById(R.id.calle);
+        numeroDireccion= (TextView)findViewById(R.id.numero);
+        coloniaDireccion = (TextView)findViewById(R.id.colonia);
+        barra = findViewById(R.id.nav_view);
+        View barra1 = barra.getHeaderView(0);
+        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(request.nombre_tecnico);
         setSupportActionBar(toolbar);
         Error.Errores(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -61,8 +70,13 @@ public class Inicio extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         ///////////////////////////////////////////////////////////////
         pieChart.refreshDrawableState();
-        trabajo.setText(request.sigueinteTrabajo);
-        direccion.setText(request.siguenteDireccion);
+        tipoTrabajo.setText(request.sigueinteTipo);
+        contratoTrabajo.setText(request.siguenteContrato);
+        horaTrabajo.setText(request.sigueinteHora);
+        calleDireccion.setText(request.siguenteCalle);
+        numeroDireccion.setText(request.sigueinteNumero);
+        coloniaDireccion.setText(request.siguenteColonia);
+
     }
 
     @Override

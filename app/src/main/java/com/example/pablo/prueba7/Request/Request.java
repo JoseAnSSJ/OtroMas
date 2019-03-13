@@ -127,7 +127,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     CambioDom c = new CambioDom();
-    public static String clave_tecnico,msgComando="",sigueinteTrabajo,siguenteDireccion;
+    public static String clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
     public static String nombre_tecnico;
     public static boolean cambioA, isnet;
     public static Long abc;
@@ -265,11 +265,13 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NUMERO").getAsString(),
                                 userJson.get("Tipo").getAsString()
                         );
-                        sigueinteTrabajo= "Tipo de trabajo: " + user.Tipo + " Contrato: " + user.Contrato + " Hora: " + user.Hora;
-                        siguenteDireccion = "Colonia: " + user.Colonia + " Calle: " + user.Calle;
-                    }catch (Exception e){
-                        sigueinteTrabajo ="Ha terminado los Trabajos asignados";
-                        siguenteDireccion="";
+                        sigueinteTipo= user.Tipo;
+                        siguenteContrato = user.Contrato;
+                        sigueinteHora= user.Hora;
+                        siguenteCalle = user.Calle;
+                        sigueinteNumero= user.NUMERO;
+                        siguenteColonia =user.Colonia;
+                           }catch (Exception e){
                     }
                     Intent intento = new Intent(context, Inicio.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

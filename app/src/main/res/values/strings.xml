@@ -96,8 +96,53 @@
     <string name="exterior">Exterior</string>
     <string name="interior">Interior</string>
     <string name="fin">Fin</string>
-    <string name="inicio">Inicio</string>
 
+    <string name="login">Login</string>
+
+    <string name="contrasenia">Contraseña</string>
+    <string name="btnlogin">Entrar</string>
+    <string name="recordar">Recordar</string>
+
+    <string name="ordenes">Ordenes</string>
+    <string name="reportes">Reportes</string>
+    <string name="configuracion">Configuración</string>
+    <string name="cerrarSesion">Cerrar sesión</string>
+    <string name="proximo_Trabajo">Próximo trabajo</string>
+    <string name="direccion">Dirección</string>
+
+    <string name="nContrato"># de contrato</string>
+    <string name="btn_CAparato">Cambio aparato</string>
+    <string name="btn_CDomicilio">Cambio domicilio</string>
+    <string name="tab_Horas">Horas</string>
+    <string name="tab_Trabajo">Trabajo</string>
+    <string name="tab_Material">Material</string>
+    <string name="tab_Ejecutar">Finalizar</string>
+    <string name="pendiente">Pendiente</string>
+    <string name="primerVisita">Visita 1</string>
+    <string name="segundaVisita">Visita 2</string>
+    <string name="horaInicio">Hora inicio</string>
+    <string name="horaFin">Hora fin</string>
+    <string name="formatoFecha">dd/MM/AAAA</string>
+    <string name="formatoHora">hh:mm</string>
+    <string name="tecnicoSecundario">Técnico secundario</string>
+    <string name="coordenadas">Coordenadas</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+    <string name="btn_ejecutar">Ejecutar</string>
+    <string name="statusComando">Estatus comando</string>
+    <string name="espera">Espera</string>
+    <string name="resultado">Resultado</string>
+    <string name="tipoDeTrabajo">Tipo de trabajo:</string>
+    <string name="hora">Hora:</string>
+    <string name="calle">Calle:</string>
+    <string name="numero">Número:</string>
+    <string name="colonia">Colonia:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="compania">Compañia</string>
+    <string name="domicilio">Domicilio</string>
+    <string name="tv_Nombre">Nombre</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="servAsignados">Servicios asignados</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

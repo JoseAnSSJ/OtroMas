@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -35,6 +36,8 @@ public class Reportes extends AppCompatActivity
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
    private quejas_adapter_result adapterqueja;
+    NavigationView barra;
+    TextView nombreTec;
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -47,7 +50,10 @@ public class Reportes extends AppCompatActivity
         bcontrato=findViewById(R.id.bcontrato);
         reportesearch=findViewById(R.id.reportesearch);
         contratosearch=findViewById(R.id.contsearch);
-
+        barra = findViewById(R.id.nav_view);
+        View barra1 = barra.getHeaderView(0);
+        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(request.nombre_tecnico);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
