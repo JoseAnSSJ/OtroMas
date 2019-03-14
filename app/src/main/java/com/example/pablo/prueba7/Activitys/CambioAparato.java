@@ -48,6 +48,7 @@ public class CambioAparato extends AppCompatActivity {
 
 
 
+
         Finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,12 +62,9 @@ public class CambioAparato extends AppCompatActivity {
         aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.SetCambioAparato(getBaseContext());
-                if(request.cambioA==true){
+                request.SetCambioAparato(getApplicationContext());
+                Login.esperar(1);
                     finish();
-                }
-
-
             }
         });
         estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -157,7 +155,7 @@ public class CambioAparato extends AppCompatActivity {
             }
             return position;
         }
-        public static int obtenerPosicionSA(Spinner spinner, String abc){
+        public static int obtenerPosicionSA( String abc){
             int position=0;
             Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();
             List<GetSP_StatusAparatosListResult> dat = itdata.next();
@@ -168,7 +166,7 @@ public class CambioAparato extends AppCompatActivity {
         }
         return position;
     }
-    public static int obtenerPosicionTA(Spinner spinner, int abc){
+    public static int obtenerPosicionTA(int abc){
         int position=0;
         Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = Array.dataApaTipo.iterator();
         List<GetListTipoAparatosByIdArticuloResult> dat = itdata.next();
@@ -179,7 +177,7 @@ public class CambioAparato extends AppCompatActivity {
         }
         return position;
     }
-    public static int obtenerPosicionA(Spinner spinner, int abc){
+    public static int obtenerPosicionA(int abc){
         int position=0;
         Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata = Array.dataApaTipDis.iterator();
         List<GetListAparatosDisponiblesByIdArticuloResult> dat = itdata.next();

@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -910,6 +911,7 @@ public class Request extends AppCompatActivity {
                             CambioAparato.aparato.setAdapter(adapter);
                             try {
                                 CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                                getStatusApa(context);
                             } catch (Exception e) {
 
                             }
@@ -950,7 +952,8 @@ public class Request extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                             CambioAparato.estado.setAdapter(adapter);
                             try {
-                                CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparato.estado, CambioAparatoDeepModel.StatusEntrega));
+                                CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
+                                getApaTipo(context);
                             } catch (Exception e) {
 
                             }
@@ -996,6 +999,16 @@ public class Request extends AppCompatActivity {
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                             CambioAparato.tipoAparato.setAdapter(adapter);
+                            try{
+                                Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
+                                List<GetListClienteAparatosResult> dat1 = itdata1.next();
+                                CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                                CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                                CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
+                                getApaTipDis(context);
+                            }catch (Exception e){
+
+                            }
                         }
                     }
                 }
@@ -1023,6 +1036,13 @@ public class Request extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<JSONApaTipDis> call, Response<JSONApaTipDis> response) {
                     if(response.code()==200) {
+                        try{
+                            Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
+                            List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
+                            CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                        }catch (Exception e){
+
+                        }
                         JSONApaTipDis jsonResponse = response.body();
                         array.dataApaTipDis = new ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>>(asList(jsonResponse.GetListAparatosDisponiblesByIdArticuloResult()));
                         Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata = array.dataApaTipDis.iterator();
@@ -1036,8 +1056,16 @@ public class Request extends AppCompatActivity {
                                 datos[j] = dat.get(i).getDescripcion();
                                 j = j + 1;
                             }
+                            //////////////////////
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                             CambioAparato.aparatoAsignar.setAdapter(adapter);
+                            try{
+
+                                CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
+                            }catch (Exception e){
+
+                            }
+                            ///////////////////////////
                         }
                     }
                 }
@@ -1068,19 +1096,8 @@ public class Request extends AppCompatActivity {
                                     userJson.get("StatusEntrega").getAsString()
                             );
                             getCliApa(context);
-                            getStatusApa(context);
-                            ///
-                            Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
-                            List<GetListClienteAparatosResult> dat = itdata.next();
-                            CambioAparato.idArticulo = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato, CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
-                            CambioAparato.contrato = dat.get(CambioAparato.obtenerPosicionTA(CambioAparato.tipoAparato, CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
-                            getApaTipo(context);
 
-                            //////////////////////
-                            Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
-                            List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
-                            CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparato.aparatoAsignar, CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
-                            getApaTipDis(context);
+
 
 
                         } catch (Exception e) {
@@ -2188,7 +2205,8 @@ public class Request extends AppCompatActivity {
 
                     if(response1.code()==200){
                         Toast.makeText(context, "Se ha guardado el aparato correctamente", Toast.LENGTH_SHORT).show();
-                        cambioA=true;
+
+
                     }else{
                         Toast.makeText(context, "Error al agregar el aparato", Toast.LENGTH_SHORT).show();
                         cambioA=false;
