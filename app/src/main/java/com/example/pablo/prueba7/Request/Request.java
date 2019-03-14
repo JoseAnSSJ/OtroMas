@@ -625,7 +625,7 @@ public class Request extends AppCompatActivity {
 
                     }
 
-
+/*
                     try {
                         if (DeepConsModel.STATUS.equals("E")) {
                             statusMA=("Ejecutada");
@@ -638,7 +638,7 @@ public class Request extends AppCompatActivity {
                         }
                     } catch (Exception e) {
 
-                    }
+                    }*/
 
 
                 }
@@ -680,7 +680,7 @@ public class Request extends AppCompatActivity {
                     }
 
 
-                    MainActivity.Empresa.setText(InfoClienteModelo.Compania);
+                   // MainActivity.Empresa.setText(InfoClienteModelo.Compania);
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 }

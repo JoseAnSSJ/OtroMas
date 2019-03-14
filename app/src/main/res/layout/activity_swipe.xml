@@ -72,7 +72,7 @@
             android:layout_marginTop="25dp"
             android:layout_toEndOf="@+id/zaw"
             android:hint="---" />
-
+<!--
         <TextView
             android:id="@+id/txtqwe"
             android:layout_width="wrap_content"
@@ -92,7 +92,8 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="25dp"
             android:layout_toEndOf="@+id/txtqwe"
-            android:hint="---" />
+            android:hint="" />
+            -->
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -100,7 +101,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
         android:verticalScrollbarPosition="defaultPosition"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/scv"
         >
         <RelativeLayout
@@ -110,97 +111,91 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="50dp"
             android:background="#c0f2f1"
-            android:visibility="gone"
+            android:visibility="visible"
             >
+
             <TextView
+                android:id="@+id/asd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="400dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="161dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/info_Usuario"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_width="97dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/empresaDos"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/infoempresa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="75dp"
-                android:hint="---"
-                android:textSize="20dp" />
-            <TextView
+                android:id="@+id/as"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/asd"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="115dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/nombreDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/infonombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/as"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
                 android:hint="---"
                 android:textSize="20dp" />
+
             <TextView
+                android:id="@+id/wre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/infonombre"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="180dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/direccionDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/infodireccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/wre"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="200dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
                 android:text="---"
                 android:textSize="20dp" />
+
             <TextView
+                android:id="@+id/jkl"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
+                android:layout_below="@+id/infodireccion"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="250dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/servicios_Asignados"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/infoservicios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/jkl"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="50dp"
                 android:gravity="center"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="270dp"
+                android:textAlignment="center"
                 android:textSize="20dp" />
         </RelativeLayout>
 

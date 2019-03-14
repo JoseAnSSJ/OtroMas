@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         hzScrollView= findViewById(R.id.scv);
         NombreTec= findViewById(R.id.tecniconame);
         Contrato= findViewById(R.id.contrato);
-        Status= findViewById(R.id.status);
-        Empresa= findViewById(R.id.infoempresa);
+      //  Status= findViewById(R.id.status);
         Nombre= findViewById(R.id.infonombre);
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
-        Status.setText(request.statusMA);
+      //  Status.setText(request.statusMA);
         NombreTec.setText(request.nombre_tecnico);
 
 

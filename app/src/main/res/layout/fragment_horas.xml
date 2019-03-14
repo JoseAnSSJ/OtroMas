@@ -166,58 +166,58 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp">
-               <!-- <TextView
-                    android:id="@+id/horabi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:hint="@string/formatoHora"
+                <!-- <TextView
+                     android:id="@+id/horabi"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentStart="true"
+                     android:layout_marginStart="10dp"
+                     android:hint="@string/formatoHora"
 
-                    android:text="@string/horai"
-                    android:textSize="20dp" />
-                <TextView
-                    android:id="@+id/horabf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/horaf"
-                    android:hint="@string/formatoHora"
-                    android:textSize="20dp" />
+                     android:text="@string/horai"
+                     android:textSize="20dp" />
+                 <TextView
+                     android:id="@+id/horabf"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="50dp"
+                     android:layout_marginBottom="20dp"
+                     android:text="@string/horaf"
+                     android:hint="@string/formatoHora"
+                     android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/horaf11"
-                    android:layout_width="150dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="135dp"
-                    android:layout_marginTop="52dp"
-                    android:layout_marginEnd="91dp"
-                    android:layout_marginBottom="9dp"
-                    android:focusable="false"
-                    android:hint="00:00"
-                    android:textSize="20dp" />
+                 <EditText
+                     android:id="@+id/horaf11"
+                     android:layout_width="150dp"
+                     android:layout_height="44dp"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentEnd="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="135dp"
+                     android:layout_marginTop="52dp"
+                     android:layout_marginEnd="91dp"
+                     android:layout_marginBottom="9dp"
+                     android:focusable="false"
+                     android:hint="00:00"
+                     android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/horai11"
-                    android:layout_width="118dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="136dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="61dp"
-                    android:focusable="false"
-                    android:hint="00:00"
-                    android:textSize="20dp" />-->
+                 <EditText
+                     android:id="@+id/horai11"
+                     android:layout_width="118dp"
+                     android:layout_height="44dp"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="136dp"
+                     android:layout_marginTop="0dp"
+                     android:layout_marginBottom="61dp"
+                     android:focusable="false"
+                     android:hint="00:00"
+                     android:textSize="20dp" />-->
             </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"
