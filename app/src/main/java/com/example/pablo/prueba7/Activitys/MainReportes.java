@@ -57,11 +57,12 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);
 
+                    info.setText("Ocultar");
                 }
                 else{
                     layoutAnimado.setVisibility(View.GONE);
                     hzScrollView.setVisibility(View.GONE);
-
+                    info.setText("Info");
                 }
             }
         });

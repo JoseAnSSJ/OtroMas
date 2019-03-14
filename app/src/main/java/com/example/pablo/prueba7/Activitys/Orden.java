@@ -216,7 +216,7 @@ public class Orden extends AppCompatActivity
             Intent intent1 = new Intent(Orden.this, Reportes.class);
             clavequeja=0;
             opcion=1;
-            //request.getListQuejas();
+            request.getListQuejas();
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {

@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Activitys.MainReportes;
-import com.example.pablo.prueba7.Activitys.Orden;
-import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -38,7 +36,7 @@ public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
     public static Button eject;
-    private Button salir;
+    EditText edt1;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
     int añoE, mesE, diaE;
@@ -60,18 +58,6 @@ public class EjecutarFragment extends Fragment {
         eject = view.findViewById(R.id.ejec);
         msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         ejecutar = view.findViewById(R.id.ejecutarLay);
-        salir= view.findViewById(R.id.salirEjecutarOrd);
-
-
-
-        salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getActivity(), Orden.class);
-                startActivity(intent);
-            }
-        });
-
 
         reiniciar.setEnabled(false);
 if(request.isnet==true){
@@ -100,9 +86,6 @@ if(request.isnet==true){
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                                  eject.setEnabled(false);
                                  request.getValidaOrdSer(getActivity());
-                            Intent intent1 = new Intent(getActivity(), Orden.class);
-                            startActivity(intent1);
-                            request.getListOrd();
                         }
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
                             Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
@@ -176,11 +159,8 @@ if(request.isnet==true){
                                     }
                                 }).show();
                     }
-
-
                 }
                 ////////*************************
-
 
                 reiniciar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -191,14 +171,10 @@ if(request.isnet==true){
                 });
 
 
-
-
             }
         });
         return view;
-
     }
-
 
     public int ValidarFechas(int diaE, int mesE, int añoE, String fechaSol, int diaA, int mesA, int añoA, int horaI, int horaF) {
         int a = 0;
@@ -247,8 +223,6 @@ if(request.isnet==true){
         }
         return a;
     }
-
-
 
 }
 

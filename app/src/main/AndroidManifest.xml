@@ -49,11 +49,11 @@
             android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
             ></activity>
         <activity android:name=".Activitys.asignacion"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
         <activity android:name=".Activitys.asignado"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
         <activity android:name=".Activitys.ExtensionesAdi"

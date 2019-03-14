@@ -166,7 +166,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp">
-                <TextView
+               <!-- <TextView
                     android:id="@+id/horabi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                     android:layout_marginBottom="61dp"
                     android:focusable="false"
                     android:hint="00:00"
-                    android:textSize="20dp" />
+                    android:textSize="20dp" />-->
             </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"

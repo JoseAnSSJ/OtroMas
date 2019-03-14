@@ -74,6 +74,13 @@ public class CambioDom extends AppCompatActivity {
             CasaOeste.setVisibility(View.VISIBLE);
         }
 
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +91,5 @@ public class CambioDom extends AppCompatActivity {
         });
 
 
-        regresar .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-
     }
 }
-
