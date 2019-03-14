@@ -35,9 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
             android:text="---"
-
             />
-
+        
         <Button
             android:id="@+id/info"
             android:layout_width="90dp"
@@ -73,8 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="233dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="50dp"
             android:text="@string/estatusDos"
             android:textColor="#000"
             />
@@ -84,8 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="284dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="50dp"
             android:hint="---" />
     </RelativeLayout>
     <ScrollView
