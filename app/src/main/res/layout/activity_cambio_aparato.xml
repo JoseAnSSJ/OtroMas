@@ -26,7 +26,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/selecciona_Aparato"
-                    android:textSize="35dp"
+                    android:textSize="25dp"
+                    android:layout_marginTop="30dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -36,7 +37,7 @@
                     android:layout_alignTop="@id/qwe"
                     android:layout_marginTop="50dp"
                     android:text="@string/aparato_Cambiar"
-                    android:textSize="30dp"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -45,7 +46,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="120dp"
                     android:text="@string/aparatoDos"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <Spinner
@@ -62,7 +63,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="190dp"
                     android:text="@string/estado_Aparato"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <Spinner
@@ -84,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/aparato_a_Asignar"
-                    android:textSize="30dp"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -122,7 +123,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="40dp"
                         android:text="@string/aparatoDos"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -143,7 +144,7 @@
                     android:layout_marginStart="57dp"
                     android:layout_marginTop="280dp"
                     android:background="@drawable/boton"
-                    android:backgroundTint="@color/colorAccent"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="@string/aceptar"
                     android:textColor="#000" />
 
@@ -157,7 +158,7 @@
                     android:layout_marginEnd="59dp"
                     android:layout_toEndOf="@+id/uno"
                     android:background="@drawable/boton"
-                    android:backgroundTint="@color/colorAccent"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="@string/Regresar"
                     android:textColor="#000" />
             </RelativeLayout>
