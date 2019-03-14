@@ -161,6 +161,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 visita=1;
             }
             break;
+
             case R.id.visitada:
             {
                 mostrarParticular(true);
