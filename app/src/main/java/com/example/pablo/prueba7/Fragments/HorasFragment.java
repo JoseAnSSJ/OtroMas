@@ -76,7 +76,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         reportesselectDate = view.findViewById(R.id.tv_Ejecucion);
         reportesselectDate1 = view.findViewById(R.id.tv_PrimerVisita);
         reportesselectDate2 = view.findViewById(R.id.tv_SegundaVisita);
-        reportesselectDate3 = view.findViewById(R.id.tv_TerceraVisita);
+        reportesselectDate3 = view.findViewById(R.id.visita31);
 
 
       //  reportesselectTime = view.findViewById(R.id.horai11);
