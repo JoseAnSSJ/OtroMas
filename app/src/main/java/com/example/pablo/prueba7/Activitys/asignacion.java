@@ -95,6 +95,7 @@ String f;
                 Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento=new Intent(asignacion.this, asignado.class);
                 startActivity(intento);
+                finish();
 
             }
         });
