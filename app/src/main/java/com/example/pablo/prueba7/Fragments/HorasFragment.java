@@ -53,7 +53,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
         request.getTecSecR(getContext());
-        TecSec1= view.findViewById(R.id.tecnicosec1);
+        TecSec1= view.findViewById(R.id.spinnerTecnicoSec);
 
 
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,22 +73,23 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
 
         //////////// acciones de botones de hora y fecha//////
-        reportesselectDate = view.findViewById(R.id.ejecureal1);
-        reportesselectDate1 = view.findViewById(R.id.visita11);
-        reportesselectDate2 = view.findViewById(R.id.visita21);
-        reportesselectDate3 = view.findViewById(R.id.visita31);
+        reportesselectDate = view.findViewById(R.id.tv_Ejecucion);
+        reportesselectDate1 = view.findViewById(R.id.tv_PrimerVisita);
+        reportesselectDate2 = view.findViewById(R.id.tv_SegundaVisita);
+        reportesselectDate3 = view.findViewById(R.id.tv_TerceraVisita);
 
 
-        reportesselectTime = view.findViewById(R.id.horai11);
-        reportesselectTime2 = view.findViewById(R.id.horaf11);
+      //  reportesselectTime = view.findViewById(R.id.horai11);
+     //   reportesselectTime2 = view.findViewById(R.id.horaf11);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
-        contenedorParticular = view.findViewById(R.id.RE1);
-        contenedorCorporativo = view.findViewById(R.id.RV1);
+        contenedorParticular = view.findViewById(R.id.constrain_Visita);
+        contenedorCorporativo = view.findViewById(R.id.constrain_Ejecutada);
 
-        btn1 = view.findViewById(R.id.ejutada1);
-        bt2 = view.findViewById(R.id.visitada1);
+        btn1 = view.findViewById(R.id.rb_Visita);
+        bt2 = view.findViewById(R.id.rb_Ejecutada);
+       // bt2.setChecked(true);
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
@@ -96,8 +97,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         reportesselectDate1.setOnClickListener(this);
         reportesselectDate2.setOnClickListener(this);
         reportesselectDate3.setOnClickListener(this);
-        reportesselectTime.setOnClickListener(this);
-        reportesselectTime2.setOnClickListener(this);
+ //       reportesselectTime.setOnClickListener(this);
+ //       reportesselectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 
@@ -113,7 +114,19 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                btn1.setChecked(true);
                 if(btn1.isChecked()==true){
+                    reporteEjecutada=0;
+                    repotteVisita=1;
+                    statusHora="V";
+                    reportesselectDate.setText("");
+//                    reportesselectTime.setText("");
+ //                   reportesselectTime.setEnabled(false);
+                    reportesselectDate1.setText("");
+                    reportesselectDate2.setText("");
+                    reportesselectDate3.setText("");
+   ///                 reportesselectTime2.setText("");
+ //                   reportesselectTime2.setEnabled(false);
                     reporteEjecutada=0;
                     repotteVisita=1;
                     statusHora="V";
@@ -124,7 +137,19 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                bt2.setChecked(true);
                 if(bt2.isChecked()==true){
+                    reporteEjecutada=1;
+                    repotteVisita=0;
+                    statusHora="E";
+                    reportesselectDate.setText("");
+ //                   reportesselectTime.setText("");
+ ///                   reportesselectTime.setEnabled(true);
+                    reportesselectDate1.setText("");
+                    reportesselectDate2.setText("");
+                    reportesselectDate3.setText("");
+ //                   reportesselectTime2.setText("");
+ //                   reportesselectTime2.setEnabled(true);
                     reporteEjecutada=1;
                     repotteVisita=0;
                     statusHora="E";
@@ -132,41 +157,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
             }
         });
-        switch (v.getId()) {
-            case R.id.ejutada:
-            {
-                mostrarParticular(false);
-                reportesselectDate.setText("");
-                reportesselectTime.setText("");
-                reportesselectTime.setEnabled(false);
-                reportesselectDate1.setText("");
-                reportesselectDate2.setText("");
-                reportesselectDate3.setText("");
-                reportesselectTime2.setText("");
-                reportesselectTime2.setEnabled(false);
-                reporteEjecutada=0;
-                repotteVisita=1;
-                statusHora="V";
-
-            }
-            break;
-            case R.id.visitada:
-            {
-                mostrarParticular(true);
-                reportesselectDate.setText("");
-                reportesselectTime.setText("");
-                reportesselectTime.setEnabled(true);
-                reportesselectDate1.setText("");
-                reportesselectDate2.setText("");
-                reportesselectDate3.setText("");
-                reportesselectTime2.setText("");
-                reportesselectTime2.setEnabled(true);
-                reporteEjecutada=1;
-                repotteVisita=0;
-                statusHora="E";
-            }
-            break;
-        }
 
 
         if (v == reportesselectDate) {
@@ -207,12 +197,12 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         if (v == reportesselectTime) {
 
 // Get Current Time
-            final Calendar c = Calendar.getInstance();
+         /*     final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
             mMinute = c.get(Calendar.MINUTE);
 
             // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+          TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
 
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
@@ -227,7 +217,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
-        }
+        }*/
 
         if (v  == reportesselectDate1) {
             final Calendar c = Calendar.getInstance();
@@ -336,7 +326,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             datePickerDialog.show();
         }
 
-        if (v == reportesselectTime2) {
+       /* if (v == reportesselectTime2) {
 
 // Get Current Time
             final Calendar c = Calendar.getInstance();
@@ -359,17 +349,13 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
-        }
+        }*/
 
 
-    }
-
-
-    private void mostrarParticular(boolean b) {
-        contenedorParticular.setVisibility(b ? View.VISIBLE: View.GONE);
-        contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);
     }
 }
+    }
+
 
 
 

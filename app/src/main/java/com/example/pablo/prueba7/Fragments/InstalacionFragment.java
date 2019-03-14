@@ -32,6 +32,8 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 
@@ -40,7 +42,7 @@ import java.util.Calendar;
  */
 public class InstalacionFragment extends Fragment implements View.OnClickListener {
 
-    public static EditText selectDate, selectTime, selectDate1, selectDate2, selectTime2;
+    public static TextView selectDate, selectTime, selectDate1, selectDate2, selectTime2;
    // public static String clv_TecSec_seleccion="-1"
    public static String latitud, longitud,diaI,mesI,añoI, diaV1,mesV1,añoV1,diaV2,mesV2,añoV2;
     public static int ejecutada=1, visita=0, visita1=0, TecSecSelecc=-1,hf,hi;
@@ -70,25 +72,26 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.activity_hora, container, false);
-        Obs = view.findViewById(R.id.obs);
+        Obs = view.findViewById(R.id.tv_Observaciones);
 
         request.getTecSec(getContext());
         //////////// acciones de botones de hora y fecha//////
-        selectDate = view.findViewById(R.id.ejecureal);
-        selectDate1 = view.findViewById(R.id.visita1);
-        selectDate2 = view.findViewById(R.id.visita2);
-        selectTime = view.findViewById(R.id.horai);
-        selectTime2 = view.findViewById(R.id.horaf);
+        selectDate = view.findViewById(R.id.tv_Ejecucion);
+        selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
+        selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
+     //   selectTime = view.findViewById(R.id.horai);
+     //   selectTime2 = view.findViewById(R.id.horaf);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
-        contenedorParticular = view.findViewById(R.id.RE);
-        contenedorCorporativo = view.findViewById(R.id.RV);
-        btn1 = view.findViewById(R.id.ejutada);
-        bt2 = view.findViewById(R.id.visitada);
+        contenedorParticular = view.findViewById(R.id.constrain_Ejecutada);
+        contenedorCorporativo = view.findViewById(R.id.constrain_Visita);
+        btn1 = view.findViewById(R.id.rb_Visita);
+        bt2 = view.findViewById(R.id.rb_Ejecutada);
         /////////////////////////////////////////////////////
         Obs.setText(request.obsMA);
-        TecSec = view.findViewById(R.id.tecnicosec);
+        TecSec = view.findViewById(R.id.spinnerTecnicoSec);
+       // bt2.setChecked(true);
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -103,9 +106,9 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }
         });
         ///////////////////GPS//////////////////////////////
-        coordenadas = view.findViewById(R.id.txtCoordenadas);
-        coordenadas1 =view.findViewById(R.id.txtCoordenadas1);
-        coordenadas2 = view.findViewById(R.id.txtCoordenadas2);
+       // coordenadas = view.findViewById(R.id.txtCoordenadas);
+        coordenadas1 =view.findViewById(R.id.tv_Latitud);
+        coordenadas2 = view.findViewById(R.id.tv_Longitud);
 
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -117,8 +120,8 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         selectDate.setOnClickListener(this);
         selectDate1.setOnClickListener(this);
         selectDate2.setOnClickListener(this);
-        selectTime.setOnClickListener(this);
-        selectTime2.setOnClickListener(this);
+//        selectTime.setOnClickListener(this);
+//        selectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 
@@ -128,7 +131,19 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if(btn1.isChecked()==true){
+                    ejecutada=0;
+                    visita=1;
+                    mostrarParticular(false);
+                    selectDate.setText("");
+//                    selectTime.setText("");
+//                    selectTime.setEnabled(false);
+                    selectDate1.setText("");
+                    selectDate2.setText("");
+                    selectDate2.setEnabled(false);
+//                    selectTime2.setText("");
+//                    selectTime2.setEnabled(false);
                     ejecutada=0;
                     visita=1;
                 }
@@ -138,45 +153,24 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if(bt2.isChecked()==true){
+                    ejecutada=1;
+                    visita=0;
+                    mostrarParticular(true);
+                    selectDate.setText("");
+//                    selectTime.setText("");
+//                    selectTime.setEnabled(true);
+                    selectDate1.setText("");
+                    selectDate2.setText("");
+ //                   selectTime2.setText("");
+ //                   selectTime2.setEnabled(true);
                     ejecutada=1;
                     visita=0;
                 }
 
             }
         });
-        switch (view.getId()) {
-            case R.id.ejutada:
-            {
-                mostrarParticular(false);
-                selectDate.setText("");
-                selectTime.setText("");
-                selectTime.setEnabled(false);
-                selectDate1.setText("");
-                selectDate2.setText("");
-                selectDate2.setEnabled(false);
-                selectTime2.setText("");
-                selectTime2.setEnabled(false);
-                ejecutada=0;
-                visita=1;
-            }
-            break;
-            case R.id.visitada:
-            {
-                mostrarParticular(true);
-                selectDate.setText("");
-                selectTime.setText("");
-                selectTime.setEnabled(true);
-                selectDate1.setText("");
-                selectDate2.setText("");
-                selectTime2.setText("");
-                selectTime2.setEnabled(true);
-                ejecutada=1;
-                visita=0;
-
-            }
-            break;
-        }
 
 
         if (view == selectDate) {
@@ -214,7 +208,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
-        if (view == selectTime) {
+      /*  if (view == selectTime) {
 
 // Get Current Time
             final Calendar c = Calendar.getInstance();
@@ -237,7 +231,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
-        }
+        }*/
 
         if (view == selectDate1) {
             final Calendar c = Calendar.getInstance();
@@ -310,7 +304,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
-        if (view == selectTime2) {
+       /* if (view == selectTime2) {
 
 // Get Current Time
             final Calendar c = Calendar.getInstance();
@@ -333,7 +327,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 }
             }, mHour, mMinute, false);
             timePickerDialog.show();
-        }
+        }*/
 
 
     }
@@ -360,7 +354,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
 
-        coordenadas.setText("Localización agregada");
+//        coordenadas.setText("Localización agregada");
 //        direccion.setText("");
     }
 
@@ -399,24 +393,24 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             latitud= String.valueOf(loc.getLatitude());
             longitud = String.valueOf(loc.getLongitude());
             String Text1 = "Coordenadas" ;
-            String Text2 =  "\n Lat = " + loc.getLatitude();
-            String Text3 = "\n Long = " + loc.getLongitude();
+            String Text2 =  String.valueOf(loc.getLatitude());
+            String Text3 = String.valueOf(loc.getLongitude());
             coordenadas2.setText(Text3);
             coordenadas1.setText(Text2);
-            coordenadas.setText(Text1);
+//            coordenadas.setText(Text1);
             this.mainActivity.setLocation(loc);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
             /* Este metodo se ejecuta cuando el GPS es desactivado*/
-            coordenadas.setText("GPS Desactivado");
+         //   coordenadas.setText("GPS Desactivado");
         }
 
         @Override
         public void onProviderEnabled(String provider) {
             /* Este metodo se ejecuta cuando el GPS es activado*/
-            coordenadas.setText("GPS Activado");
+          //  coordenadas.setText("GPS Activado");
         }
 
         @Override

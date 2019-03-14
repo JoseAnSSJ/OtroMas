@@ -12,23 +12,26 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="19dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="173dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="4dp"
-            android:textColor="#000"
-            android:text="@string/tecnicoDos" />
+            android:text="@string/tecnicoDos"
+            android:textColor="#000" />
+
         <TextView
             android:id="@+id/tecniconame"
             android:layout_width="wrap_content"
@@ -49,6 +52,7 @@
             android:background="@drawable/boton"
             android:text="@string/datos_Cliente"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,8 +61,8 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="25dp"
             android:text="@string/contratoDos"
-            android:textColor="#000"
-            />
+            android:textColor="#000" />
+
         <TextView
             android:id="@+id/contrato"
             android:layout_width="wrap_content"
@@ -68,6 +72,7 @@
             android:layout_marginStart="165dp"
             android:layout_marginTop="25dp"
             android:hint="---" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,8 +81,8 @@
             android:layout_marginStart="233dp"
             android:layout_marginTop="24dp"
             android:text="@string/estatusDos"
-            android:textColor="#000"
-            />
+            android:textColor="#000" />
+
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
