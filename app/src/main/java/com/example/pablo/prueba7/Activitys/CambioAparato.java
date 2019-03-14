@@ -10,8 +10,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
+import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -90,6 +92,7 @@ public class CambioAparato extends AppCompatActivity {
                     Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata1 = Array.dataApaTipDis.iterator();
                     List<GetListAparatosDisponiblesByIdArticuloResult> dat1 = itdata1.next();
                     clvAparatoCAPAT=dat1.get(position-1).getClv_Aparato();
+
                 }
             }
 
@@ -105,9 +108,16 @@ public class CambioAparato extends AppCompatActivity {
                         if(position!=0){
                             Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat = itdata.next();
-                            idArticulo = dat.get(position-1).getIdArticulo();
+                            if(trabajos_adapter_result.ftth==1){
+                                idArticulo2 = dat.get(position-1).getIdArticulo();
                             contrato = dat.get(position-1).getControNet();
-                            request.getApaTipo(getApplicationContext());
+                                request.getApaTipDis(getApplicationContext());
+                            }else{
+                                idArticulo = dat.get(position-1).getIdArticulo();
+                                contrato = dat.get(position-1).getControNet();
+                                request.getApaTipo(getApplicationContext());
+                            }
+
                         }
                     }
 

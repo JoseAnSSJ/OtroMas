@@ -43,6 +43,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public static  int lugar;
     public static boolean stat;
     public static int ClaveTrabajo;
+    public static int ftth=0;
 
 
 
@@ -170,6 +171,8 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
+                    ftth=1;
+
                     Cmcontext.startActivity(intento);
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
