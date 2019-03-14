@@ -136,6 +136,7 @@ public class Request extends AppCompatActivity {
     public static int tecC;
     public static String fechaSl;
     public int reintentaB;
+    public static String extencionesE;
     public  static ArrayAdapter adapterTecSec,adapterTecSecR;
     public static boolean pieza=false;
     public static String contraroMA,obsMA,statusMA;
@@ -862,7 +863,7 @@ public class Request extends AppCompatActivity {
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                     if(response1.code()==200){
                         String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
-                        txtExtencion.setText(string);
+                        extencionesE=string;
                         Intent intento = new Intent(context, ExtensionesAdi.class);
                         context.startActivity(intento);
                     }

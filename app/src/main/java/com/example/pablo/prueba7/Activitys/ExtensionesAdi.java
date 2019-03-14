@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
 
 public class ExtensionesAdi extends AppCompatActivity {
     private Button aceptar,salir;
     public static TextView txtExtencion;
+    Request request= new Request();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -20,6 +22,7 @@ public class ExtensionesAdi extends AppCompatActivity {
         aceptar = findViewById(R.id.extencionAceptar);
         txtExtencion = findViewById(R.id.txtExtencion);
         salir=findViewById(R.id.extencionSalir);
+        txtExtencion.setText(request.extencionesE);
 
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
