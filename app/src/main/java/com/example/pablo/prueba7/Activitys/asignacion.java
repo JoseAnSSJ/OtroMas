@@ -36,6 +36,7 @@ Request request = new Request();
 
     public static Button siguiente, eliminar, aceptarAsignacion,eliminarAparato, cancelarAsigancion;
     public static  Button aceptarmedio,cancelarmedio;
+    private Button Regresar;
     public static ListView Asignacion;
     public static Spinner spinnerMedio;
     public static RelativeLayout layoutMedio;
@@ -72,10 +73,11 @@ String f;
         aceptarAsignacion = findViewById(R.id.aceptarAsignacion);
         layoutMedio = findViewById(R.id.poiuyt);
         cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
-
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+
+
 
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,5 +230,6 @@ cancelarAsigancion.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
 
     }

@@ -20,8 +20,8 @@ import com.example.pablo.prueba7.Request.Request;
  * A simple {@link Fragment} subclass.
  */
 public class TrabajosFragment extends Fragment implements View.OnClickListener {
-    public static Spinner solucion,prioridad,clasific;
-    public static TextView desc, problm;
+    public static Spinner solucion;
+    public static TextView desc, problm,prioridad,clasific;
     public static  EditText proble;
     private Request request = new Request();
     public static int Clv_Sol=-1;
@@ -48,7 +48,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
          proble=view.findViewById(R.id.problema);
-         solucion = view.findViewById(R.id.tiposol);
+       solucion = view.findViewById(R.id.tiposol);
         solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -67,7 +67,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
 
-        solucion.getSelectedItemPosition();
+
 
 
         prioridad= view.findViewById(R.id.Sp2);

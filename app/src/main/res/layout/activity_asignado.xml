@@ -100,10 +100,12 @@
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/agregar"
+        android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:text="@string/agregar"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:id="@+id/agregar"

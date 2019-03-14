@@ -412,10 +412,7 @@ public class Request extends AppCompatActivity {
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
 
-                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
+
 
                         }
                     }
@@ -1413,6 +1410,7 @@ public class Request extends AppCompatActivity {
 
                             ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                             solucion.setAdapter(adapter);
+
                         }
                     }
                 }
@@ -1454,17 +1452,11 @@ public class Request extends AppCompatActivity {
                                 Asigna1.add(dat.get(i).getClasificacionProblema());
                                 Obs = dat.get(i).observaciones;
                                 clvP = dat.get(i).clvPrioridadQueja;
-                                tecC = dat.get(i).tecnicoCuadrilla;
 
 
-                                ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna);
-                                TrabajosFragment.prioridad.setAdapter(adapter);
 
-
-                                ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna1);
-                                TrabajosFragment.clasific.setAdapter(adapter1);
-
-
+                                TrabajosFragment.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
+                                TrabajosFragment.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                                 TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                                 TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
 
@@ -1645,7 +1637,7 @@ public class Request extends AppCompatActivity {
                     if(response.code()==200){
                         JSONTecSecReport jsonResponse = response.body();
                         array.dataTECSEC = new ArrayList<List<GetMuestraTecnicosAlmacenListResult>>((asList(jsonResponse.getGetMuestraTecnicosAlmacenListResult())));
-                        Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata = array.dataTECSEC.iterator();
+                        Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata =array.dataTECSEC.iterator();
                         while (itdata.hasNext()) {
 
                             List<GetMuestraTecnicosAlmacenListResult> dat = itdata.next();
