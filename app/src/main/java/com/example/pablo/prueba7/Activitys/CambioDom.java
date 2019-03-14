@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class CambioDom extends AppCompatActivity {
-
     private Button aceptar,  regresar;
     public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
     public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
@@ -48,30 +48,29 @@ public class CambioDom extends AppCompatActivity {
 
 
 
-        Iterator<List<GetDameDatosCAMDOResult>> itdata = Array.dataCAMDO.iterator();
-            List<GetDameDatosCAMDOResult> dat = itdata.next();
-        Ciudad.setText(dat.get(0).Ciudad);
-        Localidad.setText(dat.get(0).getLocalidad());
-        Colonia.setText(dat.get(0).getColonia());
-        Calle.setText(dat.get(0).getCalle());
-        Numero.setText(String.valueOf(dat.get(0).getNUMERO()));
-        Numero_i.setText(dat.get(0).getNum_int());
-        Telefono.setText(dat.get(0).getTELEFONO());
-        CalleN.setText(dat.get(0).getCalleNorte());
-        CalleS.setText(dat.get(0).getCalleSur());
-        CallleE.setText(dat.get(0).getCalleEste());
-        CalleO.setText(dat.get(0).getCalleOeste());
 
-        if (dat.get(0).getCasa().equals("N")) {
+        Ciudad.setText(Request.ciudadcmdo);
+        Localidad.setText(Request.localidadcmdo);
+        Colonia.setText(Request.coloniacmdo);
+        Calle.setText(Request.callecmdo);
+        Numero.setText(Request.numerocmdo);
+        Numero_i.setText(Request.numeroicmdo);
+        Telefono.setText(Request.telefonocmdo);
+        CalleN.setText(Request.callencmdo);
+        CalleS.setText(Request.callescmdo);
+        CallleE.setText(Request.calleecmdo);
+        CalleO.setText(Request.calleocmdo);
+
+        if (Request.casacmdo.equals("N")) {
             CasaNorte.setVisibility(View.VISIBLE);
         }
-        if (dat.get(0).getCasa().equals("S")) {
+        if (Request.casacmdo.equals("S")) {
             CasaSur.setVisibility(View.VISIBLE);
         }
-        if (dat.get(0).getCasa().equals("E")) {
+        if (Request.casacmdo.equals("E")) {
             CasaEste.setVisibility(View.VISIBLE);
         }
-        if (dat.get(0).getCasa().equals("O")) {
+        if (Request.casacmdo.equals("O")) {
             CasaOeste.setVisibility(View.VISIBLE);
         }
 

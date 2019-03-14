@@ -89,22 +89,18 @@
 
       <Button
           android:id="@+id/salirEjecutarOrd"
-          android:layout_width="wrap_content"
+          android:layout_width="118dp"
           android:layout_height="wrap_content"
-          android:layout_alignBottom="@+id/restart"
           android:layout_alignParentTop="true"
-          android:layout_alignParentEnd="true"
           android:layout_gravity="center"
-          android:layout_marginStart="56dp"
-          android:layout_marginTop="298dp"
-          android:layout_marginEnd="59dp"
-          android:layout_marginBottom="2dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="295dp"
           android:layout_toEndOf="@+id/restart"
           android:background="@drawable/boton"
-          android:backgroundTint="@color/colorAccent"
+          android:backgroundTint="#2196F3"
+          android:enabled="false"
           android:text="@string/salir"
-          android:textColor="#000"
-          android:visibility="visible" />
+          android:textColor="#000" />
     </RelativeLayout>
 
   </RelativeLayout>

@@ -20,11 +20,10 @@
 
         <TextView
             android:id="@+id/tv_NombreTecnico"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="-10dp"
             android:layout_marginTop="40dp"
             android:paddingBottom="10dp"
             android:text="nobre tecnico"

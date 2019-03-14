@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="120dp"
-                android:background="@drawable/contorno" />
+                android:background="@drawable/disenio_spinner" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="210dp"
-                android:background="@drawable/contorno" />
+                android:background="@drawable/disenio_spinner" />
 
             <TextView
                 android:layout_width="wrap_content"

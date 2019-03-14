@@ -55,7 +55,7 @@
                     android:layout_height="28dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="150dp"
-                    android:background="@drawable/spinners" />
+                    android:background="@drawable/disenio_spinner" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                     android:layout_height="28dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="220dp"
-                    android:background="@drawable/spinners" />
+                    android:background="@drawable/disenio_spinner" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -109,7 +109,7 @@
                         android:layout_height="28dp"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="110dp"
-                        android:background="@drawable/spinners" />
+                        android:background="@drawable/disenio_spinner" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -132,7 +132,7 @@
                         android:layout_height="28dp"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="70dp"
-                        android:background="@drawable/spinners" />
+                        android:background="@drawable/disenio_spinner" />
                 </RelativeLayout>
 
                 <Button
@@ -152,10 +152,8 @@
                     android:id="@+id/dos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="92dp"
+                    android:layout_marginStart="70dp"
                     android:layout_marginTop="280dp"
-                    android:layout_marginEnd="59dp"
                     android:layout_toEndOf="@+id/uno"
                     android:background="@drawable/boton"
                     android:backgroundTint="@color/colorPrimary"

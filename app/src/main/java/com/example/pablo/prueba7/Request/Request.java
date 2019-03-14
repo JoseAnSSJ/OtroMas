@@ -142,6 +142,7 @@ public class Request extends AppCompatActivity {
     public static String contraroMA,obsMA,statusMA;
     public static Integer nExtenciones=0;
     public static String reintentarComando;
+    public static String ciudadcmdo,localidadcmdo,coloniacmdo,callecmdo,numerocmdo,numeroicmdo,telefonocmdo,callencmdo,callescmdo,calleecmdo,calleocmdo,casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
@@ -1109,21 +1110,51 @@ public class Request extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
                     if(response.code()==200){
+                        try{
                         JSONCAMDO jsonResponse = response.body();
-                        array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
-                        Iterator<List<GetDameDatosCAMDOResult>> itdata = array.dataCAMDO.iterator();
-                        while (itdata.hasNext()) {
-                            List<GetDameDatosCAMDOResult> dat = itdata.next();
-                            String datos[] = new String[dat.size()];
-                            for (int i = 0; i < dat.size(); i++) {
-                                Log.d("casa", dat.get(i).getCasa());
+                            array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
+                            Iterator<List<GetDameDatosCAMDOResult>> itdata = array.dataCAMDO.iterator();
+                            while (itdata.hasNext()) {
+                                List<GetDameDatosCAMDOResult> dat = itdata.next();
+                                String datos[] = new String[dat.size()];
+                                for (int i = 0; i < dat.size(); i++) {
+                                    Log.d("casa", dat.get(i).getCasa());
+                                }
+                                ciudadcmdo=dat.get(0).Ciudad;
+                                localidadcmdo=dat.get(0).localidad;
+                                coloniacmdo=dat.get(0).colonia;
+                                callecmdo=dat.get(0).calle;
+                                numerocmdo= String.valueOf(dat.get(0).NUMERO);
+                                numeroicmdo=dat.get(0).Num_int;
+                                telefonocmdo=dat.get(0).TELEFONO;
+                                callencmdo=dat.get(0).calleNorte;
+                                callescmdo=dat.get(0).calleSur;
+                                calleecmdo=dat.get(0).calleEste;
+                                calleocmdo=dat.get(0).calleOeste;
+                                casacmdo=dat.get(0).Casa;
+                                Intent intento = new Intent(context, CambioDom.class);
+                                context.startActivity(intento);
                             }
-
+                        }catch (Exception e){
+                            ciudadcmdo="";
+                            localidadcmdo="";
+                            coloniacmdo="";
+                            callecmdo="";
+                            numerocmdo="";
+                            numeroicmdo="";
+                            telefonocmdo="";
+                            callencmdo="";
+                            callescmdo="";
+                            calleecmdo="";
+                            calleocmdo="";
+                            casacmdo="";
                             Intent intento = new Intent(context, CambioDom.class);
                             context.startActivity(intento);
-
-
                         }
+
+
+
+
                     }
                 }
 
