@@ -83,16 +83,16 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 
-        ActionBar.Tab tab = actionBar.newTab().setText("Horas").setTabListener(this);
+        ActionBar.Tab tab = actionBar.newTab().setText("Reporte").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Reporte").setTabListener(this);
+        tab = actionBar.newTab().setText("Horas").setTabListener(this);
         actionBar.addTab(tab);
 
         tab = actionBar.newTab().setText("Material").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Ejecutar").setTabListener(this);
+        tab = actionBar.newTab().setText("Finalizar").setTabListener(this);
         actionBar.addTab(tab);
 
 
@@ -109,9 +109,9 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new HorasFragment();
-                case 1:
                     return new TrabajosFragment();
+                case 1:
+                    return new HorasFragment();
                 case 2:
                     return new MaterialesFragment();
                 case 3:
