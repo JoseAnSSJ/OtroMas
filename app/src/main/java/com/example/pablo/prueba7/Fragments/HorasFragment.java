@@ -53,7 +53,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_horas, container, false);
         request.getTecSecR(getContext());
-        TecSec1= view.findViewById(R.id.spinnerTecnicoSec);
+        TecSec1= view.findViewById(R.id.tecnicosec1);
 
 
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,11 +73,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
 
         //////////// acciones de botones de hora y fecha//////
-        reportesselectDate = view.findViewById(R.id.tv_Ejecucion);
-        reportesselectDate1 = view.findViewById(R.id.tv_PrimerVisita);
-        reportesselectDate2 = view.findViewById(R.id.tv_SegundaVisita);
-        reportesselectDate3 = view.findViewById(R.id.tv_TerceraVisita);
-
+        reportesselectDate = view.findViewById(R.id.ejecureal1);
+        reportesselectDate1 = view.findViewById(R.id.visita11);
+        reportesselectDate2 = view.findViewById(R.id.visita21);
+        reportesselectDate3 = view.findViewById(R.id.visita31);
 
       //  reportesselectTime = view.findViewById(R.id.horai11);
      //   reportesselectTime2 = view.findViewById(R.id.horaf11);
@@ -87,8 +86,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         contenedorParticular = view.findViewById(R.id.constrain_Visita);
         contenedorCorporativo = view.findViewById(R.id.constrain_Ejecutada);
 
-        btn1 = view.findViewById(R.id.rb_Visita);
-        bt2 = view.findViewById(R.id.rb_Ejecutada);
+        btn1 = view.findViewById(R.id.ejutada1);
+        bt2 = view.findViewById(R.id.visitada1);
        // bt2.setChecked(true);
         /////////////////////////////////////////////////////
 
@@ -157,6 +156,40 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
             }
         });
+        switch (v.getId()) {
+            case R.id.ejutada1:
+            {
+                mostrarParticular(false);
+                reportesselectDate.setText("");
+               // reportesselectTime.setText("");
+               // reportesselectTime.setEnabled(false);
+                reportesselectDate1.setText("");
+                reportesselectDate2.setText("");
+                reportesselectDate3.setText("");
+               // reportesselectTime2.setText("");
+               // reportesselectTime2.setEnabled(false);
+                reporteEjecutada=0;
+                repotteVisita=1;
+                statusHora="V";
+
+            }
+            break;
+            case R.id.visitada1:
+            {
+                mostrarParticular(true);
+                reportesselectDate.setText("");
+             //   reportesselectTime.setText("");
+//                reportesselectDate1.setText("");
+                reportesselectDate2.setText("");
+                reportesselectDate3.setText("");
+          //      reportesselectTime2.setText("");
+              //  reportesselectTime2.setEnabled(true);
+                reporteEjecutada=1;
+                repotteVisita=0;
+                statusHora="E";
+            }
+            break;
+        }
 
 
         if (v == reportesselectDate) {
@@ -354,7 +387,15 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
 
     }
 }
+    private void mostrarParticular(boolean b) {
+        contenedorParticular.setVisibility(b ? View.VISIBLE: View.GONE);
+        contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);
     }
+}
+
+
+
+
 
 
 
