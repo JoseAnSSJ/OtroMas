@@ -12,34 +12,33 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="19dp">
-
+        android:layout_marginTop="10dp">
         <TextView
+            android:id="@+id/qwe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="173dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="4dp"
-            android:text="@string/tecnicoDos"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:text="@string/tecnicoDos" />
 
         <TextView
             android:id="@+id/tecniconame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
-            android:text="---"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/qwe"
 
-            />
+            android:text="---" />
 
         <Button
             android:id="@+id/info"
@@ -52,8 +51,8 @@
             android:background="@drawable/boton"
             android:text="@string/datos_Cliente"
             android:textStyle="bold" />
-
         <TextView
+            android:id="@+id/zaw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -61,25 +60,27 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="25dp"
             android:text="@string/contratoDos"
-            android:textColor="#000" />
+            android:textColor="#000"
+            />
 
         <TextView
             android:id="@+id/contrato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="165dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/zaw"
             android:hint="---" />
 
         <TextView
+            android:id="@+id/txtqwe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="233dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/contrato"
             android:text="@string/estatusDos"
             android:textColor="#000" />
 
@@ -87,10 +88,10 @@
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="284dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/txtqwe"
             android:hint="---" />
     </RelativeLayout>
     <ScrollView
@@ -202,5 +203,7 @@
                 android:layout_marginTop="270dp"
                 android:textSize="20dp" />
         </RelativeLayout>
+
     </ScrollView>
+
 </RelativeLayout>

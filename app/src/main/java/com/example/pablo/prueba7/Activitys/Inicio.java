@@ -68,8 +68,71 @@ public class Inicio extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //////////////////////////////////////////////////////////////
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(1f);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setHoleColor(android.R.color.white);
+        pieChart.setTransparentCircleRadius(1f);
+
+        //Datos de la grafica
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+        if(OE==0 && OP==0 && OV==0 && RP==0 && OEP==0 && OO==0 && RE==0 && RV==0 && REP==0&& RO==0 ){
+            yValues.add(new PieEntry(100f, "Completado"));
+            PieDataSet dataSet = new PieDataSet(yValues, "");
+            dataSet.setSliceSpace(7f);
+            dataSet.setSelectionShift(10f);
+            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            dataSet.setHighlightEnabled(true);
+            PieData data = new PieData((dataSet));
+            data.setValueTextSize(15f);
+            data.setValueTextColor(Color.BLACK);
+            pieChart.setData(data);
+        }else {
+            if (OE != 0) {
+                yValues.add(new PieEntry(OE, "OrdenEjecutada"));
+            }
+            if (OP != 0) {
+                yValues.add(new PieEntry(OP, "OrdenPendiente"));
+            }
+            if (OV != 0) {
+                yValues.add(new PieEntry(OV, "OrdenEnVisita"));
+            }
+            if (OEP != 0) {
+                yValues.add(new PieEntry(OV, "OrdenEnProceso"));
+            }
+            if (OO != 0) {
+                yValues.add(new PieEntry(OV, "Otros"));
+            }
+            if (RE != 0) {
+                yValues.add(new PieEntry(RE, "ReportesEjecutadas"));
+            }
+            if (RP != 0) {
+                yValues.add(new PieEntry(RP, "ReportesPendiente"));
+            }
+            if (REP != 0) {
+                yValues.add(new PieEntry(REP, "ReportesEnProceso"));
+            }
+            if (RV != 0) {
+                yValues.add(new PieEntry(RV, "ReportesEnVisita"));
+            }
+            if (RO != 0) {
+                yValues.add(new PieEntry(OV, "Otros"));
+            }
+        }
+            PieDataSet dataSet = new PieDataSet(yValues, "");
+            dataSet.setSliceSpace(7f);
+            dataSet.setSelectionShift(10f);
+            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            dataSet.setHighlightEnabled(true);
+            PieData data = new PieData((dataSet));
+            data.setValueTextSize(15f);
+            data.setValueTextColor(Color.BLACK);
+            pieChart.setData(data);
         ///////////////////////////////////////////////////////////////
-        pieChart.refreshDrawableState();
+
         tipoTrabajo.setText(request.sigueinteTipo);
         contratoTrabajo.setText(request.siguenteContrato);
         horaTrabajo.setText(request.sigueinteHora);
@@ -143,70 +206,10 @@ public class Inicio extends AppCompatActivity
 
 
     //Grafica de pastel
-    public static void Grafica(){
+    public static void Grafica(PieChart pieChart1){
 
         //Propiedades de la grafica
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(1f);
-        pieChart.setDrawHoleEnabled(false);
-        pieChart.setHoleColor(android.R.color.white);
-        pieChart.setTransparentCircleRadius(1f);
 
-        //Datos de la grafica
-        ArrayList<PieEntry> yValues = new ArrayList<>();
-       if(OE==0 && OP==0 && OV==0 && RP==0 && OEP==0 && OO==0 && RE==0 && RV==0 && REP==0&& RO==0 ){
-            yValues.add(new PieEntry(100f, "Completado"));
-           PieDataSet dataSet = new PieDataSet(yValues, "");
-           dataSet.setSliceSpace(7f);
-           dataSet.setSelectionShift(10f);
-           dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-           dataSet.setHighlightEnabled(true);
-           PieData data = new PieData((dataSet));
-           data.setValueTextSize(15f);
-           data.setValueTextColor(Color.BLACK);
-           pieChart.setData(data);
-        }else {
-           if (OE != 0){
-               yValues.add(new PieEntry(OE,"OrdenEjecutada"));
-           }
-           if (OP != 0) {
-               yValues.add(new PieEntry(OP,"OrdenPendiente"));
-           }
-           if (OV != 0){
-               yValues.add(new PieEntry(OV,"OrdenEnVisita"));
-           }
-           if (OEP != 0){
-               yValues.add(new PieEntry(OV,"OrdenEnProceso"));
-           }
-           if (OO != 0){
-               yValues.add(new PieEntry(OV,"Otros"));
-           }
-           if (RE != 0){
-               yValues.add(new PieEntry(RE,"ReportesEjecutadas"));
-           }
-           if (RP != 0){
-               yValues.add(new PieEntry(RP,"ReportesPendiente"));
-           }
-           if (REP != 0){
-               yValues.add(new PieEntry(REP,"ReportesEnProceso"));
-           }
-           if (RV != 0){
-               yValues.add(new PieEntry(RV,"ReportesEnVisita"));
-           }
-           if (RO != 0){
-               yValues.add(new PieEntry(OV,"Otros"));
-           }
-           PieDataSet dataSet = new PieDataSet(yValues, "");
-           dataSet.setSliceSpace(7f);
-           dataSet.setSelectionShift(10f);
-           dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-           dataSet.setHighlightEnabled(true);
-           PieData data = new PieData((dataSet));
-           data.setValueTextSize(15f);
-           data.setValueTextColor(Color.BLACK);
-           pieChart.setData(data);
        }
 
 
@@ -223,6 +226,6 @@ public class Inicio extends AppCompatActivity
         dataSet.setColors(colors);*/
 
 
-    }
+
 
 }

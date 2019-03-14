@@ -273,10 +273,9 @@ public class Request extends AppCompatActivity {
                         siguenteColonia =user.Colonia;
                            }catch (Exception e){
                     }
-                    Intent intento = new Intent(context, Inicio.class);
-                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intento);
+
                     getOrdenes(context);
+
                 }
 
 
@@ -497,12 +496,15 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-
+                    Intent intento = new Intent(context, Inicio.class);
+                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intento);
 
                     try{
-                        Inicio.Grafica();
+                 //       Inicio.Grafica(Inicio.pieChart);
+                 //       Inicio.pieChart.refreshDrawableState();
                     }catch (Exception e){
-
+                   //     Inicio.pieChart.refreshDrawableState();
                     }
                 }
 
