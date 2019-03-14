@@ -8,6 +8,8 @@
         android:text="Aparatos asignados"
         android:layout_marginStart="90dp"
         android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="90dp" />
     <Button
         android:id="@+id/eliminar"
@@ -25,7 +27,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#00b0ff"
         android:layout_marginLeft="10dp"
         android:background="@drawable/boton"
@@ -44,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Asignacion"
+            android:layout_marginTop="40dp"
             >
         </ListView>
     </RelativeLayout>
