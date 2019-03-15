@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Services;
 
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 
@@ -1056,7 +1057,7 @@ public class Services {
         jsonObject.put("ClvTecnico", claveTecnico);
         jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
         jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("FecEje", InstalacionFragment.selectDate.getText());
+        jsonObject.put("FecEje", EjecutarFragment.fechaHoy);
         jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
         jsonObject.put("Impresa", 1);
         jsonObject.put("ListadeArticulos", "");
@@ -1099,8 +1100,8 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvOrden", clvor);
-        jsonObject.put("horafin", InstalacionFragment.selectTime2.getText());
-        jsonObject.put("horainicio", InstalacionFragment.selectTime.getText());
+        jsonObject.put("horafin", EjecutarFragment.horaHoy);
+        jsonObject.put("horainicio", "08:00");
         jsonObject.put("opcion", 1);
 
 

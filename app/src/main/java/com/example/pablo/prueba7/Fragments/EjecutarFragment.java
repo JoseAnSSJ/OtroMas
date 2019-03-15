@@ -36,10 +36,10 @@ public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
     public static Button eject;
-    EditText edt1;
+    public static String fechaHoy,horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
-    int añoE, mesE, diaE;
+    int añoE, mesE, diaE,horaE,minutoE;
     private  InstalacionFragment horas = new InstalacionFragment();
     private Request request = new Request();
     public EjecutarFragment() {
@@ -81,8 +81,16 @@ if(request.isnet==true){
                 añoE = c.get(Calendar.YEAR);
                 mesE = c.get(Calendar.MONTH);
                 diaE = c.get(Calendar.DAY_OF_MONTH);
+                horaE = c.get(Calendar.HOUR);
+                minutoE = c.get(Calendar.MINUTE);
+
                 if (horas.ejecutada == 1) {
-                    try {
+                    fechaHoy=diaE+"/"+mesE+1+"/"+añoE;
+                    horaHoy = horaE+":"+minutoE;
+                    eject.setEnabled(false);
+                    request.getValidaOrdSer(getActivity());
+
+                   /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                                  eject.setEnabled(false);
                                  request.getValidaOrdSer(getActivity());
@@ -106,11 +114,11 @@ if(request.isnet==true){
                                         startActivity(intent1);
                                     }
                                 }).show();
-                    }
+                    }*/
 
                 }
                 if (horas.visita == 1) {
-                    try {
+                   /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1), Integer.parseInt(InstalacionFragment.mesV1), Integer.parseInt(InstalacionFragment.añoV1), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
                         }
@@ -132,11 +140,11 @@ if(request.isnet==true){
                                         startActivity(intent1);
                                     }
                                 }).show();
-                    }
+                    }*/
 
                 }
                 if (horas.visita1 == 1) {
-                    try {
+                   /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2), Integer.parseInt(InstalacionFragment.mesV2), Integer.parseInt(InstalacionFragment.añoV2), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
                         }
@@ -158,7 +166,7 @@ if(request.isnet==true){
                                         startActivity(intent1);
                                     }
                                 }).show();
-                    }
+                    }*/
                 }
                 ////////*************************
 
@@ -176,7 +184,7 @@ if(request.isnet==true){
         return view;
     }
 
-    public int ValidarFechas(int diaE, int mesE, int añoE, String fechaSol, int diaA, int mesA, int añoA, int horaI, int horaF) {
+  /*  public int ValidarFechas(int diaE, int mesE, int añoE, String fechaSol, int diaA, int mesA, int añoA, int horaI, int horaF) {
         int a = 0;
         char[] fechaSol1 = fechaSol.toCharArray();
         String diaS = "";
@@ -222,7 +230,7 @@ if(request.isnet==true){
             Toast.makeText(getContext(), "Ingrese horas", Toast.LENGTH_SHORT).show();
         }
         return a;
-    }
+    }*/
 
 }
 
