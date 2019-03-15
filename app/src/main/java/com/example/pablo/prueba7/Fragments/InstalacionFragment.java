@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,7 +56,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     public static Spinner TecSec;
     private Request request = new Request();
     private RadioButton btn1, bt2;
-    private LayoutInflater inflater;
+    private ConstraintLayout todo;
     private ViewGroup container;
     private Bundle onsavedInstanceState;
 
@@ -79,6 +81,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
         selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
+        todo = view.findViewById(R.id.todo);
      //   selectTime = view.findViewById(R.id.horai);
      //   selectTime2 = view.findViewById(R.id.horaf);
         ///////////////////////////////////////////////////////
@@ -135,6 +138,9 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 if(btn1.isChecked()==true){
                     ejecutada=0;
                     visita=1;
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    params.setMargins(0, 170, 0, 0);
+                    todo.setLayoutParams(params);
                     mostrarParticular(false);
                     selectDate.setText("");
 //                    selectTime.setText("");
@@ -158,6 +164,9 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                     ejecutada=1;
                     visita=0;
                     mostrarParticular(true);
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    params.setMargins(0, 0, 0, 0);
+                    todo.setLayoutParams(params);
                     selectDate.setText("");
 //                    selectTime.setText("");
 //                    selectTime.setEnabled(true);
