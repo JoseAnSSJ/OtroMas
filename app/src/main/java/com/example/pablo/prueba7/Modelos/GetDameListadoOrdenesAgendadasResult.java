@@ -20,6 +20,19 @@ public class GetDameListadoOrdenesAgendadasResult {
     @SerializedName("Status")
     @Expose
     private String status;
+/////////////////////////////////
+    @SerializedName("Calle")
+    @Expose
+    private String calle;
+
+    @SerializedName("NUMERO")
+    @Expose
+    private String NUMERO;
+
+    @SerializedName("Colonia")
+    @Expose
+    private String colonia;
+
 
 
 
@@ -55,4 +68,27 @@ public class GetDameListadoOrdenesAgendadasResult {
         this.status = status;
     }
 
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
+    public String getNumero() {
+        return NUMERO;
+    }
+
+    public void setNumero(String numero) {
+        this.NUMERO = numero;
+    }
 }

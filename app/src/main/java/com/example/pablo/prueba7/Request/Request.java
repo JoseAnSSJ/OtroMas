@@ -543,6 +543,7 @@ public class Request extends AppCompatActivity {
                         Array.nombresrc.clear();
                         Array.statusrc.clear();
                         Array.contratosrc.clear();
+                        Array.direccionsrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Log.d("Clave de orden", String.valueOf(dat.get(i).getClvOrden()));
                             Log.d("Contrato", dat.get(i).getContrato());
@@ -553,10 +554,10 @@ public class Request extends AppCompatActivity {
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+" "+dat.get(i).getCalle()+" "+dat.get(i).getColonia()));
                         }
                     }
                 }
-
             }
 
             @Override

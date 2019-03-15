@@ -26,21 +26,23 @@ public class ordenes_adapter_result extends BaseAdapter {
     private ArrayList<String>contratosrc;
     private ArrayList<String>nombresrc;
     private ArrayList<String>statusrc;
+    private ArrayList<String>direccionsrc;
     private Request request=new Request();
 
-    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc){
+    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc,ArrayList<String>direccionsrc){
 
         this.ordensrc=ordensrc;
         this.contratosrc=contratosrc;
         this.nombresrc=nombrex;
         this.statusrc=statusrc;
+        this.direccionsrc=direccionsrc;
 
         mContext=context;
         inflater=LayoutInflater.from(mContext);
 
     }
     public  class viewHolder{
-        private TextView status,contrato1,nombre;
+        private TextView status,contrato1,nombre,direccionOrd;
         private Button orden;
     }
 
@@ -77,6 +79,7 @@ public class ordenes_adapter_result extends BaseAdapter {
             holder.orden=(Button)convertView.findViewById(R.id.ordenv);
             holder.contrato1=(TextView)convertView.findViewById(R.id.contratov);
             holder.nombre=(TextView)convertView.findViewById(R.id.nombrev);
+            holder.direccionOrd=(TextView)convertView.findViewById(R.id.direccionOrd);
 
             convertView.setTag(holder);
         }
@@ -88,6 +91,7 @@ public class ordenes_adapter_result extends BaseAdapter {
         holder.orden.setText(Array.ordensrc.get(position));
         holder.contrato1.setText(Array.contratosrc.get(position));
         holder.status.setText(Array.statusrc.get(position));
+        holder.direccionOrd.setText(Array.direccionsrc.get(position));
 
         holder.orden.setOnClickListener(new View.OnClickListener() {
             @Override
