@@ -88,7 +88,7 @@ public class Array {
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
     public static  ArrayList<Integer> Clv_TecSecR;
     public static  ArrayList<Integer> clv_Soluc;
-
+    public static ArrayList<String> Direccion= new ArrayList<String>();
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
     public static ArrayList<String> Asigna= new ArrayList<String>();

@@ -407,16 +407,18 @@ public class Request extends AppCompatActivity {
                             Log.d("Contrato", dat.get(i).getContrato());
                             Log.d("Nombre", dat.get(i).getNombre());
                             Log.d("Status", dat.get(i).getStatus());
+                            Log.d("Calle", dat.get(i).getCalle());
+                            Log.d("NUMERO", dat.get(i).getNUMERO());
+                            Log.d("Colonia", dat.get(i).getColonia());
+
+
+
 
                             Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
-
-                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.Direccion.add(String.valueOf(dat.get(i).getColonia()+" "+dat.get(i).getCalle()+" "+dat.get(i).getNUMERO()));
 
                         }
                     }
@@ -1487,18 +1489,10 @@ public class Request extends AppCompatActivity {
                                 clvP = dat.get(i).clvPrioridadQueja;
                                 tecC = dat.get(i).tecnicoCuadrilla;
 
-
-                                ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna);
-                                TrabajosFragment.prioridad.setAdapter(adapter);
-
-
-                                ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna1);
-                                TrabajosFragment.clasific.setAdapter(adapter1);
-
-
+                                TrabajosFragment.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
+                                TrabajosFragment.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                                 TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                                 TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
-
                             }
                         }
                     }

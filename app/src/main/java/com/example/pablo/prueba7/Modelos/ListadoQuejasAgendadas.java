@@ -9,7 +9,7 @@ public class ListadoQuejasAgendadas {
 
     @SerializedName("Clv_Queja")
     @Expose
-     Integer clvQueja;
+    Integer clvQueja;
     @SerializedName("Contrato")
     @Expose
     private String contrato;
@@ -19,7 +19,15 @@ public class ListadoQuejasAgendadas {
     @SerializedName("Status")
     @Expose
     private String status;
-
+    @SerializedName("Calle")
+    @Expose
+    private String Calle;
+    @SerializedName("NUMERO")
+    @Expose
+    private String NUMERO;
+    @SerializedName("Colonia")
+    @Expose
+    private String Colonia;
 
 
     public Integer getClvQueja() {
@@ -52,6 +60,31 @@ public class ListadoQuejasAgendadas {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCalle() {
+        return Calle;
+    }
+
+    public void setCalle(String Calle) {
+        this.Calle = Calle;
+    }
+
+
+
+    public String getNUMERO() {
+        return NUMERO;
+    }
+
+    public void setNUMERO(String NUMERO) {
+        this.NUMERO =NUMERO;
+    }
+    public String getColonia() {
+        return Colonia;
+    }
+
+    public void setColonia(String Colonia) {
+        this.Colonia = Colonia;
     }
 
 }

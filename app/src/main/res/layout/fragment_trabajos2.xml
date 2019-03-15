@@ -27,14 +27,14 @@
                 android:textColor="#000"
                 android:textSize="20dp" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/Sp1"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/spinners"
-                android:focusableInTouchMode="false"></Spinner>
+                android:focusableInTouchMode="false"></TextView>
             <TextView
                 android:id="@+id/dos"
                 android:layout_width="wrap_content"
@@ -45,14 +45,14 @@
                 android:text="@string/prioridad"
                 android:textColor="#000"
                 android:textSize="20dp" />
-            <Spinner
+            <TextView
                 android:id="@+id/Sp2"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_below="@+id/dos"
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/spinners">
-            </Spinner>
+            </TextView>
             <TextView
                 android:id="@+id/cinco"
                 android:layout_width="wrap_content"
