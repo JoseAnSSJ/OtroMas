@@ -984,6 +984,15 @@ public class Request extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<JSONApaTipo> call, Response<JSONApaTipo> response) {
                     if(response.code()==200) {
+                        try{
+                            Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
+                            List<GetListClienteAparatosResult> dat1 = itdata1.next();
+                            CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                            CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+
+                        }catch (Exception e){
+
+                        }
                         JSONApaTipo jsonResponse = response.body();
                         array.dataApaTipo = new ArrayList<List<GetListTipoAparatosByIdArticuloResult>>(asList(jsonResponse.GetListTipoAparatosByIdArticuloResult()));
                         Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = array.dataApaTipo.iterator();
