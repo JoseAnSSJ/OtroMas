@@ -35,11 +35,10 @@
             android:id="@+id/tecniconame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_toEndOf="@+id/qwe"
-
-            android:text="---" />
-
+            android:layout_marginStart="170dp"
+            android:text="---"
+            />
+        
         <Button
             android:id="@+id/info"
             android:layout_width="90dp"
@@ -78,9 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="25dp"
-            android:layout_toEndOf="@+id/contrato"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="50dp"
             android:text="@string/estatusDos"
             android:textColor="#000" />
 
@@ -89,11 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="25dp"
-            android:layout_toEndOf="@+id/txtqwe"
-            android:hint="" />
-            -->
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="50dp"
+            android:hint="---" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
