@@ -41,11 +41,9 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
     private RadioButton btn1, bt2;
     public static String statusHora="E",dia,mes,ano;
 
-
     public HorasFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,23 +56,18 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         request.getTecSecR(getContext());
         todo = view.findViewById(R.id.todo);
         TecSec1= view.findViewById(R.id.tecnicosec1);
-
+        request.getTecSecR(getContext());
 
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 TecSecSelecc1 = Array.Clv_TecSecR.get(position);
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
-
+        //TecSec1.setSelection((TecSecSelecc1));
 
         //////////// acciones de botones de hora y fecha//////
         reportesselectDate = view.findViewById(R.id.ejecureal1);
@@ -204,7 +197,6 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             }
             break;
         }
-
 
         if (v == reportesselectDate) {
             final Calendar c = Calendar.getInstance();

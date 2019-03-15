@@ -34,7 +34,7 @@ public class Orden extends AppCompatActivity
     private Request request = new Request();
     private ordenes_adapter_result adapterord;
     private Button cambiodom, cambioapa,ordenb,contratob;
-  public static   ListView ordenes;
+    public static   ListView ordenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
@@ -64,7 +64,7 @@ public class Orden extends AppCompatActivity
         clvorden=0;
         opcion=1;
         cont="";
-        adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc);
+        adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
         ordenes.refreshDrawableState();
 /////////////////////////////////////////////
@@ -109,6 +109,7 @@ public class Orden extends AppCompatActivity
                     Array.nombresrc.clear();
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
 
                     opcion=2;
                     clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
@@ -142,6 +143,7 @@ public class Orden extends AppCompatActivity
                     Array.nombresrc.clear();
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
 
                     opcion=3;
                     cont=(contsearch.getText().toString().toLowerCase().trim());

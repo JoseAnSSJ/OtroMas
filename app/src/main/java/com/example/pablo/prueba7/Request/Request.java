@@ -579,6 +579,56 @@ public class Request extends AppCompatActivity {
 
 
 
+        Service service = null;
+        try {
+            service = services.getListOrdService();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<Example1> call = service.getDataListOrd();
+        call.enqueue(new Callback<Example1>() {
+
+
+            @Override
+            public void onResponse(Call<Example1> call, Response<Example1> response) {
+                if(response.code()==200){
+                    Example1 jsonResponse = response.body();
+                    array.dataagenda = new ArrayList<List<GetDameListadoOrdenesAgendadasResult>>(asList(jsonResponse.getGetDameListadoOrdenesAgendadasResult()));
+                    Iterator<List<GetDameListadoOrdenesAgendadasResult>> itData = array.dataagenda.iterator();
+                    while (itData.hasNext()) {
+                        List<GetDameListadoOrdenesAgendadasResult> dat = (List<GetDameListadoOrdenesAgendadasResult>) itData.next();
+                        Array.ordensrc.clear();
+                        Array.nombresrc.clear();
+                        Array.statusrc.clear();
+                        Array.contratosrc.clear();
+                        Array.direccionsrc.clear();
+                        for (int i = 0; i < dat.size(); i++) {
+                            Log.d("Clave de orden", String.valueOf(dat.get(i).getClvOrden()));
+                            Log.d("Contrato", dat.get(i).getContrato());
+                            Log.d("Nombre", dat.get(i).getNombre());
+                            Log.d("Status", dat.get(i).getStatus());
+
+                            Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
+                            Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
+                            Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+", "+dat.get(i).getCalle()+", "+dat.get(i).getColonia()));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Example1> call, Throwable t) {
+
+            }
+
+
+        });
+
+    }
+
     ///////////////////Consuta pantalla ordenes///////////////////////////
     public void getDeepCons(final Context context) {
 

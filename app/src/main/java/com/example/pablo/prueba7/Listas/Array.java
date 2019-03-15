@@ -42,6 +42,7 @@ public class Array {
     public static ArrayList<String>ordensrc=new ArrayList<>();
     public static ArrayList<String>nombresrc=new ArrayList<>();
     public static ArrayList<String>statusrc=new ArrayList<>();
+    public static ArrayList<String>direccionsrc=new ArrayList<>();
     //----ARRAY QUEJAS----//
     public static ArrayList<List<ListadoQuejasAgendadas>> dataquejas;
     public static ArrayList<String>contratoQ=new ArrayList<>();

@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="115dp">
 
 
     <TextView
@@ -29,12 +29,36 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:textSize="14dp"
+        android:maxLines="2"
         android:text="Maria Emma Garcia Zapotitlan"
         android:layout_alignParentTop="true"
         android:layout_marginTop="45dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Direccion:"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/direccionOrd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="------"
+            android:maxLines="2"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="80dp"
+            />
     <Button
         android:id="@+id/ordenv"
         android:layout_width="wrap_content"
