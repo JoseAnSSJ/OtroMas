@@ -35,7 +35,7 @@
                 android:layout_alignStart="@+id/uno"
                 android:gravity="center"
                 android:textColor="#000"
-                android:background="@drawable/spinners"
+                android:background="@drawable/disenio_spinner"
                 android:focusableInTouchMode="false"/>
             <TextView
                 android:id="@+id/dos"
@@ -55,7 +55,7 @@
                 android:gravity="center"
                 android:textColor="#000"
                 android:layout_alignStart="@+id/uno"
-                android:background="@drawable/spinners">
+                android:background="@drawable/disenio_spinner">
             </TextView>
             <TextView
                 android:id="@+id/cinco"
@@ -105,7 +105,7 @@
                 android:layout_height="28dp"
                 android:layout_below="@+id/cuatro"
                 android:layout_alignStart="@+id/uno"
-                android:background="@drawable/spinners"
+                android:background="@drawable/disenio_spinner"
                 android:hint="---" />
             <TextView
                 android:id="@+id/txtw"
