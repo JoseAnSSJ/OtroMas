@@ -130,28 +130,49 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
         return view;
     }
+
     public void onClick(View view) {
+        if(btn1.isChecked()==true){
+            ejecutada=0;
+            visita=1;
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+            params.setMargins(0, 150, 0, 0);
+            todo.setLayoutParams(params);
+            mostrarParticular(false);
+            selectDate.setText("");
+//                    selectTime.setText("");
+//                    selectTime.setEnabled(false);
+            selectDate1.setText("");
+            selectDate2.setText("");
+            selectDate2.setEnabled(false);
+//                    selectTime2.setText("");
+//                    selectTime2.setEnabled(false);
+            ejecutada=0;
+            visita=1;
+        }
+        if(bt2.isChecked()==true){
+            ejecutada=1;
+            visita=0;
+            mostrarParticular(true);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+            todo.setLayoutParams(params);
+            selectDate.setText("");
+//                    selectTime.setText("");
+//                    selectTime.setEnabled(true);
+            selectDate1.setText("");
+            selectDate2.setText("");
+            //                   selectTime2.setText("");
+            //                   selectTime2.setEnabled(true);
+            ejecutada=1;
+            visita=0;
+        }
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(btn1.isChecked()==true){
-                    ejecutada=0;
-                    visita=1;
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-                    params.setMargins(0, 150, 0, 0);
-                    todo.setLayoutParams(params);
-                    mostrarParticular(false);
-                    selectDate.setText("");
-//                    selectTime.setText("");
-//                    selectTime.setEnabled(false);
-                    selectDate1.setText("");
-                    selectDate2.setText("");
-                    selectDate2.setEnabled(false);
-//                    selectTime2.setText("");
-//                    selectTime2.setEnabled(false);
-                    ejecutada=0;
-                    visita=1;
+
                 }
 
             }
@@ -161,21 +182,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(bt2.isChecked()==true){
-                    ejecutada=1;
-                    visita=0;
-                    mostrarParticular(true);
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-                    params.setMargins(0, 0, 0, 0);
-                    todo.setLayoutParams(params);
-                    selectDate.setText("");
-//                    selectTime.setText("");
-//                    selectTime.setEnabled(true);
-                    selectDate1.setText("");
-                    selectDate2.setText("");
- //                   selectTime2.setText("");
- //                   selectTime2.setEnabled(true);
-                    ejecutada=1;
-                    visita=0;
+
                 }
 
             }
@@ -438,4 +445,5 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
         }
     }
+
 }

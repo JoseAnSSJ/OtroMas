@@ -13,30 +13,29 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="89dp">
+
         <RadioGroup
             android:id="@+id/grupo_dias"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:checkedButton="@+id/ejutada1"
             android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/ejutada1"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:clickable="false"
-                android:duplicateParentState="false"
                 android:text="@string/visita"
-                android:visibility="visible" />
+                 />
+
             <RadioButton
                 android:id="@+id/visitada1"
                 android:layout_width="107dp"
-                android:layout_height="wrap_content"
                 android:checked="true"
-                android:clickable="false"
-                android:focusable="auto"
+                android:layout_height="wrap_content"
                 android:text="@string/ejecutada"
-                android:visibility="visible"
-                />
+                 />
         </RadioGroup>
     </RelativeLayout>
     <ScrollView

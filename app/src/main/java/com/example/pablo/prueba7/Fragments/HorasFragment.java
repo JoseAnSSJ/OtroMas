@@ -117,7 +117,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                btn1.setChecked(true);
+
                 if (btn1.isChecked() == true) {
                     reporteEjecutada = 0;
                     repotteVisita = 1;
@@ -143,7 +143,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                bt2.setChecked(true);
+
                 if (bt2.isChecked() == true) {
                     reporteEjecutada = 1;
                     repotteVisita = 0;

@@ -1258,7 +1258,7 @@ public class Services {
         objQuejas.put("Clv_Queja", clvReport.toString());
         objQuejas.put("Clv_Tecnico", claveTecnico);
         objQuejas.put("FechaProceso", "");
-        objQuejas.put("Fecha_Ejecucion", year+""+mHour+mMinute);
+        objQuejas.put("Fecha_Ejecucion", year+""+mHour+"0"+mMinute);
         objQuejas.put("HP", "");
         objQuejas.put("HV1", "");
         objQuejas.put("HV2", "");
