@@ -139,7 +139,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                     ejecutada=0;
                     visita=1;
                     ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-                    params.setMargins(0, 170, 0, 0);
+                    params.setMargins(0, 150, 0, 0);
                     todo.setLayoutParams(params);
                     mostrarParticular(false);
                     selectDate.setText("");
