@@ -554,7 +554,7 @@ public class Request extends AppCompatActivity {
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+" "+dat.get(i).getCalle()+" "+dat.get(i).getColonia()));
+                            Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+", "+dat.get(i).getCalle()+", "+dat.get(i).getColonia()));
                         }
                     }
                 }
