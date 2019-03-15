@@ -71,7 +71,7 @@
             android:layout_marginTop="25dp"
             android:layout_toEndOf="@+id/zaw"
             android:hint="---" />
-<!--
+
         <TextView
             android:id="@+id/txtqwe"
             android:layout_width="wrap_content"

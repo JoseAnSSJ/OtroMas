@@ -626,7 +626,7 @@ public class Request extends AppCompatActivity {
 
                     }
 
-/*
+
                     try {
                         if (DeepConsModel.STATUS.equals("E")) {
                             statusMA=("Ejecutada");
@@ -639,7 +639,7 @@ public class Request extends AppCompatActivity {
                         }
                     } catch (Exception e) {
 
-                    }*/
+                    }
 
 
                 }
@@ -1513,15 +1513,8 @@ public class Request extends AppCompatActivity {
                                 clvP = dat.get(i).clvPrioridadQueja;
                                 tecC = dat.get(i).tecnicoCuadrilla;
 
-
-                                ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna);
-                                TrabajosFragment.prioridad.setAdapter(adapter);
-
-
-                                ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, Asigna1);
-                                TrabajosFragment.clasific.setAdapter(adapter1);
-
-
+                                TrabajosFragment.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
+                                TrabajosFragment.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                                 TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                                 TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
 

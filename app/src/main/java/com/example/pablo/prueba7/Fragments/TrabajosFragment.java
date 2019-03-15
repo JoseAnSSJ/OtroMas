@@ -20,8 +20,8 @@ import com.example.pablo.prueba7.Request.Request;
  * A simple {@link Fragment} subclass.
  */
 public class TrabajosFragment extends Fragment implements View.OnClickListener {
-    public static Spinner solucion,prioridad,clasific;
-    public static TextView desc, problm;
+    public static Spinner solucion;
+    public static TextView desc, problm,prioridad,clasific;
     public static  EditText proble;
     private Request request = new Request();
     public static int Clv_Sol=-1;

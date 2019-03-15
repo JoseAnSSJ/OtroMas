@@ -838,7 +838,6 @@ public class Services {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Queja", clvReport);
-        jsonObject.put("Fecha_Ejecucion", HorasFragment.reportesselectDate.getText());
 
 
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");

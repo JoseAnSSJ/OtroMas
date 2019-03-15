@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pablo.prueba7.Listas.Array;
@@ -29,7 +30,7 @@ import java.util.Calendar;
 public class HorasFragment extends Fragment  implements View.OnClickListener{
     Request request = new Request();
     public static String diaI1,mesI1,añoI1, diaV11,mesV11,añoV11,diaV21,mesV21,añoV21,diaV3,mesV3,añoV3;
-    public static EditText reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
+    public static TextView reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
     public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc1=-1,hf1,hi1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
