@@ -36,6 +36,9 @@ public class Ejecutar1Fragment extends Fragment {
     public static String hora1I, horafin, solution;
     public static Date datetime;
     int añoE, mesE, diaE;
+    public static int mHour;
+    public static int mMinute;
+    public static String year;
 
     public Ejecutar1Fragment() {
         // Required empty public constructor
@@ -74,9 +77,16 @@ public class Ejecutar1Fragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+               year = añoE+"0"+ mesE+""+ diaE;
+                mHour = c.get(Calendar.HOUR);
+                mMinute = c.get(Calendar.MINUTE);
+                request.getGuardaHoraReporte(getContext());
+                request.getGuardaCampos(getContext());
 
 
-                if (horas.reporteEjecutada == 1) {
+
+
+             /*  if (horas.reporteEjecutada == 1) {
                     try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaI1), Integer.parseInt(HorasFragment.mesI1), Integer.parseInt(HorasFragment.añoI1), fechaSl, diaE, mesE + 1, añoE) == 1) {
                             request.getGuardaHoraReporte(getContext());
@@ -191,10 +201,11 @@ public class Ejecutar1Fragment extends Fragment {
                         }
                     }
                 }
+            }*/
             }
-        }
-        return a;
+        });
+        return view;
     }
-
 }
+
 

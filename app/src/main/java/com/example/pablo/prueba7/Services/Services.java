@@ -43,7 +43,11 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
+import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mHour;
+import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mMinute;
+
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
+import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.year;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.Materiales.EFDM;
 import static com.example.pablo.prueba7.Fragments.Materiales.EIMD;
@@ -56,9 +60,7 @@ import static com.example.pablo.prueba7.Fragments.Materiales.totalDM;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.Clv_Sol;
 import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
-import static com.example.pablo.prueba7.Request.Request.nExtenciones;
-import static com.example.pablo.prueba7.Request.Request.tecC;
-import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
+
 import static com.example.pablo.prueba7.Activitys.asignacion.jsonArray;
 import static com.example.pablo.prueba7.Activitys.asignacion.jsonObject2;
 import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
@@ -841,6 +843,7 @@ public class Services {
         jsonObject.put("Clv_Queja", clvReport);
 
 
+
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -1213,8 +1216,8 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_orden", clvReport);
-        jsonObject.put("horaFin", HorasFragment.reportesselectTime2.getText());
-        jsonObject.put("horaInicio", HorasFragment.reportesselectTime.getText());
+        jsonObject.put("horaFin",mHour+":0"+mMinute);
+        jsonObject.put("horaInicio", "08:00");
 
         jsonObject.put("opcion", 2);
 
@@ -1255,7 +1258,7 @@ public class Services {
         objQuejas.put("Clv_Queja", clvReport.toString());
         objQuejas.put("Clv_Tecnico", claveTecnico);
         objQuejas.put("FechaProceso", "");
-        objQuejas.put("Fecha_Ejecucion", HorasFragment.ano + HorasFragment.mes + HorasFragment.dia + " " + HorasFragment.reportesselectTime.getText());
+        objQuejas.put("Fecha_Ejecucion", year+""+mHour+mMinute);
         objQuejas.put("HP", "");
         objQuejas.put("HV1", "");
         objQuejas.put("HV2", "");

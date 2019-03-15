@@ -408,16 +408,18 @@ public class Request extends AppCompatActivity {
                             Log.d("Contrato", dat.get(i).getContrato());
                             Log.d("Nombre", dat.get(i).getNombre());
                             Log.d("Status", dat.get(i).getStatus());
+                            Log.d("Calle", dat.get(i).getCalle());
+                            Log.d("NUMERO", dat.get(i).getNUMERO());
+                            Log.d("Colonia", dat.get(i).getColonia());
+
+
+
 
                             Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
-
-                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.Direccion.add(String.valueOf(dat.get(i).getColonia()+" "+dat.get(i).getCalle()+" "+dat.get(i).getNUMERO()));
 
                         }
                     }
@@ -1518,7 +1520,6 @@ public class Request extends AppCompatActivity {
                                 TrabajosFragment.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                                 TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                                 TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
-
                             }
                         }
                     }

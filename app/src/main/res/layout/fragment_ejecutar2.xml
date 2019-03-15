@@ -17,9 +17,9 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="65dp"
             android:layout_marginTop="162dp"
-            android:layout_marginEnd="47dp"
-            android:background="@drawable/boton"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/ejecutar" />
+    android:layout_marginEnd="47dp"
+    android:background="@drawable/boton"
+    android:backgroundTint="@color/colorPrimary"
+    android:text="@string/ejecutar" />
     </RelativeLayout>
-</FrameLayout>
+    </FrameLayout>
