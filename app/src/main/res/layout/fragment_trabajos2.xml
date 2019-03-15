@@ -33,8 +33,10 @@
                 android:layout_height="28dp"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
+                android:gravity="center"
+                android:textColor="#000"
                 android:background="@drawable/spinners"
-                android:focusableInTouchMode="false"></TextView>
+                android:focusableInTouchMode="false"/>
             <TextView
                 android:id="@+id/dos"
                 android:layout_width="wrap_content"
@@ -50,6 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_below="@+id/dos"
+                android:gravity="center"
+                android:textColor="#000"
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/spinners">
             </TextView>
@@ -81,7 +85,7 @@
                 android:textSize="20dp" />
             <TextView
                 android:id="@+id/observa"
-                android:layout_width="357dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/tres"
                 android:layout_alignStart="@+id/uno"
