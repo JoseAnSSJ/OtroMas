@@ -68,13 +68,13 @@ if(request.isnet==true){
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(trabajos_adapter_result.rapg==true){
+             /*   if(trabajos_adapter_result.rapg==true){
                     if (Array.recibixnew.size() == 0) {
                         Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
                     } else {
                           request.send_aparat();
                     }
-                }
+                }*/
 
                 //**************************************
                 final Calendar c = Calendar.getInstance();

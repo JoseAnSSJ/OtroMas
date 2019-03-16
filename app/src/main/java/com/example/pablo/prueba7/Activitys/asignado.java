@@ -44,8 +44,8 @@ public class asignado extends AppCompatActivity {
     public static Servicios_Adapter adapter;
     private CheckBox checkBox;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
-    public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
-    public static List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
+  //  public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
+  //  public static List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -139,9 +139,9 @@ public class asignado extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                for(int c=0; c<dat4.size(); c++){
+                for(int c=0; c<request.dat4.size(); c++){
                     for(int d=0; d<selectedStrings.size();d++){
-                            int abc=dat4.get(c).getClv_UnicaNet();
+                            int abc=request.dat4.get(c).getClv_UnicaNet();
                                  if(selectedStrings.get(d)==abc){
                                      children dataChild= new children();
 
@@ -154,7 +154,7 @@ public class asignado extends AppCompatActivity {
                                   dataChild.setNombre(nombreSpinner);
                                 dataChild.setTipo("A");
                                   dataChild.setType("file");
-                                    dat4.get(c).children.add(dataChild);
+                                     request.dat4.get(c).children.add(dataChild);
                         }
                     }
                 }

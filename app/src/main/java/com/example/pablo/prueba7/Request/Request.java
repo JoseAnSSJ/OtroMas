@@ -126,6 +126,8 @@ import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
     Services services = new Services();
+    public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
+    public static List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
     Array array = new Array();
     CambioDom c = new CambioDom();
     public static String clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
@@ -1252,16 +1254,17 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONArbolServicios> call, Response<JSONArbolServicios> response) {
                 if(response.code()==200){
+
                     array.nombreArbol.clear();
                     JSONArbolServicios jsonResponse = response.body();
                     array.dataArbSer = new ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
-                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-                    while (itData.hasNext()) {
-                        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                    while (itData4.hasNext()) {
+                        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
 
-                        for (int i = 0; i < dat.size(); i++) {
-                            Log.d("response21", String.valueOf(dat.get(i).getIdMedio()));
-                            array.nombreArbol.add(dat.get(i).getNombre());
+                        for (int i = 0; i < dat4.size(); i++) {
+                            Log.d("response21", String.valueOf(dat4.get(i).getIdMedio()));
+                            array.nombreArbol.add(dat4.get(i).getNombre());
                         }
                     }
                     Intent intento25 = new Intent(context, asignacion.class);

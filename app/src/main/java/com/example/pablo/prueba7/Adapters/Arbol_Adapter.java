@@ -103,16 +103,16 @@ public class Arbol_Adapter extends BaseAdapter {
         ///////////////
 
         a=0;
-        if(asignado.dat4.get(position).getIdMedio()==0){
+        if(request.dat4.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
             holder.checkBox.setVisibility(View.GONE);
         }else{
 
-            holder.nombre.setText(asignado.dat4.get(position).getNombre()+" ("+asignado.dat4.get(position).getDetalle()+")");
+            holder.nombre.setText(request.dat4.get(position).getNombre()+" ("+request.dat4.get(position).getDetalle()+")");
             holder.medio.setVisibility(View.INVISIBLE);
             holder.checkBox.setVisibility(View.VISIBLE);
 
-        }if(asignado.dat4.get(position).children.size()==0){
+        }if(request.dat4.get(position).children.size()==0){
 
         }else{
 
@@ -121,14 +121,14 @@ public class Arbol_Adapter extends BaseAdapter {
             holder.checkBox.setVisibility(View.GONE);
             Arbol_Adapter.DeletChildren.clear();
 
-            for(d = 0; d<asignado.dat4.get(position).children.size(); d++){
+            for(d = 0; d<request.dat4.get(position).children.size(); d++){
                 c=0;
                 String hijo="";
-                hijo = asignado.dat4.get(position).children.get(d).Nombre + asignado.dat4.get(position).children.get(d).getDetalle();
+                hijo = request.dat4.get(position).children.get(d).Nombre + request.dat4.get(position).children.get(d).getDetalle();
                 array.children.add(hijo);
                 ArrayAdapter arrayAdapter1 = new ArrayAdapter(mcontext, android.R.layout.simple_list_item_checked,array.children);
                 holder.listaAparatos.setAdapter(arrayAdapter1);
-                if(array.children.size()==asignado.dat4.size()){
+                if(array.children.size()==request.dat4.size()){
                     asignacion.aceptarAsignacion.setEnabled(true);
                     siguiente.setEnabled(true);
                 }
@@ -140,7 +140,7 @@ public class Arbol_Adapter extends BaseAdapter {
                         if(holder.listaAparatos.isItemChecked(position3)==true){
                             Arbol_Adapter.DeletMedio.clear();
                             String abc= String.valueOf(position);
-                            DeletChildren.add(Integer.valueOf(asignado.dat4.get(position).children.get(position3).getClv_Aparato()+abc));
+                            DeletChildren.add(Integer.valueOf(request.dat4.get(position).children.get(position3).getClv_Aparato()+abc));
                         }
                         if(holder.listaAparatos.isItemChecked(position3)==false){
                             DeletChildren.clear();
@@ -168,11 +168,11 @@ public class Arbol_Adapter extends BaseAdapter {
 int d=0;
         f=0;
         h=0;
-     for(int c=0; c<asignado.dat4.size(); c++){
-            if(asignado.dat4.get(c).Detalle!=""){
+     for(int c=0; c<request.dat4.size(); c++){
+            if(request.dat4.get(c).Detalle!=""){
                 d=d+1;
             }
-            if(d!=asignado.dat4.size()){
+            if(d!=request.dat4.size()){
 
             }else{
                 siguiente.setEnabled(true);
@@ -279,8 +279,8 @@ int d=0;
                     } catch (Exception e) {
                         clv_Medio = dat2.get(position1 - 1).getIdMedio();
                     }
-                    asignado.dat4.get(posi).setIdMedio(clv_Medio);
-                    asignado.dat4.get(posi).setDetalle(dato);
+                    request.dat4.get(posi).setIdMedio(clv_Medio);
+                    request.dat4.get(posi).setDetalle(dato);
                 }
             }
 
@@ -294,7 +294,7 @@ int d=0;
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                if(holder.checkBox.isChecked()==true){
                       Arbol_Adapter.DeletMedio.clear();
-                       DeletMedio.add(asignado.dat4.get(position).IdMedio+asignado.dat4.get(position).Detalle);
+                       DeletMedio.add(request.dat4.get(position).IdMedio+request.dat4.get(position).Detalle);
                 }if(holder.checkBox.isChecked()==false){
                   Arbol_Adapter.DeletMedio.clear();
 
