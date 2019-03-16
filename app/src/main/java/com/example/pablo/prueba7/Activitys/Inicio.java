@@ -180,7 +180,7 @@ public class Inicio extends AppCompatActivity
             Intent intent1 = new Intent(Inicio.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd();
+            request.getListOrd(getApplicationContext());
             tipodeDescarga="O";
             startActivity(intent1);
 
@@ -189,7 +189,7 @@ public class Inicio extends AppCompatActivity
             Intent intent1 = new Intent(Inicio.this, Reportes.class);
             clavequeja=0;
             opcion=1;
-            request.getListQuejas();
+            request.getListQuejas(getApplicationContext());
             tipodeDescarga="Q";
             startActivity(intent1);
             finish();

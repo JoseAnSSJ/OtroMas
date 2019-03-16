@@ -92,7 +92,7 @@ public class Reportes extends AppCompatActivity
 
                     opcion=2;
                     clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
-                    request.getListQuejas();
+                    request.getListQuejas(getApplicationContext());
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -125,7 +125,7 @@ public class Reportes extends AppCompatActivity
 
                     opcion=3;
                     cont=(contratosearch.getText().toString().toLowerCase().trim());
-                    request.getListQuejas();
+                    request.getListQuejas(getApplicationContext());
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -176,7 +176,7 @@ public class Reportes extends AppCompatActivity
             Intent intent1 = new Intent(Reportes.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd();
+            request.getListOrd(getApplicationContext());
             startActivity(intent1);
 
         } else if (id == R.id.Reportes) {
@@ -184,7 +184,7 @@ public class Reportes extends AppCompatActivity
             clavequeja=0;
             opcion=1;
             cont="";
-            request.getListQuejas();
+            request.getListQuejas(getApplicationContext());
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {

@@ -113,7 +113,7 @@ public class Orden extends AppCompatActivity
 
                     opcion=2;
                     clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd();
+                    rqs.getListOrd(getApplicationContext());
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -147,7 +147,7 @@ public class Orden extends AppCompatActivity
 
                     opcion=3;
                     cont=(contsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd();
+                    rqs.getListOrd(getApplicationContext());
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -208,7 +208,7 @@ public class Orden extends AppCompatActivity
             Intent intent1 = new Intent(Orden.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd();
+            request.getListOrd(getApplicationContext());
             //request.getTrabajos();
             //request.getDeepCons();
             startActivity(intent1);
@@ -218,7 +218,7 @@ public class Orden extends AppCompatActivity
             Intent intent1 = new Intent(Orden.this, Reportes.class);
             clavequeja=0;
             opcion=1;
-            request.getListQuejas();
+            request.getListQuejas(getApplicationContext());
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {

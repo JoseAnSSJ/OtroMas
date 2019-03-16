@@ -207,30 +207,35 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
-                JSONResponseTecnico jsonResponse = response.body();
-                //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
-                array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
-                //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
-                Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
-                while (iteData.hasNext()) {
-                    List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
-                    //Se recorre la lista y se guarla la informacion en el Modelo
-                    for (int i = 0; i < data.size(); i++) {
-                        Log.d("response9", data.get(i).clv_tecnico);
-                        Log.d("nombre", data.get(i).tecnico);
+                if(response.code()==200){
+                    JSONResponseTecnico jsonResponse = response.body();
+                    //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
+                    array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
+                    //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
+                    Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
+                    while (iteData.hasNext()) {
+                        List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
+                        //Se recorre la lista y se guarla la informacion en el Modelo
+                        for (int i = 0; i < data.size(); i++) {
+                            Log.d("response9", data.get(i).clv_tecnico);
+                            Log.d("nombre", data.get(i).tecnico);
+                        }
+                        clave_tecnico = data.get(0).clv_tecnico;
+                        nombre_tecnico = data.get(0).tecnico;
+
+                        services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
+
+                        //     MainActivity.NombreTec.setText(data.get(0).tecnico);
+
                     }
-                    clave_tecnico = data.get(0).clv_tecnico;
-                    nombre_tecnico = data.get(0).tecnico;
+                    Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
 
-                    services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
 
-                    //     MainActivity.NombreTec.setText(data.get(0).tecnico);
+                    getProximaCita(context);
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
-
-
-                getProximaCita(context);
 
 
 
@@ -279,6 +284,8 @@ public class Request extends AppCompatActivity {
 
                     getOrdenes(context);
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -364,6 +371,8 @@ public class Request extends AppCompatActivity {
                         Inicio.OO = 0;
                     }
                     getQuejas(context);
+                }else{
+                    Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -377,7 +386,7 @@ public class Request extends AppCompatActivity {
     }
 
     /////////////////Lista de ordenes/////////////////////////////
-    public void getListQuejas() {
+    public void getListQuejas(final Context context) {
 
         Service service = null;
         try {
@@ -423,6 +432,8 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -436,7 +447,7 @@ public class Request extends AppCompatActivity {
         });
 
     }
-    public void getListOrd() {
+    public void getListOrd(final Context context) {
 
         Service service = null;
         try {
@@ -474,6 +485,8 @@ public class Request extends AppCompatActivity {
                             Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+", "+dat.get(i).getCalle()+", "+dat.get(i).getColonia()));
                         }
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir lista de ordenes", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -563,6 +576,8 @@ public class Request extends AppCompatActivity {
                     }catch (Exception e){
                         //     Inicio.pieChart.refreshDrawableState();
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -646,6 +661,8 @@ public class Request extends AppCompatActivity {
                     }
 
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir datos de la orden", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -657,7 +674,7 @@ public class Request extends AppCompatActivity {
     }
 
     /////////////////Informacion del Cliente/////////////////////////////
-    public void getInfoCliente() {
+    public void getInfoCliente(final Context context) {
 
         Service service = null;
         try {
@@ -689,6 +706,9 @@ public class Request extends AppCompatActivity {
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 }
+                else{
+                    Toast.makeText(context, "Error al conseguir informacion del cliente", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -699,7 +719,7 @@ public class Request extends AppCompatActivity {
     }
 
     /////////////////ServiciosdelCliente/////////////////////////////
-    public void getServicios() {
+    public void getServicios(final Context context) {
 
         Service service = null;
         try {
@@ -728,6 +748,8 @@ public class Request extends AppCompatActivity {
                         MainActivity.InfoServicios.setText(resumen.toString());
 
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir servicios del cliente", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -784,6 +806,8 @@ public class Request extends AppCompatActivity {
 
 
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir trabajos", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -840,6 +864,8 @@ public class Request extends AppCompatActivity {
 
                     }
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir lista de tecnicos secundarios", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -872,6 +898,8 @@ public class Request extends AppCompatActivity {
                     extencionesE=string;
                     Intent intento = new Intent(context, ExtensionesAdi.class);
                     context.startActivity(intento);
+                }else{
+                    Toast.makeText(context, "Error al conseguir extenciones adicionales", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -921,6 +949,8 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir aparatos del cliente", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -962,6 +992,8 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir estatus del aparato", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1023,6 +1055,8 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir tipo de aparato", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1080,6 +1114,8 @@ public class Request extends AppCompatActivity {
                         }
                         ///////////////////////////
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1118,6 +1154,8 @@ public class Request extends AppCompatActivity {
                         getStatusApa(context);
                     }
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir datos de cambio de aparato", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -1188,6 +1226,8 @@ public class Request extends AppCompatActivity {
 
 
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir datos de cambio de domicilio", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1225,6 +1265,8 @@ public class Request extends AppCompatActivity {
                     }
                     Intent intento25 = new Intent(context, asignacion.class);
                     context.startActivity(intento25);
+                }else{
+                    Toast.makeText(context, "Error al conseguir datos de la orden", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1264,6 +1306,8 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medio);
                     asignacion.spinnerMedio.setAdapter(adapter1);
+                }else{
+                    Toast.makeText(context, "Error al conseguir Clave Tecnico", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -1306,6 +1350,8 @@ public class Request extends AppCompatActivity {
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
                     asignado.spinnerAparato.setAdapter(adapter1);
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir tipos de aparatos", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1344,6 +1390,8 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoDisponibles);
                     asignado.spinneraparatoDisponible.setAdapter(adapter1);
+                }else{
+                    Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -1387,6 +1435,8 @@ public class Request extends AppCompatActivity {
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     asignado.serviciosAparato.setAdapter(arrayAdapter);
 
+                }else{
+                    Toast.makeText(context, "Error al conseguir servicios de aparatos", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1418,6 +1468,8 @@ public class Request extends AppCompatActivity {
                     Toast.makeText(context, "aparato agregado", Toast.LENGTH_LONG).show();
                     finish();
 
+                }else{
+                    Toast.makeText(context, "Error al aceptar asignacion", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1475,6 +1527,8 @@ public class Request extends AppCompatActivity {
                         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         solucion.setAdapter(adapter);
                     }
+                }else{
+                    Toast.makeText(context, "Error al conseguir soluciones", Toast.LENGTH_LONG).show();
                 }
             }
 
