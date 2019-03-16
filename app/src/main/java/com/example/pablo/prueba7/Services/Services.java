@@ -1154,9 +1154,10 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvOrden", clvor);
-        jsonObject.put("OP", "M");
-        jsonObject.put("OP2", 0);
+        jsonObject.put("Op", "M");
         jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject.put("Op2", 0);
+
 
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");

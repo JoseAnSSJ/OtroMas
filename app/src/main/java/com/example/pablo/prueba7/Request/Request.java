@@ -1973,7 +1973,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
+                Log.d("exito","llega a 6");
                 //String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
