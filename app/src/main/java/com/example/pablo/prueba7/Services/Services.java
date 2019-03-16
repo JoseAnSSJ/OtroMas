@@ -43,6 +43,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
+import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.horas12;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mHour;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mMinute;
 
@@ -1258,7 +1259,7 @@ public class Services {
         objQuejas.put("Clv_Queja", clvReport.toString());
         objQuejas.put("Clv_Tecnico", claveTecnico);
         objQuejas.put("FechaProceso", "");
-        objQuejas.put("Fecha_Ejecucion", year+""+mHour+"0"+mMinute);
+        objQuejas.put("Fecha_Ejecucion", year+""+horas12);
         objQuejas.put("HP", "");
         objQuejas.put("HV1", "");
         objQuejas.put("HV2", "");
@@ -1269,9 +1270,9 @@ public class Services {
         objQuejas.put("Status", HorasFragment.statusHora);
         objQuejas.put("TecnicoCuadrilla", TecSecSelecc1);
         objQuejas.put("Visita", false);
-        objQuejas.put("Visita1", "");
-        objQuejas.put("Visita2", "");
-        objQuejas.put("Visita3", "");
+        objQuejas.put("Visita1", HorasFragment.reportesselectDate1.getText());
+        objQuejas.put("Visita2", HorasFragment.reportesselectDate2.getText());
+        objQuejas.put("Visita3", HorasFragment.reportesselectDate3.getText());
         objQuejas.put("clvPrioridadQueja", clvP);
         objQuejas.put("clvProblema", Clv_Sol);
         jsonObject.put("objQuejas", objQuejas);

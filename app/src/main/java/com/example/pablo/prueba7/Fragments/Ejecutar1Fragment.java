@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Fragments;
 
 
+import android.app.assist.AssistStructure;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class Ejecutar1Fragment extends Fragment {
     int añoE, mesE, diaE;
     public static int mHour;
     public static int mMinute;
-    public static String year;
+    public static String year, horas12;
 
     public Ejecutar1Fragment() {
         // Required empty public constructor
@@ -71,23 +72,35 @@ public class Ejecutar1Fragment extends Fragment {
         añoE = c.get(Calendar.YEAR);
         mesE = c.get(Calendar.MONTH);
         diaE = c.get(Calendar.DAY_OF_MONTH);
+        mHour = c.get(Calendar.HOUR);
+        mMinute = c.get(Calendar.MINUTE);
 
         eject.setOnClickListener(new View.OnClickListener() {
+            String proble= TrabajosFragment.proble.getText().toString();
 
 
             @Override
             public void onClick(View v) {
-               year = añoE+"0"+ mesE+""+ diaE;
-                mHour = c.get(Calendar.HOUR);
-                mMinute = c.get(Calendar.MINUTE);
-                request.getGuardaHoraReporte(getContext());
-                request.getGuardaCampos(getContext());
 
 
 
 
-             /*  if (horas.reporteEjecutada == 1) {
-                    try {
+              if (horas.reporteEjecutada == 1) {
+
+
+                  year = añoE+"0"+ mesE+""+ diaE;
+                  horas12= mHour+":"+mMinute;
+                  request.getGuardaHoraReporte(getContext());
+                  request.getGuardaCampos(getContext());
+                  Intent intent1 = new Intent(getActivity(), Reportes.class);
+                  startActivity(intent1);
+                  request.getListQuejas();
+
+
+
+              }
+
+                  /*  try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaI1), Integer.parseInt(HorasFragment.mesI1), Integer.parseInt(HorasFragment.añoI1), fechaSl, diaE, mesE + 1, añoE) == 1) {
                             request.getGuardaHoraReporte(getContext());
                             request.getGuardaCampos(getContext());
@@ -115,11 +128,19 @@ public class Ejecutar1Fragment extends Fragment {
                                 }).show();
                     }
 
-                }
+                }*/
                 if (horas.repotteVisita == 1) {
                     try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                            year = añoE+"0"+ mesE+""+ diaE;
+                            mHour = c.get(Calendar.HOUR);
+                            mMinute = c.get(Calendar.MINUTE);
+                            request.getGuardaHoraReporte(getContext());
+                            request.getGuardaCampos(getContext());
+                            Intent intent1 = new Intent(getActivity(), Reportes.class);
+                            startActivity(intent1);
+                            request.getListQuejas();
                         }
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 0) {
                             Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
@@ -136,6 +157,14 @@ public class Ejecutar1Fragment extends Fragment {
                     try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                            year = añoE+"0"+ mesE+""+ diaE;
+                            mHour = c.get(Calendar.HOUR);
+                            mMinute = c.get(Calendar.MINUTE);
+                            request.getGuardaHoraReporte(getContext());
+                            request.getGuardaCampos(getContext());
+                            Intent intent1 = new Intent(getActivity(), Reportes.class);
+                            startActivity(intent1);
+                            request.getListQuejas();
                         }
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 0) {
                             Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
@@ -151,6 +180,14 @@ public class Ejecutar1Fragment extends Fragment {
                     try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV3), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                            year = añoE+"0"+ mesE+""+ diaE;
+                            mHour = c.get(Calendar.HOUR);
+                            mMinute = c.get(Calendar.MINUTE);
+                            request.getGuardaHoraReporte(getContext());
+                            request.getGuardaCampos(getContext());
+                            Intent intent1 = new Intent(getActivity(), Reportes.class);
+                            startActivity(intent1);
+                            request.getListQuejas();
                         }
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaV3), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 0) {
                             Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
@@ -197,14 +234,8 @@ public class Ejecutar1Fragment extends Fragment {
                             if (diaE <= diaA) {
 
 
-                            }
-                        }
-                    }
-                }
-            }*/
-            }
-        });
-        return view;
+                            }}}}}}
+        return a;
     }
 }
 
