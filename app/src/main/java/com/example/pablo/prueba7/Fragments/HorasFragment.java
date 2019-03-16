@@ -28,18 +28,18 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HorasFragment extends Fragment  implements View.OnClickListener{
+public class HorasFragment extends Fragment  implements View.OnClickListener {
     Request request = new Request();
-    public static String diaI1,mesI1,añoI1, diaV11,mesV11,añoV11,diaV21,mesV21,añoV21,diaV3,mesV3,añoV3;
+    public static String diaI1, mesI1, añoI1, diaV11, mesV11, añoV11, diaV21, mesV21, añoV21, diaV3, mesV3, añoV3;
     public static TextView reportesselectDate, reportesselectTime, reportesselectDate1, reportesselectDate2, reportesselectTime2, reportesselectDate3;
-    public static int reporteEjecutada=1, repotteVisita=0,reporteVisita1=0,reporteVisita2=0,TecSecSelecc1=-1,hf1,hi1;
+    public static int reporteEjecutada = 1, repotteVisita = 0, reporteVisita1 = 0, reporteVisita2 = 0, TecSecSelecc1 = -1, hf1, hi1;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private View contenedorParticular;
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
-    public static String statusHora="E",dia,mes,ano;
+    public static String statusHora = "E", dia, mes, ano;
 
     public HorasFragment() {
         // Required empty public constructor
@@ -52,10 +52,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         setRetainInstance(true);
 
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_horas, container, false);
+        View view = inflater.inflate(R.layout.fragment_horas, container, false);
         request.getTecSecR(getContext());
         todo = view.findViewById(R.id.todo);
-        TecSec1= view.findViewById(R.id.tecnicosec1);
+        TecSec1 = view.findViewById(R.id.tecnicosec1);
         request.getTecSecR(getContext());
 
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -63,6 +63,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TecSecSelecc1 = Array.Clv_TecSecR.get(position);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -70,7 +71,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         //TecSec1.setSelection((TecSecSelecc1));
 
         //////////// acciones de botones de hora y fecha//////
-        reportesselectDate = view.findViewById(R.id.ejecureal1);
+        // reportesselectDate = view.findViewById(R.id.ejecureal1);
         reportesselectDate1 = view.findViewById(R.id.visita11);
         reportesselectDate2 = view.findViewById(R.id.visita21);
         reportesselectDate3 = view.findViewById(R.id.visita31);
@@ -89,7 +90,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
-        reportesselectDate.setOnClickListener(this);
+//        reportesselectDate.setOnClickListener(this);
         reportesselectDate1.setOnClickListener(this);
         reportesselectDate2.setOnClickListener(this);
         reportesselectDate3.setOnClickListener(this);
@@ -115,10 +116,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     reporteEjecutada = 0;
                     repotteVisita = 1;
                     statusHora = "V";
-                   // ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-                   // params.setMargins(0, 200, 0, 0);
-                   // todo.setLayoutParams(params);
-                    reportesselectDate.setText("");
+                    // ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    // params.setMargins(0, 200, 0, 0);
+                    // todo.setLayoutParams(params);
+                  //  reportesselectDate.setText("");
 //                    reportesselectTime.setText("");
                     //                   reportesselectTime.setEnabled(false);
                     reportesselectDate1.setText("");
@@ -141,10 +142,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                     reporteEjecutada = 1;
                     repotteVisita = 0;
                     statusHora = "E";
-                  //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-                  //  params.setMargins(0, 75, 0, 0);
-                  //  todo.setLayoutParams(params);
-                    reportesselectDate.setText("");
+                    //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    //  params.setMargins(0, 75, 0, 0);
+                    //  todo.setLayoutParams(params);
+                    // reportesselectDate.setText("");
                     //                   reportesselectTime.setText("");
                     ///                   reportesselectTime.setEnabled(true);
                     reportesselectDate1.setText("");
@@ -162,7 +163,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.ejutada1: {
                 mostrarParticular(false);
-                reportesselectDate.setText("");
+                //  reportesselectDate.setText("");
                 // reportesselectTime.setText("");
                 // reportesselectTime.setEnabled(false);
                 reportesselectDate1.setText("");
@@ -173,15 +174,15 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 reporteEjecutada = 0;
                 repotteVisita = 1;
                 statusHora = "V";
-             //   ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-             //   params.setMargins(0, 200, 0, 0);
-             //   todo.setLayoutParams(params);
+                //   ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                //   params.setMargins(0, 200, 0, 0);
+                //   todo.setLayoutParams(params);
 
             }
             break;
             case R.id.visitada1: {
                 mostrarParticular(true);
-                reportesselectDate.setText("");
+                //reportesselectDate.setText("");
                 //   reportesselectTime.setText("");
 //                reportesselectDate1.setText("");
                 reportesselectDate2.setText("");
@@ -191,14 +192,14 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 reporteEjecutada = 1;
                 repotteVisita = 0;
                 statusHora = "E";
-              //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
-              //  params.setMargins(0, 75, 0, 0);
-              //  todo.setLayoutParams(params);
+                //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                //  params.setMargins(0, 75, 0, 0);
+                //  todo.setLayoutParams(params);
             }
             break;
         }
 
-        if (v == reportesselectDate) {
+       /* if (v == reportesselectDate) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -234,7 +235,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener{
                 }
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
-        }
+    }*/
+
     /*   if (v == reportesselectTime) {
 
 // Get Current Time
