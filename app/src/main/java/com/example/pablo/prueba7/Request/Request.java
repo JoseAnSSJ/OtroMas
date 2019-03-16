@@ -412,6 +412,7 @@ public class Request extends AppCompatActivity {
                         Array.nombreQ.clear();
                         Array.statusQ.clear();
                         Array.contratoQ.clear();
+                        Array.Direccion.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Log.d("Clave Reporte", String.valueOf(dat.get(i).getClvQueja()));
                             Log.d("Contrato", dat.get(i).getContrato());

@@ -84,29 +84,9 @@
         android:gravity="center"
         />
 
-        <TextView
-            android:id="@+id/txtd"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/nombrev"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
-            android:text="Direccion"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/direccionLista"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/nombrev"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/txtd"
-            android:gravity="center"
-            android:text="-----------"
-            android:textStyle="bold" />
+
+
     </RelativeLayout>
 
 

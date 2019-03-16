@@ -49,6 +49,7 @@ public class Array {
     public static ArrayList<String>Queja=new ArrayList<>();
     public static ArrayList<String>nombreQ=new ArrayList<>();
     public static ArrayList<String>statusQ=new ArrayList<>();
+    public static ArrayList<String> Direccion= new ArrayList<String>();
  ///////////////////////ARRAY TRABAJOS///////////////////
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
@@ -89,7 +90,7 @@ public class Array {
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
     public static  ArrayList<Integer> Clv_TecSecR;
     public static  ArrayList<Integer> clv_Soluc;
-    public static ArrayList<String> Direccion= new ArrayList<String>();
+
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
     public static ArrayList<String> Asigna= new ArrayList<String>();

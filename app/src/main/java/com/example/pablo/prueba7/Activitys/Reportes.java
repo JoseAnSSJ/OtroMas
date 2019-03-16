@@ -65,7 +65,7 @@ public class Reportes extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ////////////////////////////////
-        adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ);
+        adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
         /////////////////////////////////
         ///////////Busqueda de Reporte/////////////
@@ -73,8 +73,6 @@ public class Reportes extends AppCompatActivity
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 if (reportesearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 =
@@ -89,6 +87,7 @@ public class Reportes extends AppCompatActivity
                     Array.nombreQ.clear();
                     Array.statusQ.clear();
                     Array.contratoQ.clear();
+                    Array.Direccion.clear();
 
                     opcion=2;
                     clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
@@ -122,6 +121,7 @@ public class Reportes extends AppCompatActivity
                     Array.nombreQ.clear();
                     Array.statusQ.clear();
                     Array.contratoQ.clear();
+                    Array.Direccion.clear();
 
                     opcion=3;
                     cont=(contratosearch.getText().toString().toLowerCase().trim());
