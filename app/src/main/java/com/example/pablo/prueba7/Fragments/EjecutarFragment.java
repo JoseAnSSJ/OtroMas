@@ -39,7 +39,7 @@ public class EjecutarFragment extends Fragment {
     public static String fechaHoy,horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
-    int añoE, mesE, diaE,horaE,minutoE;
+    public static int añoE, mesE, diaE,horaE,minutoE;
     private  InstalacionFragment horas = new InstalacionFragment();
     private Request request = new Request();
     public EjecutarFragment() {
@@ -68,27 +68,25 @@ if(request.isnet==true){
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   if(trabajos_adapter_result.rapg==true){
-                    if (Array.recibixnew.size() == 0) {
-                        Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
-                    } else {
-                          request.send_aparat();
-                    }
-                }*/
+if(request.rapagejecutar==true){
+    if (Array.recibixnew.size() == 0) {
+        Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
+    } else {
+        try {
+            request.send_aparat();
+            //**************************************
+            final Calendar c = Calendar.getInstance();
+            añoE = c.get(Calendar.YEAR);
+            mesE = c.get(Calendar.MONTH);
+            diaE = c.get(Calendar.DAY_OF_MONTH);
+            horaE = c.get(Calendar.HOUR);
+            minutoE = c.get(Calendar.MINUTE);
 
-                //**************************************
-                final Calendar c = Calendar.getInstance();
-                añoE = c.get(Calendar.YEAR);
-                mesE = c.get(Calendar.MONTH);
-                diaE = c.get(Calendar.DAY_OF_MONTH);
-                horaE = c.get(Calendar.HOUR);
-                minutoE = c.get(Calendar.MINUTE);
-
-                if (horas.ejecutada == 1) {
-                    fechaHoy=diaE+"/"+mesE+1+"/"+añoE;
-                    horaHoy = horaE+":"+minutoE;
-                    eject.setEnabled(false);
-                    request.getValidaOrdSer(getActivity());
+            if (horas.ejecutada == 1) {
+                fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
+                horaHoy = horaE + ":" + minutoE;
+                eject.setEnabled(false);
+                request.getValidaOrdSer(getActivity());
 
                    /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
@@ -116,8 +114,8 @@ if(request.isnet==true){
                                 }).show();
                     }*/
 
-                }
-                if (horas.visita == 1) {
+            }
+            if (horas.visita == 1) {
                    /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1), Integer.parseInt(InstalacionFragment.mesV1), Integer.parseInt(InstalacionFragment.añoV1), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
@@ -142,8 +140,8 @@ if(request.isnet==true){
                                 }).show();
                     }*/
 
-                }
-                if (horas.visita1 == 1) {
+            }
+            if (horas.visita1 == 1) {
                    /* try {
                         if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2), Integer.parseInt(InstalacionFragment.mesV2), Integer.parseInt(InstalacionFragment.añoV2), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
                             Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
@@ -167,20 +165,128 @@ if(request.isnet==true){
                                     }
                                 }).show();
                     }*/
-                }
-                ////////*************************
-
-                reiniciar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        request.ReintentarComando(getActivity());
-                        reiniciar.setEnabled(false);
-                    }
-                });
-
-
             }
+            ////////*************************
+
+            reiniciar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    request.ReintentarComando(getActivity());
+                    reiniciar.setEnabled(false);
+                }
+            });
+
+
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+        }
+    }
+}else {
+    final Calendar c = Calendar.getInstance();
+    añoE = c.get(Calendar.YEAR);
+    mesE = c.get(Calendar.MONTH);
+    diaE = c.get(Calendar.DAY_OF_MONTH);
+    horaE = c.get(Calendar.HOUR);
+    minutoE = c.get(Calendar.MINUTE);
+
+    if (horas.ejecutada == 1) {
+        fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
+        horaHoy = horaE + ":" + minutoE;
+        eject.setEnabled(false);
+        request.getValidaOrdSer(getActivity());
+
+                   /* try {
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
+                                 eject.setEnabled(false);
+                                 request.getValidaOrdSer(getActivity());
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
+                            Toast.makeText(getActivity(), "La fecha de ejecución no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaI), Integer.parseInt(InstalacionFragment.mesI), Integer.parseInt(InstalacionFragment.añoI), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 2) {
+                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
+                    }*/
+
+    }
+    if (horas.visita == 1) {
+                   /* try {
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1), Integer.parseInt(InstalacionFragment.mesV1), Integer.parseInt(InstalacionFragment.añoV1), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
+                            Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1), Integer.parseInt(InstalacionFragment.mesV1), Integer.parseInt(InstalacionFragment.añoV1), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
+                            Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV1), Integer.parseInt(InstalacionFragment.mesV1), Integer.parseInt(InstalacionFragment.añoV1), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 2) {
+                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
+                    }*/
+
+    }
+    if (horas.visita1 == 1) {
+                   /* try {
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2), Integer.parseInt(InstalacionFragment.mesV2), Integer.parseInt(InstalacionFragment.añoV2), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 1) {
+                            Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2), Integer.parseInt(InstalacionFragment.mesV2), Integer.parseInt(InstalacionFragment.añoV2), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 0) {
+                            Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
+                        }
+                        if (ValidarFechas(Integer.parseInt(InstalacionFragment.diaV2), Integer.parseInt(InstalacionFragment.mesV2), Integer.parseInt(InstalacionFragment.añoV2), DeepConsModel.Fec_Sol, diaE, mesE + 1, añoE, InstalacionFragment.hi, InstalacionFragment.hf) == 2) {
+                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Snackbar.make(v, "La fecha es obligatoria", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(getResources().getColor(R.color.design_default_color_primary_dark))
+                                .setAction("Aceptar", new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                        //intent1.setFlags();
+                                        startActivity(intent1);
+                                    }
+                                }).show();
+                    }*/
+    }
+    ////////*************************
+
+    reiniciar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            request.ReintentarComando(getActivity());
+            reiniciar.setEnabled(false);
+        }
+    });
+}
+
+                }
         });
+
         return view;
     }
 

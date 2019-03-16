@@ -117,6 +117,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
@@ -126,8 +127,7 @@ import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
     Services services = new Services();
-    public static Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
-    public static List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
+
     Array array = new Array();
     CambioDom c = new CambioDom();
     public static String clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
@@ -145,6 +145,7 @@ public class Request extends AppCompatActivity {
     public static String contraroMA,obsMA,statusMA;
     public static Integer nExtenciones=0;
     public static String reintentarComando;
+    public static boolean rapagejecutar=false;
     public static String ciudadcmdo,localidadcmdo,coloniacmdo,callecmdo,numerocmdo,numeroicmdo,telefonocmdo,callencmdo,callescmdo,calleecmdo,calleocmdo,casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
@@ -796,6 +797,9 @@ public class Request extends AppCompatActivity {
                             Array.recibix.add(dat.get(i).getSeRealiza());
                             if(dat.get(i).getClvTrabajo()==1270){
                                 isnet=true;
+                            }
+                            if(dat.get(i).getClvTrabajo()==1203){
+                                rapagejecutar=true;
                             }
                         }
                         Intent intento1 = new Intent(context, MainActivity.class);
@@ -1810,6 +1814,7 @@ public class Request extends AppCompatActivity {
 
                     if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
                         getChecaCAMDO(context);
+                        Log.d("exito","1");
                     }else{
                         EjecutarFragment.eject.setEnabled(true);
                         Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
@@ -1848,6 +1853,7 @@ public class Request extends AppCompatActivity {
                     );
                     if (checa.Error.equals("0")) {
                         getAddRelOrdUsu(context);
+                        Log.d("exito","2");
                     } else {
                         Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
                     }
@@ -1877,8 +1883,10 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                Log.d("exito","llego al 3");
                 if(response1.code()==200){
                     getDeepMODORDSER(context);
+                    Log.d("exito","3");
                 }
             }
 
@@ -1906,16 +1914,10 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
 
-
+                Log.d("exito","llego al 4");
                 if (response1.code() == 200) {
-                    JsonObject jsonObject = response1.body().getAsJsonObject("GetDeepMODORDSERResult");
-                    GetDeepMODORDSERModel checa = new GetDeepMODORDSERModel(
-                            jsonObject.get("BaseIdUser").getAsInt()
-                    );
-
-                    if (checa.getBaseIdUser() == 0) {
                         getGuardaHora(context);
-                    }
+                        Log.d("exito","4");
                 }
             }
 
@@ -1945,6 +1947,7 @@ public class Request extends AppCompatActivity {
 
                 if(response1.code()==200){
                     getGuardaOrdSerAparatos(context);
+                    Log.d("exito","5");
                 }
             }
 
@@ -1974,6 +1977,7 @@ public class Request extends AppCompatActivity {
                 //String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
+                    Log.d("exito","6");
                 }
             }
 
@@ -2011,6 +2015,7 @@ public class Request extends AppCompatActivity {
                         }
                         if(IS==1){
                             GuardaCoordenadas(context);
+                            Log.d("exito","7");
                         }else{
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -2088,7 +2093,7 @@ public class Request extends AppCompatActivity {
 
                         getValidaReporte(context);
 
-
+                        Log.d("exito","8");
 
                     }
                 }
@@ -2120,7 +2125,7 @@ public class Request extends AppCompatActivity {
                 // Log.d("wer","asd");
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
-
+                        Log.d("exito","9");
 
                     }
                 }
@@ -2152,7 +2157,7 @@ public class Request extends AppCompatActivity {
 
                 if(response1.code()==200){
                     ConsultaIp(context);
-
+                    Log.d("exito","10");
                 }
             }
 
@@ -2190,7 +2195,7 @@ public class Request extends AppCompatActivity {
                     for(int a=0;a<1;a++){
 
                         if(reintentarComando.equals("true")){
-                            EjecutarFragment.reiniciar.setEnabled(true);
+                            reiniciar.setEnabled(true);
                             EjecutarFragment.msgEjecutarOrd.setText(Request.msgComando);
                         }else{
                             if(msgComando.length()>3){
@@ -2241,6 +2246,8 @@ public class Request extends AppCompatActivity {
 
                 if(response1.code()==200){
                     ConsultaIp(context);
+                    reiniciar.setEnabled(true);
+                    Log.d("exito","11");
                 }
             }
 

@@ -52,7 +52,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     //public static Boolean[]recib=new Boolean[Array.accionx.size()];
     public static String descr;
     public static int cont=0;
-    public static boolean rapg =true;
+    public static boolean rapg =false;
 
     public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
         this.trabajox=trabajox;

@@ -48,6 +48,9 @@ import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mMinute;
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.year;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.añoE;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.diaE;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.mesE;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.Materiales.EFDM;
 import static com.example.pablo.prueba7.Fragments.Materiales.EIMD;
@@ -1019,11 +1022,14 @@ public class Services {
     public Service getADDRELORDUSUService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+
         jsonObject.put("ClvOrden", clvor);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
         jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject1.put("objNueRelOrdenUsuario",jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
 
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
@@ -1053,14 +1059,21 @@ public class Services {
 
     public Service getDeppMODORDSERService() throws JSONException {
         //POST Body Json
+        String ab="";
         JSONObject jsonObject = new JSONObject();
+        if(mesE<10){
+            ab= "0"+mesE;
+        }else{
+            ab=String.valueOf(mesE);
+        }
+        String s=diaE +"-"+ ab +"-"+  + añoE;
 
         jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
         jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("ClvTecnico", claveTecnico);
         jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
         jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("FecEje", EjecutarFragment.fechaHoy);
+        jsonObject.put("FecEje", s);
         jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
         jsonObject.put("Impresa", 1);
         jsonObject.put("ListadeArticulos", "");
@@ -1102,9 +1115,9 @@ public class Services {
     public Service getGuardaHoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
-        jsonObject.put("horafin", EjecutarFragment.horaHoy);
-        jsonObject.put("horainicio", "08:00");
+        jsonObject.put("Clv_orden", clvor);
+        jsonObject.put("horaFin", EjecutarFragment.horaHoy);
+        jsonObject.put("horaInicio", "08:00");
         jsonObject.put("opcion", 1);
 
 
@@ -1178,12 +1191,14 @@ public class Services {
     public Service getAddLlenaBitacoraService() throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrden", clvor);
+        JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("DescripcionMov", "Se generó la");
+        jsonObject.put("ClvOrden", clvor);
+        jsonObject1.put("objSP_LLena_Bitacora_Ordenes",jsonObject);
 
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
 
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
