@@ -81,7 +81,6 @@ public class Ejecutar1Fragment extends Fragment {
         }else{
             month=String.valueOf(mesE);
         }
-        String y=añoE +""+ month +""+diaE;
 
         final String minute;
         if(mMinute<10){
@@ -89,39 +88,33 @@ public class Ejecutar1Fragment extends Fragment {
         }else{
             minute=String.valueOf(mMinute);
         }
-        String a=mHour+":"+ minute ;
-
-
-
-
-
 
         eject.setOnClickListener(new View.OnClickListener() {
-
-
-
-
             @Override
             public void onClick(View v) {
-                if(TrabajosFragment.proble.getText().toString().isEmpty()){
+
+
+
+                if (TrabajosFragment.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solucion")) {
+                    Toast.makeText(getContext(), "Seleccione un tipo de solucion", Toast.LENGTH_SHORT).show();
+                }else {
+                    if(TrabajosFragment.proble.getText().toString().isEmpty()){
                     Toast.makeText(getContext(),"Campo Problema real vacio", Toast.LENGTH_LONG).show();
 
 
                 }else {
 
                     if (horas.reporteEjecutada == 1) {
-
-
                         year = añoE + "" + month + "" + diaE;
                         horas12 = mHour + ":" + minute;
-                        request.getGuardaHoraReporte(getContext());
+                       /*request.getGuardaHoraReporte(getContext());
                         request.getGuardaCampos(getContext());
                         Intent intent1 = new Intent(getActivity(), Reportes.class);
                         startActivity(intent1);
-                        request.getListQuejas();
-
+                        request.getListQuejas();*/
 
                     }
+                }
 
                   /*  try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaI1), Integer.parseInt(HorasFragment.mesI1), Integer.parseInt(HorasFragment.añoI1), fechaSl, diaE, mesE + 1, añoE) == 1) {
