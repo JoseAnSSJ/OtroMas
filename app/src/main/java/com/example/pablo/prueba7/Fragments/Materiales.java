@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Fragments;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ public class Materiales extends Fragment {
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
+    int seleccion,seleccionExte;
+
 
     public Materiales() {
         // Required empty public constructor
@@ -63,7 +66,7 @@ public class Materiales extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
         tabla = view.findViewById(R.id.tabla);
-        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),tabla);
+        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),Materiales.tabla);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -92,6 +95,7 @@ public class Materiales extends Fragment {
                     cantidadDM=dat.get(position-1).Cantidad;
                     idInventarioMD=dat.get(position-1).IdInventario;
                     request.getTipoMat();
+                    seleccion=position;
 
 
                 }
@@ -107,6 +111,7 @@ public class Materiales extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0){
                     extSer=(position-1);
+                    seleccionExte=position;
                 }
             }
 
@@ -118,37 +123,64 @@ public class Materiales extends Fragment {
 agragarDM.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-if(request.pieza==true){
-    piezaSer = Integer.parseInt(String.valueOf(pieza.getText()));
-    totalDM = piezaSer;
-    IIDM =0;
-    IFDM =0;
-    EIMD = 0;
-            EFDM=0;
-    if(cantidadDM>=totalDM){
-       request.getValidaPreDes(getContext());
-        tablaAdapter.agregarFilaTabla(Array.listaTabla);
-    }else {
-        Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
-    }
-}else {
-    IIDM =Integer.parseInt(String.valueOf(mII.getText()));
-    IFDM =Integer.parseInt(String.valueOf(mFI.getText()));
-    EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
-    EFDM=Integer.parseInt(String.valueOf(mFE.getText()));
-    metros=(IFDM-IIDM)+(EFDM-EIMD);
-    totalDM=metros;
-    if(cantidadDM>=totalDM){
-          request.getValidaPreDes(getContext());
-
-    }else {
-        Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
-    }
+        if(seleccion==0){
+            Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
+        }else {
+           if(request.extencionesMat==true){
+               if(seleccionExte==0){
+                   Toast.makeText(getContext(),"Seleccione una extencion",Toast.LENGTH_SHORT).show();
+               }else{
+                   EjecutarDescargaMaterial();
+               }
+           }else{
+               EjecutarDescargaMaterial();
+           }
+        }
 }
-}
-
 });
 
         return view;
+    }
+    public void EjecutarDescargaMaterial(){
+        if (request.pieza == true) {
+            if(pieza.getText().toString().length()==0){
+                Toast.makeText(getContext(),"Seleccione cantidad",Toast.LENGTH_SHORT).show();
+            }else {
+                piezaSer = Integer.parseInt(String.valueOf(pieza.getText()));
+                totalDM = piezaSer;
+                IIDM = 0;
+                IFDM = 0;
+                EIMD = 0;
+                EFDM = 0;
+                if (cantidadDM >= totalDM) {
+                    request.getValidaPreDes(getActivity(), getContext());
+
+
+                } else {
+                    Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        } else {
+            if(mII.getText().toString().length()==0||mFI.getText().toString().length()==0||mIE.getText().toString().length()==0||mFE.getText().toString().length()==0){
+                Toast.makeText(getContext(),"Seleccione metraje",Toast.LENGTH_SHORT).show();
+
+            }else {
+                IIDM = Integer.parseInt(String.valueOf(mII.getText()));
+                IFDM = Integer.parseInt(String.valueOf(mFI.getText()));
+                EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
+                EFDM = Integer.parseInt(String.valueOf(mFE.getText()));
+                metros = (IFDM - IIDM) + (EFDM - EIMD);
+                totalDM = metros;
+                if (cantidadDM >= totalDM) {
+                    request.getValidaPreDes(getActivity(), getContext());
+
+                } else {
+                    Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
     }
 }

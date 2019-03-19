@@ -153,7 +153,7 @@ public class Request extends AppCompatActivity {
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
-    Arbol_Adapter adapter;
+    public static boolean extencionesMat=false;
 
     public static boolean b = false;
 
@@ -2429,9 +2429,6 @@ Log.d("asd","ad");
     }
 
     public void LlenaExt(final Context context) {
-
-
-
         Service service = null;
         service = services.getLlenaExtService();
 
@@ -2457,8 +2454,14 @@ Log.d("asd","ad");
                         }
 
                     }
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
-                    Materiales.spinnerExtMat.setAdapter(arrayAdapter);
+                    try{
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
+                        Materiales.spinnerExtMat.setAdapter(arrayAdapter);
+                        extencionesMat=true;
+                    }catch (Exception e){
+
+                    }
+
                 }
             }
             @Override
@@ -2500,7 +2503,7 @@ Log.d("asd","ad");
             }
         });
     }
-    public void getValidaPreDes(final Context context) {
+    public void getValidaPreDes(final Activity activity,final Context context) {
         Service service = null;
         service = services.getValidaPreService();
         Call<JsonObject> call = service.getValidaPre();
@@ -2511,11 +2514,11 @@ Log.d("asd","ad");
                     String dato;
                     dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
                     if(dato.equals("0")){
-                        addPreDes(context);
+                        addPreDes(activity,context);
                     }
                     if(dato.equals("1")){
                         Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
-                        getPredescarga(context);
+                        getPredescarga(activity,context);
                     }
 
                 }
@@ -2530,7 +2533,7 @@ Log.d("asd","ad");
             }
         });
     }
-    public void addPreDes(final Context context) {
+    public void addPreDes(final Activity activity,final Context context) {
         Service service = null;
         service = services.addPreDescargaService();
         Call<JsonObject> call = service.addPreDescarga();
@@ -2539,7 +2542,7 @@ Log.d("asd","ad");
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.code()==200){
                     Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
-                    getPredescarga(context);
+                    getPredescarga(activity,context);
                 }else{
 
                 }
@@ -2551,7 +2554,7 @@ Log.d("asd","ad");
             }
         });
     }
-    public void getPredescarga(final Context context){
+    public void getPredescarga(final Activity activity, final Context context){
         Service service = null;
         service = services.getPreDescargaService();
         Call<JSONPreDescarga> call = service.getPreDescarga();
@@ -2584,9 +2587,9 @@ Log.d("asd","ad");
 
                         }
                     }
-
-
-
+                    Materiales.tabla.setVisibility(View.VISIBLE);
+                    final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
+                    tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }
 
