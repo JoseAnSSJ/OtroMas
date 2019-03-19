@@ -18,6 +18,7 @@ import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
@@ -97,6 +98,7 @@ import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 import com.example.pablo.prueba7.Activitys.asignacion;
@@ -117,6 +119,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
@@ -169,7 +172,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
-
+Log.d("asd","ad");
                 if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
                     Log.d("response2", userJson.get("Usuario").getAsString());
@@ -2189,17 +2192,13 @@ public class Request extends AppCompatActivity {
                     );
                     reintentarComando = String.valueOf(user.AplicaReintentar);
                     msgComando = user.Msg;
-
-
-
                     for(int a=0;a<1;a++){
-
                         if(reintentarComando.equals("true")){
                             reiniciar.setEnabled(true);
-                            EjecutarFragment.msgEjecutarOrd.setText(Request.msgComando);
+                            msgEjecutarOrd.setText(Request.msgComando);
                         }else{
                             if(msgComando.length()>3){
-                                EjecutarFragment.msgEjecutarOrd.setText(msgComando);
+                                msgEjecutarOrd.setText(msgComando);
                                 Login.esperar(5);
                                 ((Activity)context).finish();
                             }else{
@@ -2227,7 +2226,6 @@ public class Request extends AppCompatActivity {
 
 
     }
-
     public void ReintentarComando(final Context context) {
         reintentaB=0;
         Service service = null;
@@ -2246,6 +2244,7 @@ public class Request extends AppCompatActivity {
 
                 if(response1.code()==200){
                     ConsultaIp(context);
+                    msgEjecutarOrd.setText("");
                     reiniciar.setEnabled(true);
                     Log.d("exito","11");
                 }
@@ -2514,12 +2513,11 @@ public class Request extends AppCompatActivity {
                     String dato;
                     dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
                     if(dato.equals("0")){
-                        getPredescarga(context);
                         addPreDes(context);
                     }
                     if(dato.equals("1")){
                         Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
-                        // getPredescarga(context);
+                        getPredescarga(context);
                     }
 
                 }
@@ -2562,14 +2560,6 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                array.listaTabla.clear();
-                array.listaTabla.add("Clave");
-                array.listaTabla.add("Descripcion");
-                array.listaTabla.add("Cantidad");
-                array.listaTabla.add("Metraje inicial int.");
-                array.listaTabla.add("Metraje final int.");
-                array.listaTabla.add("Metraje inicial ext.");
-                array.listaTabla.add("Metraje final ext.");
                 if(response.code()==200){
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
@@ -2588,8 +2578,10 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
-                    ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.listaTabla);
-                    Materiales.tabla.setAdapter(adapter);
+                    TablaAdapter tablaAdapter = new TablaAdapter(context,Materiales.tabla);
+                    tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+                    tablaAdapter.agregarFilaTabla(array.dataPreDescarga);
+
                 }
             }
 

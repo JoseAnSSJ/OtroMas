@@ -76,6 +76,7 @@ String f;
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        Asignacion.refreshDrawableState();
 
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override

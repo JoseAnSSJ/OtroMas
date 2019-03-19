@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
@@ -26,7 +28,7 @@ public class Materiales extends Fragment {
 
     private LayoutInflater inflater;
     private ViewGroup container;
-    public static GridView tabla;
+    public static TableLayout tabla;
     private Bundle onsavedInstanceState;
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
@@ -61,7 +63,6 @@ public class Materiales extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
         tabla = view.findViewById(R.id.tabla);
-        tabla.setHorizontalSpacing(6);
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -124,6 +125,7 @@ if(request.pieza==true){
             EFDM=0;
     if(cantidadDM>=totalDM){
        request.getValidaPreDes(getContext());
+
     }else {
         Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
     }
@@ -136,6 +138,7 @@ if(request.pieza==true){
     totalDM=metros;
     if(cantidadDM>=totalDM){
           request.getValidaPreDes(getContext());
+
     }else {
         Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
     }

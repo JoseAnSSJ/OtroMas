@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cabecera_tabla">
+        <item>Clave</item>
+        <item>Descripción</item>
+        <item>Cantidad</item>
+        <item>Metraj inicial int.</item>
+        <item>Metraj final int.</item>
+        <item>Metraj inicial ext.</item>
+        <item>Metraj final ext.</item>
+    </string-array>
+
+</resources>

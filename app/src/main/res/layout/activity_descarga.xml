@@ -272,9 +272,17 @@
                 android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje" />
 <!---->
+            <HorizontalScrollView
+                android:id="@+id/scrollhorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
 
                 <LinearLayout
-
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -282,13 +290,12 @@
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
 
-                <GridView
-                    android:id="@+id/tabla"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-
+                    <TableLayout
+                        android:id="@+id/tabla"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
+            </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

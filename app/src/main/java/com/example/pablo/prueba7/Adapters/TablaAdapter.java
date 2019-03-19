@@ -1,123 +1,164 @@
 package com.example.pablo.prueba7.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.evrencoskun.tableview.adapter.AbstractTableAdapter;
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
+import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
+import com.example.pablo.prueba7.R;
 
-public class TablaAdapter extends AbstractTableAdapter {
+import java.util.ArrayList;
+import java.util.List;
 
-    public TablaAdapter(Context context) {
-        super(context);
+public class TablaAdapter  {
+    // Variables de la clase
+
+    private TableLayout tabla;          // Layout donde se pintará la tabla
+    private ArrayList<TableRow> filas;  // Array de las filas de la tabla
+    private Context context;
+    private Resources rs;
+    private int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
+
+    /**
+     * Constructor de la tabla
+     * @param context Actividad donde va a estar la tabla
+     * @param tabla TableLayout donde se pintará la tabla
+     */
+    public TablaAdapter(Context context, TableLayout tabla)
+    {
+        context = context;
+        this.tabla = tabla;
+        rs = context.getResources();
+        FILAS = COLUMNAS = 0;
+        filas = new ArrayList<TableRow>();
     }
 
-    class CeldaViewHolder extends AbstractTableAdapter{
+    /**
+     * Añade la cabecera a la tabla
+     * @param recursocabecera Recurso (array) donde se encuentra la cabecera de la tabla
+     */
+    public void agregarCabecera(int recursocabecera)
+    {
+        TableRow.LayoutParams layoutCelda;
+        TableRow fila = new TableRow(context);
+        TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        fila.setLayoutParams(layoutFila);
 
-        public CeldaViewHolder(Context context) {
-            super(context);
+        String[] arraycabecera = rs.getStringArray(recursocabecera);
+        COLUMNAS = arraycabecera.length;
 
+        for(int i = 0; i < arraycabecera.length; i++)
+        {
+            TextView texto = new TextView(context);
+            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(arraycabecera[i]), TableRow.LayoutParams.WRAP_CONTENT);
+            texto.setText(arraycabecera[i]);
+            texto.setGravity(Gravity.CENTER_HORIZONTAL);
+            texto.setTextAppearance(context, R.style.estilo_celda);
+            texto.setBackgroundResource(R.drawable.tabla_celda_cabecera);
+            texto.setLayoutParams(layoutCelda);
+
+            fila.addView(texto);
         }
 
-        @Override
-        public int getColumnHeaderItemViewType(int position) {
-            return 0;
+        tabla.addView(fila);
+        filas.add(fila);
+
+        FILAS++;
+    }
+
+    /**
+     * Agrega una fila a la tabla
+     * @param elementos Elementos de la fila
+     */
+    public void agregarFilaTabla(ArrayList <List<dameTblPreDescargaMaterialResultModel>> elementos)
+    {
+        TableRow.LayoutParams layoutCelda;
+        TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        TableRow fila = new TableRow(context);
+        fila.setLayoutParams(layoutFila);
+
+        for(int i = 0; i< elementos.size(); i++)
+        {
+            TextView texto = new TextView(context);
+            texto.setText(String.valueOf(elementos.get(i)));
+            texto.setGravity(Gravity.CENTER_HORIZONTAL);
+            texto.setTextAppearance(context, R.style.estilo_celda);
+            texto.setBackgroundResource(R.drawable.tabla_celda);
+            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
+            texto.setLayoutParams(layoutCelda);
+
+            fila.addView(texto);
         }
 
-        @Override
-        public int getRowHeaderItemViewType(int position) {
-            return 0;
-        }
+        tabla.addView(fila);
+        filas.add(fila);
 
-        @Override
-        public int getCellItemViewType(int position) {
-            return 0;
-        }
+        FILAS++;
+    }
 
-        @Override
-        public AbstractViewHolder onCreateCellViewHolder(ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindCellViewHolder(AbstractViewHolder holder, Object cellItemModel, int columnPosition, int rowPosition) {
-
-        }
-
-        @Override
-        public AbstractViewHolder onCreateColumnHeaderViewHolder(ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindColumnHeaderViewHolder(AbstractViewHolder holder, Object columnHeaderItemModel, int columnPosition) {
-
-        }
-
-        @Override
-        public AbstractViewHolder onCreateRowHeaderViewHolder(ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindRowHeaderViewHolder(AbstractViewHolder holder, Object rowHeaderItemModel, int rowPosition) {
-
-        }
-
-        @Override
-        public View onCreateCornerView() {
-            return null;
+    /**
+     * Elimina una fila de la tabla
+     * @param indicefilaeliminar Indice de la fila a eliminar
+     */
+    public void eliminarFila(int indicefilaeliminar)
+    {
+        if( indicefilaeliminar > 0 && indicefilaeliminar < FILAS )
+        {
+            tabla.removeViewAt(indicefilaeliminar);
+            FILAS--;
         }
     }
 
-    @Override
-    public int getColumnHeaderItemViewType(int position) {
-        return 0;
+    /**
+     * Devuelve las filas de la tabla, la cabecera se cuenta como fila
+     * @return Filas totales de la tabla
+     */
+    public int getFilas()
+    {
+        return FILAS;
     }
 
-    @Override
-    public int getRowHeaderItemViewType(int position) {
-        return 0;
+    /**
+     * Devuelve las columnas de la tabla
+     * @return Columnas totales de la tabla
+     */
+    public int getColumnas()
+    {
+        return COLUMNAS;
     }
 
-    @Override
-    public int getCellItemViewType(int position) {
-        return 0;
+    /**
+     * Devuelve el número de celdas de la tabla, la cabecera se cuenta como fila
+     * @return Número de celdas totales de la tabla
+     */
+    public int getCeldasTotales()
+    {
+        return FILAS * COLUMNAS;
     }
 
-    @Override
-    public AbstractViewHolder onCreateCellViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
+    /**
+     * Obtiene el ancho en píxeles de un texto en un String
+     * @param texto Texto
+     * @return Ancho en píxeles del texto
+     */
+    private int obtenerAnchoPixelesTexto(String texto)
+    {
+        Paint p = new Paint();
+        Rect bounds = new Rect();
+        p.setTextSize(50);
 
-    @Override
-    public void onBindCellViewHolder(AbstractViewHolder holder, Object cellItemModel, int columnPosition, int rowPosition) {
-
-    }
-
-    @Override
-    public AbstractViewHolder onCreateColumnHeaderViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindColumnHeaderViewHolder(AbstractViewHolder holder, Object columnHeaderItemModel, int columnPosition) {
-
-    }
-
-    @Override
-    public AbstractViewHolder onCreateRowHeaderViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindRowHeaderViewHolder(AbstractViewHolder holder, Object rowHeaderItemModel, int rowPosition) {
-
-    }
-
-    @Override
-    public View onCreateCornerView() {
-        return null;
+        p.getTextBounds(texto, 0, texto.length(), bounds);
+        return bounds.width();
     }
 }
