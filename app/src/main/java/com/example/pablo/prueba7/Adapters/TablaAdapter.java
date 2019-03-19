@@ -5,16 +5,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.evrencoskun.tableview.adapter.AbstractTableAdapter;
-import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
+import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.R;
 
@@ -26,20 +23,20 @@ public class TablaAdapter  {
 
     private TableLayout tabla;          // Layout donde se pintará la tabla
     private ArrayList<TableRow> filas;  // Array de las filas de la tabla
-    private Context context;
+    private Activity activity;
     private Resources rs;
     private int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
 
     /**
      * Constructor de la tabla
-     * @param context Actividad donde va a estar la tabla
+     * @param activity Actividad donde va a estar la tabla
      * @param tabla TableLayout donde se pintará la tabla
      */
-    public TablaAdapter(Context context, TableLayout tabla)
+    public TablaAdapter(Activity activity, TableLayout tabla)
     {
-        context = context;
+        this.activity = activity;
         this.tabla = tabla;
-        rs = context.getResources();
+        rs = this.activity.getResources();
         FILAS = COLUMNAS = 0;
         filas = new ArrayList<TableRow>();
     }
@@ -51,7 +48,7 @@ public class TablaAdapter  {
     public void agregarCabecera(int recursocabecera)
     {
         TableRow.LayoutParams layoutCelda;
-        TableRow fila = new TableRow(context);
+        TableRow fila = new TableRow(activity);
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         fila.setLayoutParams(layoutFila);
 
@@ -60,11 +57,11 @@ public class TablaAdapter  {
 
         for(int i = 0; i < arraycabecera.length; i++)
         {
-            TextView texto = new TextView(context);
+            TextView texto = new TextView(activity);
             layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(arraycabecera[i]), TableRow.LayoutParams.WRAP_CONTENT);
             texto.setText(arraycabecera[i]);
             texto.setGravity(Gravity.CENTER_HORIZONTAL);
-            texto.setTextAppearance(context, R.style.estilo_celda);
+            texto.setTextAppearance(activity, R.style.estilo_celda);
             texto.setBackgroundResource(R.drawable.tabla_celda_cabecera);
             texto.setLayoutParams(layoutCelda);
 
@@ -81,28 +78,28 @@ public class TablaAdapter  {
      * Agrega una fila a la tabla
      * @param elementos Elementos de la fila
      */
-    public void agregarFilaTabla(ArrayList <List<dameTblPreDescargaMaterialResultModel>> elementos)
+    public void agregarFilaTabla(ArrayList <String> elementos)
     {
         TableRow.LayoutParams layoutCelda;
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-        TableRow fila = new TableRow(context);
+        TableRow fila = new TableRow(activity);
         fila.setLayoutParams(layoutFila);
 
         for(int i = 0; i< elementos.size(); i++)
         {
-            TextView texto = new TextView(context);
+            TextView texto = new TextView(activity);
             texto.setText(String.valueOf(elementos.get(i)));
             texto.setGravity(Gravity.CENTER_HORIZONTAL);
-            texto.setTextAppearance(context, R.style.estilo_celda);
+            texto.setTextAppearance(activity, R.style.estilo_celda);
             texto.setBackgroundResource(R.drawable.tabla_celda);
             layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
             texto.setLayoutParams(layoutCelda);
-
             fila.addView(texto);
         }
 
         tabla.addView(fila);
         filas.add(fila);
+
 
         FILAS++;
     }

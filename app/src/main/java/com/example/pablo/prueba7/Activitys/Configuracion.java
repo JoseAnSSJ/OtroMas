@@ -51,7 +51,6 @@ public class Configuracion extends AppCompatActivity
             public void onClick(View v) {
                 UserModel.Token="";
                 try {
-                     request.b = false;
                     Intent intento = new Intent(Configuracion.this, Login.class);
                     startActivity(intento);
                 }

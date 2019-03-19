@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
@@ -29,7 +30,6 @@ public class Materiales extends Fragment {
     private LayoutInflater inflater;
     private ViewGroup container;
     public static TableLayout tabla;
-    private Bundle onsavedInstanceState;
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
@@ -63,6 +63,8 @@ public class Materiales extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
         tabla = view.findViewById(R.id.tabla);
+        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),tabla);
+        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -125,7 +127,7 @@ if(request.pieza==true){
             EFDM=0;
     if(cantidadDM>=totalDM){
        request.getValidaPreDes(getContext());
-
+        tablaAdapter.agregarFilaTabla(Array.listaTabla);
     }else {
         Toast.makeText(getContext(),"Cantidad incorrecta",Toast.LENGTH_SHORT).show();
     }
@@ -146,6 +148,7 @@ if(request.pieza==true){
 }
 
 });
+
         return view;
     }
 }

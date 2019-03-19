@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,13 +9,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,7 @@ public class Login extends AppCompatActivity {
     private String user;
     public static String enco;
     public static String cvl_usuario;
+    public static ProgressBar progressBar;
     private Request request = new Request();
 
 
@@ -51,6 +56,7 @@ public class Login extends AppCompatActivity {
         usurio = (EditText) findViewById(R.id.usuario);
         contraseña = (EditText) findViewById(R.id.contrasenia);
         entrar = (Button)findViewById(R.id.btnLogin);
+        progressBar = findViewById(R.id.barlog);
         cvl_usuario= usurio.getText().toString();
         setTitle(null);
 
@@ -78,7 +84,7 @@ public class Login extends AppCompatActivity {
 
 
                     request.getReviews(getApplicationContext());
-
+                showProgress(true);
                 Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
             }
         });
@@ -121,6 +127,12 @@ public class Login extends AppCompatActivity {
             System.out.println(e);
         }
     }
+    public static void showProgress(boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
 
+      /*  int visibility = show ? View.GONE : View.VISIBLE;
+        barlog.setVisibility(visibility);
+        barlog.setVisibility(visibility);*/
+    }
 
 }

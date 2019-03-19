@@ -35,7 +35,7 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="75dp"
                     android:text="@string/descripArticu"
                     android:textSize="20dp"
@@ -47,7 +47,7 @@
                     android:id="@+id/descripcionArticuloDesc"
                     android:layout_width="350dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/disenio_spinner"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,21 +58,22 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/clasificacionMate"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/descripcionArticuloDesc"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/descripcionArticuloDesc" />
 
                 <Spinner
                     android:id="@+id/clasificacionMatDesc"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/disenio_spinner"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             </android.support.constraint.ConstraintLayout>
@@ -90,29 +91,26 @@
 
                 <TextView
                     android:id="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="wrap_content"
-
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="4dp"
+
                     android:layout_marginTop="8dp"
                     android:text="@string/seleccionExt"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
                     android:id="@+id/extencionesDescarga"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11"
                     android:layout_width="350dp"
-                    android:background="@drawable/disenio_spinner"
-                    android:layout_height="wrap_content"
+                    android:layout_height="24dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                     />
+                    android:background="@drawable/disenio_spinner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -136,7 +134,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/cantidad"
-                    android:textSize="22sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -148,6 +146,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="20dp"
                     android:inputType="number" />
             </android.support.constraint.ConstraintLayout>
 
@@ -160,6 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textSize="20dp"
                 android:visibility="invisible">
 
                 <TextView
@@ -169,7 +169,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="8dp"
                     android:text="Inicio"
-                    android:textSize="22sp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView15"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -184,7 +184,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/fin"
-                    android:textSize="22sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -197,7 +197,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="60dp"
                     android:text="@string/interior"
-                    android:textSize="22sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -210,7 +210,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="50dp"
                     android:text="@string/exterior"
-                    android:textSize="22sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -222,6 +222,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="20dp"
+                    android:textSize="20dp"
                     android:inputType="number" />
 
                 <EditText
@@ -233,6 +234,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="20dp"
+                    android:textSize="20dp"
                     android:inputType="number" />
 
                 <EditText
@@ -244,6 +246,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="20dp"
                     android:inputType="number" />
 
                 <EditText
@@ -255,6 +258,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="20dp"
                     android:inputType="number" />
             </android.support.constraint.ConstraintLayout>
 

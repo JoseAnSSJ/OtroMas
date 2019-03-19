@@ -186,6 +186,7 @@ Log.d("asd","ad");
                     );
                     getClv_tecnico(context);
                 }else{
+                    Login.showProgress(false);
                     Toast.makeText(context, "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }
                 b = true;
@@ -234,9 +235,6 @@ Log.d("asd","ad");
                         //     MainActivity.NombreTec.setText(data.get(0).tecnico);
 
                     }
-                    Toast.makeText(context, "Bienvenido", Toast.LENGTH_LONG).show();
-
-
                     getProximaCita(context);
 
                 }else{
@@ -287,7 +285,6 @@ Log.d("asd","ad");
                         siguenteColonia =user.Colonia;
                     }catch (Exception e){
                     }
-
                     getOrdenes(context);
 
                 }else{
@@ -573,6 +570,7 @@ Log.d("asd","ad");
                         }
 
                     }
+                    Login.showProgress(false);
                     Intent intento = new Intent(context, Inicio.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intento);
@@ -2560,6 +2558,14 @@ Log.d("asd","ad");
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
+                array.listaTabla.clear();
+               /* array.listaTabla.add("Clave");
+                array.listaTabla.add("Descripcion");
+                array.listaTabla.add("Cantidad");
+                array.listaTabla.add("Metraje inicial int.");
+                array.listaTabla.add("Metraje final int.");
+                array.listaTabla.add("Metraje inicial ext.");
+                array.listaTabla.add("Metraje final ext.");*/
                 if(response.code()==200){
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
@@ -2569,18 +2575,17 @@ Log.d("asd","ad");
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
-                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
                             array.listaTabla.add(String.valueOf(dat.get(i).contrato));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
+                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
 
                         }
                     }
-                    TablaAdapter tablaAdapter = new TablaAdapter(context,Materiales.tabla);
-                    tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
-                    tablaAdapter.agregarFilaTabla(array.dataPreDescarga);
+
+
 
                 }
             }

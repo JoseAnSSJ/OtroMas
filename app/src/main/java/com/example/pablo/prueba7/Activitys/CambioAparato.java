@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
@@ -30,6 +31,7 @@ public class CambioAparato extends AppCompatActivity {
     public static int idArticulo, contrato, idArticulo2, clvAparatoCAPAT;
     public static String statusAparato;
     private Request request = new Request();
+    RelativeLayout aa;
     private Array array = new Array();
     private Button aceptarCambioAparato, Finish;
 
@@ -42,9 +44,14 @@ public class CambioAparato extends AppCompatActivity {
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
+        aa=findViewById(R.id.aa);
         Finish= findViewById(R.id.dos);
         request.getDeepCAPAT(getApplicationContext());
-
+        if(trabajos_adapter_result.ftth==0){
+            aa.setVisibility(View.VISIBLE);
+        }else{
+            aa.setVisibility(View.GONE);
+        }
 
 
 
