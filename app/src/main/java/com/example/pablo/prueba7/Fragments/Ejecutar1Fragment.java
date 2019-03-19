@@ -107,11 +107,11 @@ public class Ejecutar1Fragment extends Fragment {
                     if (horas.reporteEjecutada == 1) {
                         year = añoE + "" + month + "" + diaE;
                         horas12 = mHour + ":" + minute;
-                       /*request.getGuardaHoraReporte(getContext());
+                        request.getGuardaHoraReporte(getContext());
                         request.getGuardaCampos(getContext());
                         Intent intent1 = new Intent(getActivity(), Reportes.class);
                         startActivity(intent1);
-                        request.getListQuejas();*/
+                        request.getListQuejas();
 
                     }
                 }
