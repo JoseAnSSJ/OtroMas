@@ -22,6 +22,7 @@ import com.example.pablo.prueba7.Request.Request;
 import java.util.Date;
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.proble;
 import static com.example.pablo.prueba7.Request.Request.fechaSl;
 
 
@@ -59,7 +60,7 @@ public class Ejecutar1Fragment extends Fragment {
         eject = view.findViewById(R.id.ejec1);
 //        hora1I = HorasFragment.reportesselectTime.getText().toString();
         //      horafin = HorasFragment.reportesselectTime2.getText().toString();
-        solution = TrabajosFragment.proble.getText().toString();
+        solution = proble.getText().toString();
 
        /* Iterator<List<GetQuejasListResult>> itData = Array.dataReport.iterator();
         List<GetQuejasListResult> dat =  itData.next();
@@ -74,31 +75,53 @@ public class Ejecutar1Fragment extends Fragment {
         diaE = c.get(Calendar.DAY_OF_MONTH);
         mHour = c.get(Calendar.HOUR);
         mMinute = c.get(Calendar.MINUTE);
+        final String month;
+        if(mesE<10){
+            month= "0"+mesE;
+        }else{
+            month=String.valueOf(mesE);
+        }
+        String y=añoE +""+ month +""+diaE;
+
+        final String minute;
+        if(mMinute<10){
+            minute= "0"+mMinute;
+        }else{
+            minute=String.valueOf(mMinute);
+        }
+        String a=mHour+":"+ minute ;
+
+
+
+
+
 
         eject.setOnClickListener(new View.OnClickListener() {
-            String proble= TrabajosFragment.proble.getText().toString();
+
+
 
 
             @Override
             public void onClick(View v) {
+                if(TrabajosFragment.proble.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Campo Problema real vacio", Toast.LENGTH_LONG).show();
 
 
+                }else {
+
+                    if (horas.reporteEjecutada == 1) {
 
 
-              if (horas.reporteEjecutada == 1) {
+                        year = añoE + "" + month + "" + diaE;
+                        horas12 = mHour + ":" + minute;
+                        request.getGuardaHoraReporte(getContext());
+                        request.getGuardaCampos(getContext());
+                        Intent intent1 = new Intent(getActivity(), Reportes.class);
+                        startActivity(intent1);
+                        request.getListQuejas();
 
 
-                  year = añoE+"0"+ mesE+""+ diaE;
-                  horas12= mHour+":"+mMinute;
-                  request.getGuardaHoraReporte(getContext());
-                  request.getGuardaCampos(getContext());
-                  Intent intent1 = new Intent(getActivity(), Reportes.class);
-                  startActivity(intent1);
-                  request.getListQuejas();
-
-
-
-              }
+                    }
 
                   /*  try {
                         if (ValidarFechas(Integer.parseInt(HorasFragment.diaI1), Integer.parseInt(HorasFragment.mesI1), Integer.parseInt(HorasFragment.añoI1), fechaSl, diaE, mesE + 1, añoE) == 1) {
@@ -129,79 +152,54 @@ public class Ejecutar1Fragment extends Fragment {
                     }
 
                 }*/
-                if (horas.repotteVisita == 1) {
-                    try {
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 1) {
-                            Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
-                            year = añoE+"0"+ mesE+""+ diaE;
-                            mHour = c.get(Calendar.HOUR);
-                            mMinute = c.get(Calendar.MINUTE);
-                            request.getGuardaHoraReporte(getContext());
-                            request.getGuardaCampos(getContext());
-                            Intent intent1 = new Intent(getActivity(), Reportes.class);
-                            startActivity(intent1);
-                            request.getListQuejas();
+                    if (horas.repotteVisita == 1) {
+                        try {
+                            if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 1) {
+                                Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                                request.getGuardaHoraReporte(getContext());
+                                request.getGuardaCampos(getContext());
+                                Intent intent1 = new Intent(getActivity(), Reportes.class);
+                                startActivity(intent1);
+                                request.getListQuejas();
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                         }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 0) {
-                            Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                        }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV11), Integer.parseInt(HorasFragment.mesV11), Integer.parseInt(HorasFragment.añoV11), fechaSl, diaE, mesE + 1, añoE) == 2) {
-                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+
                     }
+                    if (horas.reporteVisita1 == 1) {
+                        try {
+                            if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 1) {
+                                Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                                request.getGuardaHoraReporte(getContext());
+                                request.getGuardaCampos(getContext());
+                                Intent intent1 = new Intent(getActivity(), Reportes.class);
+                                startActivity(intent1);
+                                request.getListQuejas();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    if (horas.reporteVisita2 == 1) {
+                        try {
+                            if (ValidarFechas(Integer.parseInt(HorasFragment.diaV3), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 1) {
+                                Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
+                                request.getGuardaHoraReporte(getContext());
+                                request.getGuardaCampos(getContext());
+                                Intent intent1 = new Intent(getActivity(), Reportes.class);
+                                startActivity(intent1);
+                                request.getListQuejas();
+
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    ////////*************************
 
                 }
-                if (horas.reporteVisita1 == 1) {
-                    try {
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 1) {
-                            Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
-                            year = añoE+"0"+ mesE+""+ diaE;
-                            mHour = c.get(Calendar.HOUR);
-                            mMinute = c.get(Calendar.MINUTE);
-                            request.getGuardaHoraReporte(getContext());
-                            request.getGuardaCampos(getContext());
-                            Intent intent1 = new Intent(getActivity(), Reportes.class);
-                            startActivity(intent1);
-                            request.getListQuejas();
-                        }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 0) {
-                            Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                        }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV21), Integer.parseInt(HorasFragment.añoV21), fechaSl, diaE, mesE + 1, añoE) == 2) {
-                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                if (horas.reporteVisita2 == 1) {
-                    try {
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV3), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 1) {
-                            Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
-                            year = añoE+"0"+ mesE+""+ diaE;
-                            mHour = c.get(Calendar.HOUR);
-                            mMinute = c.get(Calendar.MINUTE);
-                            request.getGuardaHoraReporte(getContext());
-                            request.getGuardaCampos(getContext());
-                            Intent intent1 = new Intent(getActivity(), Reportes.class);
-                            startActivity(intent1);
-                            request.getListQuejas();
-                        }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV3), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 0) {
-                            Toast.makeText(getActivity(), "La fecha de Visita no puede ser menor a la fecha de solicitud ni mayo a la fecha actual", Toast.LENGTH_LONG).show();
-                        }
-                        if (ValidarFechas(Integer.parseInt(HorasFragment.diaV21), Integer.parseInt(HorasFragment.mesV3), Integer.parseInt(HorasFragment.añoV3), fechaSl, diaE, mesE + 1, añoE) == 2) {
-                            Toast.makeText(getActivity(), "La hora inicio debe de ser menor a la hora fin", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                ////////*************************
-
-
             }
         });
 

@@ -1217,7 +1217,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_orden", clvReport);
-        jsonObject.put("horaFin",mHour+":0"+mMinute);
+        jsonObject.put("horaFin",horas12);
         jsonObject.put("horaInicio", "08:00");
 
         jsonObject.put("opcion", 2);
