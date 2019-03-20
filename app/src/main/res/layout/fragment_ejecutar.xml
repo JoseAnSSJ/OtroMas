@@ -59,7 +59,7 @@
           android:layout_marginStart="20dp"
           android:layout_marginTop="40dp"
           android:layout_toEndOf="@+id/eqwe"
-          android:hint="Espera"
+          android:hint="@string/espera"
           android:textSize="20dp" />
 
       <TextView

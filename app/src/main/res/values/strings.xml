@@ -65,7 +65,7 @@
     <string name="proximo_TrabajoDos">Próximo trabajo:</string>
     <string name="orden">Orden</string>
     <string name="n_Contrato">No. de Contrato</string>
-    <string name="contrato">Contrato</string>
+
     <string name="n_Orden"># de Orden</string>
     <string name="estatus">Estatus</string>
     <string name="reporte">Reporte</string>
@@ -144,6 +144,8 @@
     <string name="ciudad">Ciudad</string>
     <string name="servAsignados">Servicios asignados</string>
     <string name="fechaformato">dd/MM/AAAA</string>
+    <string name="inicio">Inicio</string>
+    <string name="contrato">Contrato</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
