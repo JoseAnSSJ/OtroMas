@@ -110,11 +110,9 @@ public class TablaAdapter  {
      */
     public void eliminarFila(int indicefilaeliminar)
     {
-        if( indicefilaeliminar > 0 && indicefilaeliminar < FILAS )
-        {
+
             tabla.removeViewAt(indicefilaeliminar);
             FILAS--;
-        }
     }
 
     /**

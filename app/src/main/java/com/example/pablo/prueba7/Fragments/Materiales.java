@@ -112,6 +112,9 @@ public class Materiales extends Fragment {
                 if(position!=0){
                     extSer=(position-1);
                     seleccionExte=position;
+                    request.getPredescarga(getActivity(),getContext());
+                }else{
+                    extSer=(position);
                 }
             }
 

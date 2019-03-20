@@ -1,20 +1,16 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Orden;
-import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
@@ -71,7 +67,6 @@ import com.example.pablo.prueba7.Modelos.GetConTecnicoAgendaResult;
 import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
 import com.example.pablo.prueba7.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.example.pablo.prueba7.Modelos.GetDameSerDelCliFacListResult;
-import com.example.pablo.prueba7.Modelos.GetDeepMODORDSERModel;
 import com.example.pablo.prueba7.Modelos.GetDeepValidaQuejaCompaniaAdicModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
@@ -98,7 +93,6 @@ import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
-import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 import com.example.pablo.prueba7.Activitys.asignacion;
@@ -109,7 +103,6 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -118,7 +111,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
@@ -132,39 +124,22 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
 
     Array array = new Array();
-    CambioDom c = new CambioDom();
-    public static String clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
-    public static String nombre_tecnico;
+    public static String reintentarComando,contraroMA,obsMA,statusMA,extencionesE,fechaSl,Obs,nombre_tecnico,clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
     public static boolean cambioA, isnet;
     public static Long abc;
-    public static String Obs;
-    public static int clvP;
-    public static int tecC;
-    public static String fechaSl;
+    public static int clvP,tecC,nExtenciones=0;
     public int reintentaB;
-    public static String extencionesE;
     public  static ArrayAdapter adapterTecSec,adapterTecSecR;
-    public static boolean pieza=false;
-    public static String contraroMA,obsMA,statusMA;
-    public static Integer nExtenciones=0;
-    public static String reintentarComando;
-    public static boolean rapagejecutar=false;
+    public static boolean pieza=false,rapagejecutar=false,extencionesMat=false,b = false;
     public static String ciudadcmdo,localidadcmdo,coloniacmdo,callecmdo,numerocmdo,numeroicmdo,telefonocmdo,callencmdo,callescmdo,calleecmdo,calleocmdo,casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
-    public static boolean extencionesMat=false;
-
-    public static boolean b = false;
-
     public static String datos[];
 
 
     ///////////////////Token///////////////////////////
     public void getReviews(final Context context) {
-
-        final List<String> lista = new ArrayList();
-
         Services restApiAdapter = new Services();
         Service service = restApiAdapter.getClientService();
         Call<JsonObject> call = service.getDataUser();
@@ -172,11 +147,8 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
-Log.d("asd","ad");
                 if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
-                    Log.d("response2", userJson.get("Usuario").getAsString());
-                    Log.d("response3", userJson.get("Token").getAsString());
                     //Introduccion de datos del request en el Modelo para poder usarlos
                     UserModel user = new UserModel(
                             userJson.get("Usuario").getAsString(),
@@ -223,10 +195,6 @@ Log.d("asd","ad");
                     while (iteData.hasNext()) {
                         List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
                         //Se recorre la lista y se guarla la informacion en el Modelo
-                        for (int i = 0; i < data.size(); i++) {
-                            Log.d("response9", data.get(i).clv_tecnico);
-                            Log.d("nombre", data.get(i).tecnico);
-                        }
                         clave_tecnico = data.get(0).clv_tecnico;
                         nombre_tecnico = data.get(0).tecnico;
 
@@ -267,7 +235,6 @@ Log.d("asd","ad");
                 if(response.code()==200){
                     try{
                         JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
-                        Log.d("response4", userJson.get("Calle").toString());
                         ProximaCitaModel user = new ProximaCitaModel(
                                 userJson.get("Calle").getAsString(),
                                 userJson.get("Clave").getAsInt(),
@@ -325,8 +292,6 @@ Log.d("asd","ad");
                         while (itData.hasNext()) {
                             List<OrdSer> dat = (List<OrdSer>) itData.next();
                             for (int i = 0; i < dat.size(); i++) {
-                                Log.d("response9", dat.get(i).getStatus());
-                                Log.d("response10", String.valueOf(dat.get(i).getTotal()));
                                 if (dat.get(i).getStatus().equals("Ejecutada")) {
                                     try {
                                         Inicio.OE = dat.get(i).getTotal();
@@ -417,17 +382,6 @@ Log.d("asd","ad");
                         Array.contratoQ.clear();
                         Array.Direccion.clear();
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("Clave Reporte", String.valueOf(dat.get(i).getClvQueja()));
-                            Log.d("Contrato", dat.get(i).getContrato());
-                            Log.d("Nombre", dat.get(i).getNombre());
-                            Log.d("Status", dat.get(i).getStatus());
-                            Log.d("Calle", dat.get(i).getCalle());
-                            Log.d("NUMERO", dat.get(i).getNUMERO());
-                            Log.d("Colonia", dat.get(i).getColonia());
-
-
-
-
                             Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
@@ -477,11 +431,6 @@ Log.d("asd","ad");
                         Array.statusrc.clear();
                         Array.contratosrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("Clave de orden", String.valueOf(dat.get(i).getClvOrden()));
-                            Log.d("Contrato", dat.get(i).getContrato());
-                            Log.d("Nombre", dat.get(i).getNombre());
-                            Log.d("Status", dat.get(i).getStatus());
-
                             Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
@@ -528,8 +477,6 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<Queja> dat = (List<Queja>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("response7", dat.get(i).getStatus());
-                            Log.d("response8", String.valueOf(dat.get(i).getTotal()));
                             if (dat.get(i).getStatus().equals("Ejecutada")) {
                                 try {
                                     Inicio.RE = dat.get(i).getTotal();
@@ -789,7 +736,6 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("response11", dat.get(i).getDescripcion());
                             dat.get(i).setSeRealiza(false);
                             Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
                             Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
@@ -857,7 +803,6 @@ Log.d("asd","ad");
                         int j = 1;
                         datos[0] = a;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("responsetecsec", dat.get(i).getNOMBRE());
                             datos[j] = dat.get(i).getNOMBRE();
                             Array.clv_tecnicoSecundario.add(j, dat.get(i).getCLV_TECNICO());
 
@@ -943,7 +888,6 @@ Log.d("asd","ad");
                         datos[0] = "Seleccione Aparato";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("responseAparatosCliente", String.valueOf(dat.get(i).Descripcion));
                             datos[j] = dat.get(i).getMac();
                             j = j + 1;
                         }
@@ -986,7 +930,6 @@ Log.d("asd","ad");
                         datos[0] = "Seleccione Estado";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("responseStatus", dat.get(i).Concepto);
                             datos[j] = dat.get(i).getConcepto();
                             j = j + 1;
                         }
@@ -1046,7 +989,6 @@ Log.d("asd","ad");
                         datos[0] = "Seleccione Tipo de Aparato";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("responseIdArticulo", String.valueOf(dat.get(i).IdArticulo));
                             datos[j] = dat.get(i).getNombre();
                             j = j + 1;
                         }
@@ -1055,9 +997,10 @@ Log.d("asd","ad");
                         try{
                             Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat1 = itdata1.next();
+                            CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
                             CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
                             CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
-                            CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
+
                             getApaTipDis(context);
                         }catch (Exception e){
 
@@ -1107,7 +1050,6 @@ Log.d("asd","ad");
                         datos[0] = "Seleccine Aparato Disponible";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("responseClv_aparato", String.valueOf(dat.get(i).Clv_Aparato));
                             datos[j] = dat.get(i).getDescripcion();
                             j = j + 1;
                         }
@@ -1115,7 +1057,6 @@ Log.d("asd","ad");
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.aparatoAsignar.setAdapter(adapter);
                         try{
-
                             CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
                         }catch (Exception e){
 
@@ -1155,11 +1096,9 @@ Log.d("asd","ad");
                         getCliApa(context);
 
 
-
-
                     } catch (Exception e) {
                         getCliApa(context);
-                        getStatusApa(context);
+
                     }
 
                 }else{
@@ -1196,9 +1135,6 @@ Log.d("asd","ad");
                         while (itdata.hasNext()) {
                             List<GetDameDatosCAMDOResult> dat = itdata.next();
                             String datos[] = new String[dat.size()];
-                            for (int i = 0; i < dat.size(); i++) {
-                                Log.d("casa", dat.get(i).getCasa());
-                            }
                             ciudadcmdo=dat.get(0).Ciudad;
                             localidadcmdo=dat.get(0).localidad;
                             coloniacmdo=dat.get(0).colonia;
@@ -1268,7 +1204,6 @@ Log.d("asd","ad");
                         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
 
                         for (int i = 0; i < dat4.size(); i++) {
-                            Log.d("response21", String.valueOf(dat4.get(i).getIdMedio()));
                             array.nombreArbol.add(dat4.get(i).getNombre());
                         }
                     }
@@ -1309,7 +1244,6 @@ Log.d("asd","ad");
                         List<GetMuestraMedioPorServicoContratadoListResult> dat = (List<GetMuestraMedioPorServicoContratadoListResult>) itData.next();
                         array.medio.add("Selecionar Medio");
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("response22", dat.get(i).getDescripcion());
                             array.medio.add(dat.get(i).getDescripcion());
                         }
                     }
@@ -1352,7 +1286,6 @@ Log.d("asd","ad");
                         List<GetMuestraTipoAparatoListResult> dat = (List<GetMuestraTipoAparatoListResult>) itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("response23", dat.get(i).getNombre());
                             array.tipoAparato.add(dat.get(i).getNombre());
                         }
                     }
@@ -1436,8 +1369,6 @@ Log.d("asd","ad");
 
                         for (int i = 0; i < dat.size(); i++) {
                             array.serviciosAparatos.add(dat.get(i).getNombre());
-                            Log.d("ertgf", array.serviciosAparatos.get(i));
-
                         }
 
                     }
@@ -1520,8 +1451,6 @@ Log.d("asd","ad");
                         int j = 1;
                         datos[0] = f;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("descripcion", String.valueOf(dat.get(i).dESCRIPCION));
-                            Log.d("occ", String.valueOf(dat.get(i).cLVTRABAJO));
                             datos[j] = dat.get(i).getDESCRIPCION();
 
                             Array.clv_Soluc.add(j, dat.get(i).getCLVTRABAJO());
@@ -1569,11 +1498,6 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<GetQuejasListResult> dat = (List<GetQuejasListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            Log.d("response40", dat.get(i).getObservaciones());
-                            Log.d("response41", dat.get(i).getProblema());
-                            Log.d("response42", dat.get(i).getPrioridad());
-                            Log.d("response43", dat.get(i).getClasificacionProblema());
-
                             Asigna.add(dat.get(i).getPrioridad());
                             Asigna1.add(dat.get(i).getClasificacionProblema());
                             Obs = dat.get(i).observaciones;
@@ -1621,9 +1545,6 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<GetConTecnicoAgendaResult> dat = (List<GetConTecnicoAgendaResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            Log.d("response50", dat.get(i).getTecnico());
-
-
                             MainReportes.NombreTec1.setText(String.valueOf(dat.get(i).getTecnico()));
                             // TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
 
@@ -1664,10 +1585,11 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<GetDameSerDelCliFacListResult> dat = (List<GetDameSerDelCliFacListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            Log.d("response60", dat.get(i).getServicio());
-
-
-                            MainReportes.infoA.setText("    " + dat.get(0).getServicio() + '\n' + "    " + dat.get(1).getServicio() + '\n' + "    " +
+                         /*
+                         //
+                        ///////
+                          */
+                          MainReportes.infoA.setText("    " + dat.get(0).getServicio() + '\n' + "    " + dat.get(1).getServicio() + '\n' + "    " +
                                     dat.get(2).getServicio() + '\n' + dat.get(3).getServicio() + '\n' + dat.get(4).getServicio()
                                     + '\n' + dat.get(5).getServicio() + '\n' + dat.get(6).getServicio() + '\n' + dat.get(7).getServicio() + '\n' + "    " + dat.get(8).getServicio());
 
@@ -1707,24 +1629,12 @@ Log.d("asd","ad");
                     while (itData.hasNext()) {
                         List<GetuspBuscaContratoSeparado2ListResult> dat = (List<GetuspBuscaContratoSeparado2ListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            Log.d("response100", dat.get(i).getNombre());
-                            Log.d("response101", dat.get(i).getApellidoPaterno());
-                            Log.d("response102", ((String.valueOf(dat.get(i).getContratoBueno()))));
-                            Log.d("response103", dat.get(i).getCONTRATO());
-
-
                             MainReportes.Nombre1.setText(dat.get(i).getNombre() + "  " + dat.get(i).getApellidoPaterno() + "  " + dat.get(i).getApellidoMaterno());
                             MainReportes.Direccion1.setText(dat.get(i).getCALLE() + "  " + dat.get(i).getNUMERO() + "  " + dat.get(i).getCOLONIA());
                             MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
-
-                            if (response.code() == 200) {
                                 abc = dat.get(i).contratoBueno;
                                 getServiciosAsignados();
-                            }
-
-
-
                         }
 
                     }
@@ -1769,7 +1679,6 @@ Log.d("asd","ad");
                         int j = 1;
                         datos[0] = a;
                         for (int i = 0; i < dat.size(); i++) {
-                            Log.d("descripcion81", String.valueOf(dat.get(i).getNombre()));
                             datos[j] = dat.get(i).getNombre();
                             Array.Clv_TecSecR.add(j, dat.get(i).getClvTecnico());
 
@@ -1815,7 +1724,6 @@ Log.d("asd","ad");
 
                     if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
                         getChecaCAMDO(context);
-                        Log.d("exito","1");
                     }else{
                         EjecutarFragment.eject.setEnabled(true);
                         Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
@@ -1854,7 +1762,6 @@ Log.d("asd","ad");
                     );
                     if (checa.Error.equals("0")) {
                         getAddRelOrdUsu(context);
-                        Log.d("exito","2");
                     } else {
                         Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
                     }
@@ -1884,10 +1791,8 @@ Log.d("asd","ad");
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                Log.d("exito","llego al 3");
                 if(response1.code()==200){
                     getDeepMODORDSER(context);
-                    Log.d("exito","3");
                 }
             }
 
@@ -1914,11 +1819,8 @@ Log.d("asd","ad");
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
-                Log.d("exito","llego al 4");
                 if (response1.code() == 200) {
                         getGuardaHora(context);
-                        Log.d("exito","4");
                 }
             }
 
@@ -1948,7 +1850,6 @@ Log.d("asd","ad");
 
                 if(response1.code()==200){
                     getGuardaOrdSerAparatos(context);
-                    Log.d("exito","5");
                 }
             }
 
@@ -1974,11 +1875,8 @@ Log.d("asd","ad");
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                Log.d("exito","llega a 6");
-                //String string1 = String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult"));
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
-                    Log.d("exito","6");
                 }
             }
 
@@ -2016,7 +1914,6 @@ Log.d("asd","ad");
                         }
                         if(IS==1){
                             GuardaCoordenadas(context);
-                            Log.d("exito","7");
                         }else{
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -2093,9 +1990,6 @@ Log.d("asd","ad");
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)) {
 
                         getValidaReporte(context);
-
-                        Log.d("exito","8");
-
                     }
                 }
             }
@@ -2123,11 +2017,8 @@ Log.d("asd","ad");
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                // Log.d("wer","asd");
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
-                        Log.d("exito","9");
-
                     }
                 }
             }
@@ -2158,7 +2049,6 @@ Log.d("asd","ad");
 
                 if(response1.code()==200){
                     ConsultaIp(context);
-                    Log.d("exito","10");
                 }
             }
 
@@ -2214,7 +2104,6 @@ Log.d("asd","ad");
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.d("error", t.getMessage());
             }
 
             public  void retry(Call<JsonObject> call){
@@ -2244,7 +2133,6 @@ Log.d("asd","ad");
                     ConsultaIp(context);
                     msgEjecutarOrd.setText("");
                     reiniciar.setEnabled(true);
-                    Log.d("exito","11");
                 }
             }
 
@@ -2486,15 +2374,11 @@ Log.d("asd","ad");
                     if(user.Tipo.equals("Piezas")){
                         Materiales.piezasMat.setVisibility(View.VISIBLE);
                         pieza=true;
-                        // Materiales.metrosMat.setVisibility(View.VISIBLE);
                     }else{
                         Materiales.metrosMat.setVisibility(View.VISIBLE);
                         pieza=false;
                     }
                 }
-
-
-
             }
 
             @Override
@@ -2510,23 +2394,18 @@ Log.d("asd","ad");
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     String dato;
-                    dato= String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
-                    if(dato.equals("0")){
-                        addPreDes(activity,context);
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
+                    if (dato.equals("0")) {
+                        addPreDes(activity, context);
                     }
-                    if(dato.equals("1")){
-                        Toast.makeText(context,"Ya existe ese tipo de material",Toast.LENGTH_SHORT).show();
-                        getPredescarga(activity,context);
+                    if (dato.equals("1")) {
+                        Toast.makeText(context, "Ya existe ese tipo de material", Toast.LENGTH_SHORT).show();
+                        getPredescarga(activity, context);
                     }
-
                 }
-
-
-
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -2547,7 +2426,6 @@ Log.d("asd","ad");
 
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -2561,34 +2439,30 @@ Log.d("asd","ad");
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
+                try {
+                    tablaAdapter.eliminarFila(1);
+                }catch (Exception e){}
                 array.listaTabla.clear();
-               /* array.listaTabla.add("Clave");
-                array.listaTabla.add("Descripcion");
-                array.listaTabla.add("Cantidad");
-                array.listaTabla.add("Metraje inicial int.");
-                array.listaTabla.add("Metraje final int.");
-                array.listaTabla.add("Metraje inicial ext.");
-                array.listaTabla.add("Metraje final ext.");*/
                 if(response.code()==200){
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
                     Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
-
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
-                            array.listaTabla.add(String.valueOf(dat.get(i).contrato));
+                            array.listaTabla.add(String.valueOf(dat.get(i).getNombre()));
                             array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
                             array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
+                            array.listaTabla.add(String.valueOf(dat.get(i).getNoExt()));
 
                         }
                     }
                     Materiales.tabla.setVisibility(View.VISIBLE);
-                    final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }
@@ -2600,13 +2474,3 @@ Log.d("asd","ad");
         });
     }
 }
-
-
-
-
-
-
-
-
-
-

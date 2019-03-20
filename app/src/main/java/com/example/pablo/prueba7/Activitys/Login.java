@@ -77,15 +77,21 @@ public class Login extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+if(usurio.getText().toString().length()==0){
+    Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
+}else{
+    if(contraseña.getText().toString().length()==0){
+        Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
+    }else{
+        user = usurio.getText().toString() + ":" + contraseña.getText().toString();
+        enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
+        request.getReviews(getApplicationContext());
+        showProgress(true);
+        Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
+    }
+}
 
 
-                user = usurio.getText().toString() + ":" + contraseña.getText().toString();
-                enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
-
-
-                    request.getReviews(getApplicationContext());
-                showProgress(true);
-                Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -15,8 +15,9 @@ public class dameTblPreDescargaMaterialResultModel {
     public int metrajeInicioExterior;
     public int noArticulo;
     public String tipoDescarga;
+    public String Nombre;
 
-    public dameTblPreDescargaMaterialResultModel(int noExt, int cantidadUtilizada, int clvOrden, int clvTecnico, int contrato, boolean esCable, int idAlmacenEmpresa, int idPreDescarga, int metrajeFin, int metrajeFinExterior, int metrajeInicio, int metrajeInicioExterior, int noArticulo, String tipoDescarga) {
+    public dameTblPreDescargaMaterialResultModel(int noExt, int cantidadUtilizada, int clvOrden, int clvTecnico, int contrato, boolean esCable, int idAlmacenEmpresa, int idPreDescarga, int metrajeFin, int metrajeFinExterior, int metrajeInicio, int metrajeInicioExterior, int noArticulo, String tipoDescarga, String nombre) {
         this.NoExt = noExt;
         this.cantidadUtilizada = cantidadUtilizada;
         this.clvOrden = clvOrden;
@@ -31,7 +32,13 @@ public class dameTblPreDescargaMaterialResultModel {
         this.metrajeInicioExterior = metrajeInicioExterior;
         this.noArticulo = noArticulo;
         this.tipoDescarga = tipoDescarga;
+        this.Nombre=nombre;
     }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
 
     public int getNoExt() {
         return NoExt;
