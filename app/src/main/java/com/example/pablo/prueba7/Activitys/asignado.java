@@ -51,8 +51,8 @@ public class asignado extends AppCompatActivity {
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignado);
-        escanear = (Button) findViewById(R.id.escanear);
-        codigo = (TextView) findViewById(R.id.codigo);
+        //escanear = (Button) findViewById(R.id.escanear);
+        //codigo = (TextView) findViewById(R.id.codigo);
         spinnerAparato=findViewById(R.id.tipo_aparato);
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);

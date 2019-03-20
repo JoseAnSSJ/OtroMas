@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,7 +32,7 @@ public class CambioAparato extends AppCompatActivity {
     public static int idArticulo, contrato, idArticulo2, clvAparatoCAPAT;
     public static String statusAparato;
     private Request request = new Request();
-    RelativeLayout aa;
+    ConstraintLayout aa;
     private Array array = new Array();
     private Button aceptarCambioAparato, Finish;
 

@@ -130,6 +130,7 @@ public class Inicio extends AppCompatActivity
             PieData data = new PieData((dataSet));
             data.setValueTextSize(15f);
             data.setValueTextColor(Color.BLACK);
+        pieChart.animateXY(2000, 2000);
             pieChart.setData(data);
         ///////////////////////////////////////////////////////////////
 

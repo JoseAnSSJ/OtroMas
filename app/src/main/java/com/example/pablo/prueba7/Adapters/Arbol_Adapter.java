@@ -210,6 +210,7 @@ int d=0;
         holder.medio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asignacion.eliminarAparato.setVisibility(View.GONE);
                 asignacion.aceptarAsignacion.setVisibility(View.GONE);
                 asignacion.cancelarAsigancion.setVisibility(View.GONE);
                 siguiente.setVisibility(View.GONE);

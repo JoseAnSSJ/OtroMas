@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="800dp">
+        android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
@@ -16,33 +23,22 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="@string/aparatos_Asignados"
-            android:textSize="25dp"
+            android:textSize="@dimen/titulos"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/eliminar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/eliminar"
-        android:visibility="gone"
-        />
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <Button
             android:id="@+id/eliminarAparatos"
-            android:layout_width="200dp"
+            android:layout_width="@dimen/botonGrandeL"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-
             android:layout_marginTop="32dp"
             android:background="@drawable/boton"
             android:backgroundTint="#00b0ff"
             android:text="@string/eliminar"
+            android:textSize="@dimen/mediano"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -51,7 +47,7 @@
         <ListView
             android:id="@+id/Asignacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_below="@+id/eliminarAparatos"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
@@ -59,11 +55,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eliminarAparatos"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/siguiente"
-            android:layout_width="270dp"
+            android:layout_width="@dimen/botonGrandeL"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Asignacion"
             android:layout_centerHorizontal="true"
@@ -73,6 +69,7 @@
             android:enabled="false"
             android:text="@string/asigar_Aparatos"
             android:textColor="#000"
+            android:textSize="@dimen/mediano"
             app:layout_constraintBottom_toTopOf="@+id/cancelarAsignacion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -80,7 +77,7 @@
 
         <Button
             android:id="@+id/cancelarAsignacion"
-            android:layout_width="270dp"
+            android:layout_width="@dimen/botonGrandeL"
             android:layout_height="wrap_content"
             android:layout_below="@+id/siguiente"
             android:layout_centerHorizontal="true"
@@ -89,6 +86,7 @@
             android:backgroundTint="#00b0ff"
             android:text="@string/cancelar"
             android:textColor="#000"
+            android:textSize="@dimen/mediano"
             app:layout_constraintBottom_toTopOf="@+id/aceptarAsignacion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -96,7 +94,7 @@
 
         <Button
             android:id="@+id/aceptarAsignacion"
-            android:layout_width="270dp"
+            android:layout_width="@dimen/botonGrandeL"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cancelarAsignacion"
             android:layout_centerHorizontal="true"
@@ -106,62 +104,80 @@
             android:enabled="false"
             android:text="@string/aceptar"
             android:textColor="#000"
+            android:textSize="@dimen/mediano"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent" />
-    <RelativeLayout android:id="@+id/poiuyt"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="250dp"
-        android:background="#ffffff"
-        android:visibility="gone"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/medio"
-            android:layout_centerHorizontal="true"
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/poiuyt"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="100dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            />
-        <Spinner
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="159dp"
-            android:id="@+id/spinnerMedio"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/contorno"
-            >
-        </Spinner>
-        <Button
-            android:id="@+id/aceptarMedio"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/aceptar"
-            android:textAlignment="center"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="250dp"
-            android:textSize="20dp"
-            android:background="@color/colorPrimary"
-            android:layout_marginStart="30dp"
-            />
-        <Button
-            android:id="@+id/cancelarMedio"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="250dp"
-            android:layout_marginEnd="30dp"
-            android:text="@string/cancelar"
-            android:textAlignment="center"
-            android:background="@color/colorPrimary"
-            android:textSize="20dp" />
-    </RelativeLayout>
+            android:background="#ffffff"
+            android:visibility="gone"
+            android:foregroundGravity="center_vertical"
+            app:layout_constraintBottom_toTopOf="@+id/aceptarAsignacion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:text="@string/medio"
+                android:textSize="@dimen/grande"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerMedio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerMedio"
+                android:layout_width="@dimen/spinnerL"
+                android:layout_height="@dimen/spinnerA"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                android:background="@drawable/disenio_spinner"
+                app:layout_constraintBottom_toTopOf="@+id/aceptarMedio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.513"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.105"></Spinner>
+
+            <Button
+                android:id="@+id/aceptarMedio"
+                android:layout_width="@dimen/botonChicoL"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/aceptar"
+                android:textAlignment="center"
+                android:textSize="@dimen/grande"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerMedio" />
+
+            <Button
+                android:id="@+id/cancelarMedio"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/cancelar"
+                android:textAlignment="center"
+                android:textSize="@dimen/grande"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerMedio" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
