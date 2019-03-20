@@ -1,7 +1,10 @@
 package com.example.pablo.prueba7.Adapters;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,9 +98,12 @@ public class ordenes_adapter_result extends BaseAdapter {
                 clvor = Integer.valueOf(ordensrc.get(position));
                 request.getDeepCons(mContext);
 
+
             }
         });
 
         return convertView;
     }
+
+
 }

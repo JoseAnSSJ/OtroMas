@@ -1,6 +1,10 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +17,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -20,6 +25,8 @@ import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.Trabajos;
+
+import androidx.annotation.RequiresApi;
 
 
 //import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
@@ -29,16 +36,17 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private ViewPager mViewPager;
     ScrollView hzScrollView;
     Button info;
+    int position;
     RelativeLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Empresa, Nombre, Direccion, InfoServicios;
 
     Request request = new Request();
 
-
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setRetainInstance(true);
+        validar_Permiso();
         if (onSaveInstanceState != null) {
             //Restore the fragment's instance
 
@@ -138,13 +146,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 case 0:
                     return new Trabajos();
                 case 1:
-
                     return new InstalacionFragment();
                 case 2:
                     return new Materiales();
                 case 3:
                     return new EjecutarFragment();
-
                 default:
                     return null;
             }
@@ -176,7 +182,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        mViewPager.setCurrentItem(tab.getPosition());
+       // mViewPager.setCurrentItem(tab.getPosition());
+        position=tab.getPosition();
+        mViewPager.setCurrentItem(position);
 
     }
 
@@ -190,5 +198,41 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
 
+    public void regresar(){
+        if((position-1)>=0){
+            mViewPager.setCurrentItem(position-1);}
+            else{
+            finish();
+            }
+            }
+
+            public void onBackPressed(){
+        regresar();
+            }
+
+    private void validar_Permiso() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1008);
+        } else {
+
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1008) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            } else {
+                Toast.makeText(this, "Debe aceptar los permisos", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
 
 }
