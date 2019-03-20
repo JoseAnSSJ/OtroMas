@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible">
-
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -13,91 +12,85 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/qwe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="#000"
+            android:text="@string/tecnicoDos" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="4dp"
-                android:text="Tecnico:" />
+        <TextView
+            android:id="@+id/tecniconame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:text="---"
+            />
 
-            <TextView
-                android:id="@+id/tecniconame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:text="Juan Santillan"
-                android:textStyle="bold"/>
+        <Button
+            android:id="@+id/info"
+            android:layout_width="90dp"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/boton"
+            android:text="@string/datos_Cliente"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/zaw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/contratoDos"
+            android:textColor="#000"
+            />
 
-            <Button
-                android:id="@+id/info"
-                android:layout_width="80dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="15dp"
-                android:text="Datos Cliente"
-                android:textSize="6dp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/contrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/zaw"
+            android:hint="---" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="25dp"
-                android:text="Contrato:"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtqwe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/estatusDos"
+            android:textColor="#000" />
 
-            <TextView
-                android:id="@+id/contrato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="165dp"
-                android:layout_marginTop="25dp"
-                android:hint="456-453" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="250dp"
-                android:layout_marginTop="25dp"
-                android:text="Status:"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="300dp"
-                android:layout_marginTop="25dp"
-                android:hint="Ejecutada" />
-
-
-        </RelativeLayout>
-
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="50dp"
+            android:hint="---" />
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="1000dp"
@@ -107,7 +100,6 @@
         android:visibility="gone"
         android:id="@+id/scv"
         >
-
         <RelativeLayout
             android:id="@+id/animado"
             android:layout_width="match_parent"
@@ -116,50 +108,29 @@
             android:layout_marginTop="50dp"
             android:background="#c0f2f1"
             android:visibility="gone"
-
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="400dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="161dp"
-                android:text="Informacion del Usuario"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="97dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:text="Empresa:"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/infoempresa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="75dp"
-                android:hint="TLAYACAPAN"
-                android:textSize="20dp" />
-
-            <TextView
+                android:id="@+id/asd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="115dp"
-                android:text="Nombre:"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/info_Usuario"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/as"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/asd"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/nombreDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -167,21 +138,22 @@
                 android:id="@+id/infonombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/as"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="140dp"
-                android:hint="MARIA EMMA"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:hint="---"
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/wre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/infonombre"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="180dp"
-                android:text="Direccion:"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/direccionDos"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -189,21 +161,22 @@
                 android:id="@+id/infodireccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/wre"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="200dp"
-                android:text="xxxxxxxxxxx"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="---"
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/jkl"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
+                android:layout_below="@+id/infodireccion"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="250dp"
-                android:layout_marginStart="30dp"
-                android:text="Servicions Asignados"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/servicios_Asignados"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -211,12 +184,17 @@
                 android:id="@+id/infoservicios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/jkl"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="270dp"
-                android:text=""
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="50dp"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:textSize="20dp" />
         </RelativeLayout>
+
     </ScrollView>
+
 </RelativeLayout>

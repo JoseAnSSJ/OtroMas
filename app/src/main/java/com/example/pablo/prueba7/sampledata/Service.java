@@ -12,8 +12,13 @@ import com.example.pablo.prueba7.Listas.JSONArbolServicios;
 import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONClasificacionProblm;
+import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
+import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
+import com.example.pablo.prueba7.Listas.JSONHIHF;
+import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
+import com.example.pablo.prueba7.Listas.JSONPreDescarga;
 import com.example.pablo.prueba7.Listas.JSONPrioridad;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
 import com.example.pablo.prueba7.Listas.JSONReportes;
@@ -27,6 +32,7 @@ import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
 import com.example.pablo.prueba7.Listas.QuejasList;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -96,14 +102,11 @@ public interface Service {
     Call<JSONNombreTecnico>getNom();
     @POST(Constants.URL_GET_ASERVICE)
     Call<JSONServicioAsignado>getServ();
-
     @POST(Constants.URL_GET_TSECR)
     Call<JSONTecSecReport>getTec();
     ///////////////////EjecucionInstalacion/////////////////
     @POST(Constants.URL_GET_VALI_OrdSer)
     Call<JsonObject> getVALIOrdSer();
-
-
     @POST(Constants.URL_GET_CHECA_CAMDO)
     Call<JsonObject> getChecaCAMDO();
     @POST(Constants.URL_ADD_REL_ORDUSU)
@@ -129,11 +132,31 @@ public interface Service {
     Call<JsonObject>getLLenaReporte();
     @POST(Constants.URL_GET_VALIDA)
     Call<JsonObject>getValidaRep();
-
     ///////////////////////////////////
     @POST(Constants.URL_GET_CAPAT)
     Call<JsonObject> getCAPAT();
     @POST(Constants.URL_GET_DEEP_CAPAT)
     Call<JsonObject> getDeepCAPAT();
+    @POST(Constants.URL_SEND_NOENTREGADOS)
+    Call<JsonObject>noent();
+    /////////////////
+    @POST(Constants.URL_GET_MUESTRABIT)
+    Call<JSONDetalleBitacora> getMuestraBit();
+    @POST(Constants.URL_GET_DETALLEBIT)
+    Call<JSONDescripcionArticulosBit>getDetalleBit();
+    @POST(Constants.URL_GET_CHECAEXT)
+    Call<JsonObject> getChecaExt();
+    @POST(Constants.URL_GET_LLENAEXT)
+    Call<JSONLlenaExtenciones>getLlenaExt();
+    @POST(Constants.URL_GET_TIPOMAT)
+    Call<JsonObject> getTipoMat();
+    @POST(Constants.URL_VALIDAPRE)
+    Call<JsonObject> getValidaPre();
+    @POST(Constants.URL_ADD_PREDESCARGA)
+    Call<JsonObject> addPreDescarga();
+    @POST(Constants.URL_GET_PREDESCARGA)
+    Call<JSONPreDescarga> getPreDescarga();
+
+
 }
 

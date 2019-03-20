@@ -15,7 +15,9 @@ public class JSONPrioridad {
         return getSoftvGetPrioridadQuejaListResult;
     }
 
-
+    public void setGetSoftvGetPrioridadQuejaListResult(List<GetSoftvGetPrioridadQuejaListResult> getSoftvGetPrioridadQuejaListResult) {
+        this.getSoftvGetPrioridadQuejaListResult = getSoftvGetPrioridadQuejaListResult;
+    }
 
 }
 

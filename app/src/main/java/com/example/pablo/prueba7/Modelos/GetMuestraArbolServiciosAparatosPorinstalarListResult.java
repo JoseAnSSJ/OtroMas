@@ -55,7 +55,13 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         BaseRemoteIp = baseRemoteIp;
     }
 
+    public void setClv_TipSer(Integer clv_TipSer) {
+        Clv_TipSer = clv_TipSer;
+    }
 
+    public void setClv_UnicaNet(Integer clv_UnicaNet) {
+        Clv_UnicaNet = clv_UnicaNet;
+    }
 
     public void setContrato(Integer contrato) {
         Contrato = contrato;
@@ -77,6 +83,9 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         Nombre = nombre;
     }
 
+    public void setTipo(String tipo) {
+        Tipo = tipo;
+    }
 
     public void setType(String type) {
         Type = type;
@@ -94,6 +103,13 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         return BaseIdUser;
     }
 
+    public Integer getBaseRemoteIp() {
+        return BaseRemoteIp;
+    }
+
+    public Integer getClv_TipSer() {
+        return Clv_TipSer;
+    }
 
     public Integer getClv_UnicaNet() {
         return Clv_UnicaNet;
@@ -119,6 +135,10 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         return Nombre;
     }
 
+    public String getTipo() {
+        return Tipo;
+    }
+
     public String getType() {
         return Type;
     }
@@ -127,4 +147,7 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         return children;
     }
 
+    public Integer getClv_orden() {
+        return clv_orden;
+    }
 }

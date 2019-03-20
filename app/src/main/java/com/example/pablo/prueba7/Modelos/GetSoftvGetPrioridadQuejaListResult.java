@@ -33,6 +33,9 @@ public class GetSoftvGetPrioridadQuejaListResult {
         this.baseIdUser = baseIdUser;
     }
 
+    public Object getBaseRemoteIp() {
+        return baseRemoteIp;
+    }
 
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
@@ -46,6 +49,13 @@ public class GetSoftvGetPrioridadQuejaListResult {
         this.descripcion = descripcion;
     }
 
+    public Long getClvPrioridadQueja() {
+        return clvPrioridadQueja;
+    }
+
+    public void setClvPrioridadQueja(Long clvPrioridadQueja) {
+        this.clvPrioridadQueja = clvPrioridadQueja;
+    }
 
 }
 

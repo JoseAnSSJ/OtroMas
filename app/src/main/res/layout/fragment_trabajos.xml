@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_alignParentTop="true"
     android:layout_marginTop="70dp"
-    tools:context=".Trabajos">
-
-
+    tools:context=".Fragments.Trabajos">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,10 +15,9 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:text="Descripcion"
+        android:text="@string/descripcion"
         android:textSize="18dp"
         android:textStyle="bold" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,10 +28,9 @@
         android:paddingRight="10dp"
         android:layout_marginTop="100dp"
         android:paddingBottom="10dp"
-        android:text="Accion"
+        android:text="@string/accion"
         android:textSize="18dp"
         android:textStyle="bold" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,25 +39,13 @@
         android:layout_marginStart="320dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="1dp"
-        android:text="Recibi"
-
+        android:text="@string/recibi"
         android:textSize="18dp"
         android:textStyle="bold" />
-
-
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Enviar"
-    android:id="@+id/send"
-    android:layout_marginStart="280dp"
-    android:layout_marginTop="55dp"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"
         android:id="@+id/listTrabajos">
     </ListView>
-
 </FrameLayout>

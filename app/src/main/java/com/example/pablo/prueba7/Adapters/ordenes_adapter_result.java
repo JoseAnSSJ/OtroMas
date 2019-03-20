@@ -9,41 +9,41 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.MainActivity;
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
-
 import java.util.ArrayList;
-
-
 
 public class ordenes_adapter_result extends BaseAdapter {
 
     public static Integer clvor, contratoReq;
-    LayoutInflater inflater;
-    Context mContext;
-    ArrayList<String> ordensrc;
-    ArrayList<String>contratosrc;
-    ArrayList<String>nombresrc;
-    ArrayList<String>statusrc;
-    Request request=new Request();
+    private LayoutInflater inflater;
+    private Context mContext;
+    private ArrayList<String> ordensrc;
+    private ArrayList<String>contratosrc;
+    private ArrayList<String>nombresrc;
+    private ArrayList<String>statusrc;
+    private ArrayList<String>direccionsrc;
+    private Request request=new Request();
 
-    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc){
+    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc,ArrayList<String>direccionsrc){
 
         this.ordensrc=ordensrc;
         this.contratosrc=contratosrc;
         this.nombresrc=nombrex;
         this.statusrc=statusrc;
+        this.direccionsrc=direccionsrc;
 
         mContext=context;
         inflater=LayoutInflater.from(mContext);
 
     }
     public  class viewHolder{
-        TextView status,contrato1,nombre;
-        Button orden;
+        private TextView status,contrato1,nombre,direccionOrd;
+        private Button orden;
     }
 
     @Override
@@ -75,10 +75,11 @@ public class ordenes_adapter_result extends BaseAdapter {
 
             convertView=inflater.inflate(R.layout.ordenes_list_items,null);
 
-            holder.status=convertView.findViewById(R.id.statusv);
-            holder.orden=convertView.findViewById(R.id.ordenv);
-            holder.contrato1=convertView.findViewById(R.id.contratov);
-            holder.nombre=convertView.findViewById(R.id.nombrev);
+            holder.status=(TextView)convertView.findViewById(R.id.statusv);
+            holder.orden=(Button)convertView.findViewById(R.id.ordenv);
+            holder.contrato1=(TextView)convertView.findViewById(R.id.contratov);
+            holder.nombre=(TextView)convertView.findViewById(R.id.nombrev);
+            holder.direccionOrd=(TextView)convertView.findViewById(R.id.direccionOrd);
 
             convertView.setTag(holder);
         }
@@ -90,19 +91,18 @@ public class ordenes_adapter_result extends BaseAdapter {
         holder.orden.setText(Array.ordensrc.get(position));
         holder.contrato1.setText(Array.contratosrc.get(position));
         holder.status.setText(Array.statusrc.get(position));
+        holder.direccionOrd.setText(Array.direccionsrc.get(position));
 
         holder.orden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(intento1);
                 clvor = Integer.valueOf(ordensrc.get(position));
+                request.getDeepCons(mContext);
 
 
 
 
-                request.getDeepCons();
-                request.getTrabajos();
+
 
 
 

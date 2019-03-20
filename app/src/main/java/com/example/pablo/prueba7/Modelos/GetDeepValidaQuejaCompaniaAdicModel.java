@@ -15,3 +15,7 @@ public class GetDeepValidaQuejaCompaniaAdicModel {
         BaseIdUser = baseIdUser;
     }
 }
+
+
+
+

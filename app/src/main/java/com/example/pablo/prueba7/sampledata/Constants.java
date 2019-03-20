@@ -25,7 +25,6 @@ public class Constants {
     public static final String URL_ACEPTAR_ASIG = "AsignaAparatosAlServicio/GetAsignaAparatosAlServicioList";
     public static final String URL_GET_QUEJAS_AGENDADAS = "AplicacionMovil/GetDameListadoQuejasAgendadas";
     public static final String URL_GET_CONCON = "OrdSer/GetCONCONEX";
-
     //////////////////////////////////////////////////////////////Reportes////////////////////////////////////////////////////////////////
     public static final String URL_GET_CLIT_REPOR ="uspBuscaContratoSeparado2/GetuspBuscaContratoSeparado2List";
     public static final String URL_GET_SOL="MUESTRATRABAJOSQUEJAS/GetMUESTRATRABAJOSQUEJASList";
@@ -34,20 +33,19 @@ public class Constants {
     public static final String URL_GET_CLASIF="uspConsultaTblClasificacionProblemas/GetuspConsultaTblClasificacionProblemasList";
     public static final String URL_GET_ITEC="OrdSer/GetConTecnicoAgenda";
     public static final String URL_GET_ASERVICE="DameSerDelCliFac/GetDameSerDelCliFacList";
-//////////////////////////////////////////EjecutarOrdenInstalacion////////////////////////////////////////////
-public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerAparatos";
+    public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
+    //////////////////////////////////////////EjecutarOrdenInstalacion////////////////////////////////////////////
+    public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerAparatos";
     public static final String URL_GET_CHECA_CAMDO="Checa_si_tiene_camdo/GetCheca_si_tiene_camdo";
     public static final String URL_ADD_REL_ORDUSU="NueRelOrdenUsuario/AddNueRelOrdenUsuario";
     public static final String URL_GET_MODORDSER="MODORDSER/GetDeepMODORDSER";
     public static final String URL_GET_GUARDA_HORA="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_GUARDAOrdSerAparatos="SP_GuardaOrdSerAparatos/GetDeepSP_GuardaOrdSerAparatos";
-
+    //public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
     public static final String URL_GET_GUARDA_COORDENADAS="CLIENTES_New/GetGuardaCoordendasCli";
     public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
     public static final String URL_GET_CONSULTA_IP="OrdSer/GetConsultaIpPorContrato";
     public static final String URL_GET_REINTENTA_COMANDO="OrdSer/GetReintentarComando";
-
-
     ///////////////////////////////////////EjecutarReportes/////////////////
     public static final String URL_Get_HIHF="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_UPDATE="Quejas/UpdateQuejas";
@@ -55,8 +53,16 @@ public static final String URL_GET_VALI_OrdSer="OrdSer/GetSP_ValidaGuardaOrdSerA
     /////////////////////////////////////////////////
     public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
     public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
-    public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
-
+    public static final String URL_SEND_NOENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
+    ////////////
+    public static final String URL_GET_MUESTRABIT="Muestra_Detalle_Bitacora_2/GetMuestra_Detalle_Bitacora_2List";
+    public static final String URL_GET_DETALLEBIT="Muestra_Descripcion_Articulo_2/GetMuestra_Descripcion_Articulo_2List";
+    public static final String URL_GET_CHECAEXT="UspChecaSiTieneExtensiones/GetUspChecaSiTieneExtensiones";
+    public static final String URL_GET_LLENAEXT="UspChecaSiTieneExtensiones/GetUspLlenaComboExtensionesList";
+    public static final String URL_GET_TIPOMAT="OrdSer/GetSoftv_ObtenTipoMaterial";
+    public static final String URL_VALIDAPRE="AplicacionMovil/ValidaExisteTblPreDescargaMaterial";
+    public static final String URL_ADD_PREDESCARGA="AplicacionMovil/InsertaTblPreDescargaMaterial";
+    public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
 
 
 }

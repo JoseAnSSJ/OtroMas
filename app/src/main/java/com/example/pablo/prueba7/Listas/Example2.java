@@ -16,4 +16,7 @@ public class Example2 {
         return getdameSerDELCliresumenResult;
     }
 
+    public void setdameSerDELCliresumenResult(List<GetdameSerDELCliresumenResult> getdameSerDELCliresumenResult) {
+        this.getdameSerDELCliresumenResult = getdameSerDELCliresumenResult;
+    }
 }

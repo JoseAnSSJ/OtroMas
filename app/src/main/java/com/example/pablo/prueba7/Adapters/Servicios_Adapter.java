@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,15 @@ import java.util.ArrayList;
 
 public class Servicios_Adapter extends BaseAdapter  {
 
-Array array = new Array();
-    LayoutInflater inflater;
-    Context mcontext;
-    ArrayList<String> selectedStrings = new ArrayList<String>();
+    private Array array = new Array();
+    private LayoutInflater inflater;
+    private Context mcontext;
+    private  ArrayList<String> selectedStrings = new ArrayList<String>();
 
 
     public Servicios_Adapter (Context context){
-        mcontext=context;
+
+         mcontext=context;
         inflater = LayoutInflater.from(mcontext);
     }
 
@@ -81,7 +83,7 @@ Array array = new Array();
                 if(isChecked){
                     selectedStrings.add(String.valueOf(holder.check.getText()));
                 }else{
-
+                  //  selectedStrings.remove(String.valueOf(holder.check.getText()));
                 }
                 if(selectedStrings.size()!=0){
                     for (int a=0; a<selectedStrings.size(); a++){
