@@ -303,7 +303,7 @@ int d=0;
                   Arbol_Adapter.DeletMedio.clear();
 
                }
- 
+
             }
         });
 

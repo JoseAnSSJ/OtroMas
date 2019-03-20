@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Array {
-   public static ArrayList<List<GetdameSerDELCliresumenResult>> dataclientes;
+    public static ArrayList<List<GetdameSerDELCliresumenResult>> dataclientes;
     public static ArrayList<List<Queja>> dataque;
     public static  ArrayList<List<OrdSer>> dataord;
     //////////////////////ARRAY ORDENES//////////////////////
@@ -50,7 +50,7 @@ public class Array {
     public static ArrayList<String>nombreQ=new ArrayList<>();
     public static ArrayList<String>statusQ=new ArrayList<>();
     public static ArrayList<String> Direccion= new ArrayList<String>();
- ///////////////////////ARRAY TRABAJOS///////////////////
+    ///////////////////////ARRAY TRABAJOS///////////////////
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
@@ -90,19 +90,6 @@ public class Array {
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
     public static  ArrayList<Integer> Clv_TecSecR;
     public static  ArrayList<Integer> clv_Soluc;
-    public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
-    public static ArrayList<String> Asigna= new ArrayList<String>();
-    public static ArrayList<String> Asigna1= new ArrayList<String>();
-    public static ArrayList<String> Asigna2= new ArrayList<String>();
-    /////////
-    public static ArrayList<List<DetalleBitacoraModel>>dataDetBit;
-    public static ArrayList<String> detalleBit= new ArrayList<String>();
-    public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;
-    public static ArrayList<String> descripcionArtBit= new ArrayList<String>();
-    public static ArrayList<List<LlenaExtencionesModel>>dataLlenaExt;
-    public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
-    public static ArrayList<String> descripcionExt= new ArrayList<String>();
-    public static ArrayList<String> listaTabla= new ArrayList<String>();
 
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
