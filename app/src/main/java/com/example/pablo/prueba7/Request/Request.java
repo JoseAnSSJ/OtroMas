@@ -1349,7 +1349,7 @@ Log.d("asd","ad");
                     Iterator<List<GetMuestraTipoAparatoListResult>> itData = array.dataTipoAparatos.iterator();
                     array.tipoAparato.add("Seleccione aparato");
                     while (itData.hasNext()) {
-                        List<GetMuestraTipoAparatoListResult> dat = (List<GetMuestraTipoAparatoListResult>) itData.next();
+                        List<GetMuestraTipoAparatoListResult> dat = itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
                             Log.d("response23", dat.get(i).getNombre());

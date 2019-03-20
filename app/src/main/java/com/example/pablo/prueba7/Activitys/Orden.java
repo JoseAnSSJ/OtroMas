@@ -192,12 +192,10 @@ public class Orden extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Intent intento1=new Intent(Orden.this,Inicio.class);
+        startActivity(intento1);
+        //Intent intento1 = new Intent(mContext, MainReportes.class);
     }
 
     @Override
@@ -206,6 +204,8 @@ public class Orden extends AppCompatActivity
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;
     }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

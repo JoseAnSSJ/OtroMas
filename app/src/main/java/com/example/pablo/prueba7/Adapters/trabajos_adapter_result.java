@@ -160,7 +160,6 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
                     request.getArbSer(Cmcontext);
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
-
                 }
 
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")) {
@@ -195,10 +194,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                 }
 
 
-                /*if ((accion.getText().toString().trim().equalsIgnoreCase("null"))){
-                    accion.setEnabled(false);
-                    accion.setText("---");
-                }*/
+
 
             }
         });
@@ -210,7 +206,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
-        //dat1.get(cont).setSeRealiza(true);
+
 
         for(int i=0;i<dat1.size();i++){
         stat=(recibixnew.get(i));

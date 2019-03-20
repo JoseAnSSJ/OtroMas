@@ -34,7 +34,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reportess);
-        info=(Button)findViewById(R.id.info);
+        info=findViewById(R.id.info);
         layoutAnimado = (RelativeLayout) findViewById(R.id.animado);
         hzScrollView=(ScrollView)findViewById(R.id.scv);
         Nombre1= findViewById(R.id.infonombre1);
