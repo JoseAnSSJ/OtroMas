@@ -159,12 +159,8 @@ public class Reportes extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+            Intent intento1=new Intent(Reportes.this,Inicio.class);
+            startActivity(intento1);
     }
 
     @Override

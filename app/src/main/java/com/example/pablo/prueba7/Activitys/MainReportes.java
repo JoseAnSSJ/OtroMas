@@ -26,7 +26,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private ScrollView hzScrollView;
     private Button info;
     private RelativeLayout layoutAnimado;
-
+    int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
 
@@ -116,7 +116,6 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                     return new MaterialesFragment();
                 case 3:
                     return new Ejecutar1Fragment();
-
                 default:
                     return null;
             }
@@ -142,8 +141,8 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        mViewPager.setCurrentItem(tab.getPosition());
-
+        position=tab.getPosition();
+        mViewPager.setCurrentItem(position);
     }
 
     @Override
@@ -154,6 +153,18 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
+    }
+
+    public void onBackPressed(){
+        regresar();
+    }
+
+    public void regresar(){
+        if((position-1)>=0){
+            mViewPager.setCurrentItem(position-1);}
+        else{
+            finish();
+        }
     }
 
 
