@@ -1656,10 +1656,10 @@ public class Request extends AppCompatActivity {
                             MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
 
-                            if (response.code() == 200) {
+
                                 abc = dat.get(i).contratoBueno;
                                 getServiciosAsignados();
-                            }
+
 
 
 
