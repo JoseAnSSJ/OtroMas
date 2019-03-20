@@ -97,11 +97,19 @@ public class Orden extends AppCompatActivity
 
 
                 if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
+                    Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    Array.statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Orden Vacio", Toast.LENGTH_SHORT);
+                    clvorden=0;
+                    opcion=1;
+                    request.getListOrd(getApplicationContext());
                     toast1.show();
-
+                    ordenes.setAdapter(adapterord);
                 }
                 else {
 
@@ -134,6 +142,17 @@ public class Orden extends AppCompatActivity
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Contrato vacio", Toast.LENGTH_SHORT);
+                    Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    Array.statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
+
+                    clvorden=0;
+                    opcion=1;
+                    request.getListOrd(getApplicationContext());
+                    toast1.show();
+                    ordenes.setAdapter(adapterord);
                     toast1.show();
 
                 }
@@ -187,8 +206,6 @@ public class Orden extends AppCompatActivity
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;
     }
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

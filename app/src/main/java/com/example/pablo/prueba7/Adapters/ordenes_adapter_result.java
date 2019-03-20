@@ -50,8 +50,6 @@ public class ordenes_adapter_result extends BaseAdapter {
     public int getCount() {
         return Array.ordensrc.size();
 
-
-
     }
 
     @Override
@@ -64,11 +62,9 @@ public class ordenes_adapter_result extends BaseAdapter {
         return position;
     }
 
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
-
 
         if (convertView == null) {
             holder = new viewHolder();
@@ -98,14 +94,6 @@ public class ordenes_adapter_result extends BaseAdapter {
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));
                 request.getDeepCons(mContext);
-
-
-
-
-
-
-
-
 
             }
         });

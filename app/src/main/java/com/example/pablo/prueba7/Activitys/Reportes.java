@@ -78,7 +78,16 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Reporte vacío", Toast.LENGTH_SHORT);
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
+                    Array.Direccion.clear();
+
                     toast1.show();
+                    clavequeja=0;
+                    opcion=1;
+                    request.getListQuejas(getApplicationContext());
 
                 }
                 else {
@@ -112,6 +121,15 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Contrato vacio", Toast.LENGTH_SHORT);
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
+                    Array.Direccion.clear();
+
+                    clavequeja=0;
+                    opcion=1;
+                    request.getListQuejas(getApplicationContext());
                     toast1.show();
 
                 }
