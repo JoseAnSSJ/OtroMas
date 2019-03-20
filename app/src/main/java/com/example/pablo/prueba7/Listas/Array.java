@@ -90,6 +90,19 @@ public class Array {
     public static ArrayList<List<GetDameSerDelCliFacListResult>>dataServ;
     public static  ArrayList<Integer> Clv_TecSecR;
     public static  ArrayList<Integer> clv_Soluc;
+    public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;
+    public static ArrayList<String> Asigna= new ArrayList<String>();
+    public static ArrayList<String> Asigna1= new ArrayList<String>();
+    public static ArrayList<String> Asigna2= new ArrayList<String>();
+    /////////
+    public static ArrayList<List<DetalleBitacoraModel>>dataDetBit;
+    public static ArrayList<String> detalleBit= new ArrayList<String>();
+    public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;
+    public static ArrayList<String> descripcionArtBit= new ArrayList<String>();
+    public static ArrayList<List<LlenaExtencionesModel>>dataLlenaExt;
+    public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
+    public static ArrayList<String> descripcionExt= new ArrayList<String>();
+    public static ArrayList<String> listaTabla= new ArrayList<String>();
 
 
     public static ArrayList<List<GetMuestraTecnicosAlmacenListResult>>dataTECSEC;

@@ -63,6 +63,7 @@ public class Constants {
     public static final String URL_VALIDAPRE="AplicacionMovil/ValidaExisteTblPreDescargaMaterial";
     public static final String URL_ADD_PREDESCARGA="AplicacionMovil/InsertaTblPreDescargaMaterial";
     public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
+    public static final String URL_GET_TSECR="Muestra_Tecnicos_Almacen/GetMuestra_Tecnicos_AlmacenList";
 
 
 }

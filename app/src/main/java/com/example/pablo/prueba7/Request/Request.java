@@ -208,6 +208,8 @@ public class Request extends AppCompatActivity {
                 }else{
                     Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
+                if(response.code()==200){
+                    getProximaCita(context);
 
 
 
@@ -2029,151 +2031,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////////////////////////////////////////////////////////////////
-    public void GuardaCoordenadas(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.getGuardaCoordenadasService();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getGuardaCoordenadas();
-        call.enqueue(new Callback<JsonObject>() {
-
-
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                reintentaB=0;
-
-                if(response1.code()==200){
-                    ConsultaIp(context);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-
-            }
-        });
-    }
-    public void ConsultaIp(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.getConsultaIpService();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getConsultaIp();
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
-                    jsonConsultaIp = new JsonObject();
-                    jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
-                    ConsultaIpModel user = new ConsultaIpModel(
-                            jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
-                            jsonConsultaIp.get("Msg").getAsString()
-                    );
-                    reintentarComando = String.valueOf(user.AplicaReintentar);
-                    msgComando = user.Msg;
-                    for(int a=0;a<1;a++){
-                        if(reintentarComando.equals("true")){
-                            reiniciar.setEnabled(true);
-                            msgEjecutarOrd.setText(Request.msgComando);
-                        }else{
-                            if(msgComando.length()>3){
-                                msgEjecutarOrd.setText(msgComando);
-                                Login.esperar(5);
-                                ((Activity)context).finish();
-                            }else{
-                                Login.esperar(3);
-                                retry(call);
-                            }
-                        }
-                    }
-
-
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-            }
-
-            public  void retry(Call<JsonObject> call){
-                call.clone().enqueue(this);
-            }
-        });
-
-
-    }
-    public void ReintentarComando(final Context context) {
-        reintentaB=0;
-        Service service = null;
-        try {
-            service = services.getReintentarComandoService();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getReintentaComando();
-        call.enqueue(new Callback<JsonObject>() {
-
-
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
-                if(response1.code()==200){
-                    ConsultaIp(context);
-                    msgEjecutarOrd.setText("");
-                    reiniciar.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-
-            }
-        });
-    }
-    public void SetCambioAparato(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.getCAPATService();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getCAPAT();
-        call.enqueue(new Callback<JsonObject>() {
-
-
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
-                if(response1.code()==200){
-                    Toast.makeText(context, "Se ha guardado el aparato correctamente", Toast.LENGTH_SHORT).show();
-
-
-                }else{
-                    Toast.makeText(context, "Error al agregar el aparato", Toast.LENGTH_SHORT).show();
-                    cambioA=false;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-
-            }
-        });
-    }
     public void send_aparat() {
 
         adaptertrabajos.norec();
@@ -2187,6 +2044,237 @@ public class Request extends AppCompatActivity {
 
         Call<JsonObject> call = service.noent();
         call.enqueue(new Callback<JsonObject>() {
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+//////////////
+
+    public void getChecaExt(final Context context) {
+        Service service = null;
+        service = services.getChecaExtService();
+        Call<JsonObject> call = service.getChecaExt();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    JsonObject userJson = response.body().getAsJsonObject("GetUspChecaSiTieneExtensionesResult");
+                    ChecaSiExtencionesModel user = new ChecaSiExtencionesModel(
+                            userJson.get("BND").getAsInt(),
+                            userJson.get("NUMEXT").getAsInt()
+                    );
+                    if(user.BND==1){
+                        MuestraBit(context);
+                        LlenaExt(context);
+                        nExtenciones=user.BND;
+
+                    }else{
+                        MuestraBit(context);
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
+    public void MuestraBit(final Context context) {
+        Service service = null;
+        service = services.getMuestraBitService();
+
+        Call<JSONDetalleBitacora> call = service.getMuestraBit();
+        call.enqueue(new Callback<JSONDetalleBitacora>() {
+
+            @Override
+            public void onResponse(Call<JSONDetalleBitacora> call, Response<JSONDetalleBitacora> response1) {
+                if (response1.code() == 200) {
+                    array.detalleBit.clear();
+                    array.detalleBit.add(0,"---Seleccionar---");
+                    int j=1;
+                    JSONDetalleBitacora jsonResponse = response1.body();
+                    array.dataDetBit = new ArrayList<List<DetalleBitacoraModel>>(asList(jsonResponse.detalleBitacoraModel()));
+                    Iterator<List<DetalleBitacoraModel>> itData = array.dataDetBit.iterator();
+                    while (itData.hasNext()) {
+                        List<DetalleBitacoraModel> dat = itData.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.detalleBit.add(j,dat.get(i).Descripcion);
+                            j=j+1;
+                        }
+
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
+                    Materiales.descripcionMat.setAdapter(arrayAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<JSONDetalleBitacora> call, Throwable t) {
+
+            }
+
+        });
+    }
+    //////////////////////////////
+    public void DetalleBit(final Context context) {
+
+
+
+        Service service = null;
+        service = services.getDetalleBitService();
+
+        Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
+        call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
+
+            @Override
+            public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
+                if (response1.code() == 200) {
+                    array.descripcionArtBit.clear();
+                    array.descripcionArtBit.add(0,"---Seleccionar---");
+                    int j=1;
+                    JSONDescripcionArticulosBit jsonResponse = response1.body();
+                    array.dataDetArtBit = new ArrayList<List<DescripcionArticuloModel>>(asList(jsonResponse.descripcionArticuloModel()));
+                    Iterator<List<DescripcionArticuloModel>> itData = array.dataDetArtBit.iterator();
+                    while (itData.hasNext()) {
+                        List<DescripcionArticuloModel> dat = itData.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.descripcionArtBit.add(j,dat.get(i).Nombre);
+                            j=j+1;
+                        }
+
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
+                    Materiales.clasificacionMat.setAdapter(arrayAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
+
+            }
+
+        });
+    }
+
+    public void LlenaExt(final Context context) {
+        Service service = null;
+        service = services.getLlenaExtService();
+
+        Call<JSONLlenaExtenciones> call = service.getLlenaExt();
+        call.enqueue(new Callback<JSONLlenaExtenciones>() {
+
+            @Override
+            public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
+                if (response1.code() == 200) {
+                    Materiales.extMat.setVisibility(View.VISIBLE);
+                    array.descripcionExt.clear();
+                    array.descripcionExt.add(0,"---Seleccionar---");
+                    int j=1;
+                    JSONLlenaExtenciones jsonResponse = response1.body();
+                    array.dataLlenaExt = new ArrayList<List<LlenaExtencionesModel>>(asList(jsonResponse.llenaExtencionesModel()));
+                    Iterator<List<LlenaExtencionesModel>> itData = array.dataLlenaExt.iterator();
+                    while (itData.hasNext()) {
+                        List<LlenaExtencionesModel> dat = itData.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
+                            j=j+1;
+                        }
+
+                    }
+                    try{
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
+                        Materiales.spinnerExtMat.setAdapter(arrayAdapter);
+                        extencionesMat=true;
+                    }catch (Exception e){
+
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<JSONLlenaExtenciones> call, Throwable t) {
+
+            }
+
+        });
+    }
+    public void getTipoMat() {
+        Service service = null;
+        service = services.getTipoMatService();
+        Call<JsonObject> call = service.getTipoMat();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
+                    TipoMaterialModel user = new TipoMaterialModel(
+                            userJson.get("Tipo").getAsString()
+                    );
+                    if(user.Tipo.equals("Piezas")){
+                        Materiales.piezasMat.setVisibility(View.VISIBLE);
+                        pieza=true;
+                    }else{
+                        Materiales.metrosMat.setVisibility(View.VISIBLE);
+                        pieza=false;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getValidaPreDes(final Activity activity,final Context context) {
+        Service service = null;
+        service = services.getValidaPreService();
+        Call<JsonObject> call = service.getValidaPre();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    String dato;
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
+                    if (dato.equals("0")) {
+                        addPreDes(activity, context);
+                    }
+                    if (dato.equals("1")) {
+                        Toast.makeText(context, "Ya existe ese tipo de material", Toast.LENGTH_SHORT).show();
+                        getPredescarga(activity, context);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void send_aparat() {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
