@@ -15,5 +15,7 @@ public class JSONClasificacionProblm {
         return getuspConsultaTblClasificacionProblemasListResult;
     }
 
-
+    public void setGetuspConsultaTblClasificacionProblemasListResult(List<GetuspConsultaTblClasificacionProblemasListResult> getuspConsultaTblClasificacionProblemasListResult) {
+        this.getuspConsultaTblClasificacionProblemasListResult = getuspConsultaTblClasificacionProblemasListResult;
+    }
 }

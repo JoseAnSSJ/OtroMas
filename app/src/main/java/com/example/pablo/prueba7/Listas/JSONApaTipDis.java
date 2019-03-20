@@ -14,6 +14,8 @@ public class JSONApaTipDis {
         return GetListAparatosDisponiblesByIdArticuloResult;
     }
 
-
+    public void setListAparatosDisponiblesByIdArticuloResult(List<GetListAparatosDisponiblesByIdArticuloResult> getListAparatosDisponiblesByIdArticuloResult) {
+        this.GetListAparatosDisponiblesByIdArticuloResult = getListAparatosDisponiblesByIdArticuloResult;
+    }
 }
    

@@ -12,8 +12,13 @@ public class Example {
     public GetDameOrdenesQuejasTotalesResult getDameOrdenesQuejasTotalesResult;
 
 
+    public GetDameOrdenesQuejasTotalesResult getGetDameOrdenesQuejasTotalesResult() {
+        return getDameOrdenesQuejasTotalesResult;
+    }
 
-
+    public void setGetDameOrdenesQuejasTotalesResult(GetDameOrdenesQuejasTotalesResult getDameOrdenesQuejasTotalesResult) {
+        this.getDameOrdenesQuejasTotalesResult = getDameOrdenesQuejasTotalesResult;
+    }
 
 
 }

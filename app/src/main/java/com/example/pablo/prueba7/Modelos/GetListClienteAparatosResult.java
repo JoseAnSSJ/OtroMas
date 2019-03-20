@@ -7,7 +7,7 @@ public class GetListClienteAparatosResult {
     public String Mac;
     public int Clv_Aparato;
 
-    public GetListClienteAparatosResult (int ControlNet, String Descripcion, int idArticulo, String mac, int clv_Aparato){
+    public GetListClienteAparatosResult(int ControlNet, String Descripcion, int idArticulo, String mac, int clv_Aparato){
         this.ControNet = ControlNet;
         this.Descripcion = Descripcion;
         this.idArticulo = idArticulo;

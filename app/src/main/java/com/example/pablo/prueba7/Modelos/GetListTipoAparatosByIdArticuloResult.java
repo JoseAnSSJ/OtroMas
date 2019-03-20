@@ -21,4 +21,7 @@ public class GetListTipoAparatosByIdArticuloResult {
         Nombre = nombre;
     }
 
+    public void setIdArticulo(int idArticulo) {
+        IdArticulo = idArticulo;
+    }
 }

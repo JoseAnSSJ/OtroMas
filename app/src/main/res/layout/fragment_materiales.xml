@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MaterialesFragment">
+    tools:context=".Fragments.MaterialesFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginTop="110dp"
-            android:text="No.bitacora "
+            android:text="@string/n_Bitacora"
             android:textSize="20dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="187dp"
-            android:text="Descripcion del articulo "
+            android:text="@string/descripcion_Articulo"
             android:textSize="20dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp" />
@@ -55,7 +55,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="187dp"
             android:layout_marginEnd="10dp"
-            android:text="Clasificacion de material"
+            android:text="@string/clasificaion_Materiales"
             android:textSize="20dp" />
         <Spinner
             android:layout_width="168dp"
@@ -73,7 +73,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="299dp"
             android:layout_alignParentEnd="true"
-            android:text="AGREGAR" />
+            android:text="@string/agregar" />
 
     </RelativeLayout>
 </FrameLayout>

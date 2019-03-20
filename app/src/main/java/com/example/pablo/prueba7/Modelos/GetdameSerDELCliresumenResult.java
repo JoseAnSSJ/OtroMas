@@ -13,4 +13,7 @@ public class GetdameSerDELCliresumenResult {
         return resumen;
     }
 
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
 }

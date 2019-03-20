@@ -23,6 +23,13 @@ public class UserModel {
         this.Usuario = Usuario;
     }
 
+    public static String getToken() {
+        return Token;
+    }
+
+    public void setToken(String Token) {
+        this.Token = Token;
+    }
 
     public String getCodigo() {
         return Codigo;
@@ -30,4 +37,11 @@ public class UserModel {
 
     public void setCodigo(String codigo) { Codigo = codigo; }
 
+    public int getId_Usuario() {
+        return Id_Usuario;
+    }
+
+    public void setId_Usuario(int id_Usuario) {
+        Id_Usuario = id_Usuario;
+    }
 }
