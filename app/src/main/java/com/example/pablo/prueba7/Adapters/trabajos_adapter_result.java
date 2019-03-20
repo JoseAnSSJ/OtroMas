@@ -64,8 +64,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     }
 
     public class viewHolder{
-        TextView trabajo;
-        Button accion;
+        TextView trabajo,accion,control;
         CheckBox recibi;
 
     }
@@ -92,11 +91,12 @@ public class trabajos_adapter_result extends BaseAdapter {
         if (convertView == null) {
             holder = new viewHolder();
 
-            convertView=inflatertrab.inflate(R.layout.list_trabajos_items,null);
+            convertView=inflatertrab.inflate(R.layout.recycler_trabajo,null);
 
-            holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
-            holder.accion=(Button)convertView.findViewById(R.id.accionv);
-            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+            holder.trabajo=(TextView)convertView.findViewById(R.id.tv_Descripcion);
+            holder.accion=(TextView)convertView.findViewById(R.id.tv_Accion);
+            holder.recibi=(CheckBox)convertView.findViewById(R.id.check_recibi);
+            holder.control=(TextView)convertView.findViewById(R.id.click);
 
             convertView.setTag(holder);
         }
@@ -150,7 +150,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
         ClaveTrabajo = Array.clavex.get(position);
 
         ///////////
-        holder.accion.setOnClickListener(new View.OnClickListener() {
+        holder.control.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
