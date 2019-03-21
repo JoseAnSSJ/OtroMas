@@ -152,7 +152,7 @@
 
             <Button
                 android:id="@+id/aceptarMedio"
-                android:layout_width="@dimen/botonChicoL"
+                android:layout_width="@dimen/botonMedianoL"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="50dp"
@@ -166,7 +166,7 @@
 
             <Button
                 android:id="@+id/cancelarMedio"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/botonMedianoL"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"

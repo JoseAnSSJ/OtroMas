@@ -116,7 +116,7 @@
             android:layout_height="300dp"
             android:layout_alignParentTop="true"
             android:background="#ffffff"
-            android:visibility="gone"
+            android:visibility="visible"
             android:foregroundGravity="center_vertical"
             app:layout_constraintBottom_toTopOf="@+id/aceptarAsignacion"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +152,7 @@
 
             <Button
                 android:id="@+id/aceptarMedio"
-                android:layout_width="@dimen/botonChicoL"
+                android:layout_width="@dimen/botonMedianoL"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="50dp"
@@ -166,7 +166,7 @@
 
             <Button
                 android:id="@+id/cancelarMedio"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/botonMedianoL"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"

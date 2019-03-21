@@ -38,7 +38,7 @@
                     android:id="@+id/tv_Accion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center|left"
                     android:text="TextView"
@@ -61,12 +61,11 @@
                     android:id="@+id/tv_recibi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/recibi"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/tv_Accion"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion" />
 
                 <TextView
