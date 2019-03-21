@@ -16,5 +16,6 @@
     <dimen name="botonMedianoA">50dp</dimen>
     <dimen name="botonGrandeL">270dp</dimen>
     <dimen name="spinnerL">350dp</dimen>
+    <dimen name="spinnerS">304dp</dimen>
     <dimen name="spinnerA">24dp</dimen>
 </resources>
