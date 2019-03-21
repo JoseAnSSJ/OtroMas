@@ -40,10 +40,7 @@ public class Orden extends AppCompatActivity
     TextView nombreTec;
    private Request rqs=new Request();
 
-
     @Override
-
-
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_orden);
@@ -195,7 +192,6 @@ public class Orden extends AppCompatActivity
 
         Intent intento1=new Intent(Orden.this,Inicio.class);
         startActivity(intento1);
-
     }
 
     @Override
@@ -204,8 +200,6 @@ public class Orden extends AppCompatActivity
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;
     }
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -248,5 +242,4 @@ public class Orden extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

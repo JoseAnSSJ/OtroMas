@@ -45,8 +45,6 @@ public class Materiales extends Fragment {
         // Required empty public constructor
     }
 
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -76,7 +74,6 @@ public class Materiales extends Fragment {
                         List<DetalleBitacoraModel> dat = itData.next();
                         clvTipoDescMat=dat.get(position-1).catTipoArticuloClave;
                         request.DetalleBit(getContext());
-
                 }
             }
 
