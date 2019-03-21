@@ -1,8 +1,11 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -29,6 +33,7 @@ import java.util.ArrayList;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.opcion;
+import static java.security.AccessController.getContext;
 
 
 public class Inicio extends AppCompatActivity
@@ -39,8 +44,6 @@ public class Inicio extends AppCompatActivity
     public static PieChart  pieChart;
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
-
-
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -144,12 +147,27 @@ public class Inicio extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    dialogoSalida();
+    }
+
+    public void dialogoSalida() {
+        new AlertDialog.Builder(this)
+        .setTitle("SALIR")
+                .setMessage("¿Desea salir de la aplicacón?")
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
+
     }
 
     @Override
@@ -158,8 +176,6 @@ public class Inicio extends AppCompatActivity
         getMenuInflater().inflate(R.menu.inicio, menu);
         return true;
     }
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
