@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.MaterialesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_height="425dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="110dp"
+            android:text="@string/n_Bitacora"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp"
+            android:hint="0"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="150dp" />
+
+        <TextView
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="187dp"
+            android:text="@string/descripcion_Articulo"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp" />
+        <Spinner
+            android:layout_width="168dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="260dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp">
+        </Spinner>
+
+        <TextView
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="187dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/clasificaion_Materiales"
+            android:textSize="20dp" />
+        <Spinner
+            android:layout_width="168dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="216dp"
+            android:layout_marginTop="260dp">
+
+        </Spinner>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="299dp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/agregar" />
+
+    </RelativeLayout>
+</FrameLayout>
