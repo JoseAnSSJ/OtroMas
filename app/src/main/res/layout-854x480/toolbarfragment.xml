@@ -23,6 +23,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/tecnicoDos"
             android:textStyle="bold"
+            android:textSize="@dimen/chico"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
+            android:textSize="@dimen/chico"
             android:layout_marginTop="2dp"
             android:text="@string/contrato"
             android:textStyle="bold"
@@ -41,9 +43,9 @@
         <TextView
             android:id="@+id/tv_NombreTecnico"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/chico"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView6"
             app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -53,6 +55,7 @@
             android:id="@+id/tv_NContrato"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/chico"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView6"
@@ -80,10 +83,9 @@
             !-->
         <ImageButton
             android:id="@+id/btn_Infomacion"
-            android:layout_width="42dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="28dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="32dp"
             android:layout_marginBottom="8dp"
             android:background="#00222222"
             android:contentDescription="@string/informacion"
@@ -91,6 +93,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_NombreTecnico"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9" />
+            app:layout_constraintVertical_bias="0.217" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.Toolbar>

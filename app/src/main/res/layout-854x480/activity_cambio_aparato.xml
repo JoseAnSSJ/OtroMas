@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/selecciona_Aparato"
-                    android:textSize="@dimen/titulos"
+                    android:textSize="@dimen/grande"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/aparato_Cambiar"
-                    android:textSize="@dimen/xl"
+                    android:textSize="@dimen/grande"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/qwe" />
@@ -63,7 +63,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/aparatoDos"
-                    android:textSize="@dimen/grande"
+                    android:textSize="@dimen/mediano"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/posicion" />
 
@@ -86,7 +86,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/estado_Aparato"
-                    android:textSize="@dimen/grande"
+                    android:textSize="@dimen/mediano"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/aparato" />
 
@@ -117,7 +117,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/aparato_a_Asignar"
-                    android:textSize="@dimen/xl"
+                    android:textSize="@dimen/grande"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -140,7 +140,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/tipo_de_AparatoDos"
-                        android:textSize="@dimen/grande"
+                        android:textSize="@dimen/mediano"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -173,7 +173,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/aparatoDos"
-                        android:textSize="@dimen/grande"
+                        android:textSize="@dimen/mediano"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,8 +191,8 @@
 
                 <Button
                     android:id="@+id/uno"
-                    android:layout_width="@dimen/botonMedianoL"
-                    android:layout_height="@dimen/botonMedianoA"
+                    android:layout_width="@dimen/botonChicoL"
+                    android:layout_height="@dimen/botonChicoA"
                     android:layout_below="@+id/aa"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="24dp"
@@ -207,8 +207,8 @@
 
                 <Button
                     android:id="@+id/dos"
-                    android:layout_width="@dimen/botonMedianoL"
-                    android:layout_height="@dimen/botonMedianoA"
+                    android:layout_width="@dimen/botonChicoL"
+                    android:layout_height="@dimen/botonChicoA"
                     android:layout_below="@+id/aa"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"

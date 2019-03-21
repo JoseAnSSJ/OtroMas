@@ -1,52 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_alignParentTop="true"
     android:layout_marginTop="70dp"
     tools:context=".Fragments.Trabajos">
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/textView35"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="183dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="72dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/descripcion"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView34"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="72dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_marginTop="100dp"
+
         android:paddingBottom="10dp"
         android:text="@string/accion"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView35"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginTop="72dp"
         android:text="@string/recibi"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="7dp" />
+
     <ListView
+        android:id="@+id/listTrabajos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"
         android:dividerHeight="5dp"
-        android:id="@+id/listTrabajos">
+        >
+
+
     </ListView>
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

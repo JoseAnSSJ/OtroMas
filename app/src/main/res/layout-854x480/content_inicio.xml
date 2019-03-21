@@ -14,9 +14,9 @@
         <!-- TODO: Update blank fragment layout -->
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/graficaPastel"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="261dp"
+            android:layout_height="258dp"
+            android:layout_marginTop="16dp"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/proximo_Trabajo"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="@dimen/chico"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graficaPastel" />
@@ -45,10 +45,9 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.38" />
+            app:layout_constraintVertical_bias="0.201" />
 
         <TextView
             android:id="@+id/textView2"
@@ -59,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/direccion"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="@dimen/chico"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -71,6 +70,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
+            android:textSize="@dimen/chico"
+
             android:text="@string/tipoDeTrabajo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -81,6 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:textSize="@dimen/chico"
+
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -89,6 +92,8 @@
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/chico"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -101,6 +106,8 @@
             android:layout_width="220sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="@dimen/chico"
+
             app:layout_constraintEnd_toEndOf="@+id/tipoDeTrabajo"
             app:layout_constraintStart_toStartOf="@+id/tipoDeTrabajo"
             app:layout_constraintTop_toBottomOf="@+id/tipoDeTrabajo" />
@@ -109,6 +116,8 @@
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/chico"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -121,6 +130,8 @@
             android:layout_width="220sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="@dimen/chico"
+
             app:layout_constraintEnd_toEndOf="@+id/contrato"
             app:layout_constraintStart_toStartOf="@+id/contrato"
             app:layout_constraintTop_toBottomOf="@+id/contrato" />
@@ -130,6 +141,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textSize="@dimen/chico"
+
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/calle"
@@ -141,6 +154,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textSize="@dimen/chico"
+
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/numero"
@@ -151,6 +166,8 @@
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/chico"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -162,6 +179,8 @@
             android:id="@+id/calle"
             android:layout_width="220sp"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/chico"
+
             app:layout_constraintBottom_toBottomOf="@+id/textView27"
             app:layout_constraintEnd_toEndOf="@+id/hora"
             app:layout_constraintStart_toStartOf="@+id/hora"
@@ -172,6 +191,8 @@
             android:layout_width="220sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="@dimen/chico"
+
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView28"
             app:layout_constraintEnd_toEndOf="@+id/calle"
@@ -185,6 +206,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView29"
             app:layout_constraintEnd_toEndOf="@+id/numero"
             app:layout_constraintStart_toStartOf="@+id/numero"
+            android:textSize="@dimen/chico"
+
             app:layout_constraintTop_toTopOf="@+id/textView29" />
 
     </android.support.constraint.ConstraintLayout>

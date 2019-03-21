@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:dividerHeight="5dp"
+            android:textSize="@dimen/mediano"
             android:elevation="80dp"
             android:layout_marginTop="80dp"
             />
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reporte"
+            android:textSize="@dimen/mediano"
             android:layout_marginStart="60dp"
             android:textStyle="bold"
             />
@@ -32,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="@string/n_Contrato"
             android:layout_marginStart="220dp"
+            android:textSize="@dimen/mediano"
             android:textStyle="bold"
             />
         <TextView
@@ -41,7 +44,7 @@
             android:layout_marginTop="55dp"
             android:layout_marginStart="10dp"
             android:text="@string/contrato"
-            android:textSize="18dp"
+            android:textSize="@dimen/mediano"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +53,7 @@
             android:layout_marginStart="200dp"
             android:layout_marginTop="55dp"
             android:text="@string/n_Reporte"
-            android:textSize="18dp"
+            android:textSize="@dimen/mediano"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"

@@ -24,16 +24,18 @@
             <RadioButton
                 android:id="@+id/ejutada1"
                 android:layout_width="82dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
+                android:textSize="@dimen/chico"
                 android:layout_marginStart="80dp"
                 android:text="@string/visita"
                  />
 
             <RadioButton
                 android:id="@+id/visitada1"
-                android:layout_width="107dp"
+                android:layout_width="82dp"
                 android:checked="true"
-                android:layout_height="wrap_content"
+                android:textSize="@dimen/chico"
+                android:layout_height="20dp"
                 android:text="@string/ejecutada"
                  />
         </RadioGroup>
@@ -236,14 +238,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/tecnico_Sec"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/tecnicosec1"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="@dimen/spinnerA"
                 android:layout_below="@+id/textView3"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/disenio_spinner"
