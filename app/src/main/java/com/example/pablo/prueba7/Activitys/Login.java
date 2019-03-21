@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +28,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-
+import com.example.pablo.prueba7.sampledata.Util;
 
 
 public class Login extends AppCompatActivity {
@@ -36,8 +39,7 @@ public class Login extends AppCompatActivity {
     private EditText usurio, contraseña;
     private Button entrar, entrar2;
     private String user;
-    public static String enco;
-    public static String cvl_usuario;
+    public static String enco,cvl_usuario;
     public static ProgressBar progressBar;
     private Request request = new Request();
 
@@ -57,9 +59,8 @@ public class Login extends AppCompatActivity {
         contraseña = (EditText) findViewById(R.id.contrasenia);
         entrar = (Button)findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.barlog);
-        cvl_usuario= usurio.getText().toString();
-        setTitle(null);
 
+        setTitle(null);
         //Creacion de Notificaciones
 /*
         token.setOnClickListener(new View.OnClickListener() {
@@ -77,17 +78,25 @@ public class Login extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 if(usurio.getText().toString().length()==0){
     Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
 }else{
     if(contraseña.getText().toString().length()==0){
         Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
     }else{
-        user = usurio.getText().toString() + ":" + contraseña.getText().toString();
-        enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
-        request.getReviews(getApplicationContext());
-        showProgress(true);
-        Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
+if(!isOnline()){
+    Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+}else{
+    user = usurio.getText().toString() + ":" + contraseña.getText().toString();
+    enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
+    guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
+
+    request.getReviews(getApplicationContext());
+    showProgress(true);
+    Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
+}
+
     }
 }
 
@@ -96,7 +105,13 @@ if(usurio.getText().toString().length()==0){
         });
 
     }
-
+public void guardarPre(Context context,String usario,String encode){
+    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+    Util.editor = Util.preferences.edit();
+    Util.editor.putString("usuario",usario);
+    Util.editor.putString("enco","Basic: " +encode);
+    Util.editor.commit();
+}
     //Notificaciones
     public void noti(){
         createNotificationChannel();
@@ -135,10 +150,13 @@ if(usurio.getText().toString().length()==0){
     }
     public static void showProgress(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+    private boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-      /*  int visibility = show ? View.GONE : View.VISIBLE;
-        barlog.setVisibility(visibility);
-        barlog.setVisibility(visibility);*/
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 
 }

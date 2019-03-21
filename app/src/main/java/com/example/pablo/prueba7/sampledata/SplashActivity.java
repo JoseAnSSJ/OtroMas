@@ -9,11 +9,13 @@ import android.text.TextUtils;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Activitys.Login;
-import com.example.pablo.prueba7.sampledata.Util;
+import com.example.pablo.prueba7.Request.Request;
 
 public class SplashActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
+    public static boolean LoginShare=false;
+    Request request = new Request();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +23,13 @@ public class SplashActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         Intent intentLogin = new Intent(this, Login.class);
-        Intent intentMain = new Intent(this, Inicio.class);
-
-        if (!TextUtils.isEmpty(Util.getUsuarioPreference(preferences))
-                && !TextUtils.isEmpty(Util.getContraseniaPreference(preferences))
-                && !TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
-            startActivity(intentMain);
+        Intent intentinicio = new Intent(this, Inicio.class);
+        if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
+            LoginShare=true;
+            startActivity(intentinicio);
         } else {
             startActivity(intentLogin);
+            LoginShare=false;
         }
         finish();
     }

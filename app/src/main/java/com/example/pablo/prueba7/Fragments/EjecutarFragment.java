@@ -73,7 +73,7 @@ if(request.rapagejecutar==true){
         Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
     } else {
         try {
-            request.send_aparat();
+            request.send_aparat(getContext());
             //**************************************
             final Calendar c = Calendar.getInstance();
             añoE = c.get(Calendar.YEAR);

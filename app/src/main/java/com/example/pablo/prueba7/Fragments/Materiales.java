@@ -94,7 +94,7 @@ public class Materiales extends Fragment {
                         idArticuloDM=dat.get(position-1).IdArticulo;
                     cantidadDM=dat.get(position-1).Cantidad;
                     idInventarioMD=dat.get(position-1).IdInventario;
-                    request.getTipoMat();
+                    request.getTipoMat(getContext());
                     seleccion=position;
 
 

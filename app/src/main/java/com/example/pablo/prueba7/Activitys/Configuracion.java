@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.SplashActivity;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.w3c.dom.Text;
 
@@ -49,8 +51,10 @@ public class Configuracion extends AppCompatActivity
         CS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserModel.Token="";
                 try {
+                    Util.preferences = getApplicationContext().getSharedPreferences("credenciales", getApplicationContext().MODE_PRIVATE);
+                    Util.preferences.edit().clear().apply();
+                    SplashActivity.LoginShare=false;
                     Intent intento = new Intent(Configuracion.this, Login.class);
                     startActivity(intento);
                 }
@@ -103,7 +107,7 @@ public class Configuracion extends AppCompatActivity
            request.getProximaCita(getApplicationContext());
            request.getOrdenes(getApplicationContext());
 
-        } else if (id == R.id.Órdenes) {
+        } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Configuracion.this, Orden.class);
             startActivity(intent1);
 

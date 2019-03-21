@@ -99,6 +99,7 @@ import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 import com.example.pablo.prueba7.Activitys.asignacion;
 import com.example.pablo.prueba7.Activitys.asignado;
 import com.example.pablo.prueba7.sampledata.Service;
+import com.example.pablo.prueba7.sampledata.Util;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -114,8 +115,6 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
-import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
-import static com.example.pablo.prueba7.Activitys.asignacion.jsonArray;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
@@ -141,16 +140,19 @@ public class Request extends AppCompatActivity {
     public static String datos[];
 
 
+
     ///////////////////Token///////////////////////////
     public void getReviews(final Context context) {
         Services restApiAdapter = new Services();
-        Service service = restApiAdapter.getClientService();
+        Service service = restApiAdapter.getClientService(context);
         Call<JsonObject> call = service.getDataUser();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
                 if (response.code() == 200) {
+                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.editor = Util.preferences.edit();
                     JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
                     //Introduccion de datos del request en el Modelo para poder usarlos
                     UserModel user = new UserModel(
@@ -159,6 +161,8 @@ public class Request extends AppCompatActivity {
                             userJson.get("Codigo").getAsString(),
                             userJson.get("IdUsuario").getAsInt()
                     );
+                    Util.editor.putString("token",user.getCodigo());
+                    Util.editor.commit();
                     getClv_tecnico(context);
                 }else{
                     Login.showProgress(false);
@@ -175,12 +179,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //////////////////Clave Tecnico////////////////////////////
     public void getClv_tecnico(final Context context) {
         Service service = null;
         try {
-            service = services.getTecService();
+            service = services.getTecService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -190,6 +193,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
                 if(response.code()==200){
+                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.editor = Util.preferences.edit();
                     JSONResponseTecnico jsonResponse = response.body();
                     //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
                     array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
@@ -202,13 +207,21 @@ public class Request extends AppCompatActivity {
                         nombre_tecnico = data.get(0).tecnico;
 
                         services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
-
+                        Util.editor.putString("nombre_Tecnico",data.get(0).getNombre_tec());
+                        Util.editor.commit();
                         //     MainActivity.NombreTec.setText(data.get(0).tecnico);
 
                     }
+
                     getProximaCita(context);
 
                 }else{
+                    try{
+                        Login.showProgress(false);
+                    }catch (Exception e){
+                        Inicio.showProgress(false);
+                    }
+
                     Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
 
@@ -222,12 +235,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     ///////////////////Proxima Cita///////////////////////////
     public void getProximaCita(final Context context) {
         Service service = null;
         try {
-            service = services.getProxService();
+            service = services.getProxService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -258,6 +270,11 @@ public class Request extends AppCompatActivity {
                     getOrdenes(context);
 
                 }else{
+                    try{
+                        Login.showProgress(false);
+                    }catch (Exception e){
+                        Inicio.showProgress(false);
+                    }
                     Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
                 }
 
@@ -270,12 +287,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     ///////////////////Status,Observaciones, ORDENES///////////////////////////
     public void getOrdenes(final Context context) {
         Service service = null;
         try {
-            service = services.getOrdSerService();
+            service = services.getOrdSerService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -343,6 +359,11 @@ public class Request extends AppCompatActivity {
                     }
                     getQuejas(context);
                 }else{
+                    try{
+                        Login.showProgress(false);
+                    }catch (Exception e){
+                        Inicio.showProgress(false);
+                    }
                     Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
                 }
 
@@ -355,13 +376,12 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     /////////////////Lista de ordenes/////////////////////////////
     public void getListQuejas(final Context context) {
 
         Service service = null;
         try {
-            service = services.getListQuejasService();
+            service = services.getListQuejasService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -394,7 +414,12 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 }else{
-                    Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
+                    try{
+                        Login.showProgress(false);
+                    }catch (Exception e){
+                        Inicio.showProgress(false);
+                    }
+                    Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -412,7 +437,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getListOrdService();
+            service = services.getListOrdService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -456,13 +481,11 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
-
     //////////////////Quejas////////////////////////////
     public void getQuejas(final Context context) {
         Service service = null;
         try {
-            service = services.getOrdSerService();
+            service = services.getOrdSerService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -520,18 +543,27 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-                    Login.showProgress(false);
-                    Intent intento = new Intent(context, Inicio.class);
-                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intento);
-
                     try{
-                        //       Inicio.Grafica(Inicio.pieChart);
-                        //       Inicio.pieChart.refreshDrawableState();
+                        Login.showProgress(false);
+                        Intent intento = new Intent(context, Inicio.class);
+                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intento);
                     }catch (Exception e){
-                        //     Inicio.pieChart.refreshDrawableState();
+                        Inicio.showProgress(false);
+                        Inicio.Grafica(Inicio.pieChart);
+                        Inicio.tipoTrabajo.setText(sigueinteTipo);
+                        Inicio.contratoTrabajo.setText(siguenteContrato);
+                        Inicio.horaTrabajo.setText(sigueinteHora);
+                        Inicio.calleDireccion.setText(siguenteCalle);
+                        Inicio.numeroDireccion.setText(sigueinteNumero);
+                        Inicio.coloniaDireccion.setText(siguenteColonia);
                     }
                 }else{
+                    try{
+                        Login.showProgress(false);
+                    }catch (Exception e){
+                        Inicio.showProgress(false);
+                    }
                     Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
                 }
 
@@ -547,15 +579,12 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
-
-
     ///////////////////Consuta pantalla ordenes///////////////////////////
     public void getDeepCons(final Context context) {
 
         Service service = null;
         try {
-            service = services.getDeepConsService();
+            service = services.getDeepConsService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -627,13 +656,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     /////////////////Informacion del Cliente/////////////////////////////
     public void getInfoCliente(final Context context) {
 
         Service service = null;
         try {
-            service = services.getInfoClienteService();
+            service = services.getInfoClienteService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -672,13 +700,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     /////////////////ServiciosdelCliente/////////////////////////////
     public void getServicios(final Context context) {
 
         Service service = null;
         try {
-            service = services.getServiciosService();
+            service = services.getServiciosService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -716,12 +743,11 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
     /////////////////////////////informacion trabajos//////////////////////////////
     public void getTrabajos(final Context context) {
         Service service = null;
         try {
-            service = services.getTrabajoService();
+            service = services.getTrabajoService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -785,7 +811,6 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     ////TecnicoSecundario////
     public void getTecSec(final Context context){
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
@@ -793,7 +818,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getTecSecService();
+            service = services.getTecSecService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -838,12 +863,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getExtencionesAdicionales(final Context context) {
 
         Service service = null;
         try {
-            service = services.getExtencionAdiService();
+            service = services.getExtencionAdiService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -871,12 +895,11 @@ public class Request extends AppCompatActivity {
         });
     }
 ////ClientesAparato////
-
     public void getCliApa(final Context context) {
 
         Service service = null;
         try {
-            service = services.getCliApaService();
+            service = services.getCliApaService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -920,10 +943,9 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     ////Status Aparato////
     public void getStatusApa(final Context context) {
-        Service service = services.getStatusApa();
+        Service service = services.getStatusApa(context);
         Call<JSONStatusApa> call = service.getDataStatusApa();
         call.enqueue(new Callback<JSONStatusApa>() {
             @Override
@@ -963,12 +985,11 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
     ////TipoAparato////
     public void getApaTipo(final Context context) {
         Service service = null;
         try {
-            service = services.getApaTipoService();
+            service = services.getApaTipoService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1025,13 +1046,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     ////AparatoDisponible////
     public void getApaTipDis(final Context context) {
 
         Service service = null;
         try {
-            service = services.getApaTipDisService();
+            service = services.getApaTipDisService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1085,7 +1105,7 @@ public class Request extends AppCompatActivity {
     public void getDeepCAPAT(final Context context) {
 
         Services restApiAdapter = new Services();
-        Service service = restApiAdapter.getDeepCAPATService();
+        Service service = restApiAdapter.getDeepCAPATService(context);
         Call<JsonObject> call = service.getDeepCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -1122,11 +1142,10 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getCAMDO(final Context context) {
         Service service = null;
         try {
-            service = services.getCAMODOService();
+            service = services.getCAMODOService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1190,12 +1209,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     /////////////////////////////Arbol Servicios//////////////////////////////
     public void getArbSer(final Context context) {
         Service service = null;
         try {
-            service = services.getArbolSerService();
+            service = services.getArbolSerService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1231,12 +1249,11 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     /////////////////////////////Medios Servicios//////////////////////////////
     public void getMedSer(final Context context) {
         Service service = null;
         try {
-            service = services.getMediosSerService();
+            service = services.getMediosSerService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1272,12 +1289,11 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     /////////////////////////////Tipo de Aparatos//////////////////////////////
     public void getTipoAparatos(final Context context) {
         Service service = null;
         try {
-            service = services.getTipoAparatosService();
+            service = services.getTipoAparatosService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1314,12 +1330,11 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     /////////////////////////////Aparatos Disponibles//////////////////////////////
     public void getAparatosDisponibles(final Context context) {
         Service service = null;
         try {
-            service = services.getAparatosDisponiblesService();
+            service = services.getAparatosDisponiblesService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1360,7 +1375,7 @@ public class Request extends AppCompatActivity {
     public void getServiciosAparatos(final Context context) {
         Service service = null;
         try {
-            service = services.getServiciosAparatosService();
+            service = services.getServiciosAparatosService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1404,7 +1419,7 @@ public class Request extends AppCompatActivity {
         Services getAceptarAsigService = new Services();
         Service service = null;
         try {
-            service = getAceptarAsigService.getAceptarAsigService();
+            service = getAceptarAsigService.getAceptarAsigService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1429,9 +1444,6 @@ public class Request extends AppCompatActivity {
         });
     }
     ////////////////////////////////////////INFO CLIENTE Reportes///////////////////////////////////////
-
-
-
     ////////////////////////////////////TIPO DE SOLUCION///////////////////////////////////////////////
     public void getSolucuion(final Context context) {
         Array.clv_Soluc = new ArrayList<Integer>();
@@ -1439,7 +1451,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getSolocionService();
+            service = services.getSolocionService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1490,7 +1502,7 @@ public class Request extends AppCompatActivity {
     public void getReportesC(final Context context) {
         Service service = null;
         try {
-            service = services.getReporteCService();
+            service = services.getReporteCService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1534,10 +1546,10 @@ public class Request extends AppCompatActivity {
 
     /////////////////Nombre Tecnico//////
 
-    public void getnombretec(Context context) {
+    public void getnombretec(final Context context) {
         Service service = null;
         try {
-            service = services.getNombreService();
+            service = services.getNombreService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1570,12 +1582,11 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
     //////////////////////////////////////servicios asiggnados ///////////////////////////////////////////
-    public void getServiciosAsignados() {
+    public void getServiciosAsignados(final Context context) {
         Service service = null;
         try {
-            service = services.getAsignadosService();
+            service = services.getAsignadosService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1622,11 +1633,10 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
     public void getReportes(final Context context) {
         Service service = null;
         try {
-            service = services.getMediosReportes();
+            service = services.getMediosReportes(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1649,11 +1659,11 @@ public class Request extends AppCompatActivity {
                             MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
                             abc = dat.get(i).contratoBueno;
-                            getServiciosAsignados();
+                            getServiciosAsignados(context);
 
 
                                 abc = dat.get(i).contratoBueno;
-                                getServiciosAsignados();
+                                getServiciosAsignados(context);
 
 
 
@@ -1673,14 +1683,13 @@ public class Request extends AppCompatActivity {
         });
 
     }
-
     public void getTecSecR(final Context context) {
         Array.Clv_TecSecR = new ArrayList<Integer>();
         Array.Clv_TecSecR.add(0,-1);
 
         Service service = null;
         try {
-            service = services.getTecSecRService();
+            service = services.getTecSecRService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1725,13 +1734,12 @@ public class Request extends AppCompatActivity {
 
         });
     }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////
     public void getValidaOrdSer(final Context context) {
 
         Service service = null;
         try {
-            service = services.getValidaOrdSerService();
+            service = services.getValidaOrdSerService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1760,12 +1768,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getChecaCAMDO(final Context context) {
 
         Service service = null;
         try {
-            service = services.getChecaCAMDOService();
+            service = services.getChecaCAMDOService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1797,13 +1804,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////
     public void getAddRelOrdUsu(final Context context) {
 
         Service service = null;
         try {
-            service = services.getADDRELORDUSUService();
+            service = services.getADDRELORDUSUService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1825,13 +1831,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
-
     public void getDeepMODORDSER(final Context context) {
 
         Service service = null;
         try {
-            service = services.getDeppMODORDSERService();
+            service = services.getDeppMODORDSERService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1853,12 +1857,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getGuardaHora(final Context context) {
 
         Service service = null;
         try {
-            service = services.getGuardaHoraService();
+            service = services.getGuardaHoraService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1882,12 +1885,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getGuardaOrdSerAparatos(final Context context) {
 
         Service service = null;
         try {
-            service = services.getGuardaOrdSerAparatosService();
+            service = services.getGuardaOrdSerAparatosService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1909,12 +1911,11 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void addLlenaBitacora(final Context context) {
 
         Service service = null;
         try {
-            service = services.getAddLlenaBitacoraService();
+            service = services.getAddLlenaBitacoraService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1953,14 +1954,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
-
     ////////////////////////Ejecutar Reporte/////////////
     public void getValidaReporte(final Context context) {
 
         Service service = null;
         try {
-            service = services.getValidaInfoReportes();
+            service = services.getValidaInfoReportes(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1992,13 +1991,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //////////////////horas///////////////
     public void getGuardaHoraReporte(final Context context) {
 
         Service service = null;
         try {
-            service = services.getGuardaHoraReporte();
+            service = services.getGuardaHoraReporte(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2023,13 +2021,12 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     ///////////////////guardar campos///////////
     public void getGuardaCampos(final Context context) {
 
         Service service = null;
         try {
-            service = services.getGuardaInfoReportes();
+            service = services.getGuardaInfoReportes(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2057,7 +2054,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getGuardaCoordenadasService();
+            service = services.getGuardaCoordenadasService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2085,7 +2082,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getConsultaIpService();
+            service = services.getConsultaIpService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2140,7 +2137,7 @@ public class Request extends AppCompatActivity {
         reintentaB=0;
         Service service = null;
         try {
-            service = services.getReintentarComandoService();
+            service = services.getReintentarComandoService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2169,7 +2166,7 @@ public class Request extends AppCompatActivity {
 
         Service service = null;
         try {
-            service = services.getCAPATService();
+            service = services.getCAPATService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2197,13 +2194,13 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    public void send_aparat() {
+    public void send_aparat(final Context context) {
 
         adaptertrabajos.norec();
 
         Service service = null;
         try {
-            service = services.recibiapar();
+            service = services.recibiapar(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2225,10 +2222,9 @@ public class Request extends AppCompatActivity {
         });
     }
 //////////////
-
     public void getChecaExt(final Context context) {
         Service service = null;
-        service = services.getChecaExtService();
+        service = services.getChecaExtService(context);
         Call<JsonObject> call = service.getChecaExt();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2264,7 +2260,7 @@ public class Request extends AppCompatActivity {
 
     public void MuestraBit(final Context context) {
         Service service = null;
-        service = services.getMuestraBitService();
+        service = services.getMuestraBitService(context);
 
         Call<JSONDetalleBitacora> call = service.getMuestraBit();
         call.enqueue(new Callback<JSONDetalleBitacora>() {
@@ -2304,7 +2300,7 @@ public class Request extends AppCompatActivity {
 
 
         Service service = null;
-        service = services.getDetalleBitService();
+        service = services.getDetalleBitService(context);
 
         Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
         call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
@@ -2341,7 +2337,7 @@ public class Request extends AppCompatActivity {
 
     public void LlenaExt(final Context context) {
         Service service = null;
-        service = services.getLlenaExtService();
+        service = services.getLlenaExtService(context);
 
         Call<JSONLlenaExtenciones> call = service.getLlenaExt();
         call.enqueue(new Callback<JSONLlenaExtenciones>() {
@@ -2382,9 +2378,9 @@ public class Request extends AppCompatActivity {
 
         });
     }
-    public void getTipoMat() {
+    public void getTipoMat(final Context context) {
         Service service = null;
-        service = services.getTipoMatService();
+        service = services.getTipoMatService(context);
         Call<JsonObject> call = service.getTipoMat();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2412,7 +2408,7 @@ public class Request extends AppCompatActivity {
     }
     public void getValidaPreDes(final Activity activity,final Context context) {
         Service service = null;
-        service = services.getValidaPreService();
+        service = services.getValidaPreService(context);
         Call<JsonObject> call = service.getValidaPre();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2437,7 +2433,7 @@ public class Request extends AppCompatActivity {
     }
     public void addPreDes(final Activity activity,final Context context) {
         Service service = null;
-        service = services.addPreDescargaService();
+        service = services.addPreDescargaService(context);
         Call<JsonObject> call = service.addPreDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2457,7 +2453,7 @@ public class Request extends AppCompatActivity {
     }
     public void getPredescarga(final Activity activity, final Context context){
         Service service = null;
-        service = services.getPreDescargaService();
+        service = services.getPreDescargaService(context);
         Call<JSONPreDescarga> call = service.getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override

@@ -1,8 +1,10 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,10 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.SplashActivity;
+import com.example.pablo.prueba7.sampledata.Util;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -37,6 +42,7 @@ public class Inicio extends AppCompatActivity
     public static String tipodeDescarga;
         NavigationView barra;
     public static PieChart  pieChart;
+    public static ProgressBar progressBarInicio;
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
 
@@ -54,10 +60,23 @@ public class Inicio extends AppCompatActivity
         calleDireccion = (TextView)findViewById(R.id.calle);
         numeroDireccion= (TextView)findViewById(R.id.numero);
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
+        progressBarInicio = findViewById(R.id.barloginicio);
+        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+
+        if (SplashActivity.LoginShare==true) {
+            request.getClv_tecnico(getApplicationContext());
+showProgress(true);
+
+        }else{
+
+        }
+
+       // ---------
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         setSupportActionBar(toolbar);
         Error.Errores(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -69,6 +88,83 @@ public class Inicio extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //////////////////////////////////////////////////////////////
+        Grafica(pieChart);
+        tipoTrabajo.setText(request.sigueinteTipo);
+        contratoTrabajo.setText(request.siguenteContrato);
+        horaTrabajo.setText(request.sigueinteHora);
+        calleDireccion.setText(request.siguenteCalle);
+        numeroDireccion.setText(request.sigueinteNumero);
+        coloniaDireccion.setText(request.siguenteColonia);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.inicio, menu);
+        return true;
+    }
+
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.Inicio) {
+            Intent intent1 = new Intent(Inicio.this, Inicio.class);
+            startActivity(intent1);
+            //Actualizar la siguente cita y la grafica
+            request.getProximaCita(getApplicationContext());
+                request.getOrdenes(getApplicationContext());
+
+
+            finish();
+        } else if (id == R.id.Ordenes_menu) {
+            Intent intent1 = new Intent(Inicio.this, Orden.class);
+            clvorden=0;
+            opcion=1;
+            request.getListOrd(getApplicationContext());
+            tipodeDescarga="O";
+            startActivity(intent1);
+
+            finish();
+        } else if (id == R.id.Reportes) {
+            Intent intent1 = new Intent(Inicio.this, Reportes.class);
+            clavequeja=0;
+            opcion=1;
+            request.getListQuejas(getApplicationContext());
+            tipodeDescarga="Q";
+            startActivity(intent1);
+            finish();
+        } else if (id == R.id.Configuraciones) {
+            Intent intent1 = new Intent(Inicio.this, Configuracion.class);
+            startActivity(intent1);
+            finish();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    //Grafica de pastel
+    public static void Grafica(PieChart pieChart1){
+
+        //Propiedades de la grafica
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
@@ -122,95 +218,17 @@ public class Inicio extends AppCompatActivity
                 yValues.add(new PieEntry(OV, "Otros"));
             }
         }
-            PieDataSet dataSet = new PieDataSet(yValues, "");
-            dataSet.setSliceSpace(7f);
-            dataSet.setSelectionShift(10f);
-            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-            dataSet.setHighlightEnabled(true);
-            PieData data = new PieData((dataSet));
-            data.setValueTextSize(15f);
-            data.setValueTextColor(Color.BLACK);
+        PieDataSet dataSet = new PieDataSet(yValues, "");
+        dataSet.setSliceSpace(7f);
+        dataSet.setSelectionShift(10f);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setHighlightEnabled(true);
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(15f);
+        data.setValueTextColor(Color.BLACK);
         pieChart.animateXY(2000, 2000);
-            pieChart.setData(data);
+        pieChart.setData(data);
         ///////////////////////////////////////////////////////////////
-
-        tipoTrabajo.setText(request.sigueinteTipo);
-        contratoTrabajo.setText(request.siguenteContrato);
-        horaTrabajo.setText(request.sigueinteHora);
-        calleDireccion.setText(request.siguenteCalle);
-        numeroDireccion.setText(request.sigueinteNumero);
-        coloniaDireccion.setText(request.siguenteColonia);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.inicio, menu);
-        return true;
-    }
-
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Inicio.this, Inicio.class);
-            startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-            request.getProximaCita(getApplicationContext());
-                request.getOrdenes(getApplicationContext());
-
-
-            finish();
-        } else if (id == R.id.Órdenes) {
-            Intent intent1 = new Intent(Inicio.this, Orden.class);
-            clvorden=0;
-            opcion=1;
-            request.getListOrd(getApplicationContext());
-            tipodeDescarga="O";
-            startActivity(intent1);
-
-            finish();
-        } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Inicio.this, Reportes.class);
-            clavequeja=0;
-            opcion=1;
-            request.getListQuejas(getApplicationContext());
-            tipodeDescarga="Q";
-            startActivity(intent1);
-            finish();
-        } else if (id == R.id.Configuraciones) {
-            Intent intent1 = new Intent(Inicio.this, Configuracion.class);
-            startActivity(intent1);
-            finish();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
-    //Grafica de pastel
-    public static void Grafica(PieChart pieChart1){
-
-        //Propiedades de la grafica
-
        }
 
 
@@ -227,6 +245,8 @@ public class Inicio extends AppCompatActivity
         dataSet.setColors(colors);*/
 
 
-
+    public static void showProgress(boolean show) {
+        progressBarInicio.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
 
 }

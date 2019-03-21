@@ -186,7 +186,7 @@ public class Reportes extends AppCompatActivity
             request.getProximaCita(getApplicationContext());
             request.getOrdenes(getApplicationContext());
 
-        } else if (id == R.id.Órdenes) {
+        } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Reportes.this, Orden.class);
             clvorden=0;
             opcion=1;
