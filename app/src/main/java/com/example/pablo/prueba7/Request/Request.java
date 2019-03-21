@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -1128,6 +1129,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
                 if(response.code()==200){
+                    Log.d("asd","asd");
                     try{
                         JSONCAMDO jsonResponse = response.body();
                         array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));

@@ -96,7 +96,7 @@ public class trabajos_adapter_result extends BaseAdapter {
 
             holder.trabajo=(TextView)convertView.findViewById(R.id.trabajov);
             holder.accion=(Button)convertView.findViewById(R.id.accionv);
-            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiap);
+            holder.recibi=(CheckBox)convertView.findViewById(R.id.recibiTrabajo);
 
             convertView.setTag(holder);
         }
@@ -146,7 +146,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
 
 
-
+            Array.clavex.clear();
         ClaveTrabajo = Array.clavex.get(position);
 
         ///////////

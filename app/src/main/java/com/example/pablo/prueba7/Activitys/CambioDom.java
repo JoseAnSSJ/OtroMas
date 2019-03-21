@@ -27,7 +27,7 @@ public class CambioDom extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_domicilio);
         aceptar = findViewById(R.id.aceptar);
-        Ciudad = findViewById(R.id.ciudadCAMDO);
+        Ciudad = findViewById(R.id.CiudadCAMDO);
         Localidad = findViewById(R.id.localidad);
         Colonia = findViewById(R.id.colonia);
         Calle = findViewById(R.id.Calledom);
