@@ -44,11 +44,8 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
         request.getReportesC(getContext());
         request.getReportes(getContext());
 
-
-
-
-         proble=view.findViewById(R.id.problema);
-         solucion = view.findViewById(R.id.tiposol);
+        proble=view.findViewById(R.id.problema);
+        solucion = view.findViewById(R.id.tiposol);
         solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -66,16 +63,12 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
 
 
 
-
-        solucion.getSelectedItemPosition();
-
-
+        clasific= view.findViewById(R.id.Sp1);
         prioridad= view.findViewById(R.id.Sp2);
         desc= view.findViewById(R.id.observa);
         problm= view.findViewById(R.id.report);
-        clasific= view.findViewById(R.id.Sp1);
 
-        proble. setText("  ");
+
 
         return view;
     }

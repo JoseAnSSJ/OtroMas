@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +22,9 @@ import com.example.pablo.prueba7.Request.Request;
 
 import java.util.ArrayList;
 
-public class ordenes_adapter_result extends BaseAdapter {
+import static com.example.pablo.prueba7.Activitys.Orden.ordenes;
+
+public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     public static Integer clvor, contratoReq;
     private LayoutInflater inflater;
@@ -44,9 +48,15 @@ public class ordenes_adapter_result extends BaseAdapter {
         inflater=LayoutInflater.from(mContext);
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("APP","Click");
+    }
+
     public  class viewHolder{
-        private TextView status,contrato1,nombre,direccionOrd;
-        private Button orden;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control;
+       // private Button ;
     }
 
     @Override
@@ -72,13 +82,14 @@ public class ordenes_adapter_result extends BaseAdapter {
         if (convertView == null) {
             holder = new viewHolder();
 
-            convertView=inflater.inflate(R.layout.ordenes_list_items,null);
+            convertView=inflater.inflate(R.layout.recycler_oq,null);
 
-            holder.status=(TextView)convertView.findViewById(R.id.statusv);
-            holder.orden=(Button)convertView.findViewById(R.id.ordenv);
-            holder.contrato1=(TextView)convertView.findViewById(R.id.contratov);
-            holder.nombre=(TextView)convertView.findViewById(R.id.nombrev);
-            holder.direccionOrd=(TextView)convertView.findViewById(R.id.direccionOrd);
+            holder.status=(TextView)convertView.findViewById(R.id.tv_estatus);
+            holder.orden=(TextView)convertView.findViewById(R.id.tv_NOrden);
+            holder.contrato1=(TextView)convertView.findViewById(R.id.tv_NContrato);
+            holder.nombre=(TextView)convertView.findViewById(R.id.tv_Nombre);
+            holder.direccionOrd=(TextView)convertView.findViewById(R.id.id_direccion);
+            holder.control=(TextView)convertView.findViewById(R.id.controla);
 
             convertView.setTag(holder);
         }
@@ -92,7 +103,7 @@ public class ordenes_adapter_result extends BaseAdapter {
         holder.status.setText(Array.statusrc.get(position));
         holder.direccionOrd.setText(Array.direccionsrc.get(position));
 
-        holder.orden.setOnClickListener(new View.OnClickListener() {
+        holder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));

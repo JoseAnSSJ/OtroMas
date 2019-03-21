@@ -114,6 +114,8 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
+import static com.example.pablo.prueba7.Activitys.ExtensionesAdi.txtExtencion;
+import static com.example.pablo.prueba7.Activitys.asignacion.jsonArray;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
@@ -436,7 +438,7 @@ public class Request extends AppCompatActivity {
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String .valueOf(dat.get(i).getNumero()+", "+dat.get(i).getCalle()+", "+dat.get(i).getColonia()));
+                            Array.direccionsrc.add(String .valueOf(dat.get(i).getColonia()+", "+dat.get(i).getCalle()+", "+dat.get(i).getNumero()));
                         }
                     }
                 }else{
@@ -695,7 +697,7 @@ public class Request extends AppCompatActivity {
                         List<GetdameSerDELCliresumenResult> dat = (List<GetdameSerDELCliresumenResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             String a = "";
-                            a = dat.get(i).getResumen() + '\n';
+                            a += dat.get(i).getResumen() + "\t\t";
                             resumen.add(i, a);
                         }
                         MainActivity.InfoServicios.setText(resumen.toString());
@@ -1579,7 +1581,7 @@ public class Request extends AppCompatActivity {
                 if(response.code()==200) {
                     JSONServicioAsignado jsonResponse = response.body();
 
-
+                    ArrayList<String> servicio = new ArrayList<>();
                     array.dataServ = new ArrayList<List<GetDameSerDelCliFacListResult>>((asList(jsonResponse.getGetDameSerDelCliFacListResult())));
 
 
@@ -1594,6 +1596,12 @@ public class Request extends AppCompatActivity {
                             MainReportes.infoA.setText("    " + dat.get(0).getServicio() + '\n' + "    " + dat.get(1).getServicio() + '\n' + "    " +
                                     dat.get(2).getServicio() + '\n' + dat.get(3).getServicio() + '\n' + dat.get(4).getServicio()
                                     + '\n' + dat.get(5).getServicio() + '\n' + dat.get(6).getServicio() + '\n' + dat.get(7).getServicio() + '\n' + "    " + dat.get(8).getServicio());
+
+                            String a = "";
+                            a += dat.get(i).getServicio() + "\t\t";
+                            servicio.add(i, a);
+
+                            MainReportes.infoA.setText(servicio.toString());
 
                         }
                     }
@@ -1637,6 +1645,14 @@ public class Request extends AppCompatActivity {
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
                             abc = dat.get(i).contratoBueno;
                             getServiciosAsignados();
+
+
+                                abc = dat.get(i).contratoBueno;
+                                getServiciosAsignados();
+
+
+
+
                         }
 
                     }
