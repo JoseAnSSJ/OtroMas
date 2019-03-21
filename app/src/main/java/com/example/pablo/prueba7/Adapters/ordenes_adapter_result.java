@@ -1,7 +1,10 @@
 package com.example.pablo.prueba7.Adapters;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +53,6 @@ public class ordenes_adapter_result extends BaseAdapter {
     public int getCount() {
         return Array.ordensrc.size();
 
-
-
     }
 
     @Override
@@ -64,11 +65,9 @@ public class ordenes_adapter_result extends BaseAdapter {
         return position;
     }
 
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
-
 
         if (convertView == null) {
             holder = new viewHolder();
@@ -100,16 +99,11 @@ public class ordenes_adapter_result extends BaseAdapter {
                 request.getDeepCons(mContext);
 
 
-
-
-
-
-
-
-
             }
         });
 
         return convertView;
     }
+
+
 }

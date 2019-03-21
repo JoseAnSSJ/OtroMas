@@ -78,7 +78,16 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Reporte vacío", Toast.LENGTH_SHORT);
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
+                    Array.Direccion.clear();
+
                     toast1.show();
+                    clavequeja=0;
+                    opcion=1;
+                    request.getListQuejas(getApplicationContext());
 
                 }
                 else {
@@ -112,6 +121,15 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Contrato vacio", Toast.LENGTH_SHORT);
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
+                    Array.Direccion.clear();
+
+                    clavequeja=0;
+                    opcion=1;
+                    request.getListQuejas(getApplicationContext());
                     toast1.show();
 
                 }
@@ -141,12 +159,8 @@ public class Reportes extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+            Intent intento1=new Intent(Reportes.this,Inicio.class);
+            startActivity(intento1);
     }
 
     @Override

@@ -1285,7 +1285,7 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraTipoAparatoListResult>> itData = array.dataTipoAparatos.iterator();
                     array.tipoAparato.add("Seleccione aparato");
                     while (itData.hasNext()) {
-                        List<GetMuestraTipoAparatoListResult> dat = (List<GetMuestraTipoAparatoListResult>) itData.next();
+                        List<GetMuestraTipoAparatoListResult> dat = itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
                             array.tipoAparato.add(dat.get(i).getNombre());
