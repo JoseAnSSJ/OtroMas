@@ -35,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
                     android:text="@string/selecciona_Aparato"
                     android:textSize="@dimen/titulos"
                     android:textStyle="bold"
@@ -47,13 +48,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/qwe"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
                     android:text="@string/aparato_Cambiar"
                     android:textSize="@dimen/xl"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/qwe" />
+                    tools:layout_editor_absoluteX="4dp"
+                    tools:layout_editor_absoluteY="58dp" />
 
                 <TextView
                     android:id="@+id/textView26"
@@ -61,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/aparatoDos"
                     android:textSize="@dimen/grande"
                     app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/estado_Aparato"
                     android:textSize="@dimen/grande"
                     app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:text="@string/aparato_a_Asignar"
                     android:textSize="@dimen/xl"
                     android:textStyle="bold"
@@ -137,12 +136,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
                         android:text="@string/tipo_de_AparatoDos"
                         android:textSize="@dimen/grande"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="16dp" />
 
                     <Spinner
                         android:id="@+id/tipo_aparato1"
@@ -171,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="@string/aparatoDos"
                         android:textSize="@dimen/grande"
                         app:layout_constraintStart_toStartOf="parent"

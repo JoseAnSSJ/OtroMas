@@ -18,24 +18,27 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp">
+
         <TextView
+            android:id="@+id/rty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="104dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="4dp"
+            android:layout_toEndOf="@+id/info"
             android:text="@string/tecnicoDos"
             android:textColor="#000" />
+
         <TextView
             android:id="@+id/tecnico1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="185dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/rty"
             android:text="---" />
         <Button
             android:id="@+id/info"
@@ -43,28 +46,31 @@
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:text="@string/datos_Cliente"
             android:background="@drawable/boton"
             android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/rtya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="103dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="32dp"
+            android:layout_toEndOf="@+id/info"
             android:text="@string/contratoDos"
             android:textColor="#000" />
+
         <TextView
             android:id="@+id/contrato1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="186dp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="33dp"
+            android:layout_toEndOf="@+id/rtya"
             android:hint="---" />
     </RelativeLayout>
     <ScrollView

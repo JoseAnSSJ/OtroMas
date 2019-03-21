@@ -116,7 +116,7 @@
             android:layout_height="300dp"
             android:layout_alignParentTop="true"
             android:background="#ffffff"
-            android:visibility="visible"
+            android:visibility="gone"
             android:foregroundGravity="center_vertical"
             app:layout_constraintBottom_toTopOf="@+id/aceptarAsignacion"
             app:layout_constraintEnd_toEndOf="parent"

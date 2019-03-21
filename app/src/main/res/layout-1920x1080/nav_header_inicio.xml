@@ -23,20 +23,20 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="-10dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="24dp"
             android:paddingBottom="10dp"
             android:text="nobre tecnico"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#fff"
             app:layout_constraintStart_toEndOf="@+id/fotografiaTecnico"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/fotografiaTecnico" />
 
         <ImageView
             android:id="@+id/fotografiaTecnico"
             android:layout_width="121dp"
             android:layout_height="115dp"
             android:layout_gravity="end"
+            android:layout_marginStart="16dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_person_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"

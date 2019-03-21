@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/asignacion_Aparatos"
                 android:textSize="@dimen/titulos"
                 android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/aparatoDos"
                 android:textSize="@dimen/grande"
                 android:textStyle="bold"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/servicios_a_los_que"
                 android:textSize="@dimen/grande"
                 android:textStyle="bold"
@@ -125,7 +125,8 @@
                     android:id="@+id/Servicios123"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    tools:layout_editor_absoluteY="8dp"></ListView>
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"></ListView>
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

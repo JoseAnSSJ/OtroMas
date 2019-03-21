@@ -168,7 +168,6 @@
                     android:id="@+id/uno"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginStart=""
                     android:background="@drawable/contorno"></RelativeLayout>
 
                 <RelativeLayout
