@@ -550,6 +550,7 @@ public class Request extends AppCompatActivity {
                         context.startActivity(intento);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Inicio.pieChart.setVisibility(View.VISIBLE);
                         Inicio.Grafica(Inicio.pieChart);
                         Inicio.tipoTrabajo.setText(sigueinteTipo);
                         Inicio.contratoTrabajo.setText(siguenteContrato);

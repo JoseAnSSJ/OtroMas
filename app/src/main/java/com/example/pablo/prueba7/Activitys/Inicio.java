@@ -72,7 +72,8 @@ public class Inicio extends AppCompatActivity
 showProgress(true);
 
         }else{
-
+            pieChart.setVisibility(View.VISIBLE);
+            Grafica(pieChart);
         }
 
        // ---------
@@ -91,7 +92,7 @@ showProgress(true);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //////////////////////////////////////////////////////////////
-        Grafica(pieChart);
+
         tipoTrabajo.setText(request.sigueinteTipo);
         contratoTrabajo.setText(request.siguenteContrato);
         horaTrabajo.setText(request.sigueinteHora);
