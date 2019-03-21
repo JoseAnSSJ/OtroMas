@@ -146,7 +146,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
 
 
-            Array.clavex.clear();
+
         ClaveTrabajo = Array.clavex.get(position);
 
         ///////////

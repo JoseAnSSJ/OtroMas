@@ -730,6 +730,11 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<Example3> call, Response<Example3> response) {
                 if(response.code()==200){
+                    Array.trabajox.clear();
+                    Array.accionx.clear();
+                    Array.clavex.clear();
+                    Array.clv_trabajox.clear();
+                    Array.recibix.clear();
                     isnet =false;
                     Example3 jsonResponse = response.body();
                     array.dataTrabajos = new ArrayList<List<GetBUSCADetOrdSerListResult>>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));

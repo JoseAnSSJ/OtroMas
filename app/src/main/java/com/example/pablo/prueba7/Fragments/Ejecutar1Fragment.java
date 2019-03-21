@@ -57,7 +57,7 @@ public class Ejecutar1Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
 
-        eject = view.findViewById(R.id.ejec1);
+        eject = view.findViewById(R.id.ejecutarR);
 //        hora1I = HorasFragment.reportesselectTime.getText().toString();
         //      horafin = HorasFragment.reportesselectTime2.getText().toString();
         solution = proble.getText().toString();
@@ -110,7 +110,7 @@ public class Ejecutar1Fragment extends Fragment {
                         request.getGuardaHoraReporte(getContext());
                         request.getGuardaCampos(getContext());
                         Intent intent1 = new Intent(getActivity(), Reportes.class);
-                        request.getListQuejas();
+                        request.getListQuejas(getContext());
                         startActivity(intent1);
 
 
@@ -154,7 +154,7 @@ public class Ejecutar1Fragment extends Fragment {
                                 request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas();
+                                request.getListQuejas(getContext());
                             }
 
                         } catch (Exception e) {
@@ -170,7 +170,7 @@ public class Ejecutar1Fragment extends Fragment {
                                 request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas();
+                                request.getListQuejas(getContext());
                             }
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
@@ -184,7 +184,7 @@ public class Ejecutar1Fragment extends Fragment {
                                 request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas();
+                                request.getListQuejas(getContext());
 
                             }
                         } catch (Exception e) {
