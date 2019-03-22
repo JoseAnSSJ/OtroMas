@@ -544,8 +544,8 @@ public class Services {
     //////////////Cambio de Domicilio/////C//////////
     public Service getCAMODOService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Orden", clvor);
-        jsonObject.put("CLAVE", ClaveTrabajo);
+        jsonObject.put("clv_orden", clvor);
+        jsonObject.put("Clave", ClaveTrabajo);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {

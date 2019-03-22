@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class JSONCAMDO {
-    @SerializedName("GetDeepCAMDOResult")
+    @SerializedName("GetDameDatosCAMDOResult")
     @Expose
     private List<GetDameDatosCAMDOResult> GetDameDatosCAMDOResult = null;
 
