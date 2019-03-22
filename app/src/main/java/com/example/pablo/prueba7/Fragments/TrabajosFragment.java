@@ -24,7 +24,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
     public static TextView desc, problm,prioridad,clasific;
     public static  EditText proble;
     private Request request = new Request();
-    public static int Clv_Sol=-1;
+    public static int Clv_Sol=-1,posSolucionRepo=0;
 
 
     public TrabajosFragment() {
@@ -51,6 +51,7 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 Clv_Sol = Array.clv_Soluc.get(position);
+                posSolucionRepo=position;
 
             }
 
