@@ -119,6 +119,12 @@ import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
+import static com.example.pablo.prueba7.Fragments.Materiales.clasificacionMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.descripcionMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posClasMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posDescMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posExtMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.spinnerExtMat;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.posSolucionRepo;
@@ -2292,7 +2298,8 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
-                    Materiales.descripcionMat.setAdapter(arrayAdapter);
+                    descripcionMat.setAdapter(arrayAdapter);
+                            descripcionMat.setSelection(posDescMat);
                 }
             }
             @Override
@@ -2333,6 +2340,8 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
                     Materiales.clasificacionMat.setAdapter(arrayAdapter);
+                    clasificacionMat.setSelection(posClasMat);
+
                 }
             }
             @Override
@@ -2373,10 +2382,10 @@ public class Request extends AppCompatActivity {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         Materiales.spinnerExtMat.setAdapter(arrayAdapter);
                         extencionesMat=true;
+                        spinnerExtMat.setSelection(posExtMat);
                     }catch (Exception e){
 
                     }
-
                 }
             }
             @Override
