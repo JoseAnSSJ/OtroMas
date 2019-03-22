@@ -2376,7 +2376,6 @@ public class Request extends AppCompatActivity {
                             array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
                             j=j+1;
                         }
-
                     }
                     try{
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
