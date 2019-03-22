@@ -124,7 +124,6 @@ import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
     Services services = new Services();
-
     Array array = new Array();
     public static String reintentarComando,contraroMA,obsMA,statusMA,extencionesE,fechaSl,Obs,nombre_tecnico,clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
     public static boolean cambioA, isnet;
@@ -174,7 +173,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //Clave Tecnico//
+ //Clave Tecnico//
     public void getClv_tecnico(final Context context) {
         Service service = null;
         try {
@@ -431,7 +430,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-   //Quejas//
+//Quejas//
     public void getQuejas(final Context context) {
         Service service = null;
         try {
@@ -720,7 +719,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////TecnicoSecundario////
+//TecnicoSecundario////
     public void getTecSec(final Context context){
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0,-1);
@@ -831,7 +830,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////Status Aparato////
+//Status Aparato////
     public void getStatusApa(final Context context) {
         Service service = services.getStatusApa(context);
         Call<JSONStatusApa> call = service.getDataStatusApa();
@@ -869,7 +868,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////TipoAparato////
+//TipoAparato////
     public void getApaTipo(final Context context) {
         Service service = null;
         try {
@@ -927,7 +926,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////AparatoDisponible////
+//AparatoDisponible////
     public void getApaTipDis(final Context context) {
 
         Service service = null;
@@ -1174,7 +1173,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //Aparatos Disponibles///
+//Aparatos Disponibles///
     public void getAparatosDisponibles(final Context context) {
         Service service = null;
         try {
@@ -1208,7 +1207,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //Servicios Aparatos//
+//Servicios Aparatos//
     public void getServiciosAparatos(final Context context) {
         Service service = null;
         try {
@@ -1266,8 +1265,8 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-  //INFO CLIENTE Reportes///
-  ////TIPO DE SOLUCION///
+//INFO CLIENTE Reportes///
+//TIPO DE SOLUCION///
     public void getSolucuion(final Context context) {
         Array.clv_Soluc = new ArrayList<Integer>();
         Array.clv_Soluc.add(0,-1);
@@ -1309,7 +1308,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //Reporte del Cliente//
+//Reporte del Cliente//
     public void getReportesC(final Context context) {
         Service service = null;
         try {
@@ -1347,8 +1346,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
-    //Nombre Tecnico//////
+//Nombre Tecnico//////
     public void getnombretec(final Context context) {
         Service service = null;
         try {
@@ -1485,7 +1483,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void getValidaOrdSer(final Context context) {
         Service service = null;
         try {
@@ -1665,7 +1662,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    //Ejecutar Reporte//
+//Ejecutar Reporte//
     public void getValidaReporte(final Context context) {
         Service service = null;
         try {
@@ -1718,7 +1715,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-///guardar campos//
+//guardar campos//
     public void getGuardaCampos(final Context context) {
         Service service = null;
         try {
