@@ -13,26 +13,26 @@
         android:layout_width="99dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="76dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/descripcion"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView34"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
+        android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="76dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
 
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/accion"
         android:textStyle="bold"
@@ -45,11 +45,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="76dp"
         android:text="@string/recibi"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="7dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listTrabajos"

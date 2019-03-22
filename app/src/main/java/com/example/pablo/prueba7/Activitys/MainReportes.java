@@ -43,16 +43,11 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         infoA = findViewById(R.id.infoservicios1);
         contrato1=findViewById(R.id.contrato1);
         ciudad1=findViewById(R.id.infoempresa1);
-
         setTitle(null);
-        //request.getTecSec(this);
-
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if(layoutAnimado.getVisibility()==View.GONE) {
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);
@@ -68,44 +63,25 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         });
 
         //* Swipe
-
         MainReportes.PagerAdapter adapter = new MainReportes.PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
-
-
         mViewPager.setAdapter(adapter);
-
         mViewPager.setOnPageChangeListener(this);
-
         ActionBar actionBar = getSupportActionBar();
-
-
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-
         ActionBar.Tab tab = actionBar.newTab().setText("Reporte").setTabListener(this);
         actionBar.addTab(tab);
-
         tab = actionBar.newTab().setText("Horas").setTabListener(this);
         actionBar.addTab(tab);
-
         tab = actionBar.newTab().setText("Material").setTabListener(this);
         actionBar.addTab(tab);
-
         tab = actionBar.newTab().setText("Finalizar").setTabListener(this);
         actionBar.addTab(tab);
-
-
-
-
-
     }
     public class PagerAdapter extends FragmentPagerAdapter {
-
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
@@ -138,27 +114,22 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public void onPageScrollStateChanged(int i) {
 
     }
-
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         position=tab.getPosition();
         mViewPager.setCurrentItem(position);
     }
-
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
-
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
-
     public void onBackPressed(){
         regresar();
     }
-
     public void regresar(){
         if((position-1)>=0){
             mViewPager.setCurrentItem(position-1);}
@@ -166,6 +137,4 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
             finish();
         }
     }
-
-
 }

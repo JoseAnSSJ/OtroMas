@@ -43,12 +43,6 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
         regresar=findViewById(R.id.regresa);
-
-
-
-
-
-
         Ciudad.setText(Request.ciudadcmdo);
         Localidad.setText(Request.localidadcmdo);
         Colonia.setText(Request.coloniacmdo);
@@ -60,7 +54,6 @@ public class CambioDom extends AppCompatActivity {
         CalleS.setText(Request.callescmdo);
         CallleE.setText(Request.calleecmdo);
         CalleO.setText(Request.calleocmdo);
-
         if (Request.casacmdo.equals("N")) {
             CasaNorte.setVisibility(View.VISIBLE);
         }
@@ -73,15 +66,12 @@ public class CambioDom extends AppCompatActivity {
         if (Request.casacmdo.equals("O")) {
             CasaOeste.setVisibility(View.VISIBLE);
         }
-
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

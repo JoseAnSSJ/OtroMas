@@ -10,12 +10,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-
 import static com.example.pablo.prueba7.Listas.Array.recibix;
 
 
@@ -29,24 +27,14 @@ public class Trabajos extends Fragment{
     public static Button accion;
     public static trabajos_adapter_result adaptertrabajos;
     public static ListView trabajos;
-    private LayoutInflater inflater;
-    private ViewGroup container;
-    private Bundle onsavedInstanceState;
-
 
     public Trabajos() {
         // Required empty public constructor
-
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
-
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
         trabajos=view.findViewById(R.id.listTrabajos);
         adaptertrabajos = new trabajos_adapter_result(getContext(), Array.trabajox, Array.accionx, recibix);

@@ -46,13 +46,10 @@ public class asignado extends AppCompatActivity {
     private CheckBox checkBox;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
 
-
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignado);
-        //escanear = (Button) findViewById(R.id.escanear);
-        //codigo = (TextView) findViewById(R.id.codigo);
         spinnerAparato=findViewById(R.id.tipo_aparato);
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
@@ -60,10 +57,6 @@ public class asignado extends AppCompatActivity {
         checkBox= findViewById(R.id.chekServicios);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
-
-
-
-
         spinnerAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
@@ -95,10 +88,10 @@ public class asignado extends AppCompatActivity {
                             for(int a=0; a<selectedStrings.size(); a++){
 
                                 Log.d("asdasd", String.valueOf(selectedStrings.get(a)));
-                            }}
+                            }
+                        }
 
                     });
-
                 }
 
             }
@@ -116,24 +109,12 @@ public class asignado extends AppCompatActivity {
                     List<GetMuestraAparatosDisponiblesListResult> dat1 =  itData1.next();
                 clveAparatoSpinner=dat1.get(position1).getClv_Aparato();
                 nombreSpinner= dat1.get(position1).getDescripcion();
-
-                ///////////////
-
-
-                //////////////////////
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
-
-
-
-
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,14 +149,8 @@ public class asignado extends AppCompatActivity {
                     startActivity(intento);
                     finish();
                 }
-
-                ////////////
-
-
-
             }
         });
-
         escanear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,7 +159,6 @@ public class asignado extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -193,11 +167,6 @@ public class asignado extends AppCompatActivity {
             contents = data.getStringExtra("SCAN_RESULT");
             codigo.setText(contents);
             codigo.setVisibility(TextView.VISIBLE);
-
-
         }
     }
-
-
-
 }

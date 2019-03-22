@@ -35,7 +35,6 @@ import static com.example.pablo.prueba7.Services.Services.jsonObject;
 public class trabajos_adapter_result extends BaseAdapter {
     private LayoutInflater inflatertrab;
     private Context Cmcontext;
-    private Context context;
     private ArrayList<String>trabajox;
     private ArrayList<String>accionx;
     private ArrayList<Boolean>recibix;
@@ -44,12 +43,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public static boolean stat;
     public static int ClaveTrabajo;
     public static int ftth=0;
-
-
-
     private Request request = new Request();
-
-    //public static Boolean[]recib=new Boolean[Array.accionx.size()];
     public static String descr;
     public static int cont=0;
     public static boolean rapg =false;
@@ -62,13 +56,10 @@ public class trabajos_adapter_result extends BaseAdapter {
         inflatertrab=LayoutInflater.from(Cmcontext);
         inflatertrab=LayoutInflater.from(context);
     }
-
     public class viewHolder{
         TextView trabajo,accion,control;
         CheckBox recibi;
-
     }
-
     @Override
     public int getCount() {
         return Array.trabajox.size();
@@ -90,46 +81,31 @@ public class trabajos_adapter_result extends BaseAdapter {
         lugar=position;
         if (convertView == null) {
             holder = new viewHolder();
-
             convertView=inflatertrab.inflate(R.layout.recycler_trabajo,null);
-
             holder.trabajo=(TextView)convertView.findViewById(R.id.tv_Descripcion);
             holder.accion=(TextView)convertView.findViewById(R.id.tv_Accion);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.check_recibi);
             holder.control=(TextView)convertView.findViewById(R.id.click);
-
             convertView.setTag(holder);
         }
         else {
             holder=(viewHolder)convertView.getTag();
         }
-
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
         holder.recibi.setChecked(Array.recibix.get(position));
-
-
-
-        /////////////
-       // clvor = Integer.valueOf(Array.ordensrc.get(position));
-
-
-rapg=true;
-holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        rapg=true;
+        holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
-
         if(holder.recibi.isChecked()){
-
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
                recibixnew.add(dat1.get(i).getSeRealiza());
-
             }
-
             if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")
@@ -143,71 +119,47 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
         }
     }
 });
-
-
-
-
         ClaveTrabajo = Array.clavex.get(position);
-
-        ///////////
         holder.control.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 isnet=0;
                 Request request = new Request();
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
                     request.getArbSer(Cmcontext);
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                 }
-
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")) {
                     request.getArbSer(Cmcontext);
                     isnet=1;
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
-
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=1;
-
                     Cmcontext.startActivity(intento);
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                     request.getCAMDO(Cmcontext);
-
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
                     ftth=0;
-
-
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
                     Toast.makeText(Cmcontext, "Espere", Toast.LENGTH_LONG).show();
                     request.getExtencionesAdicionales(Cmcontext);
-
-
                 }
-
-
-
-
             }
         });
         return convertView;
     }
-
-
     public void norec(){
-
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
-
-
         for(int i=0;i<dat1.size();i++){
         stat=(recibixnew.get(i));
             Clave =Integer.valueOf( clavex.get(i));
@@ -234,7 +186,5 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
 
     }
 }
-
     }
-
 }

@@ -71,8 +71,6 @@ showProgress(true);
         }else{
 
         }
-
-       // ---------
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
@@ -87,7 +85,6 @@ showProgress(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //////////////////////////////////////////////////////////////
         Grafica(pieChart);
         tipoTrabajo.setText(request.sigueinteTipo);
         contratoTrabajo.setText(request.siguenteContrato);
@@ -228,24 +225,8 @@ showProgress(true);
         data.setValueTextColor(Color.BLACK);
         pieChart.animateXY(2000, 2000);
         pieChart.setData(data);
-        ///////////////////////////////////////////////////////////////
-       }
-
-
-
-  /*      ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GREEN);
-        colors.add(Color.BLUE);
-        colors.add(Color.GREEN);
-        colors.add(Color.BLUE);
-        colors.add(Color.GREEN);
-        colors.add(Color.BLUE);
-        colors.add(Color.GREEN);
-
-        dataSet.setColors(colors);*/
-
-
-    public static void showProgress(boolean show) {
+    }
+       public static void showProgress(boolean show) {
         progressBarInicio.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
