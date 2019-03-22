@@ -71,7 +71,7 @@
 
             <Spinner
                 android:id="@+id/tipo_aparato"
-                android:layout_width="@dimen/spinnerL"
+                android:layout_width="390dp"
                 android:layout_height="@dimen/spinnerA"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -93,7 +93,7 @@
 
             <Spinner
                 android:id="@+id/aparatoDisponible"
-                android:layout_width="@dimen/spinnerL"
+                android:layout_width="390dp"
                 android:layout_height="@dimen/spinnerA"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"

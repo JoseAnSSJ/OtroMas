@@ -69,10 +69,10 @@
 
                 <Spinner
                     android:id="@+id/aparato"
-                    android:layout_width="@dimen/spinnerS"
+                    android:layout_width="290dp"
                     android:layout_height="@dimen/spinnerA"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/disenio_spinner"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,10 +92,10 @@
 
                 <Spinner
                     android:id="@+id/estadoaparato"
-                    android:layout_width="@dimen/spinnerS"
+                    android:layout_width="290dp"
                     android:layout_height="@dimen/spinnerA"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/disenio_spinner"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,10 +146,10 @@
 
                     <Spinner
                         android:id="@+id/tipo_aparato1"
-                        android:layout_width="@dimen/spinnerS"
-                        android:layout_height="22dp"
+                        android:layout_width="290dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/disenio_spinner"
                         app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +179,10 @@
 
                     <Spinner
                         android:id="@+id/aparatoAsignar"
-                        android:layout_width="@dimen/spinnerS"
+                        android:layout_width="290dp"
                         android:layout_height="@dimen/spinnerA"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/disenio_spinner"
                         app:layout_constraintStart_toStartOf="parent"

@@ -45,7 +45,7 @@
 
                 <Spinner
                     android:id="@+id/descripcionArticuloDesc"
-                    android:layout_width="350dp"
+                    android:layout_width="390dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -68,7 +68,7 @@
 
                 <Spinner
                     android:id="@+id/clasificacionMatDesc"
-                    android:layout_width="350dp"
+                    android:layout_width="390dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -82,7 +82,7 @@
                 android:id="@+id/constrain_Extenciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -140,7 +140,7 @@
 
                 <EditText
                     android:id="@+id/piezaMD"
-                    android:layout_width="350dp"
+                    android:layout_width="390dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
@@ -167,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/inicio"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -178,13 +178,12 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/fin"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/textView13"
+                    app:layout_constraintStart_toEndOf="@+id/textView13"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -217,8 +216,7 @@
                     android:id="@+id/InicialIDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
@@ -241,8 +239,7 @@
                     android:id="@+id/InicialEDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:inputType="number"
                     android:textSize="20dp"

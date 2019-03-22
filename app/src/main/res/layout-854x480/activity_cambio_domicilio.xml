@@ -279,8 +279,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="70dp"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginEnd="75dp"
                     android:rotation="90"
                     android:text="@string/calle_Este"
                     android:textSize="14dp" />
