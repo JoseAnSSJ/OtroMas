@@ -40,6 +40,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
     public static String statusHora = "E", dia, mes, ano;
+    public static int tecPosRepo;
 
     public HorasFragment() {
         // Required empty public constructor
@@ -62,6 +63,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TecSecSelecc1 = Array.Clv_TecSecR.get(position);
+                tecPosRepo=position;
             }
 
             @Override

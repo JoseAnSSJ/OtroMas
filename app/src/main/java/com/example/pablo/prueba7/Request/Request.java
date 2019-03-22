@@ -115,8 +115,13 @@ import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.posSolucionRepo;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
@@ -843,7 +848,8 @@ public class Request extends AppCompatActivity {
                         }
 
                         adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        InstalacionFragment.TecSec.setAdapter(adapterTecSec);
+                        TecSec.setAdapter(adapterTecSec);
+                        TecSec.setSelection(posTec);
 
 
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
@@ -1485,6 +1491,7 @@ public class Request extends AppCompatActivity {
 
                         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         solucion.setAdapter(adapter);
+                        solucion.setSelection(posSolucionRepo);
                     }
                 }else{
                     Toast.makeText(context, "Error al conseguir soluciones", Toast.LENGTH_LONG).show();
@@ -1719,7 +1726,8 @@ public class Request extends AppCompatActivity {
                         }
 
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        HorasFragment.TecSec1.setAdapter(adapterTecSecR);
+                        TecSec1.setAdapter(adapterTecSecR);
+                        TecSec1.setSelection(tecPosRepo);
 
 
                     }
