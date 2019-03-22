@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.TrabajosFragment">
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginTop="80dp">
-        android:verticalScrollbarPosition="defaultPosition"
-        android:visibility="visible">
+
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/uno"
                 android:layout_width="wrap_content"
@@ -25,18 +26,19 @@
                 android:layout_marginTop="0dp"
                 android:text="@string/clasificacion_Problema"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
 
             <TextView
                 android:id="@+id/Sp1"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="@dimen/spinnerA"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
-                android:gravity="center"
-                android:textColor="#000"
                 android:background="@drawable/disenio_spinner"
-                android:focusableInTouchMode="false"/>
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:textColor="#000" />
+
             <TextView
                 android:id="@+id/dos"
                 android:layout_width="wrap_content"
@@ -46,17 +48,18 @@
                 android:layout_marginTop="89dp"
                 android:text="@string/prioridad"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
+
             <TextView
                 android:id="@+id/Sp2"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="@dimen/spinnerA"
                 android:layout_below="@+id/dos"
-                android:gravity="center"
-                android:textColor="#000"
                 android:layout_alignStart="@+id/uno"
-                android:background="@drawable/disenio_spinner">
-            </TextView>
+                android:background="@drawable/disenio_spinner"
+                android:gravity="center"
+                android:textColor="#000"></TextView>
+
             <TextView
                 android:id="@+id/cinco"
                 android:layout_width="wrap_content"
@@ -65,7 +68,8 @@
                 android:layout_marginTop="185dp"
                 android:text="@string/reporte_Cliente"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
+
             <TextView
                 android:id="@+id/report"
                 android:layout_width="wrap_content"
@@ -73,6 +77,7 @@
                 android:layout_below="@+id/cinco"
                 android:layout_alignStart="@+id/uno"
                 android:hint="---" />
+
             <TextView
                 android:id="@+id/tres"
                 android:layout_width="wrap_content"
@@ -82,51 +87,64 @@
                 android:layout_marginTop="261dp"
                 android:text="@string/observaciones"
                 android:textColor="#000"
-                android:textSize="20dp" />
+
+                android:textSize="@dimen/mediano" />
+
             <TextView
                 android:id="@+id/observa"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/tres"
                 android:layout_alignStart="@+id/uno"
-                android:hint="---" />
+                android:hint="---"
+                android:textSize="@dimen/mediano" />
+
             <TextView
                 android:id="@+id/cuatro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/observa"
                 android:layout_alignStart="@+id/uno"
-                android:layout_marginTop="360dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="17dp"
                 android:text="@string/tipo_Solucion"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
+
             <Spinner
                 android:id="@+id/tiposol"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="20dp"
                 android:layout_below="@+id/cuatro"
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/disenio_spinner"
-                android:hint="---" />
+                android:hint="---"
+                android:textSize="@dimen/mediano" />
+
             <TextView
                 android:id="@+id/txtw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="450dp"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="@dimen/spinnerA"
+                android:layout_below="@+id/tiposol"
                 android:layout_alignStart="@+id/uno"
-                android:textSize="20dp"
+
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/problema_Real"
                 android:textColor="#000000"
-                android:text="@string/problema_Real" />
+                android:textSize="@dimen/mediano" />
+
             <EditText
                 android:id="@+id/problema"
-                android:textSize="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/spinnerS"
                 android:layout_height="47dp"
                 android:layout_below="@+id/txtw"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/contorno"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="@dimen/mediano" />
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>

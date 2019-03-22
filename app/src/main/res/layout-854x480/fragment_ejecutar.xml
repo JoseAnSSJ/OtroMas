@@ -21,8 +21,8 @@
 
       <Button
           android:id="@+id/ejec"
-          android:layout_width="101dp"
-          android:layout_height="wrap_content"
+          android:layout_width="@dimen/botonChicoL"
+          android:layout_height="@dimen/botonChicoA"
           android:layout_centerHorizontal="true"
           android:background="@drawable/boton"
           android:backgroundTint="#2196F3"
@@ -104,8 +104,8 @@
 
     <Button
         android:id="@+id/salirEjecutarOrd"
-        android:layout_width="101dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/botonChicoL"
+        android:layout_height="@dimen/botonChicoA"
         android:layout_below="@+id/animado9"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"

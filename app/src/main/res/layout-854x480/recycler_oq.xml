@@ -31,7 +31,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="2660-22"
-            android:textSize="22dp"
+            android:textSize="@dimen/mediano"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -45,6 +45,7 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textSize="@dimen/chico"
             android:text="SELENE PEREZ MENDOZA"
             app:layout_constraintStart_toStartOf="@+id/tv_NContrato"
             app:layout_constraintTop_toBottomOf="@+id/tv_NContrato" />
@@ -55,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="1025"
-            android:textSize="22sp"
+            android:textSize="@dimen/mediano"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_estatus"
             app:layout_constraintTop_toTopOf="@+id/tv_NContrato" />
@@ -66,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:textSize="16dp"
+            android:textSize="@dimen/chico"
             app:layout_constraintBottom_toBottomOf="@+id/tv_Nombre"
             app:layout_constraintStart_toEndOf="@+id/tv_Nombre"
             app:layout_constraintTop_toTopOf="@+id/tv_Nombre" />
@@ -77,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:textSize="@dimen/chico"
             android:text="@string/direccion"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_estatus"
@@ -89,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginStart="16dp"
+            android:textSize="@dimen/chico"
             app:layout_constraintBottom_toBottomOf="@+id/txt"
             app:layout_constraintStart_toEndOf="@+id/txt"
             app:layout_constraintTop_toTopOf="@+id/txt" />
