@@ -200,7 +200,6 @@ public class Request extends AppCompatActivity {
                         //Se recorre la lista y se guarla la informacion en el Modelo
                         clave_tecnico = data.get(0).clv_tecnico;
                         nombre_tecnico = data.get(0).tecnico;
-
                         services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
                         Util.editor.putString("nombre_Tecnico",data.get(0).getNombre_tec());
                         Util.editor.commit();
@@ -615,7 +614,6 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NUMERO").getAsString()
                         );
                     }catch (Exception e){
-
                     }
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
@@ -1090,7 +1088,6 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
                     while (itData4.hasNext()) {
                         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
-
                         for (int i = 0; i < dat4.size(); i++) {
                             array.nombreArbol.add(dat4.get(i).getNombre());
                         }
@@ -1211,8 +1208,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
-//Servicios Aparatos//
+    //Servicios Aparatos//
     public void getServiciosAparatos(final Context context) {
         Service service = null;
         try {
@@ -1231,7 +1227,6 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
-
                         for (int i = 0; i < dat.size(); i++) {
                             array.serviciosAparatos.add(dat.get(i).getNombre());
                         }
@@ -1353,7 +1348,7 @@ public class Request extends AppCompatActivity {
         });
     }
 
-//Nombre Tecnico//////
+    //Nombre Tecnico//////
     public void getnombretec(final Context context) {
         Service service = null;
         try {
@@ -1577,7 +1572,6 @@ public class Request extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Call<JsonObject> call = service.getMODORDSER();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -1592,27 +1586,20 @@ public class Request extends AppCompatActivity {
         });
     }
     public void getGuardaHora(final Context context) {
-
         Service service = null;
         try {
             service = services.getGuardaHoraService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Call<JsonObject> call = service.getGuardaHora();
         call.enqueue(new Callback<JsonObject>() {
-
-
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-
-
                 if(response1.code()==200){
                     getGuardaOrdSerAparatos(context);
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1634,7 +1621,6 @@ public class Request extends AppCompatActivity {
                     addLlenaBitacora(context);
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1709,7 +1695,6 @@ public class Request extends AppCompatActivity {
     }
 //horas//
     public void getGuardaHoraReporte(final Context context) {
-
         Service service = null;
         try {
             service = services.getGuardaHoraReporte(context);
@@ -1727,7 +1712,6 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1758,7 +1742,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    ////////////////////////////////////////////////////////////////
     public void GuardaCoordenadas(final Context context) {
 
         Service service = null;
@@ -1780,7 +1763,6 @@ public class Request extends AppCompatActivity {
                     ConsultaIp(context);
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1788,14 +1770,12 @@ public class Request extends AppCompatActivity {
         });
     }
     public void ConsultaIp(final Context context) {
-
         Service service = null;
         try {
             service = services.getConsultaIpService(context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Call<JsonObject> call = service.getConsultaIp();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -1824,13 +1804,8 @@ public class Request extends AppCompatActivity {
                             }
                         }
                     }
-
-
-
-
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
@@ -1839,8 +1814,6 @@ public class Request extends AppCompatActivity {
                 call.clone().enqueue(this);
             }
         });
-
-
     }
     public void ReintentarComando(final Context context) {
         reintentaB=0;
@@ -1852,8 +1825,6 @@ public class Request extends AppCompatActivity {
         }
         Call<JsonObject> call = service.getReintentaComando();
         call.enqueue(new Callback<JsonObject>() {
-
-
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if(response1.code()==200){
@@ -1862,7 +1833,6 @@ public class Request extends AppCompatActivity {
                     reiniciar.setEnabled(true);
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1903,10 +1873,8 @@ public class Request extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Call<JsonObject> call = service.noent();
         call.enqueue(new Callback<JsonObject>() {
-
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
@@ -1942,11 +1910,7 @@ public class Request extends AppCompatActivity {
                         MuestraBit(context);
                     }
                 }
-
-
-
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1987,7 +1951,6 @@ public class Request extends AppCompatActivity {
 
         });
     }
-    //////////////////////////////
     public void DetalleBit(final Context context) {
         Service service = null;
         service = services.getDetalleBitService(context);
@@ -2039,7 +2002,6 @@ public class Request extends AppCompatActivity {
                     Iterator<List<LlenaExtencionesModel>> itData = array.dataLlenaExt.iterator();
                     while (itData.hasNext()) {
                         List<LlenaExtencionesModel> dat = itData.next();
-
                         for (int i = 0; i < dat.size(); i++) {
                             array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
                             j=j+1;
@@ -2169,10 +2131,8 @@ public class Request extends AppCompatActivity {
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }
-
             @Override
             public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
-
             }
         });
     }
