@@ -49,13 +49,13 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if(usurio.getText().toString().length()==0){
     Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
-}else{
-    if(contraseña.getText().toString().length()==0){
+     }else{
+                    if(contraseña.getText().toString().length()==0){
         Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
     }else{
-if(!isOnline()){
+        if(!isOnline()){
     Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
-}else{
+        }else{
     user = usurio.getText().toString() + ":" + contraseña.getText().toString();
     enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
     guardarPre(getApplicationContext(),usurio.getText().toString(),enco);

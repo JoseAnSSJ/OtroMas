@@ -65,8 +65,6 @@ public class Inicio extends AppCompatActivity
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
         progressBarInicio = findViewById(R.id.barloginicio);
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-
-
         if (SplashActivity.LoginShare==true) {
             request.getClv_tecnico(getApplicationContext());
 showProgress(true);
@@ -89,9 +87,6 @@ showProgress(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Grafica(pieChart);
-        //////////////////////////////////////////////////////////////
-
         tipoTrabajo.setText(request.sigueinteTipo);
         contratoTrabajo.setText(request.siguenteContrato);
         horaTrabajo.setText(request.sigueinteHora);
@@ -175,11 +170,8 @@ showProgress(true);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
     //Grafica de pastel
     public static void Grafica(PieChart pieChart1){
-
         //Propiedades de la grafica
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
