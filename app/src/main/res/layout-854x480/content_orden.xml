@@ -31,8 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
             android:text="@string/orden"
-            android:textSize="@dimen/chico"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
         <EditText
@@ -41,7 +42,8 @@
             android:layout_height="28dp"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="29dp"
+            android:textSize="15dp"
+            android:layout_marginTop="40dp"
             android:inputType="number" />
 
         <Button
@@ -50,7 +52,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="135dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="42dp"
             android:background="@android:drawable/ic_search_category_default"
             android:gravity="center_vertical" />
 
@@ -62,7 +64,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="170dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="40dp"
+            android:textSize="15dp"
             android:layout_marginEnd="32dp"
             android:inputType="text|number" />
 
@@ -72,7 +75,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="290dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="42dp"
             android:background="@android:drawable/ic_search_category_default"
             android:gravity="center_vertical" />
 
@@ -80,7 +83,8 @@
             android:textSize="@dimen/mediano"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="190dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="180dp"
             android:text="@string/n_Contrato"
             android:textStyle="bold" />
 
@@ -98,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="220dp"
+            android:layout_marginStart="130dp"
             android:layout_marginTop="75dp"
             android:text="@string/n_Orden"
             android:textSize="@dimen/mediano"
@@ -108,11 +112,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="320dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="75dp"
+            android:layout_marginEnd="24dp"
             android:text="@string/estatus"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
 

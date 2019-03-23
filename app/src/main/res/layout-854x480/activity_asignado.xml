@@ -109,7 +109,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/servicios_a_los_que"
-                android:textSize="@dimen/grande"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

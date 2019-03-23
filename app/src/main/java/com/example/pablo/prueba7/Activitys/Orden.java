@@ -38,7 +38,6 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     TextView nombreTec;
    private Request rqs=new Request();
 
-
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -173,5 +172,4 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

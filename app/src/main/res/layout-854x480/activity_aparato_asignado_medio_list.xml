@@ -26,21 +26,14 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/chek"
             app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/textservicioasig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="10dp"
-            android:text=""
-            android:textSize="@dimen/mediano" />
+
 
         <Button
             android:id="@+id/medio"
             android:layout_width="@dimen/botonChicoL"
             android:layout_height="@dimen/botonChicoA"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/boton"
             android:backgroundTint="#00b0ff"
             android:checked="false"

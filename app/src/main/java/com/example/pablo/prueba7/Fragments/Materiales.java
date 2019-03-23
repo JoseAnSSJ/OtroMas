@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -30,6 +31,7 @@ public class Materiales extends Fragment {
 
     private LayoutInflater inflater;
     private ViewGroup container;
+    public static HorizontalScrollView scrollViewM;
     public static TableLayout tabla;
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
@@ -44,8 +46,6 @@ public class Materiales extends Fragment {
     public Materiales() {
         // Required empty public constructor
     }
-
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -66,6 +66,7 @@ public class Materiales extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
         tabla = view.findViewById(R.id.tabla);
+        scrollViewM = view.findViewById(R.id.scrollhorizontal);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),Materiales.tabla);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,7 +77,6 @@ public class Materiales extends Fragment {
                         List<DetalleBitacoraModel> dat = itData.next();
                         clvTipoDescMat=dat.get(position-1).catTipoArticuloClave;
                         request.DetalleBit(getContext());
-
                 }
             }
 
