@@ -45,6 +45,7 @@ public class Reportes extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Error.Errores(this);
+
         reportes=findViewById(R.id.listreporte);
         breporte=findViewById(R.id.breporte);
         bcontrato=findViewById(R.id.bcontrato);
@@ -61,6 +62,7 @@ public class Reportes extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
+
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

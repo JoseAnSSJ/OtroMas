@@ -116,9 +116,9 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
                     reporteEjecutada = 0;
                     repotteVisita = 1;
                     statusHora = "V";
-                    // ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    // ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                     // params.setMargins(0, 200, 0, 0);
-                    // todo.setLayoutParams(params);
+
                   //  reportesselectDate.setText("");
 //                    reportesselectTime.setText("");
                     //                   reportesselectTime.setEnabled(false);
@@ -142,9 +142,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
                     reporteEjecutada = 1;
                     repotteVisita = 0;
                     statusHora = "E";
-                    //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                    //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                     //  params.setMargins(0, 75, 0, 0);
-                    //  todo.setLayoutParams(params);
                     // reportesselectDate.setText("");
                     //                   reportesselectTime.setText("");
                     ///                   reportesselectTime.setEnabled(true);
@@ -174,10 +173,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
                 reporteEjecutada = 0;
                 repotteVisita = 1;
                 statusHora = "V";
-                //   ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                //   ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 //   params.setMargins(0, 200, 0, 0);
-                //   todo.setLayoutParams(params);
-
             }
             break;
             case R.id.visitada1: {
@@ -192,9 +189,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
                 reporteEjecutada = 1;
                 repotteVisita = 0;
                 statusHora = "E";
-                //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)todo.getLayoutParams();
+                //  ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 //  params.setMargins(0, 75, 0, 0);
-                //  todo.setLayoutParams(params);
             }
             break;
         }
