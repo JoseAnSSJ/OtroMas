@@ -25,6 +25,7 @@ import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
+import com.example.pablo.prueba7.Fragments.MaterialesFragment;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Listas.Example;
 import com.example.pablo.prueba7.Listas.Example1;
@@ -2498,6 +2499,7 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
+                    Materiales.scrollViewM.setVisibility(View.VISIBLE);
                     Materiales.tabla.setVisibility(View.VISIBLE);
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
@@ -2509,4 +2511,161 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
+    //////////////////
+    public void DetalleBitR(final Context context) {
+
+
+
+        Service service = null;
+        service = services.getDetalleBitRService(context);
+
+        Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
+        call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
+
+            @Override
+            public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
+                if (response1.code() == 200) {
+                    array.descripcionArtBit.clear();
+                    array.descripcionArtBit.add(0,"---Seleccionar---");
+                    int j=1;
+                    JSONDescripcionArticulosBit jsonResponse = response1.body();
+                    array.dataDetArtBit = new ArrayList<List<DescripcionArticuloModel>>(asList(jsonResponse.descripcionArticuloModel()));
+                    Iterator<List<DescripcionArticuloModel>> itData = array.dataDetArtBit.iterator();
+                    while (itData.hasNext()) {
+                        List<DescripcionArticuloModel> dat = itData.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.descripcionArtBit.add(j,dat.get(i).Nombre);
+                            j=j+1;
+                        }
+
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
+                    MaterialesFragment.clasificacionMatR.setAdapter(arrayAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
+
+            }
+
+        });
+    }
+    public void getTipoMatR(final Context context) {
+        Service service = null;
+        service = services.getTipoMatRService(context);
+        Call<JsonObject> call = service.getTipoMat();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
+                    TipoMaterialModel user = new TipoMaterialModel(
+                            userJson.get("Tipo").getAsString()
+                    );
+                    if(user.Tipo.equals("Piezas")){
+                        MaterialesFragment.piezasMatR.setVisibility(View.VISIBLE);
+                        pieza=true;
+                    }else{
+                        MaterialesFragment.metrosMatR.setVisibility(View.VISIBLE);
+                        pieza=false;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getValidaPreDesR(final Activity activity,final Context context) {
+        Service service = null;
+        service = services.getValidaPreRService(context);
+        Call<JsonObject> call = service.getValidaPre();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    String dato;
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblPreDescargaMaterialResult"));
+                    if (dato.equals("0")) {
+                        addPreDesR(activity, context);
+                    }
+                    if (dato.equals("1")) {
+                        Toast.makeText(context, "Ya existe ese tipo de material", Toast.LENGTH_SHORT).show();
+                        getPredescargaR(activity, context);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void addPreDesR(final Activity activity,final Context context) {
+        Service service = null;
+        service = services.addPreDescargaRService(context);
+        Call<JsonObject> call = service.addPreDescarga();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code()==200){
+                    Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
+                    getPredescargaR(activity,context);
+                }else{
+
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getPredescargaR(final Activity activity, final Context context){
+        Service service = null;
+        service = services.getPreDescargaRService(context);
+        Call<JSONPreDescarga> call = service.getPreDescarga();
+        call.enqueue(new Callback<JSONPreDescarga>() {
+            @Override
+            public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
+                try {
+                    tablaAdapter.eliminarFila(1);
+                }catch (Exception e){}
+                array.listaTabla.clear();
+                if(response.code()==200){
+                    JSONPreDescarga jsonResponse = response.body();
+                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
+                    Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
+                    while (itdata.hasNext()) {
+                        List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
+                            array.listaTabla.add(String.valueOf(dat.get(i).getNombre()));
+                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
+                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
+                            array.listaTabla.add(String.valueOf(dat.get(i).getNoExt()));
+
+                        }
+                    }
+                    MaterialesFragment.horizontalScrollViewR.setVisibility(View.VISIBLE);
+                    MaterialesFragment.tablaR.setVisibility(View.VISIBLE);
+                    tablaAdapter.agregarFilaTabla(Array.listaTabla);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
+
+            }
+        });
+    }
+    //////////
 }

@@ -16,14 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="110dp"
             android:dividerHeight="5dp"
             android:elevation="80dp"
-            android:layout_marginTop="80dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reporte"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="60dp"
             android:textStyle="bold"
             />
@@ -31,14 +32,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/n_Contrato"
-            android:layout_marginStart="220dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="190dp"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="75dp"
             android:layout_marginStart="10dp"
             android:text="@string/contrato"
             android:textSize="18dp"
@@ -47,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="75dp"
             android:text="@string/n_Reporte"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -56,43 +58,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="320dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="300dp"
             android:text="@string/estatus"
-            android:layout_marginTop="55dp"
             android:textSize="18dp"
             android:textStyle="bold" />
         <EditText
             android:id="@+id/reportesearch"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
             android:inputType="number" />
         <Button
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="45dp"
             android:background="@android:drawable/ic_search_category_default"
             android:id="@+id/breporte"
-            android:layout_marginStart="135dp"
+            android:layout_marginStart="155dp"
             android:layout_marginLeft="30dp" />
         <EditText
             android:id="@+id/contsearch"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="25dp"
             android:inputType="text|number" />
         <Button
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="30dp"
             android:background="@android:drawable/ic_search_category_default"
             android:id="@+id/bcontrato"
-            android:layout_marginStart="290dp"
-            android:layout_marginLeft="30dp" />
+            android:layout_marginStart="325dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="45dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
