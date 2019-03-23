@@ -29,14 +29,14 @@
 
             <TextView
                 android:id="@+id/Sp1"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="390dp"
+                android:layout_height="24dp"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
-                android:gravity="center"
-                android:textColor="#000"
                 android:background="@drawable/disenio_spinner"
-                android:focusableInTouchMode="false"/>
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:textColor="#000" />
             <TextView
                 android:id="@+id/dos"
                 android:layout_width="wrap_content"
@@ -49,8 +49,8 @@
                 android:textSize="20dp" />
             <TextView
                 android:id="@+id/Sp2"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="390dp"
+                android:layout_height="24dp"
                 android:layout_below="@+id/dos"
                 android:gravity="center"
                 android:textColor="#000"
@@ -101,8 +101,8 @@
                 android:textSize="20dp" />
             <Spinner
                 android:id="@+id/tiposol"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_width="390dp"
+                android:layout_height="24dp"
                 android:layout_below="@+id/cuatro"
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/disenio_spinner"

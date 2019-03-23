@@ -27,6 +27,7 @@
             app:layout_constraintStart_toEndOf="@+id/chek"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <Button
             android:id="@+id/medio"
             android:layout_width="@dimen/botonChicoL"
