@@ -877,7 +877,6 @@ public class Request extends AppCompatActivity {
                         TecSec.setAdapter(adapterTecSec);
                         TecSec.setSelection(posTec);
 
-
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
 
                     }
@@ -1754,8 +1753,6 @@ public class Request extends AppCompatActivity {
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         TecSec1.setAdapter(adapterTecSecR);
                         TecSec1.setSelection(tecPosRepo);
-
-
                     }
                 }
             }

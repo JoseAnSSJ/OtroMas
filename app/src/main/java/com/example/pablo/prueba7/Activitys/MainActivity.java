@@ -28,6 +28,12 @@ import com.example.pablo.prueba7.Fragments.Trabajos;
 
 import androidx.annotation.RequiresApi;
 
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
+import static com.example.pablo.prueba7.Fragments.MaterialesFragment.clasificacionMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesFragment.descripcionMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesFragment.spinnerExtMatR;
+
 
 //import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
@@ -201,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             mViewPager.setCurrentItem(position-1);}
             else{
             finish();
+            TecSec.setSelection(0);
             }
             }
 

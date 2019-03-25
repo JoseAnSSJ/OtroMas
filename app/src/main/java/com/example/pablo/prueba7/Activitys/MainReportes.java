@@ -21,6 +21,9 @@ import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Fragments.MaterialesFragment;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 
+import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
+
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private ScrollView hzScrollView;
@@ -163,6 +166,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         if((position-1)>=0){
             mViewPager.setCurrentItem(position-1);}
         else{
+            TecSec1.setSelection(tecPosRepo);
             finish();
         }
     }
