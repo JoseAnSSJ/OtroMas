@@ -59,9 +59,13 @@ if(!isOnline()){
     user = usurio.getText().toString() + ":" + contraseña.getText().toString();
     enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
     guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
-
     request.getReviews(getApplicationContext());
+    /////////////
     showProgress(true);
+    usurio.setEnabled(false);
+    contraseña.setEnabled(false);
+    entrar.setEnabled(false);
+    /////////////
     Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
 }
 

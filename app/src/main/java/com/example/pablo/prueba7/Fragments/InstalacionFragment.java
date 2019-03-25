@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,12 +30,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.GetMuestraRelOrdenesTecnicosListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import static android.content.Context.LOCATION_SERVICE;
 
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -57,7 +62,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     private ViewGroup container;
     private Bundle onsavedInstanceState;
     private LocationManager locationManager;
-    int posTec;
+    public static  int posTec;
 
     public InstalacionFragment() {
         // Required empty public constructor
@@ -112,13 +117,14 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         Obs.setText(request.obsMA);
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
         // bt2.setChecked(true);
+     //   Util.preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+       // TecSec.setSelection(Util.getPositionTecSec(Util.preferences));
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
-                posTec = position;
-
+                  posTec=position;
+                  TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
             }
 
             @Override
@@ -127,6 +133,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }
         });
         ///////////////////GPS//////////////////////////////
+
 
         cordLat = (TextView) view.findViewById(R.id.tv_Latitud);
         cordLong = (TextView) view.findViewById(R.id.tv_Longitud);

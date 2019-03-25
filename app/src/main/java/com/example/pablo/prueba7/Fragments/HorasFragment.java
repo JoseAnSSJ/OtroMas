@@ -60,6 +60,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TecSecSelecc1 = Array.Clv_TecSecR.get(position);
+                tecPosRepo=position;
             }
 
             @Override

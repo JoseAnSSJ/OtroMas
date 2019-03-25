@@ -98,7 +98,6 @@ public class Inicio extends AppCompatActivity
         calleDireccion.setText(request.siguenteCalle);
         numeroDireccion.setText(request.sigueinteNumero);
         coloniaDireccion.setText(request.siguenteColonia);
-
     }
 
     @Override
@@ -123,7 +122,6 @@ public class Inicio extends AppCompatActivity
                                 finish();
                             }
                         }).show();
-
     }
 
     @Override
@@ -144,10 +142,9 @@ public class Inicio extends AppCompatActivity
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
             request.getProximaCita(getApplicationContext());
-                request.getOrdenes(getApplicationContext());
-
-
+            request.getOrdenes(getApplicationContext());
             finish();
+
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
             clvorden=0;
