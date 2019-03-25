@@ -119,8 +119,19 @@ import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
+import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
+import static com.example.pablo.prueba7.Fragments.Materiales.clasificacionMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.descripcionMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posClasMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posDescMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.posExtMat;
+import static com.example.pablo.prueba7.Fragments.Materiales.spinnerExtMat;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
+import static com.example.pablo.prueba7.Fragments.TrabajosFragment.posSolucionRepo;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
@@ -863,7 +874,8 @@ public class Request extends AppCompatActivity {
                         }
 
                         adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        InstalacionFragment.TecSec.setAdapter(adapterTecSec);
+                        TecSec.setAdapter(adapterTecSec);
+                        TecSec.setSelection(posTec);
 
 
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
@@ -1505,6 +1517,7 @@ public class Request extends AppCompatActivity {
 
                         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         solucion.setAdapter(adapter);
+                        solucion.setSelection(posSolucionRepo);
                     }
                 }else{
                     Toast.makeText(context, "Error al conseguir soluciones", Toast.LENGTH_LONG).show();
@@ -1739,7 +1752,8 @@ public class Request extends AppCompatActivity {
                         }
 
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        HorasFragment.TecSec1.setAdapter(adapterTecSecR);
+                        TecSec1.setAdapter(adapterTecSecR);
+                        TecSec1.setSelection(tecPosRepo);
 
 
                     }
@@ -2304,7 +2318,8 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
-                    Materiales.descripcionMat.setAdapter(arrayAdapter);
+                    descripcionMat.setAdapter(arrayAdapter);
+                            descripcionMat.setSelection(posDescMat);
                 }
             }
             @Override
@@ -2345,6 +2360,8 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
                     Materiales.clasificacionMat.setAdapter(arrayAdapter);
+                    clasificacionMat.setSelection(posClasMat);
+
                 }
             }
             @Override
@@ -2379,16 +2396,15 @@ public class Request extends AppCompatActivity {
                             array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
                             j=j+1;
                         }
-
                     }
                     try{
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         Materiales.spinnerExtMat.setAdapter(arrayAdapter);
                         extencionesMat=true;
+                        spinnerExtMat.setSelection(posExtMat);
                     }catch (Exception e){
 
                     }
-
                 }
             }
             @Override

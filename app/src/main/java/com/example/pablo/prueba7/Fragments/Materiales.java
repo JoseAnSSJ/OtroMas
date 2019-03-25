@@ -41,6 +41,7 @@ public class Materiales extends Fragment {
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
     int seleccion,seleccionExte;
+    public static int posDescMat,posClasMat,posExtMat;
 
 
     public Materiales() {
@@ -72,6 +73,7 @@ public class Materiales extends Fragment {
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posDescMat=position;
                 if(position!=0){
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                         List<DetalleBitacoraModel> dat = itData.next();
@@ -96,7 +98,7 @@ public class Materiales extends Fragment {
                     idInventarioMD=dat.get(position-1).IdInventario;
                     request.getTipoMat(getContext());
                     seleccion=position;
-
+                    posClasMat=position;
 
                 }
             }
@@ -109,6 +111,7 @@ public class Materiales extends Fragment {
         spinnerExtMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posExtMat=position;
                 if(position!=0){
                     extSer=(position-1);
                     seleccionExte=position;
