@@ -13,19 +13,4 @@ public class CambioAparatoDeepModel {
         this.StatusEntrega = statusEntrega;
     }
 
-    public int getAparatoAsignar() {
-        return AparatoAsignar;
-    }
-
-    public int getAparatoCliente() {
-        return AparatoCliente;
-    }
-
-    public int getTipoAparatoAsignar() {
-        return TipoAparatoAsignar;
-    }
-
-    public String getStatusEntrega() {
-        return StatusEntrega;
-    }
 }

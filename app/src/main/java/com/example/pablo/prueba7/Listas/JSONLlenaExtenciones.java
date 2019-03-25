@@ -14,8 +14,4 @@ public class JSONLlenaExtenciones {
     public List<LlenaExtencionesModel> llenaExtencionesModel() {
         return LlenaExtencionesModel;
     }
-
-    public void setLlenaExtencionesModel(List<LlenaExtencionesModel> llenaExtencionesModel) {
-        this.LlenaExtencionesModel = llenaExtencionesModel;
-    }
 }

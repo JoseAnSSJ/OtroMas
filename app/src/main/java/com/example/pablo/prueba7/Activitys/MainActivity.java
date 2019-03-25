@@ -29,16 +29,13 @@ import com.example.pablo.prueba7.Fragments.Trabajos;
 import androidx.annotation.RequiresApi;
 
 
-//import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
-
-
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     ScrollView hzScrollView;
     Button info;
     int position;
     RelativeLayout layoutAnimado;
-    public static TextView NombreTec, Contrato, Status, Empresa, Nombre, Direccion, InfoServicios;
+    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
 
     Request request = new Request();
 
@@ -47,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         super.onCreate(onSaveInstanceState);
         setRetainInstance(true);
         validar_Permiso();
-        if (onSaveInstanceState != null) {
-            //Restore the fragment's instance
-            Fragment mcontext = getSupportFragmentManager().getFragment(onSaveInstanceState, "asd");
-        }
         setContentView(R.layout.activity_swipe);
         info= findViewById(R.id.info);
         layoutAnimado= findViewById(R.id.animado);
@@ -146,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
 
             FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
+
 
 
         public int getCount() {

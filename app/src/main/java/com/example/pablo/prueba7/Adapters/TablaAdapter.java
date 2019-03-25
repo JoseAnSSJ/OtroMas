@@ -1,22 +1,17 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.pablo.prueba7.Fragments.Materiales;
-import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TablaAdapter  {
     // Variables de la clase
@@ -114,39 +109,6 @@ public class TablaAdapter  {
             tabla.removeViewAt(indicefilaeliminar);
             FILAS--;
     }
-
-    /**
-     * Devuelve las filas de la tabla, la cabecera se cuenta como fila
-     * @return Filas totales de la tabla
-     */
-    public int getFilas()
-    {
-        return FILAS;
-    }
-
-    /**
-     * Devuelve las columnas de la tabla
-     * @return Columnas totales de la tabla
-     */
-    public int getColumnas()
-    {
-        return COLUMNAS;
-    }
-
-    /**
-     * Devuelve el número de celdas de la tabla, la cabecera se cuenta como fila
-     * @return Número de celdas totales de la tabla
-     */
-    public int getCeldasTotales()
-    {
-        return FILAS * COLUMNAS;
-    }
-
-    /**
-     * Obtiene el ancho en píxeles de un texto en un String
-     * @param texto Texto
-     * @return Ancho en píxeles del texto
-     */
     private int obtenerAnchoPixelesTexto(String texto)
     {
         Paint p = new Paint();

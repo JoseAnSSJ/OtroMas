@@ -14,8 +14,4 @@ public class JSONMediosSer {
     public List<GetMuestraMedioPorServicoContratadoListResult> GetMuestraMedioPorServicoContratadoListResult() {
         return GetMuestraMedioPorServicoContratadoListResult;
     }
-
-    public void setMuestraMedioPorServicoContratadoListResult(List<GetMuestraMedioPorServicoContratadoListResult> getMuestraMedioPorServicoContratadoListResult) {
-        this.GetMuestraMedioPorServicoContratadoListResult = getMuestraMedioPorServicoContratadoListResult;
-    }
 }

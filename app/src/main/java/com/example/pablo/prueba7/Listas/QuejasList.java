@@ -16,9 +16,4 @@ public class QuejasList {
     public List<ListadoQuejasAgendadas> GetDameListadoQuejasAgendadasResult() {
         return ListadoQuejasAgendadas;
     }
-
-    public void setGetDameListadoQuejasAgendadasResult(List<ListadoQuejasAgendadas> getDameListadoQuejasAgendadasResult) {
-        this.ListadoQuejasAgendadas = getDameListadoQuejasAgendadasResult;
-    }
-
 }

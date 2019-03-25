@@ -2,7 +2,6 @@ package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,7 +30,7 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 public class Orden extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
     private ordenes_adapter_result adapterord;
-    private Button cambiodom, cambioapa,ordenb,contratob;
+    private Button ordenb,contratob;
     public static   ListView ordenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
@@ -49,7 +48,6 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         contratob=findViewById(R.id.bcontrato);
         ordsearch=findViewById(R.id.ordsearch);
         contsearch=findViewById(R.id.contsearch);
-        Error.Errores(this);
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);

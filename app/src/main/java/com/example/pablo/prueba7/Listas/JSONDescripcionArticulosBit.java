@@ -15,7 +15,4 @@ public class JSONDescripcionArticulosBit {
         return DescripcionArticuloModel;
     }
 
-    public void setDescripcionArticuloModel(List<DescripcionArticuloModel> descripcionArticuloModel) {
-        this.DescripcionArticuloModel = descripcionArticuloModel;
-    }
 }

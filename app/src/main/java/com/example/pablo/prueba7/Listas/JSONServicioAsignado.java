@@ -14,8 +14,4 @@ public class JSONServicioAsignado {
     public List<GetDameSerDelCliFacListResult> getGetDameSerDelCliFacListResult() {
         return getDameSerDelCliFacListResult;
     }
-
-    public void setGetDameSerDelCliFacListResult(List<GetDameSerDelCliFacListResult> getDameSerDelCliFacListResult) {
-        this.getDameSerDelCliFacListResult = getDameSerDelCliFacListResult;
-    }
 }

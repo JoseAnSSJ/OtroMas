@@ -16,8 +16,4 @@ public class Example1 {
     public List<GetDameListadoOrdenesAgendadasResult> getGetDameListadoOrdenesAgendadasResult() {
         return getDameListadoOrdenesAgendadasResult;
     }
-
-    public void setGetDameListadoOrdenesAgendadasResult(List<GetDameListadoOrdenesAgendadasResult> getDameListadoOrdenesAgendadasResult) {
-        this.getDameListadoOrdenesAgendadasResult = getDameListadoOrdenesAgendadasResult;
-    }
 }

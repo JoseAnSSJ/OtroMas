@@ -14,10 +14,5 @@ public class JSONTecSecReport {
     public List<GetMuestraTecnicosAlmacenListResult> getGetMuestraTecnicosAlmacenListResult() {
         return getMuestraTecnicosAlmacenListResult;
     }
-
-    public void setGetMuestraTecnicosAlmacenListResult(List<GetMuestraTecnicosAlmacenListResult> getMuestraTecnicosAlmacenListResult) {
-        this.getMuestraTecnicosAlmacenListResult = getMuestraTecnicosAlmacenListResult;
-    }
-
 }
 

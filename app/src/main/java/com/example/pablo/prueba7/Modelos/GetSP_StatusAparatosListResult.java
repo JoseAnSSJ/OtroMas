@@ -17,11 +17,4 @@ public class GetSP_StatusAparatosListResult {
         return Concepto;
     }
 
-    public void setClv_StatusCableModem(String clv_StatusCableModem) {
-        Clv_StatusCableModem = clv_StatusCableModem;
-    }
-
-    public void setConcepto(String concepto) {
-        Concepto = concepto;
-    }
 }

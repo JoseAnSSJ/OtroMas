@@ -8,14 +8,10 @@ public class JSONNombreTecnico {
     @SerializedName("GetConTecnicoAgendaResult")
     @Expose
     private GetConTecnicoAgendaResult getConTecnicoAgendaResult;
-
     public GetConTecnicoAgendaResult getGetConTecnicoAgendaResult() {
         return getConTecnicoAgendaResult;
     }
 
-    public void setGetConTecnicoAgendaResult(GetConTecnicoAgendaResult getConTecnicoAgendaResult) {
-        this.getConTecnicoAgendaResult = getConTecnicoAgendaResult;
-    }
 
 
 

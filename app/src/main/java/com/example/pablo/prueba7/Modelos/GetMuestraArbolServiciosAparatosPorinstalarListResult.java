@@ -55,24 +55,12 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         BaseRemoteIp = baseRemoteIp;
     }
 
-    public void setClv_TipSer(Integer clv_TipSer) {
-        Clv_TipSer = clv_TipSer;
-    }
-
-    public void setClv_UnicaNet(Integer clv_UnicaNet) {
-        Clv_UnicaNet = clv_UnicaNet;
-    }
-
     public void setContrato(Integer contrato) {
         Contrato = contrato;
     }
 
     public void setDetalle(String detalle) {
         Detalle = detalle;
-    }
-
-    public void setExpanded(Integer expanded) {
-        Expanded = expanded;
     }
 
     public void setIdMedio(Integer idMedio) {
@@ -87,14 +75,6 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         Tipo = tipo;
     }
 
-    public void setType(String type) {
-        Type = type;
-    }
-
-    public void setChildren(ArrayList<com.example.pablo.prueba7.Modelos.children> children) {
-        this.children = children;
-    }
-
     public void setClv_orden(Integer clv_orden) {
         this.clv_orden = clv_orden;
     }
@@ -105,10 +85,6 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
 
     public Integer getBaseRemoteIp() {
         return BaseRemoteIp;
-    }
-
-    public Integer getClv_TipSer() {
-        return Clv_TipSer;
     }
 
     public Integer getClv_UnicaNet() {
@@ -123,10 +99,6 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         return Detalle;
     }
 
-    public Integer getExpanded() {
-        return Expanded;
-    }
-
     public Integer getIdMedio() {
         return IdMedio;
     }
@@ -139,15 +111,4 @@ public class GetMuestraArbolServiciosAparatosPorinstalarListResult {
         return Tipo;
     }
 
-    public String getType() {
-        return Type;
-    }
-
-    public ArrayList<com.example.pablo.prueba7.Modelos.children> getChildren() {
-        return children;
-    }
-
-    public Integer getClv_orden() {
-        return clv_orden;
-    }
 }

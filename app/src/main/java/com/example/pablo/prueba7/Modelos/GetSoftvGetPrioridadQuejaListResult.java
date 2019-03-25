@@ -49,14 +49,6 @@ public class GetSoftvGetPrioridadQuejaListResult {
         this.descripcion = descripcion;
     }
 
-    public Long getClvPrioridadQueja() {
-        return clvPrioridadQueja;
-    }
-
-    public void setClvPrioridadQueja(Long clvPrioridadQueja) {
-        this.clvPrioridadQueja = clvPrioridadQueja;
-    }
-
 }
 
 

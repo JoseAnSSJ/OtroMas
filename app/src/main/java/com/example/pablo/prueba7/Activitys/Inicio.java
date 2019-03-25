@@ -4,11 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -38,7 +37,7 @@ import java.util.ArrayList;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.opcion;
-import static java.security.AccessController.getContext;
+
 
 
 public class Inicio extends AppCompatActivity
@@ -46,6 +45,7 @@ public class Inicio extends AppCompatActivity
     public static int OE,OP,OV,OEP,OO,RE,RP,REP,RV,RO;
     public static String tipodeDescarga;
         NavigationView barra;
+    public static DrawerLayout drawer;
     public static PieChart  pieChart;
     public static ProgressBar progressBarInicio;
     private Request request = new Request();
@@ -64,27 +64,32 @@ public class Inicio extends AppCompatActivity
         numeroDireccion= (TextView)findViewById(R.id.numero);
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
         progressBarInicio = findViewById(R.id.barloginicio);
-        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        if (SplashActivity.LoginShare==true) {
-            request.getClv_tecnico(getApplicationContext());
-showProgress(true);
-
-        }else{
-            pieChart.setVisibility(View.VISIBLE);
-            Grafica(pieChart);
-        }
         barra = findViewById(R.id.nav_view);
-        View barra1 = barra.getHeaderView(0);
-        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+
         setSupportActionBar(toolbar);
-        Error.Errores(this);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        if (SplashActivity.LoginShare==true) {
+            if(!isOnline()){
+                Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+                finish();
 
+            }else {
+                request.getClv_tecnico(getApplicationContext());
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                showProgress(true);
+            }
+        }else{
+            pieChart.setVisibility(View.VISIBLE);
+            Grafica(pieChart);
+        }
+        View barra1 = barra.getHeaderView(0);
+        nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         tipoTrabajo.setText(request.sigueinteTipo);
@@ -171,7 +176,7 @@ showProgress(true);
         return true;
     }
     //Grafica de pastel
-    public static void Grafica(PieChart pieChart1){
+    public static void Grafica(PieChart pieChart){
         //Propiedades de la grafica
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
@@ -240,5 +245,11 @@ showProgress(true);
        public static void showProgress(boolean show) {
         progressBarInicio.setVisibility(show ? View.VISIBLE : View.GONE);
     }
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
+    }
 }

@@ -15,7 +15,4 @@ public class JSONCLIAPA {
     return GetListClienteAparatosResult;
   }
 
-  public void setListClienteAparatosResult(List<GetListClienteAparatosResult> getListClienteAparatosResult) {
-    this.GetListClienteAparatosResult = getListClienteAparatosResult;
-  }
 }

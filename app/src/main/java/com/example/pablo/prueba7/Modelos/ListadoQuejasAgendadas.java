@@ -34,10 +34,6 @@ public class ListadoQuejasAgendadas {
         return clvQueja;
     }
 
-    public void setClvQueja(Integer clvQueja) {
-        this.clvQueja = clvQueja;
-    }
-
     public String getContrato() {
         return contrato;
     }
@@ -76,9 +72,6 @@ public class ListadoQuejasAgendadas {
         return NUMERO;
     }
 
-    public void setNUMERO(String NUMERO) {
-        this.NUMERO =NUMERO;
-    }
     public String getColonia() {
         return Colonia;
     }

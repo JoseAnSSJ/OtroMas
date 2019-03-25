@@ -16,9 +16,6 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
     @SerializedName("DESCRIPCION")
     @Expose
     public  String dESCRIPCION;
-    @SerializedName("TipSer")
-    @Expose
-    private Object tipSer;
     public GetMUESTRATRABAJOSQUEJASListResult(int clv_trabajo, String descripcion){
         this.cLVTRABAJO = clv_trabajo;
         this.dESCRIPCION = descripcion;
@@ -44,28 +41,9 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
         return cLVTRABAJO;
     }
 
-    public void setCLVTRABAJO(int cLVTRABAJO) {
-        this.cLVTRABAJO = cLVTRABAJO;
-    }
-
     public String getDESCRIPCION() {
         return dESCRIPCION;
     }
-
-    public void setDESCRIPCION(String dESCRIPCION) {
-        this.dESCRIPCION = dESCRIPCION;
-    }
-
-    public Object getTipSer() {
-        return tipSer;
-    }
-
-    public void setTipSer(Object tipSer) {
-        this.tipSer = tipSer;
-    }
-
-
-
 }
 
 

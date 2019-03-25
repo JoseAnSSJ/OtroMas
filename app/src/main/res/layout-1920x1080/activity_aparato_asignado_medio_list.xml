@@ -38,6 +38,7 @@
             android:clickable="false"
             android:focusable="false"
             android:text="@string/medio"
+            android:textColor="#000"
             android:background="@drawable/boton"
             android:backgroundTint="#00b0ff"
             android:textSize="@dimen/mediano"

@@ -41,16 +41,14 @@ public class asignacion extends AppCompatActivity {
     public static ListView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
-    int c, d, e;
+    int c, e;
     String f;
-    children dataChild = new children();
     public static JSONArray jsonArray = new JSONArray();
     public static JSONArray jsonArray2 = new JSONArray();
     public static JSONArray jsonArray3 = new JSONArray();
     public static JSONObject jsonObject2 = new JSONObject();
     public static JSONObject jsonObject3 = new JSONObject();
     public static JSONObject jsonObject4 = new JSONObject();
-    GetMuestraArbolServiciosAparatosPorinstalarListResult modelo = new GetMuestraArbolServiciosAparatosPorinstalarListResult();
     public static Arbol_Adapter adapter;
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);

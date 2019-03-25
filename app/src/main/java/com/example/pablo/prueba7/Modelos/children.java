@@ -87,21 +87,12 @@ public class children {
     public String getTipo() {
         return Tipo;
     }
-
-    public String getType() {
-        return Type;
-    }
-
     public Integer getBaseIdUser() {
         return baseIdUser;
     }
 
     public Integer getBaseRemoteIp() {
         return baseRemoteIp;
-    }
-
-    public Integer getClv_UnicaNet() {
-        return clv_UnicaNet;
     }
 }
 

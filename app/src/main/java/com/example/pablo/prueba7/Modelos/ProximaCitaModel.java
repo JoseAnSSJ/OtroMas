@@ -25,10 +25,6 @@ public class ProximaCitaModel {
         return Calle;
     }
 
-    public int getClave() {
-        return Clave;
-    }
-
     public String getColonia() {
         return Colonia;
     }
@@ -41,20 +37,12 @@ public class ProximaCitaModel {
         return Hora;
     }
 
-    public String getNUMERO() {
-        return NUMERO;
-    }
-
     public String getTipo() {
         return Tipo;
     }
 
     public void setCalle(String calle) {
         Calle = calle;
-    }
-
-    public void setClave(int clave) {
-        Clave = clave;
     }
 
     public void setColonia(String colonia) {
@@ -67,10 +55,6 @@ public class ProximaCitaModel {
 
     public void setHora(String hora) {
         Hora = hora;
-    }
-
-    public void setNUMERO(String NUMERO) {
-        this.NUMERO = NUMERO;
     }
 
     public void setTipo(String tipo) {

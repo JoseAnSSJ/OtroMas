@@ -8,12 +8,4 @@ public class ChecaSiExtencionesModel {
         this.BND = BND;
         this.NUMEXT = NUMEXT;
     }
-
-    public int getBND() {
-        return BND;
-    }
-
-    public int getNUMEXT() {
-        return NUMEXT;
-    }
 }

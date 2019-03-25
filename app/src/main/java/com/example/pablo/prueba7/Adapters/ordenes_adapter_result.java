@@ -1,32 +1,24 @@
 package com.example.pablo.prueba7.Adapters;
 
-import android.Manifest;
+
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Activitys.Orden.ordenes;
-
 public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
-    public static Integer clvor, contratoReq;
+    public static Integer clvor;
     private LayoutInflater inflater;
     private Context mContext;
     private ArrayList<String> ordensrc;

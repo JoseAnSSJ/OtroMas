@@ -25,9 +25,4 @@ public class OrdSer {
         return total;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-
 }

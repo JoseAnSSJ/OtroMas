@@ -14,8 +14,4 @@ public class JSONPreDescarga {
     public List<dameTblPreDescargaMaterialResultModel> getdameTblPreDescargaMaterialResultModel() {
         return getdameTblPreDescargaMaterialResultModel;
     }
-
-    public void setdameTblPreDescargaMaterialResultModel(List<dameTblPreDescargaMaterialResultModel> getdameTblPreDescargaMaterialResultModel) {
-        this.getdameTblPreDescargaMaterialResultModel = getdameTblPreDescargaMaterialResultModel();
-    }
 }

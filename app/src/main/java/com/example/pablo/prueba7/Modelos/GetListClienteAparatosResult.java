@@ -16,10 +16,6 @@ public class GetListClienteAparatosResult {
 
     }
 
-    public int getClv_Aparato() {
-        return Clv_Aparato;
-    }
-
     public  int getControNet() {
         return ControNet;
     }

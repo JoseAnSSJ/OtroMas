@@ -14,9 +14,4 @@ public class JSONReporteCliente {
     public List<GetQuejasListResult> getGetQuejasListResult() {
         return getQuejasListResult;
     }
-
-    public void setGetQuejasListResult(List<GetQuejasListResult> getQuejasListResult) {
-        this.getQuejasListResult = getQuejasListResult;
-    }
-
 }

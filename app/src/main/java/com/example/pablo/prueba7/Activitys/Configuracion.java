@@ -2,7 +2,6 @@ package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,13 +14,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
-
-import org.w3c.dom.Text;
 
 import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
@@ -45,7 +41,6 @@ public class Configuracion extends AppCompatActivity
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(request.nombre_tecnico);
-        Error.Errores(this);
         //Boton para cerrar sesion
         nombreConfi.setText(nombre_tecnico);
         CS.setOnClickListener(new View.OnClickListener() {

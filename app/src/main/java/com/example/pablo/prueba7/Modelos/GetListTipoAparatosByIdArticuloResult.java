@@ -4,7 +4,7 @@ public class GetListTipoAparatosByIdArticuloResult {
     public String Nombre;
     public int IdArticulo;
 
-    public  GetListTipoAparatosByIdArticuloResult (String nombre, int idArticulo){
+    public GetListTipoAparatosByIdArticuloResult(String nombre, int idArticulo) {
         this.Nombre = nombre;
         this.IdArticulo = idArticulo;
     }
@@ -21,7 +21,4 @@ public class GetListTipoAparatosByIdArticuloResult {
         Nombre = nombre;
     }
 
-    public void setIdArticulo(int idArticulo) {
-        IdArticulo = idArticulo;
-    }
 }

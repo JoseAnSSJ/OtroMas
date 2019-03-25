@@ -3,7 +3,6 @@ package com.example.pablo.prueba7.Services;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
@@ -13,10 +12,8 @@ import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.MaterialesFragment;
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Modelos.ChecaSiExtencionesModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
-import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Activitys.asignacion;
@@ -31,7 +28,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -50,8 +46,6 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoR
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.horas12;
-import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mHour;
-import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.mMinute;
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.year;

@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/boton"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#00b0ff"
             android:enabled="true"
             android:text="@string/ejecutar"
             android:textColor="#000" />
@@ -94,7 +94,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:background="@drawable/boton"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#00b0ff"
             android:enabled="false"
             android:text="@string/reiniciar"
             android:textColor="#000" />
@@ -110,7 +110,7 @@
           android:layout_centerHorizontal="true"
           android:layout_marginTop="20dp"
           android:background="@drawable/boton"
-          android:backgroundTint="#2196F3"
+          android:backgroundTint="#00b0ff"
           android:enabled="false"
           android:text="@string/salir"
           android:textColor="#000" />

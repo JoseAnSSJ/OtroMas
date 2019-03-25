@@ -55,9 +55,4 @@ public class GetMuestraTecnicosAlmacenListResult {
     public Integer getClvTecnico() {
         return clvTecnico;
     }
-
-    public void setClvTecnico(Integer clvTecnico) {
-        this.clvTecnico = clvTecnico;
     }
-
-}

@@ -17,17 +17,8 @@ public class GetDameOrdenesQuejasTotalesResult {
         return OrdSer;
     }
 
-    public void setOrdSer(List<OrdSer> OrdSer) {
-        this.OrdSer = OrdSer;
-    }
-
     public List<Queja> getQueja() {
         return Queja;
     }
-
-    public void setQueja(List<Queja> Queja) {
-        this.Queja = Queja;
-    }
-
 
 }

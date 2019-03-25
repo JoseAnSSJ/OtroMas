@@ -15,7 +15,4 @@ public class JSONDetalleBitacora {
         return DetalleBitacoraModel;
     }
 
-    public void setDetalleBitacoraModel(List<DetalleBitacoraModel> detalleBitacoraModel) {
-        this.DetalleBitacoraModel = detalleBitacoraModel;
-    }
 }

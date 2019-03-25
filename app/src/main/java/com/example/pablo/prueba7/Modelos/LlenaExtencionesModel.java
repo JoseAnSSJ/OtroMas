@@ -9,11 +9,4 @@ public class LlenaExtencionesModel {
         this.ID = ID;
     }
 
-    public String getDESCRIPCION() {
-        return DESCRIPCION;
-    }
-
-    public int getID() {
-        return ID;
-    }
 }

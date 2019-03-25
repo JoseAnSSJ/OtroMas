@@ -8,13 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.GetDameDatosCAMDOResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
-import java.util.Iterator;
-import java.util.List;
 
 public class CambioDom extends AppCompatActivity {
     private Button aceptar,  regresar;
@@ -77,6 +73,7 @@ public class CambioDom extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intento1 = new Intent(CambioDom.this, Orden.class);
                 startActivity(intento1);
+                finish();
             }
         });
 

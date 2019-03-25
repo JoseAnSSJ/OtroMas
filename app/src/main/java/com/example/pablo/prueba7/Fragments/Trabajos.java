@@ -6,14 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
-import com.example.pablo.prueba7.Request.Request;
 import static com.example.pablo.prueba7.Listas.Array.recibix;
 
 
@@ -21,10 +17,6 @@ import static com.example.pablo.prueba7.Listas.Array.recibix;
  * A simple {@link Fragment} subclass.
  */
 public class Trabajos extends Fragment{
-    private RelativeLayout layoutAnimado;
-    private Request request = new Request();
-    public static TextView trabajo;
-    public static Button accion;
     public static trabajos_adapter_result adaptertrabajos;
     public static ListView trabajos;
 

@@ -24,9 +24,4 @@ public class Queja {
         return total;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-
 }

@@ -15,15 +15,7 @@ public class GetMuestraRelOrdenesTecnicosListResult {
     public  String getNOMBRE() {
         return NOMBRE;
     }
-    public void setNOMBRE(String NOMBRE) {
-        this.NOMBRE = NOMBRE;
-    }
-
     public int getCLV_TECNICO() {
         return CLV_TECNICO;
-    }
-
-    public void setCLV_TECNICO(int CLV_TECNICO) {
-        this.CLV_TECNICO = CLV_TECNICO;
     }
 }

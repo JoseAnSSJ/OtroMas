@@ -7,11 +7,4 @@ public class GetCheca_si_tiene_CAMDOModel {
         this.Error = error;
     }
 
-    public String getError() {
-        return Error;
-    }
-
-    public void setError(String error) {
-        Error = error;
-    }
 }

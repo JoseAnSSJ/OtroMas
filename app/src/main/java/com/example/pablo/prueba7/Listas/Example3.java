@@ -15,9 +15,4 @@ public class Example3 {
     public List<GetBUSCADetOrdSerListResult> getGetBUSCADetOrdSerListResult() {
         return getBUSCADetOrdSerListResult;
     }
-
-    public void setGetBUSCADetOrdSerListResult(List<GetBUSCADetOrdSerListResult> getBUSCADetOrdSerListResult) {
-        this.getBUSCADetOrdSerListResult = getBUSCADetOrdSerListResult;
-    }
-
 }

@@ -14,8 +14,4 @@ public class JSONArbolServicios {
     public List<GetMuestraArbolServiciosAparatosPorinstalarListResult> GetMuestraArbolServiciosAparatosPorinstalarListResult() {
         return getMuestraArbolServiciosAparatosPorinstalarListResult;
     }
-
-    public void setMuestraArbolServiciosAparatosPorinstalarListResult(List<GetMuestraArbolServiciosAparatosPorinstalarListResult> getMuestraArbolServiciosAparatosPorinstalarListResult) {
-        this.getMuestraArbolServiciosAparatosPorinstalarListResult = getMuestraArbolServiciosAparatosPorinstalarListResult;
-    }
 }

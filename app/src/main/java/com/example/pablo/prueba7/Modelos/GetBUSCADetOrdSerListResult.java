@@ -55,32 +55,12 @@ public class GetBUSCADetOrdSerListResult {
         return accion;
     }
 
-    public void setAccion(String accion) {
-        this.accion = accion;
-    }
-
     public Integer getClave() {
         return clave;
     }
 
-    public void setClave(Integer clave) {
-        this.clave = clave;
-    }
-
-    public Integer getClvOrden() {
-        return clvOrden;
-    }
-
-    public void setClvOrden(Integer clvOrden) {
-        this.clvOrden = clvOrden;
-    }
-
     public Integer getClvTrabajo() {
         return clvTrabajo;
-    }
-
-    public void setClvTrabajo(Integer clvTrabajo) {
-        this.clvTrabajo = clvTrabajo;
     }
 
     public String getDescripcion() {
@@ -89,14 +69,6 @@ public class GetBUSCADetOrdSerListResult {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Object getObs() {
-        return obs;
-    }
-
-    public void setObs(Object obs) {
-        this.obs = obs;
     }
 
     public Boolean getSeRealiza() {

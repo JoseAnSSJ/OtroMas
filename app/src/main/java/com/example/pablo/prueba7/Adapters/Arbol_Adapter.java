@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.asignacion;
-import com.example.pablo.prueba7.Activitys.asignado;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
@@ -76,7 +75,6 @@ public class Arbol_Adapter extends BaseAdapter {
         holder = new viewHolder();
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
         final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData.next();
-        final children dataChild= new children();
         convertView=inflater.inflate(R.layout.activity_aparato_asignado_medio_list,null);
         holder.listaAparatos = convertView.findViewById(R.id.ListaAparatos);
         holder.nombre=convertView.findViewById(R.id.textservicio);
@@ -180,6 +178,7 @@ public class Arbol_Adapter extends BaseAdapter {
                 if (m[0] == 1) {
                     Toast.makeText(mcontext, "Debe de llenar el campo 'Medio'", Toast.LENGTH_LONG).show();
                 } else {
+                    asignacion.eliminarAparato.setVisibility(View.VISIBLE);
                     asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
                     asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
                     siguiente.setVisibility(View.VISIBLE);
@@ -195,6 +194,7 @@ public class Arbol_Adapter extends BaseAdapter {
         asignacion.cancelarmedio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asignacion.eliminarAparato.setVisibility(View.VISIBLE);
                 asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
                 asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
                 siguiente.setVisibility(View.VISIBLE);

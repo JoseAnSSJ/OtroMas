@@ -26,9 +26,9 @@ import com.example.pablo.prueba7.sampledata.Util;
 public class Login extends AppCompatActivity {
 
     private EditText usurio, contraseña;
-    private Button entrar, entrar2;
+    private Button entrar;
     private String user;
-    public static String enco,cvl_usuario;
+    public static String enco;
     public static ProgressBar progressBar;
     private Request request = new Request();
     public final static String CHANNEL_ID = "NOTIFICACION";
@@ -113,7 +113,7 @@ public void guardarPre(Context context,String usario,String encode){
     public static void showProgress(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-    private boolean isOnline() {
+    public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 

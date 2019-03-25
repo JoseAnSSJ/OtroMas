@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.R;
-import com.example.pablo.prueba7.Request.Request;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,6 @@ public class quejas_adapter_result extends BaseAdapter {
     private ArrayList<String>nombreQ;
     private ArrayList<String>statusQ;
     private ArrayList<String>Direccion;
-    private Request request=new Request();
     public static Integer clvReport;
     public static String contratoReport;
 

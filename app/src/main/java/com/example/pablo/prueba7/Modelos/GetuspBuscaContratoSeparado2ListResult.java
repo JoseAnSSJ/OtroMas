@@ -84,116 +84,32 @@ public class GetuspBuscaContratoSeparado2ListResult {
         this.baseRemoteIp = baseRemoteIp;
     }
 
-    public Long getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Long activo) {
-        this.activo = activo;
-    }
-
     public String getApellidoMaterno() {
         return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
     public String getCALLE() {
         return cALLE;
-    }
-
-    public void setCALLE(String cALLE) {
-        this.cALLE = cALLE;
     }
 
     public String getCIUDAD() {
         return cIUDAD;
     }
 
-    public void setCIUDAD(String cIUDAD) {
-        this.cIUDAD = cIUDAD;
-    }
-
     public String getCOLONIA() {
         return cOLONIA;
-    }
-
-    public void setCOLONIA(String cOLONIA) {
-        this.cOLONIA = cOLONIA;
     }
 
     public String getCONTRATO() {
         return cONTRATO;
     }
 
-    public void setCONTRATO(String cONTRATO) {
-        this.cONTRATO = cONTRATO;
-    }
-
-    public Object getClvColonia() {
-        return clvColonia;
-    }
-
-    public void setClvColonia(Object clvColonia) {
-        this.clvColonia = clvColonia;
-    }
-
-    public Long getContratoBueno() {
-        return contratoBueno;
-    }
-
-    public void setContratoBueno(Long contratoBueno) {
-        this.contratoBueno = contratoBueno;
-    }
-
-    public Object getContratoCom() {
-        return contratoCom;
-    }
-
-    public void setContratoCom(Object contratoCom) {
-        this.contratoCom = contratoCom;
-    }
-
-    public Boolean getESHOTEL() {
-        return eSHOTEL;
-    }
-
-    public void setESHOTEL(Boolean eSHOTEL) {
-        this.eSHOTEL = eSHOTEL;
-    }
-
-    public Object getIdDistribuidor() {
-        return idDistribuidor;
-    }
-
-    public void setIdDistribuidor(Object idDistribuidor) {
-        this.idDistribuidor = idDistribuidor;
-    }
-
-    public Object getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Object idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public String getNUMERO() {
         return nUMERO;
-    }
-
-    public void setNUMERO(String nUMERO) {
-        this.nUMERO = nUMERO;
     }
 
     public String getNombre() {
@@ -203,38 +119,5 @@ public class GetuspBuscaContratoSeparado2ListResult {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public Object getOp() {
-        return op;
     }
-
-    public void setOp(Object op) {
-        this.op = op;
-    }
-
-    public Boolean getSOLOINTERNET() {
-        return sOLOINTERNET;
-    }
-
-    public void setSOLOINTERNET(Boolean sOLOINTERNET) {
-        this.sOLOINTERNET = sOLOINTERNET;
-    }
-
-    public Object getSetupBox() {
-        return setupBox;
-    }
-
-    public void setSetupBox(Object setupBox) {
-        this.setupBox = setupBox;
-    }
-
-    public Object getTipoSer() {
-        return tipoSer;
-    }
-
-    public void setTipoSer(Object tipoSer) {
-        this.tipoSer = tipoSer;
-    }
-
-}
 

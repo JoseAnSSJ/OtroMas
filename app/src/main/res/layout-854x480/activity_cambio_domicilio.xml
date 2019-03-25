@@ -334,10 +334,11 @@
                 android:layout_height="@dimen/botonChicoA"
                 android:layout_below="@+id/map"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="61dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="2dp"
+                android:textColor="#000"
                 android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="#00b0ff"
                 android:text="@string/aceptar" />
 
 
@@ -346,11 +347,12 @@
                 android:layout_width="@dimen/botonChicoL"
                 android:layout_height="@dimen/botonChicoA"
                 android:layout_below="@+id/map"
-                android:layout_marginStart="25dp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/aceptar"
+                android:layout_marginEnd="60dp"
+                android:textColor="#000"
                 android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="#00b0ff"
                 android:text="@string/Regresar" />
         </RelativeLayout>
     </ScrollView>

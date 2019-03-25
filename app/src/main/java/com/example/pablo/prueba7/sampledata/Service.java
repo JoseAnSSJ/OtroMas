@@ -14,7 +14,6 @@ import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONClasificacionProblm;
 import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
 import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
-import com.example.pablo.prueba7.Listas.JSONHIHF;
 import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;

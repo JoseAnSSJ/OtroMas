@@ -33,14 +33,6 @@ public class GetuspConsultaTblClasificacionProblemasListResult {
         this.baseRemoteIp = baseRemoteIp;
     }
 
-    public Long getClvProblema() {
-        return clvProblema;
-    }
-
-    public void setClvProblema(Long clvProblema) {
-        this.clvProblema = clvProblema;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }

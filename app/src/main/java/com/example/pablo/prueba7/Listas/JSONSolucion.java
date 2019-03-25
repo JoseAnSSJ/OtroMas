@@ -14,12 +14,4 @@ public class JSONSolucion {
     public List<GetMUESTRATRABAJOSQUEJASListResult> getGetMUESTRATRABAJOSQUEJASListResult() {
         return getMUESTRATRABAJOSQUEJASListResult;
     }
-
-    public void setGetMUESTRATRABAJOSQUEJASListResult(List<GetMUESTRATRABAJOSQUEJASListResult> getMUESTRATRABAJOSQUEJASListResult) {
-        this.getMUESTRATRABAJOSQUEJASListResult = getMUESTRATRABAJOSQUEJASListResult;
-    }
-
-
-
-
 }

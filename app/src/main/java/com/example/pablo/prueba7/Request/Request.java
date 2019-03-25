@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -126,13 +127,13 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando,contraroMA,obsMA,statusMA,extencionesE,fechaSl,Obs,nombre_tecnico,clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
+    public static String reintentarComando,contraroMA,obsMA,statusMA,extencionesE,Obs,nombre_tecnico,clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
     public static boolean cambioA, isnet;
     public static Long abc;
     public static int clvP,tecC,nExtenciones=0;
     public int reintentaB;
     public  static ArrayAdapter adapterTecSec,adapterTecSecR;
-    public static boolean pieza=false,rapagejecutar=false,extencionesMat=false,b = false;
+    public static boolean pieza=false,rapagejecutar=false,extencionesMat=false;
     public static String ciudadcmdo,localidadcmdo,coloniacmdo,callecmdo,numerocmdo,numeroicmdo,telefonocmdo,callencmdo,callescmdo,calleecmdo,calleocmdo,casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
@@ -212,6 +213,8 @@ public class Request extends AppCompatActivity {
                         Login.showProgress(false);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Login.esperar(3);
+                        ((Activity)context).finish();
                     }
                     Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
@@ -260,6 +263,8 @@ public class Request extends AppCompatActivity {
                         Login.showProgress(false);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Login.esperar(3);
+                        ((Activity)context).finish();
                     }
                     Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
                 }
@@ -341,6 +346,8 @@ public class Request extends AppCompatActivity {
                         Login.showProgress(false);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Login.esperar(3);
+                        ((Activity)context).finish();
                     }
                     Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
                 }
@@ -386,6 +393,8 @@ public class Request extends AppCompatActivity {
                         Login.showProgress(false);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Login.esperar(3);
+                        ((Activity)context).finish();
                     }
                     Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
                 }
@@ -499,6 +508,7 @@ public class Request extends AppCompatActivity {
                         intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intento);
                     }catch (Exception e){
+                        Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                         Inicio.showProgress(false);
                         Inicio.pieChart.setVisibility(View.VISIBLE);
                         Inicio.Grafica(Inicio.pieChart);
@@ -514,6 +524,8 @@ public class Request extends AppCompatActivity {
                         Login.showProgress(false);
                     }catch (Exception e){
                         Inicio.showProgress(false);
+                        Login.esperar(3);
+                        ((Activity)context).finish();
                     }
                     Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
                 }

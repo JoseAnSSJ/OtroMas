@@ -4,18 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import com.example.pablo.prueba7.Adapters.Servicios_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -42,8 +37,6 @@ public class asignado extends AppCompatActivity {
     private Array array = new Array();
     public static int idArticuloasignado, clveAparatoSpinner;
     public static String detalleSpinner, nombreSpinner;
-    public static Servicios_Adapter adapter;
-    private CheckBox checkBox;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
 
     @Override
@@ -54,7 +47,6 @@ public class asignado extends AppCompatActivity {
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
-        checkBox= findViewById(R.id.chekServicios);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
         spinnerAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,11 +76,6 @@ public class asignado extends AppCompatActivity {
                                 }else{
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
                                 }
-
-                            for(int a=0; a<selectedStrings.size(); a++){
-
-                                Log.d("asdasd", String.valueOf(selectedStrings.get(a)));
-                            }
                         }
 
                     });
@@ -151,13 +138,13 @@ public class asignado extends AppCompatActivity {
                 }
             }
         });
-        escanear.setOnClickListener(new View.OnClickListener() {
+      /*  escanear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IntentIntegrator scanIntegrator = new IntentIntegrator(asignado.this);
                 scanIntegrator.initiateScan();
             }
-        });
+        });*/
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

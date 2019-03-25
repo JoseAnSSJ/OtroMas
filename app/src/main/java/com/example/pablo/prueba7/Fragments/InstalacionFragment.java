@@ -4,15 +4,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -20,19 +17,15 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
@@ -40,9 +33,6 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import static android.content.Context.LOCATION_SERVICE;
-
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -52,14 +42,13 @@ import java.util.Calendar;
  */
 public class InstalacionFragment extends Fragment implements View.OnClickListener, LocationListener {
 
-    public static TextView selectDate, selectTime, selectDate1, selectDate2, selectTime2;
-    // public static String clv_TecSec_seleccion="-1"
+    public static TextView selectDate,  selectDate1, selectDate2;
     public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
-    public static int ejecutada = 1, visita = 0, visita1 = 0, TecSecSelecc = -1, hf, hi;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    public static int ejecutada = 1, visita = 0, visita1 = 0, TecSecSelecc = -1;
+    private int mYear, mMonth, mDay ;
     private View contenedorParticular;
     private View contenedorCorporativo;
-    private TextView coordenadas, direccion, cordLat, cordLong;
+    private TextView cordLat, cordLong;
     public static TextView Obs;
     public static Spinner TecSec;
     private Request request = new Request();
@@ -112,8 +101,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
         selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
         todo = view.findViewById(R.id.todo);
-        //   selectTime = view.findViewById(R.id.horai);
-        //   selectTime2 = view.findViewById(R.id.horaf);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
@@ -165,13 +152,9 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             todo.setLayoutParams(params);
             mostrarParticular(false);
             selectDate.setText("");
-//                    selectTime.setText("");
-//                    selectTime.setEnabled(false);
             selectDate1.setText("");
             selectDate2.setText("");
             selectDate2.setEnabled(false);
-//                    selectTime2.setText("");
-//                    selectTime2.setEnabled(false);
             ejecutada = 0;
             visita = 1;
         }
@@ -183,37 +166,11 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             params.setMargins(0, 0, 0, 0);
             todo.setLayoutParams(params);
             selectDate.setText("");
-//                    selectTime.setText("");
-//                    selectTime.setEnabled(true);
             selectDate1.setText("");
             selectDate2.setText("");
-            //                   selectTime2.setText("");
-            //                   selectTime2.setEnabled(true);
             ejecutada = 1;
             visita = 0;
         }
-        btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (btn1.isChecked() == true) {
-
-                }
-
-            }
-        });
-        bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (bt2.isChecked() == true) {
-
-                }
-
-            }
-        });
-
-
         if (view == selectDate) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -249,30 +206,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
-      /*  if (view == selectTime) {
-
-// Get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                if(minutes<10){
-                    selectTime.setText(hourOfDay + ":0" + minutes);
-                    hi= hourOfDay;
-                }else{
-                    selectTime.setText(hourOfDay + ":" + minutes);
-                    hi= hourOfDay;
-                }
-
-                }
-            }, mHour, mMinute, false);
-            timePickerDialog.show();
-        }*/
 
         if (view == selectDate1) {
             final Calendar c = Calendar.getInstance();
@@ -345,32 +278,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
-       /* if (view == selectTime2) {
-
-// Get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                    if(minute<10){
-                        selectTime2.setText(hourOfDay + ":0" + minute);
-                        hf=hourOfDay;
-                    }else{
-                        selectTime2.setText(hourOfDay + ":" + minute);
-                        hf=hourOfDay;
-                    }
-                }
-            }, mHour, mMinute, false);
-            timePickerDialog.show();
-        }*/
-
-
     }
 
     private void mostrarParticular(boolean b) {

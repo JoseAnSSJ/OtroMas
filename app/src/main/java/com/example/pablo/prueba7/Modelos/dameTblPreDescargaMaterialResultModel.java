@@ -34,65 +34,15 @@ public class dameTblPreDescargaMaterialResultModel {
         this.tipoDescarga = tipoDescarga;
         this.Nombre=nombre;
     }
-
     public String getNombre() {
         return Nombre;
     }
-
-
     public int getNoExt() {
         return NoExt;
-    }
-
-    public int getCantidadUtilizada() {
-        return cantidadUtilizada;
-    }
-
-    public int getClvOrden() {
-        return clvOrden;
-    }
-
-    public int getClvTecnico() {
-        return clvTecnico;
     }
 
     public int getContrato() {
         return contrato;
     }
 
-    public boolean isEsCable() {
-        return esCable;
-    }
-
-    public int getIdAlmacenEmpresa() {
-        return idAlmacenEmpresa;
-    }
-
-    public int getIdPreDescarga() {
-        return idPreDescarga;
-    }
-
-    public int getMetrajeFin() {
-        return metrajeFin;
-    }
-
-    public int getMetrajeFinExterior() {
-        return metrajeFinExterior;
-    }
-
-    public int getMetrajeInicio() {
-        return metrajeInicio;
-    }
-
-    public int getMetrajeInicioExterior() {
-        return metrajeInicioExterior;
-    }
-
-    public int getNoArticulo() {
-        return noArticulo;
-    }
-
-    public String getTipoDescarga() {
-        return tipoDescarga;
-    }
 }

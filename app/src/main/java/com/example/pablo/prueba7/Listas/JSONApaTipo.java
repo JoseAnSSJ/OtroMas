@@ -14,8 +14,4 @@ public class JSONApaTipo {
     public List<GetListTipoAparatosByIdArticuloResult> GetListTipoAparatosByIdArticuloResult() {
         return GetListTipoAparatosByIdArticuloResult;
     }
-
-    public void setListTipoAparatosByIdArticuloResult(List<GetListTipoAparatosByIdArticuloResult> getListTipoAparatosByIdArticuloResult) {
-        this.GetListTipoAparatosByIdArticuloResult = getListTipoAparatosByIdArticuloResult;
-    }
 }

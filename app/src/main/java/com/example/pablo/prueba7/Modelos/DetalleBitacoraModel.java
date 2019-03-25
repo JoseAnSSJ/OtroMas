@@ -13,15 +13,8 @@ public class DetalleBitacoraModel {
         Descripcion = descripcion;
     }
 
-    public void setCatTipoArticuloClave(int catTipoArticuloClave) {
-        this.catTipoArticuloClave = catTipoArticuloClave;
-    }
     public String getDescripcion() {
         return Descripcion;
     }
 
-
-    public int getCatTipoArticuloClave() {
-        return catTipoArticuloClave;
-    }
 }

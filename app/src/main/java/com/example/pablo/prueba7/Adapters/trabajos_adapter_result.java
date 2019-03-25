@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -43,9 +42,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public static boolean stat;
     public static int ClaveTrabajo;
     public static int ftth=0;
-    private Request request = new Request();
     public static String descr;
-    public static int cont=0;
     public static boolean rapg =false;
 
     public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){

@@ -14,11 +14,6 @@ public class JSONReportes {
     public List<GetuspBuscaContratoSeparado2ListResult> getGetuspBuscaContratoSeparado2ListResult() {
         return getuspBuscaContratoSeparado2ListResult;
     }
-
-    public void setGetuspBuscaContratoSeparado2ListResult(List<GetuspBuscaContratoSeparado2ListResult> getuspBuscaContratoSeparado2ListResult) {
-        this.getuspBuscaContratoSeparado2ListResult = getuspBuscaContratoSeparado2ListResult;
-    }
-
 }
 
 
