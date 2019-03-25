@@ -26,7 +26,7 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center|left"
                     android:text="CAPAG - Cambio de tipo de aparato"
-
+                    android:textSize="@dimen/chico"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +42,7 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center|left"
                     android:text="TextView"
+                    android:textSize="@dimen/chico"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Descripcion"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion"
@@ -64,7 +65,7 @@
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="32dp"
                     android:text="@string/recibi"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/chico"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion" />
