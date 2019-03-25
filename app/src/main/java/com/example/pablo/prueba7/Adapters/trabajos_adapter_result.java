@@ -135,6 +135,7 @@ holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListe
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")
+                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("FUERA - Fuera Del Area De Instalación")
                     ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
                 Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
                 holder.recibi.setChecked(false);
