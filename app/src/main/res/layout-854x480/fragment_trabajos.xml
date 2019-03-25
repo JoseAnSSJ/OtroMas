@@ -64,7 +64,12 @@
             android:layout_width="match_parent"
             android:layout_height="391dp"
             android:layout_marginTop="8dp"
+            android:background="#f5f5f5"
             android:dividerHeight="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView42"></ListView>
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView42">
+
+        </ListView>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

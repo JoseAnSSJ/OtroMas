@@ -19,7 +19,7 @@ public class Error extends AppCompatActivity {
                 @Override
                 public void run() {
                     Looper.prepare();
-                    Toast.makeText(context,"Error la aplicacion",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Error  en la aplicacion",Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }.start();
