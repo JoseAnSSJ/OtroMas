@@ -68,10 +68,12 @@
             android:hint="---" />
     </RelativeLayout>
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/contorno"
         android:verticalScrollbarPosition="defaultPosition"
         android:visibility="gone"
         android:id="@+id/scv"
@@ -82,17 +84,19 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_marginTop="50dp"
-            android:background="#E1F5FE"
+            android:background="@drawable/contorno"
+            android:backgroundTint="@color/colorPrimary"
             android:visibility="gone"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="400dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="161dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="40dp"
                 android:text="@string/info_Usuario"
                 android:textSize="20dp"
                 android:textStyle="bold" />
