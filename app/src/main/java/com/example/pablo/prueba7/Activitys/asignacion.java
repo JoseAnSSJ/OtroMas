@@ -165,24 +165,25 @@ public class asignacion extends AppCompatActivity {
 
                     }
                 }
-                for (c = 0; c < dat.size(); c++) {
-                    f = String.valueOf(c);
-                    e = 0;
-                    if (dat.get(c).IdMedio != null && dat.get(c).Detalle != null) {
-                        String abc = dat.get(c).IdMedio + dat.get(c).Detalle;
-                        try {
-                            if ((abc).equals(Arbol_Adapter.DeletMedio.get(0))) {
-                                dat.get(c).setDetalle("");
-                                dat.get(c).setIdMedio(0);
-                                Arbol_Adapter.DeletChildren.remove(c);
-                                e = e + 1;
 
+                do{
+                    for (c = 0; c < dat.size(); c++) {
+                        if (dat.get(c).IdMedio != null && dat.get(c).Detalle != null) {
+                            String abc = dat.get(c).IdMedio + dat.get(c).Detalle;
+                            try {
+                                if ((abc).equals(Arbol_Adapter.DeletMedio.get(0))) {
+                                    dat.get(c).setDetalle(null);
+                                    dat.get(c).setIdMedio(0);
+                                    Arbol_Adapter.DeletMedio.remove(0);
+                                }
+
+                            } catch (Exception x) {
                             }
-                        } catch (Exception x) {
-
                         }
                     }
-                }
+                }while (Arbol_Adapter.DeletMedio.isEmpty()==false);
+
+
 
                 Asignacion.setAdapter(adapter);
 

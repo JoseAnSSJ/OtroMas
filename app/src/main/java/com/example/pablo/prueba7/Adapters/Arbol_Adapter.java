@@ -83,7 +83,7 @@ public class Arbol_Adapter extends BaseAdapter {
         holder.medio=convertView.findViewById(R.id.medio);
         holder.checkBox=convertView.findViewById(R.id.chek);
         convertView.setTag(holder);
-        Log.d("ad","asd"+dat4.size());
+
         /////////////////////
         Validar(dat4);
         //////////////Llenar nombres///////////////////////////
@@ -122,12 +122,12 @@ public class Arbol_Adapter extends BaseAdapter {
                     public void onItemClick(AdapterView<?> parent, View view, int position3, long id) {
 
                         if(holder.listaAparatos.isItemChecked(position3)==true){
-                            Arbol_Adapter.DeletMedio.clear();
                             String abc= String.valueOf(position);
                             DeletChildren.add(Integer.valueOf(dat4.get(position).children.get(position3).getClv_Aparato()+abc));
                         }
                         if(holder.listaAparatos.isItemChecked(position3)==false){
-                            DeletChildren.clear();
+                            String abc= String.valueOf(position);
+                            DeletChildren.remove(Integer.valueOf(dat4.get(position).children.get(position3).getClv_Aparato()+abc));
                            }
                     }
                 });
@@ -226,11 +226,11 @@ public class Arbol_Adapter extends BaseAdapter {
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                if(holder.checkBox.isChecked()==true){
-                      Arbol_Adapter.DeletMedio.clear();
                        DeletMedio.add(dat4.get(position).IdMedio+dat4.get(position).Detalle);
                 }if(holder.checkBox.isChecked()==false){
-                  Arbol_Adapter.DeletMedio.clear();
+                  Arbol_Adapter.DeletMedio.remove(dat4.get(position).IdMedio+dat4.get(position).Detalle);
 
                }
 

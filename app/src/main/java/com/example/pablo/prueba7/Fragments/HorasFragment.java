@@ -37,6 +37,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
     public static Spinner TecSec1;
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
+    public static int tecPosRepo;
     public static String statusHora = "E";
 
     public HorasFragment() {

@@ -25,8 +25,8 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 public class Login extends AppCompatActivity {
 
-    private EditText usurio, contraseña;
-    private Button entrar;
+    public static EditText usurio, contraseña;
+    public static Button entrar;
     private String user;
     public static String enco;
     public static ProgressBar progressBar;
