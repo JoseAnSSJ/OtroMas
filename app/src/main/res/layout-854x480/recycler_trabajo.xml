@@ -52,23 +52,11 @@
                     android:id="@+id/check_recibi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_Descripcion"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_recibi"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/tv_recibi" />
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_Accion"
+                    app:layout_constraintStart_toEndOf="@+id/click"
+                    app:layout_constraintTop_toTopOf="@+id/tv_Accion" />
 
-                <TextView
-                    android:id="@+id/tv_recibi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="32dp"
-                    android:text="@string/recibi"
-                    android:textSize="@dimen/chico"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_Descripcion" />
                 <TextView
                     android:id="@+id/click"
                     android:layout_width="276dp"
