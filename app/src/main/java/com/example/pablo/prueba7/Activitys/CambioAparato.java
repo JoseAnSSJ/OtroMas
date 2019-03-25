@@ -54,19 +54,12 @@ public class CambioAparato extends AppCompatActivity {
             aa.setVisibility(View.GONE);
         }
 
-
-
-
         Finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
-
-
         aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,12 +77,10 @@ public class CambioAparato extends AppCompatActivity {
                     statusAparato=dat1.get(position-1).getClv_StatusCableModem();
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-
         });
         aparatoAsignar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -98,10 +89,8 @@ public class CambioAparato extends AppCompatActivity {
                     Iterator<List<GetListAparatosDisponiblesByIdArticuloResult>> itdata1 = Array.dataApaTipDis.iterator();
                     List<GetListAparatosDisponiblesByIdArticuloResult> dat1 = itdata1.next();
                     clvAparatoCAPAT=dat1.get(position-1).getClv_Aparato();
-
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -132,8 +121,7 @@ public class CambioAparato extends AppCompatActivity {
 
                     }
                 }
-        );
-
+                );
         tipoAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -144,14 +132,12 @@ public class CambioAparato extends AppCompatActivity {
                     request.getApaTipDis(getApplicationContext());
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
     }
-
     public static int obtenerPosicionAC(int abc){
             int position=0;
             Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();

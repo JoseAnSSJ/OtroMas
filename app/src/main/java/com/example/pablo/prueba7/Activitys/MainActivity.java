@@ -49,11 +49,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         validar_Permiso();
         if (onSaveInstanceState != null) {
             //Restore the fragment's instance
-
             Fragment mcontext = getSupportFragmentManager().getFragment(onSaveInstanceState, "asd");
-
         }
-
         setContentView(R.layout.activity_swipe);
         info= findViewById(R.id.info);
         layoutAnimado= findViewById(R.id.animado);
@@ -70,10 +67,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Contrato.setText(request.contraroMA);
         Status.setText(request.statusMA);
         NombreTec.setText(request.nombre_tecnico);
-
-
-//* Boton de informacion
-
+        //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,10 +88,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         });
 
         //* Swipe
-
-
-
-
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
 

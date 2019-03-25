@@ -36,35 +36,26 @@ public class asignacion extends AppCompatActivity {
     Array array = new Array();
     Request request = new Request();
 
-    public static Button siguiente, eliminar, aceptarAsignacion, eliminarAparato, cancelarAsigancion;
+    public static Button siguiente, aceptarAsignacion, eliminarAparato, cancelarAsigancion;
     public static Button aceptarmedio, cancelarmedio;
     public static ListView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
-
-
     int c, d, e;
     String f;
-
     children dataChild = new children();
-
     public static JSONArray jsonArray = new JSONArray();
     public static JSONArray jsonArray2 = new JSONArray();
     public static JSONArray jsonArray3 = new JSONArray();
     public static JSONObject jsonObject2 = new JSONObject();
     public static JSONObject jsonObject3 = new JSONObject();
     public static JSONObject jsonObject4 = new JSONObject();
-
     GetMuestraArbolServiciosAparatosPorinstalarListResult modelo = new GetMuestraArbolServiciosAparatosPorinstalarListResult();
-
     public static Arbol_Adapter adapter;
-
-
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignacion);
         siguiente = findViewById(R.id.siguiente);
-
         Asignacion = findViewById(R.id.Asignacion);
         eliminarAparato = findViewById(R.id.eliminarAparatos);
         aceptarmedio = findViewById(R.id.aceptarMedio);
@@ -73,12 +64,10 @@ public class asignacion extends AppCompatActivity {
         aceptarAsignacion = findViewById(R.id.aceptarAsignacion);
         layoutMedio = findViewById(R.id.poiuyt);
         cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
-
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         Asignacion.refreshDrawableState();
-
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,10 +85,7 @@ public class asignacion extends AppCompatActivity {
                 }
                 Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento = new Intent(asignacion.this, asignado.class);
-                startActivity(intento);
-
-
-            }
+                startActivity(intento); }
         });
         Asignacion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,7 +101,6 @@ public class asignacion extends AppCompatActivity {
                 }
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
-
                 for (int c = 0; c < dat.size(); c++) {
                     jsonObject3 = new JSONObject();
                     jsonArray3 = new JSONArray();
@@ -149,20 +134,12 @@ public class asignacion extends AppCompatActivity {
                         jsonArray2.put(c, jsonObject3);
                         Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
                         request.getAceptatAsignacino(getApplicationContext());
-                        //  adapter = new Arbol_Adapter(getApplicationContext());
-                        //   Asignacion.setAdapter(adapter);
-                        //    Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(asignacion.this, "Error", Toast.LENGTH_LONG);
                     }
                 }
-
-
-                //       Intent intento=new Intent(asignacion.this,MainActivity.class);
-                // startActivity(intento);
-
             }
         });
         eliminarAparato.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +147,6 @@ public class asignacion extends AppCompatActivity {
             public void onClick(View v) {
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
-
                 while (Arbol_Adapter.DeletChildren.isEmpty() == false) {
                     for (c = 0; c < dat.size(); c++) {
                         f = String.valueOf(c);
@@ -179,12 +155,9 @@ public class asignacion extends AppCompatActivity {
                             for (int d = 0; d < dat.get(c).children.size(); d++) {
                                 String abc = dat.get(c).children.get(d).getClv_Aparato() + f;
                                 try {
-
-
                                     if (Integer.parseInt(abc) == (Arbol_Adapter.DeletChildren.get(0))) {
                                         dat.get(c).children.remove(d);
                                         Arbol_Adapter.DeletChildren.remove(0);
-                                        //  e = e + 1;
                                     }
                                 } catch (Exception x) {
 
@@ -194,7 +167,6 @@ public class asignacion extends AppCompatActivity {
 
                     }
                 }
-                ////////////
                 for (c = 0; c < dat.size(); c++) {
                     f = String.valueOf(c);
                     e = 0;
@@ -213,11 +185,7 @@ public class asignacion extends AppCompatActivity {
                         }
                     }
                 }
-
-
-                //  adapter = new Arbol_Adapter(getApplicationContext());
                 Asignacion.setAdapter(adapter);
-                //  Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                 siguiente.setEnabled(false);
             }
         });
@@ -227,8 +195,6 @@ public class asignacion extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
 }
