@@ -169,14 +169,14 @@ public class Request extends AppCompatActivity {
                     Login.showProgress(false);
                     Toast.makeText(context, "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }
-                b = true;
+
 
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                Log.e( "onFailure: ",t.toString());
             }
         });
     }

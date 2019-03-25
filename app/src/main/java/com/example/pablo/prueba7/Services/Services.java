@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -92,8 +93,6 @@ public class Services {
     public static JSONObject jsonObject = new JSONObject();
     JSONObject jsonObject20 = new JSONObject();
     public static JSONArray jsonArrayap = new JSONArray();
-
-    public String abc = "Basic: " + Login.enco;
 
     /////////TOKEN///C////
     public Service getClientService(final Context context) {
