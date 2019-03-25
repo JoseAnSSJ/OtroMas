@@ -9,7 +9,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/disenio_recyclerview"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
@@ -26,8 +26,10 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center|left"
                     android:text="CAPAG - Cambio de tipo de aparato"
-                    android:textSize="@dimen/chico"
+                    android:textSize="@dimen/mediano"
                     android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -37,12 +39,12 @@
                 <TextView
                     android:id="@+id/tv_Accion"
                     android:layout_width="wrap_content"
-                    android:layout_height="18dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="160dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center|left"
                     android:text="TextView"
-                    android:textSize="@dimen/chico"
+                    android:textSize="@dimen/mediano"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Descripcion"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion"
@@ -52,7 +54,7 @@
                     android:id="@+id/check_recibi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Accion"
                     app:layout_constraintStart_toEndOf="@+id/click"
                     app:layout_constraintTop_toTopOf="@+id/tv_Accion" />

@@ -83,7 +83,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"
             android:background="@drawable/contorno"
             android:backgroundTint="@color/colorPrimary"
             android:visibility="gone"
