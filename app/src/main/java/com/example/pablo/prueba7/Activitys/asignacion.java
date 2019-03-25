@@ -183,8 +183,9 @@ public class asignacion extends AppCompatActivity {
                         }
                     }
                 }
+
                 Asignacion.setAdapter(adapter);
-                siguiente.setEnabled(false);
+
             }
         });
         cancelarAsigancion.setOnClickListener(new View.OnClickListener() {

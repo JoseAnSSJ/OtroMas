@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.example.pablo.prueba7.Activitys.asignacion.Asignacion;
+import static com.example.pablo.prueba7.Activitys.asignacion.aceptarAsignacion;
 import static com.example.pablo.prueba7.Activitys.asignacion.aceptarmedio;
 import static com.example.pablo.prueba7.Activitys.asignacion.layoutMedio;
 import static com.example.pablo.prueba7.Activitys.asignacion.siguiente;
@@ -81,10 +83,15 @@ public class Arbol_Adapter extends BaseAdapter {
         holder.medio=convertView.findViewById(R.id.medio);
         holder.checkBox=convertView.findViewById(R.id.chek);
         convertView.setTag(holder);
+        Log.d("ad","asd"+dat4.size());
+        /////////////////////
+        Validar(dat4);
+        //////////////Llenar nombres///////////////////////////
         a=0;
         if(dat4.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
             holder.checkBox.setVisibility(View.GONE);
+
         }else{
 
             holder.nombre.setText(dat4.get(position).getNombre()+" ("+dat4.get(position).getDetalle()+")");
@@ -137,19 +144,9 @@ public class Arbol_Adapter extends BaseAdapter {
                 });
             }
         }
-        int d=0;
-        f=0;
-        h=0;
-     for(int c=0; c<dat4.size(); c++){
-            if(dat4.get(c).Detalle!=""){
-                d=d+1;
-            }
-            if(d!=dat4.size()){
-
-            }else{
-                siguiente.setEnabled(true);
-            }
-     }
+        /////////////////////////////////////////////
+            Validar(dat4);
+        /////////////
      final int[] m = {1};
      holder.medio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,10 +181,10 @@ public class Arbol_Adapter extends BaseAdapter {
                     siguiente.setVisibility(View.VISIBLE);
                     layoutMedio.setVisibility(View.GONE);
                     Asignacion.setVisibility(View.VISIBLE);
-                    siguiente.setEnabled(true);
                     medio.setVisibility(View.GONE);
                     a=0;
                     Asignacion.setAdapter(Arbol_Adapter.this);
+                    Validar(dat4);
                 }
             }
         });
@@ -200,7 +197,6 @@ public class Arbol_Adapter extends BaseAdapter {
                 siguiente.setVisibility(View.VISIBLE);
                 layoutMedio.setVisibility(View.GONE);
                 Asignacion.setVisibility(View.VISIBLE);
-                siguiente.setEnabled(true);
             }
         });
         asignacion.spinnerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -243,4 +239,29 @@ public class Arbol_Adapter extends BaseAdapter {
 
         return convertView;
     }
+    public static void Validar(List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4){
+        int d=0;
+        for(int c=0; c<dat4.size(); c++){
+            if(dat4.get(c).Detalle==null||dat4.get(c).Detalle.equals("")){
+                d=d+1;
+            }
+            if(d>=1){
+                siguiente.setEnabled(false);
+            }else{
+                siguiente.setEnabled(true);
+            }
+        }
+        int g=0;
+        for(int f=0; f<dat4.size(); f++){
+            if(dat4.get(f).children.size()==0){
+                g=g+1;
+            }
+        }
+        if(g>=0){
+            aceptarAsignacion.setEnabled(false);
+        }else{
+            aceptarAsignacion.setEnabled(true);
+        }
+    }
+
 }

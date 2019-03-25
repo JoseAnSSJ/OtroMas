@@ -28,7 +28,7 @@ import java.util.List;
 
 public class asignado extends AppCompatActivity {
 
-    private Button escanear, agragar;
+    private Button escanear, agragar,cancelar;
     private TextView codigo;
     private String contents;
     public static ListView serviciosAparato;
@@ -47,8 +47,15 @@ public class asignado extends AppCompatActivity {
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
+        cancelar=findViewById(R.id.cancelarAsignacionAparato);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         spinnerAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
