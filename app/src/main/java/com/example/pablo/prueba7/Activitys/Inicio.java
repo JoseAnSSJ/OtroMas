@@ -69,12 +69,13 @@ public class Inicio extends AppCompatActivity
 
         if (SplashActivity.LoginShare==true) {
             request.getClv_tecnico(getApplicationContext());
-showProgress(true);
+           showProgress(true);
 
         }else{
             pieChart.setVisibility(View.VISIBLE);
             Grafica(pieChart);
         }
+
 
        // ---------
         barra = findViewById(R.id.nav_view);
@@ -99,7 +100,6 @@ showProgress(true);
         calleDireccion.setText(request.siguenteCalle);
         numeroDireccion.setText(request.sigueinteNumero);
         coloniaDireccion.setText(request.siguenteColonia);
-
     }
 
     @Override
@@ -124,7 +124,6 @@ showProgress(true);
                                 finish();
                             }
                         }).show();
-
     }
 
     @Override
@@ -145,10 +144,9 @@ showProgress(true);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
             request.getProximaCita(getApplicationContext());
-                request.getOrdenes(getApplicationContext());
-
-
+            request.getOrdenes(getApplicationContext());
             finish();
+
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
             clvorden=0;

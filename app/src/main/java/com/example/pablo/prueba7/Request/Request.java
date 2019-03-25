@@ -114,6 +114,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.pablo.prueba7.Activitys.Login.contraseña;
+import static com.example.pablo.prueba7.Activitys.Login.entrar;
+import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
@@ -168,6 +171,9 @@ public class Request extends AppCompatActivity {
                 }else{
                     Login.showProgress(false);
                     Toast.makeText(context, "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                    usurio.setEnabled(true);
+                    contraseña.setEnabled(true);
+                    entrar.setEnabled(true);
                 }
                 b = true;
 
@@ -219,10 +225,13 @@ public class Request extends AppCompatActivity {
                 }else{
                     try{
                         Login.showProgress(false);
+
                     }catch (Exception e){
                         Inicio.showProgress(false);
                     }
-
+                    usurio.setEnabled(true);
+                    contraseña.setEnabled(true);
+                    entrar.setEnabled(true);
                     Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
 
@@ -276,6 +285,9 @@ public class Request extends AppCompatActivity {
                     }catch (Exception e){
                         Inicio.showProgress(false);
                     }
+                    usurio.setEnabled(true);
+                    contraseña.setEnabled(true);
+                    entrar.setEnabled(true);
                     Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
                 }
 
@@ -365,6 +377,9 @@ public class Request extends AppCompatActivity {
                     }catch (Exception e){
                         Inicio.showProgress(false);
                     }
+                    usurio.setEnabled(true);
+                    contraseña.setEnabled(true);
+                    entrar.setEnabled(true);
                     Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
                 }
 
@@ -567,6 +582,9 @@ public class Request extends AppCompatActivity {
                         Inicio.showProgress(false);
                     }
                     Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
+                    usurio.setEnabled(true);
+                    contraseña.setEnabled(true);
+                    entrar.setEnabled(true);
                 }
 
 

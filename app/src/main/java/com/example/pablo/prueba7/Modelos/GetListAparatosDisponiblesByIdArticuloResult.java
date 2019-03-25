@@ -21,4 +21,5 @@ public class GetListAparatosDisponiblesByIdArticuloResult {
   public void setDescripcion(String descripcion) {
     Descripcion = descripcion;
   }
+
 }

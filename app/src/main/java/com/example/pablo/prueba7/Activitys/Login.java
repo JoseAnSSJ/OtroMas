@@ -36,8 +36,8 @@ public class Login extends AppCompatActivity {
      *Login
      */
 
-    private EditText usurio, contraseña;
-    private Button entrar, entrar2;
+    public static EditText usurio, contraseña;
+    public static Button entrar, entrar2;
     private String user;
     public static String enco,cvl_usuario;
     public static ProgressBar progressBar;
@@ -69,11 +69,8 @@ public class Login extends AppCompatActivity {
                 createNotificationChannel();
                 createNotification();
             }
-        });
+});
         */
-
-
-
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,16 +88,18 @@ if(!isOnline()){
     user = usurio.getText().toString() + ":" + contraseña.getText().toString();
     enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
     guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
-
     request.getReviews(getApplicationContext());
+    /////////////
     showProgress(true);
+    usurio.setEnabled(false);
+    contraseña.setEnabled(false);
+    entrar.setEnabled(false);
+    /////////////
     Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
 }
 
     }
 }
-
-
             }
         });
 
