@@ -123,6 +123,7 @@ import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
+import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
@@ -1627,6 +1628,7 @@ BarraCargar barraCargar = new BarraCargar();
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
                         getChecaCAMDO(context);
                     } else {
+                        dialogEjecutar.dismiss();
                         EjecutarFragment.eject.setEnabled(true);
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
                     }
@@ -1659,6 +1661,8 @@ BarraCargar barraCargar = new BarraCargar();
                     if (checa.Error.equals("0")) {
                         getAddRelOrdUsu(context);
                     } else {
+                        dialogEjecutar.dismiss();
+                        EjecutarFragment.eject.setEnabled(true);
                         Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -1684,6 +1688,10 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getDeepMODORDSER(context);
+                }else{
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    dialogEjecutar.dismiss();
+                    EjecutarFragment.eject.setEnabled(true);
                 }
             }
 
@@ -1706,6 +1714,10 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaHora(context);
+                }else{
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    dialogEjecutar.dismiss();
+                    EjecutarFragment.eject.setEnabled(true);
                 }
             }
 
@@ -1728,6 +1740,10 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaOrdSerAparatos(context);
+                }else{
+                    dialogEjecutar.dismiss();
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    EjecutarFragment.eject.setEnabled(true);
                 }
             }
 
@@ -1751,6 +1767,10 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
+                }else{
+                    dialogEjecutar.dismiss();
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    EjecutarFragment.eject.setEnabled(true);
                 }
             }
 
@@ -1785,12 +1805,17 @@ BarraCargar barraCargar = new BarraCargar();
                         if (IS == 1) {
                             GuardaCoordenadas(context);
                         } else {
+                            dialogEjecutar.dismiss();
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intent);
                         }
 
                     }
+                }else{
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    EjecutarFragment.eject.setEnabled(true);
+                    dialogEjecutar.dismiss();
                 }
             }
 
@@ -1903,6 +1928,10 @@ BarraCargar barraCargar = new BarraCargar();
 
                 if (response1.code() == 200) {
                     ConsultaIp(context);
+                }else{
+                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    dialogEjecutar.dismiss();
+                    EjecutarFragment.eject.setEnabled(true);
                 }
             }
 
@@ -1940,6 +1969,7 @@ BarraCargar barraCargar = new BarraCargar();
                         } else {
                             if (msgComando.length() > 3) {
                                 msgEjecutarOrd.setText(msgComando);
+                                dialogEjecutar.dismiss();
                                 Login.esperar(5);
                                 ((Activity) context).finish();
                             } else {
