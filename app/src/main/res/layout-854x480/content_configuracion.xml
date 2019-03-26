@@ -36,7 +36,7 @@
         android:id="@+id/nombreTecnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:text="---"
         android:textSize="@dimen/mediano"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
@@ -53,7 +53,7 @@
         android:text="@string/nombre"
         android:textSize="@dimen/mediano"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
