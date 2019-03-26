@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.sampledata;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     public static boolean LoginShare=false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent intentinicio = new Intent(this, Inicio.class);
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
+
             startActivity(intentinicio);
         } else {
             startActivity(intentLogin);

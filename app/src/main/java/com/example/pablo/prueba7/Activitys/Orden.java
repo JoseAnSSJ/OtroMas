@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     private ordenes_adapter_result adapterord;
     private Button ordenb,contratob;
     public static   ListView ordenes;
+    public static ProgressBar progressBarOrdenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
@@ -55,9 +57,16 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         clvorden=0;
         opcion=1;
         cont="";
+        progressBarOrdenes = findViewById(R.id.barlogodenes);
+        ////////////////
+
+        //////////////////
         adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
         ordenes.refreshDrawableState();
+        //if(ordenes.getAdapter()!=null){
+        //    progressBarOrdenes.setVisibility(View.INVISIBLE);
+       // }
         //Busqueda de orden////
         ordenb.setOnClickListener(new View.OnClickListener() {
             @Override

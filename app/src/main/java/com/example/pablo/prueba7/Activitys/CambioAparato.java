@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -18,6 +19,7 @@ import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +33,7 @@ public class CambioAparato extends AppCompatActivity {
     ConstraintLayout aa;
     private Array array = new Array();
     private Button aceptarCambioAparato, Finish;
+    public static ProgressDialog dialogCAPAT;
 
     @Override
     protected void onCreate(@Nullable final Bundle onSaveInstanceState) {
@@ -43,6 +46,8 @@ public class CambioAparato extends AppCompatActivity {
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
         aa=findViewById(R.id.aa);
         Finish= findViewById(R.id.dos);
+        dialogCAPAT= new BarraCargar().showDialog(this,"Cambio");
+
         request.getDeepCAPAT(getApplicationContext());
         if(trabajos_adapter_result.ftth==0){
             aa.setVisibility(View.VISIBLE);
@@ -60,7 +65,7 @@ public class CambioAparato extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 request.SetCambioAparato(getApplicationContext());
-                Login.esperar(1);
+                dialogCAPAT.show();
                     finish();
             }
         });

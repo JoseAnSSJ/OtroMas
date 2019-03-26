@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Activitys;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
 
@@ -34,7 +36,8 @@ public class Login extends AppCompatActivity {
     public final static String CHANNEL_ID = "NOTIFICACION";
     public final static int NOTIFICACION_ID = 0;
     public static TextView clave;
-
+    public static ProgressDialog dialogLogin;
+BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class Login extends AppCompatActivity {
         entrar = (Button)findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.barlog);
         setTitle(null);
+        dialogLogin= new BarraCargar().showDialog(this,"login");
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +65,8 @@ if(!isOnline()){
     guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
     request.getReviews(getApplicationContext());
     /////////////
-    showProgress(true);
+
+dialogLogin.show();
     usurio.setEnabled(false);
     contraseña.setEnabled(false);
     entrar.setEnabled(false);

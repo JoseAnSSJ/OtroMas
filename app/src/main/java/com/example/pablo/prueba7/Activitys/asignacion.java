@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -23,6 +24,7 @@ import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinst
 import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +45,7 @@ public class asignacion extends AppCompatActivity {
     public static ConstraintLayout layoutMedio;
     int c, e;
     String f;
+    public static ProgressDialog dialogAsignacion;
     public static JSONArray jsonArray = new JSONArray();
     public static JSONArray jsonArray2 = new JSONArray();
     public static JSONArray jsonArray3 = new JSONArray();
@@ -62,10 +65,15 @@ public class asignacion extends AppCompatActivity {
         aceptarAsignacion = findViewById(R.id.aceptarAsignacion);
         layoutMedio = findViewById(R.id.poiuyt);
         cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
+        dialogAsignacion= new BarraCargar().showDialog(this,"asignacion");
+        dialogAsignacion.show();
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         Asignacion.refreshDrawableState();
+        if(Asignacion.getAdapter()!=null){
+            dialogAsignacion.dismiss();
+        }
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,6 +16,8 @@ import com.example.pablo.prueba7.Request.Request;
 
 import java.util.ArrayList;
 
+import static com.example.pablo.prueba7.Activitys.Orden.progressBarOrdenes;
+
 public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     public static Integer clvor;
@@ -81,6 +83,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
         else {
             holder=(viewHolder)convertView.getTag();
         }
+        progressBarOrdenes.setVisibility(View.VISIBLE);
         holder.nombre.setText(Array.nombresrc.get(position));
         holder.orden.setText(Array.ordensrc.get(position));
         holder.contrato1.setText(Array.contratosrc.get(position));
@@ -93,7 +96,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
                 request.getDeepCons(mContext);
             }
         });
-
+        progressBarOrdenes.setVisibility(View.INVISIBLE);
         return convertView;
     }
 }

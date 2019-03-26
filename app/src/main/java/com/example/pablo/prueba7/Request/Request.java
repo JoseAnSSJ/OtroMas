@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,7 +21,6 @@ import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
-
 
 
 import com.example.pablo.prueba7.Activitys.Inicio;
@@ -100,7 +100,9 @@ import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
 import com.example.pablo.prueba7.Activitys.asignacion;
 import com.example.pablo.prueba7.Activitys.asignado;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Service;
+import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
 import com.google.gson.JsonObject;
 
@@ -115,9 +117,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
 import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
@@ -141,18 +145,52 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando,contraroMA,obsMA,statusMA,extencionesE,Obs,nombre_tecnico,clave_tecnico,msgComando="",sigueinteTipo,siguenteContrato,sigueinteHora,siguenteCalle,sigueinteNumero,siguenteColonia;
-    public static boolean cambioA, isnet;
+    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
+    public static boolean isnet;
     public static Long abc;
-    public static int clvP,tecC,nExtenciones=0;
+    public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
-    public  static ArrayAdapter adapterTecSec,adapterTecSecR;
-    public static boolean pieza=false,rapagejecutar=false,extencionesMat=false;
-    public static String ciudadcmdo,localidadcmdo,coloniacmdo,callecmdo,numerocmdo,numeroicmdo,telefonocmdo,callencmdo,callescmdo,calleecmdo,calleocmdo,casacmdo;
+    public static ArrayAdapter adapterTecSec, adapterTecSecR;
+    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
+    public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
     public static String datos[];
+    String Text="Request";
+BarraCargar barraCargar = new BarraCargar();
+
+    public void ErrorInicioDeSesion(final Context context) {
+
+
+        try {
+            Login.dialogLogin.dismiss();
+            usurio.setEnabled(true);
+            contraseña.setEnabled(true);
+            entrar.setEnabled(true);
+        } catch (Exception e) {
+            Inicio.dialogInicio.dismiss();
+            Login.esperar(3);
+            ((Activity) context).finish();
+        }
+
+    }
+
+    public void ErrorCargarDatos(final Context context) {
+
+        try {
+            Login.dialogLogin= new BarraCargar().showDialog(context,Text);
+            Login.dialogLogin.dismiss();
+            usurio.setEnabled(true);
+            contraseña.setEnabled(true);
+            entrar.setEnabled(true);
+        } catch (Exception e) {
+            Inicio.dialogInicio= new BarraCargar().showDialog(context,Text);
+            Inicio.dialogInicio.dismiss();
+            Login.esperar(3);
+            ((Activity) context).finish();
+        }
+    }
 
     //Token///
     public void getReviews(final Context context) {
@@ -174,27 +212,32 @@ public class Request extends AppCompatActivity {
                             userJson.get("Codigo").getAsString(),
                             userJson.get("IdUsuario").getAsInt()
                     );
-                    Util.editor.putString("token",user.getCodigo());
+                    Util.editor.putString("token", user.getCodigo());
                     Util.editor.commit();
                     getClv_tecnico(context);
-                }else{
-                    Login.showProgress(false);
-                    Toast.makeText(context, "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                } else {
+                    Login.dialogLogin.dismiss();
+                    Toast.makeText(context, "Error al iniciar sesion", Toast.LENGTH_LONG).show();
                     usurio.setEnabled(true);
                     contraseña.setEnabled(true);
                     entrar.setEnabled(true);
                 }
 
 
-
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.e( "onFailure: ",t.toString());
+                Login.dialogLogin.dismiss();
+                Toast.makeText(context, "Error al iniciar sesion", Toast.LENGTH_LONG).show();
+                usurio.setEnabled(true);
+                contraseña.setEnabled(true);
+                entrar.setEnabled(true);
             }
         });
     }
- //Clave Tecnico//
+
+    //Clave Tecnico//
     public void getClv_tecnico(final Context context) {
         Service service = null;
         try {
@@ -207,7 +250,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
-                if(response.code()==200){
+                if (response.code() == 200) {
                     Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                     Util.editor = Util.preferences.edit();
                     JSONResponseTecnico jsonResponse = response.body();
@@ -221,31 +264,25 @@ public class Request extends AppCompatActivity {
                         clave_tecnico = data.get(0).clv_tecnico;
                         nombre_tecnico = data.get(0).tecnico;
                         services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
-                        Util.editor.putString("nombre_Tecnico",data.get(0).getNombre_tec());
+                        Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                         Util.editor.commit();
                     }
                     getProximaCita(context);
-                }else{
-                    try{
-                        Login.showProgress(false);
+                } else {
+                    ErrorCargarDatos(context);
 
-                    }catch (Exception e){
-                        Inicio.showProgress(false);
-                        Login.esperar(3);
-                        ((Activity)context).finish();
-                    }
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
                     Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
+                ErrorInicioDeSesion(context);
             }
         });
     }
-//Proxima Cita//
+
+    //Proxima Cita//
     public void getProximaCita(final Context context) {
         Service service = null;
         try {
@@ -257,8 +294,8 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
-                    try{
+                if (response.code() == 200) {
+                    try {
                         JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
                         ProximaCitaModel user = new ProximaCitaModel(
                                 userJson.get("Calle").getAsString(),
@@ -269,36 +306,31 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NUMERO").getAsString(),
                                 userJson.get("Tipo").getAsString()
                         );
-                        sigueinteTipo= user.Tipo;
+                        sigueinteTipo = user.Tipo;
                         siguenteContrato = user.Contrato;
-                        sigueinteHora= user.Hora;
+                        sigueinteHora = user.Hora;
                         siguenteCalle = user.Calle;
-                        sigueinteNumero= user.NUMERO;
-                        siguenteColonia =user.Colonia;
-                    }catch (Exception e){
+                        sigueinteNumero = user.NUMERO;
+                        siguenteColonia = user.Colonia;
+                    } catch (Exception e) {
                     }
                     getOrdenes(context);
 
-                }else{
-                    try{
-                        Login.showProgress(false);
-                    }catch (Exception e){
-                        Inicio.showProgress(false);
-                        Login.esperar(3);
-                        ((Activity)context).finish();
-                    }
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
+                } else {
+                    ErrorCargarDatos(context);
+
                     Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorInicioDeSesion(context);
             }
         });
     }
-//Status,Observaciones, ORDENES//
+
+    //ORDENES//
     public void getOrdenes(final Context context) {
         Service service = null;
         try {
@@ -310,7 +342,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     Example jsonResponse = response.body();
                     try {
                         array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
@@ -365,111 +397,21 @@ public class Request extends AppCompatActivity {
                         Inicio.OO = 0;
                     }
                     getQuejas(context);
-                }else{
-                    try{
-                        Login.showProgress(false);
-                    }catch (Exception e){
-                        Inicio.showProgress(false);
-                        Login.esperar(3);
-                        ((Activity)context).finish();
-                    }
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
+                } else {
+                    ErrorCargarDatos(context);
+
                     Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
+                ErrorInicioDeSesion(context);
             }
         });
     }
-//Lista de ordenes///
-    public void getListQuejas(final Context context) {
-        Service service = null;
-        try {
-            service = services.getListQuejasService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<QuejasList> call = service.getQuejasAgendadas();
-        call.enqueue(new Callback<QuejasList>() {
-            @Override
-            public void onResponse(Call<QuejasList> call, Response<QuejasList> response) {
-                if(response.code()==200){
-                    QuejasList jsonResponse = response.body();
-                    array.dataquejas = new ArrayList<List<ListadoQuejasAgendadas>>(asList(jsonResponse.GetDameListadoQuejasAgendadasResult()));
-                    Iterator<List<ListadoQuejasAgendadas>> itData = array.dataquejas.iterator();
-                    while (itData.hasNext()) {
-                        List<ListadoQuejasAgendadas> dat = (List<ListadoQuejasAgendadas>) itData.next();
-                        Array.Queja.clear();
-                        Array.nombreQ.clear();
-                        Array.statusQ.clear();
-                        Array.contratoQ.clear();
-                        Array.Direccion.clear();
-                        for (int i = 0; i < dat.size(); i++) {
-                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
-                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.Direccion.add(String.valueOf(dat.get(i).getColonia()+", "+dat.get(i).getCalle()+", "+dat.get(i).getNUMERO()));
-                        }
-                    }
-                }else{
-                    try{
-                        Login.showProgress(false);
-                    }catch (Exception e){
-                        Inicio.showProgress(false);
-                        Login.esperar(3);
-                        ((Activity)context).finish();
-                    }
-                    Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<QuejasList> call, Throwable t) {
-            }
-        });
-    }
-    public void getListOrd(final Context context) {
-        Service service = null;
-        try {
-            service = services.getListOrdService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example1> call = service.getDataListOrd();
-        call.enqueue(new Callback<Example1>() {
-            @Override
-            public void onResponse(Call<Example1> call, Response<Example1> response) {
-                if(response.code()==200){
-                    Example1 jsonResponse = response.body();
-                    array.dataagenda = new ArrayList<List<GetDameListadoOrdenesAgendadasResult>>(asList(jsonResponse.getGetDameListadoOrdenesAgendadasResult()));
-                    Iterator<List<GetDameListadoOrdenesAgendadasResult>> itData = array.dataagenda.iterator();
-                    while (itData.hasNext()) {
-                        List<GetDameListadoOrdenesAgendadasResult> dat = (List<GetDameListadoOrdenesAgendadasResult>) itData.next();
-                        Array.ordensrc.clear();
-                        Array.nombresrc.clear();
-                        Array.statusrc.clear();
-                        Array.contratosrc.clear();
-                        for (int i = 0; i < dat.size(); i++) {
-                            Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
-                            Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
-                            Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
-                            Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String .valueOf(dat.get(i).getColonia()+", "+dat.get(i).getCalle()+", "+dat.get(i).getNumero()));
-                        }
-                    }
-                }else{
-                    Toast.makeText(context, "Error al conseguir lista de ordenes", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<Example1> call, Throwable t) {
-            }
-        });
-    }
-//Quejas//
+
+    //Quejas//
     public void getQuejas(final Context context) {
         Service service = null;
         try {
@@ -482,7 +424,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     Example jsonResponse = response.body();
                     array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
                     Iterator<List<Queja>> itData = array.dataque.iterator();
@@ -529,14 +471,8 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-                    try{
-                        Login.showProgress(false);
-                        Intent intento = new Intent(context, Inicio.class);
-                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivity(intento);
-                    }catch (Exception e){
+                    if(SplashActivity.LoginShare==true) {
                         Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                        Inicio.showProgress(false);
                         Inicio.pieChart.setVisibility(View.VISIBLE);
                         Inicio.Grafica(Inicio.pieChart);
                         Inicio.tipoTrabajo.setText(sigueinteTipo);
@@ -545,27 +481,112 @@ public class Request extends AppCompatActivity {
                         Inicio.calleDireccion.setText(siguenteCalle);
                         Inicio.numeroDireccion.setText(sigueinteNumero);
                         Inicio.coloniaDireccion.setText(siguenteColonia);
+                        Inicio.dialogInicio.dismiss();
+                    }else {
+                        Intent intento = new Intent(context, Inicio.class);
+                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intento);
+                        Login.dialogLogin.dismiss();
                     }
-                }else{
-                    try{
-                        Login.showProgress(false);
-                    }catch (Exception e){
-                        Inicio.showProgress(false);
-                        Login.esperar(3);
-                        ((Activity)context).finish();
-                    }
+                } else {
+                    ErrorCargarDatos(context);
                     Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
+
                 }
             }
+
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
+                ErrorInicioDeSesion(context);
+
             }
         });
     }
-//Consuta pantalla ordenes//
+
+    //Lista de ordenes///
+    public void getListQuejas(final Context context) {
+        Service service = null;
+        try {
+            service = services.getListQuejasService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<QuejasList> call = service.getQuejasAgendadas();
+        call.enqueue(new Callback<QuejasList>() {
+            @Override
+            public void onResponse(Call<QuejasList> call, Response<QuejasList> response) {
+                if (response.code() == 200) {
+                    QuejasList jsonResponse = response.body();
+                    array.dataquejas = new ArrayList<List<ListadoQuejasAgendadas>>(asList(jsonResponse.GetDameListadoQuejasAgendadasResult()));
+                    Iterator<List<ListadoQuejasAgendadas>> itData = array.dataquejas.iterator();
+                    while (itData.hasNext()) {
+                        List<ListadoQuejasAgendadas> dat = (List<ListadoQuejasAgendadas>) itData.next();
+                        Array.Queja.clear();
+                        Array.nombreQ.clear();
+                        Array.statusQ.clear();
+                        Array.contratoQ.clear();
+                        Array.Direccion.clear();
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
+                            Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
+                            Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.Direccion.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO()));
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuejasList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getListOrd(final Context context) {
+        Service service = null;
+        try {
+            service = services.getListOrdService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<Example1> call = service.getDataListOrd();
+        call.enqueue(new Callback<Example1>() {
+            @Override
+            public void onResponse(Call<Example1> call, Response<Example1> response) {
+                if (response.code() == 200) {
+                    Example1 jsonResponse = response.body();
+                    array.dataagenda = new ArrayList<List<GetDameListadoOrdenesAgendadasResult>>(asList(jsonResponse.getGetDameListadoOrdenesAgendadasResult()));
+                    Iterator<List<GetDameListadoOrdenesAgendadasResult>> itData = array.dataagenda.iterator();
+                    while (itData.hasNext()) {
+                        List<GetDameListadoOrdenesAgendadasResult> dat = (List<GetDameListadoOrdenesAgendadasResult>) itData.next();
+                        Array.ordensrc.clear();
+                        Array.nombresrc.clear();
+                        Array.statusrc.clear();
+                        Array.contratosrc.clear();
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
+                            Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
+                            Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.direccionsrc.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNumero()));
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, "Error al conseguir lista de ordenes", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Example1> call, Throwable t) {
+            }
+        });
+    }
+
+    //Consuta pantalla ordenes//
     public void getDeepCons(final Context context) {
         Service service = null;
         try {
@@ -577,7 +598,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("GetDeepConsultaOrdSerResult");
                     try {
                         DeepConsModel user = new DeepConsModel(
@@ -590,7 +611,7 @@ public class Request extends AppCompatActivity {
                                 userJson.get("Clv_TipSer").getAsInt(),
                                 userJson.get("Fec_Sol").getAsString()
                         );
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         DeepConsModel user = new DeepConsModel(
                                 userJson.get("Clv_FACTURA").getAsInt(),
                                 userJson.get("Contrato").getAsInt(),
@@ -604,38 +625,40 @@ public class Request extends AppCompatActivity {
                     }
                     getTrabajos(context);
                     try {
-                        contraroMA=(String.valueOf(DeepConsModel.getContatoCom()));
+                        contraroMA = (String.valueOf(DeepConsModel.getContatoCom()));
                     } catch (Exception e) {
 
                     }
                     try {
-                        obsMA=(String.valueOf(DeepConsModel.Obs));
+                        obsMA = (String.valueOf(DeepConsModel.Obs));
                     } catch (Exception e) {
 
                     }
                     try {
                         if (DeepConsModel.STATUS.equals("E")) {
-                            statusMA=("Ejecutada");
+                            statusMA = ("Ejecutada");
 
                         } else if (DeepConsModel.STATUS.equals("P")) {
-                            statusMA=("Pendiente");
+                            statusMA = ("Pendiente");
 
                         } else if (DeepConsModel.STATUS.equals("V")) {
-                            statusMA=("En Visita");
+                            statusMA = ("En Visita");
                         }
                     } catch (Exception e) {
 
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir datos de la orden", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
- //Informacion del Cliente//
+
+    //Informacion del Cliente//
     public void getInfoCliente(final Context context) {
         Service service = null;
         try {
@@ -647,8 +670,8 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200) {
-                    try{
+                if (response.code() == 200) {
+                    try {
                         JsonObject userJson = response.body().getAsJsonObject("GetDeepBUSCLIPORCONTRATO_OrdSerResult");
                         InfoClienteModelo user = new InfoClienteModelo(
                                 userJson.get("CALLE").getAsString(),
@@ -658,21 +681,22 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NOMBRE").getAsString(),
                                 userJson.get("NUMERO").getAsString()
                         );
-                    }catch (Exception e){
+                    } catch (Exception e) {
                     }
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
-                }
-                else{
+                } else {
                     Toast.makeText(context, "Error al conseguir informacion del cliente", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
- //ServiciosdelCliente//
+
+    //ServiciosdelCliente//
     public void getServicios(final Context context) {
         Service service = null;
         try {
@@ -684,7 +708,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<Example2>() {
             @Override
             public void onResponse(Call<Example2> call, Response<Example2> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     ArrayList<String> resumen = new ArrayList<>();
                     Example2 jsonResponse = response.body();
                     array.dataclientes = new ArrayList<List<GetdameSerDELCliresumenResult>>(asList(jsonResponse.getdameSerDELCliresumenResult()));
@@ -699,16 +723,18 @@ public class Request extends AppCompatActivity {
                         MainActivity.InfoServicios.setText(resumen.toString());
 
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir servicios del cliente", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<Example2> call, Throwable t) {
             }
         });
     }
-//informacion trabajos//
+
+    //informacion trabajos//
     public void getTrabajos(final Context context) {
         Service service = null;
         try {
@@ -720,13 +746,13 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<Example3>() {
             @Override
             public void onResponse(Call<Example3> call, Response<Example3> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     Array.trabajox.clear();
                     Array.accionx.clear();
                     Array.clavex.clear();
                     Array.clv_trabajox.clear();
                     Array.recibix.clear();
-                    isnet =false;
+                    isnet = false;
                     Example3 jsonResponse = response.body();
                     array.dataTrabajos = new ArrayList<List<GetBUSCADetOrdSerListResult>>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));
                     Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
@@ -741,34 +767,36 @@ public class Request extends AppCompatActivity {
                             Array.clavex.add(dat.get(i).getClave());
                             Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                             Array.recibix.add(dat.get(i).getSeRealiza());
-                            if(dat.get(i).getClvTrabajo()==1270){
-                                isnet=true;
+                            if (dat.get(i).getClvTrabajo() == 1270) {
+                                isnet = true;
                             }
-                            if(dat.get(i).getClvTrabajo()==1203){
-                                rapagejecutar=true;
+                            if (dat.get(i).getClvTrabajo() == 1203) {
+                                rapagejecutar = true;
                             }
                         }
                         Intent intento1 = new Intent(context, MainActivity.class);
                         context.startActivity(intento1);
-                        try{
+                        try {
                             trabajos.setAdapter(adaptertrabajos);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir trabajos", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<Example3> call, Throwable t) {
             }
         });
     }
-//TecnicoSecundario////
-    public void getTecSec(final Context context){
+
+    //TecnicoSecundario////
+    public void getTecSec(final Context context) {
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
-        Array.clv_tecnicoSecundario.add(0,-1);
+        Array.clv_tecnicoSecundario.add(0, -1);
 
         Service service = null;
         try {
@@ -802,15 +830,17 @@ public class Request extends AppCompatActivity {
 
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir lista de tecnicos secundarios", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONTecSec> call, Throwable t) {
             }
         });
     }
+
     public void getExtencionesAdicionales(final Context context) {
         Service service = null;
         try {
@@ -822,21 +852,24 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
-                    extencionesE=string;
+                    extencionesE = string;
                     Intent intento = new Intent(context, ExtensionesAdi.class);
                     context.startActivity(intento);
-                }else{
+                    dialogTrabajos.dismiss();
+                } else {
                     Toast.makeText(context, "Error al conseguir extenciones adicionales", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
-//ClientesAparato//
+
+    //ClientesAparato//
     public void getCliApa(final Context context) {
         Service service = null;
         try {
@@ -848,7 +881,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONCLIAPA>() {
             @Override
             public void onResponse(Call<JSONCLIAPA> call, Response<JSONCLIAPA> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JSONCLIAPA jsonResponse = response.body();
                     array.dataCliApa = new ArrayList<List<GetListClienteAparatosResult>>(asList(jsonResponse.GetListClienteAparatosResult()));
                     Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
@@ -867,26 +900,28 @@ public class Request extends AppCompatActivity {
                             CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
                             getStatusApa(context);
                         } catch (Exception e) {
-
+                            dialogTrabajos.dismiss();
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir aparatos del cliente", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONCLIAPA> call, Throwable t) {
             }
         });
     }
-//Status Aparato////
+
+    //Status Aparato////
     public void getStatusApa(final Context context) {
         Service service = services.getStatusApa(context);
         Call<JSONStatusApa> call = service.getDataStatusApa();
         call.enqueue(new Callback<JSONStatusApa>() {
             @Override
             public void onResponse(Call<JSONStatusApa> call, Response<JSONStatusApa> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     JSONStatusApa jsonResponse = response.body();
                     array.dataStaApa = new ArrayList<List<GetSP_StatusAparatosListResult>>(asList(jsonResponse.GetSP_StatusAparatosListResult()));
                     Iterator<List<GetSP_StatusAparatosListResult>> itdata = array.dataStaApa.iterator();
@@ -908,16 +943,18 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir estatus del aparato", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONStatusApa> call, Throwable t) {
             }
         });
     }
-//TipoAparato////
+
+    //TipoAparato////
     public void getApaTipo(final Context context) {
         Service service = null;
         try {
@@ -929,14 +966,14 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONApaTipo>() {
             @Override
             public void onResponse(Call<JSONApaTipo> call, Response<JSONApaTipo> response) {
-                if(response.code()==200) {
-                    try{
+                if (response.code() == 200) {
+                    try {
                         Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
                         List<GetListClienteAparatosResult> dat1 = itdata1.next();
                         CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
                         CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                     JSONApaTipo jsonResponse = response.body();
@@ -953,7 +990,7 @@ public class Request extends AppCompatActivity {
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.tipoAparato.setAdapter(adapter);
-                        try{
+                        try {
                             Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat1 = itdata1.next();
                             CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
@@ -961,21 +998,23 @@ public class Request extends AppCompatActivity {
                             CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
 
                             getApaTipDis(context);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir tipo de aparato", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONApaTipo> call, Throwable t) {
 
             }
         });
     }
-//AparatoDisponible////
+
+    //AparatoDisponible////
     public void getApaTipDis(final Context context) {
 
         Service service = null;
@@ -988,12 +1027,12 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONApaTipDis>() {
             @Override
             public void onResponse(Call<JSONApaTipDis> call, Response<JSONApaTipDis> response) {
-                if(response.code()==200) {
-                    try{
+                if (response.code() == 200) {
+                    try {
                         Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
                         List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
                         CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                     }
                     JSONApaTipDis jsonResponse = response.body();
                     array.dataApaTipDis = new ArrayList<List<GetListAparatosDisponiblesByIdArticuloResult>>(asList(jsonResponse.GetListAparatosDisponiblesByIdArticuloResult()));
@@ -1009,20 +1048,23 @@ public class Request extends AppCompatActivity {
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.aparatoAsignar.setAdapter(adapter);
-                        try{
+                        try {
                             CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
-                        }catch (Exception e){
+                            dialogTrabajos.dismiss();
+                        } catch (Exception e) {
                         }
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONApaTipDis> call, Throwable t) {
             }
         });
     }
+
     public void getDeepCAPAT(final Context context) {
         Services restApiAdapter = new Services();
         Service service = restApiAdapter.getDeepCAPATService(context);
@@ -1031,7 +1073,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     CambioAparatoDeepModel.StatusEntrega = "";
                     JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
                     try {
@@ -1042,19 +1084,22 @@ public class Request extends AppCompatActivity {
                                 userJson.get("StatusEntrega").getAsString()
                         );
                         getCliApa(context);
+
                     } catch (Exception e) {
                         getCliApa(context);
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir datos de cambio de aparato", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void getCAMDO(final Context context) {
         Service service = null;
         try {
@@ -1067,56 +1112,61 @@ public class Request extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
-                if(response.code()==200){
-                    Log.d("asd","asd");
-                    try{
+                if (response.code() == 200) {
+                    Log.d("asd", "asd");
+                    try {
                         JSONCAMDO jsonResponse = response.body();
                         array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
                         Iterator<List<GetDameDatosCAMDOResult>> itdata = array.dataCAMDO.iterator();
                         while (itdata.hasNext()) {
                             List<GetDameDatosCAMDOResult> dat = itdata.next();
                             String datos[] = new String[dat.size()];
-                            ciudadcmdo=dat.get(0).Ciudad;
-                            localidadcmdo=dat.get(0).localidad;
-                            coloniacmdo=dat.get(0).colonia;
-                            callecmdo=dat.get(0).calle;
-                            numerocmdo= String.valueOf(dat.get(0).NUMERO);
-                            numeroicmdo=dat.get(0).Num_int;
-                            telefonocmdo=dat.get(0).TELEFONO;
-                            callencmdo=dat.get(0).calleNorte;
-                            callescmdo=dat.get(0).calleSur;
-                            calleecmdo=dat.get(0).calleEste;
-                            calleocmdo=dat.get(0).calleOeste;
-                            casacmdo=dat.get(0).Casa;
+                            ciudadcmdo = dat.get(0).Ciudad;
+                            localidadcmdo = dat.get(0).localidad;
+                            coloniacmdo = dat.get(0).colonia;
+                            callecmdo = dat.get(0).calle;
+                            numerocmdo = String.valueOf(dat.get(0).NUMERO);
+                            numeroicmdo = dat.get(0).Num_int;
+                            telefonocmdo = dat.get(0).TELEFONO;
+                            callencmdo = dat.get(0).calleNorte;
+                            callescmdo = dat.get(0).calleSur;
+                            calleecmdo = dat.get(0).calleEste;
+                            calleocmdo = dat.get(0).calleOeste;
+                            casacmdo = dat.get(0).Casa;
                             Intent intento = new Intent(context, CambioDom.class);
                             context.startActivity(intento);
+                            dialogTrabajos.dismiss();
                         }
-                    }catch (Exception e){
-                        ciudadcmdo="";
-                        localidadcmdo="";
-                        coloniacmdo="";
-                        callecmdo="";
-                        numerocmdo="";
-                        numeroicmdo="";
-                        telefonocmdo="";
-                        callencmdo="";
-                        callescmdo="";
-                        calleecmdo="";
-                        calleocmdo="";
-                        casacmdo="";
+                    } catch (Exception e) {
+                        ciudadcmdo = "";
+                        localidadcmdo = "";
+                        coloniacmdo = "";
+                        callecmdo = "";
+                        numerocmdo = "";
+                        numeroicmdo = "";
+                        telefonocmdo = "";
+                        callencmdo = "";
+                        callescmdo = "";
+                        calleecmdo = "";
+                        calleocmdo = "";
+                        casacmdo = "";
                         Intent intento = new Intent(context, CambioDom.class);
                         context.startActivity(intento);
+                        dialogTrabajos.dismiss();
+                        Toast.makeText(context, "Error al conseguir datos de cambio de domicilio", Toast.LENGTH_LONG).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir datos de cambio de domicilio", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONCAMDO> call, Throwable t) {
             }
         });
     }
-//Arbol Servicios//
+
+    //Arbol Servicios//
     public void getArbSer(final Context context) {
         Service service = null;
         try {
@@ -1128,7 +1178,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONArbolServicios>() {
             @Override
             public void onResponse(Call<JSONArbolServicios> call, Response<JSONArbolServicios> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
 
                     array.nombreArbol.clear();
                     JSONArbolServicios jsonResponse = response.body();
@@ -1142,16 +1192,19 @@ public class Request extends AppCompatActivity {
                     }
                     Intent intento25 = new Intent(context, asignacion.class);
                     context.startActivity(intento25);
-                }else{
-                    Toast.makeText(context, "Error al conseguir datos de la orden", Toast.LENGTH_LONG).show();
+                    dialogTrabajos.dismiss();
+                } else {
+                    Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONArbolServicios> call, Throwable t) {
             }
         });
     }
-//Medios Servicios//
+
+    //Medios Servicios//
     public void getMedSer(final Context context) {
         Service service = null;
         try {
@@ -1163,7 +1216,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONMediosSer>() {
             @Override
             public void onResponse(Call<JSONMediosSer> call, Response<JSONMediosSer> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     array.medio.clear();
                     JSONMediosSer jsonResponse = response.body();
                     array.dataMedSer = new ArrayList<List<GetMuestraMedioPorServicoContratadoListResult>>(asList(jsonResponse.GetMuestraMedioPorServicoContratadoListResult()));
@@ -1177,16 +1230,18 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medio);
                     asignacion.spinnerMedio.setAdapter(adapter1);
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir Clave Tecnico", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONMediosSer> call, Throwable t) {
             }
         });
     }
-//Tipo de Aparatos//
+
+    //Tipo de Aparatos//
     public void getTipoAparatos(final Context context) {
         Service service = null;
         try {
@@ -1198,7 +1253,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONTipoAparatos>() {
             @Override
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     array.tipoAparato.clear();
                     JSONTipoAparatos jsonResponse = response.body();
                     array.dataTipoAparatos = new ArrayList<List<GetMuestraTipoAparatoListResult>>(asList(jsonResponse.GetMuestraTipoAparatoListResult()));
@@ -1212,7 +1267,7 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
                     asignado.spinnerAparato.setAdapter(adapter1);
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir tipos de aparatos", Toast.LENGTH_LONG).show();
                 }
             }
@@ -1222,7 +1277,8 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-//Aparatos Disponibles///
+
+    //Aparatos Disponibles///
     public void getAparatosDisponibles(final Context context) {
         Service service = null;
         try {
@@ -1234,7 +1290,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONAparatosDisponibles>() {
             @Override
             public void onResponse(Call<JSONAparatosDisponibles> call, Response<JSONAparatosDisponibles> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     array.aparatoDisponibles.clear();
                     JSONAparatosDisponibles jsonResponse = response.body();
                     array.dataAparatosDisponibles = new ArrayList<List<GetMuestraAparatosDisponiblesListResult>>(asList(jsonResponse.GetMuestraAparatosDisponiblesListResult()));
@@ -1247,16 +1303,18 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoDisponibles);
                     asignado.spinneraparatoDisponible.setAdapter(adapter1);
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONAparatosDisponibles> call, Throwable t) {
             }
         });
     }
-//Servicios Aparatos//
+
+    //Servicios Aparatos//
     public void getServiciosAparatos(final Context context) {
         Service service = null;
         try {
@@ -1268,7 +1326,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
             public void onResponse(Call<JSONServiciosAparatos> call, Response<JSONServiciosAparatos> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     array.serviciosAparatos.clear();
                     JSONServiciosAparatos jsonResponse = response.body();
                     array.dataserviciosAparatos = new ArrayList<List<GetMuestraServiciosRelTipoAparatoListResult>>(asList(jsonResponse.GetMuestraServiciosRelTipoAparatoListResult()));
@@ -1281,15 +1339,17 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     asignado.serviciosAparato.setAdapter(arrayAdapter);
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir servicios de aparatos", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONServiciosAparatos> call, Throwable t) {
             }
         });
     }
+
     public void getAceptatAsignacino(final Context context) {
         Services getAceptarAsigService = new Services();
         Service service = null;
@@ -1305,20 +1365,22 @@ public class Request extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(context, "aparato agregado", Toast.LENGTH_LONG).show();
                     finish();
-                }else{
+                } else {
                     Toast.makeText(context, "Error al aceptar asignacion", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
-//INFO CLIENTE Reportes///
+
+    //INFO CLIENTE Reportes///
 //TIPO DE SOLUCION///
     public void getSolucuion(final Context context) {
         Array.clv_Soluc = new ArrayList<Integer>();
-        Array.clv_Soluc.add(0,-1);
+        Array.clv_Soluc.add(0, -1);
 
         Service service = null;
         try {
@@ -1330,7 +1392,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONSolucion>() {
             @Override
             public void onResponse(Call<JSONSolucion> call, Response<JSONSolucion> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     JSONSolucion jsonResponse = response.body();
                     array.dataSOL = new ArrayList<List<GetMUESTRATRABAJOSQUEJASListResult>>((asList(jsonResponse.getGetMUESTRATRABAJOSQUEJASListResult())));
                     Iterator<List<GetMUESTRATRABAJOSQUEJASListResult>> itdata = array.dataSOL.iterator();
@@ -1348,17 +1410,19 @@ public class Request extends AppCompatActivity {
                         solucion.setAdapter(adapter);
                         solucion.setSelection(posSolucionRepo);
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error al conseguir soluciones", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<JSONSolucion> call, Throwable t) {
 
             }
         });
     }
-//Reporte del Cliente//
+
+    //Reporte del Cliente//
     public void getReportesC(final Context context) {
         Service service = null;
         try {
@@ -1370,7 +1434,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONReporteCliente>() {
             @Override
             public void onResponse(Call<JSONReporteCliente> call, Response<JSONReporteCliente> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     JSONReporteCliente jsonResponse = response.body();
                     array.dataReport = new ArrayList<List<GetQuejasListResult>>(asList(jsonResponse.getGetQuejasListResult()));
                     Iterator<List<GetQuejasListResult>> itData = array.dataReport.iterator();
@@ -1396,7 +1460,8 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-//Nombre Tecnico//////
+
+    //Nombre Tecnico//////
     public void getnombretec(final Context context) {
         Service service = null;
         try {
@@ -1408,7 +1473,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONNombreTecnico>() {
             @Override
             public void onResponse(Call<JSONNombreTecnico> call, Response<JSONNombreTecnico> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     JSONNombreTecnico jsonResponse = response.body();
                     array.dataNom = new ArrayList<List<GetConTecnicoAgendaResult>>(Collections.singleton(asList(jsonResponse.getGetConTecnicoAgendaResult())));
                     Iterator<List<GetConTecnicoAgendaResult>> itData = array.dataNom.iterator();
@@ -1420,12 +1485,14 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JSONNombreTecnico> call, Throwable t) {
             }
         });
     }
-//servicios asiggnados //
+
+    //servicios asiggnados //
     public void getServiciosAsignados(final Context context) {
         Service service = null;
         try {
@@ -1437,7 +1504,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONServicioAsignado>() {
             @Override
             public void onResponse(Call<JSONServicioAsignado> call, Response<JSONServicioAsignado> response) {
-                if(response.code()==200) {
+                if (response.code() == 200) {
                     JSONServicioAsignado jsonResponse = response.body();
                     ArrayList<String> servicio = new ArrayList<>();
                     array.dataServ = new ArrayList<List<GetDameSerDelCliFacListResult>>((asList(jsonResponse.getGetDameSerDelCliFacListResult())));
@@ -1453,11 +1520,13 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JSONServicioAsignado> call, Throwable t) {
             }
         });
     }
+
     public void getReportes(final Context context) {
         Service service = null;
         try {
@@ -1470,7 +1539,7 @@ public class Request extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<JSONReportes> call, Response<JSONReportes> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JSONReportes jsonResponse = response.body();
                     array.dataRep = new ArrayList<List<GetuspBuscaContratoSeparado2ListResult>>(asList(jsonResponse.getGetuspBuscaContratoSeparado2ListResult()));
                     Iterator<List<GetuspBuscaContratoSeparado2ListResult>> itData = array.dataRep.iterator();
@@ -1495,9 +1564,10 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
     public void getTecSecR(final Context context) {
         Array.Clv_TecSecR = new ArrayList<Integer>();
-        Array.Clv_TecSecR.add(0,-1);
+        Array.Clv_TecSecR.add(0, -1);
         Service service = null;
         try {
             service = services.getTecSecRService(context);
@@ -1508,7 +1578,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONTecSecReport>() {
             @Override
             public void onResponse(Call<JSONTecSecReport> call, Response<JSONTecSecReport> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JSONTecSecReport jsonResponse = response.body();
                     array.dataTECSEC = new ArrayList<List<GetMuestraTecnicosAlmacenListResult>>((asList(jsonResponse.getGetMuestraTecnicosAlmacenListResult())));
                     Iterator<List<GetMuestraTecnicosAlmacenListResult>> itdata = array.dataTECSEC.iterator();
@@ -1536,6 +1606,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
     public void getValidaOrdSer(final Context context) {
         Service service = null;
         try {
@@ -1547,14 +1618,14 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
-                    if(String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length()==2){
+                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
                         getChecaCAMDO(context);
-                    }else{
+                    } else {
                         EjecutarFragment.eject.setEnabled(true);
-                        Toast.makeText(context,"Error"+string1,Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -1565,6 +1636,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
     public void getChecaCAMDO(final Context context) {
         Service service = null;
         try {
@@ -1576,7 +1648,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     JsonObject jsonObject = response1.body().getAsJsonObject("GetCheca_si_tiene_camdoResult");
                     GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
                             jsonObject.get("Error").getAsString()
@@ -1595,6 +1667,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
     public void getAddRelOrdUsu(final Context context) {
         Service service = null;
         try {
@@ -1606,15 +1679,17 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     getDeepMODORDSER(context);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
+
     public void getDeepMODORDSER(final Context context) {
         Service service = null;
         try {
@@ -1630,11 +1705,13 @@ public class Request extends AppCompatActivity {
                     getGuardaHora(context);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
+
     public void getGuardaHora(final Context context) {
         Service service = null;
         try {
@@ -1646,16 +1723,18 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     getGuardaOrdSerAparatos(context);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void getGuardaOrdSerAparatos(final Context context) {
         Service service = null;
         try {
@@ -1671,12 +1750,14 @@ public class Request extends AppCompatActivity {
                     addLlenaBitacora(context);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void addLlenaBitacora(final Context context) {
         Service service = null;
         try {
@@ -1688,34 +1769,36 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                int IS=0;
-                if(response1.code()==200){
-                    if(String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")){
+                int IS = 0;
+                if (response1.code() == 200) {
+                    if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")) {
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
-                        List<GetBUSCADetOrdSerListResult> dat =  itData.next();
-                        for(int a=0; a<dat.size(); a++){
-                            if(dat.get(a).getClvTrabajo()==1270||dat.get(a).getClvTrabajo()==1271||dat.get(a).getClvTrabajo()==1272){
-                                IS=1;
+                        List<GetBUSCADetOrdSerListResult> dat = itData.next();
+                        for (int a = 0; a < dat.size(); a++) {
+                            if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
+                                IS = 1;
                             }
                         }
-                        if(IS==1){
+                        if (IS == 1) {
                             GuardaCoordenadas(context);
-                        }else{
+                        } else {
                             Intent intent = new Intent(context, Orden.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intent);
                         }
 
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-//Ejecutar Reporte//
+
+    //Ejecutar Reporte//
     public void getValidaReporte(final Context context) {
         Service service = null;
         try {
@@ -1737,13 +1820,15 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-//horas//
+
+    //horas//
     public void getGuardaHoraReporte(final Context context) {
         Service service = null;
         try {
@@ -1762,13 +1847,15 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-//guardar campos//
+
+    //guardar campos//
     public void getGuardaCampos(final Context context) {
         Service service = null;
         try {
@@ -1786,12 +1873,14 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void GuardaCoordenadas(final Context context) {
 
         Service service = null;
@@ -1807,18 +1896,20 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                reintentaB=0;
+                reintentaB = 0;
 
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     ConsultaIp(context);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void ConsultaIp(final Context context) {
         Service service = null;
         try {
@@ -1830,7 +1921,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     jsonConsultaIp = new JsonObject();
                     jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
                     ConsultaIpModel user = new ConsultaIpModel(
@@ -1839,16 +1930,16 @@ public class Request extends AppCompatActivity {
                     );
                     reintentarComando = String.valueOf(user.AplicaReintentar);
                     msgComando = user.Msg;
-                    for(int a=0;a<1;a++){
-                        if(reintentarComando.equals("true")){
+                    for (int a = 0; a < 1; a++) {
+                        if (reintentarComando.equals("true")) {
                             reiniciar.setEnabled(true);
                             msgEjecutarOrd.setText(Request.msgComando);
-                        }else{
-                            if(msgComando.length()>3){
+                        } else {
+                            if (msgComando.length() > 3) {
                                 msgEjecutarOrd.setText(msgComando);
                                 Login.esperar(5);
-                                ((Activity)context).finish();
-                            }else{
+                                ((Activity) context).finish();
+                            } else {
                                 Login.esperar(3);
                                 retry(call);
                             }
@@ -1856,17 +1947,19 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }
 
-            public  void retry(Call<JsonObject> call){
+            public void retry(Call<JsonObject> call) {
                 call.clone().enqueue(this);
             }
         });
     }
+
     public void ReintentarComando(final Context context) {
-        reintentaB=0;
+        reintentaB = 0;
         Service service = null;
         try {
             service = services.getReintentarComandoService(context);
@@ -1877,18 +1970,20 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     ConsultaIp(context);
                     msgEjecutarOrd.setText("");
                     reiniciar.setEnabled(true);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void SetCambioAparato(final Context context) {
         Service service = null;
         try {
@@ -1900,21 +1995,25 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if(response1.code()==200){
+                if (response1.code() == 200) {
                     Toast.makeText(context, "Se ha guardado el aparato correctamente", Toast.LENGTH_SHORT).show();
+                    dialogCAPAT.dismiss();
+                    dialogTrabajos.dismiss();
 
-
-                }else{
+                } else {
                     Toast.makeText(context, "Error al agregar el aparato", Toast.LENGTH_SHORT).show();
-                    cambioA=false;
+                    dialogCAPAT.dismiss();
+                    dialogTrabajos.dismiss();
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void send_aparat(final Context context) {
         adaptertrabajos.norec();
         Service service = null;
@@ -1931,6 +2030,7 @@ public class Request extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
@@ -1938,6 +2038,7 @@ public class Request extends AppCompatActivity {
 
         });
     }
+
     public void getChecaExt(final Context context) {
         Service service = null;
         service = services.getChecaExtService(context);
@@ -1945,28 +2046,30 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("GetUspChecaSiTieneExtensionesResult");
                     ChecaSiExtencionesModel user = new ChecaSiExtencionesModel(
                             userJson.get("BND").getAsInt(),
                             userJson.get("NUMEXT").getAsInt()
                     );
-                    if(user.BND==1){
+                    if (user.BND == 1) {
                         MuestraBit(context);
                         LlenaExt(context);
-                        nExtenciones=user.BND;
+                        nExtenciones = user.BND;
 
-                    }else{
+                    } else {
                         MuestraBit(context);
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
+
     public void MuestraBit(final Context context) {
         Service service = null;
         service = services.getMuestraBitService(context);
@@ -1976,8 +2079,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONDetalleBitacora> call, Response<JSONDetalleBitacora> response1) {
                 if (response1.code() == 200) {
                     array.detalleBit.clear();
-                    array.detalleBit.add(0,"---Seleccionar---");
-                    int j=1;
+                    array.detalleBit.add(0, "---Seleccionar---");
+                    int j = 1;
                     JSONDetalleBitacora jsonResponse = response1.body();
                     array.dataDetBit = new ArrayList<List<DetalleBitacoraModel>>(asList(jsonResponse.detalleBitacoraModel()));
                     Iterator<List<DetalleBitacoraModel>> itData = array.dataDetBit.iterator();
@@ -1985,16 +2088,17 @@ public class Request extends AppCompatActivity {
                         List<DetalleBitacoraModel> dat = itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
-                            array.detalleBit.add(j,dat.get(i).Descripcion);
-                            j=j+1;
+                            array.detalleBit.add(j, dat.get(i).Descripcion);
+                            j = j + 1;
                         }
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
                     descripcionMat.setAdapter(arrayAdapter);
-                            descripcionMat.setSelection(posDescMat);
+                    descripcionMat.setSelection(posDescMat);
                 }
             }
+
             @Override
             public void onFailure(Call<JSONDetalleBitacora> call, Throwable t) {
 
@@ -2002,6 +2106,7 @@ public class Request extends AppCompatActivity {
 
         });
     }
+
     public void DetalleBit(final Context context) {
         Service service = null;
         service = services.getDetalleBitService(context);
@@ -2011,8 +2116,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
                 if (response1.code() == 200) {
                     array.descripcionArtBit.clear();
-                    array.descripcionArtBit.add(0,"---Seleccionar---");
-                    int j=1;
+                    array.descripcionArtBit.add(0, "---Seleccionar---");
+                    int j = 1;
                     JSONDescripcionArticulosBit jsonResponse = response1.body();
                     array.dataDetArtBit = new ArrayList<List<DescripcionArticuloModel>>(asList(jsonResponse.descripcionArticuloModel()));
                     Iterator<List<DescripcionArticuloModel>> itData = array.dataDetArtBit.iterator();
@@ -2020,8 +2125,8 @@ public class Request extends AppCompatActivity {
                         List<DescripcionArticuloModel> dat = itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
-                            array.descripcionArtBit.add(j,dat.get(i).Nombre);
-                            j=j+1;
+                            array.descripcionArtBit.add(j, dat.get(i).Nombre);
+                            j = j + 1;
                         }
 
                     }
@@ -2031,6 +2136,7 @@ public class Request extends AppCompatActivity {
 
                 }
             }
+
             @Override
             public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
 
@@ -2038,6 +2144,7 @@ public class Request extends AppCompatActivity {
 
         });
     }
+
     public void LlenaExt(final Context context) {
         Service service = null;
         service = services.getLlenaExtService(context);
@@ -2048,28 +2155,29 @@ public class Request extends AppCompatActivity {
                 if (response1.code() == 200) {
                     Materiales.extMat.setVisibility(View.VISIBLE);
                     array.descripcionExt.clear();
-                    array.descripcionExt.add(0,"---Seleccionar---");
-                    int j=1;
+                    array.descripcionExt.add(0, "---Seleccionar---");
+                    int j = 1;
                     JSONLlenaExtenciones jsonResponse = response1.body();
                     array.dataLlenaExt = new ArrayList<List<LlenaExtencionesModel>>(asList(jsonResponse.llenaExtencionesModel()));
                     Iterator<List<LlenaExtencionesModel>> itData = array.dataLlenaExt.iterator();
                     while (itData.hasNext()) {
                         List<LlenaExtencionesModel> dat = itData.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            array.descripcionExt.add(j,dat.get(i).DESCRIPCION);
-                            j=j+1;
+                            array.descripcionExt.add(j, dat.get(i).DESCRIPCION);
+                            j = j + 1;
                         }
                     }
-                    try{
+                    try {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         Materiales.spinnerExtMat.setAdapter(arrayAdapter);
-                        extencionesMat=true;
+                        extencionesMat = true;
                         spinnerExtMat.setSelection(posExtMat);
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JSONLlenaExtenciones> call, Throwable t) {
 
@@ -2077,6 +2185,7 @@ public class Request extends AppCompatActivity {
 
         });
     }
+
     public void getTipoMat(final Context context) {
         Service service = null;
         service = services.getTipoMatService(context);
@@ -2084,17 +2193,17 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
                     TipoMaterialModel user = new TipoMaterialModel(
                             userJson.get("Tipo").getAsString()
                     );
-                    if(user.Tipo.equals("Piezas")){
+                    if (user.Tipo.equals("Piezas")) {
                         Materiales.piezasMat.setVisibility(View.VISIBLE);
-                        pieza=true;
-                    }else{
+                        pieza = true;
+                    } else {
                         Materiales.metrosMat.setVisibility(View.VISIBLE);
-                        pieza=false;
+                        pieza = false;
                     }
                 }
             }
@@ -2105,7 +2214,8 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    public void getValidaPreDes(final Activity activity,final Context context) {
+
+    public void getValidaPreDes(final Activity activity, final Context context) {
         Service service = null;
         service = services.getValidaPreService(context);
         Call<JsonObject> call = service.getValidaPre();
@@ -2124,47 +2234,52 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-    public void addPreDes(final Activity activity,final Context context) {
+
+    public void addPreDes(final Activity activity, final Context context) {
         Service service = null;
         service = services.addPreDescargaService(context);
         Call<JsonObject> call = service.addPreDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
-                    Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
-                    getPredescarga(activity,context);
-                }else{
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
+                    getPredescarga(activity, context);
+                } else {
 
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-    public void getPredescarga(final Activity activity, final Context context){
+
+    public void getPredescarga(final Activity activity, final Context context) {
         Service service = null;
         service = services.getPreDescargaService(context);
         Call<JSONPreDescarga> call = service.getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity, Materiales.tabla);
                 try {
                     tablaAdapter.eliminarFila(1);
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 array.listaTabla.clear();
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
-                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
+                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>>(asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
                     Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
@@ -2184,6 +2299,7 @@ public class Request extends AppCompatActivity {
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }
+
             @Override
             public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
             }
@@ -2192,7 +2308,6 @@ public class Request extends AppCompatActivity {
 
     //////////////////
     public void DetalleBitR(final Context context) {
-
 
 
         Service service = null;
@@ -2205,8 +2320,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
                 if (response1.code() == 200) {
                     array.descripcionArtBit.clear();
-                    array.descripcionArtBit.add(0,"---Seleccionar---");
-                    int j=1;
+                    array.descripcionArtBit.add(0, "---Seleccionar---");
+                    int j = 1;
                     JSONDescripcionArticulosBit jsonResponse = response1.body();
                     array.dataDetArtBit = new ArrayList<List<DescripcionArticuloModel>>(asList(jsonResponse.descripcionArticuloModel()));
                     Iterator<List<DescripcionArticuloModel>> itData = array.dataDetArtBit.iterator();
@@ -2214,8 +2329,8 @@ public class Request extends AppCompatActivity {
                         List<DescripcionArticuloModel> dat = itData.next();
 
                         for (int i = 0; i < dat.size(); i++) {
-                            array.descripcionArtBit.add(j,dat.get(i).Nombre);
-                            j=j+1;
+                            array.descripcionArtBit.add(j, dat.get(i).Nombre);
+                            j = j + 1;
                         }
 
                     }
@@ -2223,6 +2338,7 @@ public class Request extends AppCompatActivity {
                     MaterialesFragment.clasificacionMatR.setAdapter(arrayAdapter);
                 }
             }
+
             @Override
             public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
 
@@ -2230,6 +2346,7 @@ public class Request extends AppCompatActivity {
 
         });
     }
+
     public void getTipoMatR(final Context context) {
         Service service = null;
         service = services.getTipoMatRService(context);
@@ -2237,17 +2354,17 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
                     TipoMaterialModel user = new TipoMaterialModel(
                             userJson.get("Tipo").getAsString()
                     );
-                    if(user.Tipo.equals("Piezas")){
+                    if (user.Tipo.equals("Piezas")) {
                         MaterialesFragment.piezasMatR.setVisibility(View.VISIBLE);
-                        pieza=true;
-                    }else{
+                        pieza = true;
+                    } else {
                         MaterialesFragment.metrosMatR.setVisibility(View.VISIBLE);
-                        pieza=false;
+                        pieza = false;
                     }
                 }
             }
@@ -2258,7 +2375,8 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-    public void getValidaPreDesR(final Activity activity,final Context context) {
+
+    public void getValidaPreDesR(final Activity activity, final Context context) {
         Service service = null;
         service = services.getValidaPreRService(context);
         Call<JsonObject> call = service.getValidaPre();
@@ -2277,47 +2395,52 @@ public class Request extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-    public void addPreDesR(final Activity activity,final Context context) {
+
+    public void addPreDesR(final Activity activity, final Context context) {
         Service service = null;
         service = services.addPreDescargaRService(context);
         Call<JsonObject> call = service.addPreDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.code()==200){
-                    Toast.makeText(context,"Se agrego correctamente",Toast.LENGTH_SHORT).show();
-                    getPredescargaR(activity,context);
-                }else{
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
+                    getPredescargaR(activity, context);
+                } else {
 
                 }
             }
+
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
     }
-    public void getPredescargaR(final Activity activity, final Context context){
+
+    public void getPredescargaR(final Activity activity, final Context context) {
         Service service = null;
         service = services.getPreDescargaRService(context);
         Call<JSONPreDescarga> call = service.getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity,Materiales.tabla);
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity, Materiales.tabla);
                 try {
                     tablaAdapter.eliminarFila(1);
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 array.listaTabla.clear();
-                if(response.code()==200){
+                if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
-                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>> (asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
+                    array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>>(asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
                     Iterator<List<dameTblPreDescargaMaterialResultModel>> itdata = array.dataPreDescarga.iterator();
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();

@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
 import com.github.mikephil.charting.charts.PieChart;
@@ -50,7 +52,8 @@ public class Inicio extends AppCompatActivity
     public static ProgressBar progressBarInicio;
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
-
+    public static ProgressDialog dialogInicio;
+BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -65,7 +68,7 @@ public class Inicio extends AppCompatActivity
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
         progressBarInicio = findViewById(R.id.barloginicio);
         barra = findViewById(R.id.nav_view);
-
+        dialogInicio= new BarraCargar().showDialog(this,"asd");
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,14 +82,16 @@ public class Inicio extends AppCompatActivity
                 finish();
 
             }else {
+                dialogInicio.show();
                 request.getClv_tecnico(getApplicationContext());
                 drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                showProgress(true);
+
             }
         }else{
             pieChart.setVisibility(View.VISIBLE);
             Grafica(pieChart);
         }
+
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));

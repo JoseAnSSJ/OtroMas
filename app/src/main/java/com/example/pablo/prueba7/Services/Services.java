@@ -1,7 +1,6 @@
 package com.example.pablo.prueba7.Services;
 
 
-
 import android.content.Context;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
@@ -28,6 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -103,7 +103,12 @@ public class Services {
                                 .build();
                         return chain.proceed(newRequest);
                     }
-                }).build();
+                })
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .writeTimeout(5, TimeUnit.SECONDS)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -111,7 +116,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Servicio Tecnico///
+
+    //Servicio Tecnico///
     public Service getTecService(final Context context) throws JSONException {
         //POST Body Json
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -132,7 +138,10 @@ public class Services {
                             .build();
                     return chain.proceed(newRequest);
                 }
-            }).build();
+            }).connectTimeout(5, TimeUnit.SECONDS)
+              .readTimeout(5, TimeUnit.SECONDS)
+              .writeTimeout(5, TimeUnit.SECONDS)
+              .build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.NEW_URL)
                     .client(client)
@@ -145,7 +154,8 @@ public class Services {
         }
         return null;
     }
-//Proximo Servicio/////
+
+    //Proximo Servicio/////
     public Service getProxService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -158,7 +168,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",  getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -166,7 +176,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(5, TimeUnit.SECONDS)
+          .readTimeout(5, TimeUnit.SECONDS)
+          .writeTimeout(5, TimeUnit.SECONDS)
+          .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -175,7 +188,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-//Orden de servicio//
+
+    //Orden de servicio//
     public Service getOrdSerService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -188,18 +202,22 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",   getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(5, TimeUnit.SECONDS)
+           .readTimeout(5, TimeUnit.SECONDS)
+           .writeTimeout(5, TimeUnit.SECONDS)
+           .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(Service.class);
     }
-//Lista de ordenes///
+
+    //Lista de ordenes///
     public Service getListOrdService(final Context context) throws JSONException {
 //POST Body JsonArray
         JSONObject jsonObject = new JSONObject();
@@ -217,7 +235,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",   getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body).build();
                 return chain.proceed(newRequest);
@@ -229,7 +247,8 @@ public class Services {
         return retrofit.create(Service.class);
 
     }
-//Lista de Reportes////
+
+    //Lista de Reportes////
     public Service getListQuejasService(final Context context) throws JSONException {
         //POST Body JsonArray
         JSONObject jsonObject = new JSONObject();
@@ -247,7 +266,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",   getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body).build();
                 return chain.proceed(newRequest);
@@ -259,7 +278,8 @@ public class Services {
         return retrofit.create(Service.class);
 
     }
-//Servicios Service//
+
+    //Servicios Service//
     public Service getServiciosService(final Context context) throws JSONException {
         //POST Body Json
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -273,7 +293,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",   getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body).build();
                 return chain.proceed(newRequest);
@@ -286,7 +306,8 @@ public class Services {
         return retrofit.create(Service.class);
 
     }
-//Informacion pantalla de ordenes//
+
+    //Informacion pantalla de ordenes//
     public Service getDeepConsService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -316,7 +337,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-//Informacion del cliente//
+
+    //Informacion del cliente//
     public Service getInfoClienteService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -346,7 +368,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-//Lista de Trabajos//
+
+    //Lista de Trabajos//
     public Service getTrabajoService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Orden", clvor);
@@ -370,7 +393,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Tecnico Secundario//
+
+    //Tecnico Secundario//
     public Service getTecSecService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvOrdSer", clvor);
@@ -394,7 +418,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-// Aparatos Clientes//
+
+    // Aparatos Clientes//
     public Service getCliApaService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Contrato", DeepConsModel.Contrato);
@@ -418,7 +443,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Status Aparato//
+
+    //Status Aparato//
     public Service getStatusApa(final Context context) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -442,7 +468,8 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-///Tipo de Aparato//
+
+    ///Tipo de Aparato//
     public Service getApaTipoService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ContratoNet", CambioAparato.contrato);
@@ -467,7 +494,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Tipo de Aparato Disponible//
+
+    //Tipo de Aparato Disponible//
     public Service getApaTipDisService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Tecnico", claveTecnico);
@@ -492,7 +520,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Cambio de Domicilio//
+
+    //Cambio de Domicilio//
     public Service getCAMODOService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("clv_orden", clvor);
@@ -517,7 +546,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Arbol Servicios//
+
+    //Arbol Servicios//
     public Service getArbolSerService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("clv_orden", clvor);
@@ -541,7 +571,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Medios Servicios//
+
+    //Medios Servicios//
     public Service getMediosSerService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvUnicaNet", clv_unicaNet);
@@ -565,7 +596,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Tipo Aparatos//
+
+    //Tipo Aparatos//
     public Service getTipoAparatosService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Id", 0);
@@ -594,7 +626,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Aparatos Disponibles//
+
+    //Aparatos Disponibles//
     public Service getAparatosDisponiblesService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("clv_orden", clvor);
@@ -620,7 +653,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Servicios Disponibles//
+
+    //Servicios Disponibles//
     public Service getServiciosAparatosService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Id", idArticuloasignado);
@@ -651,7 +685,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Tipo Aparatos//
+
+    //Tipo Aparatos//
     public Service getAceptarAsigService(final Context context) throws JSONException {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
@@ -682,7 +717,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Servicios Disponibles//
+
+    //Servicios Disponibles//
     public Service getExtencionAdiService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clave", ClaveTrabajo);
@@ -708,7 +744,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-///Reportes///
+
+    ///Reportes///
     public Service getMediosReportes(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ContratoCom", contratoReport);
@@ -737,7 +774,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//solucion///
+
+    //solucion///
     public Service getSolocionService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("TipoSer", 1);
@@ -761,7 +799,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//observacion y problema ///
+
+    //observacion y problema ///
     public Service getReporteCService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Queja", clvReport);
@@ -785,7 +824,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//tecnicoNombre///
+
+    //tecnicoNombre///
     public Service getNombreService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv", clvReport);
@@ -796,7 +836,7 @@ public class Services {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -810,7 +850,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Servicios Asignados//
+
+    //Servicios Asignados//
     public Service getAsignadosService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Contrato", com.example.pablo.prueba7.Request.Request.abc);
@@ -834,7 +875,8 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//hora inicio, hora fin//
+
+    //hora inicio, hora fin//
     public Service getTecSecRService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Contrato", com.example.pablo.prueba7.Request.Request.abc);
@@ -858,6 +900,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getValidaOrdSerService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -888,6 +931,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getChecaCAMDOService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -914,6 +958,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getADDRELORDUSUService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -921,7 +966,7 @@ public class Services {
         jsonObject.put("ClvOrden", clvor);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
         jsonObject.put("Status", HorasFragment.statusHora);
-        jsonObject1.put("objNueRelOrdenUsuario",jsonObject);
+        jsonObject1.put("objNueRelOrdenUsuario", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -944,16 +989,17 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getDeppMODORDSERService(final Context context) throws JSONException {
         //POST Body Json
-        String ab="";
+        String ab = "";
         JSONObject jsonObject = new JSONObject();
-        if(mesE<10){
-            ab= "0"+mesE;
-        }else{
-            ab=String.valueOf(mesE);
+        if (mesE < 10) {
+            ab = "0" + mesE;
+        } else {
+            ab = String.valueOf(mesE);
         }
-        String s=diaE +"-"+ ab +"-"+  + añoE;
+        String s = diaE + "-" + ab + "-" + +añoE;
         jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
         jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
         jsonObject.put("ClvTecnico", claveTecnico);
@@ -992,6 +1038,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getGuardaHoraService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1007,7 +1054,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1021,6 +1068,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getGuardaOrdSerAparatosService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1051,13 +1099,14 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getAddLlenaBitacoraService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("DescripcionMov", "Se generó la");
         jsonObject.put("ClvOrden", clvor);
-        jsonObject1.put("objSP_LLena_Bitacora_Ordenes",jsonObject);
+        jsonObject1.put("objSP_LLena_Bitacora_Ordenes", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -1080,12 +1129,13 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
-//Reportes///
+
+    //Reportes///
     public Service getGuardaHoraReporte(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_orden", clvReport);
-        jsonObject.put("horaFin",horas12);
+        jsonObject.put("horaFin", horas12);
         jsonObject.put("horaInicio", "08:00");
         jsonObject.put("opcion", 2);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -1114,6 +1164,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getGuardaInfoReportes(final Context context) throws JSONException {
         //POST Body Json
         JSONObject objQuejas = new JSONObject();
@@ -1121,7 +1172,7 @@ public class Services {
         objQuejas.put("Clv_Queja", clvReport.toString());
         objQuejas.put("Clv_Tecnico", claveTecnico);
         objQuejas.put("FechaProceso", "");
-        objQuejas.put("Fecha_Ejecucion", year+" "+horas12);
+        objQuejas.put("Fecha_Ejecucion", year + " " + horas12);
         objQuejas.put("HP", "");
         objQuejas.put("HV1", "");
         objQuejas.put("HV2", "");
@@ -1161,6 +1212,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getValidaInfoReportes(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1188,6 +1240,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getGuardaCoordenadasService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1204,7 +1257,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1220,6 +1273,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getConsultaIpService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1234,7 +1288,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1249,6 +1303,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getReintentarComandoService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1261,7 +1316,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1277,6 +1332,7 @@ public class Services {
                 .build();
         return retrofit.create(Service.class);
     }
+
     public Service getCAPATService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1295,7 +1351,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1312,6 +1368,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getDeepCAPATService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1329,7 +1386,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1346,6 +1403,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service recibiapar(final Context context) throws JSONException {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         //Log.i(jsonArrayap.get(0));
@@ -1362,7 +1420,7 @@ public class Services {
 
                 //Modificacion del Header
                 okhttp3.Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body).build();
                 return chain.proceed(newRequest);
@@ -1374,6 +1432,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getMuestraBitService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1392,7 +1451,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1409,6 +1468,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getDetalleBitService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1427,7 +1487,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1444,6 +1504,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getChecaExtService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1461,7 +1522,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1478,6 +1539,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getLlenaExtService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1495,7 +1557,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1538,7 +1600,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1555,6 +1617,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getValidaPreService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1575,7 +1638,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1592,29 +1655,30 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service addPreDescargaService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         int escable;
-        if(com.example.pablo.prueba7.Request.Request.pieza==true){
-            escable=0;
-        }else{
-            escable=1;
+        if (com.example.pablo.prueba7.Request.Request.pieza == true) {
+            escable = 0;
+        } else {
+            escable = 1;
         }
         try {
             jsonObject.put("contrato", DeepConsModel.Contrato);
             jsonObject.put("clvOrden", clvor);
-            jsonObject.put("noArticulo",idInventarioMD );
+            jsonObject.put("noArticulo", idInventarioMD);
             jsonObject.put("cantidadUtilizada", totalDM);
             jsonObject.put("clvTecnico", claveTecnico);
-            jsonObject.put("idAlmacenEmpresa",0 );
-            jsonObject.put("metrajeInicio",IIDM);
-            jsonObject.put("metrajeFin",IFDM );
-            jsonObject.put("esCable",escable);
-            jsonObject.put("tipoDescarga",tipodeDescarga );
+            jsonObject.put("idAlmacenEmpresa", 0);
+            jsonObject.put("metrajeInicio", IIDM);
+            jsonObject.put("metrajeFin", IFDM);
+            jsonObject.put("esCable", escable);
+            jsonObject.put("tipoDescarga", tipodeDescarga);
             jsonObject.put("metrajeInicioExterior", EIMD);
             jsonObject.put("metrajeFinExterior", EFDM);
-            jsonObject.put("NoExt",extSer );
+            jsonObject.put("NoExt", extSer);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1627,7 +1691,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1642,6 +1706,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getPreDescargaService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1660,7 +1725,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1675,6 +1740,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     //////////////////////
     public Service getDetalleBitRService(final Context context) {
         //POST Body Json
@@ -1697,7 +1763,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1716,6 +1782,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getTipoMatRService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1741,7 +1808,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1760,6 +1827,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getValidaPreRService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1782,7 +1850,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1801,29 +1869,30 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service addPreDescargaRService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         int escable;
-        if(com.example.pablo.prueba7.Request.Request.pieza==true){
-            escable=0;
-        }else{
-            escable=1;
+        if (com.example.pablo.prueba7.Request.Request.pieza == true) {
+            escable = 0;
+        } else {
+            escable = 1;
         }
         try {
             jsonObject.put("contrato", DeepConsModel.Contrato);
             jsonObject.put("clvOrden", clvor);
-            jsonObject.put("noArticulo",idInventarioMDR );
+            jsonObject.put("noArticulo", idInventarioMDR);
             jsonObject.put("cantidadUtilizada", totalDMR);
             jsonObject.put("clvTecnico", claveTecnico);
-            jsonObject.put("idAlmacenEmpresa",0 );
-            jsonObject.put("metrajeInicio",IIDMR);
-            jsonObject.put("metrajeFin",IFDMR );
-            jsonObject.put("esCable",escable);
-            jsonObject.put("tipoDescarga",tipodeDescarga );
+            jsonObject.put("idAlmacenEmpresa", 0);
+            jsonObject.put("metrajeInicio", IIDMR);
+            jsonObject.put("metrajeFin", IFDMR);
+            jsonObject.put("esCable", escable);
+            jsonObject.put("tipoDescarga", tipodeDescarga);
             jsonObject.put("metrajeInicioExterior", EIMDR);
             jsonObject.put("metrajeFinExterior", EFDMR);
-            jsonObject.put("NoExt",extSerR );
+            jsonObject.put("NoExt", extSerR);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1838,7 +1907,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1857,6 +1926,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
     public Service getPreDescargaRService(final Context context) {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
@@ -1878,7 +1948,7 @@ public class Services {
             public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 //Modificacion del Header
                 Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization",getToken(context))
+                        .addHeader("Authorization", getToken(context))
                         .addHeader("Content-Type", "application/json")
                         .post(body)
                         .build();
@@ -1900,11 +1970,11 @@ public class Services {
 
     ////////////////////////
 
-    public String getToken(final Context context){
+    public String getToken(final Context context) {
         String token;
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         token = Util.getTokenPreference(Util.preferences);
-        return token ;
+        return token;
     }
 }
 
