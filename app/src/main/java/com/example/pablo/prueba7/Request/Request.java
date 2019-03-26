@@ -121,6 +121,7 @@ import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
 import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
+import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
@@ -179,13 +180,13 @@ BarraCargar barraCargar = new BarraCargar();
     public void ErrorCargarDatos(final Context context) {
 
         try {
-            Login.dialogLogin= new BarraCargar().showDialog(context,Text);
+            Login.dialogLogin= new BarraCargar().showDialog(context);
             Login.dialogLogin.dismiss();
             usurio.setEnabled(true);
             contraseña.setEnabled(true);
             entrar.setEnabled(true);
         } catch (Exception e) {
-            Inicio.dialogInicio= new BarraCargar().showDialog(context,Text);
+            Inicio.dialogInicio= new BarraCargar().showDialog(context);
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
             ((Activity) context).finish();
@@ -217,7 +218,7 @@ BarraCargar barraCargar = new BarraCargar();
                     getClv_tecnico(context);
                 } else {
                     Login.dialogLogin.dismiss();
-                    Toast.makeText(context, "Error al iniciar sesion", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
                     usurio.setEnabled(true);
                     contraseña.setEnabled(true);
                     entrar.setEnabled(true);
@@ -229,7 +230,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Login.dialogLogin.dismiss();
-                Toast.makeText(context, "Error al iniciar sesion", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
                 usurio.setEnabled(true);
                 contraseña.setEnabled(true);
                 entrar.setEnabled(true);
@@ -271,7 +272,7 @@ BarraCargar barraCargar = new BarraCargar();
                 } else {
                     ErrorCargarDatos(context);
 
-                    Toast.makeText(context, "Error al conseguir clave Tecnico", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -319,7 +320,7 @@ BarraCargar barraCargar = new BarraCargar();
                 } else {
                     ErrorCargarDatos(context);
 
-                    Toast.makeText(context, "Error al conseguir siguiente Cita", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir siguiente cita", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -576,7 +577,7 @@ BarraCargar barraCargar = new BarraCargar();
                         }
                     }
                 } else {
-                    Toast.makeText(context, "Error al conseguir lista de ordenes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -648,7 +649,7 @@ BarraCargar barraCargar = new BarraCargar();
 
                     }
                 } else {
-                    Toast.makeText(context, "Error al conseguir datos de la orden", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -686,7 +687,7 @@ BarraCargar barraCargar = new BarraCargar();
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 } else {
-                    Toast.makeText(context, "Error al conseguir informacion del cliente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir información del cliente", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1231,7 +1232,7 @@ BarraCargar barraCargar = new BarraCargar();
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medio);
                     asignacion.spinnerMedio.setAdapter(adapter1);
                 } else {
-                    Toast.makeText(context, "Error al conseguir Clave Tecnico", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1363,10 +1364,12 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    Toast.makeText(context, "aparato agregado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
+                    dialogAsignacion.dismiss();
                     finish();
                 } else {
                     Toast.makeText(context, "Error al aceptar asignacion", Toast.LENGTH_LONG).show();
+                    dialogAsignacion.dismiss();
                 }
             }
 

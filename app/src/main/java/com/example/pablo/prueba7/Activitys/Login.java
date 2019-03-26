@@ -47,7 +47,7 @@ BarraCargar barraCargar = new BarraCargar();
         entrar = (Button)findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.barlog);
         setTitle(null);
-        dialogLogin= new BarraCargar().showDialog(this,"login");
+        dialogLogin= new BarraCargar().showDialog(this);
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

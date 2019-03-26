@@ -81,7 +81,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
         lugar=position;
-        dialogTrabajos= new BarraCargar().showDialog(Cmcontext,"Trabajos");
+        dialogTrabajos= new BarraCargar().showDialog(Cmcontext);
 try{
     dialogTrabajos.dismiss();
 }catch (Exception e){}

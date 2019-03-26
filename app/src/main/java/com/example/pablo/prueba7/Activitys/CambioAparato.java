@@ -46,7 +46,7 @@ public class CambioAparato extends AppCompatActivity {
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
         aa=findViewById(R.id.aa);
         Finish= findViewById(R.id.dos);
-        dialogCAPAT= new BarraCargar().showDialog(this,"Cambio");
+        dialogCAPAT= new BarraCargar().showDialog(this);
 
         request.getDeepCAPAT(getApplicationContext());
         if(trabajos_adapter_result.ftth==0){

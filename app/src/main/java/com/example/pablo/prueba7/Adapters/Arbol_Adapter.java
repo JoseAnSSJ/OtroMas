@@ -110,12 +110,6 @@ public class Arbol_Adapter extends BaseAdapter {
                 array.children.add(hijo);
                 ArrayAdapter arrayAdapter1 = new ArrayAdapter(mcontext, android.R.layout.simple_list_item_checked,array.children);
                 holder.listaAparatos.setAdapter(arrayAdapter1);
-                asignacion.aceptarAsignacion.setEnabled(false);
-                for(int l=0; l<dat4.size(); l++){
-                    if(dat4.get(l).children!=null){
-                        asignacion.aceptarAsignacion.setEnabled(true);
-                    }
-                }
                 holder.listaAparatos.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 holder.listaAparatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -257,7 +251,7 @@ public class Arbol_Adapter extends BaseAdapter {
                 g=g+1;
             }
         }
-        if(g>=0){
+        if(g>=1){
             aceptarAsignacion.setEnabled(false);
         }else{
             aceptarAsignacion.setEnabled(true);

@@ -68,7 +68,7 @@ BarraCargar barraCargar = new BarraCargar();
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
         progressBarInicio = findViewById(R.id.barloginicio);
         barra = findViewById(R.id.nav_view);
-        dialogInicio= new BarraCargar().showDialog(this,"asd");
+        dialogInicio= new BarraCargar().showDialog(this);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -65,8 +65,7 @@ public class asignacion extends AppCompatActivity {
         aceptarAsignacion = findViewById(R.id.aceptarAsignacion);
         layoutMedio = findViewById(R.id.poiuyt);
         cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
-        dialogAsignacion= new BarraCargar().showDialog(this,"asignacion");
-        dialogAsignacion.show();
+        dialogAsignacion= new BarraCargar().showDialog(this);
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
@@ -102,6 +101,7 @@ public class asignacion extends AppCompatActivity {
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialogAsignacion.show();
                 for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
                     Array.dataArbSer.get(0).get(a).setClv_orden(clvor);
                 }
@@ -138,12 +138,12 @@ public class asignacion extends AppCompatActivity {
                         jsonObject3.put("children", jsonArray3);
                         jsonObject3.put("clv_orden", dat.get(c).clv_orden);
                         jsonArray2.put(c, jsonObject3);
-                        Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
                         request.getAceptatAsignacino(getApplicationContext());
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(asignacion.this, "Error", Toast.LENGTH_LONG);
+                        dialogAsignacion.dismiss();
                     }
                 }
             }
