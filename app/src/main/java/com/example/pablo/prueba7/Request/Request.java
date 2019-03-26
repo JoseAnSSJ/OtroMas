@@ -829,7 +829,6 @@ BarraCargar barraCargar = new BarraCargar();
                         TecSec.setAdapter(adapterTecSec);
                         TecSec.setSelection(posTec);
 
-
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
                 } else {
@@ -1599,8 +1598,6 @@ BarraCargar barraCargar = new BarraCargar();
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         TecSec1.setAdapter(adapterTecSecR);
                         TecSec1.setSelection(tecPosRepo);
-
-
                     }
                 }
             }
