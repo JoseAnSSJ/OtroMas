@@ -173,7 +173,7 @@ BarraCargar barraCargar = new BarraCargar();
         } catch (Exception e) {
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-            ((Activity) context).finish();
+           // ((Activity) context).finish();
         }
 
     }
@@ -1259,7 +1259,7 @@ BarraCargar barraCargar = new BarraCargar();
                     JSONTipoAparatos jsonResponse = response.body();
                     array.dataTipoAparatos = new ArrayList<List<GetMuestraTipoAparatoListResult>>(asList(jsonResponse.GetMuestraTipoAparatoListResult()));
                     Iterator<List<GetMuestraTipoAparatoListResult>> itData = array.dataTipoAparatos.iterator();
-                    array.tipoAparato.add("Seleccione aparato");
+                    array.tipoAparato.add("Seleccione tipo de aparato");
                     while (itData.hasNext()) {
                         List<GetMuestraTipoAparatoListResult> dat = itData.next();
                         for (int i = 0; i < dat.size(); i++) {
@@ -1293,16 +1293,21 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JSONAparatosDisponibles> call, Response<JSONAparatosDisponibles> response) {
                 if (response.code() == 200) {
                     array.aparatoDisponibles.clear();
+                    array.aparatoAsignacion.clear();
                     JSONAparatosDisponibles jsonResponse = response.body();
                     array.dataAparatosDisponibles = new ArrayList<List<GetMuestraAparatosDisponiblesListResult>>(asList(jsonResponse.GetMuestraAparatosDisponiblesListResult()));
                     Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData = array.dataAparatosDisponibles.iterator();
+                    array.aparatoAsignacion.add("Seleccione aparato");
                     while (itData.hasNext()) {
                         List<GetMuestraAparatosDisponiblesListResult> dat = (List<GetMuestraAparatosDisponiblesListResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.aparatoDisponibles.add(dat.get(i).getDescripcion());
+                            array.aparatoAsignacion.add(dat.get(i).getDescripcion());
+
                         }
                     }
-                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoDisponibles);
+
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoAsignacion);
                     asignado.spinneraparatoDisponible.setAdapter(adapter1);
                 } else {
                     Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();

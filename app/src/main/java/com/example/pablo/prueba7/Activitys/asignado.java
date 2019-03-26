@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -53,6 +54,8 @@ public class asignado extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intento=new Intent(asignado.this,asignacion.class);
+                startActivity(intento);
                 finish();
             }
         });
@@ -83,6 +86,8 @@ public class asignado extends AppCompatActivity {
                                 }else{
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
                                 }
+                            clveAparatoSpinner=0;
+                            nombreSpinner="";
                         }
 
                     });
@@ -99,10 +104,12 @@ public class asignado extends AppCompatActivity {
         spinneraparatoDisponible.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
-                Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData1 = array.dataAparatosDisponibles.iterator();
-                    List<GetMuestraAparatosDisponiblesListResult> dat1 =  itData1.next();
-                clveAparatoSpinner=dat1.get(position1).getClv_Aparato();
-                nombreSpinner= dat1.get(position1).getDescripcion();
+                if (position1 != 0) {
+                    Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData1 = array.dataAparatosDisponibles.iterator();
+                    List<GetMuestraAparatosDisponiblesListResult> dat1 = itData1.next();
+                    clveAparatoSpinner = dat1.get(position1-1).getClv_Aparato();
+                    nombreSpinner = dat1.get(position1-1).getDescripcion();
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -113,35 +120,40 @@ public class asignado extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedStrings==null){
-                    Toast.makeText(getApplicationContext(), "Seleccione minimo un aparato", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Seleccione minimo un servicio", Toast.LENGTH_SHORT);
                 }else {
-                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
-                    List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
-                    for(int c=0; c<dat4.size(); c++){
-                        for(int d=0; d<selectedStrings.size();d++){
-                            int abc=dat4.get(c).getClv_UnicaNet();
-                            if(selectedStrings.get(0)==abc){
-                                children dataChild= new children();
-                                dataChild.setBaseIdUser(0);
-                                dataChild.setBaseRemoteIp(null);
-                                dataChild.setClv_Aparato(clveAparatoSpinner);
-                                dataChild.setClv_UnicaNet(null);
-                                dataChild.setContratoNet(0);
-                                dataChild.setDetalle(detalleSpinner);
-                                dataChild.setNombre(nombreSpinner);
-                                dataChild.setTipo("A");
-                                dataChild.setType("file");
-                                dat4.get(c).children.add(dataChild);
-                                selectedStrings.remove(0);
+                    if(clveAparatoSpinner==0||nombreSpinner==""||nombreSpinner==null){
+                        Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_SHORT);
+                    }else{
+                        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
+                        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
+                        for(int c=0; c<dat4.size(); c++){
+                            for(int d=0; d<selectedStrings.size();d++){
+                                int abc=dat4.get(c).getClv_UnicaNet();
+                                if(selectedStrings.get(0)==abc){
+                                    children dataChild= new children();
+                                    dataChild.setBaseIdUser(0);
+                                    dataChild.setBaseRemoteIp(null);
+                                    dataChild.setClv_Aparato(clveAparatoSpinner);
+                                    dataChild.setClv_UnicaNet(null);
+                                    dataChild.setContratoNet(0);
+                                    dataChild.setDetalle(detalleSpinner);
+                                    dataChild.setNombre(nombreSpinner);
+                                    dataChild.setTipo("A");
+                                    dataChild.setType("file");
+                                    dat4.get(c).children.add(dataChild);
+                                    selectedStrings.remove(0);
 
+                                }
                             }
                         }
-                    }
-                    asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+                        asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
 
-                    Intent intento=new Intent(asignado.this,asignacion.class);
-                    startActivity(intento);
-                    finish();
+                        Intent intento=new Intent(asignado.this,asignacion.class);
+                        startActivity(intento);
+                        finish();
+                    }
+
                 }
             }
         });
@@ -162,5 +174,13 @@ public class asignado extends AppCompatActivity {
             codigo.setText(contents);
             codigo.setVisibility(TextView.VISIBLE);
         }
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intento=new Intent(asignado.this,asignacion.class);
+            startActivity(intento);
+            finish();
+        }
+        return true;
     }
 }

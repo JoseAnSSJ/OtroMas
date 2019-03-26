@@ -90,14 +90,11 @@ public class asignacion extends AppCompatActivity {
                 }
                 Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento = new Intent(asignacion.this, asignado.class);
-                startActivity(intento); }
-        });
-        Asignacion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("posision", String.valueOf(position));
+                startActivity(intento);
+                finish();
             }
         });
+
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
