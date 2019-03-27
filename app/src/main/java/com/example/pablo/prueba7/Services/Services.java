@@ -104,9 +104,9 @@ public class Services {
                         return chain.proceed(newRequest);
                     }
                 })
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -138,9 +138,9 @@ public class Services {
                             .build();
                     return chain.proceed(newRequest);
                 }
-            }).connectTimeout(5, TimeUnit.SECONDS)
-              .readTimeout(5, TimeUnit.SECONDS)
-              .writeTimeout(5, TimeUnit.SECONDS)
+            }).connectTimeout(15, TimeUnit.SECONDS)
+              .readTimeout(15, TimeUnit.SECONDS)
+              .writeTimeout(15, TimeUnit.SECONDS)
               .build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.NEW_URL)
@@ -176,9 +176,9 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).connectTimeout(5, TimeUnit.SECONDS)
-          .readTimeout(5, TimeUnit.SECONDS)
-          .writeTimeout(5, TimeUnit.SECONDS)
+        }).connectTimeout(15, TimeUnit.SECONDS)
+          .readTimeout(15, TimeUnit.SECONDS)
+          .writeTimeout(15, TimeUnit.SECONDS)
           .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
@@ -207,9 +207,9 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).connectTimeout(5, TimeUnit.SECONDS)
-           .readTimeout(5, TimeUnit.SECONDS)
-           .writeTimeout(5, TimeUnit.SECONDS)
+        }).connectTimeout(15, TimeUnit.SECONDS)
+           .readTimeout(15, TimeUnit.SECONDS)
+           .writeTimeout(15, TimeUnit.SECONDS)
            .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
