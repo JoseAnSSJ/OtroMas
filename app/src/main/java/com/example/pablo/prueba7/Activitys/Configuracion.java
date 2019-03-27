@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
 
@@ -29,6 +31,8 @@ public class Configuracion extends AppCompatActivity
     private Request request = new Request();
     NavigationView barra;
     TextView nombreTec;
+    public static ProgressDialog dialogOrdenes;
+    BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -41,6 +45,7 @@ public class Configuracion extends AppCompatActivity
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+        dialogOrdenes = barraCargar.showDialog(this);
         //Boton para cerrar sesion
         nombreConfi.setText(Util.getNombreTecnicoPreference(Util.preferences));
         CS.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +104,11 @@ public class Configuracion extends AppCompatActivity
             Intent intent1 = new Intent(Configuracion.this, Inicio.class);
             startActivity(intent1);
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Configuracion.this, Orden.class);
-            startActivity(intent1);
-
+            dialogOrdenes.show();
+            request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Configuracion.this, Reportes.class);
-            startActivity(intent1);
-
+            dialogOrdenes.show();
+            request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Configuracion.this, Configuracion.class);
             startActivity(intent1);
@@ -116,5 +119,28 @@ public class Configuracion extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_queja", clvqueja);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
+    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_orden", clvorden);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
 }

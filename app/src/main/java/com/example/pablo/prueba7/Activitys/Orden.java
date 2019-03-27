@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONException;
@@ -37,8 +39,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     NavigationView barra;
     TextView nombreTec;
    private Request rqs=new Request();
-
-
+    public static ProgressDialog dialogOrdenes;
+    BarraCargar barraCargar = new BarraCargar();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -56,8 +58,9 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         progressBarOrdenes = findViewById(R.id.barlogodenes);
+        dialogOrdenes= barraCargar.showDialog(this);
         ////////////////
-
+        barraCargar.terminarBarra();
         //////////////////
         adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
@@ -150,8 +153,10 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
             Intent intent1 = new Intent(Orden.this, Inicio.class);
             startActivity(intent1);
         } else if (id == R.id.Ordenes_menu) {
+            dialogOrdenes.show();
             request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
         } else if (id == R.id.Reportes) {
+            dialogOrdenes.show();
             request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Orden.this, Configuracion.class);

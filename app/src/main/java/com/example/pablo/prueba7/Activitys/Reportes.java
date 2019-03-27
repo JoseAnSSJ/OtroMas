@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,7 @@ import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
@@ -33,6 +35,8 @@ public class Reportes extends AppCompatActivity
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
    private quejas_adapter_result adapterqueja;
+    public static ProgressDialog dialogReportes;
+    BarraCargar barraCargar = new BarraCargar();
     NavigationView barra;
     TextView nombreTec;
     @Override
@@ -49,6 +53,7 @@ public class Reportes extends AppCompatActivity
         contratosearch=findViewById(R.id.contsearch);
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
+        dialogReportes= barraCargar.showDialog(this);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -58,7 +63,9 @@ public class Reportes extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
-
+//----
+        barraCargar.terminarBarra();
+        //----
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,8 +137,10 @@ public class Reportes extends AppCompatActivity
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
         } else if (id == R.id.Ordenes_menu) {
+            dialogReportes.show();
           request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
         } else if (id == R.id.Reportes) {
+            dialogReportes.show();
             request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Reportes.this, Configuracion.class);

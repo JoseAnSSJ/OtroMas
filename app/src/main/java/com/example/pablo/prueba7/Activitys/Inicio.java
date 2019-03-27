@@ -51,13 +51,10 @@ public class Inicio extends AppCompatActivity
         NavigationView barra;
     public static DrawerLayout drawer;
     public static PieChart  pieChart;
-    public static ProgressBar progressBarInicio;
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
     public static ProgressDialog dialogInicio;
-
-
-BarraCargar barraCargar = new BarraCargar();
+    BarraCargar barraCargar = new BarraCargar();
 
     public Inicio() throws JSONException {
     }
@@ -74,9 +71,8 @@ BarraCargar barraCargar = new BarraCargar();
         calleDireccion = (TextView)findViewById(R.id.calle);
         numeroDireccion= (TextView)findViewById(R.id.numero);
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
-        progressBarInicio = findViewById(R.id.barloginicio);
         barra = findViewById(R.id.nav_view);
-        dialogInicio= new BarraCargar().showDialog(this);
+        dialogInicio= barraCargar.showDialog(this);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,21 +80,26 @@ BarraCargar barraCargar = new BarraCargar();
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        if (SplashActivity.LoginShare==true) {
-            if(!isOnline()){
-                Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
-                finish();
+        try{
+            if (SplashActivity.LoginShare==true) {
+                if(!isOnline()){
+                    Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+                    finish();
 
-            }else {
-                dialogInicio.show();
-                request.getClv_tecnico(getApplicationContext());
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                }else {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
+                    dialogInicio.show();
+                    request.getProximaCita(getApplicationContext(),jsonObject);
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
+                }
+            }else{
+                pieChart.setVisibility(View.VISIBLE);
+                Grafica(pieChart);
             }
-        }else{
-            pieChart.setVisibility(View.VISIBLE);
-            Grafica(pieChart);
-        }
+        }catch (Exception e){}
+            barraCargar.terminarBarra();
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
@@ -149,42 +150,24 @@ BarraCargar barraCargar = new BarraCargar();
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         //----------------
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", 1);
-            jsonObject.put("clv_queja", 0);
-            jsonObject.put("contratoCom", 0);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-
-        //----------------
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Inicio.this, Inicio.class);
             startActivity(intent1);
-            finish();
-
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Inicio.this, Orden.class);
-            request.getListOrd(getApplicationContext(),jsonObject2);
+            dialogInicio.show();
+            request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
             tipodeDescarga="O";
-            startActivity(intent1);
-
-            finish();
         } else if (id == R.id.Reportes) {
-
-            request.getListQuejas(getApplicationContext(),jsonObject2);
+            dialogInicio.show();
+            request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
             tipodeDescarga="Q";
-            finish();
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Inicio.this, Configuracion.class);
-            intent1.putExtra("json",jsonObject.toString());
             startActivity(intent1);
-            finish();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -265,4 +248,29 @@ BarraCargar barraCargar = new BarraCargar();
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
+    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_queja", clvqueja);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
+    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_orden", clvorden);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
+
 }

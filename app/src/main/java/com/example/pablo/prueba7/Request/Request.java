@@ -291,7 +291,6 @@ public class Request extends AppCompatActivity {
                 try{
                     ErrorInicioDeSesion(context);
                 }catch (Exception e){ErrorCargarDatos(context);}
-                ((Activity)context).finish();
                 Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
             }
         });
@@ -341,7 +340,6 @@ public class Request extends AppCompatActivity {
                 try{
                     ErrorInicioDeSesion(context);
                 }catch (Exception e){ErrorCargarDatos(context);}
-                ((Activity)context).finish();
                 Toast.makeText(context, "Error al conseguir siguiente cita", Toast.LENGTH_LONG).show();
             }
         });
@@ -425,7 +423,6 @@ public class Request extends AppCompatActivity {
                 try{
                     ErrorInicioDeSesion(context);
                 }catch (Exception e){ErrorCargarDatos(context);}
-                ((Activity)context).finish();
                 Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
             }
         });
@@ -523,7 +520,6 @@ public class Request extends AppCompatActivity {
                 try{
                     ErrorInicioDeSesion(context);
                 }catch (Exception e){ErrorCargarDatos(context);}
-                ((Activity)context).finish();
                 Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
             }
         });
@@ -556,6 +552,7 @@ public class Request extends AppCompatActivity {
                     }
                     Intent intent1 = new Intent(context, Reportes.class);
                     context.startActivity(intent1);
+
                 } else {
                     Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
                 }
