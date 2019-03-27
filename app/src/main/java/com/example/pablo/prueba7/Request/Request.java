@@ -18,6 +18,7 @@ import com.example.pablo.prueba7.Activitys.CambioDom;
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
+import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 
@@ -146,7 +147,7 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, clave_tecnico, msgComando = "";
+    public static String reintentarComando, obsMA ,extencionesE, Obs, clave_tecnico, msgComando = "";
     public static boolean isnet;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
@@ -159,7 +160,7 @@ public class Request extends AppCompatActivity {
     String f = "Seleccione tipo de solucion";
     public static String datos[];
     //--------------------------------//
-    private String sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
+    private String sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia,contraroMA,statusMA;
     //----------------------------------//
 
     public void ErrorInicioDeSesion(final Context context) {
@@ -603,7 +604,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Consuta pantalla ordenes//
-  /*  public void getDeepCons(final Context context, final JSONObject jsonObject) {
+    public void getDeepCons(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataDeepCons();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -633,7 +634,7 @@ public class Request extends AppCompatActivity {
                                 userJson.get("Fec_Sol").getAsString()
                         );
                     }
-                    getTrabajos(context);
+                    getTrabajos(context,jsonObject);
                     try {
                         contraroMA = (String.valueOf(DeepConsModel.getContatoCom()));
                     } catch (Exception e) {
@@ -667,7 +668,56 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+    //informacion trabajos//
+    public void getTrabajos(final Context context, final JSONObject jsonObject) {
+        Call<Example3> call = services.RequestPost(context, jsonObject).getDataTrabajos();
+        call.enqueue(new Callback<Example3>() {
+            @Override
+            public void onResponse(Call<Example3> call, Response<Example3> response) {
+                if (response.code() == 200) {
+                    Array.trabajox.clear();
+                    Array.accionx.clear();
+                    Array.clavex.clear();
+                    Array.clv_trabajox.clear();
+                    Array.recibix.clear();
+                    isnet = false;
+                    Example3 jsonResponse = response.body();
+                    array.dataTrabajos = new ArrayList<List<GetBUSCADetOrdSerListResult>>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));
+                    Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
+                    Array.trabajox.clear();
+                    Array.accionx.clear();
+                    while (itData.hasNext()) {
+                        List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            dat.get(i).setSeRealiza(false);
+                            Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
+                            Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
+                            Array.clavex.add(dat.get(i).getClave());
+                            Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
+                            Array.recibix.add(dat.get(i).getSeRealiza());
+                            if (dat.get(i).getClvTrabajo() == 1270) {
+                                isnet = true;
+                            }
+                            if (dat.get(i).getClvTrabajo() == 1203) {
+                                rapagejecutar = true;
+                            }
+                        }
 
+                        Intent intento1 = new Intent(context, MainActivity.class);
+                        intento1.putExtra("contratp",contraroMA);
+                        intento1.putExtra("estatus",statusMA);
+                        context.startActivity(intento1);
+                    }
+                } else {
+                    Toast.makeText(context, "Error al conseguir trabajos", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Example3> call, Throwable t) {
+            }
+        });
+    }
     //Informacion del Cliente//
     public void getInfoCliente(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataInfoCliente();
@@ -719,7 +769,7 @@ public class Request extends AppCompatActivity {
                             resumen.add(i, a);
                         }
                         MainActivity.InfoServicios.setText(resumen.toString());
-
+                        MainActivity.dialogMain.dismiss();
                     }
                 } else {
                     Toast.makeText(context, "Error al conseguir servicios del cliente", Toast.LENGTH_LONG).show();
@@ -732,60 +782,9 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    //informacion trabajos//
-    public void getTrabajos(final Context context, final JSONObject jsonObject) {
-        Call<Example3> call = services.RequestPost(context, jsonObject).getDataTrabajos();
-        call.enqueue(new Callback<Example3>() {
-            @Override
-            public void onResponse(Call<Example3> call, Response<Example3> response) {
-                if (response.code() == 200) {
-                    Array.trabajox.clear();
-                    Array.accionx.clear();
-                    Array.clavex.clear();
-                    Array.clv_trabajox.clear();
-                    Array.recibix.clear();
-                    isnet = false;
-                    Example3 jsonResponse = response.body();
-                    array.dataTrabajos = new ArrayList<List<GetBUSCADetOrdSerListResult>>(asList(jsonResponse.getGetBUSCADetOrdSerListResult()));
-                    Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
-                    Array.trabajox.clear();
-                    Array.accionx.clear();
-                    while (itData.hasNext()) {
-                        List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
-                        for (int i = 0; i < dat.size(); i++) {
-                            dat.get(i).setSeRealiza(false);
-                            Array.trabajox.add(String.valueOf(dat.get(i).getDescripcion()));
-                            Array.accionx.add(String.valueOf(dat.get(i).getAccion()));
-                            Array.clavex.add(dat.get(i).getClave());
-                            Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
-                            Array.recibix.add(dat.get(i).getSeRealiza());
-                            if (dat.get(i).getClvTrabajo() == 1270) {
-                                isnet = true;
-                            }
-                            if (dat.get(i).getClvTrabajo() == 1203) {
-                                rapagejecutar = true;
-                            }
-                        }
-                        Intent intento1 = new Intent(context, MainActivity.class);
-                        context.startActivity(intento1);
-                        try {
-                            trabajos.setAdapter(adaptertrabajos);
-                        } catch (Exception e) {
 
-                        }
-                    }
-                } else {
-                    Toast.makeText(context, "Error al conseguir trabajos", Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Example3> call, Throwable t) {
-            }
-        });
-    }
-
-    //TecnicoSecundario////
+   /* //TecnicoSecundario////
     public void getTecSec(final Context context, final JSONObject jsonObject) {
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0, -1);

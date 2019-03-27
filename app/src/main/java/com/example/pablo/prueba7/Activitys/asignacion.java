@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
@@ -25,6 +25,7 @@ import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -100,7 +101,7 @@ public class asignacion extends AppCompatActivity {
             public void onClick(View v) {
                 dialogAsignacion.show();
                 for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
-                    Array.dataArbSer.get(0).get(a).setClv_orden(clvor);
+                    Array.dataArbSer.get(0).get(a).setClv_orden(Util.getClvOrden(Util.preferences));
                 }
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();

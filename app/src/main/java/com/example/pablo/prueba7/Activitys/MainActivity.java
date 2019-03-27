@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,13 +20,19 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.Trabajos;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import androidx.annotation.RequiresApi;
 
@@ -43,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     int position;
     RelativeLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
-
+    public static ProgressDialog dialogMain;
+    BarraCargar barraCargar = new BarraCargar();
     Request request = new Request();
 
     @Override
@@ -62,21 +70,28 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
         setTitle(null);
-
-       // NombreTec.setText(nombre_tecnico);
-        Contrato.setText(request.contraroMA);
-        Status.setText(request.statusMA);
+        ordenes_adapter_result.dialogTrabajos.dismiss();
+        Contrato.setText(getIntent().getStringExtra("contato"));
+        Status.setText(getIntent().getStringExtra("estatus"));
+        dialogMain= barraCargar.showDialog(this);
         NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //* Boton de informacion
+        final JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject1 = new JSONObject();
+        try{
+            jsonObject.put("CONTRATO", DeepConsModel.Contrato);
+            jsonObject1.put("Contrato", DeepConsModel.Contrato);
+        }catch (Exception e){}
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  request.getInfoCliente(getApplicationContext());
-              //      request.getServicios(getApplicationContext());
+
+                request.getInfoCliente(getApplicationContext(),jsonObject);
+                    request.getServicios(getApplicationContext(),jsonObject1);
                 if(layoutAnimado.getVisibility()==View.GONE) {
+                    dialogMain.show();
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);
-
                     info.setText("Ocultar");
                 }
                 else{
@@ -190,8 +205,15 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         if((position-1)>=0){
             mViewPager.setCurrentItem(position-1);}
             else{
-            finish();
-            TecSec.setSelection(0);
+            if(layoutAnimado.getVisibility()==View.VISIBLE){
+                layoutAnimado.setVisibility(View.GONE);
+                hzScrollView.setVisibility(View.GONE);
+                info.setText("Info");
+            }else{
+                finish();
+                TecSec.setSelection(0);
+            }
+
             }
             }
 

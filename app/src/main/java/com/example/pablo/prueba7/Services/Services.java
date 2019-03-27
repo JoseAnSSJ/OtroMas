@@ -40,7 +40,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.pablo.prueba7.Activitys.Inicio.tipodeDescarga;
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.clv_unicaNet;
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport;
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
@@ -116,121 +115,8 @@ public class Services {
     }
 
 
-    //Servicios Service//
-    public Service getServiciosService(final Context context) throws JSONException {
-        //POST Body Json
-        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Contrato", DeepConsModel.Contrato);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body).build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
-                .client(client).addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-
-    }
-
-    //Informacion pantalla de ordenes//
-    public Service getDeepConsService(final Context context) throws JSONException {
-        //POST Body Json
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Orden", clvor);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
-
-    //Informacion del cliente//
-    public Service getInfoClienteService(final Context context) throws JSONException {
-        //POST Body Json
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("CONTRATO", DeepConsModel.Contrato);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
-
-    //Lista de Trabajos//
-    public Service getTrabajoService(final Context context) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Orden", clvor);
-        MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit.create(Service.class);
-    }
-
+/*
     //Tecnico Secundario//
     public Service getTecSecService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
@@ -1804,7 +1690,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-
+*/
     ////////////////////////
 
     public String getToken(final Context context) {

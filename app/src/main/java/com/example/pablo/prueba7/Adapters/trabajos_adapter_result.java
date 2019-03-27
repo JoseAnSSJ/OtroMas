@@ -18,6 +18,7 @@ import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
@@ -185,7 +186,7 @@ try{
 
             jsonObject = new JSONObject();
             jsonObject.put("Clave", Clave);
-            jsonObject.put("Clv_Orden", clvor);
+            jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));
             jsonObject.put("Clv_Trabajo", clvTra);
             jsonObject.put("Descripcion", descr);
             jsonObject.put("Obs", JSONObject.NULL);

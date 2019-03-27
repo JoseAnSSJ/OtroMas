@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Adapters;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,7 +25,7 @@ import static com.example.pablo.prueba7.Activitys.Orden.progressBarOrdenes;
 
 public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
-    public static Integer clvor;
+    public Integer clvor;
     private LayoutInflater inflater;
     private Context mContext;
     private ArrayList<String> ordensrc;
@@ -29,6 +34,8 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
     private ArrayList<String>statusrc;
     private ArrayList<String>direccionsrc;
     private Request request=new Request();
+    public static ProgressDialog dialogTrabajos;
+    BarraCargar barraCargar = new BarraCargar();
 
     public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc,ArrayList<String>direccionsrc){
 
@@ -66,6 +73,9 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
+        dialogTrabajos= barraCargar.showDialog(mContext);
+        Util.preferences = mContext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
         if (convertView == null) {
             holder = new viewHolder();
 
@@ -83,7 +93,6 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
         else {
             holder=(viewHolder)convertView.getTag();
         }
-        progressBarOrdenes.setVisibility(View.VISIBLE);
         holder.nombre.setText(Array.nombresrc.get(position));
         holder.orden.setText(Array.ordensrc.get(position));
         holder.contrato1.setText(Array.contratosrc.get(position));
@@ -92,11 +101,16 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
         holder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clvor = Integer.valueOf(ordensrc.get(position));
-               // request.getDeepCons(mContext);
+                dialogTrabajos.show();
+                Util.editor.putInt("ClvOrden", Integer.parseInt(ordensrc.get(position)));
+                Util.editor.commit();
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));
+                }catch (Exception e){}
+                request.getDeepCons(mContext,jsonObject);
             }
         });
-        progressBarOrdenes.setVisibility(View.INVISIBLE);
         return convertView;
     }
 }
