@@ -533,7 +533,7 @@ BarraCargar barraCargar = new BarraCargar();
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.Direccion.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO()));
+                            Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO() + ", " + dat.get(i).getColonia()));
                         }
                     }
                 } else {
@@ -574,7 +574,7 @@ BarraCargar barraCargar = new BarraCargar();
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNumero()));
+                            Array.direccionsrc.add(String.valueOf( dat.get(i).getCalle()+ ", " +dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
                         }
                     }
                 } else {
