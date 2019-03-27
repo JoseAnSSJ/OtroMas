@@ -93,7 +93,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
             @Override
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));
-                request.getDeepCons(mContext);
+               // request.getDeepCons(mContext);
             }
         });
         progressBarOrdenes.setVisibility(View.INVISIBLE);

@@ -138,11 +138,11 @@ try{
                 Request request = new Request();
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
                     dialogTrabajos.show();
-                    request.getArbSer(Cmcontext);
+                   // request.getArbSer(Cmcontext);
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")) {
                     dialogTrabajos.show();
-                    request.getArbSer(Cmcontext);
+                   // request.getArbSer(Cmcontext);
                     isnet=1;
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
@@ -153,7 +153,7 @@ try{
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
                     dialogTrabajos.show();
-                    request.getCAMDO(Cmcontext);
+                   // request.getCAMDO(Cmcontext);
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
                     dialogTrabajos.show();
@@ -163,7 +163,7 @@ try{
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
                     dialogTrabajos.show();
-                    request.getExtencionesAdicionales(Cmcontext);
+                   // request.getExtencionesAdicionales(Cmcontext);
                 }
 
             }

@@ -34,10 +34,14 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
+import static com.example.pablo.prueba7.Services.Services.jsonObject;
 import static com.example.pablo.prueba7.Services.Services.opcion;
 
 
@@ -53,7 +57,13 @@ public class Inicio extends AppCompatActivity
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
     public static ProgressDialog dialogInicio;
+//    JSONObject jsonObject = new JSONObject(getIntent().getStringExtra("json"));
+
 BarraCargar barraCargar = new BarraCargar();
+
+    public Inicio() throws JSONException {
+    }
+
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -91,7 +101,6 @@ BarraCargar barraCargar = new BarraCargar();
             pieChart.setVisibility(View.VISIBLE);
             Grafica(pieChart);
         }
-
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
@@ -146,15 +155,15 @@ BarraCargar barraCargar = new BarraCargar();
             Intent intent1 = new Intent(Inicio.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-            request.getProximaCita(getApplicationContext());
-            request.getOrdenes(getApplicationContext());
+            request.getProximaCita(getApplicationContext(),jsonObject);
+            request.getOrdenes(getApplicationContext(),jsonObject);
             finish();
 
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd(getApplicationContext());
+           // request.getListOrd(getApplicationContext());
             tipodeDescarga="O";
             startActivity(intent1);
 
@@ -163,7 +172,7 @@ BarraCargar barraCargar = new BarraCargar();
             Intent intent1 = new Intent(Inicio.this, Reportes.class);
             clavequeja=0;
             opcion=1;
-            request.getListQuejas(getApplicationContext());
+           /// request.getListQuejas(getApplicationContext());
             tipodeDescarga="Q";
             startActivity(intent1);
             finish();

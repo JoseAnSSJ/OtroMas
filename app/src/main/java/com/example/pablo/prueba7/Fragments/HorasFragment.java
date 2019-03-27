@@ -52,10 +52,10 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_horas, container, false);
-        request.getTecSecR(getContext());
+      //  request.getTecSecR(getContext());
         todo = view.findViewById(R.id.todo);
         TecSec1 = view.findViewById(R.id.tecnicosec1);
-        request.getTecSecR(getContext());
+       // request.getTecSecR(getContext());
 
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

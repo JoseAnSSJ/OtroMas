@@ -18,8 +18,8 @@ public class Util {
         return preferences.getString("token", "");
     }
 
-    public static int getPositionTecSec(SharedPreferences preferences){
-        return preferences.getInt("posicion", 0);
+    public static int getClvTecnico(SharedPreferences preferences){
+        return preferences.getInt("clvTecnico", 0);
     }
 
     public static String getNombreTecnicoPreference(SharedPreferences preferences){

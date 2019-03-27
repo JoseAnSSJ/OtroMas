@@ -100,7 +100,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Obs = view.findViewById(R.id.tv_Observaciones);
 
-        request.getTecSec(getContext());
+       // request.getTecSec(getContext());
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);

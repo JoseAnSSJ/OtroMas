@@ -66,7 +66,7 @@ if(request.rapagejecutar==true){
         dialogEjecutar.dismiss();
     } else {
         try {
-            request.send_aparat(getContext());
+          //  request.send_aparat(getContext());
             //**************************************
          Ejecutar();
             ////////*************************
@@ -87,7 +87,7 @@ Ejecutar();
             @Override
             public void onClick(View view) {
                 dialogEjecutar.show();
-                request.ReintentarComando(getActivity());
+                //request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
             }
         });
@@ -105,7 +105,7 @@ public void Ejecutar(){
         fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
         horaHoy = horaE + ":" + minutoE;
         eject.setEnabled(false);
-        request.getValidaOrdSer(getActivity());
+       // request.getValidaOrdSer(getActivity());
 
     }
     if (horas.visita == 1) {

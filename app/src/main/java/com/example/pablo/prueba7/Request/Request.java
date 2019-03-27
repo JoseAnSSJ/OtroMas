@@ -1,7 +1,6 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,8 +19,6 @@ import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
-import com.example.pablo.prueba7.Fragments.HorasFragment;
-
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
@@ -107,6 +104,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -159,8 +157,8 @@ public class Request extends AppCompatActivity {
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
     public static String datos[];
-    String Text="Request";
-BarraCargar barraCargar = new BarraCargar();
+
+    BarraCargar barraCargar = new BarraCargar();
 
     public void ErrorInicioDeSesion(final Context context) {
 
@@ -173,7 +171,7 @@ BarraCargar barraCargar = new BarraCargar();
         } catch (Exception e) {
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-           // ((Activity) context).finish();
+            // ((Activity) context).finish();
         }
 
     }
@@ -181,13 +179,13 @@ BarraCargar barraCargar = new BarraCargar();
     public void ErrorCargarDatos(final Context context) {
 
         try {
-            Login.dialogLogin= new BarraCargar().showDialog(context);
+            Login.dialogLogin = new BarraCargar().showDialog(context);
             Login.dialogLogin.dismiss();
             usurio.setEnabled(true);
             contraseña.setEnabled(true);
             entrar.setEnabled(true);
         } catch (Exception e) {
-            Inicio.dialogInicio= new BarraCargar().showDialog(context);
+            Inicio.dialogInicio = new BarraCargar().showDialog(context);
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
             ((Activity) context).finish();
@@ -196,34 +194,40 @@ BarraCargar barraCargar = new BarraCargar();
 
     //Token///
     public void getReviews(final Context context) {
-        Services restApiAdapter = new Services();
-        Service service = restApiAdapter.getClientService(context);
+
+        Service service = services.getClientService(context);
         Call<JsonObject> call = service.getDataUser();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
-                if (response.code() == 200) {
-                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                    Util.editor = Util.preferences.edit();
-                    JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
-                    //Introduccion de datos del request en el Modelo para poder usarlos
-                    UserModel user = new UserModel(
-                            userJson.get("Usuario").getAsString(),
-                            userJson.get("Token").getAsString(),
-                            userJson.get("Codigo").getAsString(),
-                            userJson.get("IdUsuario").getAsInt()
-                    );
-                    Util.editor.putString("token", user.getCodigo());
-                    Util.editor.commit();
-                    getClv_tecnico(context);
-                } else {
-                    Login.dialogLogin.dismiss();
-                    Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
-                }
+                try{
+                    if (response.code() == 200) {
+                        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        Util.editor = Util.preferences.edit();
+                        JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
+                        //Introduccion de datos del request en el Modelo para poder usarlos
+                        UserModel user = new UserModel(
+                                userJson.get("Usuario").getAsString(),
+                                userJson.get("Token").getAsString(),
+                                userJson.get("Codigo").getAsString(),
+                                userJson.get("IdUsuario").getAsInt()
+                        );
+                        Util.editor.putString("token", user.getCodigo());
+
+                        JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("Clv_Usuario",Util.getUsuarioPreference(Util.preferences));
+                        Util.editor.commit();
+                        getClv_tecnico(context);
+                    } else {
+                        Login.dialogLogin.dismiss();
+                        Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
+                        usurio.setEnabled(true);
+                        contraseña.setEnabled(true);
+                        entrar.setEnabled(true);
+                    }
+                }catch (Exception e){}
+
 
 
             }
@@ -241,40 +245,45 @@ BarraCargar barraCargar = new BarraCargar();
 
     //Clave Tecnico//
     public void getClv_tecnico(final Context context) {
-        Service service = null;
-        try {
-            service = services.getTecService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONResponseTecnico> call = service.getDataTec();
+        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("Clv_Usuario",Util.getUsuarioPreference(Util.preferences));
+        }catch (Exception e){}
+        Call<JSONResponseTecnico> call = services.RequestPost(context, jsonObject).getDataTec();
         call.enqueue(new Callback<JSONResponseTecnico>() {
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
-                if (response.code() == 200) {
-                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                    Util.editor = Util.preferences.edit();
-                    JSONResponseTecnico jsonResponse = response.body();
-                    //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
-                    array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
-                    //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
-                    Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
-                    while (iteData.hasNext()) {
-                        List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
-                        //Se recorre la lista y se guarla la informacion en el Modelo
-                        clave_tecnico = data.get(0).clv_tecnico;
-                        nombre_tecnico = data.get(0).tecnico;
-                        services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
-                        Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
-                        Util.editor.commit();
-                    }
-                    getProximaCita(context);
-                } else {
-                    ErrorCargarDatos(context);
+                Log.d("asd","asd");
+                try{
+                    if (response.code() == 200) {
 
-                    Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
-                }
+                        JSONResponseTecnico jsonResponse = response.body();
+                        //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
+                        array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
+                        //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
+                        Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
+                        while (iteData.hasNext()) {
+                            List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
+                            //Se recorre la lista y se guarla la informacion en el Modelo
+                           // clave_tecnico = data.get(0).clv_tecnico;
+                          //  nombre_tecnico = data.get(0).tecnico;
+                            Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
+                            Util.editor.putInt("clvTecnico", data.get(0).getClv_tecnico());
+                        }
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
+                        getProximaCita(context,jsonObject);
+                        Util.editor.commit();
+                    } else {
+                        ErrorCargarDatos(context);
+
+                        Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception e){}
+
             }
 
             @Override
@@ -285,14 +294,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Proxima Cita//
-    public void getProximaCita(final Context context) {
-        Service service = null;
-        try {
-            service = services.getProxService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataProx();
+    public void getProximaCita(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataProx();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -314,10 +317,13 @@ BarraCargar barraCargar = new BarraCargar();
                         siguenteCalle = user.Calle;
                         sigueinteNumero = user.NUMERO;
                         siguenteColonia = user.Colonia;
+
+
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
+                        getOrdenes(context,jsonObject);
                     } catch (Exception e) {
                     }
-                    getOrdenes(context);
-
                 } else {
                     ErrorCargarDatos(context);
 
@@ -333,77 +339,76 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //ORDENES//
-    public void getOrdenes(final Context context) {
-        Service service = null;
-        try {
-            service = services.getOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example> call = service.getDataOrdenes();
+    public void getOrdenes(final Context context, final JSONObject jsonObject) {
+        Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
-                if (response.code() == 200) {
-                    Example jsonResponse = response.body();
-                    try {
-                        array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
-                        Iterator<List<OrdSer>> itData = array.dataord.iterator();
-                        while (itData.hasNext()) {
-                            List<OrdSer> dat = (List<OrdSer>) itData.next();
-                            for (int i = 0; i < dat.size(); i++) {
-                                if (dat.get(i).getStatus().equals("Ejecutada")) {
-                                    try {
-                                        Inicio.OE = dat.get(i).getTotal();
+                try{
+                    if (response.code() == 200) {
+                        Example jsonResponse = response.body();
+                        try {
+                            array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
+                            Iterator<List<OrdSer>> itData = array.dataord.iterator();
+                            while (itData.hasNext()) {
+                                List<OrdSer> dat = (List<OrdSer>) itData.next();
+                                for (int i = 0; i < dat.size(); i++) {
+                                    if (dat.get(i).getStatus().equals("Ejecutada")) {
+                                        try {
+                                            Inicio.OE = dat.get(i).getTotal();
 
-                                    } catch (Exception e) {
-                                        Inicio.OE = 0;
+                                        } catch (Exception e) {
+                                            Inicio.OE = 0;
+                                        }
                                     }
-                                }
-                                if (dat.get(i).getStatus().equals("Pendiente")) {
-                                    try {
-                                        Inicio.OP = dat.get(i).getTotal();
-                                    } catch (Exception e) {
-                                        Inicio.OP = 0;
+                                    if (dat.get(i).getStatus().equals("Pendiente")) {
+                                        try {
+                                            Inicio.OP = dat.get(i).getTotal();
+                                        } catch (Exception e) {
+                                            Inicio.OP = 0;
+                                        }
                                     }
-                                }
-                                if (dat.get(i).getStatus().equals("Visita")) {
-                                    try {
-                                        Inicio.OV = dat.get(i).getTotal();
-                                    } catch (Exception e) {
-                                        Inicio.OV = 0;
-                                    }
+                                    if (dat.get(i).getStatus().equals("Visita")) {
+                                        try {
+                                            Inicio.OV = dat.get(i).getTotal();
+                                        } catch (Exception e) {
+                                            Inicio.OV = 0;
+                                        }
 
-                                }
-                                if (dat.get(i).getStatus().equals("En Proceso")) {
-                                    try {
-                                        Inicio.OEP = dat.get(i).getTotal();
-                                    } catch (Exception e) {
-                                        Inicio.OEP = 0;
                                     }
-                                }
-                                if (dat.get(i).getStatus().equals("otro")) {
-                                    try {
-                                        Inicio.OO = dat.get(i).getTotal();
-                                    } catch (Exception e) {
-                                        Inicio.OO = 0;
+                                    if (dat.get(i).getStatus().equals("En Proceso")) {
+                                        try {
+                                            Inicio.OEP = dat.get(i).getTotal();
+                                        } catch (Exception e) {
+                                            Inicio.OEP = 0;
+                                        }
+                                    }
+                                    if (dat.get(i).getStatus().equals("otro")) {
+                                        try {
+                                            Inicio.OO = dat.get(i).getTotal();
+                                        } catch (Exception e) {
+                                            Inicio.OO = 0;
+                                        }
                                     }
                                 }
                             }
+                        } catch (Exception e) {
+                            Inicio.OE = 0;
+                            Inicio.OP = 0;
+                            Inicio.OV = 0;
+                            Inicio.OEP = 0;
+                            Inicio.OO = 0;
                         }
-                    } catch (Exception e) {
-                        Inicio.OE = 0;
-                        Inicio.OP = 0;
-                        Inicio.OV = 0;
-                        Inicio.OEP = 0;
-                        Inicio.OO = 0;
-                    }
-                    getQuejas(context);
-                } else {
-                    ErrorCargarDatos(context);
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("Clv_Usuario",Util.getClvTecnico(Util.preferences));
+                        getQuejas(context,jsonObject);
+                    } else {
+                        ErrorCargarDatos(context);
 
-                    Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
-                }
+                        Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception e){}
+
             }
 
             @Override
@@ -414,87 +419,84 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Quejas//
-    public void getQuejas(final Context context) {
-        Service service = null;
-        try {
-            service = services.getOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example> call = service.getDataOrdenes();
+    public void getQuejas(final Context context, final JSONObject jsonObject) {
+        Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
 
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
-                if (response.code() == 200) {
-                    Example jsonResponse = response.body();
-                    array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
-                    Iterator<List<Queja>> itData = array.dataque.iterator();
-                    while (itData.hasNext()) {
-                        List<Queja> dat = (List<Queja>) itData.next();
-                        for (int i = 0; i < dat.size(); i++) {
-                            if (dat.get(i).getStatus().equals("Ejecutada")) {
-                                try {
-                                    Inicio.RE = dat.get(i).getTotal();
+                try{
+                    if (response.code() == 200) {
+                        Example jsonResponse = response.body();
+                        array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
+                        Iterator<List<Queja>> itData = array.dataque.iterator();
+                        while (itData.hasNext()) {
+                            List<Queja> dat = (List<Queja>) itData.next();
+                            for (int i = 0; i < dat.size(); i++) {
+                                if (dat.get(i).getStatus().equals("Ejecutada")) {
+                                    try {
+                                        Inicio.RE = dat.get(i).getTotal();
 
-                                } catch (Exception e) {
-                                    Inicio.RE = 0;
+                                    } catch (Exception e) {
+                                        Inicio.RE = 0;
+                                    }
                                 }
-                            }
-                            if (dat.get(i).getStatus().equals("Pendiente")) {
-                                try {
-                                    Inicio.RP = dat.get(i).getTotal();
-                                } catch (Exception e) {
-                                    Inicio.RP = 0;
+                                if (dat.get(i).getStatus().equals("Pendiente")) {
+                                    try {
+                                        Inicio.RP = dat.get(i).getTotal();
+                                    } catch (Exception e) {
+                                        Inicio.RP = 0;
+                                    }
                                 }
-                            }
-                            if (dat.get(i).getStatus().equals("Visita")) {
-                                try {
-                                    Inicio.RV = dat.get(i).getTotal();
-                                } catch (Exception e) {
-                                    Inicio.RV = 0;
-                                }
+                                if (dat.get(i).getStatus().equals("Visita")) {
+                                    try {
+                                        Inicio.RV = dat.get(i).getTotal();
+                                    } catch (Exception e) {
+                                        Inicio.RV = 0;
+                                    }
 
-                            }
-                            if (dat.get(i).getStatus().equals("En Proceso")) {
-                                try {
-                                    Inicio.REP = dat.get(i).getTotal();
-                                } catch (Exception e) {
-                                    Inicio.REP = 0;
+                                }
+                                if (dat.get(i).getStatus().equals("En Proceso")) {
+                                    try {
+                                        Inicio.REP = dat.get(i).getTotal();
+                                    } catch (Exception e) {
+                                        Inicio.REP = 0;
+                                    }
+                                }
+                                if (dat.get(i).getStatus().equals("otro")) {
+                                    try {
+                                        Inicio.RO = dat.get(i).getTotal();
+                                    } catch (Exception e) {
+                                        Inicio.RO = 0;
+                                    }
                                 }
                             }
-                            if (dat.get(i).getStatus().equals("otro")) {
-                                try {
-                                    Inicio.RO = dat.get(i).getTotal();
-                                } catch (Exception e) {
-                                    Inicio.RO = 0;
-                                }
-                            }
+
                         }
+                        if (SplashActivity.LoginShare == true) {
+                            Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                            Inicio.pieChart.setVisibility(View.VISIBLE);
+                            Inicio.Grafica(Inicio.pieChart);
+                            Inicio.tipoTrabajo.setText(sigueinteTipo);
+                            Inicio.contratoTrabajo.setText(siguenteContrato);
+                            Inicio.horaTrabajo.setText(sigueinteHora);
+                            Inicio.calleDireccion.setText(siguenteCalle);
+                            Inicio.numeroDireccion.setText(sigueinteNumero);
+                            Inicio.coloniaDireccion.setText(siguenteColonia);
+                            Inicio.dialogInicio.dismiss();
+                        } else {
+                            Intent intento = new Intent(context, Inicio.class);
+                            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivity(intento);
+                            Login.dialogLogin.dismiss();
+                        }
+                    } else {
+                        ErrorCargarDatos(context);
+                        Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
 
                     }
-                    if(SplashActivity.LoginShare==true) {
-                        Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                        Inicio.pieChart.setVisibility(View.VISIBLE);
-                        Inicio.Grafica(Inicio.pieChart);
-                        Inicio.tipoTrabajo.setText(sigueinteTipo);
-                        Inicio.contratoTrabajo.setText(siguenteContrato);
-                        Inicio.horaTrabajo.setText(sigueinteHora);
-                        Inicio.calleDireccion.setText(siguenteCalle);
-                        Inicio.numeroDireccion.setText(sigueinteNumero);
-                        Inicio.coloniaDireccion.setText(siguenteColonia);
-                        Inicio.dialogInicio.dismiss();
-                    }else {
-                        Intent intento = new Intent(context, Inicio.class);
-                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivity(intento);
-                        Login.dialogLogin.dismiss();
-                    }
-                } else {
-                    ErrorCargarDatos(context);
-                    Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
+                }catch (Exception e){}
 
-                }
             }
 
             @Override
@@ -504,16 +506,10 @@ BarraCargar barraCargar = new BarraCargar();
             }
         });
     }
-
+/*
     //Lista de ordenes///
-    public void getListQuejas(final Context context) {
-        Service service = null;
-        try {
-            service = services.getListQuejasService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<QuejasList> call = service.getQuejasAgendadas();
+    public void getListQuejas(final Context context, final JSONObject jsonObject) {
+        Call<QuejasList> call = services.RequestPost(context, jsonObject).getQuejasAgendadas();
         call.enqueue(new Callback<QuejasList>() {
             @Override
             public void onResponse(Call<QuejasList> call, Response<QuejasList> response) {
@@ -548,14 +544,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getListOrd(final Context context) {
-        Service service = null;
-        try {
-            service = services.getListOrdService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example1> call = service.getDataListOrd();
+    public void getListOrd(final Context context, final JSONObject jsonObject) {
+        Call<Example1> call = services.RequestPost(context, jsonObject).getDataListOrd();
         call.enqueue(new Callback<Example1>() {
             @Override
             public void onResponse(Call<Example1> call, Response<Example1> response) {
@@ -589,14 +579,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Consuta pantalla ordenes//
-    public void getDeepCons(final Context context) {
-        Service service = null;
-        try {
-            service = services.getDeepConsService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataDeepCons();
+    public void getDeepCons(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataDeepCons();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -661,14 +645,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Informacion del Cliente//
-    public void getInfoCliente(final Context context) {
-        Service service = null;
-        try {
-            service = services.getInfoClienteService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataInfoCliente();
+    public void getInfoCliente(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataInfoCliente();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -699,14 +677,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //ServiciosdelCliente//
-    public void getServicios(final Context context) {
-        Service service = null;
-        try {
-            service = services.getServiciosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example2> call = service.getDataServicios();
+    public void getServicios(final Context context, final JSONObject jsonObject) {
+        Call<Example2> call = services.RequestPost(context, jsonObject).getDataServicios();
         call.enqueue(new Callback<Example2>() {
             @Override
             public void onResponse(Call<Example2> call, Response<Example2> response) {
@@ -737,14 +709,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //informacion trabajos//
-    public void getTrabajos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getTrabajoService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example3> call = service.getDataTrabajos();
+    public void getTrabajos(final Context context, final JSONObject jsonObject) {
+        Call<Example3> call = services.RequestPost(context, jsonObject).getDataTrabajos();
         call.enqueue(new Callback<Example3>() {
             @Override
             public void onResponse(Call<Example3> call, Response<Example3> response) {
@@ -796,17 +762,10 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //TecnicoSecundario////
-    public void getTecSec(final Context context) {
+    public void getTecSec(final Context context, final JSONObject jsonObject) {
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0, -1);
-
-        Service service = null;
-        try {
-            service = services.getTecSecService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONTecSec> call = service.getDataTecSec();
+        Call<JSONTecSec> call = services.RequestPost(context, jsonObject).getDataTecSec();
         call.enqueue(new Callback<JSONTecSec>() {
             @Override
             public void onResponse(Call<JSONTecSec> call, Response<JSONTecSec> response) {
@@ -842,14 +801,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getExtencionesAdicionales(final Context context) {
-        Service service = null;
-        try {
-            service = services.getExtencionAdiService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataExtencionAdi();
+    public void getExtencionesAdicionales(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).RequestPost(context, jsonObject);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -871,13 +824,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //ClientesAparato//
-    public void getCliApa(final Context context) {
-        Service service = null;
-        try {
-            service = services.getCliApaService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void getCliApa(final Context context, final JSONObject jsonObject) {
+        services.RequestPost(context, jsonObject)
         Call<JSONCLIAPA> call = service.getDataCliApa();
         call.enqueue(new Callback<JSONCLIAPA>() {
             @Override
@@ -916,9 +864,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Status Aparato////
-    public void getStatusApa(final Context context) {
-        Service service = services.getStatusApa(context);
-        Call<JSONStatusApa> call = service.getDataStatusApa();
+    public void getStatusApa(final Context context, final JSONObject jsonObject) {
+        Call<JSONStatusApa> call = services.getStatusApa(context).getDataStatusApa();
         call.enqueue(new Callback<JSONStatusApa>() {
             @Override
             public void onResponse(Call<JSONStatusApa> call, Response<JSONStatusApa> response) {
@@ -956,14 +903,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //TipoAparato////
-    public void getApaTipo(final Context context) {
-        Service service = null;
-        try {
-            service = services.getApaTipoService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONApaTipo> call = service.getDataApaTipo();
+    public void getApaTipo(final Context context, final JSONObject jsonObject) {
+        Call<JSONApaTipo> call = services.RequestPost(context, jsonObject).getDataApaTipo();
         call.enqueue(new Callback<JSONApaTipo>() {
             @Override
             public void onResponse(Call<JSONApaTipo> call, Response<JSONApaTipo> response) {
@@ -1016,15 +957,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //AparatoDisponible////
-    public void getApaTipDis(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.getApaTipDisService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONApaTipDis> call = service.getDataApaTipDis();
+    public void getApaTipDis(final Context context, final JSONObject jsonObject) {
+        Call<JSONApaTipDis> call = services.RequestPost(context, jsonObject).getDataApaTipDis();
         call.enqueue(new Callback<JSONApaTipDis>() {
             @Override
             public void onResponse(Call<JSONApaTipDis> call, Response<JSONApaTipDis> response) {
@@ -1066,10 +1000,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getDeepCAPAT(final Context context) {
-        Services restApiAdapter = new Services();
-        Service service = restApiAdapter.getDeepCAPATService(context);
-        Call<JsonObject> call = service.getDeepCAPAT();
+    public void getDeepCAPAT(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDeepCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -1101,14 +1033,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getCAMDO(final Context context) {
-        Service service = null;
-        try {
-            service = services.getCAMODOService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONCAMDO> call = service.getDataCAMDO();
+    public void getCAMDO(final Context context, final JSONObject jsonObject) {
+        Call<JSONCAMDO> call = services.RequestPost(context, jsonObject).getDataCAMDO();
         call.enqueue(new Callback<JSONCAMDO>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -1168,14 +1094,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Arbol Servicios//
-    public void getArbSer(final Context context) {
-        Service service = null;
-        try {
-            service = services.getArbolSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONArbolServicios> call = service.getDataArbSer();
+    public void getArbSer(final Context context, final JSONObject jsonObject) {
+        Call<JSONArbolServicios> call = services.RequestPost(context, jsonObject).getDataArbSer();
         call.enqueue(new Callback<JSONArbolServicios>() {
             @Override
             public void onResponse(Call<JSONArbolServicios> call, Response<JSONArbolServicios> response) {
@@ -1206,14 +1126,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Medios Servicios//
-    public void getMedSer(final Context context) {
-        Service service = null;
-        try {
-            service = services.getMediosSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONMediosSer> call = service.getDataMedSer();
+    public void getMedSer(final Context context, final JSONObject jsonObject) {
+        Call<JSONMediosSer> call = services.RequestPost(context, jsonObject).getDataMedSer();
         call.enqueue(new Callback<JSONMediosSer>() {
             @Override
             public void onResponse(Call<JSONMediosSer> call, Response<JSONMediosSer> response) {
@@ -1243,14 +1157,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Tipo de Aparatos//
-    public void getTipoAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getTipoAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONTipoAparatos> call = service.getDataTipoAparatos();
+    public void getTipoAparatos(final Context context, final JSONObject jsonObject) {
+        Call<JSONTipoAparatos> call = services.RequestPost(context, jsonObject).getDataTipoAparatos();
         call.enqueue(new Callback<JSONTipoAparatos>() {
             @Override
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
@@ -1280,14 +1188,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Aparatos Disponibles///
-    public void getAparatosDisponibles(final Context context) {
-        Service service = null;
-        try {
-            service = services.getAparatosDisponiblesService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONAparatosDisponibles> call = service.getDataAparatosDisponibles();
+    public void getAparatosDisponibles(final Context context, final JSONObject jsonObject) {
+        Call<JSONAparatosDisponibles> call = services.RequestPost(context, jsonObject).getDataAparatosDisponibles();
         call.enqueue(new Callback<JSONAparatosDisponibles>() {
             @Override
             public void onResponse(Call<JSONAparatosDisponibles> call, Response<JSONAparatosDisponibles> response) {
@@ -1321,14 +1223,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Servicios Aparatos//
-    public void getServiciosAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getServiciosAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONServiciosAparatos> call = service.getDataServiciosAparatos();
+    public void getServiciosAparatos(final Context context, final JSONObject jsonObject) {
+        Call<JSONServiciosAparatos> call = services.RequestPost(context, jsonObject).getDataServiciosAparatos();
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
             public void onResponse(Call<JSONServiciosAparatos> call, Response<JSONServiciosAparatos> response) {
@@ -1356,15 +1252,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getAceptatAsignacino(final Context context) {
-        Services getAceptarAsigService = new Services();
-        Service service = null;
-        try {
-            service = getAceptarAsigService.getAceptarAsigService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataAceptarAsig();
+    public void getAceptatAsignacino(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataAceptarAsig();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -1386,17 +1275,10 @@ BarraCargar barraCargar = new BarraCargar();
 
     //INFO CLIENTE Reportes///
 //TIPO DE SOLUCION///
-    public void getSolucuion(final Context context) {
+    public void getSolucuion(final Context context, final JSONObject jsonObject) {
         Array.clv_Soluc = new ArrayList<Integer>();
         Array.clv_Soluc.add(0, -1);
-
-        Service service = null;
-        try {
-            service = services.getSolocionService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONSolucion> call = service.getSolut();
+        Call<JSONSolucion> call = services.RequestPost(context, jsonObject).getSolut();
         call.enqueue(new Callback<JSONSolucion>() {
             @Override
             public void onResponse(Call<JSONSolucion> call, Response<JSONSolucion> response) {
@@ -1431,14 +1313,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Reporte del Cliente//
-    public void getReportesC(final Context context) {
-        Service service = null;
-        try {
-            service = services.getReporteCService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONReporteCliente> call = service.getRPC();
+    public void getReportesC(final Context context, final JSONObject jsonObject) {
+        Call<JSONReporteCliente> call = services.RequestPost(context, jsonObject).getRPC();
         call.enqueue(new Callback<JSONReporteCliente>() {
             @Override
             public void onResponse(Call<JSONReporteCliente> call, Response<JSONReporteCliente> response) {
@@ -1470,14 +1346,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Nombre Tecnico//////
-    public void getnombretec(final Context context) {
-        Service service = null;
-        try {
-            service = services.getNombreService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONNombreTecnico> call = service.getNom();
+    public void getnombretec(final Context context, final JSONObject jsonObject) {
+        Call<JSONNombreTecnico> call = services.RequestPost(context, jsonObject).getNom();
         call.enqueue(new Callback<JSONNombreTecnico>() {
             @Override
             public void onResponse(Call<JSONNombreTecnico> call, Response<JSONNombreTecnico> response) {
@@ -1501,14 +1371,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //servicios asiggnados //
-    public void getServiciosAsignados(final Context context) {
-        Service service = null;
-        try {
-            service = services.getAsignadosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONServicioAsignado> call = service.getServ();
+    public void getServiciosAsignados(final Context context, final JSONObject jsonObject) {
+        Call<JSONServicioAsignado> call = services.RequestPost(context, jsonObject).getServ();
         call.enqueue(new Callback<JSONServicioAsignado>() {
             @Override
             public void onResponse(Call<JSONServicioAsignado> call, Response<JSONServicioAsignado> response) {
@@ -1535,14 +1399,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getReportes(final Context context) {
-        Service service = null;
-        try {
-            service = services.getMediosReportes(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONReportes> call = service.getReport();
+    public void getReportes(final Context context, final JSONObject jsonObject) {
+        Call<JSONReportes> call = services.RequestPost(context, jsonObject).getReport();
         call.enqueue(new Callback<JSONReportes>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -1573,16 +1431,10 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getTecSecR(final Context context) {
+    public void getTecSecR(final Context context, final JSONObject jsonObject) {
         Array.Clv_TecSecR = new ArrayList<Integer>();
         Array.Clv_TecSecR.add(0, -1);
-        Service service = null;
-        try {
-            service = services.getTecSecRService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONTecSecReport> call = service.getTec();
+        Call<JSONTecSecReport> call = services.RequestPost(context, jsonObject).getTec();
         call.enqueue(new Callback<JSONTecSecReport>() {
             @Override
             public void onResponse(Call<JSONTecSecReport> call, Response<JSONTecSecReport> response) {
@@ -1613,14 +1465,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getValidaOrdSer(final Context context) {
-        Service service = null;
-        try {
-            service = services.getValidaOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getVALIOrdSer();
+    public void getValidaOrdSer(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getVALIOrdSer();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1644,14 +1490,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getChecaCAMDO(final Context context) {
-        Service service = null;
-        try {
-            service = services.getChecaCAMDOService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getChecaCAMDO();
+    public void getChecaCAMDO(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getChecaCAMDO();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1677,20 +1517,14 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getAddRelOrdUsu(final Context context) {
-        Service service = null;
-        try {
-            service = services.getADDRELORDUSUService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getADDRELORDUSU();
+    public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getADDRELORDUSU();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getDeepMODORDSER(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1703,20 +1537,14 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getDeepMODORDSER(final Context context) {
-        Service service = null;
-        try {
-            service = services.getDeppMODORDSERService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getMODORDSER();
+    public void getDeepMODORDSER(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getMODORDSER();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaHora(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1729,20 +1557,14 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getGuardaHora(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaHoraService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getGuardaHora();
+    public void getGuardaHora(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaHora();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaOrdSerAparatos(context);
-                }else{
+                } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
@@ -1756,20 +1578,14 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getGuardaOrdSerAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaOrdSerAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+    public void getGuardaOrdSerAparatos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getGUARDAOrdSerAparatos();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
-                }else{
+                } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
@@ -1783,14 +1599,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void addLlenaBitacora(final Context context) {
-        Service service = null;
-        try {
-            service = services.getAddLlenaBitacoraService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getLLENABITACORA_ORD();
+    public void addLlenaBitacora(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getLLENABITACORA_ORD();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1814,7 +1624,7 @@ BarraCargar barraCargar = new BarraCargar();
                         }
 
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
                     dialogEjecutar.dismiss();
@@ -1829,14 +1639,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //Ejecutar Reporte//
-    public void getValidaReporte(final Context context) {
-        Service service = null;
-        try {
-            service = services.getValidaInfoReportes(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getValidaRep();
+    public void getValidaReporte(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getValidaRep();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1859,14 +1663,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //horas//
-    public void getGuardaHoraReporte(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaHoraReporte(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getHiHf();
+    public void getGuardaHoraReporte(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getHiHf();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1886,15 +1684,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //guardar campos//
-    public void getGuardaCampos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaInfoReportes(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getLLenaReporte();
+    public void getGuardaCampos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getLLenaReporte();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1911,16 +1702,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void GuardaCoordenadas(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.getGuardaCoordenadasService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getGuardaCoordenadas();
+    public void GuardaCoordenadas(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaCoordenadas();
         call.enqueue(new Callback<JsonObject>() {
 
 
@@ -1930,7 +1713,7 @@ BarraCargar barraCargar = new BarraCargar();
 
                 if (response1.code() == 200) {
                     ConsultaIp(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1944,14 +1727,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void ConsultaIp(final Context context) {
-        Service service = null;
-        try {
-            service = services.getConsultaIpService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getConsultaIp();
+    public void ConsultaIp(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getConsultaIp();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -1993,15 +1770,9 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void ReintentarComando(final Context context) {
+    public void ReintentarComando(final Context context, final JSONObject jsonObject) {
         reintentaB = 0;
-        Service service = null;
-        try {
-            service = services.getReintentarComandoService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getReintentaComando();
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getReintentaComando();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -2019,14 +1790,9 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void SetCambioAparato(final Context context) {
+    public void SetCambioAparato(final Context context, final JSONObject jsonObject) {
         Service service = null;
-        try {
-            service = services.getCAPATService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getCAPAT();
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -2049,15 +1815,9 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void send_aparat(final Context context) {
+    public void send_aparat(final Context context, final JSONObject jsonObject) {
         adaptertrabajos.norec();
-        Service service = null;
-        try {
-            service = services.recibiapar(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.noent();
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).noent();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -2074,10 +1834,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getChecaExt(final Context context) {
-        Service service = null;
-        service = services.getChecaExtService(context);
-        Call<JsonObject> call = service.getChecaExt();
+    public void getChecaExt(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getChecaExt();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2105,10 +1863,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void MuestraBit(final Context context) {
-        Service service = null;
-        service = services.getMuestraBitService(context);
-        Call<JSONDetalleBitacora> call = service.getMuestraBit();
+    public void MuestraBit(final Context context, final JSONObject jsonObject) {
+        Call<JSONDetalleBitacora> call = services.RequestPost(context, jsonObject).getMuestraBit();
         call.enqueue(new Callback<JSONDetalleBitacora>() {
             @Override
             public void onResponse(Call<JSONDetalleBitacora> call, Response<JSONDetalleBitacora> response1) {
@@ -2142,10 +1898,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void DetalleBit(final Context context) {
-        Service service = null;
-        service = services.getDetalleBitService(context);
-        Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
+    public void DetalleBit(final Context context, final JSONObject jsonObject) {
+        Call<JSONDescripcionArticulosBit> call = services.RequestPost(context, jsonObject).getDetalleBit();
         call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
             @Override
             public void onResponse(Call<JSONDescripcionArticulosBit> call, Response<JSONDescripcionArticulosBit> response1) {
@@ -2180,10 +1934,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void LlenaExt(final Context context) {
-        Service service = null;
-        service = services.getLlenaExtService(context);
-        Call<JSONLlenaExtenciones> call = service.getLlenaExt();
+    public void LlenaExt(final Context context, final JSONObject jsonObject) {
+        Call<JSONLlenaExtenciones> call = services.RequestPost(context, jsonObject).getLlenaExt();
         call.enqueue(new Callback<JSONLlenaExtenciones>() {
             @Override
             public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
@@ -2221,10 +1973,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getTipoMat(final Context context) {
-        Service service = null;
-        service = services.getTipoMatService(context);
-        Call<JsonObject> call = service.getTipoMat();
+    public void getTipoMat(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getTipoMat();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2250,10 +2000,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getValidaPreDes(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.getValidaPreService(context);
-        Call<JsonObject> call = service.getValidaPre();
+    public void getValidaPreDes(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getValidaPre();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2277,10 +2025,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void addPreDes(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.addPreDescargaService(context);
-        Call<JsonObject> call = service.addPreDescarga();
+    public void addPreDes(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).addPreDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2299,10 +2045,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getPredescarga(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.getPreDescargaService(context);
-        Call<JSONPreDescarga> call = service.getPreDescarga();
+    public void getPredescarga(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JSONPreDescarga> call = services.RequestPost(context, jsonObject).getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
@@ -2342,13 +2086,8 @@ BarraCargar barraCargar = new BarraCargar();
     }
 
     //////////////////
-    public void DetalleBitR(final Context context) {
-
-
-        Service service = null;
-        service = services.getDetalleBitRService(context);
-
-        Call<JSONDescripcionArticulosBit> call = service.getDetalleBit();
+    public void DetalleBitR(final Context context, final JSONObject jsonObject) {
+        Call<JSONDescripcionArticulosBit> call = services.RequestPost(context, jsonObject).getDetalleBit();
         call.enqueue(new Callback<JSONDescripcionArticulosBit>() {
 
             @Override
@@ -2382,10 +2121,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getTipoMatR(final Context context) {
-        Service service = null;
-        service = services.getTipoMatRService(context);
-        Call<JsonObject> call = service.getTipoMat();
+    public void getTipoMatR(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getTipoMat();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2411,10 +2148,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getValidaPreDesR(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.getValidaPreRService(context);
-        Call<JsonObject> call = service.getValidaPre();
+    public void getValidaPreDesR(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getValidaPre();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2438,10 +2173,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void addPreDesR(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.addPreDescargaRService(context);
-        Call<JsonObject> call = service.addPreDescarga();
+    public void addPreDesR(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).addPreDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2460,10 +2193,8 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getPredescargaR(final Activity activity, final Context context) {
-        Service service = null;
-        service = services.getPreDescargaRService(context);
-        Call<JSONPreDescarga> call = service.getPreDescarga();
+    public void getPredescargaR(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JSONPreDescarga> call = services.RequestPost(context, jsonObject).getPreDescarga();
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
@@ -2504,4 +2235,7 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
     //////////
+    */
+
+
 }

@@ -159,7 +159,7 @@ public class Services {
     public Service getProxService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_tecnico", claveTecnico);
+        jsonObject.put("", claveTecnico);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -188,7 +188,7 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-
+//--------------------------------------------------------------------------------------
     //Orden de servicio//
     public Service getOrdSerService(final Context context) throws JSONException {
         //POST Body Json
@@ -1976,7 +1976,7 @@ public class Services {
         token = Util.getTokenPreference(Util.preferences);
         return token;
     }
-    
+    //-------------------------------------
     public Service RequestPost(final Context context, JSONObject jsonObject) {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());

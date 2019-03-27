@@ -74,7 +74,7 @@ public class Reportes extends AppCompatActivity
                     toast1.show();
                     clavequeja=0;
                     opcion=1;
-                    request.getListQuejas(getApplicationContext());
+                  //  request.getListQuejas(getApplicationContext());
                 } else {
                     Array.Queja.clear();
                     Array.nombreQ.clear();
@@ -83,7 +83,7 @@ public class Reportes extends AppCompatActivity
                     Array.Direccion.clear();
                     opcion=2;
                     clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
-                    request.getListQuejas(getApplicationContext());
+                  //  request.getListQuejas(getApplicationContext());
                     Toast toast1 =Toast.makeText(getApplicationContext(), "Reporte encontrado", Toast.LENGTH_SHORT);toast1.show();
                     reportes.setAdapter(adapterqueja);
                 }
@@ -102,7 +102,7 @@ public class Reportes extends AppCompatActivity
                     Array.Direccion.clear();
                     clavequeja=0;
                     opcion=1;
-                    request.getListQuejas(getApplicationContext());
+                   // request.getListQuejas(getApplicationContext());
                     toast1.show();
                 } else {
                     Array.Queja.clear();
@@ -112,7 +112,7 @@ public class Reportes extends AppCompatActivity
                     Array.Direccion.clear();
                     opcion=3;
                     cont=(contratosearch.getText().toString().toLowerCase().trim());
-                    request.getListQuejas(getApplicationContext());
+                   // request.getListQuejas(getApplicationContext());
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     reportes.setAdapter(adapterqueja);
                 }
@@ -139,20 +139,20 @@ public class Reportes extends AppCompatActivity
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-            request.getProximaCita(getApplicationContext());
-            request.getOrdenes(getApplicationContext());
+          //  request.getProximaCita(getApplicationContext());
+          //  request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Reportes.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd(getApplicationContext());
+           // request.getListOrd(getApplicationContext());
             startActivity(intent1);
         } else if (id == R.id.Reportes) {
             Intent intent1 = new Intent(Reportes.this, Reportes.class);
             clavequeja=0;
             opcion=1;
             cont="";
-            request.getListQuejas(getApplicationContext());
+          //  request.getListQuejas(getApplicationContext());
             startActivity(intent1);
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Reportes.this, Configuracion.class);

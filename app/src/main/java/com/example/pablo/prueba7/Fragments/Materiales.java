@@ -49,7 +49,7 @@ public class Materiales extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         View view  = inflater.inflate(R.layout.activity_descarga, container, false);
-        request.getChecaExt(getContext());
+       // request.getChecaExt(getContext());
         descripcionMat = view.findViewById(R.id.descripcionArticuloDesc);
         clasificacionMat = view.findViewById(R.id.clasificacionMatDesc);
         extMat = view.findViewById(R.id.constrain_Extenciones);
@@ -74,7 +74,7 @@ public class Materiales extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                         List<DetalleBitacoraModel> dat = itData.next();
                         clvTipoDescMat=dat.get(position-1).catTipoArticuloClave;
-                        request.DetalleBit(getContext());
+                      //  request.DetalleBit(getContext());
                 }
             }
 
@@ -92,7 +92,7 @@ public class Materiales extends Fragment {
                         idArticuloDM=dat.get(position-1).IdArticulo;
                     cantidadDM=dat.get(position-1).Cantidad;
                     idInventarioMD=dat.get(position-1).IdInventario;
-                    request.getTipoMat(getContext());
+                   // request.getTipoMat(getContext());
                     seleccion=position;
                     posClasMat=position;
 
@@ -111,7 +111,7 @@ public class Materiales extends Fragment {
                 if(position!=0){
                     extSer=(position-1);
                     seleccionExte=position;
-                    request.getPredescarga(getActivity(),getContext());
+                  ///  request.getPredescarga(getActivity(),getContext());
                 }else{
                     extSer=(position);
                 }
@@ -155,7 +155,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 EIMD = 0;
                 EFDM = 0;
                 if (cantidadDM >= totalDM) {
-                    request.getValidaPreDes(getActivity(), getContext());
+                    //request.getValidaPreDes(getActivity(), getContext());
 
 
                 } else {
@@ -176,7 +176,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 metros = (IFDM - IIDM) + (EFDM - EIMD);
                 totalDM = metros;
                 if (cantidadDM >= totalDM) {
-                    request.getValidaPreDes(getActivity(), getContext());
+                   // request.getValidaPreDes(getActivity(), getContext());
 
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();

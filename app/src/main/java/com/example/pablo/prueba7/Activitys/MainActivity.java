@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.getInfoCliente(getApplicationContext());
-                    request.getServicios(getApplicationContext());
+              //  request.getInfoCliente(getApplicationContext());
+              //      request.getServicios(getApplicationContext());
                 if(layoutAnimado.getVisibility()==View.GONE) {
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);

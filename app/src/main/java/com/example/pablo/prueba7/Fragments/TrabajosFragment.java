@@ -38,10 +38,10 @@ public class TrabajosFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.fragment_trabajos2, container, false);
-        request.getnombretec(getContext());
-        request.getSolucuion(getContext());
-        request.getReportesC(getContext());
-        request.getReportes(getContext());
+        //request.getnombretec(getContext());
+       // request.getSolucuion(getContext());
+       // request.getReportesC(getContext());
+       // request.getReportes(getContext());
         proble=view.findViewById(R.id.problema);
         solucion = view.findViewById(R.id.tiposol);
         solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

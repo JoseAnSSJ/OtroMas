@@ -49,7 +49,7 @@ public class asignado extends AppCompatActivity {
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
-        request.getTipoAparatos(getApplicationContext());
+        //request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +67,8 @@ public class asignado extends AppCompatActivity {
                     List<GetMuestraTipoAparatoListResult> dat = itdata.next();
                     detalleSpinner= dat.get(position-1).getCategoria();
                     idArticuloasignado = dat.get(position-1).getIdArticulo();
-                    request.getAparatosDisponibles(getApplicationContext());
-                    request.getServiciosAparatos(getApplicationContext());
+                   // request.getAparatosDisponibles(getApplicationContext());
+                   // request.getServiciosAparatos(getApplicationContext());
                     serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

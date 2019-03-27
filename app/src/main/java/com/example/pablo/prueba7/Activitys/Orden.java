@@ -80,7 +80,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Orden Vacio", Toast.LENGTH_SHORT);
                     clvorden=0;
                     opcion=1;
-                    request.getListOrd(getApplicationContext());
+                   // request.getListOrd(getApplicationContext());
                     toast1.show();
                     ordenes.setAdapter(adapterord);
                 } else {
@@ -91,7 +91,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.direccionsrc.clear();
                     opcion=2;
                     clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd(getApplicationContext());
+                   // rqs.getListOrd(getApplicationContext());
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Orden encontrada", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
                 }
@@ -112,7 +112,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.direccionsrc.clear();
                     clvorden=0;
                     opcion=1;
-                    request.getListOrd(getApplicationContext());
+                   // request.getListOrd(getApplicationContext());
                     toast1.show();
                     ordenes.setAdapter(adapterord);
                     toast1.show();
@@ -124,7 +124,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.direccionsrc.clear();
                     opcion=3;
                     cont=(contsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd(getApplicationContext());
+                   // rqs.getListOrd(getApplicationContext());
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
                 }
@@ -157,19 +157,19 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
             Intent intent1 = new Intent(Orden.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-           request.getProximaCita(getApplicationContext());
-           request.getOrdenes(getApplicationContext());
+        //   request.getProximaCita(getApplicationContext());
+        //   request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Orden.this, Orden.class);
             clvorden=0;
             opcion=1;
-            request.getListOrd(getApplicationContext());
+         //   request.getListOrd(getApplicationContext());
             startActivity(intent1);
         } else if (id == R.id.Reportes) {
             Intent intent1 = new Intent(Orden.this, Reportes.class);
             clavequeja=0;
             opcion=1;
-            request.getListQuejas(getApplicationContext());
+         //   request.getListQuejas(getApplicationContext());
             startActivity(intent1);
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Orden.this, Configuracion.class);

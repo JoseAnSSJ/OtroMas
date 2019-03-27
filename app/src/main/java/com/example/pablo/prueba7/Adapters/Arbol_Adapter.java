@@ -152,7 +152,7 @@ public class Arbol_Adapter extends BaseAdapter {
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat1 =  itData1.next();
                 clv_unicaNet = dat1.get(position).getClv_UnicaNet();
-                request.getMedSer(mcontext);
+               // request.getMedSer(mcontext);
                 posi = position;
                 ////
                 layoutMedio.setVisibility(View.VISIBLE);

@@ -89,10 +89,10 @@ public class Ejecutar1Fragment extends Fragment {
                     if (horas.reporteEjecutada == 1) {
                         year = añoE + "" + month + "" + diaE;
                         horas12 = mHour + ":" + minute;
-                        request.getGuardaHoraReporte(getContext());
-                        request.getGuardaCampos(getContext());
+                      //  request.getGuardaHoraReporte(getContext());
+                       // request.getGuardaCampos(getContext());
                         Intent intent1 = new Intent(getActivity(), Reportes.class);
-                        request.getListQuejas(getContext());
+                       // request.getListQuejas(getContext());
                         startActivity(intent1);
 
 
@@ -102,11 +102,11 @@ public class Ejecutar1Fragment extends Fragment {
 
                     if (horas.repotteVisita == 1) {
                         try {
-                            request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
+                           // request.getGuardaHoraReporte(getContext());
+                             //   request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas(getContext());
+                              //  request.getListQuejas(getContext());
 
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
@@ -115,11 +115,11 @@ public class Ejecutar1Fragment extends Fragment {
                     }
                     if (horas.reporteVisita1 == 1) {
                         try {
-                               request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
+                             //  request.getGuardaHoraReporte(getContext());
+                             //   request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas(getContext());
+                             //   request.getListQuejas(getContext());
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                         }
@@ -127,11 +127,11 @@ public class Ejecutar1Fragment extends Fragment {
                     if (horas.reporteVisita2 == 1) {
                         try {
                                 Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
-                                request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
+                              //  request.getGuardaHoraReporte(getContext());
+                              //  request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);
                                 startActivity(intent1);
-                                request.getListQuejas(getContext());
+                              //  request.getListQuejas(getContext());
 
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();

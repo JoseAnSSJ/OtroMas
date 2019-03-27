@@ -56,7 +56,7 @@ public class MaterialesFragment extends Fragment {
         setRetainInstance(true);
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_materiales, container, false);
-        request.getChecaExt(getContext());
+      //  request.getChecaExt(getContext());
         descripcionMatR = view.findViewById(R.id.descripcionArticuloDescR);
         clasificacionMatR = view.findViewById(R.id.clasificacionMatDescR);
         extMatR = view.findViewById(R.id.constrain_ExtencionesR);
@@ -80,7 +80,7 @@ public class MaterialesFragment extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMatR=dat.get(position-1).catTipoArticuloClave;
-                    request.DetalleBitR(getContext());
+                //    request.DetalleBitR(getContext());
                 }
             }
 
@@ -98,7 +98,7 @@ public class MaterialesFragment extends Fragment {
                     idArticuloDMR=dat.get(position-1).IdArticulo;
                     cantidadDMR=dat.get(position-1).Cantidad;
                     idInventarioMDR=dat.get(position-1).IdInventario;
-                    request.getTipoMatR(getContext());
+                //    request.getTipoMatR(getContext());
                     seleccionR=position;
 
 
@@ -116,7 +116,7 @@ public class MaterialesFragment extends Fragment {
                 if(position!=0){
                     extSerR=(position-1);
                     seleccionExteR=position;
-                    request.getPredescargaR(getActivity(),getContext());
+                //    request.getPredescargaR(getActivity(),getContext());
                 }else{
                     extSerR=(position);
                 }
@@ -160,7 +160,7 @@ public class MaterialesFragment extends Fragment {
                 EIMDR = 0;
                 EFDMR = 0;
                 if (cantidadDMR >= totalDMR) {
-                    request.getValidaPreDesR(getActivity(), getContext());
+                //    request.getValidaPreDesR(getActivity(), getContext());
 
 
                 } else {
@@ -181,7 +181,7 @@ public class MaterialesFragment extends Fragment {
                 metrosR = (IFDMR - IIDMR) + (EFDMR - EIMDR);
                 totalDMR = metrosR;
                 if (cantidadDMR >= totalDMR) {
-                    request.getValidaPreDesR(getActivity(), getContext());
+                //    request.getValidaPreDesR(getActivity(), getContext());
 
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();

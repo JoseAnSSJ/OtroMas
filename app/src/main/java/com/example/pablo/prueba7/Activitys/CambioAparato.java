@@ -48,7 +48,7 @@ public class CambioAparato extends AppCompatActivity {
         Finish= findViewById(R.id.dos);
         dialogCAPAT= new BarraCargar().showDialog(this);
 
-        request.getDeepCAPAT(getApplicationContext());
+       // request.getDeepCAPAT(getApplicationContext());
         if(trabajos_adapter_result.ftth==0){
             aa.setVisibility(View.VISIBLE);
         }else{
@@ -64,7 +64,7 @@ public class CambioAparato extends AppCompatActivity {
         aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.SetCambioAparato(getApplicationContext());
+              //  request.SetCambioAparato(getApplicationContext());
                 dialogCAPAT.show();
                     finish();
             }
@@ -107,11 +107,11 @@ public class CambioAparato extends AppCompatActivity {
                             if(trabajos_adapter_result.ftth==1){
                                 idArticulo2 = dat.get(position-1).getIdArticulo();
                             contrato = dat.get(position-1).getControNet();
-                                request.getApaTipDis(getApplicationContext());
+                              //  request.getApaTipDis(getApplicationContext());
                             }else{
                                 idArticulo = dat.get(position-1).getIdArticulo();
                                 contrato = dat.get(position-1).getControNet();
-                                request.getApaTipo(getApplicationContext());
+                              //  request.getApaTipo(getApplicationContext());
                             }
 
                         }
@@ -130,7 +130,7 @@ public class CambioAparato extends AppCompatActivity {
                     Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata = array.dataApaTipo.iterator();
                     List<GetListTipoAparatosByIdArticuloResult> dat = itdata.next();
                     idArticulo2 = dat.get(position-1).getIdArticulo();
-                    request.getApaTipDis(getApplicationContext());
+                   // request.getApaTipDis(getApplicationContext());
                 }
             }
             @Override

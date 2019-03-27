@@ -135,7 +135,7 @@ public class asignacion extends AppCompatActivity {
                         jsonObject3.put("children", jsonArray3);
                         jsonObject3.put("clv_orden", dat.get(c).clv_orden);
                         jsonArray2.put(c, jsonObject3);
-                        request.getAceptatAsignacino(getApplicationContext());
+                      //  request.getAceptatAsignacino(getApplicationContext());
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();

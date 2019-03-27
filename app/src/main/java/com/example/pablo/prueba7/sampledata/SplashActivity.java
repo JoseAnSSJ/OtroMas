@@ -12,24 +12,27 @@ import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.Request.Request;
 
+import org.json.JSONObject;
+
 public class SplashActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     public static boolean LoginShare=false;
-
+    public JSONObject jsonObject,jsonObject1=new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        Intent intentLogin = new Intent(this, Login.class);
-        Intent intentinicio = new Intent(this, Inicio.class);
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
+            Intent intentinicio = new Intent(this, Inicio.class);
 
             startActivity(intentinicio);
+
         } else {
+            Intent intentLogin = new Intent(this, Login.class);
             startActivity(intentLogin);
             LoginShare=false;
         }
