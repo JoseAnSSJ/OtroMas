@@ -19,7 +19,7 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
+import org.json.JSONObject;
 
 
 public class Configuracion extends AppCompatActivity
@@ -40,9 +40,9 @@ public class Configuracion extends AppCompatActivity
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //Boton para cerrar sesion
-        nombreConfi.setText(nombre_tecnico);
+        nombreConfi.setText(Util.getNombreTecnicoPreference(Util.preferences));
         CS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,10 +98,6 @@ public class Configuracion extends AppCompatActivity
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Configuracion.this, Inicio.class);
             startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-          // request.getProximaCita(getApplicationContext());
-          // request.getOrdenes(getApplicationContext());
-
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Configuracion.this, Orden.class);
             startActivity(intent1);

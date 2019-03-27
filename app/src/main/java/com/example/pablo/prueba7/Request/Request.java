@@ -16,6 +16,7 @@ import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
@@ -145,7 +146,7 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
+    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, clave_tecnico, msgComando = "";
     public static boolean isnet;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
@@ -157,8 +158,9 @@ public class Request extends AppCompatActivity {
     String a = "Seleccione tecnico secundario";
     String f = "Seleccione tipo de solucion";
     public static String datos[];
-
-    BarraCargar barraCargar = new BarraCargar();
+    //--------------------------------//
+    private String sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
+    //----------------------------------//
 
     public void ErrorInicioDeSesion(final Context context) {
 
@@ -171,7 +173,7 @@ public class Request extends AppCompatActivity {
         } catch (Exception e) {
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-            // ((Activity) context).finish();
+
         }
 
     }
@@ -188,7 +190,7 @@ public class Request extends AppCompatActivity {
             Inicio.dialogInicio = new BarraCargar().showDialog(context);
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-            ((Activity) context).finish();
+
         }
     }
 
@@ -268,8 +270,6 @@ public class Request extends AppCompatActivity {
                         while (iteData.hasNext()) {
                             List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
                             //Se recorre la lista y se guarla la informacion en el Modelo
-                           // clave_tecnico = data.get(0).clv_tecnico;
-                          //  nombre_tecnico = data.get(0).tecnico;
                             Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                             Util.editor.putInt("clvTecnico", data.get(0).getClv_tecnico());
                         }
@@ -288,7 +288,11 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
-                ErrorInicioDeSesion(context);
+                try{
+                    ErrorInicioDeSesion(context);
+                }catch (Exception e){ErrorCargarDatos(context);}
+                ((Activity)context).finish();
+                Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -311,6 +315,7 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NUMERO").getAsString(),
                                 userJson.get("Tipo").getAsString()
                         );
+
                         sigueinteTipo = user.Tipo;
                         siguenteContrato = user.Contrato;
                         sigueinteHora = user.Hora;
@@ -333,7 +338,11 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context);
+                try{
+                    ErrorInicioDeSesion(context);
+                }catch (Exception e){ErrorCargarDatos(context);}
+                ((Activity)context).finish();
+                Toast.makeText(context, "Error al conseguir siguiente cita", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -413,7 +422,11 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                ErrorInicioDeSesion(context);
+                try{
+                    ErrorInicioDeSesion(context);
+                }catch (Exception e){ErrorCargarDatos(context);}
+                ((Activity)context).finish();
+                Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -487,6 +500,12 @@ public class Request extends AppCompatActivity {
                         } else {
                             Intent intento = new Intent(context, Inicio.class);
                             intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intento.putExtra("tipo",sigueinteTipo);
+                            intento.putExtra("contrato",siguenteContrato);
+                            intento.putExtra("hora",sigueinteHora);
+                            intento.putExtra("calle",siguenteCalle);
+                            intento.putExtra("numero",sigueinteNumero);
+                            intento.putExtra("colonia",siguenteColonia);
                             context.startActivity(intento);
                             Login.dialogLogin.dismiss();
                         }
@@ -501,12 +520,15 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                ErrorInicioDeSesion(context);
-
+                try{
+                    ErrorInicioDeSesion(context);
+                }catch (Exception e){ErrorCargarDatos(context);}
+                ((Activity)context).finish();
+                Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
             }
         });
     }
-/*
+
     //Lista de ordenes///
     public void getListQuejas(final Context context, final JSONObject jsonObject) {
         Call<QuejasList> call = services.RequestPost(context, jsonObject).getQuejasAgendadas();
@@ -532,6 +554,8 @@ public class Request extends AppCompatActivity {
                             Array.Direccion.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO()));
                         }
                     }
+                    Intent intent1 = new Intent(context, Reportes.class);
+                    context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
                 }
@@ -539,7 +563,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<QuejasList> call, Throwable t) {
-
+                Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -567,6 +591,8 @@ public class Request extends AppCompatActivity {
                             Array.direccionsrc.add(String.valueOf(dat.get(i).getColonia() + ", " + dat.get(i).getCalle() + ", " + dat.get(i).getNumero()));
                         }
                     }
+                    Intent intent1 = new Intent(context, Orden.class);
+                    context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
@@ -574,12 +600,13 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Example1> call, Throwable t) {
+                Toast.makeText(context, "Error al conseguir lista ordenes", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     //Consuta pantalla ordenes//
-    public void getDeepCons(final Context context, final JSONObject jsonObject) {
+  /*  public void getDeepCons(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataDeepCons();
         call.enqueue(new Callback<JsonObject>() {
             @Override

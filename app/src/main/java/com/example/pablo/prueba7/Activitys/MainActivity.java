@@ -25,6 +25,7 @@ import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.Trabajos;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import androidx.annotation.RequiresApi;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
         Status.setText(request.statusMA);
-        NombreTec.setText(request.nombre_tecnico);
+        NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override

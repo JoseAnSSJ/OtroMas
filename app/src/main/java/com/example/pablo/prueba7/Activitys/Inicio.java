@@ -39,10 +39,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.clvorden;
-import static com.example.pablo.prueba7.Services.Services.jsonObject;
-import static com.example.pablo.prueba7.Services.Services.opcion;
+import androidx.annotation.NonNull;
+
 
 
 
@@ -57,7 +55,7 @@ public class Inicio extends AppCompatActivity
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
     public static ProgressDialog dialogInicio;
-//    JSONObject jsonObject = new JSONObject(getIntent().getStringExtra("json"));
+
 
 BarraCargar barraCargar = new BarraCargar();
 
@@ -106,12 +104,14 @@ BarraCargar barraCargar = new BarraCargar();
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        tipoTrabajo.setText(request.sigueinteTipo);
-        contratoTrabajo.setText(request.siguenteContrato);
-        horaTrabajo.setText(request.sigueinteHora);
-        calleDireccion.setText(request.siguenteCalle);
-        numeroDireccion.setText(request.sigueinteNumero);
-        coloniaDireccion.setText(request.siguenteColonia);
+        tipoTrabajo.setText(getIntent().getStringExtra("tipo"));
+        contratoTrabajo.setText(getIntent().getStringExtra("contrato"));
+        horaTrabajo.setText(getIntent().getStringExtra("hora"));
+        calleDireccion.setText(getIntent().getStringExtra("calle"));
+        numeroDireccion.setText(getIntent().getStringExtra("numero"));
+        coloniaDireccion.setText(getIntent().getStringExtra("colonia"));
+
+
     }
 
     @Override
@@ -148,36 +148,41 @@ BarraCargar barraCargar = new BarraCargar();
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        //----------------
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", 1);
+            jsonObject.put("clv_queja", 0);
+            jsonObject.put("contratoCom", 0);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+
+        //----------------
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Inicio.this, Inicio.class);
             startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-            request.getProximaCita(getApplicationContext(),jsonObject);
-            request.getOrdenes(getApplicationContext(),jsonObject);
             finish();
 
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
-            clvorden=0;
-            opcion=1;
-           // request.getListOrd(getApplicationContext());
+            request.getListOrd(getApplicationContext(),jsonObject2);
             tipodeDescarga="O";
             startActivity(intent1);
 
             finish();
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Inicio.this, Reportes.class);
-            clavequeja=0;
-            opcion=1;
-           /// request.getListQuejas(getApplicationContext());
+
+            request.getListQuejas(getApplicationContext(),jsonObject2);
             tipodeDescarga="Q";
-            startActivity(intent1);
             finish();
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Inicio.this, Configuracion.class);
+            intent1.putExtra("json",jsonObject.toString());
             startActivity(intent1);
             finish();
         }
@@ -252,9 +257,6 @@ BarraCargar barraCargar = new BarraCargar();
         data.setValueTextColor(Color.BLACK);
         pieChart.animateXY(2000, 2000);
         pieChart.setData(data);
-    }
-       public static void showProgress(boolean show) {
-        progressBarInicio.setVisibility(show ? View.VISIBLE : View.GONE);
     }
     public boolean isOnline() {
         ConnectivityManager cm =

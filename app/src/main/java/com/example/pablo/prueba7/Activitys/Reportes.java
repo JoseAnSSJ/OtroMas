@@ -22,11 +22,9 @@ import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.clvorden;
-import static com.example.pablo.prueba7.Services.Services.cont;
-import static com.example.pablo.prueba7.Services.Services.opcion;
+import org.json.JSONObject;
 
 public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +50,7 @@ public class Reportes extends AppCompatActivity
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -72,18 +70,14 @@ public class Reportes extends AppCompatActivity
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
                     toast1.show();
-                    clavequeja=0;
-                    opcion=1;
-                  //  request.getListQuejas(getApplicationContext());
+                    request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
                 } else {
                     Array.Queja.clear();
                     Array.nombreQ.clear();
                     Array.statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
-                    opcion=2;
-                    clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
-                  //  request.getListQuejas(getApplicationContext());
+                    request.getListQuejas(getApplicationContext(),JsonReportes(2,Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim()),""));
                     Toast toast1 =Toast.makeText(getApplicationContext(), "Reporte encontrado", Toast.LENGTH_SHORT);toast1.show();
                     reportes.setAdapter(adapterqueja);
                 }
@@ -100,9 +94,7 @@ public class Reportes extends AppCompatActivity
                     Array.statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
-                    clavequeja=0;
-                    opcion=1;
-                   // request.getListQuejas(getApplicationContext());
+                    request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
                     toast1.show();
                 } else {
                     Array.Queja.clear();
@@ -110,9 +102,7 @@ public class Reportes extends AppCompatActivity
                     Array.statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
-                    opcion=3;
-                    cont=(contratosearch.getText().toString().toLowerCase().trim());
-                   // request.getListQuejas(getApplicationContext());
+                    request.getListQuejas(getApplicationContext(),JsonReportes(3,0,contratosearch.getText().toString().toLowerCase().trim()));
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     reportes.setAdapter(adapterqueja);
                 }
@@ -133,27 +123,16 @@ public class Reportes extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
+        //----------------
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-          //  request.getProximaCita(getApplicationContext());
-          //  request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Reportes.this, Orden.class);
-            clvorden=0;
-            opcion=1;
-           // request.getListOrd(getApplicationContext());
-            startActivity(intent1);
+          request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Reportes.this, Reportes.class);
-            clavequeja=0;
-            opcion=1;
-            cont="";
-          //  request.getListQuejas(getApplicationContext());
-            startActivity(intent1);
+            request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Reportes.this, Configuracion.class);
             startActivity(intent1);
@@ -162,6 +141,29 @@ public class Reportes extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_queja", clvqueja);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
+    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_orden", clvorden);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
 }
 

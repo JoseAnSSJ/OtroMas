@@ -22,11 +22,10 @@ import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Services.Services.clavequeja;
-import static com.example.pablo.prueba7.Services.Services.clvorden;
-import static com.example.pablo.prueba7.Services.Services.cont;
-import static com.example.pablo.prueba7.Services.Services.opcion;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Orden extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
@@ -38,6 +37,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     NavigationView barra;
     TextView nombreTec;
    private Request rqs=new Request();
+
+
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -53,10 +54,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
-        clvorden=0;
-        opcion=1;
-        cont="";
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         progressBarOrdenes = findViewById(R.id.barlogodenes);
         ////////////////
 
@@ -78,9 +76,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Orden Vacio", Toast.LENGTH_SHORT);
-                    clvorden=0;
-                    opcion=1;
-                   // request.getListOrd(getApplicationContext());
+                    request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
                     toast1.show();
                     ordenes.setAdapter(adapterord);
                 } else {
@@ -89,9 +85,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
-                    opcion=2;
-                    clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                   // rqs.getListOrd(getApplicationContext());
+                    rqs.getListOrd(getApplicationContext(),JsonOrdenes(2,Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim()),""));
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Orden encontrada", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
                 }
@@ -110,9 +104,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
-                    clvorden=0;
-                    opcion=1;
-                   // request.getListOrd(getApplicationContext());
+                    request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
                     toast1.show();
                     ordenes.setAdapter(adapterord);
                     toast1.show();
@@ -122,9 +114,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
-                    opcion=3;
-                    cont=(contsearch.getText().toString().toLowerCase().trim());
-                   // rqs.getListOrd(getApplicationContext());
+                    rqs.getListOrd(getApplicationContext(),JsonOrdenes(3,0,contsearch.getText().toString().toLowerCase().trim()));
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
                 }
@@ -151,26 +141,18 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        //----------------
+
+
+        //----------------
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Orden.this, Inicio.class);
             startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-        //   request.getProximaCita(getApplicationContext());
-        //   request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Orden.this, Orden.class);
-            clvorden=0;
-            opcion=1;
-         //   request.getListOrd(getApplicationContext());
-            startActivity(intent1);
+            request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Orden.this, Reportes.class);
-            clavequeja=0;
-            opcion=1;
-         //   request.getListQuejas(getApplicationContext());
-            startActivity(intent1);
+            request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Orden.this, Configuracion.class);
             startActivity(intent1);
@@ -178,5 +160,29 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_queja", clvqueja);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
+    }
+    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
+            jsonObject.put("op", op);
+            jsonObject.put("clv_orden", clvorden);
+            jsonObject.put("contratoCom", contratocom);
+            jsonObject2.put("ObjLista", jsonObject);
+        }catch (Exception e){}
+        return jsonObject2;
     }
 }
