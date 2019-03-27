@@ -189,8 +189,15 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         if((position-1)>=0){
             mViewPager.setCurrentItem(position-1);}
             else{
-            finish();
-            TecSec.setSelection(0);
+                if(layoutAnimado.getVisibility()==View.VISIBLE){
+                    layoutAnimado.setVisibility(View.GONE);
+                    hzScrollView.setVisibility(View.GONE);
+                    info.setText("Info");
+                }else{
+                    finish();
+                    TecSec.setSelection(0);
+                }
+
             }
             }
 
