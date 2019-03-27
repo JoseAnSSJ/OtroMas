@@ -20,6 +20,10 @@ import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.List;
@@ -47,9 +51,17 @@ public class CambioAparato extends AppCompatActivity {
         aa=findViewById(R.id.aa);
         Finish= findViewById(R.id.dos);
         dialogCAPAT= new BarraCargar().showDialog(this);
-
-       // request.getDeepCAPAT(getApplicationContext());
-        if(trabajos_adapter_result.ftth==0){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));
+            jsonObject.put("Clave", Util.getClvTrabajo(Util.preferences));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.getDeepCAPAT(getApplicationContext(),jsonObject);
+        final boolean ftth=false;
+        getIntent().getBooleanExtra("ftth",ftth);
+        if(!ftth){
             aa.setVisibility(View.VISIBLE);
         }else{
             aa.setVisibility(View.GONE);
@@ -104,7 +116,7 @@ public class CambioAparato extends AppCompatActivity {
                         if(position!=0){
                             Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat = itdata.next();
-                            if(trabajos_adapter_result.ftth==1){
+                            if(ftth==true){
                                 idArticulo2 = dat.get(position-1).getIdArticulo();
                             contrato = dat.get(position-1).getControNet();
                               //  request.getApaTipDis(getApplicationContext());

@@ -13,4 +13,19 @@ public class CambioAparatoDeepModel {
         this.StatusEntrega = statusEntrega;
     }
 
+    public static void setAparatoAsignar(int aparatoAsignar) {
+        AparatoAsignar = aparatoAsignar;
+    }
+
+    public static void setAparatoCliente(int aparatoCliente) {
+        AparatoCliente = aparatoCliente;
+    }
+
+    public static void setTipoAparatoAsignar(int tipoAparatoAsignar) {
+        TipoAparatoAsignar = tipoAparatoAsignar;
+    }
+
+    public static void setStatusEntrega(String statusEntrega) {
+        StatusEntrega = statusEntrega;
+    }
 }

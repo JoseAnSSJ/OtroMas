@@ -24,6 +24,9 @@ public class Util {
     public static int getClvOrden(SharedPreferences preferences){
         return preferences.getInt("ClvOrden", 0);
     }
+    public static int getClvTrabajo(SharedPreferences preferences){
+        return preferences.getInt("ClvTrabajo", 0);
+    }
 
     public static String getNombreTecnicoPreference(SharedPreferences preferences){
         return preferences.getString("nombre_Tecnico", "");

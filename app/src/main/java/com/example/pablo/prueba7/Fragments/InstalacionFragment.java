@@ -35,6 +35,8 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import org.json.JSONObject;
+
 import static android.content.Context.LOCATION_SERVICE;
 
 import java.util.Calendar;
@@ -72,7 +74,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // TecSec.setSelection(posTec);
+         TecSec.setSelection(posTec);
 
         // Inflate the layout for this fragment
 
@@ -99,8 +101,12 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Obs = view.findViewById(R.id.tv_Observaciones);
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
+        }catch (Exception e){}
 
-       // request.getTecSec(getContext());
+        request.getTecSec(getContext(),jsonObject);
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
@@ -116,10 +122,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         /////////////////////////////////////////////////////
         Obs.setText(request.obsMA);
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
-        // bt2.setChecked(true);
-     //   Util.preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-
-       // TecSec.setSelection(Util.getPositionTecSec(Util.preferences));
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -142,8 +144,6 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         selectDate.setOnClickListener(this);
         selectDate1.setOnClickListener(this);
         selectDate2.setOnClickListener(this);
-//        selectTime.setOnClickListener(this);
-//        selectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
 

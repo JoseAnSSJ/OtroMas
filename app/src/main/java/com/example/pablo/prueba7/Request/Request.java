@@ -245,7 +245,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //Clave Tecnico//
     public void getClv_tecnico(final Context context) {
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -296,7 +295,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //Proxima Cita//
     public void getProximaCita(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataProx();
@@ -345,7 +343,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //ORDENES//
     public void getOrdenes(final Context context, final JSONObject jsonObject) {
         Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
@@ -428,7 +425,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //Quejas//
     public void getQuejas(final Context context, final JSONObject jsonObject) {
         Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
@@ -525,7 +521,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //Lista de ordenes///
     public void getListQuejas(final Context context, final JSONObject jsonObject) {
         Call<QuejasList> call = services.RequestPost(context, jsonObject).getQuejasAgendadas();
@@ -565,7 +560,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     public void getListOrd(final Context context, final JSONObject jsonObject) {
         Call<Example1> call = services.RequestPost(context, jsonObject).getDataListOrd();
         call.enqueue(new Callback<Example1>() {
@@ -602,7 +596,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //Consuta pantalla ordenes//
     public void getDeepCons(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataDeepCons();
@@ -749,7 +742,6 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
     //ServiciosdelCliente//
     public void getServicios(final Context context, final JSONObject jsonObject) {
         Call<Example2> call = services.RequestPost(context, jsonObject).getDataServicios();
@@ -781,10 +773,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
-
-
-   /* //TecnicoSecundario////
+    //TecnicoSecundario////
     public void getTecSec(final Context context, final JSONObject jsonObject) {
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0, -1);
@@ -824,32 +813,43 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getExtencionesAdicionales(final Context context, final JSONObject jsonObject) {
-        Call<JsonObject> call = services.RequestPost(context, jsonObject).RequestPost(context, jsonObject);
+    public void getDeepCAPAT(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDeepCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
-                    String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
-                    extencionesE = string;
-                    Intent intento = new Intent(context, ExtensionesAdi.class);
-                    context.startActivity(intento);
-                    dialogTrabajos.dismiss();
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //Peticion de datos sobre el Json "LogOnResult"
+                if (response.code() == 200) {
+                    CambioAparatoDeepModel.StatusEntrega = "";
+                    JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
+                    try {
+                        CambioAparatoDeepModel user = new CambioAparatoDeepModel(
+                                userJson.get("AparatoAsignar").getAsInt(),
+                                userJson.get("AparatoCliente").getAsInt(),
+                                userJson.get("TipoAparatoAsignar").getAsInt(),
+                                userJson.get("StatusEntrega").getAsString()
+                        );
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("Contrato", DeepConsModel.Contrato);
+                     //   getCliApa(context,jsonObject);
+
+                    } catch (Exception e) {
+                       // getCliApa(context,jsonObject);
+                    }
                 } else {
-                    Toast.makeText(context, "Error al conseguir extenciones adicionales", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir datos de cambio de aparato", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+
             }
         });
     }
-
-    //ClientesAparato//
+  /*    //ClientesAparato//
     public void getCliApa(final Context context, final JSONObject jsonObject) {
-        services.RequestPost(context, jsonObject)
-        Call<JSONCLIAPA> call = service.getDataCliApa();
+        Call<JSONCLIAPA> call = services.RequestPost(context, jsonObject).getDataCliApa();
         call.enqueue(new Callback<JSONCLIAPA>() {
             @Override
             public void onResponse(Call<JSONCLIAPA> call, Response<JSONCLIAPA> response) {
@@ -887,7 +887,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Status Aparato////
-    public void getStatusApa(final Context context, final JSONObject jsonObject) {
+    public void getStatusApa(final Context context) {
         Call<JSONStatusApa> call = services.getStatusApa(context).getDataStatusApa();
         call.enqueue(new Callback<JSONStatusApa>() {
             @Override
@@ -907,7 +907,12 @@ public class Request extends AppCompatActivity {
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.estado.setAdapter(adapter);
+
+                        JSONObject jsonObject = new JSONObject();
+
                         try {
+                            jsonObject.put("ContratoNet", CambioAparato.contrato);
+                            jsonObject.put("Id_Articulo", CambioAparato.idArticulo);
                             CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
                             getApaTipo(context);
                         } catch (Exception e) {
@@ -1023,38 +1028,30 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getDeepCAPAT(final Context context, final JSONObject jsonObject) {
-        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDeepCAPAT();
+
+  public void getExtencionesAdicionales(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).RequestPost(context, jsonObject);
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                //Peticion de datos sobre el Json "LogOnResult"
-                if (response.code() == 200) {
-                    CambioAparatoDeepModel.StatusEntrega = "";
-                    JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
-                    try {
-                        CambioAparatoDeepModel user = new CambioAparatoDeepModel(
-                                userJson.get("AparatoAsignar").getAsInt(),
-                                userJson.get("AparatoCliente").getAsInt(),
-                                userJson.get("TipoAparatoAsignar").getAsInt(),
-                                userJson.get("StatusEntrega").getAsString()
-                        );
-                        getCliApa(context);
-
-                    } catch (Exception e) {
-                        getCliApa(context);
-                    }
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
+                    extencionesE = string;
+                    Intent intento = new Intent(context, ExtensionesAdi.class);
+                    context.startActivity(intento);
+                    dialogTrabajos.dismiss();
                 } else {
-                    Toast.makeText(context, "Error al conseguir datos de cambio de aparato", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir extenciones adicionales", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
             }
         });
     }
+
+
 
     public void getCAMDO(final Context context, final JSONObject jsonObject) {
         Call<JSONCAMDO> call = services.RequestPost(context, jsonObject).getDataCAMDO();

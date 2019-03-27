@@ -44,7 +44,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public static  int lugar;
     public static boolean stat;
     public static int ClaveTrabajo;
-    public static int ftth=0;
+    private boolean ftth=false;
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
@@ -81,6 +81,8 @@ public class trabajos_adapter_result extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final viewHolder holder;
+        Util.preferences = Cmcontext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
         lugar=position;
         dialogTrabajos= new BarraCargar().showDialog(Cmcontext);
 try{
@@ -127,7 +129,9 @@ try{
         }
     }
 });
-        ClaveTrabajo = Array.clavex.get(position);
+        Util.editor.putInt("ClvTrabajo", Array.clavex.get(position));
+        Util.editor.commit();
+
 
         holder.control.setOnClickListener(new View.OnClickListener() {
 
@@ -149,7 +153,8 @@ try{
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
-                    ftth=1;
+                     ftth=true;
+                    intento.putExtra("ftth", ftth);
                     Cmcontext.startActivity(intento);
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
@@ -159,8 +164,10 @@ try{
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
+                    ftth=false;
+                    intento.putExtra("ftth",ftth);
                     Cmcontext.startActivity(intento);
-                    ftth=0;
+
                 }
                 if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
                     dialogTrabajos.show();

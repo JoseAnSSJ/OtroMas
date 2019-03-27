@@ -19,6 +19,9 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -52,7 +55,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_horas, container, false);
-      //  request.getTecSecR(getContext());
+
+       // request.getTecSecR(getContext(),jsonObject);
         todo = view.findViewById(R.id.todo);
         TecSec1 = view.findViewById(R.id.tecnicosec1);
        // request.getTecSecR(getContext());

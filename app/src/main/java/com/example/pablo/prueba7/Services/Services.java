@@ -114,59 +114,6 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
-
-
-/*
-    //Tecnico Secundario//
-    public Service getTecSecService(final Context context) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvOrdSer", clvor);
-        MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit.create(Service.class);
-    }
-
-    // Aparatos Clientes//
-    public Service getCliApaService(final Context context) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Contrato", DeepConsModel.Contrato);
-        MediaType JSON = MediaType.parse("application/json; charse=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit.create(Service.class);
-    }
-
     //Status Aparato//
     public Service getStatusApa(final Context context) {
         OkHttpClient client = new OkHttpClient.Builder()
@@ -191,6 +138,12 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
+
+/*
+
+
+
+
 
     ///Tipo de Aparato//
     public Service getApaTipoService(final Context context) throws JSONException {
@@ -1092,40 +1045,7 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
-    public Service getDeepCAPATService(final Context context) {
-        //POST Body Json
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Clv_Orden", clvor);
-            jsonObject.put("Clave", ClaveTrabajo);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-
-
-                return chain.proceed(newRequest);
-            }
-        }).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
 
     public Service recibiapar(final Context context) throws JSONException {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");

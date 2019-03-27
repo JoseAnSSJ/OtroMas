@@ -98,11 +98,15 @@ public class Configuracion extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
+        }catch (Exception e){}
+
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Configuracion.this, Inicio.class);
-            startActivity(intent1);
+            request.getProximaCita(getApplicationContext(),jsonObject);
         } else if (id == R.id.Ordenes_menu) {
             dialogOrdenes.show();
             request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
@@ -110,8 +114,7 @@ public class Configuracion extends AppCompatActivity
             dialogOrdenes.show();
             request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
         } else if (id == R.id.Configuraciones) {
-            Intent intent1 = new Intent(Configuracion.this, Configuracion.class);
-            startActivity(intent1);
+
 
         }
 

@@ -81,26 +81,23 @@ public class Inicio extends AppCompatActivity
         toggle.syncState();
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         try{
-            if (SplashActivity.LoginShare==true) {
+            dialogInicio.show();
                 if(!isOnline()){
                     Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
                     finish();
-
                 }else {
+
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
-                    dialogInicio.show();
                     request.getProximaCita(getApplicationContext(),jsonObject);
                     drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
                 }
-            }else{
-                pieChart.setVisibility(View.VISIBLE);
-                Grafica(pieChart);
-            }
         }catch (Exception e){}
             barraCargar.terminarBarra();
         View barra1 = barra.getHeaderView(0);
+                        pieChart.setVisibility(View.VISIBLE);
+    Grafica(pieChart);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -154,8 +151,7 @@ public class Inicio extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Inicio.this, Inicio.class);
-            startActivity(intent1);
+
         } else if (id == R.id.Ordenes_menu) {
             dialogInicio.show();
             request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
