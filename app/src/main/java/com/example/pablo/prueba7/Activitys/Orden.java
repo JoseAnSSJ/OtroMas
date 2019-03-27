@@ -139,8 +139,14 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     }
     @Override
     public void onBackPressed() {
-        Intent intento1=new Intent(Orden.this,Inicio.class);
-        startActivity(intento1);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intento1=new Intent(Orden.this,Inicio.class);
+            startActivity(intento1);
+        }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,11 +166,10 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
            request.getProximaCita(getApplicationContext());
            request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Orden.this, Orden.class);
-            clvorden=0;
-            opcion=1;
-            request.getListOrd(getApplicationContext());
-            startActivity(intent1);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
         } else if (id == R.id.Reportes) {
             Intent intent1 = new Intent(Orden.this, Reportes.class);
             clavequeja=0;

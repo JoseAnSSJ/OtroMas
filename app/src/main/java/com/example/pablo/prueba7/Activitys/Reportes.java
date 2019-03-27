@@ -122,8 +122,14 @@ public class Reportes extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-        Intent intento1=new Intent(Reportes.this,Inicio.class);
-        startActivity(intento1);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intento1=new Intent(Reportes.this,Inicio.class);
+            startActivity(intento1);
+        }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,12 +154,10 @@ public class Reportes extends AppCompatActivity
             request.getListOrd(getApplicationContext());
             startActivity(intent1);
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Reportes.this, Reportes.class);
-            clavequeja=0;
-            opcion=1;
-            cont="";
-            request.getListQuejas(getApplicationContext());
-            startActivity(intent1);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Reportes.this, Configuracion.class);
             startActivity(intent1);

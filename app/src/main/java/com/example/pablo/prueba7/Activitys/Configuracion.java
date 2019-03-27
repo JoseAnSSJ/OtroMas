@@ -130,8 +130,10 @@ public class Configuracion extends AppCompatActivity
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {
-            Intent intent1 = new Intent(Configuracion.this, Configuracion.class);
-            startActivity(intent1);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
 
         }
 

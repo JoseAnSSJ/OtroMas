@@ -107,7 +107,12 @@ BarraCargar barraCargar = new BarraCargar();
 
     @Override
     public void onBackPressed() {
-    dialogoSalida();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            dialogoSalida();
+        }
     }
 
     public void dialogoSalida() {
@@ -143,12 +148,10 @@ BarraCargar barraCargar = new BarraCargar();
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Inicio.this, Inicio.class);
-            startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
-            request.getProximaCita(getApplicationContext());
-            request.getOrdenes(getApplicationContext());
-            finish();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
 
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Inicio.this, Orden.class);
