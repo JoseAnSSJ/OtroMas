@@ -107,6 +107,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -610,7 +611,8 @@ BarraCargar barraCargar = new BarraCargar();
                                 userJson.get("Obs").getAsString(),
                                 userJson.get("Clv_Orden").getAsInt(),
                                 userJson.get("Clv_TipSer").getAsInt(),
-                                userJson.get("Fec_Sol").getAsString()
+                                userJson.get("Fec_Sol").getAsString(),
+                                userJson.get("Visita1").getAsString()
                         );
                     } catch (Exception e) {
                         DeepConsModel user = new DeepConsModel(
@@ -621,7 +623,8 @@ BarraCargar barraCargar = new BarraCargar();
                                 userJson.get("Obs").getAsJsonNull().toString(),
                                 userJson.get("Clv_Orden").getAsInt(),
                                 userJson.get("Clv_TipSer").getAsInt(),
-                                userJson.get("Fec_Sol").getAsString()
+                                userJson.get("Fec_Sol").getAsString(),
+                                userJson.get("Visita1").getAsString()
                         );
                     }
                     getTrabajos(context);
@@ -1611,7 +1614,7 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getValidaOrdSer(final Context context) {
+    public void getValidaOrdSer(final Context context, final JSONObject jsonObjet) {
         Service service = null;
         try {
             service = services.getValidaOrdSerService(context);
@@ -1626,7 +1629,7 @@ BarraCargar barraCargar = new BarraCargar();
                     String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
-                        getChecaCAMDO(context);
+                        getChecaCAMDO(context,jsonObjet);
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarFragment.eject.setEnabled(true);
@@ -1642,7 +1645,7 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getChecaCAMDO(final Context context) {
+    public void getChecaCAMDO(final Context context, final JSONObject jsonObject1) {
         Service service = null;
         try {
             service = services.getChecaCAMDOService(context);
@@ -1659,7 +1662,7 @@ BarraCargar barraCargar = new BarraCargar();
                             jsonObject.get("Error").getAsString()
                     );
                     if (checa.Error.equals("0")) {
-                        getAddRelOrdUsu(context);
+                        getAddRelOrdUsu(context,jsonObject1);
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarFragment.eject.setEnabled(true);
@@ -1675,7 +1678,7 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
 
-    public void getAddRelOrdUsu(final Context context) {
+    public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject) {
         Service service = null;
         try {
             service = services.getADDRELORDUSUService(context);
@@ -1687,7 +1690,12 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    getDeepMODORDSER(context);
+                    if(HorasFragment.statusHora.equals("E")){
+                        getDeepMODORDSER(context);
+                    }
+                    if(HorasFragment.statusHora.equals("V")){
+                        getDeepMODORDSERV(context,jsonObject);
+                    }
                 }else{
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
@@ -1726,7 +1734,27 @@ BarraCargar barraCargar = new BarraCargar();
             }
         });
     }
+    public void getDeepMODORDSERV(final Context context, final JSONObject json) {
+        Service service = null;
+            service = services.getDeppMODORDSERServiceVisita(context,json);
+        Call<JsonObject> call = service.getMODORDSER();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    getGuardaOrdSerAparatos(context);
+                }else{
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
+                    dialogEjecutar.dismiss();
+                    EjecutarFragment.eject.setEnabled(true);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+            }
+        });
+    }
     public void getGuardaHora(final Context context) {
         Service service = null;
         try {
@@ -1797,19 +1825,30 @@ BarraCargar barraCargar = new BarraCargar();
                     if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")) {
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
-                        for (int a = 0; a < dat.size(); a++) {
-                            if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
-                                IS = 1;
+
+                        if(HorasFragment.statusHora.equals("E")){
+                            for (int a = 0; a < dat.size(); a++) {
+                                if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
+                                    IS = 1;
+                                }
+                            }
+                            if (IS == 1) {
+                                GuardaCoordenadas(context);
+                            } else {
+                                dialogEjecutar.dismiss();
+                                Intent intent = new Intent(context, Orden.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                context.startActivity(intent);
                             }
                         }
-                        if (IS == 1) {
-                            GuardaCoordenadas(context);
-                        } else {
+                        if(HorasFragment.statusHora.equals("V")){
                             dialogEjecutar.dismiss();
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intent);
                         }
+
+
 
                     }
                 }else{

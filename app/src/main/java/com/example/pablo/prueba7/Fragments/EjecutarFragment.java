@@ -10,12 +10,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
 
 /**
@@ -94,6 +98,7 @@ Ejecutar();
         return view;
     }
 public void Ejecutar(){
+    JSONObject jsonObject = new JSONObject();
     final Calendar c = Calendar.getInstance();
     añoE = c.get(Calendar.YEAR);
     mesE = c.get(Calendar.MONTH);
@@ -105,14 +110,46 @@ public void Ejecutar(){
         fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
         horaHoy = horaE + ":" + minutoE;
         eject.setEnabled(false);
-        request.getValidaOrdSer(getActivity());
+        request.getValidaOrdSer(getActivity(),jsonObject);
 
     }
     if (horas.visita == 1) {
-
-    }
+        try{
+            jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+            jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+            jsonObject.put("ClvTecnico", claveTecnico);
+            jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+            jsonObject.put("Contrato", DeepConsModel.Contrato);
+            jsonObject.put("FecEje", "");
+            jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+            jsonObject.put("Impresa", 1);
+            jsonObject.put("ListadeArticulos", "");
+            jsonObject.put("Obs", DeepConsModel.Obs);
+            jsonObject.put("Status", "V");
+            jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+            jsonObject.put("Visita1", fechaHoy);
+            jsonObject.put("Visita2", "");
+        }catch (Exception e){}
+        request.getValidaOrdSer(getActivity(),jsonObject);
+           }
     if (horas.visita1 == 1) {
-
+        try{
+            jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+            jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+            jsonObject.put("ClvTecnico", claveTecnico);
+            jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+            jsonObject.put("Contrato", DeepConsModel.Contrato);
+            jsonObject.put("FecEje", "");
+            jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+            jsonObject.put("Impresa", 1);
+            jsonObject.put("ListadeArticulos", "");
+            jsonObject.put("Obs", DeepConsModel.Obs);
+            jsonObject.put("Status", "V");
+            jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+            jsonObject.put("Visita1", DeepConsModel.Visita1);
+            jsonObject.put("Visita2", fechaHoy);
+        }catch (Exception e){}
+        request.getValidaOrdSer(getActivity(),jsonObject);
     }
 }
 
