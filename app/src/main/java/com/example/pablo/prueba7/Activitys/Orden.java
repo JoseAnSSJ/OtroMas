@@ -77,7 +77,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Array.statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Orden Vacio", Toast.LENGTH_SHORT);
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de orden vacío", Toast.LENGTH_SHORT);
                     clvorden=0;
                     opcion=1;
                     request.getListOrd(getApplicationContext());
@@ -104,7 +104,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                 if (contsearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
-                                    "Campo de Contrato vacio", Toast.LENGTH_SHORT);
+                                    "Campo de contrato vacío", Toast.LENGTH_SHORT);
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
                     Array.statusrc.clear();

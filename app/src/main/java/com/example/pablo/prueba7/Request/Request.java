@@ -156,10 +156,9 @@ public class Request extends AppCompatActivity {
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
     JsonObject jsonConsultaIp;
-    String a = "Seleccione tecnico secundario";
-    String f = "Seleccione tipo de solucion";
+    String a = "Seleccione técnico secundario";
+    String f = "Seleccione tipo de solución";
     public static String datos[];
-    String Text="Request";
 BarraCargar barraCargar = new BarraCargar();
 
     public void ErrorInicioDeSesion(final Context context) {
@@ -167,13 +166,10 @@ BarraCargar barraCargar = new BarraCargar();
 
         try {
             Login.dialogLogin.dismiss();
-            usurio.setEnabled(true);
-            contraseña.setEnabled(true);
-            entrar.setEnabled(true);
         } catch (Exception e) {
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-           // ((Activity) context).finish();
+            finish();
         }
 
     }
@@ -183,14 +179,11 @@ BarraCargar barraCargar = new BarraCargar();
         try {
             Login.dialogLogin= new BarraCargar().showDialog(context);
             Login.dialogLogin.dismiss();
-            usurio.setEnabled(true);
-            contraseña.setEnabled(true);
-            entrar.setEnabled(true);
         } catch (Exception e) {
             Inicio.dialogInicio= new BarraCargar().showDialog(context);
             Inicio.dialogInicio.dismiss();
             Login.esperar(3);
-            ((Activity) context).finish();
+            finish();
         }
     }
 
@@ -232,9 +225,6 @@ BarraCargar barraCargar = new BarraCargar();
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Login.dialogLogin.dismiss();
                 Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
-                usurio.setEnabled(true);
-                contraseña.setEnabled(true);
-                entrar.setEnabled(true);
             }
         });
     }
@@ -252,7 +242,10 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
+                Log.d("asd","asd");
                 if (response.code() == 200) {
+
+                try{
                     Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                     Util.editor = Util.preferences.edit();
                     JSONResponseTecnico jsonResponse = response.body();
@@ -270,16 +263,20 @@ BarraCargar barraCargar = new BarraCargar();
                         Util.editor.commit();
                     }
                     getProximaCita(context);
+                }catch (Exception e){
+                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                    ErrorInicioDeSesion(context);
+                }
                 } else {
-                    ErrorCargarDatos(context);
-
-                    Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
+                    Login.dialogLogin.dismiss();
+                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
                 ErrorInicioDeSesion(context);
+                finish();
             }
         });
     }
@@ -328,6 +325,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 ErrorInicioDeSesion(context);
+                finish();
             }
         });
     }
@@ -409,6 +407,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 ErrorInicioDeSesion(context);
+                finish();
             }
         });
     }
@@ -500,7 +499,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 ErrorInicioDeSesion(context);
-
+                finish();
             }
         });
     }
@@ -832,7 +831,7 @@ BarraCargar barraCargar = new BarraCargar();
                         InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
                 } else {
-                    Toast.makeText(context, "Error al conseguir lista de tecnicos secundarios", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir lista de técnicos secundarios", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -860,7 +859,7 @@ BarraCargar barraCargar = new BarraCargar();
                     context.startActivity(intento);
                     dialogTrabajos.dismiss();
                 } else {
-                    Toast.makeText(context, "Error al conseguir extenciones adicionales", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir extensiones adicionales", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -889,7 +888,7 @@ BarraCargar barraCargar = new BarraCargar();
                     while (itdata.hasNext()) {
                         List<GetListClienteAparatosResult> dat = itdata.next();
                         String datos[] = new String[dat.size() + 1];
-                        datos[0] = "Seleccione Aparato";
+                        datos[0] = "Seleccione aparato";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
                             datos[j] = dat.get(i).getMac();
@@ -929,7 +928,7 @@ BarraCargar barraCargar = new BarraCargar();
                     while (itdata.hasNext()) {
                         List<GetSP_StatusAparatosListResult> dat = itdata.next();
                         String datos[] = new String[dat.size() + 1];
-                        datos[0] = "Seleccione Estado";
+                        datos[0] = "Seleccione estado";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
                             datos[j] = dat.get(i).getConcepto();
@@ -983,7 +982,7 @@ BarraCargar barraCargar = new BarraCargar();
                     while (itdata.hasNext()) {
                         List<GetListTipoAparatosByIdArticuloResult> dat = itdata.next();
                         String datos[] = new String[dat.size() + 1];
-                        datos[0] = "Seleccione Tipo de Aparato";
+                        datos[0] = "Seleccione tipo de aparato";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
                             datos[j] = dat.get(i).getNombre();
@@ -1041,7 +1040,7 @@ BarraCargar barraCargar = new BarraCargar();
                     while (itdata.hasNext()) {
                         List<GetListAparatosDisponiblesByIdArticuloResult> dat = itdata.next();
                         String datos[] = new String[dat.size() + 1];
-                        datos[0] = "Seleccine Aparato Disponible";
+                        datos[0] = "Seleccione aparato disponible";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
                             datos[j] = dat.get(i).getDescripcion();
@@ -1114,7 +1113,6 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
                 if (response.code() == 200) {
-                    Log.d("asd", "asd");
                     try {
                         JSONCAMDO jsonResponse = response.body();
                         array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
@@ -1224,7 +1222,7 @@ BarraCargar barraCargar = new BarraCargar();
                     Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itData = array.dataMedSer.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraMedioPorServicoContratadoListResult> dat = (List<GetMuestraMedioPorServicoContratadoListResult>) itData.next();
-                        array.medio.add("Selecionar Medio");
+                        array.medio.add("Seleccionar medio");
                         for (int i = 0; i < dat.size(); i++) {
                             array.medio.add(dat.get(i).getDescripcion());
                         }
@@ -1232,7 +1230,7 @@ BarraCargar barraCargar = new BarraCargar();
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medio);
                     asignacion.spinnerMedio.setAdapter(adapter1);
                 } else {
-                    Toast.makeText(context, "Error al conseguir clave tecnico", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1373,7 +1371,7 @@ BarraCargar barraCargar = new BarraCargar();
                     dialogAsignacion.dismiss();
                     finish();
                 } else {
-                    Toast.makeText(context, "Error al aceptar asignacion", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al aceptar asignación", Toast.LENGTH_LONG).show();
                     dialogAsignacion.dismiss();
                 }
             }
@@ -1691,7 +1689,7 @@ BarraCargar barraCargar = new BarraCargar();
                 if (response1.code() == 200) {
                     getDeepMODORDSER(context);
                 }else{
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
                 }
@@ -1717,7 +1715,7 @@ BarraCargar barraCargar = new BarraCargar();
                 if (response1.code() == 200) {
                     getGuardaHora(context);
                 }else{
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
                 }
@@ -1744,7 +1742,7 @@ BarraCargar barraCargar = new BarraCargar();
                     getGuardaOrdSerAparatos(context);
                 }else{
                     dialogEjecutar.dismiss();
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
                 }
             }
@@ -1771,7 +1769,7 @@ BarraCargar barraCargar = new BarraCargar();
                     addLlenaBitacora(context);
                 }else{
                     dialogEjecutar.dismiss();
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
                 }
             }
@@ -1815,7 +1813,7 @@ BarraCargar barraCargar = new BarraCargar();
 
                     }
                 }else{
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
                     dialogEjecutar.dismiss();
                 }
@@ -1931,7 +1929,7 @@ BarraCargar barraCargar = new BarraCargar();
                 if (response1.code() == 200) {
                     ConsultaIp(context);
                 }else{
-                    Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
                 }
@@ -2062,7 +2060,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Envío de aparatos con éxito", Toast.LENGTH_SHORT);
                 }
             }
 

@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
-import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
@@ -88,7 +84,6 @@ public class asignacion extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento = new Intent(asignacion.this, asignado.class);
                 startActivity(intento);
                 finish();

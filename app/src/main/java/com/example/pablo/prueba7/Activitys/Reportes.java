@@ -65,7 +65,7 @@ public class Reportes extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (reportesearch.getText().toString().trim().equalsIgnoreCase("")){
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Reporte vacío", Toast.LENGTH_SHORT);
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de reporte vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
                     Array.nombreQ.clear();
                     Array.statusQ.clear();
@@ -94,7 +94,7 @@ public class Reportes extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (contratosearch.getText().toString().trim().equalsIgnoreCase("")){
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Contrato vacio", Toast.LENGTH_SHORT);
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de contrato vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
                     Array.nombreQ.clear();
                     Array.statusQ.clear();

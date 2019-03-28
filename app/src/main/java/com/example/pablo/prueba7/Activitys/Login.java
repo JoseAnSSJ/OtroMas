@@ -58,20 +58,15 @@ BarraCargar barraCargar = new BarraCargar();
         Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
     }else{
 if(!isOnline()){
-   Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+   Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
 }else{
     user = usurio.getText().toString() + ":" + contraseña.getText().toString();
     enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
     guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
     request.getReviews(getApplicationContext());
     /////////////
-
 dialogLogin.show();
-    usurio.setEnabled(false);
-    contraseña.setEnabled(false);
-    entrar.setEnabled(false);
     /////////////
-    Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
 }
 
     }
@@ -118,9 +113,6 @@ public void guardarPre(Context context,String usario,String encode){
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-    public static void showProgress(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
     public boolean isOnline() {
         ConnectivityManager cm =

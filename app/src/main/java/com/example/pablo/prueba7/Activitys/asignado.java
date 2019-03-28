@@ -120,7 +120,7 @@ public class asignado extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedStrings==null){
-                    Toast.makeText(getApplicationContext(), "Seleccione minimo un servicio", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Seleccione mínimo un servicio", Toast.LENGTH_SHORT);
                 }else {
                     if(clveAparatoSpinner==0||nombreSpinner==""||nombreSpinner==null){
                         Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_SHORT);

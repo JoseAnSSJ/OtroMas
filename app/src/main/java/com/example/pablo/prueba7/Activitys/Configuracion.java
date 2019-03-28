@@ -84,7 +84,7 @@ public class Configuracion extends AppCompatActivity
     public void dialogoSalida() {
         new AlertDialog.Builder(this)
                 .setTitle("SALIR")
-                .setMessage("¿Desea salir de la aplicacón?")
+                .setMessage("¿Desea salir de la aplicación?")
                 .setPositiveButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override

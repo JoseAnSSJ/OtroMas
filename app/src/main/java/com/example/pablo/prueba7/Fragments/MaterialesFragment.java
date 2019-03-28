@@ -135,7 +135,7 @@ public class MaterialesFragment extends Fragment {
                 }else {
                     if(request.extencionesMat==true){
                         if(seleccionExteR==0){
-                            Toast.makeText(getContext(),"Seleccione una extencion",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Seleccione una extención",Toast.LENGTH_SHORT).show();
                         }else{
                             EjecutarDescargaMaterial();
                         }

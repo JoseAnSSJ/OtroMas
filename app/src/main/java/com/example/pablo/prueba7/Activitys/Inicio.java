@@ -78,12 +78,12 @@ BarraCargar barraCargar = new BarraCargar();
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         if (SplashActivity.LoginShare==true) {
             if(!isOnline()){
-                Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
                 finish();
 
             }else {
                 dialogInicio.show();
-                request.getClv_tecnico(getApplicationContext());
+                request.getClv_tecnico(getBaseContext());
                 drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
             }
@@ -118,7 +118,7 @@ BarraCargar barraCargar = new BarraCargar();
     public void dialogoSalida() {
         new AlertDialog.Builder(this)
         .setTitle("SALIR")
-                .setMessage("¿Desea salir de la aplicacón?")
+                .setMessage("¿Desea salir de la aplicación?")
                 .setPositiveButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override

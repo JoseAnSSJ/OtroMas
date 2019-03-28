@@ -328,8 +328,8 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
     private void mostrarInformacionDeAlertaGPS() {
         new AlertDialog.Builder(getContext())
-                .setTitle("Señal de gps")
-                .setMessage("El gps esta desactivado, ¿deseas activarlo?")
+                .setTitle("Señal de GPS")
+                .setMessage("El GPS esta desactivado. ¿Deseas activarlo?")
                 .setPositiveButton("Activar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -340,7 +340,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "Es necesario activar el GPS", Toast.LENGTH_SHORT).show();
+                       mostrarInformacionDeAlertaGPS();
                     }
                 })
                 .show();

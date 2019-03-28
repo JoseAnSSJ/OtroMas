@@ -130,7 +130,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
         }else {
            if(request.extencionesMat==true){
                if(seleccionExte==0){
-                   Toast.makeText(getContext(),"Seleccione una extencion",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                }else{
                    EjecutarDescargaMaterial();
                }

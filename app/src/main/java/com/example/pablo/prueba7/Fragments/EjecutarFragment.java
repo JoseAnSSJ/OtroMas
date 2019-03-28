@@ -62,7 +62,7 @@ if(request.isnet==true){
                 dialogEjecutar.show();
 if(request.rapagejecutar==true){
     if (Array.recibixnew.size() == 0) {
-        Toast.makeText(getContext(), "Ningun aparato seleccionado", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
         dialogEjecutar.dismiss();
     } else {
         try {
@@ -72,7 +72,7 @@ if(request.rapagejecutar==true){
             ////////*************************
 
         } catch (Exception e) {
-            Toast.makeText(getContext(), "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(), "Error, aparatos no enviados", Toast.LENGTH_SHORT);
             dialogEjecutar.dismiss();
         }
     }

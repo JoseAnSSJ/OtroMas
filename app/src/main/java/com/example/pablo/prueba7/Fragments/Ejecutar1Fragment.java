@@ -77,11 +77,11 @@ public class Ejecutar1Fragment extends Fragment {
 
 
 
-                if (TrabajosFragment.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solucion")) {
-                    Toast.makeText(getContext(), "Seleccione un tipo de solucion", Toast.LENGTH_SHORT).show();
+                if (TrabajosFragment.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
+                    Toast.makeText(getContext(), "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
                 }else {
                     if(TrabajosFragment.proble.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"Campo Problema real vacio", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Campo Problema real vacío", Toast.LENGTH_LONG).show();
 
 
                 }else {
@@ -126,7 +126,6 @@ public class Ejecutar1Fragment extends Fragment {
                     }
                     if (horas.reporteVisita2 == 1) {
                         try {
-                                Toast.makeText(getContext(), "FechaBien", Toast.LENGTH_SHORT);
                                 request.getGuardaHoraReporte(getContext());
                                 request.getGuardaCampos(getContext());
                                 Intent intent1 = new Intent(getActivity(), Reportes.class);

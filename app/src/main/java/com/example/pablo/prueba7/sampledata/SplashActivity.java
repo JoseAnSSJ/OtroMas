@@ -27,9 +27,10 @@ public class SplashActivity extends AppCompatActivity {
         Intent intentinicio = new Intent(this, Inicio.class);
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
-
-            startActivity(intentinicio);
+            startActivity(intentLogin);
+            //startActivity(intentinicio);
         } else {
+
             startActivity(intentLogin);
             LoginShare=false;
         }
