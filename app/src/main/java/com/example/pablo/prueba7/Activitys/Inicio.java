@@ -75,22 +75,14 @@ BarraCargar barraCargar = new BarraCargar();
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        if (SplashActivity.LoginShare==true) {
-            if(!isOnline()){
-                Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
-                finish();
-
-            }else {
-                dialogInicio.show();
-                request.getClv_tecnico(getBaseContext());
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
+        try {
+            if(getIntent().getStringExtra("Reiniciar").equals("1")) {
+                dialogoReinicio();
             }
-        }else{
-            pieChart.setVisibility(View.VISIBLE);
-            Grafica(pieChart);
+        }catch (Exception e){
+            Inicar();
         }
+
 
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
@@ -103,6 +95,7 @@ BarraCargar barraCargar = new BarraCargar();
         calleDireccion.setText(request.siguenteCalle);
         numeroDireccion.setText(request.sigueinteNumero);
         coloniaDireccion.setText(request.siguenteColonia);
+
     }
 
     @Override
@@ -133,7 +126,25 @@ BarraCargar barraCargar = new BarraCargar();
                             }
                         }).show();
     }
-
+    public void dialogoReinicio() {
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage("Error al inciar aplicación")
+                .setPositiveButton("Intentar otra vez",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Inicar();
+                            }
+                        })
+                .setNegativeButton("Cerrar aplicación",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -256,5 +267,22 @@ BarraCargar barraCargar = new BarraCargar();
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
+    }
+    public void Inicar(){
+        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        if (SplashActivity.LoginShare==true) {
+            if(!isOnline()){
+                Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+                finish();
+
+            }else {
+                dialogInicio.show();
+                request.getProximaCita(getBaseContext());
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            }
+        }else{
+            pieChart.setVisibility(View.VISIBLE);
+            Grafica(pieChart);
+        }
     }
 }

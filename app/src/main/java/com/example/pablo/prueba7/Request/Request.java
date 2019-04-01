@@ -3,10 +3,12 @@ package com.example.pablo.prueba7.Request;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -163,30 +165,20 @@ public class Request extends AppCompatActivity {
 BarraCargar barraCargar = new BarraCargar();
 
     public void ErrorInicioDeSesion(final Context context) {
-
-
         try {
             Login.dialogLogin.dismiss();
+
         } catch (Exception e) {
             Inicio.dialogInicio.dismiss();
-            Login.esperar(3);
-            finish();
+            Intent intento = new Intent(context, Inicio.class);
+            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intento.putExtra("Reiniciar","1");
+            context.startActivity(intento);
+
         }
 
     }
 
-    public void ErrorCargarDatos(final Context context) {
-
-        try {
-            Login.dialogLogin= new BarraCargar().showDialog(context);
-            Login.dialogLogin.dismiss();
-        } catch (Exception e) {
-            Inicio.dialogInicio= new BarraCargar().showDialog(context);
-            Inicio.dialogInicio.dismiss();
-            Login.esperar(3);
-            finish();
-        }
-    }
 
     //Token///
     public void getReviews(final Context context) {
@@ -224,6 +216,9 @@ BarraCargar barraCargar = new BarraCargar();
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+                usurio.setEnabled(true);
+                contraseña.setEnabled(true);
+                entrar.setEnabled(true);
                 Login.dialogLogin.dismiss();
                 Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
             }
@@ -317,16 +312,15 @@ BarraCargar barraCargar = new BarraCargar();
                     getOrdenes(context);
 
                 } else {
-                    ErrorCargarDatos(context);
-
-                    Toast.makeText(context, "Error al conseguir siguiente cita", Toast.LENGTH_LONG).show();
+                    ErrorInicioDeSesion(context);
+                    Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 ErrorInicioDeSesion(context);
-                finish();
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -399,16 +393,16 @@ BarraCargar barraCargar = new BarraCargar();
                     }
                     getQuejas(context);
                 } else {
-                    ErrorCargarDatos(context);
+                    ErrorInicioDeSesion(context);
 
-                    Toast.makeText(context, "Error al conseguir todas las ordenes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 ErrorInicioDeSesion(context);
-                finish();
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -491,8 +485,8 @@ BarraCargar barraCargar = new BarraCargar();
                         Login.dialogLogin.dismiss();
                     }
                 } else {
-                    ErrorCargarDatos(context);
-                    Toast.makeText(context, "Error al conseguir lista de quejas", Toast.LENGTH_LONG).show();
+                    ErrorInicioDeSesion(context);
+                    Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -500,7 +494,7 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 ErrorInicioDeSesion(context);
-                finish();
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
     }
