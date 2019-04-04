@@ -2005,7 +2005,7 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
         JSONObject jsonObject1 = new JSONObject();
         try {
             jsonObject.put("Clv_orden", clvor);
-            jsonObject.put("FirmaCliente",Firma.firma);
+            jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
             jsonObject1.put("ObjLista",jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();

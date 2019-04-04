@@ -19,12 +19,14 @@ import java.nio.charset.StandardCharsets;
 
 public class Firma extends AppCompatActivity {
      Dibujar dibujar;
-    public static String firma="";
+    public static String imagenAEnviar="";
     public static String firma1;
     Request request = new Request();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_firma);
         dibujar= (Dibujar) findViewById(R.id.FirmaLayout);
         Toolbar toolbar;
@@ -44,8 +46,7 @@ public class Firma extends AppCompatActivity {
               dibujar.NuevoDibujo();
                 break;
             case R.id.guardarDibujo:
-                    firma= (ConvertirImgString(Screenshot.TakeScreenshot(dibujar)));
-                System.out.println(firma);
+                recortar(Screenshot.TakeScreenshot(dibujar.getRootView()));
                 finish();
                 request.addFirma(getApplicationContext());
         }
@@ -60,6 +61,17 @@ public class Firma extends AppCompatActivity {
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
         byte [] imagebyte = array.toByteArray();
         return Base64.encodeToString(imagebyte, Base64.DEFAULT);
+    }
+    private void recortar(Bitmap bmp){
+
+        int recorte = (int) (bmp.getHeight() * .15);
+        int alto = (bmp.getHeight() - recorte);
+
+        Bitmap resizedbitmap1 = Bitmap.createBitmap(bmp, 0, recorte,bmp.getWidth(), alto);
+        imagenAEnviar = ConvertirImgString(resizedbitmap1);
+        //System.out.println(imagenAEnviar);
+
+
     }
     }
 
