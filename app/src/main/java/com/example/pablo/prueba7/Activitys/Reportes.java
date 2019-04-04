@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
@@ -34,14 +38,17 @@ public class Reportes extends AppCompatActivity
    private ListView reportes;
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
+
    private quejas_adapter_result adapterqueja;
     NavigationView barra;
     TextView nombreTec;
+    public static ProgressDialog dialogReportes;
+    BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_reportes);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         reportes=findViewById(R.id.listreporte);
@@ -52,7 +59,7 @@ public class Reportes extends AppCompatActivity
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -60,7 +67,8 @@ public class Reportes extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
-
+        dialogReportes= new BarraCargar().showDialog(this);
+        barraCargar.terminarBarra();
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,28 +139,19 @@ public class Reportes extends AppCompatActivity
         }
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-      getMenuInflater().inflate(R.menu.inicio, menu);
-        return true; }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Reportes.this, Inicio.class);
-            startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
+            dialogReportes.show();
             request.getProximaCita(getApplicationContext());
-            request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Reportes.this, Orden.class);
+            dialogReportes.show();
             clvorden=0;
             opcion=1;
             request.getListOrd(getApplicationContext());
-            startActivity(intent1);
         } else if (id == R.id.Reportes) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {

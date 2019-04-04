@@ -21,7 +21,6 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Request.Request.nombre_tecnico;
 
 
 public class Configuracion extends AppCompatActivity
@@ -36,15 +35,15 @@ public class Configuracion extends AppCompatActivity
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_configuracion);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         CS = (Button)findViewById(R.id.btnCerrarSesion);
         nombreConfi = findViewById(R.id.nombreTecnico);
         barra = findViewById(R.id.nav_view);
+        setSupportActionBar(toolbar);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //Boton para cerrar sesion
-        nombreConfi.setText(nombre_tecnico);
+        nombreConfi.setText(Util.getNombreTecnicoPreference(Util.preferences));
         CS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,13 +98,6 @@ public class Configuracion extends AppCompatActivity
                             }
                         }).show();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.inicio, menu);
-        return true;
-    }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -75,7 +75,7 @@ dialogLogin.show();
         });
 
     }
-public void guardarPre(Context context,String usario,String encode){
+    public void guardarPre(Context context,String usario,String encode){
     Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
     Util.editor = Util.preferences.edit();
     Util.editor.putString("usuario",usario);

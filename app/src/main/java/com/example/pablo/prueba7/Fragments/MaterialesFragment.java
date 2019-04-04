@@ -73,6 +73,10 @@ public class MaterialesFragment extends Fragment {
         horizontalScrollViewR = view.findViewById(R.id.scrollhorizontalR);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),MaterialesFragment.tablaR);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+        if(request.extencionesMat==true){
+            spinnerExtMatR.setVisibility(View.VISIBLE);
+        }
+
         descripcionMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -100,7 +104,9 @@ public class MaterialesFragment extends Fragment {
                     idInventarioMDR=dat.get(position-1).IdInventario;
                     request.getTipoMatR(getContext());
                     seleccionR=position;
-
+                    if(request.extencionesMat==false){
+                        request.getPredescargaR(getActivity(),getContext());
+                    }
 
                 }
             }

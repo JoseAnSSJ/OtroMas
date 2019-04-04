@@ -17,18 +17,33 @@
     <RelativeLayout
         android:id="@+id/animado9"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        >
 
       <Button
           android:id="@+id/ejec"
           android:layout_width="@dimen/botonChicoL"
           android:layout_height="@dimen/botonChicoA"
           android:textSize="10dp"
-          android:layout_centerHorizontal="true"
+          android:layout_alignParentStart="true"
+          android:layout_marginStart="70dp"
           android:background="@drawable/boton"
           android:backgroundTint="#00b0ff"
           android:enabled="true"
           android:text="@string/ejecutar"
+          android:textColor="#000" />
+      <Button
+          android:id="@+id/firmarOrd"
+          android:layout_width="@dimen/botonChicoL"
+          android:layout_height="@dimen/botonChicoA"
+          android:layout_marginStart="25dp"
+          android:layout_toEndOf="@+id/ejec"
+          android:textSize="10dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="#00b0ff"
+          android:enabled="true"
+          android:text="@string/firmar"
           android:textColor="#000" />
     </RelativeLayout>
 
@@ -39,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
       <TextView
           android:id="@+id/eqwe"

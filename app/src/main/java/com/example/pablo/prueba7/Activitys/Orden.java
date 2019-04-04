@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
@@ -33,10 +36,11 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     private ordenes_adapter_result adapterord;
     private Button ordenb,contratob;
     public static   ListView ordenes;
-    public static ProgressBar progressBarOrdenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
+    public static ProgressDialog dialogOrdenes;
+    BarraCargar barraCargar = new BarraCargar();
    private Request rqs=new Request();
 
     @Override
@@ -53,13 +57,13 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(request.nombre_tecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         clvorden=0;
         opcion=1;
         cont="";
-        progressBarOrdenes = findViewById(R.id.barlogodenes);
+        dialogOrdenes= new BarraCargar().showDialog(this);
+        barraCargar.terminarBarra();
         ////////////////
-
         //////////////////
         adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
@@ -148,34 +152,25 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         }
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.inicio, menu);
-        return true;
-    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Orden.this, Inicio.class);
-            startActivity(intent1);
-            //Actualizar la siguente cita y la grafica
+            dialogOrdenes.show();
            request.getProximaCita(getApplicationContext());
-           request.getOrdenes(getApplicationContext());
         } else if (id == R.id.Ordenes_menu) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             }
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Orden.this, Reportes.class);
+            dialogOrdenes.show();
             clavequeja=0;
             opcion=1;
             request.getListQuejas(getApplicationContext());
-            startActivity(intent1);
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Orden.this, Configuracion.class);
             startActivity(intent1);

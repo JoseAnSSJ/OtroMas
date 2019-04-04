@@ -4,6 +4,8 @@ package com.example.pablo.prueba7.Services;
 import android.content.Context;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Dibujo.Firma;
+import com.example.pablo.prueba7.Dibujo.Screenshot;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
@@ -45,6 +47,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
+import static com.example.pablo.prueba7.Dibujo.Firma.ConvertirImgString;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.horas12;
 
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
@@ -1503,7 +1506,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }//
 
     public Service getChecaExtService(final Context context) {
         //POST Body Json
@@ -1616,7 +1619,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }//
 
     public Service getValidaPreService(final Context context) {
         //POST Body Json
@@ -1654,7 +1657,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }//
 
     public Service addPreDescargaService(final Context context) {
         //POST Body Json
@@ -1705,7 +1708,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }//
 
     public Service getPreDescargaService(final Context context) {
         //POST Body Json
@@ -1739,7 +1742,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }//
 
     //////////////////////
     public Service getDetalleBitRService(final Context context) {
@@ -1995,7 +1998,44 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
     return retrofit.create(Service.class);
 }
     ////////////////////////
+    public Service addFirmaService(final Context context) {
+        //POST Body Json
 
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject.put("Clv_orden", clvor);
+            jsonObject.put("FirmaCliente",Firma.firma);
+            jsonObject1.put("ObjLista",jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String boundary = jsonObject1.toString().replace("\\","");
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", getToken(context))
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
     public String getToken(final Context context) {
         String token;
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);

@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
@@ -36,6 +39,8 @@ public class EjecutarFragment extends Fragment {
     private  InstalacionFragment horas = new InstalacionFragment();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
+    Button firmar;
+
     public EjecutarFragment() {
         // Required empty public constructor
     }
@@ -53,7 +58,7 @@ public class EjecutarFragment extends Fragment {
         eject = view.findViewById(R.id.ejec);
         msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         ejecutar = view.findViewById(R.id.ejecutarLay);
-
+        firmar = view.findViewById(R.id.firmarOrd);
         reiniciar.setEnabled(false);
 if(request.isnet==true){
     ejecutar.setVisibility(View.VISIBLE);
@@ -95,8 +100,16 @@ Ejecutar();
                 reiniciar.setEnabled(false);
             }
         });
+        firmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Firma.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
+
 public void Ejecutar(){
     JSONObject jsonObject = new JSONObject();
     final Calendar c = Calendar.getInstance();
@@ -152,6 +165,7 @@ public void Ejecutar(){
         request.getValidaOrdSer(getActivity(),jsonObject);
     }
 }
+
 
 }
 

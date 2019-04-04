@@ -19,6 +19,7 @@ import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
@@ -121,6 +122,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
+import static com.example.pablo.prueba7.Activitys.Inicio.dialogInicio;
 import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
@@ -162,17 +164,17 @@ public class Request extends AppCompatActivity {
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
     public static String datos[];
-BarraCargar barraCargar = new BarraCargar();
+    BarraCargar barraCargar = new BarraCargar();
 
     public void ErrorInicioDeSesion(final Context context) {
         try {
             Login.dialogLogin.dismiss();
 
         } catch (Exception e) {
-            Inicio.dialogInicio.dismiss();
+            dialogInicio.dismiss();
             Intent intento = new Intent(context, Inicio.class);
             intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intento.putExtra("Reiniciar","1");
+            intento.putExtra("Reiniciar", "1");
             context.startActivity(intento);
 
         }
@@ -238,31 +240,31 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
-                Log.d("asd","asd");
+                Log.d("asd", "asd");
                 if (response.code() == 200) {
 
-                try{
-                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                    Util.editor = Util.preferences.edit();
-                    JSONResponseTecnico jsonResponse = response.body();
-                    //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
-                    array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
-                    //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
-                    Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
-                    while (iteData.hasNext()) {
-                        List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
-                        //Se recorre la lista y se guarla la informacion en el Modelo
-                        clave_tecnico = data.get(0).clv_tecnico;
-                        nombre_tecnico = data.get(0).tecnico;
-                        services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
-                        Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
-                        Util.editor.commit();
+                    try {
+                        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        Util.editor = Util.preferences.edit();
+                        JSONResponseTecnico jsonResponse = response.body();
+                        //Pide datos sobre el Json Get_ClvTecnicoResult haciendo referencia al JsonResponse donde se guardo
+                        array.datatec = new ArrayList<List<Get_ClvTecnicoResult>>(asList(jsonResponse.Get_ClvTecnicoResult()));
+                        //Se crea un Iterator con la lista para que se pueda recorrer con la informacion
+                        Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
+                        while (iteData.hasNext()) {
+                            List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
+                            //Se recorre la lista y se guarla la informacion en el Modelo
+                            clave_tecnico = data.get(0).clv_tecnico;
+                            nombre_tecnico = data.get(0).tecnico;
+                            services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
+                            Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
+                            Util.editor.commit();
+                        }
+                        getProximaCita(context);
+                    } catch (Exception e) {
+                        Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                        ErrorInicioDeSesion(context);
                     }
-                    getProximaCita(context);
-                }catch (Exception e){
-                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
-                    ErrorInicioDeSesion(context);
-                }
                 } else {
                     Login.dialogLogin.dismiss();
                     Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
@@ -467,7 +469,7 @@ BarraCargar barraCargar = new BarraCargar();
                         }
 
                     }
-                    if(SplashActivity.LoginShare==true) {
+                    if (SplashActivity.LoginShare == true) {
                         Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                         Inicio.pieChart.setVisibility(View.VISIBLE);
                         Inicio.Grafica(Inicio.pieChart);
@@ -477,8 +479,8 @@ BarraCargar barraCargar = new BarraCargar();
                         Inicio.calleDireccion.setText(siguenteCalle);
                         Inicio.numeroDireccion.setText(sigueinteNumero);
                         Inicio.coloniaDireccion.setText(siguenteColonia);
-                        Inicio.dialogInicio.dismiss();
-                    }else {
+                        dialogInicio.dismiss();
+                    } else {
                         Intent intento = new Intent(context, Inicio.class);
                         intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intento);
@@ -528,8 +530,11 @@ BarraCargar barraCargar = new BarraCargar();
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
                             Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO() + ", " + dat.get(i).getColonia()));
+
                         }
                     }
+                    Intent intent1 = new Intent(context, Reportes.class);
+                    context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
                 }
@@ -553,6 +558,7 @@ BarraCargar barraCargar = new BarraCargar();
         call.enqueue(new Callback<Example1>() {
             @Override
             public void onResponse(Call<Example1> call, Response<Example1> response) {
+                Log.d("asd","asd");
                 if (response.code() == 200) {
                     Example1 jsonResponse = response.body();
                     array.dataagenda = new ArrayList<List<GetDameListadoOrdenesAgendadasResult>>(asList(jsonResponse.getGetDameListadoOrdenesAgendadasResult()));
@@ -568,9 +574,11 @@ BarraCargar barraCargar = new BarraCargar();
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String.valueOf( dat.get(i).getCalle()+ ", " +dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
+                            Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
                         }
                     }
+                    Intent intent1 = new Intent(context, Orden.class);
+                    context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
@@ -597,29 +605,9 @@ BarraCargar barraCargar = new BarraCargar();
                 if (response.code() == 200) {
                     JsonObject userJson = response.body().getAsJsonObject("GetDeepConsultaOrdSerResult");
                     try {
-                        DeepConsModel user = new DeepConsModel(
-                                userJson.get("Clv_FACTURA").getAsInt(),
-                                userJson.get("Contrato").getAsInt(),
-                                userJson.get("ContratoCom").getAsString(),
-                                userJson.get("STATUS").getAsString(),
-                                userJson.get("Obs").getAsString(),
-                                userJson.get("Clv_Orden").getAsInt(),
-                                userJson.get("Clv_TipSer").getAsInt(),
-                                userJson.get("Fec_Sol").getAsString(),
-                                userJson.get("Visita1").getAsString()
-                        );
+                        TryDeepConsulta(userJson);
                     } catch (Exception e) {
-                        DeepConsModel user = new DeepConsModel(
-                                userJson.get("Clv_FACTURA").getAsInt(),
-                                userJson.get("Contrato").getAsInt(),
-                                userJson.get("ContratoCom").getAsString(),
-                                userJson.get("STATUS").getAsString(),
-                                userJson.get("Obs").getAsJsonNull().toString(),
-                                userJson.get("Clv_Orden").getAsInt(),
-                                userJson.get("Clv_TipSer").getAsInt(),
-                                userJson.get("Fec_Sol").getAsString(),
-                                userJson.get("Visita1").getAsString()
-                        );
+                        TryDeepConsulta1(userJson);
                     }
                     getTrabajos(context);
                     try {
@@ -744,6 +732,7 @@ BarraCargar barraCargar = new BarraCargar();
         call.enqueue(new Callback<Example3>() {
             @Override
             public void onResponse(Call<Example3> call, Response<Example3> response) {
+                Log.d("asd","asd");
                 if (response.code() == 200) {
                     Array.trabajox.clear();
                     Array.accionx.clear();
@@ -1623,7 +1612,7 @@ BarraCargar barraCargar = new BarraCargar();
                     String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
-                        getChecaCAMDO(context,jsonObjet);
+                        getChecaCAMDO(context, jsonObjet);
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarFragment.eject.setEnabled(true);
@@ -1656,7 +1645,7 @@ BarraCargar barraCargar = new BarraCargar();
                             jsonObject.get("Error").getAsString()
                     );
                     if (checa.Error.equals("0")) {
-                        getAddRelOrdUsu(context,jsonObject1);
+                        getAddRelOrdUsu(context, jsonObject1);
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarFragment.eject.setEnabled(true);
@@ -1684,13 +1673,13 @@ BarraCargar barraCargar = new BarraCargar();
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    if(HorasFragment.statusHora.equals("E")){
+                    if (HorasFragment.statusHora.equals("E")) {
                         getDeepMODORDSER(context);
                     }
-                    if(HorasFragment.statusHora.equals("V")){
-                        getDeepMODORDSERV(context,jsonObject);
+                    if (HorasFragment.statusHora.equals("V")) {
+                        getDeepMODORDSERV(context, jsonObject);
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1716,7 +1705,7 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaHora(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1728,16 +1717,17 @@ BarraCargar barraCargar = new BarraCargar();
             }
         });
     }
+
     public void getDeepMODORDSERV(final Context context, final JSONObject json) {
         Service service = null;
-            service = services.getDeppMODORDSERServiceVisita(context,json);
+        service = services.getDeppMODORDSERServiceVisita(context, json);
         Call<JsonObject> call = service.getMODORDSER();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaOrdSerAparatos(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -1749,6 +1739,7 @@ BarraCargar barraCargar = new BarraCargar();
             }
         });
     }
+
     public void getGuardaHora(final Context context) {
         Service service = null;
         try {
@@ -1762,7 +1753,7 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     getGuardaOrdSerAparatos(context);
-                }else{
+                } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
@@ -1789,7 +1780,7 @@ BarraCargar barraCargar = new BarraCargar();
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     addLlenaBitacora(context);
-                }else{
+                } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
@@ -1820,7 +1811,7 @@ BarraCargar barraCargar = new BarraCargar();
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
 
-                        if(HorasFragment.statusHora.equals("E")){
+                        if (HorasFragment.statusHora.equals("E")) {
                             for (int a = 0; a < dat.size(); a++) {
                                 if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
                                     IS = 1;
@@ -1835,7 +1826,7 @@ BarraCargar barraCargar = new BarraCargar();
                                 context.startActivity(intent);
                             }
                         }
-                        if(HorasFragment.statusHora.equals("V")){
+                        if (HorasFragment.statusHora.equals("V")) {
                             dialogEjecutar.dismiss();
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -1843,9 +1834,8 @@ BarraCargar barraCargar = new BarraCargar();
                         }
 
 
-
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     EjecutarFragment.eject.setEnabled(true);
                     dialogEjecutar.dismiss();
@@ -1961,7 +1951,7 @@ BarraCargar barraCargar = new BarraCargar();
 
                 if (response1.code() == 200) {
                     ConsultaIp(context);
-                }else{
+                } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
                     EjecutarFragment.eject.setEnabled(true);
@@ -2125,6 +2115,7 @@ BarraCargar barraCargar = new BarraCargar();
 
                     } else {
                         MuestraBit(context);
+                        extencionesMat = false;
                     }
                 }
             }
@@ -2535,4 +2526,81 @@ BarraCargar barraCargar = new BarraCargar();
         });
     }
     //////////
+    public void addFirma(final Context context) {
+        Service service = null;
+        service = services.addFirmaService(context);
+        Call<JsonObject> call = service.addFirma();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.d("asd","asd");
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void TryDeepConsulta1(JsonObject userJson) {
+        try {
+            DeepConsModel user1 = new DeepConsModel(
+                    userJson.get("Clv_FACTURA").getAsInt(),
+                    userJson.get("Contrato").getAsInt(),
+                    userJson.get("ContratoCom").getAsString(),
+                    userJson.get("STATUS").getAsString(),
+                    userJson.get("Obs").getAsString(),
+                    userJson.get("Clv_Orden").getAsInt(),
+                    userJson.get("Clv_TipSer").getAsInt(),
+                    userJson.get("Fec_Sol").getAsString(),
+                    userJson.get("Visita1").getAsJsonNull().toString()
+            );
+        } catch (Exception f) {
+            DeepConsModel user1 = new DeepConsModel(
+                    userJson.get("Clv_FACTURA").getAsInt(),
+                    userJson.get("Contrato").getAsInt(),
+                    userJson.get("ContratoCom").getAsString(),
+                    userJson.get("STATUS").getAsString(),
+                    userJson.get("Obs").getAsJsonNull().toString(),
+                    userJson.get("Clv_Orden").getAsInt(),
+                    userJson.get("Clv_TipSer").getAsInt(),
+                    userJson.get("Fec_Sol").getAsString(),
+                    userJson.get("Visita1").getAsJsonNull().toString()
+            );
+        }
+    }
+
+    public void TryDeepConsulta(JsonObject userJson) {
+        try {
+            DeepConsModel user = new DeepConsModel(
+                    userJson.get("Clv_FACTURA").getAsInt(),
+                    userJson.get("Contrato").getAsInt(),
+                    userJson.get("ContratoCom").getAsString(),
+                    userJson.get("STATUS").getAsString(),
+                    userJson.get("Obs").getAsString(),
+                    userJson.get("Clv_Orden").getAsInt(),
+                    userJson.get("Clv_TipSer").getAsInt(),
+                    userJson.get("Fec_Sol").getAsString(),
+                    userJson.get("Visita1").getAsString()
+            );
+        } catch (Exception e) {
+            DeepConsModel user = new DeepConsModel(
+                    userJson.get("Clv_FACTURA").getAsInt(),
+                    userJson.get("Contrato").getAsInt(),
+                    userJson.get("ContratoCom").getAsString(),
+                    userJson.get("STATUS").getAsString(),
+                    userJson.get("Obs").getAsJsonNull().toString(),
+                    userJson.get("Clv_Orden").getAsInt(),
+                    userJson.get("Clv_TipSer").getAsInt(),
+                    userJson.get("Fec_Sol").getAsString(),
+                    userJson.get("Visita1").getAsString()
+            );
+        }
+    }
 }

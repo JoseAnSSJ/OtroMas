@@ -49,7 +49,7 @@ public class Inicio extends AppCompatActivity
         NavigationView barra;
     public static DrawerLayout drawer;
     public static PieChart  pieChart;
-    public static ProgressBar progressBarInicio;
+
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
     public static ProgressDialog dialogInicio;
@@ -66,10 +66,9 @@ BarraCargar barraCargar = new BarraCargar();
         calleDireccion = (TextView)findViewById(R.id.calle);
         numeroDireccion= (TextView)findViewById(R.id.numero);
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
-        progressBarInicio = findViewById(R.id.barloginicio);
         barra = findViewById(R.id.nav_view);
-        dialogInicio= new BarraCargar().showDialog(this);
         setSupportActionBar(toolbar);
+        dialogInicio= new BarraCargar().showDialog(this);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -83,7 +82,7 @@ BarraCargar barraCargar = new BarraCargar();
             Inicar();
         }
 
-
+            barraCargar.terminarBarra();
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
@@ -145,12 +144,6 @@ BarraCargar barraCargar = new BarraCargar();
                             }
                         }).show();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.inicio, menu);
-        return true;
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -165,22 +158,20 @@ BarraCargar barraCargar = new BarraCargar();
             }
 
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Inicio.this, Orden.class);
+            dialogInicio.show();
             clvorden=0;
             opcion=1;
-            request.getListOrd(getApplicationContext());
             tipodeDescarga="O";
-            startActivity(intent1);
+            request.getListOrd(getApplicationContext());
 
-            finish();
+
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Inicio.this, Reportes.class);
+            dialogInicio.show();
             clavequeja=0;
             opcion=1;
-            request.getListQuejas(getApplicationContext());
             tipodeDescarga="Q";
-            startActivity(intent1);
-            finish();
+            request.getListQuejas(getApplicationContext());
+
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Inicio.this, Configuracion.class);
             startActivity(intent1);
@@ -258,9 +249,7 @@ BarraCargar barraCargar = new BarraCargar();
         pieChart.animateXY(2000, 2000);
         pieChart.setData(data);
     }
-       public static void showProgress(boolean show) {
-        progressBarInicio.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
+
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

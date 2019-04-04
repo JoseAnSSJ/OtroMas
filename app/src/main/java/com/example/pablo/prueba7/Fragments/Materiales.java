@@ -1,4 +1,5 @@
 package com.example.pablo.prueba7.Fragments;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,8 @@ import com.example.pablo.prueba7.Request.Request;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.pablo.prueba7.Request.Request.extencionesMat;
+
 public class Materiales extends Fragment {
 
     private LayoutInflater inflater;
@@ -32,7 +35,7 @@ public class Materiales extends Fragment {
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
-    public static int extSer;
+    public static int extSer=0;
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
@@ -66,6 +69,11 @@ public class Materiales extends Fragment {
         scrollViewM = view.findViewById(R.id.scrollhorizontal);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(),Materiales.tabla);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+        if(request.extencionesMat==true){
+            spinnerExtMat.setVisibility(View.VISIBLE);
+        }
+
+
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -95,7 +103,9 @@ public class Materiales extends Fragment {
                     request.getTipoMat(getContext());
                     seleccion=position;
                     posClasMat=position;
-
+                    if(request.extencionesMat==false){
+                        request.getPredescarga(getActivity(),getContext());
+                    }
                 }
             }
 
@@ -128,7 +138,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
         if(seleccion==0){
             Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
         }else {
-           if(request.extencionesMat==true){
+           if(extencionesMat==true){
                if(seleccionExte==0){
                    Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                }else{
