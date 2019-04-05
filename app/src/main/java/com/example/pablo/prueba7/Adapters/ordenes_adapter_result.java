@@ -94,6 +94,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));
                 request.getDeepCons(mContext);
+                request.getValidaFirma(mContext);
             }
         });
         return convertView;
