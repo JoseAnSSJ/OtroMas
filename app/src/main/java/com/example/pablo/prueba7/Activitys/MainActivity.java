@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         InfoServicios= findViewById(R.id.infoservicios);
         setTitle(null);
         ordenes_adapter_result.dialogTrabajos.dismiss();
-        Contrato.setText(getIntent().getStringExtra("contato"));
+        Contrato.setText(getIntent().getStringExtra("contrato"));
         Status.setText(getIntent().getStringExtra("estatus"));
         dialogMain= barraCargar.showDialog(this);
         NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));

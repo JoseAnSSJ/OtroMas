@@ -14,24 +14,15 @@ import com.example.pablo.prueba7.R;
 
 import java.util.ArrayList;
 
+import static com.example.pablo.prueba7.Listas.Array.Quejassrc;
+
 public class quejas_adapter_result extends BaseAdapter {
     private LayoutInflater inflater;
     private Context mContext;
-    private ArrayList<String> Queja;
-    private ArrayList<String>contratoQ;
-    private ArrayList<String>nombreQ;
-    private ArrayList<String>statusQ;
-    private ArrayList<String>Direccion;
     public static Integer clvReport;
     public static String contratoReport;
 
-    public quejas_adapter_result(Context context, ArrayList<String>Queja,ArrayList<String>nombreQ,ArrayList<String>contratoQ,ArrayList<String>statusQ,ArrayList<String>Direccion){
-
-        this.Queja=Queja;
-        this.contratoQ=contratoQ;
-        this.nombreQ=nombreQ;
-        this.statusQ=statusQ;
-        this.Direccion=Direccion;
+    public quejas_adapter_result(Context context){
 
         mContext=context;
         inflater=LayoutInflater.from(mContext);
@@ -42,7 +33,7 @@ public class quejas_adapter_result extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return Array.Queja.size();
+        return Quejassrc.get(0).size();
     }
 
     @Override
@@ -70,18 +61,18 @@ public class quejas_adapter_result extends BaseAdapter {
         else {
             holder=(quejas_adapter_result.viewHolder)convertView.getTag();
         }
-        holder.nombreq.setText(Array.nombreQ.get(position));
-        holder.quejaq.setText(Array.Queja.get(position));
-        holder.contratoq.setText(Array.contratoQ.get(position));
-        holder.statusq.setText(Array.statusQ.get(position));
-        holder.direccion.setText(Array.Direccion.get(position));
+        holder.nombreq.setText(Quejassrc.get(2).get(position));
+        holder.quejaq.setText(Quejassrc.get(0).get(position));
+        holder.contratoq.setText(Quejassrc.get(1).get(position));
+        holder.statusq.setText(Quejassrc.get(3).get(position));
+        holder.direccion.setText(Quejassrc.get(4).get(position));
         holder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intento1 = new Intent(mContext, MainReportes.class);
                 mContext.startActivity(intento1);
-                clvReport=Integer.valueOf(Queja.get(position));
-                contratoReport=String.valueOf(Array.contratoQ.get(position));
+                clvReport=Integer.valueOf(Quejassrc.get(0).get(position));
+                contratoReport=String.valueOf(Quejassrc.get(1).get(position));
             }
         });
         return convertView;

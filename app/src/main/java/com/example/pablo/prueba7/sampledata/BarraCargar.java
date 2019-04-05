@@ -17,7 +17,7 @@ public class BarraCargar {
     }
     public void terminarBarra(){
         try{
-            Inicio.dialogInicio.dismiss();
+            Inicio.progressInicio.dismiss();
         }catch (Exception e){}
         try{
 

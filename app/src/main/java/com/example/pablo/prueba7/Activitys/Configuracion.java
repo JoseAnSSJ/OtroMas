@@ -23,6 +23,9 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonOrdenes;
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonReportes;
+
 
 public class Configuracion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,15 +101,11 @@ public class Configuracion extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
-        }catch (Exception e){}
-
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            request.getProximaCita(getApplicationContext(),jsonObject);
+            Intent intento = new Intent(getApplicationContext(), Inicio.class);
+            startActivity(intento);
         } else if (id == R.id.Ordenes_menu) {
             dialogOrdenes.show();
             request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
@@ -122,28 +121,5 @@ public class Configuracion extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_queja", clvqueja);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
-    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_orden", clvorden);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
+
 }

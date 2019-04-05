@@ -29,6 +29,10 @@ import com.example.pablo.prueba7.sampledata.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.Listas.Array.Ordenessrc;
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonOrdenes;
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonReportes;
+
 public class Orden extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
     private ordenes_adapter_result adapterord;
@@ -62,35 +66,21 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         ////////////////
         barraCargar.terminarBarra();
         //////////////////
-        adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
+        adapterord=new ordenes_adapter_result(Orden.this,Ordenessrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
         ordenes.refreshDrawableState();
-        //if(ordenes.getAdapter()!=null){
-        //    progressBarOrdenes.setVisibility(View.INVISIBLE);
-       // }
         //Busqueda de orden////
         ordenb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
-                    Array.direccionsrc.clear();
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Orden Vacio", Toast.LENGTH_SHORT);
                     request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
                     toast1.show();
-                    ordenes.setAdapter(adapterord);
+
                 } else {
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
-                    Array.direccionsrc.clear();
                     rqs.getListOrd(getApplicationContext(),JsonOrdenes(2,Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim()),""));
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Orden encontrada", Toast.LENGTH_SHORT);toast1.show();
-                    ordenes.setAdapter(adapterord);
                 }
             }
         });
@@ -102,24 +92,11 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Contrato vacio", Toast.LENGTH_SHORT);
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
-                    Array.direccionsrc.clear();
                     request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
                     toast1.show();
-                    ordenes.setAdapter(adapterord);
-                    toast1.show();
                 } else {
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
-                    Array.direccionsrc.clear();
                     rqs.getListOrd(getApplicationContext(),JsonOrdenes(3,0,contsearch.getText().toString().toLowerCase().trim()));
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
-                    ordenes.setAdapter(adapterord);
                 }
             }
         });
@@ -145,15 +122,11 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
-        }catch (Exception e){}
-
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            request.getProximaCita(getApplicationContext(),jsonObject);
+            Intent intento = new Intent(getApplicationContext(), Inicio.class);
+            startActivity(intento);
         } else if (id == R.id.Ordenes_menu) {
 
         } else if (id == R.id.Reportes) {
@@ -166,29 +139,5 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_queja", clvqueja);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
-    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_orden", clvorden);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
     }
 }

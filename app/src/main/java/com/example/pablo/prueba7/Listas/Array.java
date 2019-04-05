@@ -38,18 +38,12 @@ public class Array {
     public static  ArrayList<List<OrdSer>> dataord;
     //////////////////////ARRAY ORDENES//////////////////////
     public static ArrayList<List<GetDameListadoOrdenesAgendadasResult>> dataagenda;
-    public static ArrayList<String>contratosrc=new ArrayList<>();
-    public static ArrayList<String>ordensrc=new ArrayList<>();
-    public static ArrayList<String>nombresrc=new ArrayList<>();
-    public static ArrayList<String>statusrc=new ArrayList<>();
-    public static ArrayList<String>direccionsrc=new ArrayList<>();
+    // 0=orden,1=contato, 2=nombre, 3=status, 4=direccion
+    public static List<List<String>> Ordenessrc = new ArrayList<List<String>>();
     //----ARRAY QUEJAS----//
     public static ArrayList<List<ListadoQuejasAgendadas>> dataquejas;
-    public static ArrayList<String>contratoQ=new ArrayList<>();
-    public static ArrayList<String>Queja=new ArrayList<>();
-    public static ArrayList<String>nombreQ=new ArrayList<>();
-    public static ArrayList<String>statusQ=new ArrayList<>();
-    public static ArrayList<String> Direccion= new ArrayList<String>();
+    // 0=queja,1=contato, 2=nombre, 3=status, 4=direccion
+    public static List<List<String>> Quejassrc = new ArrayList<List<String>>();
     ///////////////////////ARRAY TRABAJOS///////////////////
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();

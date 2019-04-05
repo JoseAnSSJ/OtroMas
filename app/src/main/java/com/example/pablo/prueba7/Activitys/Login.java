@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
@@ -37,70 +38,71 @@ public class Login extends AppCompatActivity {
     public final static int NOTIFICACION_ID = 0;
     public static TextView clave;
     public static ProgressDialog dialogLogin;
-BarraCargar barraCargar = new BarraCargar();
+    BarraCargar barraCargar = new BarraCargar();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         usurio = (EditText) findViewById(R.id.usuario);
         contraseña = (EditText) findViewById(R.id.contrasenia);
-        entrar = (Button)findViewById(R.id.btnLogin);
+        entrar = (Button) findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.barlog);
         setTitle(null);
-        dialogLogin= new BarraCargar().showDialog(this);
+        dialogLogin = new BarraCargar().showDialog(this);
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usurio.getText().toString().length()==0){
-    Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
-     }else{
-                    if(contraseña.getText().toString().length()==0){
-        Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
-    }else{
-if(!isOnline()){
-   Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
-}else{
-    user = usurio.getText().toString() + ":" + contraseña.getText().toString();
-    enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
-    guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
-    request.getReviews(getApplicationContext());
-    /////////////
+                if (usurio.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
+                } else {
+                    if (contraseña.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (!isOnline()) {
+                            Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
+                        } else {
+                            user = usurio.getText().toString() + ":" + contraseña.getText().toString();
+                            enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
+                            guardarPre(getApplicationContext(), usurio.getText().toString(), enco);
+                            request.getReviews(getApplicationContext());
+                            /////////////
+                            dialogLogin.show();
+                            /////////////
+                            Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
+                        }
 
-dialogLogin.show();
-    usurio.setEnabled(false);
-    contraseña.setEnabled(false);
-    entrar.setEnabled(false);
-    /////////////
-    Toast.makeText(getApplicationContext(), "Espere", Toast.LENGTH_LONG).show();
-}
-
-    }
-}
+                    }
+                }
             }
         });
 
     }
-public void guardarPre(Context context,String usario,String encode){
-    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-    Util.editor = Util.preferences.edit();
-    Util.editor.putString("usuario",usario);
-    Util.editor.putString("enco","Basic: " +encode);
-    Util.editor.commit();
-}
+
+    public void guardarPre(Context context, String usario, String encode) {
+        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
+        Util.editor.putString("usuario", usario);
+        Util.editor.putString("enco", "Basic: " + encode);
+        Util.editor.commit();
+    }
+
     //Notificaciones
-    public void noti(){
+    public void noti() {
         createNotificationChannel();
         createNotification();
     }
-    public void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+
+    public void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Noticacion";
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }
-    public void createNotification(){
+
+    public void createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_menu_send);
         builder.setContentTitle("SofTv");
@@ -111,17 +113,16 @@ public void guardarPre(Context context,String usario,String encode){
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
 
     }
+
     //Metodo para hacer detener el codigo
-    public static void esperar(int segundos){
+    public static void esperar(int segundos) {
         try {
             Thread.sleep(segundos * 1000);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    public static void showProgress(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
+
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

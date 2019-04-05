@@ -49,10 +49,10 @@ import java.util.List;
  */
 public class InstalacionFragment extends Fragment implements View.OnClickListener, LocationListener {
 
-    public static TextView selectDate,  selectDate1, selectDate2;
+    public static TextView selectDate, selectDate1, selectDate2;
     public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
     public static int ejecutada = 1, visita = 0, visita1 = 0, TecSecSelecc = -1;
-    private int mYear, mMonth, mDay ;
+    private int mYear, mMonth, mDay;
     private View contenedorParticular;
     private View contenedorCorporativo;
     private TextView cordLat, cordLong;
@@ -64,7 +64,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     private ViewGroup container;
     private Bundle onsavedInstanceState;
     private LocationManager locationManager;
-    public static  int posTec;
+    public static int posTec;
 
     public InstalacionFragment() {
         // Required empty public constructor
@@ -73,8 +73,11 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        try {
+            TecSec.setSelection(posTec);
+        } catch (Exception e) {
+        }
 
-         TecSec.setSelection(posTec);
 
         // Inflate the layout for this fragment
 
@@ -102,11 +105,12 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Obs = view.findViewById(R.id.tv_Observaciones);
         JSONObject jsonObject = new JSONObject();
-        try{
+        try {
             jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
-        request.getTecSec(getContext(),jsonObject);
+        request.getTecSec(getContext(), jsonObject);
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
@@ -125,8 +129,8 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  posTec=position;
-                  TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
+                posTec = position;
+                TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
             }
 
             @Override
@@ -293,7 +297,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     }
 
     /////////////////////////GPS///////////////////
-    private boolean comprobarGPSActivo() {
+    private void comprobarGPSActivo() {
         try {
             int gpsSignal = Settings.Secure.getInt(getActivity().getContentResolver(), Settings.Secure.LOCATION_MODE);
             if (gpsSignal == 0) {
@@ -301,28 +305,29 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 mostrarInformacionDeAlertaGPS();
             } else {
                 setearCoordenadas();
-                return true;
+
             }
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
+
     }
 
     @SuppressLint("MissingPermission")
     private void setearCoordenadas() {
+        double latitude;
+        double longitud;
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         if (location != null) {
-            double latitude = location.getLatitude();
+             latitude = location.getLatitude();
             // editor.putFloat("latitud", (float) latitude).commit();
-            double longitud = location.getLongitude();
+             longitud = location.getLongitude();
             //editor.putFloat("longitud", (float) longitud).commit();
             cordLat.setText(String.valueOf(latitude));
             cordLong.setText(String.valueOf(longitud));
-            isCoordenadas = true;
         }
     }
 
@@ -340,21 +345,17 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "Es necesario activar el GPS", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
                     }
                 })
                 .show();
     }
 
-    private boolean isCoordenadas = false;
 
     @Override
     public void onLocationChanged(Location location) {
-        if (cordLat.getText().equals("") | cordLong.getText().equals("")) {
-            isCoordenadas = false;
-        }
 
-        if (isCoordenadas == false) {
+        if (cordLat.getText().equals("") || cordLong.getText().equals("")) {
             setearCoordenadas();
         }
     }

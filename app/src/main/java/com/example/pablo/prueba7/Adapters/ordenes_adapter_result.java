@@ -19,33 +19,24 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Activitys.Orden.progressBarOrdenes;
+import java.util.List;
+
+
 
 public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     public Integer clvor;
     private LayoutInflater inflater;
     private Context mContext;
-    private ArrayList<String> ordensrc;
-    private ArrayList<String>contratosrc;
-    private ArrayList<String>nombresrc;
-    private ArrayList<String>statusrc;
-    private ArrayList<String>direccionsrc;
+
+
     private Request request=new Request();
     public static ProgressDialog dialogTrabajos;
     BarraCargar barraCargar = new BarraCargar();
 
-    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc,ArrayList<String>direccionsrc){
-
-        this.ordensrc=ordensrc;
-        this.contratosrc=contratosrc;
-        this.nombresrc=nombrex;
-        this.statusrc=statusrc;
-        this.direccionsrc=direccionsrc;
-
-        mContext=context;
+    public ordenes_adapter_result(Context context, List<List<String>> Ordenessrc){
+                mContext=context;
         inflater=LayoutInflater.from(mContext); }
         @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -57,7 +48,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
     }
     @Override
     public int getCount() {
-        return Array.ordensrc.size();
+        return Array.Ordenessrc.get(0).size();
 
     }
     @Override
@@ -93,16 +84,16 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
         else {
             holder=(viewHolder)convertView.getTag();
         }
-        holder.nombre.setText(Array.nombresrc.get(position));
-        holder.orden.setText(Array.ordensrc.get(position));
-        holder.contrato1.setText(Array.contratosrc.get(position));
-        holder.status.setText(Array.statusrc.get(position));
-        holder.direccionOrd.setText(Array.direccionsrc.get(position));
+        holder.nombre.setText(Array.Ordenessrc.get(2).get(position));
+        holder.orden.setText(Array.Ordenessrc.get(0).get(position));
+        holder.contrato1.setText(Array.Ordenessrc.get(1).get(position));
+        holder.status.setText(Array.Ordenessrc.get(3).get(position));
+        holder.direccionOrd.setText(Array.Ordenessrc.get(4).get(position));
         holder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogTrabajos.show();
-                Util.editor.putInt("ClvOrden", Integer.parseInt(ordensrc.get(position)));
+                Util.editor.putInt("ClvOrden", Integer.parseInt(Array.Ordenessrc.get(0).get(position)));
                 Util.editor.commit();
                 JSONObject jsonObject = new JSONObject();
                 try{

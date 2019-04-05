@@ -28,6 +28,9 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonOrdenes;
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonReportes;
+
 public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
    private Request request = new Request();
@@ -61,7 +64,7 @@ public class Reportes extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
+        adapterqueja=new quejas_adapter_result(this);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
 //----
         barraCargar.terminarBarra();
@@ -71,22 +74,11 @@ public class Reportes extends AppCompatActivity
             public void onClick(View v) {
                 if (reportesearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Reporte vacío", Toast.LENGTH_SHORT);
-                    Array.Queja.clear();
-                    Array.nombreQ.clear();
-                    Array.statusQ.clear();
-                    Array.contratoQ.clear();
-                    Array.Direccion.clear();
                     toast1.show();
                     request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
                 } else {
-                    Array.Queja.clear();
-                    Array.nombreQ.clear();
-                    Array.statusQ.clear();
-                    Array.contratoQ.clear();
-                    Array.Direccion.clear();
                     request.getListQuejas(getApplicationContext(),JsonReportes(2,Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim()),""));
                     Toast toast1 =Toast.makeText(getApplicationContext(), "Reporte encontrado", Toast.LENGTH_SHORT);toast1.show();
-                    reportes.setAdapter(adapterqueja);
                 }
             }
         });
@@ -96,22 +88,12 @@ public class Reportes extends AppCompatActivity
             public void onClick(View v) {
                 if (contratosearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de Contrato vacio", Toast.LENGTH_SHORT);
-                    Array.Queja.clear();
-                    Array.nombreQ.clear();
-                    Array.statusQ.clear();
-                    Array.contratoQ.clear();
-                    Array.Direccion.clear();
-                    request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
+                   request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
                     toast1.show();
                 } else {
-                    Array.Queja.clear();
-                    Array.nombreQ.clear();
-                    Array.statusQ.clear();
-                    Array.contratoQ.clear();
-                    Array.Direccion.clear();
                     request.getListQuejas(getApplicationContext(),JsonReportes(3,0,contratosearch.getText().toString().toLowerCase().trim()));
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
-                    reportes.setAdapter(adapterqueja);
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);
+                    toast1.show();
                 }
             }
         });
@@ -131,15 +113,12 @@ public class Reportes extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
-        }catch (Exception e){}
 
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            request.getProximaCita(getApplicationContext(),jsonObject);
+            Intent intento = new Intent(getApplicationContext(), Inicio.class);
+            startActivity(intento);
         } else if (id == R.id.Ordenes_menu) {
             dialogReportes.show();
           request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
@@ -153,29 +132,6 @@ public class Reportes extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_queja", clvqueja);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
-    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_orden", clvorden);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
+
 }
 

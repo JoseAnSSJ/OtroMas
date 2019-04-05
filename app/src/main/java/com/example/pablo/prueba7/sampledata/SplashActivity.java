@@ -19,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     public static boolean LoginShare=false;
     public JSONObject jsonObject,jsonObject1=new JSONObject();
+    Request request = new Request();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,6 @@ public class SplashActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
             Intent intentinicio = new Intent(this, Inicio.class);
-
             startActivity(intentinicio);
 
         } else {

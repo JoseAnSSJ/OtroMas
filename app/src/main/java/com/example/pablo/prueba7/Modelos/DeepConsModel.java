@@ -10,8 +10,9 @@ public class DeepConsModel {
     public static int Clv_Orden;
     public static int Clv_TipSer;
     public static String Fec_Sol;
+    public static String Visita1;
 
-    public DeepConsModel(int clv_FACTURA,int Contrato, String ContratoCom, String STATUS, String Obs, Integer Clv_Orden, int clv_TipSer, String fec_Sol){
+    public DeepConsModel(int clv_FACTURA,int Contrato, String ContratoCom, String STATUS, String Obs, Integer Clv_Orden, int clv_TipSer, String fec_Sol, String visita1){
         this.Contrato = Contrato;
         this.ContatoCom = ContratoCom;
         this.STATUS = STATUS;
@@ -20,6 +21,7 @@ public class DeepConsModel {
         this.Clv_TipSer = clv_TipSer;
         this.Fec_Sol = fec_Sol;
         this.Clv_FACTURA = clv_FACTURA;
+        this.Visita1 = visita1;
 
     }
 

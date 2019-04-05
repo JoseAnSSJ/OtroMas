@@ -41,7 +41,8 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 
-
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonOrdenes;
+import static com.example.pablo.prueba7.sampledata.JsonMachotes.JsonReportes;
 
 
 public class Inicio extends AppCompatActivity
@@ -53,7 +54,7 @@ public class Inicio extends AppCompatActivity
     public static PieChart  pieChart;
     private Request request = new Request();
     public static TextView tipoTrabajo,contratoTrabajo, horaTrabajo, calleDireccion,numeroDireccion,coloniaDireccion, nombreTec;
-    public static ProgressDialog dialogInicio;
+   public static ProgressDialog progressInicio;
     BarraCargar barraCargar = new BarraCargar();
 
     public Inicio() throws JSONException {
@@ -63,6 +64,7 @@ public class Inicio extends AppCompatActivity
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_inicio);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         pieChart =(PieChart)findViewById(R.id.graficaPastel);
         tipoTrabajo= (TextView)findViewById(R.id.tipoDeTrabajo);
@@ -72,32 +74,26 @@ public class Inicio extends AppCompatActivity
         numeroDireccion= (TextView)findViewById(R.id.numero);
         coloniaDireccion = (TextView)findViewById(R.id.colonia);
         barra = findViewById(R.id.nav_view);
-        dialogInicio= barraCargar.showDialog(this);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        progressInicio= barraCargar.showDialog(this);
+            progressInicio.show();
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        try{
-            dialogInicio.show();
-                if(!isOnline()){
-                    Toast.makeText(getApplicationContext(), "No cuenta con conexion a internet", Toast.LENGTH_LONG).show();
-                    finish();
-                }else {
 
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
-                    request.getProximaCita(getApplicationContext(),jsonObject);
-                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        try {
+            if(getIntent().getStringExtra("Reiniciar").equals("1")) {
 
-                }
-        }catch (Exception e){}
-            barraCargar.terminarBarra();
+                dialogoReinicio();
+            }
+        }catch (Exception e){
+            Inicar();
+        }
+
         View barra1 = barra.getHeaderView(0);
-                        pieChart.setVisibility(View.VISIBLE);
-    Grafica(pieChart);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -135,7 +131,25 @@ public class Inicio extends AppCompatActivity
                             }
                         }).show();
     }
-
+    public void dialogoReinicio() {
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage("Error al inciar aplicación")
+                .setPositiveButton("Intentar otra vez",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Inicar();
+                            }
+                        })
+                .setNegativeButton("Cerrar aplicación",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -153,11 +167,11 @@ public class Inicio extends AppCompatActivity
         if (id == R.id.Inicio) {
 
         } else if (id == R.id.Ordenes_menu) {
-            dialogInicio.show();
+            progressInicio.show();
             request.getListOrd(getApplicationContext(),JsonOrdenes(1,0,""));
             tipodeDescarga="O";
         } else if (id == R.id.Reportes) {
-            dialogInicio.show();
+            progressInicio.show();
             request.getListQuejas(getApplicationContext(),JsonReportes(1,0,""));
             tipodeDescarga="Q";
         } else if (id == R.id.Configuraciones) {
@@ -244,29 +258,26 @@ public class Inicio extends AppCompatActivity
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
-    public JSONObject JsonReportes(int op,int clvqueja, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_queja", clvqueja);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
-    }
-    public JSONObject JsonOrdenes(int op,int clvorden, String contratocom){
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        try{
-            jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences) );
-            jsonObject.put("op", op);
-            jsonObject.put("clv_orden", clvorden);
-            jsonObject.put("contratoCom", contratocom);
-            jsonObject2.put("ObjLista", jsonObject);
-        }catch (Exception e){}
-        return jsonObject2;
+    public void Inicar(){
+        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        progressInicio.show();
+        if (SplashActivity.LoginShare==true) {
+            if(!isOnline()){
+                progressInicio.dismiss();
+                Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+                finish();
+            }else {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("clv_tecnico",Util.getClvTecnico(Util.preferences));
+                }catch (Exception e){}
+
+                request.getProximaCita(getApplicationContext(),jsonObject);
+            }
+        }else{
+
+
+        }
     }
 
 }
