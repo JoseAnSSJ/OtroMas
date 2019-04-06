@@ -47,6 +47,7 @@ import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.clvReport
 import static com.example.pablo.prueba7.Adapters.quejas_adapter_result.contratoReport;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.ClaveTrabajo;
 
+import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.clvTra;
 import static com.example.pablo.prueba7.Dibujo.Firma.ConvertirImgString;
 import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.horas12;
 
@@ -2046,7 +2047,7 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
     public Service getValidaFirma(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_orden", 121210);
+        jsonObject.put("clv_orden", clvor);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {

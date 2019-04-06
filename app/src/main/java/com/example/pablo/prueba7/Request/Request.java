@@ -2624,10 +2624,13 @@ public class Request extends AppCompatActivity {
                         ValidacionFirma user = new ValidacionFirma(
                                 userJson.get("TrabajosFirmaResult").getAsString());
                validFirma =Integer.parseInt(user.getTrabajosFirmaResult()) ;
+               if(validFirma == 1){
+                   Toast.makeText(context, "Firma requerida", Toast.LENGTH_LONG).show();
+               }
                     } catch (Exception e) {
                     }
 
-                    Toast.makeText(context, "Firma requerida", Toast.LENGTH_LONG).show();
+
                 } else {
                     Toast.makeText(context, "Error al validar uso de Firma", Toast.LENGTH_LONG).show();
                 }
