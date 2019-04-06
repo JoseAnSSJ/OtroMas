@@ -39,7 +39,7 @@ public class EjecutarFragment extends Fragment {
     private  InstalacionFragment horas = new InstalacionFragment();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
-    Button firmar;
+   public static Button firmar;
 
     public EjecutarFragment() {
         // Required empty public constructor
@@ -60,7 +60,16 @@ public class EjecutarFragment extends Fragment {
         ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
         reiniciar.setEnabled(false);
-if(request.isnet==true){
+
+
+        if (request.firma==true){
+            firmar.setVisibility(View.VISIBLE);
+
+        }else if (request.firma == false){
+            firmar.setVisibility(View.GONE);
+
+        }
+        if(request.isnet==true){
     ejecutar.setVisibility(View.VISIBLE);
 }else{
     ejecutar.setVisibility(View.GONE);
@@ -89,8 +98,13 @@ if(request.rapagejecutar==true){
 Ejecutar();
     ////////*************************
 }
+            }
 
-                }
+
+
+
+
+
         });
         reiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
