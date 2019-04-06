@@ -2624,9 +2624,6 @@ public class Request extends AppCompatActivity {
                         ValidacionFirma user = new ValidacionFirma(
                                 userJson.get("TrabajosFirmaResult").getAsString());
                validFirma =Integer.parseInt(user.getTrabajosFirmaResult()) ;
-               if(validFirma == 1){
-                   Toast.makeText(context, "Firma requerida", Toast.LENGTH_LONG).show();
-               }
                     } catch (Exception e) {
                     }
 

@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="75dp"
                 android:text="@string/tecnicoSecundario"
                 android:textSize="@dimen/xl"
                 android:textStyle="bold"
