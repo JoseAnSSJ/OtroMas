@@ -103,12 +103,12 @@ BarraCargar barraCargar = new BarraCargar();
       //  if (drawer.isDrawerOpen(GravityCompat.START)) {
         //    drawer.closeDrawer(GravityCompat.START);
        // } else {
-            dialogoSalida();
+            dialogoSalida(this);
         //}
     }
 
-    public  void dialogoSalida() {
-        new AlertDialog.Builder(this)
+    public  void dialogoSalida(Context ctx) {
+        new AlertDialog.Builder(ctx)
         .setTitle("SALIR")
                 .setMessage("¿Desea salir de la aplicación?")
                 .setPositiveButton("CANCELAR",
