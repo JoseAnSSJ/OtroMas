@@ -16,7 +16,7 @@
             android:layout_marginTop="150dp"
             android:textColor="#000"
             android:background="@drawable/boton"
-            android:backgroundTint="#00b0ff"
+            android:backgroundTint="@color/colorPrimary"
     android:text="@string/ejecutar" />
         <Button
             android:id="@+id/firmarRep"
@@ -26,7 +26,7 @@
             android:layout_marginTop="150dp"
             android:layout_toEndOf="@+id/ejecutarR"
             android:background="@drawable/boton"
-            android:backgroundTint="#00b0ff"
+            android:backgroundTint="@color/colorPrimary"
             android:enabled="true"
             android:text="@string/firmar"
             android:textColor="#000" />

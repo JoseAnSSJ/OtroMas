@@ -64,7 +64,7 @@
         android:layout_marginTop="32dp"
         android:textColor="#000"
         android:background="@drawable/boton"
-        android:backgroundTint="#00b0ff"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/login"
         android:textSize="@dimen/grande"
         app:layout_constraintBottom_toBottomOf="parent"
