@@ -100,15 +100,15 @@ BarraCargar barraCargar = new BarraCargar();
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            dialogoSalida();
-        }
+      //  if (drawer.isDrawerOpen(GravityCompat.START)) {
+        //    drawer.closeDrawer(GravityCompat.START);
+       // } else {
+            dialogoSalida(this);
+        //}
     }
 
-    public void dialogoSalida() {
-        new AlertDialog.Builder(this)
+    public  void dialogoSalida(Context ctx) {
+        new AlertDialog.Builder(ctx)
         .setTitle("SALIR")
                 .setMessage("¿Desea salir de la aplicación?")
                 .setPositiveButton("CANCELAR",
@@ -124,6 +124,7 @@ BarraCargar barraCargar = new BarraCargar();
                                 finish();
                             }
                         }).show();
+        //System.exit(0);
     }
     public void dialogoReinicio() {
         new AlertDialog.Builder(this)

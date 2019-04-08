@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -24,12 +25,12 @@ import java.util.Calendar;
 
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
-
+//ORDENES
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EjecutarFragment extends Fragment {
-
+    public Button salirEjecutarOrd;
     public static Button reiniciar;
     public static Button eject;
     public static String fechaHoy,horaHoy;
@@ -40,6 +41,8 @@ public class EjecutarFragment extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
    public static Button firmar;
+    Inicio in = new Inicio();
+    Button firmar;
 
     public EjecutarFragment() {
         // Required empty public constructor
@@ -70,6 +73,12 @@ public class EjecutarFragment extends Fragment {
 
         }
         if(request.isnet==true){
+        salirEjecutarOrd = view.findViewById(R.id.salirEjecutarOrd);
+
+
+
+
+if(request.isnet==true){
     ejecutar.setVisibility(View.VISIBLE);
 }else{
     ejecutar.setVisibility(View.GONE);
@@ -112,6 +121,7 @@ Ejecutar();
                 dialogEjecutar.show();
                 request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
+
             }
         });
         firmar.setOnClickListener(new View.OnClickListener() {
