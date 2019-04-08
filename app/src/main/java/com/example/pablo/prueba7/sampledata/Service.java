@@ -169,5 +169,8 @@ public interface Service {
     @POST(Constants.URL_ADD_FIRMA)
     Call<JsonObject> addFirma();
 
+    @POST(Constants.URL_VALIDA_FIRMA)
+    Call<JsonObject> validFirma();
+
 }
 

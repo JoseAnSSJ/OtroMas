@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -24,7 +25,7 @@ import java.util.Calendar;
 
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
-
+//ORDENES
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -39,7 +40,9 @@ public class EjecutarFragment extends Fragment {
     private  InstalacionFragment horas = new InstalacionFragment();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
+    Inicio in;
     Button firmar;
+    Button salir;
 
     public EjecutarFragment() {
         // Required empty public constructor
@@ -51,6 +54,7 @@ public class EjecutarFragment extends Fragment {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        in = new Inicio();
         dialogEjecutar= new BarraCargar().showDialog(getContext());
 
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
@@ -60,6 +64,11 @@ public class EjecutarFragment extends Fragment {
         ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
         reiniciar.setEnabled(false);
+        salir = view.findViewById(R.id.salirEjecutarOrd);
+
+
+
+
 if(request.isnet==true){
     ejecutar.setVisibility(View.VISIBLE);
 }else{
@@ -98,15 +107,28 @@ Ejecutar();
                 dialogEjecutar.show();
                 request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
+
             }
         });
         firmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //in.dialogoSalida(getContext());
                 Intent intent = new Intent(getActivity(), Firma.class);
                 startActivity(intent);
+
             }
         });
+
+
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                in.dialogoSalida(getActivity());
+            }
+        });
+
+
         return view;
     }
 

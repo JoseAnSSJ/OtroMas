@@ -66,5 +66,6 @@ public class Constants {
     public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
     public static final String URL_ADD_FIRMA="AplicacionMovil/InsertaTblFirmaCliente";
 
+    public static final String URL_VALIDA_FIRMA = "AplicacionMovil/TrabajosFirma";
 
 }

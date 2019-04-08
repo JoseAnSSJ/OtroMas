@@ -23,6 +23,8 @@ import static com.example.pablo.prueba7.Fragments.TrabajosFragment.proble;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//REPORTES
 public class Ejecutar1Fragment extends Fragment {
 
     private Button eject;

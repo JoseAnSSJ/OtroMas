@@ -94,6 +94,7 @@ import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.ValidacionFirma;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
@@ -159,6 +160,7 @@ public class Request extends AppCompatActivity {
     public int reintentaB;
     public static ArrayAdapter adapterTecSec, adapterTecSecR;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
+   public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
@@ -2602,5 +2604,37 @@ public class Request extends AppCompatActivity {
                     userJson.get("Visita1").getAsString()
             );
         }
+    }
+
+    //Validar uso de firma//
+    public void getValidaFirma(final Context context) {
+        Service service = null;
+        try {
+            service = services.getValidaFirma(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<JsonObject> call = service.validFirma();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JsonObject userJson = response.body().getAsJsonObject();
+                        ValidacionFirma user = new ValidacionFirma(
+                                userJson.get("TrabajosFirmaResult").getAsString());
+               validFirma =Integer.parseInt(user.getTrabajosFirmaResult()) ;
+                    } catch (Exception e) {
+                    }
+
+
+                } else {
+                    Toast.makeText(context, "Error al validar uso de Firma", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+            }
+        });
     }
 }

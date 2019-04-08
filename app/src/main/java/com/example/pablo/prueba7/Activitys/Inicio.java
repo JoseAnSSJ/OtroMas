@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -100,15 +101,15 @@ BarraCargar barraCargar = new BarraCargar();
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            dialogoSalida();
-        }
+      //  if (drawer.isDrawerOpen(GravityCompat.START)) {
+        //    drawer.closeDrawer(GravityCompat.START);
+       // } else {
+            dialogoSalida(this);
+        //}
     }
 
-    public void dialogoSalida() {
-        new AlertDialog.Builder(this)
+    public  void dialogoSalida(final Context ctx) {
+        new AlertDialog.Builder(ctx)
         .setTitle("SALIR")
                 .setMessage("¿Desea salir de la aplicación?")
                 .setPositiveButton("CANCELAR",
@@ -121,9 +122,10 @@ BarraCargar barraCargar = new BarraCargar();
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+                                ((Activity) ctx).finishAffinity();
                             }
                         }).show();
+        //System.exit(0);
     }
     public void dialogoReinicio() {
         new AlertDialog.Builder(this)
