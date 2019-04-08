@@ -25,9 +25,10 @@
         <ListView
             android:id="@+id/listorden"
             android:layout_width="match_parent"
-            android:layout_height="574dp"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_marginTop="110dp"
+            android:backgroundTint="@color/colorPrimary"
             android:dividerHeight="10dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"

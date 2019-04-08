@@ -25,10 +25,7 @@
             android:id="@+id/ejec"
             android:layout_width="@dimen/botonChicoL"
             android:layout_height="@dimen/botonChicoA"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="119dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/boton"
@@ -47,7 +44,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_centerHorizontal="true"
-          android:layout_marginTop="100dp"
+          android:layout_marginTop="150dp"
           android:visibility="gone">
 
         <TextView
@@ -97,8 +94,8 @@
 
         <Button
             android:id="@+id/restart"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/botonChicoL"
+            android:layout_height="@dimen/botonChicoA"
             android:layout_below="@+id/msgEjecutarOrd"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"

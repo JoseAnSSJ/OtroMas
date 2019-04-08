@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".Activitys.Login">
 
     <android.support.constraint.ConstraintLayout
@@ -15,7 +16,9 @@
             android:id="@+id/imageView"
             android:layout_width="241dp"
             android:layout_height="213dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,51 +29,57 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="32dp"
             android:hint="@string/usuario"
             android:inputType="text"
             android:textAlignment="center"
             android:textSize="@dimen/grande"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorLink="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/contrasenia"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <EditText
             android:id="@+id/contrasenia"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/contraseña"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorLink="@android:color/white"
             android:inputType="textPassword"
             android:textAlignment="center"
             android:textSize="@dimen/grande"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintEnd_toEndOf="@+id/usuario"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/usuario"
             app:layout_constraintTop_toBottomOf="@+id/usuario" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="150dp"
-            android:textColor="#000"
+            android:layout_marginTop="32dp"
             android:background="@drawable/boton"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@android:color/white"
             android:text="@string/login"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/grande"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/contrasenia"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/contrasenia"
             app:layout_constraintTop_toBottomOf="@+id/contrasenia" />
-
         <ProgressBar
             android:id="@+id/barlog"
             style="?android:attr/progressBarStyleLarge"
@@ -83,6 +92,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.555" />
+
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

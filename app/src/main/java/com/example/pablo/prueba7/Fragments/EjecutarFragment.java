@@ -1,9 +1,12 @@
 package com.example.pablo.prueba7.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +69,7 @@ public class EjecutarFragment extends Fragment {
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
 
+
         if (request.firma==true){
             firmar.setVisibility(View.VISIBLE);
 
@@ -81,6 +85,7 @@ public class EjecutarFragment extends Fragment {
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialogEjecutar.show();
                 if(request.rapagejecutar==true){
                     if (Array.recibixnew.size() == 0) {
@@ -99,7 +104,8 @@ public class EjecutarFragment extends Fragment {
                         }
                     }
                 }else {
-                    Ejecutar();
+                    dialogoEjecutar();
+
                     ////////*************************
                 }
             }
@@ -138,6 +144,29 @@ public class EjecutarFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void dialogoEjecutar() {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("SALIR")
+                    .setMessage("¿Desea Ejecutar Orden?")
+                    .setPositiveButton("CANCELAR",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                    .setNegativeButton("ACEPTAR",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                Ejecutar();
+                                }
+                            }).show();
+
+
+
+
     }
 
     public void Ejecutar(){
