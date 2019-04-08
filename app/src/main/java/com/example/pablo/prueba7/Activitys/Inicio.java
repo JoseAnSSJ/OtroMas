@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -107,7 +108,7 @@ BarraCargar barraCargar = new BarraCargar();
         //}
     }
 
-    public  void dialogoSalida(Context ctx) {
+    public  void dialogoSalida(final Context ctx) {
         new AlertDialog.Builder(ctx)
         .setTitle("SALIR")
                 .setMessage("¿Desea salir de la aplicación?")
@@ -121,7 +122,7 @@ BarraCargar barraCargar = new BarraCargar();
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+                                ((Activity) ctx).finishAffinity();
                             }
                         }).show();
         //System.exit(0);

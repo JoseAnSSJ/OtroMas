@@ -102,7 +102,17 @@
                     android:text="@string/reiniciar"
                     android:textColor="#000" />
 
-            </RelativeLayout>
+      <Button
+          android:id="@+id/salirEjecutarOrd"
+          android:layout_width="101dp"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/animado9"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="#00b0ff"
+          android:text="@string/salir"
+          android:textColor="#000" />
 
 
             <Button
