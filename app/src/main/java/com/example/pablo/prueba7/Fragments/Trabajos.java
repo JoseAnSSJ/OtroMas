@@ -29,7 +29,7 @@ public class Trabajos extends Fragment{
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.fragment_trabajos, container, false);
         trabajos=view.findViewById(R.id.listTrabajos);
-        adaptertrabajos = new trabajos_adapter_result(getContext(), Array.trabajox, Array.accionx, recibix);
+        adaptertrabajos = new trabajos_adapter_result(getContext());
         trabajos.setAdapter(adaptertrabajos);
         return view;
     }

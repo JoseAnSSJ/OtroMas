@@ -37,24 +37,19 @@ import static com.example.pablo.prueba7.Services.Services.jsonObject;
 public class trabajos_adapter_result extends BaseAdapter {
     private LayoutInflater inflatertrab;
     private Context Cmcontext;
-    private ArrayList<String>trabajox;
-    private ArrayList<String>accionx;
-    private ArrayList<Boolean>recibix;
-    public static int Clave, isnet,clvTra;
-    public static  int lugar;
-    public static boolean stat;
+    int trabajo,clv;
+    private int Clave,clvTra;
+    private boolean stat;
     public static int ClaveTrabajo;
     private boolean ftth=false;
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
-    BarraCargar barraCargar = new BarraCargar();
 
 
-    public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
-        this.trabajox=trabajox;
-        this.accionx=accionx;
-        this.recibix=recibix;
+
+    public trabajos_adapter_result(Context context){
+
         Cmcontext=context;
         inflatertrab=LayoutInflater.from(Cmcontext);
         inflatertrab=LayoutInflater.from(context);
@@ -83,7 +78,7 @@ public class trabajos_adapter_result extends BaseAdapter {
         final viewHolder holder;
         Util.preferences = Cmcontext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         Util.editor = Util.preferences.edit();
-        lugar=position;
+
         dialogTrabajos= new BarraCargar().showDialog(Cmcontext);
 try{
     dialogTrabajos.dismiss();
@@ -103,25 +98,26 @@ try{
         holder.trabajo.setText(Array.trabajox.get(position));
         holder.accion.setText(Array.accionx.get(position));
         holder.recibi.setChecked(Array.recibix.get(position));
+        trabajo = Array.clv_trabajox.get(position);
+        clv = Array.clavex.get(position);
+
         rapg=true;
         holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
+        Util.editor.putInt("Clv",clv);
+        Util.editor.putInt("ClvTrabajo", trabajo);
+        Util.editor.commit();
+
         if(holder.recibi.isChecked()){
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
                recibixnew.add(dat1.get(i).getSeRealiza());
             }
-            if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("FUERA - Fuera Del Area De Instalación")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
+            if (trabajo==1272||trabajo==18||trabajo==1273||trabajo==16||trabajo==1270||trabajo==14||trabajo==1204) {
                 Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
                 holder.recibi.setChecked(false);
                 rapg=false;
@@ -129,47 +125,48 @@ try{
         }
     }
 });
-        Util.editor.putInt("ClvTrabajo", Array.clavex.get(position));
-        Util.editor.commit();
+
 
 
         holder.control.setOnClickListener(new View.OnClickListener() {
-
+            private int isnet;
             @Override
             public void onClick(View v) {
                 isnet=0;
 
 
                 Request request = new Request();
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
+                if (trabajo==1272) {
                     dialogTrabajos.show();
                    // request.getArbSer(Cmcontext);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")) {
+                if (trabajo==1270) {
                     dialogTrabajos.show();
                    // request.getArbSer(Cmcontext);
                     isnet=1;
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
+                if (trabajo==1204) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                      ftth=true;
                     intento.putExtra("ftth", ftth);
+                    intento.putExtra("clv",clv);
                     Cmcontext.startActivity(intento);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
+                if (trabajo==16) {
                     dialogTrabajos.show();
                    // request.getCAMDO(Cmcontext);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
+                if (trabajo==1273) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=false;
                     intento.putExtra("ftth",ftth);
+                    intento.putExtra("clv",clv);
                     Cmcontext.startActivity(intento);
 
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
+                if (trabajo==18) {
                     dialogTrabajos.show();
                    // request.getExtencionesAdicionales(Cmcontext);
                 }

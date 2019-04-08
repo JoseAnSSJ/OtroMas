@@ -38,7 +38,6 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     private ordenes_adapter_result adapterord;
     private Button ordenb,contratob;
     public static   ListView ordenes;
-    public static ProgressBar progressBarOrdenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
@@ -61,7 +60,6 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
-        progressBarOrdenes = findViewById(R.id.barlogodenes);
         dialogOrdenes= barraCargar.showDialog(this);
         ////////////////
         barraCargar.terminarBarra();

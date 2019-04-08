@@ -297,7 +297,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     }
 
     /////////////////////////GPS///////////////////
-    private void comprobarGPSActivo() {
+    private boolean comprobarGPSActivo() {
         try {
             int gpsSignal = Settings.Secure.getInt(getActivity().getContentResolver(), Settings.Secure.LOCATION_MODE);
             if (gpsSignal == 0) {
@@ -305,36 +305,35 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 mostrarInformacionDeAlertaGPS();
             } else {
                 setearCoordenadas();
-
+                return true;
             }
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
-
+        return false;
     }
 
     @SuppressLint("MissingPermission")
     private void setearCoordenadas() {
-        double latitude;
-        double longitud;
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         if (location != null) {
-             latitude = location.getLatitude();
+            double latitude = location.getLatitude();
             // editor.putFloat("latitud", (float) latitude).commit();
-             longitud = location.getLongitude();
+            double longitud = location.getLongitude();
             //editor.putFloat("longitud", (float) longitud).commit();
             cordLat.setText(String.valueOf(latitude));
             cordLong.setText(String.valueOf(longitud));
+            isCoordenadas = true;
         }
     }
 
     private void mostrarInformacionDeAlertaGPS() {
         new AlertDialog.Builder(getContext())
-                .setTitle("Señal de gps")
-                .setMessage("El gps esta desactivado, ¿deseas activarlo?")
+                .setTitle("Señal de GPS")
+                .setMessage("El GPS esta desactivado. ¿Deseas activarlo?")
                 .setPositiveButton("Activar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -345,17 +344,21 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        getActivity().finish();
+                        mostrarInformacionDeAlertaGPS();
                     }
                 })
                 .show();
     }
 
+    private boolean isCoordenadas = false;
 
     @Override
     public void onLocationChanged(Location location) {
+        if (cordLat.getText().equals("") | cordLong.getText().equals("")) {
+            isCoordenadas = false;
+        }
 
-        if (cordLat.getText().equals("") || cordLong.getText().equals("")) {
+        if (isCoordenadas == false) {
             setearCoordenadas();
         }
     }
@@ -376,6 +379,5 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 }

@@ -2,7 +2,7 @@ package com.example.pablo.prueba7.Modelos;
 
 public class GetListClienteAparatosResult {
     public  int ControNet;
-    public  String Descripcion;
+    public String Descripcion;
     public  int idArticulo;
     public String Mac;
     public int Clv_Aparato;

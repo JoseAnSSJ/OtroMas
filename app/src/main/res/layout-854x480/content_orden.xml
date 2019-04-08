@@ -15,16 +15,6 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
-        <ProgressBar
-            android:id="@+id/barlogodenes"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:visibility="invisible"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            />
-
         <ListView
             android:id="@+id/listorden"
             android:layout_width="match_parent"
