@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -43,7 +44,7 @@ public class EjecutarFragment extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     Inicio in;
-    Button firmar;
+
     Button salir;
 
     public EjecutarFragment() {
