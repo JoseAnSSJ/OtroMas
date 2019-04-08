@@ -154,7 +154,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
-    public static boolean isnet;
+    public static boolean isnet, firma;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
@@ -2619,19 +2619,19 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    try {
-                        JsonObject userJson = response.body().getAsJsonObject();
-                        ValidacionFirma user = new ValidacionFirma(
-                                userJson.get("TrabajosFirmaResult").getAsString());
-               validFirma =Integer.parseInt(user.getTrabajosFirmaResult()) ;
-                    } catch (Exception e) {
-                    }
-
-
-                } else {
-                    Toast.makeText(context, "Error al validar uso de Firma", Toast.LENGTH_LONG).show();
+                    JsonObject userJson = response.body().getAsJsonObject();
+                    ValidacionFirma user = new ValidacionFirma(
+                            userJson.get("TrabajosFirmaResult").getAsString());
+                    validFirma = Integer.parseInt(user.getTrabajosFirmaResult());
                 }
-            }
+                        if (validFirma == 1) {
+                            firma=true;
+                            Toast.makeText(context, "Firma requerida", Toast.LENGTH_LONG).show();
+                        }else if (validFirma == 0){
+                            firma=false;
+                        }
+
+                    }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
             }

@@ -25,7 +25,7 @@
         android:layout_marginTop="304dp"
         android:textColor="#000"
         android:background="@drawable/boton"
-        android:backgroundTint="#00b0ff"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/cerrarSesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

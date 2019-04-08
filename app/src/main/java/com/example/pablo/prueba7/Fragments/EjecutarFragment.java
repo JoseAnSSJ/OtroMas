@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -25,14 +24,14 @@ import java.util.Calendar;
 
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
-//ORDENES
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EjecutarFragment extends Fragment {
 
     public static Button reiniciar;
-    public static Button eject;
+    public static Button eject,firmar;
     public static String fechaHoy,horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
@@ -67,39 +66,49 @@ public class EjecutarFragment extends Fragment {
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
 
+        if (request.firma==true){
+            firmar.setVisibility(View.VISIBLE);
 
+        }else if (request.firma == false){
+            firmar.setVisibility(View.GONE);
 
-if(request.isnet==true){
-    ejecutar.setVisibility(View.VISIBLE);
-}else{
-    ejecutar.setVisibility(View.GONE);
-}
+        }
+        if(request.isnet==true){
+            ejecutar.setVisibility(View.VISIBLE);
+        }else{
+            ejecutar.setVisibility(View.GONE);
+        }
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogEjecutar.show();
-if(request.rapagejecutar==true){
-    if (Array.recibixnew.size() == 0) {
-        Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
-        dialogEjecutar.dismiss();
-    } else {
-        try {
-            request.send_aparat(getContext());
-            //**************************************
-         Ejecutar();
-            ////////*************************
+                if(request.rapagejecutar==true){
+                    if (Array.recibixnew.size() == 0) {
+                        Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
+                        dialogEjecutar.dismiss();
+                    } else {
+                        try {
+                            request.send_aparat(getContext());
+                            //**************************************
+                            Ejecutar();
+                            ////////*************************
 
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "Error, aparatos no enviados", Toast.LENGTH_SHORT);
-            dialogEjecutar.dismiss();
-        }
-    }
-}else {
-Ejecutar();
-    ////////*************************
-}
-
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "Error, aparatos no enviados", Toast.LENGTH_SHORT);
+                            dialogEjecutar.dismiss();
+                        }
+                    }
+                }else {
+                    Ejecutar();
+                    ////////*************************
                 }
+            }
+
+
+
+
+
+
         });
         reiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +116,6 @@ Ejecutar();
                 dialogEjecutar.show();
                 request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
-
             }
         });
         firmar.setOnClickListener(new View.OnClickListener() {
@@ -132,61 +140,61 @@ Ejecutar();
         return view;
     }
 
-public void Ejecutar(){
-    JSONObject jsonObject = new JSONObject();
-    final Calendar c = Calendar.getInstance();
-    añoE = c.get(Calendar.YEAR);
-    mesE = c.get(Calendar.MONTH);
-    diaE = c.get(Calendar.DAY_OF_MONTH);
-    horaE = c.get(Calendar.HOUR);
-    minutoE = c.get(Calendar.MINUTE);
+    public void Ejecutar(){
+        JSONObject jsonObject = new JSONObject();
+        final Calendar c = Calendar.getInstance();
+        añoE = c.get(Calendar.YEAR);
+        mesE = c.get(Calendar.MONTH);
+        diaE = c.get(Calendar.DAY_OF_MONTH);
+        horaE = c.get(Calendar.HOUR);
+        minutoE = c.get(Calendar.MINUTE);
 
-    if (horas.ejecutada == 1) {
-        fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
-        horaHoy = horaE + ":" + minutoE;
-        eject.setEnabled(false);
-        request.getValidaOrdSer(getActivity(),jsonObject);
+        if (horas.ejecutada == 1) {
+            fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
+            horaHoy = horaE + ":" + minutoE;
+            eject.setEnabled(false);
+            request.getValidaOrdSer(getActivity(),jsonObject);
 
+        }
+        if (horas.visita == 1) {
+            try{
+                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                jsonObject.put("ClvTecnico", claveTecnico);
+                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                jsonObject.put("FecEje", "");
+                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                jsonObject.put("Impresa", 1);
+                jsonObject.put("ListadeArticulos", "");
+                jsonObject.put("Obs", DeepConsModel.Obs);
+                jsonObject.put("Status", "V");
+                jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+                jsonObject.put("Visita1", fechaHoy);
+                jsonObject.put("Visita2", "");
+            }catch (Exception e){}
+            request.getValidaOrdSer(getActivity(),jsonObject);
+        }
+        if (horas.visita1 == 1) {
+            try{
+                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                jsonObject.put("ClvTecnico", claveTecnico);
+                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                jsonObject.put("FecEje", "");
+                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                jsonObject.put("Impresa", 1);
+                jsonObject.put("ListadeArticulos", "");
+                jsonObject.put("Obs", DeepConsModel.Obs);
+                jsonObject.put("Status", "V");
+                jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+                jsonObject.put("Visita1", DeepConsModel.Visita1);
+                jsonObject.put("Visita2", fechaHoy);
+            }catch (Exception e){}
+            request.getValidaOrdSer(getActivity(),jsonObject);
+        }
     }
-    if (horas.visita == 1) {
-        try{
-            jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-            jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-            jsonObject.put("ClvTecnico", claveTecnico);
-            jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-            jsonObject.put("Contrato", DeepConsModel.Contrato);
-            jsonObject.put("FecEje", "");
-            jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-            jsonObject.put("Impresa", 1);
-            jsonObject.put("ListadeArticulos", "");
-            jsonObject.put("Obs", DeepConsModel.Obs);
-            jsonObject.put("Status", "V");
-            jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
-            jsonObject.put("Visita1", fechaHoy);
-            jsonObject.put("Visita2", "");
-        }catch (Exception e){}
-        request.getValidaOrdSer(getActivity(),jsonObject);
-           }
-    if (horas.visita1 == 1) {
-        try{
-            jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-            jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-            jsonObject.put("ClvTecnico", claveTecnico);
-            jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-            jsonObject.put("Contrato", DeepConsModel.Contrato);
-            jsonObject.put("FecEje", "");
-            jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-            jsonObject.put("Impresa", 1);
-            jsonObject.put("ListadeArticulos", "");
-            jsonObject.put("Obs", DeepConsModel.Obs);
-            jsonObject.put("Status", "V");
-            jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
-            jsonObject.put("Visita1", DeepConsModel.Visita1);
-            jsonObject.put("Visita2", fechaHoy);
-        }catch (Exception e){}
-        request.getValidaOrdSer(getActivity(),jsonObject);
-    }
-}
 
 
 }

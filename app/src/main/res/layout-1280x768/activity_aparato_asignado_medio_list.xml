@@ -40,7 +40,7 @@
             android:text="@string/medio"
             android:textColor="#000"
             android:background="@drawable/boton"
-            android:backgroundTint="#00b0ff"
+            android:backgroundTint="@color/colorPrimary"
             android:textSize="@dimen/mediano"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

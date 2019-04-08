@@ -23,7 +23,7 @@
         android:layout_marginTop="290dp"
         android:textColor="#000"
         android:background="@drawable/boton"
-        android:backgroundTint="#00b0ff"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/cerrarSesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

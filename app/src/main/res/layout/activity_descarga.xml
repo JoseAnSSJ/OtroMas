@@ -270,7 +270,7 @@
                 android:layout_marginEnd="8dp"
                 android:textColor="#000"
                 android:background="@drawable/boton"
-                android:backgroundTint="#00b0ff"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/agregar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

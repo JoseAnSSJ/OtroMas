@@ -335,7 +335,7 @@
                 android:layout_marginTop="2dp"
                 android:textColor="#000"
                 android:background="@drawable/boton"
-                android:backgroundTint="#00b0ff"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/aceptar" />
 
 
@@ -348,7 +348,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/boton"
-                android:backgroundTint="#00b0ff"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/Regresar"
                 android:textColor="#000" />
         </RelativeLayout>

@@ -94,7 +94,7 @@
     </RelativeLayout>
     <ScrollView
         android:layout_width="392dp"
-        android:layout_height="1500dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginStart="8dp"
         android:verticalScrollbarPosition="defaultPosition"
