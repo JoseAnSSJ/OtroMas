@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -138,11 +139,19 @@ try{
                 Request request = new Request();
                 if (trabajo==1272) {
                     dialogTrabajos.show();
-                   // request.getArbSer(Cmcontext);
+                    JSONObject jsonObject = new JSONObject();
+                    try{
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
+                    }catch (Exception e){}
+                    request.getArbSer(Cmcontext,jsonObject);
                 }
                 if (trabajo==1270) {
                     dialogTrabajos.show();
-                   // request.getArbSer(Cmcontext);
+                    JSONObject jsonObject = new JSONObject();
+                    try{
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
+                    }catch (Exception e){}
+                    request.getArbSer(Cmcontext,jsonObject);
                     isnet=1;
                 }
                 if (trabajo==1204) {
@@ -155,7 +164,12 @@ try{
                 }
                 if (trabajo==16) {
                     dialogTrabajos.show();
-                   // request.getCAMDO(Cmcontext);
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
+                        jsonObject.put("Clave", clv);
+                    }catch (Exception e){}
+                    request.getCAMDO(Cmcontext,jsonObject);
                 }
                 if (trabajo==1273) {
                     dialogTrabajos.show();
@@ -168,7 +182,13 @@ try{
                 }
                 if (trabajo==18) {
                     dialogTrabajos.show();
-                   // request.getExtencionesAdicionales(Cmcontext);
+                    JSONObject jsonObject = new JSONObject();
+                    try{
+                        jsonObject.put("Clave", clv);
+                        jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));
+                        jsonObject.put("Contrato", DeepConsModel.Contrato);
+                    }catch (Exception e){}
+                    request.getExtencionesAdicionales(Cmcontext,jsonObject);
                 }
 
             }

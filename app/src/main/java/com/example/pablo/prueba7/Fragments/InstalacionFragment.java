@@ -57,7 +57,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     private View contenedorCorporativo;
     private TextView cordLat, cordLong;
     public static TextView Obs;
-    public static Spinner TecSec;
+    public  Spinner TecSec;
     private Request request = new Request();
     private RadioButton btn1, bt2;
     private ConstraintLayout todo;
@@ -110,7 +110,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         } catch (Exception e) {
         }
 
-        request.getTecSec(getContext(), jsonObject);
+        request.getTecSec(getContext(), jsonObject,TecSec );
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);

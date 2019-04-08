@@ -66,7 +66,7 @@ public class CambioAparato extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        request.getDeepCAPAT(getApplicationContext(), jsonObject);
+        request.getDeepCAPAT(getApplicationContext(), jsonObject,);
         final boolean ftth = getIntent().getExtras().getBoolean("ftth");
         if (!ftth) {
             aa.setVisibility(View.VISIBLE);

@@ -21,11 +21,12 @@ public class ExtensionesAdi extends AppCompatActivity {
         aceptar = findViewById(R.id.extencionAceptar);
         txtExtencion = findViewById(R.id.txtExtencion);
         salir=findViewById(R.id.extencionSalir);
-        txtExtencion.setText(request.extencionesE);
+        txtExtencion.setText(getIntent().getExtras().getString("ext"));
 
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });

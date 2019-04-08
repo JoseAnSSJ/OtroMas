@@ -14,8 +14,8 @@ import com.example.pablo.prueba7.Request.Request;
 
 public class CambioDom extends AppCompatActivity {
     private Button aceptar,  regresar;
-    public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
-    public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
+    public TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
+    public ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
 
 
     @Override
@@ -39,27 +39,27 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
         regresar=findViewById(R.id.regresa);
-        Ciudad.setText(Request.ciudadcmdo);
-        Localidad.setText(Request.localidadcmdo);
-        Colonia.setText(Request.coloniacmdo);
-        Calle.setText(Request.callecmdo);
-        Numero.setText(Request.numerocmdo);
-        Numero_i.setText(Request.numeroicmdo);
-        Telefono.setText(Request.telefonocmdo);
-        CalleN.setText(Request.callencmdo);
-        CalleS.setText(Request.callescmdo);
-        CallleE.setText(Request.calleecmdo);
-        CalleO.setText(Request.calleocmdo);
-        if (Request.casacmdo.equals("N")) {
+        Ciudad.setText(getIntent().getExtras().getString("ciudad"));
+        Localidad.setText(getIntent().getExtras().getString("localidad"));
+        Colonia.setText(getIntent().getExtras().getString("colonia"));
+        Calle.setText(getIntent().getExtras().getString("calle"));
+        Numero.setText(getIntent().getExtras().getString("numero"));
+        Numero_i.setText(getIntent().getExtras().getString("numeroint"));
+        Telefono.setText(getIntent().getExtras().getString("telefono"));
+        CalleN.setText(getIntent().getExtras().getString("callen"));
+        CalleS.setText(getIntent().getExtras().getString("calles"));
+        CallleE.setText(getIntent().getExtras().getString("callee"));
+        CalleO.setText(getIntent().getExtras().getString("calleo"));
+        if (getIntent().getExtras().getString("casa").equals("N")) {
             CasaNorte.setVisibility(View.VISIBLE);
         }
-        if (Request.casacmdo.equals("S")) {
+        if (getIntent().getExtras().getString("casa").equals("S")) {
             CasaSur.setVisibility(View.VISIBLE);
         }
-        if (Request.casacmdo.equals("E")) {
+        if (getIntent().getExtras().getString("casa").equals("E")) {
             CasaEste.setVisibility(View.VISIBLE);
         }
-        if (Request.casacmdo.equals("O")) {
+        if (getIntent().getExtras().getString("casa").equals("O")) {
             CasaOeste.setVisibility(View.VISIBLE);
         }
         regresar.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +71,6 @@ public class CambioDom extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(CambioDom.this, Orden.class);
-                startActivity(intento1);
                 finish();
             }
         });

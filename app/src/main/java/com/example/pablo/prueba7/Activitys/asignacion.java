@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -47,10 +48,10 @@ public class asignacion extends AppCompatActivity {
     int c, e;
     String f;
     public static ProgressDialog dialogAsignacion;
-    public static JSONArray jsonArray = new JSONArray();
+
     public static JSONArray jsonArray2 = new JSONArray();
     public static JSONArray jsonArray3 = new JSONArray();
-    public static JSONObject jsonObject2 = new JSONObject();
+
     public static JSONObject jsonObject3 = new JSONObject();
     public static JSONObject jsonObject4 = new JSONObject();
     public static Arbol_Adapter adapter;
@@ -67,35 +68,36 @@ public class asignacion extends AppCompatActivity {
         layoutMedio = findViewById(R.id.poiuyt);
         cancelarAsigancion = findViewById(R.id.cancelarAsignacion);
         dialogAsignacion= new BarraCargar().showDialog(this);
+        //----------
         adapter = new Arbol_Adapter(getApplicationContext());
         Asignacion.setAdapter(adapter);
         Asignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         Asignacion.refreshDrawableState();
-        if(Asignacion.getAdapter()!=null){
-            dialogAsignacion.dismiss();
-        }
+///////////////////
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONArray jsonArray = new JSONArray();
+                JSONObject jsonObject = new JSONObject();
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
                 for (int a = 0; a < dat.size(); a++) {
                     try {
-                        jsonObject2 = new JSONObject();
-                        jsonObject2.put("Clv_UnicaNet", dat.get(a).Clv_UnicaNet);
-                        jsonObject2.put("idMedio", dat.get(a).IdMedio);
-                        jsonArray.put(a, jsonObject2);
+                        jsonObject = new JSONObject();
+                        jsonObject.put("Clv_UnicaNet", dat.get(a).Clv_UnicaNet);
+                        jsonObject.put("idMedio", dat.get(a).IdMedio);
+                        jsonArray.put(a, jsonObject);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                Log.d("numero", String.valueOf(Arbol_Adapter.a));
                 Intent intento = new Intent(asignacion.this, asignado.class);
+                intento.putExtra("array",jsonArray.toString());
                 startActivity(intento);
-                finish();
+
             }
         });
-
+/////////////////////
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +148,7 @@ public class asignacion extends AppCompatActivity {
                 }
             }
         });
+
         eliminarAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,5 +205,10 @@ public class asignacion extends AppCompatActivity {
             }
         });
     }
-
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+        }
+        return true;
+    }
 }

@@ -23,6 +23,10 @@ import com.example.pablo.prueba7.Request.Request;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,9 +40,9 @@ public class asignado extends AppCompatActivity {
     public static Spinner spinnerAparato, spinneraparatoDisponible;
     private Request request = new Request();
     private Array array = new Array();
-    public static int idArticuloasignado, clveAparatoSpinner;
-    public static String detalleSpinner, nombreSpinner;
-    public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
+    public int idArticuloasignado, clveAparatoSpinner;
+    public String detalleSpinner, nombreSpinner;
+    public ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -49,7 +53,23 @@ public class asignado extends AppCompatActivity {
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
-        //request.getTipoAparatos(getApplicationContext());
+
+        Intent intent = getIntent();
+        String arrayString = intent.getStringExtra("array");
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject3 = new JSONObject();
+        try {
+            JSONArray jsonArray = new JSONArray(arrayString);
+            try {
+                jsonObject.put("Id", 0);
+                jsonObject3.put("obj", jsonObject);
+                jsonObject3.put("Lst", jsonArray);
+            }catch (Exception e){}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.getTipoAparatos(getApplicationContext(),jsonObject3);
         selectedStrings.clear();
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
