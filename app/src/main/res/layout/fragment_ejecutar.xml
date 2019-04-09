@@ -115,7 +115,6 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
-                android:enabled="false"
                 android:text="@string/salir"
                 android:textColor="#000" />
 

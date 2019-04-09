@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Fragments;
 
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.Configuracion;
 import com.example.pablo.prueba7.Activitys.Inicio;
+import com.example.pablo.prueba7.Activitys.Login;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
@@ -41,8 +44,7 @@ public class Ejecutar1Fragment extends Fragment {
     public static String year, horas12;
     public static   String month;
    public static  String minute;
-
-
+   Inicio in;
     public Ejecutar1Fragment() {
         // Required empty public constructor
     }
@@ -51,21 +53,13 @@ public class Ejecutar1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        in = new Inicio();
 
         View view = inflater.inflate(R.layout.fragment_ejecutar2, container, false);
-
         eject = view.findViewById(R.id.ejecutarR);
         salir= view.findViewById(R.id.SalirR);
-
-
-
-
-
-
         solution = proble.getText().toString();
         final Calendar c = Calendar.getInstance();
         añoE = c.get(Calendar.YEAR);
@@ -90,85 +84,43 @@ public class Ejecutar1Fragment extends Fragment {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1=new Intent(getContext(), Reportes.class);
-                startActivity(intento1);
+              dialogSalir();
             }
         });
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogoEjecutar(getContext());
-
-/*
-                if (TrabajosFragment.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
-                    Toast.makeText(getContext(), "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
-                }else {
-                    if(TrabajosFragment.proble.getText().toString().isEmpty()){
-
-                    Toast.makeText(getContext(),"Campo Problema real vacío", Toast.LENGTH_LONG).show();
-
-
-                }else {
-
-                    if (horas.reporteEjecutada == 1) {
-                        year = añoE + "" + month + "" + diaE;
-                        horas12 = mHour + ":" + minute;
-                        request.getGuardaHoraReporte(getContext());
-                        request.getGuardaCampos(getContext());
-                        Intent intent1 = new Intent(getActivity(), Reportes.class);
-                        request.getListQuejas(getContext());
-                        startActivity(intent1);
-
-
-                    }
-                }
-
-
-                    if (horas.repotteVisita == 1) {
-                        try {
-                            request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
-                                Intent intent1 = new Intent(getActivity(), Reportes.class);
-                                startActivity(intent1);
-                                request.getListQuejas(getContext());
-
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                    if (horas.reporteVisita1 == 1) {
-                        try {
-                               request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
-                                Intent intent1 = new Intent(getActivity(), Reportes.class);
-                                startActivity(intent1);
-                                request.getListQuejas(getContext());
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    if (horas.reporteVisita2 == 1) {
-                        try {
-                                request.getGuardaHoraReporte(getContext());
-                                request.getGuardaCampos(getContext());
-                                Intent intent1 = new Intent(getActivity(), Reportes.class);
-                                startActivity(intent1);
-                                request.getListQuejas(getContext());
-
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    ////////*************************
-
-                }*/
-
             }
 
         });
 
         return view;
+    }
+
+    private void dialogSalir() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("SALIR")
+                .setMessage("¿Desea salir de el reporte?")
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intento = new Intent(getActivity(), Reportes.class);
+                                startActivity(intento);
+                            }
+                        }).show();
+
+
+
+
+
     }
 
     private void dialogoEjecutar(Context onClickListener) {
@@ -179,6 +131,11 @@ public class Ejecutar1Fragment extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        Ejecutar1Fragment.this.finalize();
+                                    } catch (Throwable throwable) {
+                                        throwable.printStackTrace();
+                                    }
                                 }
                             })
                     .setNegativeButton("ACEPTAR",
@@ -191,6 +148,12 @@ public class Ejecutar1Fragment extends Fragment {
 
                                 }
                             }).show();
+
+
+
+
+
+
     }
 
     public void validacionReporte (){
@@ -255,7 +218,6 @@ public class Ejecutar1Fragment extends Fragment {
                 }
             }
             ////////*************************
-
         }
 
 

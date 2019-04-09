@@ -43,7 +43,6 @@
             android:layout_below="@+id/ejecutarR"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/salir"

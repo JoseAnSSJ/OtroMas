@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
+import com.example.pablo.prueba7.Activitys.Orden;
+import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -44,7 +46,6 @@ public class EjecutarFragment extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     Inicio in;
-    Button firma;
     Button salir;
 
     public EjecutarFragment() {
@@ -65,7 +66,7 @@ public class EjecutarFragment extends Fragment {
         eject = view.findViewById(R.id.ejec);
         msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         ejecutar = view.findViewById(R.id.ejecutarLay);
-        firma = view.findViewById(R.id.firmarOrd);
+        firmar = view.findViewById(R.id.firmarOrd);
         reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
@@ -105,7 +106,7 @@ public class EjecutarFragment extends Fragment {
                         }
                     }
                 }else {
-                    dialogoEjecutar();
+                    dialogoEjecutar1();
 
                     ////////*************************
                 }
@@ -139,7 +140,7 @@ public class EjecutarFragment extends Fragment {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                in.dialogoSalida(getActivity());
+                dialogoSalida();
             }
         });
 
@@ -147,9 +148,32 @@ public class EjecutarFragment extends Fragment {
         return view;
     }
 
-    private void dialogoEjecutar() {
+    private void dialogoSalida() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("SALIR")
+                .setMessage("¿Desea salir de la orden?")
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intento = new Intent(getActivity(), Orden.class);
+                                startActivity(intento);
+                            }
+                        }).show();
+
+
+
+    }
+
+    private void dialogoEjecutar1() {
             new AlertDialog.Builder(getContext())
-                    .setTitle("SALIR")
+                    .setTitle("Ejecutar Orden")
                     .setMessage("¿Desea Ejecutar Orden?")
                     .setPositiveButton("CANCELAR",
                             new DialogInterface.OnClickListener() {

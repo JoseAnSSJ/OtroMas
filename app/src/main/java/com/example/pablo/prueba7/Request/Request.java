@@ -2153,8 +2153,8 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
-//                    descripcionMat.setAdapter(arrayAdapter);
-                  //  descripcionMat.setSelection(posDescMat);
+                       descripcionMat.setAdapter(arrayAdapter);
+                       descripcionMat.setSelection(posDescMat);
                 }
             }
 
