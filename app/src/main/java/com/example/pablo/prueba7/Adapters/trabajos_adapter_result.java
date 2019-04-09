@@ -21,6 +21,7 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,7 +33,7 @@ import java.util.List;
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
-import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
+
 import static com.example.pablo.prueba7.Services.Services.jsonObject;
 
 public class trabajos_adapter_result extends BaseAdapter {
@@ -46,6 +47,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
+    public static JSONArray jsonArrayap = new JSONArray();
 
 
 
@@ -207,7 +209,6 @@ try{
         if (stat==false){
             System.out.println("statusx"+stat);
         try{
-
             jsonObject = new JSONObject();
             jsonObject.put("Clave", Clave);
             jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));

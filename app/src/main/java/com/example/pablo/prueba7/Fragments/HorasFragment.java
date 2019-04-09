@@ -99,6 +99,8 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
         reportesselectDate3.setEnabled(false);
 
         return view;
+
+
     }
 
     @Override
@@ -272,6 +274,7 @@ public class HorasFragment extends Fragment  implements View.OnClickListener {
         contenedorParticular.setVisibility(b ? View.VISIBLE: View.GONE);
         contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);
     }
+
 }
 
 

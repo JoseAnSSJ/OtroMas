@@ -25,6 +25,7 @@ import com.example.pablo.prueba7.Fragments.EjecutarFragment;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
+import com.example.pablo.prueba7.Fragments.HorasFragment;
 import com.example.pablo.prueba7.Fragments.InstalacionFragment;
 import com.example.pablo.prueba7.Fragments.Materiales;
 import com.example.pablo.prueba7.Fragments.MaterialesFragment;
@@ -1264,8 +1265,364 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    /////////////////fin instalacion//////////////////
-/*
+    ////////////////instalacion///////////////////
+     public void getValidaOrdSer(final Context context, final JSONObject jsonObject,final JSONObject jsonMordSer) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getVALIOrdSer();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+
+                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                        }catch (Exception e){}
+                        getChecaCAMDO(context,jsonObject,jsonMordSer);
+                    } else {
+                        dialogEjecutar.dismiss();
+                        EjecutarFragment.eject.setEnabled(true);
+                        Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+     public void getChecaCAMDO(final Context context, final JSONObject jsonObject,final JSONObject jsonMordSer) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getChecaCAMDO();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      JsonObject jsonObject = response1.body().getAsJsonObject("GetCheca_si_tiene_camdoResult");
+                      GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
+                              jsonObject.get("Error").getAsString()
+                      );
+                      if (checa.Error.equals("0")) {
+                          JSONObject jsonObject1 = new JSONObject();
+                          JSONObject jsonObject2 = new JSONObject();
+                          try {
+                              jsonObject1.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                              jsonObject1.put("ClvUsuario", UserModel.Id_Usuario);
+                              jsonObject1.put("Status", HorasFragment.statusHora);
+                              jsonObject2.put("objNueRelOrdenUsuario", jsonObject);
+                          }catch (Exception e){}
+                          getAddRelOrdUsu(context,jsonObject2,jsonMordSer);
+                      } else {
+                          dialogEjecutar.dismiss();
+                          EjecutarFragment.eject.setEnabled(true);
+                          Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
+                      }
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+
+      public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject, final JSONObject jsonMordSer) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getADDRELORDUSU();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                          getDeepMODORDSER(context,jsonMordSer);
+
+
+
+                  } else {
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      dialogEjecutar.dismiss();
+                      EjecutarFragment.eject.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+              }
+          });
+      }
+
+      public void getDeepMODORDSER(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getMODORDSER();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      if (HorasFragment.statusHora.equals("E")) {
+                          JSONObject jsonObject = new JSONObject();
+                          try{
+                          jsonObject.put("Clv_orden", Util.getClvOrden(Util.preferences));
+                          jsonObject.put("horaFin", EjecutarFragment.horaHoy);
+                          jsonObject.put("horaInicio", "08:00");
+                          jsonObject.put("opcion", 1);}
+                          catch (Exception e){}
+                          getGuardaHora(context,jsonObject);
+                      }
+                      if (HorasFragment.statusHora.equals("V")) {
+                          JSONObject jsonObject1 = new JSONObject();
+                          try{
+                              jsonObject1.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                              jsonObject1.put("Op", "M");
+                              jsonObject1.put("Status", HorasFragment.statusHora);
+                              jsonObject1.put("Op2", 0);}
+                          catch (Exception e){}
+                          getGuardaOrdSerAparatos(context, jsonObject1);
+                      }
+
+                  } else {
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      dialogEjecutar.dismiss();
+                      EjecutarFragment.eject.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+              }
+          });
+      }
+
+      public void getGuardaHora(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaHora();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      JSONObject jsonObject = new JSONObject();
+                      try{
+                          jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                          jsonObject.put("Op", "M");
+                          jsonObject.put("Status", HorasFragment.statusHora);
+                          jsonObject.put("Op2", 0);}
+                      catch (Exception e){}
+                      getGuardaOrdSerAparatos(context, jsonObject);
+                  } else {
+                      dialogEjecutar.dismiss();
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      EjecutarFragment.eject.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+
+      public void getGuardaOrdSerAparatos(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getGUARDAOrdSerAparatos();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      JSONObject jsonObject = new JSONObject();
+                      JSONObject jsonObject1 = new JSONObject();
+                      try {
+                          jsonObject.put("DescripcionMov", "Se generó la");
+                          jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                          jsonObject1.put("objSP_LLena_Bitacora_Ordenes", jsonObject);
+                      }catch (Exception e){}
+                      addLlenaBitacora(context,jsonObject1);
+                  } else {
+                      dialogEjecutar.dismiss();
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      EjecutarFragment.eject.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+
+      public void addLlenaBitacora(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getLLENABITACORA_ORD();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  int IS = 0;
+                  if (response1.code() == 200) {
+                      if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")) {
+                          Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
+                          List<GetBUSCADetOrdSerListResult> dat = itData.next();
+                          if (HorasFragment.statusHora.equals("E")) {
+                              for (int a = 0; a < dat.size(); a++) {
+                                  if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
+                                      IS = 1;
+                                  }
+                              }
+                              if (IS == 1) {
+                                  JSONObject jsonObject = new JSONObject();
+                                  JSONObject jsonObject1 = new JSONObject();
+                                  try {
+                                      jsonObject.put("Contrato", DeepConsModel.Contrato);
+                                      jsonObject.put("Latitud", InstalacionFragment.latitud);
+                                      jsonObject.put("Longitud", InstalacionFragment.longitud);
+                                      jsonObject1.put("ObjCoorCli", jsonObject);
+                                  }catch (Exception e){}
+                                  GuardaCoordenadas(context,jsonObject1);
+                              } else {
+                                  dialogEjecutar.dismiss();
+                                  Intent intent = new Intent(context, Orden.class);
+                                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                  context.startActivity(intent);
+                              }
+                          }
+                          if (HorasFragment.statusHora.equals("V")) {
+                              dialogEjecutar.dismiss();
+                              Intent intent = new Intent(context, Orden.class);
+                              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                              context.startActivity(intent);
+                          }
+
+
+                      }
+                  } else {
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      EjecutarFragment.eject.setEnabled(true);
+                      dialogEjecutar.dismiss();
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+      public void GuardaCoordenadas(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaCoordenadas();
+          call.enqueue(new Callback<JsonObject>() {
+
+
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  reintentaB = 0;
+
+                  if (response1.code() == 200) {
+                      JSONObject jsonObject = new JSONObject();
+                      JSONObject jsonObject1 = new JSONObject();
+                      try{
+                          jsonObject.put("contrato", DeepConsModel.Contrato);
+                          jsonObject1.put("ObjNodo", jsonObject);
+                      }catch (Exception e){}
+                      ConsultaIp(context,jsonObject1);
+                  } else {
+                      Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
+                      dialogEjecutar.dismiss();
+                      EjecutarFragment.eject.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+
+      public void ConsultaIp(final Context context, final JSONObject jsonObject) {
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getConsultaIp();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      jsonConsultaIp = new JsonObject();
+                      jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
+                      ConsultaIpModel user = new ConsultaIpModel(
+                              jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
+                              jsonConsultaIp.get("Msg").getAsString()
+                      );
+                      reintentarComando = String.valueOf(user.AplicaReintentar);
+                      msgComando = user.Msg;
+                      for (int a = 0; a < 1; a++) {
+                          if (reintentarComando.equals("true")) {
+                              reiniciar.setEnabled(true);
+                              msgEjecutarOrd.setText(Request.msgComando);
+                          } else {
+                              if (msgComando.length() > 3) {
+                                  msgEjecutarOrd.setText(msgComando);
+                                  dialogEjecutar.dismiss();
+                                  Login.esperar(5);
+                                  ((Activity) context).finish();
+                              } else {
+                                  Login.esperar(3);
+                                  retry(call);
+                              }
+                          }
+                      }
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+              }
+
+              public void retry(Call<JsonObject> call) {
+                  call.clone().enqueue(this);
+              }
+          });
+      }
+
+      public void ReintentarComando(final Context context, final JSONObject jsonObject) {
+          reintentaB = 0;
+          Call<JsonObject> call = services.RequestPost(context, jsonObject).getReintentaComando();
+          call.enqueue(new Callback<JsonObject>() {
+              @Override
+              public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                  if (response1.code() == 200) {
+                      JSONObject jsonObject = new JSONObject();
+                      JSONObject jsonObject1 = new JSONObject();
+                      try{
+                          jsonObject.put("contrato", DeepConsModel.Contrato);
+                          jsonObject1.put("ObjNodo", jsonObject);
+                      }catch (Exception e){}
+                      ConsultaIp(context,jsonObject1);
+                      msgEjecutarOrd.setText("");
+                      reiniciar.setEnabled(true);
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<JsonObject> call, Throwable t) {
+
+              }
+          });
+      }
+
+    public void send_aparat(final Context context, final JSONObject jsonObject) {
+        adaptertrabajos.norec();
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).noent();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+    /*
 ///////////////inicio reportes////////////////
        //INFO CLIENTE Reportes///
    //TIPO DE SOLUCION///
@@ -1458,267 +1815,6 @@ public class Request extends AppCompatActivity {
                }
            });
        }
-////////////////instalacion///////////////////
-       public void getValidaOrdSer(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getVALIOrdSer();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
-
-                       if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
-                           getChecaCAMDO(context);
-                       } else {
-                           dialogEjecutar.dismiss();
-                           EjecutarFragment.eject.setEnabled(true);
-                           Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
-                       }
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
-       public void getChecaCAMDO(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getChecaCAMDO();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       JsonObject jsonObject = response1.body().getAsJsonObject("GetCheca_si_tiene_camdoResult");
-                       GetCheca_si_tiene_CAMDOModel checa = new GetCheca_si_tiene_CAMDOModel(
-                               jsonObject.get("Error").getAsString()
-                       );
-                       if (checa.Error.equals("0")) {
-                           getAddRelOrdUsu(context);
-                       } else {
-                           dialogEjecutar.dismiss();
-                           EjecutarFragment.eject.setEnabled(true);
-                           Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
-                       }
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
-       public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getADDRELORDUSU();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       getDeepMODORDSER(context);
-                   } else {
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       dialogEjecutar.dismiss();
-                       EjecutarFragment.eject.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-               }
-           });
-       }
-
-       public void getDeepMODORDSER(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getMODORDSER();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       getGuardaHora(context);
-                   } else {
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       dialogEjecutar.dismiss();
-                       EjecutarFragment.eject.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-               }
-           });
-       }
-
-       public void getGuardaHora(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaHora();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       getGuardaOrdSerAparatos(context);
-                   } else {
-                       dialogEjecutar.dismiss();
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       EjecutarFragment.eject.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
-       public void getGuardaOrdSerAparatos(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getGUARDAOrdSerAparatos();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       addLlenaBitacora(context);
-                   } else {
-                       dialogEjecutar.dismiss();
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       EjecutarFragment.eject.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
-       public void addLlenaBitacora(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getLLENABITACORA_ORD();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   int IS = 0;
-                   if (response1.code() == 200) {
-                       if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")) {
-                           Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
-                           List<GetBUSCADetOrdSerListResult> dat = itData.next();
-                           for (int a = 0; a < dat.size(); a++) {
-                               if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
-                                   IS = 1;
-                               }
-                           }
-                           if (IS == 1) {
-                               GuardaCoordenadas(context);
-                           } else {
-                               dialogEjecutar.dismiss();
-                               Intent intent = new Intent(context, Orden.class);
-                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                               context.startActivity(intent);
-                           }
-
-                       }
-                   } else {
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       EjecutarFragment.eject.setEnabled(true);
-                       dialogEjecutar.dismiss();
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-          public void GuardaCoordenadas(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getGuardaCoordenadas();
-           call.enqueue(new Callback<JsonObject>() {
-
-
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   reintentaB = 0;
-
-                   if (response1.code() == 200) {
-                       ConsultaIp(context);
-                   } else {
-                       Toast.makeText(context, "Error, Aparatos no enviados", Toast.LENGTH_SHORT);
-                       dialogEjecutar.dismiss();
-                       EjecutarFragment.eject.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
-       public void ConsultaIp(final Context context, final JSONObject jsonObject) {
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getConsultaIp();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       jsonConsultaIp = new JsonObject();
-                       jsonConsultaIp = response1.body().getAsJsonObject("GetConsultaIpPorContratoResult");
-                       ConsultaIpModel user = new ConsultaIpModel(
-                               jsonConsultaIp.get("AplicaReintentar").getAsBoolean(),
-                               jsonConsultaIp.get("Msg").getAsString()
-                       );
-                       reintentarComando = String.valueOf(user.AplicaReintentar);
-                       msgComando = user.Msg;
-                       for (int a = 0; a < 1; a++) {
-                           if (reintentarComando.equals("true")) {
-                               reiniciar.setEnabled(true);
-                               msgEjecutarOrd.setText(Request.msgComando);
-                           } else {
-                               if (msgComando.length() > 3) {
-                                   msgEjecutarOrd.setText(msgComando);
-                                   dialogEjecutar.dismiss();
-                                   Login.esperar(5);
-                                   ((Activity) context).finish();
-                               } else {
-                                   Login.esperar(3);
-                                   retry(call);
-                               }
-                           }
-                       }
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-               }
-
-               public void retry(Call<JsonObject> call) {
-                   call.clone().enqueue(this);
-               }
-           });
-       }
-
-       public void ReintentarComando(final Context context, final JSONObject jsonObject) {
-           reintentaB = 0;
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).getReintentaComando();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       ConsultaIp(context);
-                       msgEjecutarOrd.setText("");
-                       reiniciar.setEnabled(true);
-                   }
-               }
-
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-           });
-       }
-
 
 /////////////////ejecucion/////////////
        //Ejecutar Reporte//
@@ -1787,24 +1883,7 @@ public class Request extends AppCompatActivity {
 
 
 
-       public void send_aparat(final Context context, final JSONObject jsonObject) {
-           adaptertrabajos.norec();
-           Call<JsonObject> call = services.RequestPost(context, jsonObject).noent();
-           call.enqueue(new Callback<JsonObject>() {
-               @Override
-               public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                   if (response1.code() == 200) {
-                       Toast.makeText(getApplicationContext(), "Envio de aparatos con exito", Toast.LENGTH_SHORT);
-                   }
-               }
 
-               @Override
-               public void onFailure(Call<JsonObject> call, Throwable t) {
-
-               }
-
-           });
-       }
 //////////////materiales//////////////
        public void getChecaExt(final Context context, final JSONObject jsonObject) {
            Call<JsonObject> call = services.RequestPost(context, jsonObject).getChecaExt();
