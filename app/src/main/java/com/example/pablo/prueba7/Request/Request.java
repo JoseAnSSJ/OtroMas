@@ -312,6 +312,12 @@ public class Request extends AppCompatActivity {
                         sigueinteNumero = user.NUMERO;
                         siguenteColonia = user.Colonia;
                     } catch (Exception e) {
+                        sigueinteTipo = "";
+                        siguenteContrato = "";
+                        sigueinteHora = "";
+                        siguenteCalle = "";
+                        sigueinteNumero = "";
+                        siguenteColonia = "";
                     }
                     getOrdenes(context);
 
