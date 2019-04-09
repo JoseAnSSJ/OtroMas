@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,8 @@ import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -36,14 +39,16 @@ public class asignado extends AppCompatActivity {
     private Button escanear, agragar,cancelar;
     private TextView codigo;
     private String contents;
-    public static ListView serviciosAparato;
-    public static Spinner spinnerAparato, spinneraparatoDisponible;
+    public ListView serviciosAparato;
+    public Spinner spinnerAparato, spinneraparatoDisponible;
     private Request request = new Request();
     private Array array = new Array();
     public int idArticuloasignado, clveAparatoSpinner;
     public String detalleSpinner, nombreSpinner;
     public ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
-
+    public static ProgressDialog progressAsignado;
+    public String arrayString;
+BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -53,23 +58,22 @@ public class asignado extends AppCompatActivity {
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregar);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
-
+        progressAsignado= barraCargar.showDialog(this);
+        progressAsignado.show();
         Intent intent = getIntent();
-        String arrayString = intent.getStringExtra("array");
+        arrayString = intent.getStringExtra("array");
 
         JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject3 = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
         try {
             JSONArray jsonArray = new JSONArray(arrayString);
-            try {
                 jsonObject.put("Id", 0);
-                jsonObject3.put("obj", jsonObject);
-                jsonObject3.put("Lst", jsonArray);
-            }catch (Exception e){}
+                jsonObject1.put("obj", jsonObject);
+                jsonObject1.put("Lst", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        request.getTipoAparatos(getApplicationContext(),jsonObject3);
+        request.getTipoAparatos(getApplicationContext(),jsonObject1,spinnerAparato);
         selectedStrings.clear();
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,13 +86,29 @@ public class asignado extends AppCompatActivity {
         spinnerAparato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
+                JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject1 = new JSONObject();
+                JSONObject jsonObject2 = new JSONObject();
                 if (position != 0) {
+                    clveAparatoSpinner=0;
+                    nombreSpinner="";
+                    progressAsignado.show();
                     Iterator<List<GetMuestraTipoAparatoListResult>> itdata = array.dataTipoAparatos.iterator();
                     List<GetMuestraTipoAparatoListResult> dat = itdata.next();
                     detalleSpinner= dat.get(position-1).getCategoria();
                     idArticuloasignado = dat.get(position-1).getIdArticulo();
-                   // request.getAparatosDisponibles(getApplicationContext());
-                   // request.getServiciosAparatos(getApplicationContext());
+                    try{
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
+                        jsonObject.put("Clv_Tecnico", Util.getClvTecnico(Util.preferences));
+                        jsonObject.put("idArticulo", idArticuloasignado);
+                        //////////////////////////////////////////////////
+                        JSONArray jsonArray = new JSONArray(arrayString);
+                        jsonObject1.put("Id",idArticuloasignado);
+                        jsonObject2.put("obj",jsonObject1);
+                        jsonObject2.put("Lst",jsonArray);
+                    }catch (Exception e){}
+                    request.getAparatosDisponibles(getApplicationContext(),jsonObject,spinneraparatoDisponible);
+                    request.getServiciosAparatos(getApplicationContext(),jsonObject2,serviciosAparato);
                     serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -106,8 +126,7 @@ public class asignado extends AppCompatActivity {
                                 }else{
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
                                 }
-                            clveAparatoSpinner=0;
-                            nombreSpinner="";
+
                         }
 
                     });
@@ -168,7 +187,6 @@ public class asignado extends AppCompatActivity {
                             }
                         }
                         asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
-
                         Intent intento=new Intent(asignado.this,asignacion.class);
                         startActivity(intento);
                         finish();

@@ -275,8 +275,8 @@ public class Inicio extends AppCompatActivity
                 request.getProximaCita(getApplicationContext(),jsonObject);
             }
         }else{
-
-
+            Grafica(pieChart);
+            progressInicio.dismiss();
         }
     }
 

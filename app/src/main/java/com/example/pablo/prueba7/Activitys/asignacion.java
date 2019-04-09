@@ -45,16 +45,8 @@ public class asignacion extends AppCompatActivity {
     public static ListView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
-    int c, e;
-    String f;
     public static ProgressDialog dialogAsignacion;
-
-    public static JSONArray jsonArray2 = new JSONArray();
-    public static JSONArray jsonArray3 = new JSONArray();
-
-    public static JSONObject jsonObject3 = new JSONObject();
-    public static JSONObject jsonObject4 = new JSONObject();
-    public static Arbol_Adapter adapter;
+        public Arbol_Adapter adapter;
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignacion);
@@ -94,6 +86,7 @@ public class asignacion extends AppCompatActivity {
                 Intent intento = new Intent(asignacion.this, asignado.class);
                 intento.putExtra("array",jsonArray.toString());
                 startActivity(intento);
+                finish();
 
             }
         });
@@ -107,38 +100,44 @@ public class asignacion extends AppCompatActivity {
                 }
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+                JSONObject jsonObject = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                JSONArray jsonArray1 = new JSONArray();
+                JSONObject jsonObject2 = new JSONObject();
+                JSONObject jsonObject3 = new JSONObject();
                 for (int c = 0; c < dat.size(); c++) {
-                    jsonObject3 = new JSONObject();
-                    jsonArray3 = new JSONArray();
                     try {
-                        jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
-                        jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
-                        jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
-                        jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
-                        jsonObject3.put("Contrato", JSONObject.NULL);
-                        jsonObject3.put("Detalle", dat.get(c).Detalle);
-                        jsonObject3.put("Expanded", dat.get(c).Expanded);
-                        jsonObject3.put("IdMedio", dat.get(c).IdMedio);
-                        jsonObject3.put("Nombre", dat.get(c).Nombre);
-                        jsonObject3.put("Tipo", dat.get(c).Tipo);
-                        jsonObject3.put("Type", dat.get(c).Type);
+                        jsonObject.put("BaseIdUser", dat.get(c).BaseIdUser);
+                        jsonObject.put("BaseRepoteIp", JSONObject.NULL);
+                        jsonObject.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                        jsonObject.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                        jsonObject.put("Contrato", JSONObject.NULL);
+                        jsonObject.put("Detalle", dat.get(c).Detalle);
+                        jsonObject.put("Expanded", dat.get(c).Expanded);
+                        jsonObject.put("IdMedio", dat.get(c).IdMedio);
+                        jsonObject.put("Nombre", dat.get(c).Nombre);
+                        jsonObject.put("Tipo", dat.get(c).Tipo);
+                        jsonObject.put("Type", dat.get(c).Type);
                         for (int b = 0; b < dat.get(c).children.size(); b++) {
-                            jsonObject4 = new JSONObject();
-                            jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
-                            jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
-                            jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
-                            jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
-                            jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
-                            jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
-                            jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
-                            jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
-                            jsonObject4.put("Type", dat.get(c).children.get(b).Type);
-                            jsonArray3.put(b, jsonObject4);
+                            JSONObject jsonObject1 = new JSONObject();
+                            jsonObject1.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                            jsonObject1.put("BaseRemoteIp", JSONObject.NULL);
+                            jsonObject1.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                            jsonObject1.put("Clv_UnicaNet", JSONObject.NULL);
+                            jsonObject1.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                            jsonObject1.put("Detalle", dat.get(c).children.get(b).Detalle);
+                            jsonObject1.put("Nombre", dat.get(c).children.get(b).Nombre);
+                            jsonObject1.put("Tipo", dat.get(c).children.get(b).Tipo);
+                            jsonObject1.put("Type", dat.get(c).children.get(b).Type);
+                            jsonArray.put(b, jsonObject1);
                         }
-                        jsonObject3.put("children", jsonArray3);
-                        jsonObject3.put("clv_orden", dat.get(c).clv_orden);
-                        jsonArray2.put(c, jsonObject3);
-                      //  request.getAceptatAsignacino(getApplicationContext());
+                        jsonObject.put("children", jsonArray);
+                        jsonObject.put("clv_orden", dat.get(c).clv_orden);
+                        jsonArray1.put(c, jsonObject);
+                        jsonObject2.put("Id", 0);
+                        jsonObject3.put("obj",jsonObject2);
+                        jsonObject3.put("Lst",jsonArray1);
+                        request.getAceptatAsignacino(getApplicationContext(),jsonObject3);
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -155,14 +154,11 @@ public class asignacion extends AppCompatActivity {
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
                 while (Arbol_Adapter.DeletChildren.isEmpty() == false) {
-                    for (c = 0; c < dat.size(); c++) {
-                        f = String.valueOf(c);
-                        e = 0;
+                    for (int c = 0; c < dat.size(); c++) {
                         if (dat.get(c).children != null) {
                             for (int d = 0; d < dat.get(c).children.size(); d++) {
-                                String abc = dat.get(c).children.get(d).getClv_Aparato() + f;
                                 try {
-                                    if (Integer.parseInt(abc) == (Arbol_Adapter.DeletChildren.get(0))) {
+                                    if (Integer.parseInt(dat.get(c).children.get(d).getClv_Aparato() + String.valueOf(c)) == (Arbol_Adapter.DeletChildren.get(0))) {
                                         dat.get(c).children.remove(d);
                                         Arbol_Adapter.DeletChildren.remove(0);
                                     }
@@ -176,7 +172,7 @@ public class asignacion extends AppCompatActivity {
                 }
 
                 do{
-                    for (c = 0; c < dat.size(); c++) {
+                    for (int c = 0; c < dat.size(); c++) {
                         if (dat.get(c).IdMedio != null && dat.get(c).Detalle != null) {
                             String abc = dat.get(c).IdMedio + dat.get(c).Detalle;
                             try {

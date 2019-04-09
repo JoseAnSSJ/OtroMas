@@ -110,7 +110,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         } catch (Exception e) {
         }
 
-        request.getTecSec(getContext(), jsonObject,TecSec );
+
         //////////// acciones de botones de hora y fecha//////
         selectDate = view.findViewById(R.id.tv_Ejecucion);
         selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
@@ -126,6 +126,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
         /////////////////////////////////////////////////////
         Obs.setText(request.obsMA);
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
+        request.getTecSec(getContext(), jsonObject,TecSec );
         TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

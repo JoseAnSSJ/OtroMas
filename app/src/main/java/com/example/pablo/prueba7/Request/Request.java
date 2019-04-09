@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -127,6 +128,7 @@ import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
+import static com.example.pablo.prueba7.Activitys.asignado.progressAsignado;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
@@ -1143,12 +1145,11 @@ public class Request extends AppCompatActivity {
     }
 
     //Tipo de Aparatos//
-    public void getTipoAparatos(final Context context, final JSONObject jsonObject) {
+    public void getTipoAparatos(final Context context, final JSONObject jsonObject, final Spinner asignadoTipo) {
         Call<JSONTipoAparatos> call = services.RequestPost(context, jsonObject).getDataTipoAparatos();
         call.enqueue(new Callback<JSONTipoAparatos>() {
             @Override
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
-                Log.d("asd","asd");
                 if (response.code() == 200) {
                     array.tipoAparato.clear();
                     JSONTipoAparatos jsonResponse = response.body();
@@ -1162,8 +1163,10 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
-                    asignado.spinnerAparato.setAdapter(adapter1);
+                    asignadoTipo.setAdapter(adapter1);
+                    progressAsignado.dismiss();
                 } else {
+                    progressAsignado.dismiss();
                     Toast.makeText(context, "Error al conseguir tipos de aparatos", Toast.LENGTH_LONG).show();
                 }
             }
@@ -1175,7 +1178,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Aparatos Disponibles///
-    public void getAparatosDisponibles(final Context context, final JSONObject jsonObject) {
+    public void getAparatosDisponibles(final Context context, final JSONObject jsonObject, final Spinner asignadoAparatos) {
         Call<JSONAparatosDisponibles> call = services.RequestPost(context, jsonObject).getDataAparatosDisponibles();
         call.enqueue(new Callback<JSONAparatosDisponibles>() {
             @Override
@@ -1197,7 +1200,7 @@ public class Request extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoAsignacion);
-                    asignado.spinneraparatoDisponible.setAdapter(adapter1);
+                    asignadoAparatos.setAdapter(adapter1);
                 } else {
                     Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
@@ -1210,7 +1213,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Servicios Aparatos//
-    public void getServiciosAparatos(final Context context, final JSONObject jsonObject) {
+    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView serviciosAparato) {
         Call<JSONServiciosAparatos> call = services.RequestPost(context, jsonObject).getDataServiciosAparatos();
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
@@ -1227,7 +1230,8 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
-                    asignado.serviciosAparato.setAdapter(arrayAdapter);
+                   serviciosAparato.setAdapter(arrayAdapter);
+                    progressAsignado.dismiss();
                 } else {
                     Toast.makeText(context, "Error al conseguir servicios de aparatos", Toast.LENGTH_LONG).show();
                 }
