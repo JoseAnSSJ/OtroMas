@@ -102,7 +102,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="54dp"
                 android:text="@string/info_Usuario"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="97dp"
@@ -111,7 +111,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/ciudadDos"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/infoempresa1"
@@ -121,7 +121,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="75dp"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="115dp"
                 android:text="@string/nombreDos"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/infonombre1"
@@ -141,7 +141,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="140dp"
                 android:hint="---"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="180dp"
                 android:text="@string/direccionDos"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/infodireccion1"
@@ -161,7 +161,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="200dp"
                 android:text="---"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
@@ -170,7 +170,7 @@
                 android:layout_marginTop="250dp"
                 android:layout_marginStart="30dp"
                 android:text="@string/servicios_Asignados"
-                android:textSize="20dp"
+                android:textSize="@dimen/mediano"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/infoservicios1"
@@ -182,7 +182,7 @@
                 android:layout_marginTop="270dp"
                 android:gravity="center"
                 android:text="---"
-                android:textSize="20dp" />
+                android:textSize="@dimen/mediano" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
