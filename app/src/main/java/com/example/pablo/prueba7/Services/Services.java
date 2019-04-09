@@ -72,7 +72,7 @@ import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
 
 
-import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
+
 
 
 public class Services {

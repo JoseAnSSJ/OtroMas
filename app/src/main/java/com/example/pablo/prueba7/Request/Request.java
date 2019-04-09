@@ -119,7 +119,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
+import static com.example.pablo.prueba7.Activitys.CambioAparato.obtenerPosicionA;
 import static com.example.pablo.prueba7.Activitys.CambioAparato.obtenerPosicionAC;
+import static com.example.pablo.prueba7.Activitys.CambioAparato.obtenerPosicionSA;
+import static com.example.pablo.prueba7.Activitys.CambioAparato.obtenerPosicionTA;
 import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
@@ -130,7 +133,6 @@ import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOr
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
 import static com.example.pablo.prueba7.Fragments.Materiales.clasificacionMat;
 import static com.example.pablo.prueba7.Fragments.Materiales.descripcionMat;
@@ -573,7 +575,6 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    ////////////////100//////////////////////
     //Consuta pantalla ordenes//
     public void getDeepCons(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataDeepCons();
@@ -765,7 +766,7 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getDeepCAPAT(final Context context, final JSONObject jsonObject, final Spinner aparatocliente) {
+    public void getDeepCAPAT(final Context context, final JSONObject jsonObject, final Spinner aparatocliente,final Spinner aparatoTipo,final Spinner aparatoAsignar,final Spinner aparatoEstado) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDeepCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -787,7 +788,7 @@ public class Request extends AppCompatActivity {
                                 userJson.get("TipoAparatoAsignar").getAsInt(),
                                 userJson.get("StatusEntrega").getAsString()
                         );
-                        getCliApa(context, jsonObject,aparatocliente);
+                        getCliApa(context, jsonObject,aparatocliente,aparatoTipo,aparatoAsignar,aparatoEstado);
 
                     } catch (Exception e) {
                         CambioAparatoDeepModel user = new CambioAparatoDeepModel(
@@ -796,7 +797,7 @@ public class Request extends AppCompatActivity {
                                 99,
                                 ""
                         );
-                        getCliApa(context, jsonObject,aparatocliente);
+                        getCliApa(context, jsonObject,aparatocliente,aparatoTipo,aparatoAsignar,aparatoEstado);
                     }
                 } else {
                     Toast.makeText(context, "Error al conseguir datos de cambio de aparato", Toast.LENGTH_LONG).show();
@@ -811,7 +812,7 @@ public class Request extends AppCompatActivity {
     }
 
     //ClientesAparato//
-    public void getCliApa(final Context context, final JSONObject jsonObject, final Spinner aparatoCliente) {
+    public void getCliApa(final Context context, final JSONObject jsonObject, final Spinner aparatoCliente,final Spinner aparatoTipo,final Spinner aparatoAsignar,final Spinner aparatoEstado) {
         Call<JSONCLIAPA> call = services.RequestPost(context, jsonObject).getDataCliApa();
         call.enqueue(new Callback<JSONCLIAPA>() {
             @Override
@@ -831,9 +832,9 @@ public class Request extends AppCompatActivity {
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         aparatoCliente.setAdapter(adapter);
-                        getStatusApa(context);
+                        getStatusApa(context,aparatoTipo,aparatoAsignar,aparatoEstado);
                         try {
-                            aparatoCliente.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                            aparatoCliente.setSelection(obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
                             idArticulo = dat.get(obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente) - 1).getIdArticulo();
                             contratoNet = dat.get(obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente) - 1).getControNet();
                         } catch (Exception e) {
@@ -852,7 +853,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Status Aparato////
-    public void getStatusApa(final Context context) {
+    public void getStatusApa(final Context context,final Spinner aparatoTipo,final Spinner aparatoAsignar,final Spinner aparatoEstado) {
         Call<JSONStatusApa> call = services.getStatusApa(context).getDataStatusApa();
         call.enqueue(new Callback<JSONStatusApa>() {
             @Override
@@ -871,15 +872,15 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        CambioAparato.estado.setAdapter(adapter);
+                        aparatoEstado.setAdapter(adapter);
 
                         JSONObject jsonObject = new JSONObject();
 
                         try {
                             jsonObject.put("ContratoNet", contratoNet);
                             jsonObject.put("Id_Articulo", idArticulo);
-                            CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
-                            getApaTipo(context, jsonObject);
+                            aparatoEstado.setSelection(obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
+                            getApaTipo(context, jsonObject,aparatoTipo,aparatoAsignar);
                         } catch (Exception e) {
 
                         }
@@ -896,7 +897,7 @@ public class Request extends AppCompatActivity {
     }
 
     //TipoAparato////
-    public void getApaTipo(final Context context, final JSONObject jsonObject) {
+    public void getApaTipo(final Context context, final JSONObject jsonObject,final Spinner aparatoTipo,final Spinner aparatoAsignar) {
         Call<JSONApaTipo> call = services.RequestPost(context, jsonObject).getDataApaTipo();
         call.enqueue(new Callback<JSONApaTipo>() {
             @Override
@@ -915,13 +916,13 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        CambioAparato.tipoAparato.setAdapter(adapter);
+                        aparatoTipo.setAdapter(adapter);
                         JSONObject jsonObject = new JSONObject();
                         try {
-                            CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
+                            aparatoTipo.setSelection(obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
                             jsonObject.put("Clv_Tecnico", Util.getClvTecnico(Util.preferences));
                             jsonObject.put("Id_Articulo", idArticulo);
-                            getApaTipDis(context, jsonObject);
+                            getApaTipDis(context, jsonObject,aparatoAsignar);
                         } catch (Exception e) {
                         }
                     }
@@ -938,7 +939,7 @@ public class Request extends AppCompatActivity {
     }
 
     //AparatoDisponible////
-    public void getApaTipDis(final Context context, final JSONObject jsonObject) {
+    public void getApaTipDis(final Context context, final JSONObject jsonObject,final Spinner aparatoAsignar) {
         Call<JSONApaTipDis> call = services.RequestPost(context, jsonObject).getDataApaTipDis();
         call.enqueue(new Callback<JSONApaTipDis>() {
             @Override
@@ -957,9 +958,9 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        CambioAparato.aparatoAsignar.setAdapter(adapter);
+                        aparatoAsignar.setAdapter(adapter);
                         try {
-                            CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
+                            aparatoAsignar.setSelection(obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
                             dialogTrabajos.dismiss();
                         } catch (Exception e) {
                         }

@@ -36,7 +36,7 @@ import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogT
 
 public class CambioAparato extends AppCompatActivity {
 
-    public static Spinner aparato, estado, tipoAparato, aparatoAsignar;
+    public Spinner aparato, estado, tipoAparato, aparatoAsignar;
     private String statusAparato;
     private Request request = new Request();
     ConstraintLayout aa;
@@ -66,7 +66,7 @@ public class CambioAparato extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        request.getDeepCAPAT(getApplicationContext(), jsonObject,);
+        request.getDeepCAPAT(getApplicationContext(), jsonObject,aparato,tipoAparato,aparatoAsignar,estado);
         final boolean ftth = getIntent().getExtras().getBoolean("ftth");
         if (!ftth) {
             aa.setVisibility(View.VISIBLE);
@@ -98,7 +98,7 @@ public class CambioAparato extends AppCompatActivity {
                                     jsonObject.put("Id_Articulo", idArticulo);
                                 } catch (Exception e) {
                                 }
-                                request.getApaTipDis(getApplicationContext(), jsonObject);
+                                request.getApaTipDis(getApplicationContext(), jsonObject,aparatoAsignar);
                             } else {
                                 idArticulo = dat.get(position - 1).getIdArticulo();
                                 contrato = dat.get(position - 1).getControNet();
@@ -107,7 +107,7 @@ public class CambioAparato extends AppCompatActivity {
                                     jsonObject.put("Id_Articulo", idArticulo);
                                 } catch (Exception e) {
                                 }
-                                request.getApaTipo(getApplicationContext(), jsonObject);
+                                request.getApaTipo(getApplicationContext(), jsonObject,tipoAparato,aparatoAsignar);
                             }
 
                         }
@@ -148,7 +148,7 @@ public class CambioAparato extends AppCompatActivity {
                         jsonObject.put("Id_Articulo", idArticulo2);
                     } catch (Exception e) {
                     }
-                    request.getApaTipDis(getApplicationContext(), jsonObject);
+                    request.getApaTipDis(getApplicationContext(), jsonObject,aparatoAsignar);
                 }
             }
 

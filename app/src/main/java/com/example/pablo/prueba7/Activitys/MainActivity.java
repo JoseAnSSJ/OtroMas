@@ -36,7 +36,7 @@ import org.json.JSONObject;
 
 import androidx.annotation.RequiresApi;
 
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
+
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
 import static com.example.pablo.prueba7.Fragments.MaterialesFragment.clasificacionMatR;
 import static com.example.pablo.prueba7.Fragments.MaterialesFragment.descripcionMatR;
@@ -211,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 info.setText("Info");
             }else{
                 finish();
-                TecSec.setSelection(0);
             }
 
             }
