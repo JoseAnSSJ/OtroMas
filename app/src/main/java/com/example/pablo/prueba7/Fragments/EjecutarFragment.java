@@ -156,6 +156,7 @@ public class EjecutarFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                             }
                         })
                 .setNegativeButton("ACEPTAR",
@@ -179,6 +180,7 @@ public class EjecutarFragment extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    dialogEjecutar.dismiss();
                                 }
                             })
                     .setNegativeButton("ACEPTAR",

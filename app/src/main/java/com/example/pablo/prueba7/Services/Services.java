@@ -1250,8 +1250,8 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("Latitud", InstalacionFragment.latitud);
-        jsonObject.put("Longitud", InstalacionFragment.longitud);
+        jsonObject.put("Latitud", InstalacionFragment.cordLat.getText());
+        jsonObject.put("Longitud", InstalacionFragment.cordLong.getText());
         jsonObject1.put("ObjCoorCli", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());

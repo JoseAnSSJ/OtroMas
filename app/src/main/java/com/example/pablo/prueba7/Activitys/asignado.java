@@ -47,7 +47,7 @@ public class asignado extends AppCompatActivity {
         spinnerAparato=findViewById(R.id.tipo_aparato);
         spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
-        agragar=findViewById(R.id.agregar);
+        agragar=findViewById(R.id.agregarAsignacionAparato);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
@@ -86,8 +86,6 @@ public class asignado extends AppCompatActivity {
                                 }else{
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
                                 }
-                            clveAparatoSpinner=0;
-                            nombreSpinner="";
                         }
 
                     });
@@ -119,12 +117,7 @@ public class asignado extends AppCompatActivity {
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedStrings==null){
-                    Toast.makeText(getApplicationContext(), "Seleccione mínimo un servicio", Toast.LENGTH_SHORT);
-                }else {
-                    if(clveAparatoSpinner==0||nombreSpinner==""||nombreSpinner==null){
-                        Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_SHORT);
-                    }else{
+
                         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
                         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
                         for(int c=0; c<dat4.size(); c++){
@@ -152,9 +145,9 @@ public class asignado extends AppCompatActivity {
                         Intent intento=new Intent(asignado.this,asignacion.class);
                         startActivity(intento);
                         finish();
-                    }
 
-                }
+
+
             }
         });
       /*  escanear.setOnClickListener(new View.OnClickListener() {

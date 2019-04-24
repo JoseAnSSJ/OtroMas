@@ -131,7 +131,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/agregar"
+        android:id="@+id/agregarAsignacionAparato"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

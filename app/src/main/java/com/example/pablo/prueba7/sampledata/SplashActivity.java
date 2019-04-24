@@ -28,10 +28,12 @@ public class SplashActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
             startActivity(intentinicio);
+
         } else {
 
             startActivity(intentLogin);
             LoginShare=false;
+
         }
         finish();
     }

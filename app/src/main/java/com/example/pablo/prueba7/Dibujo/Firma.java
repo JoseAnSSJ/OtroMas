@@ -31,6 +31,7 @@ public class Firma extends AppCompatActivity {
         dibujar= (Dibujar) findViewById(R.id.FirmaLayout);
         Toolbar toolbar;
 
+    setTitle("Firma Cliente");
     }
 
     @Override

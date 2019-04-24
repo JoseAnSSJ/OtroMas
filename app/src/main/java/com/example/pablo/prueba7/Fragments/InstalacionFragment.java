@@ -53,7 +53,7 @@ public class InstalacionFragment extends Fragment implements View.OnClickListene
     private int mYear, mMonth, mDay ;
     private View contenedorParticular;
     private View contenedorCorporativo;
-    private TextView cordLat, cordLong;
+    public static TextView cordLat, cordLong;
     public static TextView Obs;
     public static Spinner TecSec;
     private Request request = new Request();
