@@ -1871,6 +1871,8 @@ public class Request extends AppCompatActivity {
                     if (checa.getBaseIdUser() == 0) {
 
                     }
+                }else{
+                    dialogEjecutar.dismiss();
                 }
             }
 
@@ -1898,6 +1900,8 @@ public class Request extends AppCompatActivity {
 
                         getValidaReporte(context);
                     }
+                }else{
+                    dialogEjecutar.dismiss();
                 }
             }
 
@@ -1924,6 +1928,8 @@ public class Request extends AppCompatActivity {
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
                     }
+                }else{
+                    dialogEjecutar.dismiss();
                 }
             }
 
@@ -1995,7 +2001,6 @@ public class Request extends AppCompatActivity {
                             if (msgComando.length() > 3) {
                                 msgEjecutarOrd.setText(msgComando);
                                 dialogEjecutar.dismiss();
-                                Login.esperar(5);
                                 ((Activity) context).finish();
                             } else {
                                 Login.esperar(3);
@@ -2003,6 +2008,8 @@ public class Request extends AppCompatActivity {
                             }
                         }
                     }
+                }else{
+                    dialogEjecutar.dismiss();
                 }
             }
 
@@ -2032,6 +2039,9 @@ public class Request extends AppCompatActivity {
                     ConsultaIp(context);
                     msgEjecutarOrd.setText("");
                     reiniciar.setEnabled(true);
+                  //  dialogEjecutar.dismiss();
+                }else{
+                    dialogEjecutar.dismiss();
                 }
             }
 
