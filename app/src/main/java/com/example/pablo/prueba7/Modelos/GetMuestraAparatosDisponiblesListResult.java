@@ -10,13 +10,7 @@ public class GetMuestraAparatosDisponiblesListResult {
     @SerializedName("Descripcion")
     @Expose
     private String descripcion;
-    @SerializedName("Letra")
-    @Expose
-    public  String letra;
 
-    public String getLetra() {
-        return letra;
-    }
 
     public Integer getClv_Aparato() {
         return clv_Aparato;

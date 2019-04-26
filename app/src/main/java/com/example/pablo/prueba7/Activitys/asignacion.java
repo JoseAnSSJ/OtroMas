@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import static com.example.pablo.prueba7.Activitys.asignado.jsonArrayMAC;
+import static com.example.pablo.prueba7.Activitys.asignado.listaDeMac;
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.validacionSiguiente;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 
@@ -160,6 +162,14 @@ public class asignacion extends AppCompatActivity {
                         if (dat.get(c).children != null) {
                             for (int d = 0; d < dat.get(c).children.size(); d++) {
                                 String abc = dat.get(c).children.get(d).getClv_Aparato() + f;
+                                try{
+                                    for(int m=0; m<listaDeMac.size();m++){
+                                        if(listaDeMac.get(m).equals(dat.get(c).Detalle)){
+                                            jsonArrayMAC.remove(m);
+                                            listaDeMac.remove(m);
+                                        }
+                                    }
+                                }catch (Exception e){}
                                 try {
                                     if (Integer.parseInt(abc) == (Arbol_Adapter.DeletChildren.get(0))) {
                                         dat.get(c).children.remove(d);

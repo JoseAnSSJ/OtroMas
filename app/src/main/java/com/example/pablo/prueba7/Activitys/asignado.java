@@ -3,11 +3,13 @@ package com.example.pablo.prueba7.Activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,9 +25,14 @@ import com.example.pablo.prueba7.Request.Request;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 
 public class asignado extends AppCompatActivity {
 
@@ -39,6 +46,10 @@ public class asignado extends AppCompatActivity {
     public static int idArticuloasignado, clveAparatoSpinner;
     public static String detalleSpinner, nombreSpinner;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
+    public static ConstraintLayout constraintLayoutMACWAM;
+    public static EditText MACWAMText;
+    public static JSONArray jsonArrayMAC;
+    public static ArrayList<String> listaDeMac = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -49,6 +60,8 @@ public class asignado extends AppCompatActivity {
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar=findViewById(R.id.agregarAsignacionAparato);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
+        constraintLayoutMACWAM = findViewById(R.id.MACWAMConstraint);
+        MACWAMText = findViewById(R.id.MacWam);
         request.getTipoAparatos(getApplicationContext());
         selectedStrings.clear();
         cancelar.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +82,13 @@ public class asignado extends AppCompatActivity {
                     idArticuloasignado = dat.get(position-1).getIdArticulo();
                     request.getAparatosDisponibles(getApplicationContext());
                     request.getServiciosAparatos(getApplicationContext());
+                    JSONObject jsonObject = new JSONObject();
+                    JSONObject jsonObject1 = new JSONObject();
+                    try {
+                        jsonObject.put("Letra", dat.get(position).letra);
+                        jsonObject1.put("ObjRelMacwan",jsonObject);
+                    }catch (Exception e){}
+                    request.ValidaMACWAM(getApplicationContext(),jsonObject1);
                     serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -133,6 +153,24 @@ if(clveAparatoSpinner==0){
     if(selectedStrings.size()==0){
         Toast.makeText(getApplicationContext(),"No se ha seleccionado nigun medio",Toast.LENGTH_LONG).show();
     }else{
+
+        if(request.MACWAM==true){
+            if(MACWAMText.getText().equals(nombreSpinner)){
+                Toast.makeText(getApplicationContext(),"La MacWam no puede ser igual que la MacLan",Toast.LENGTH_SHORT).show();
+            }else{
+                JSONObject jsonObjectMACWAM = new JSONObject();
+                try{
+                    jsonObjectMACWAM.put("Clv_Aparato",idArticuloasignado);
+                    jsonObjectMACWAM.put("MacLan",nombreSpinner);
+                    jsonObjectMACWAM.put("MacWan",MACWAMText.getText());
+                    jsonObjectMACWAM.put("Clv_Orden", clvor);
+                }catch (Exception e){}
+                jsonArrayMAC.put(jsonArrayMAC);
+                listaDeMac.add(nombreSpinner);
+            }
+        }
+
+
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
         for(int c=0; c<dat4.size(); c++){
