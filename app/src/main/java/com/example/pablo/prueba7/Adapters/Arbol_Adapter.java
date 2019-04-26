@@ -46,7 +46,7 @@ public class Arbol_Adapter extends BaseAdapter {
     public static String dato;
     private Array array = new Array();
     public static int a=0;
-    public static boolean validacionSiguiente=false;
+    public static boolean validacionSiguiente;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
     public Arbol_Adapter(Context context){
@@ -158,7 +158,8 @@ public class Arbol_Adapter extends BaseAdapter {
                 ////
                 layoutMedio.setVisibility(View.VISIBLE);
                 Asignacion.setVisibility(View.GONE);
-                siguiente.setEnabled(false);
+                //siguiente.setEnabled(false);
+                validacionSiguiente=false;
 
 
             }
@@ -241,9 +242,11 @@ public class Arbol_Adapter extends BaseAdapter {
                 d=d+1;
             }
             if(d>=1){
-                siguiente.setEnabled(false);
+                //siguiente.setEnabled(false);
+                validacionSiguiente=false;
             }else{
-                siguiente.setEnabled(true);
+               // siguiente.setEnabled(true);
+                validacionSiguiente=true;
             }
         }
         int g=0;

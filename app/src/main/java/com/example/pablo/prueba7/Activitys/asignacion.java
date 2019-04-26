@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.validacionSiguiente;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 
 import com.example.pablo.prueba7.Adapters.Arbol_Adapter;
@@ -72,21 +74,27 @@ public class asignacion extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
-                List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
-                for (int a = 0; a < dat.size(); a++) {
-                    try {
-                        jsonObject2 = new JSONObject();
-                        jsonObject2.put("Clv_UnicaNet", dat.get(a).Clv_UnicaNet);
-                        jsonObject2.put("idMedio", dat.get(a).IdMedio);
-                        jsonArray.put(a, jsonObject2);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                Log.d("asd", String.valueOf(validacionSiguiente));
+                if(validacionSiguiente==true){
+                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
+                    List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = itData.next();
+                    for (int a = 0; a < dat.size(); a++) {
+                        try {
+                            jsonObject2 = new JSONObject();
+                            jsonObject2.put("Clv_UnicaNet", dat.get(a).Clv_UnicaNet);
+                            jsonObject2.put("idMedio", dat.get(a).IdMedio);
+                            jsonArray.put(a, jsonObject2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    Intent intento = new Intent(asignacion.this, asignado.class);
+                    startActivity(intento);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(),"No se ha seleccionado nigun medio",Toast.LENGTH_LONG).show();
                 }
-                Intent intento = new Intent(asignacion.this, asignado.class);
-                startActivity(intento);
-                finish();
+
             }
         });
 

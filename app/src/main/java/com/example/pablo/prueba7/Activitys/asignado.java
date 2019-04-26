@@ -76,15 +76,19 @@ public class asignado extends AppCompatActivity {
                             Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData2 = array.dataserviciosAparatos.iterator();
                                 List<GetMuestraServiciosRelTipoAparatoListResult> dat2 = itData2.next();
 
-                                if(dat2.get(position1).baseIdUser==0){
-                                    dat2.get(position1).setBaseIdUser(1);
+                                if(clveAparatoSpinner==0){
+                                    Toast.makeText(getApplicationContext(),"Seleccione un tipo de aparato",Toast.LENGTH_LONG).show();
                                 }else{
-                                    dat2.get(position1).setBaseIdUser(0);
-                                }
-                                if(dat2.get(position1).baseIdUser==1){
-                                    selectedStrings.add(dat2.get(position1).clv_UnicaNet);
-                                }else{
-                                    selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
+                                    if(dat2.get(position1).baseIdUser==0){
+                                        dat2.get(position1).setBaseIdUser(1);
+                                    }else{
+                                        dat2.get(position1).setBaseIdUser(0);
+                                    }
+                                    if(dat2.get(position1).baseIdUser==1){
+                                        selectedStrings.add(dat2.get(position1).clv_UnicaNet);
+                                    }else{
+                                        selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
+                                    }
                                 }
                         }
 
@@ -107,6 +111,12 @@ public class asignado extends AppCompatActivity {
                     List<GetMuestraAparatosDisponiblesListResult> dat1 = itData1.next();
                     clveAparatoSpinner = dat1.get(position1-1).getClv_Aparato();
                     nombreSpinner = dat1.get(position1-1).getDescripcion();
+                    serviciosAparato.setEnabled(true);
+                }else{
+                    clveAparatoSpinner=0;
+                    nombreSpinner="";
+                    Toast.makeText(getApplicationContext(),"Seleccione un aparato",Toast.LENGTH_LONG).show();
+                    serviciosAparato.setEnabled(false);
                 }
             }
             @Override
@@ -117,34 +127,42 @@ public class asignado extends AppCompatActivity {
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+if(clveAparatoSpinner==0){
+    Toast.makeText(getApplicationContext(),"Seleccione un aparato",Toast.LENGTH_LONG).show();
+}else{
+    if(selectedStrings.size()==0){
+        Toast.makeText(getApplicationContext(),"No se ha seleccionado nigun medio",Toast.LENGTH_LONG).show();
+    }else{
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
+        for(int c=0; c<dat4.size(); c++){
+            for(int d=0; d<selectedStrings.size();d++){
+                int abc=dat4.get(c).getClv_UnicaNet();
+                if(selectedStrings.get(0)==abc){
+                    children dataChild= new children();
+                    dataChild.setBaseIdUser(0);
+                    dataChild.setBaseRemoteIp(null);
+                    dataChild.setClv_Aparato(clveAparatoSpinner);
+                    dataChild.setClv_UnicaNet(null);
+                    dataChild.setContratoNet(0);
+                    dataChild.setDetalle(detalleSpinner);
+                    dataChild.setNombre(nombreSpinner);
+                    dataChild.setTipo("A");
+                    dataChild.setType("file");
+                    dat4.get(c).children.add(dataChild);
+                    selectedStrings.remove(0);
+                }
 
-                        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
-                        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
-                        for(int c=0; c<dat4.size(); c++){
-                            for(int d=0; d<selectedStrings.size();d++){
-                                int abc=dat4.get(c).getClv_UnicaNet();
-                                if(selectedStrings.get(0)==abc){
-                                    children dataChild= new children();
-                                    dataChild.setBaseIdUser(0);
-                                    dataChild.setBaseRemoteIp(null);
-                                    dataChild.setClv_Aparato(clveAparatoSpinner);
-                                    dataChild.setClv_UnicaNet(null);
-                                    dataChild.setContratoNet(0);
-                                    dataChild.setDetalle(detalleSpinner);
-                                    dataChild.setNombre(nombreSpinner);
-                                    dataChild.setTipo("A");
-                                    dataChild.setType("file");
-                                    dat4.get(c).children.add(dataChild);
-                                    selectedStrings.remove(0);
-                                }
+            }
+        }
+        asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
 
-                            }
-                        }
-                        asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
+        Intent intento=new Intent(asignado.this,asignacion.class);
+        startActivity(intento);
+        finish();
+    }
+}
 
-                        Intent intento=new Intent(asignado.this,asignacion.class);
-                        startActivity(intento);
-                        finish();
 
 
 

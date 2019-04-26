@@ -64,7 +64,7 @@
             android:layout_below="@+id/Asignacion"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
-            android:enabled="false"
+            android:enabled="true"
             android:text="@string/asigar_Aparatos"
             android:textColor="#000"
             android:background="@drawable/boton"

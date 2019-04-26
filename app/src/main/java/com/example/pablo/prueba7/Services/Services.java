@@ -163,7 +163,7 @@ public class Services {
     public Service getProxService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_tecnico", claveTecnico);
+        jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -227,7 +227,7 @@ public class Services {
 //POST Body JsonArray
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject2 = new JSONObject();
-        jsonObject.put("clv_tecnico", claveTecnico);
+        jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("op", opcion);
         jsonObject.put("clv_orden", clvorden);
         jsonObject.put("contratoCom", cont);
@@ -261,7 +261,7 @@ public class Services {
         //POST Body JsonArray
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject2 = new JSONObject();
-        jsonObject.put("clv_tecnico", claveTecnico);
+        jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("op", opcion);
         jsonObject.put("clv_queja", clavequeja);
         jsonObject.put("contratoCom", cont);
@@ -533,7 +533,7 @@ public class Services {
     //Tipo de Aparato Disponible//
     public Service getApaTipDisService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Tecnico", claveTecnico);
+        jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("Id_Articulo", CambioAparato.idArticulo2);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -681,7 +681,7 @@ public class Services {
     public Service getAparatosDisponiblesService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("clv_orden", clvor);
-        jsonObject.put("Clv_Tecnico", claveTecnico);
+        jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("idArticulo", idArticuloasignado);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -985,7 +985,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("CLV_ORDEN", clvor);
-        jsonObject.put("Clv_Tecnico", claveTecnico);
+        jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
         jsonObject.put("STATUS", HorasFragment.statusHora);
@@ -1091,7 +1091,7 @@ public class Services {
         String s = diaE + "-" + ab + "-" + +añoE;
         jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
         jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-        jsonObject.put("ClvTecnico", claveTecnico);
+        jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
         jsonObject.put("Contrato", DeepConsModel.Contrato);
         jsonObject.put("FecEje", s);
@@ -1274,7 +1274,7 @@ public class Services {
         JSONObject objQuejas = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         objQuejas.put("Clv_Queja", clvReport.toString());
-        objQuejas.put("Clv_Tecnico", claveTecnico);
+        objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         objQuejas.put("FechaProceso", "");
         objQuejas.put("Fecha_Ejecucion", year + " " + horas12);
         objQuejas.put("HP", "");
@@ -1565,7 +1565,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("ClvTecnico", claveTecnico);
+            jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("IdAlmacen", 0);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1604,7 +1604,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("ClvTecnico", claveTecnico);
+            jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("ClvTipo", clvTipoDescMat);
             jsonObject.put("IdAlmacen", 0);
         } catch (JSONException e) {
@@ -1816,7 +1816,7 @@ public class Services {
             jsonObject.put("clvOrden", clvor);
             jsonObject.put("noArticulo", idInventarioMD);
             jsonObject.put("cantidadUtilizada", totalDM);
-            jsonObject.put("clvTecnico", claveTecnico);
+            jsonObject.put("clvTecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("idAlmacenEmpresa", 0);
             jsonObject.put("metrajeInicio", IIDM);
             jsonObject.put("metrajeFin", IFDM);
@@ -1898,7 +1898,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("ClvTecnico", claveTecnico);
+            jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("ClvTipo", clvTipoDescMatR);
             jsonObject.put("IdAlmacen", 0);
         } catch (JSONException e) {
@@ -2045,7 +2045,7 @@ public class Services {
             jsonObject.put("clvOrden", clvor);
             jsonObject.put("noArticulo", idInventarioMDR);
             jsonObject.put("cantidadUtilizada", totalDMR);
-            jsonObject.put("clvTecnico", claveTecnico);
+            jsonObject.put("clvTecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("idAlmacenEmpresa", 0);
             jsonObject.put("metrajeInicio", IIDMR);
             jsonObject.put("metrajeFin", IFDMR);
