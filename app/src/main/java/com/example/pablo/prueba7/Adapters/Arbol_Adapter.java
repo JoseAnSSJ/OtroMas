@@ -205,11 +205,12 @@ public class Arbol_Adapter extends BaseAdapter {
                     Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itData2 = array.dataMedSer.iterator();
                     List<GetMuestraMedioPorServicoContratadoListResult> dat2 = itData2.next();
                     dato = dat3.get(position1-1).getDescripcion();
-                    try {
-                        clv_Medio = dat2.get(position1).getIdMedio();
-                    } catch (Exception e) {
-                        clv_Medio = dat2.get(position1 - 1).getIdMedio();
-                    }
+                        try {
+                            clv_Medio = dat2.get(position1 - 1).getIdMedio();
+                        } catch (Exception e) {
+                            clv_Medio = dat2.get(position1).getIdMedio();
+
+                        }
                     dat4.get(posi).setIdMedio(clv_Medio);
                     dat4.get(posi).setDetalle(dato);
                 }
