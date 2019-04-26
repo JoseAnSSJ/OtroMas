@@ -154,7 +154,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
-    public static boolean isnet, firma;
+    public static boolean isnet, firma,MACWAM;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
@@ -1371,12 +1371,19 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    if(MACWAM==true){
+                        JSONObject jsonObject = new JSONObject();
+                        try{
+                            jsonObject.put("RelMacwanList",jsonArrayMAC);
+                        }catch (Exception e){}
+                        AsignaMACWAM(context,jsonObject);
+                    }else{
                     Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
                     try{
                         dialogAsignacion.dismiss();
                     }catch (Exception e){}
-
                     finish();
+                    }
                 } else {
                     Toast.makeText(context, "Error al aceptar asignación", Toast.LENGTH_LONG).show();
                     dialogAsignacion.dismiss();
@@ -2678,6 +2685,102 @@ public class Request extends AppCompatActivity {
                     }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+            }
+        });
+    }
+    //////////MACWAM/////////////////
+    public void ValidaMACWAM(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).validaMACWAM();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    JsonObject userJson = response.body().getAsJsonObject("GetValidaRequiereMacWanResult");
+                    //Introduccion de datos del request en el Modelo para poder usarlos
+                    ValidaMACWAMMODEL user = new ValidaMACWAMMODEL(
+                            userJson.get("Resultado").getAsBoolean()
+                    );
+                    if(user.isResultado()==true){
+                        MACWAM = true;
+                        constraintLayoutMACWAM.setVisibility(View.VISIBLE);
+                        JSONObject jsonObject1 = new JSONObject();
+                        JSONObject jsonObject2 = new JSONObject();
+                        try{
+                            jsonObject1.put("Clv_Aparato",idArticuloasignado);
+                            jsonObject2.put("ObjRelMacwan",jsonObject1);
+                        }catch (Exception e){}
+                        GetMACWAM(context,jsonObject2);
+                    }else {
+                        MACWAM=false;
+                        constraintLayoutMACWAM.setVisibility(View.GONE);
+                    }
+                } else {
+                    ErrorInicioDeSesion(context);
+                    Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorInicioDeSesion(context);
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void GetMACWAM(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getMACWAM();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    JsonObject userJson = response.body().getAsJsonObject("ConMacWanbyClv_AparatoResult");
+                    //Introduccion de datos del request en el Modelo para poder usarlos
+                    try{
+                        GetMACWAMModel user = new GetMACWAMModel(
+                                userJson.get("MacWan").getAsString()
+                        );
+                        MACWAMText.setText(user.getMACWAM());
+                    }catch (Exception e){
+                        GetMACWAMModel user = new GetMACWAMModel(
+                                userJson.get("MacWan").getAsJsonNull().toString()
+                        );
+
+                    }
+
+                } else {
+                    ErrorInicioDeSesion(context);
+                    Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorInicioDeSesion(context);
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void AsignaMACWAM(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).asignaMACWAM();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
+                    dialogAsignacion.dismiss();
+                    finish();
+                } else {
+                    ErrorInicioDeSesion(context);
+                    Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorInicioDeSesion(context);
+                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
     }
