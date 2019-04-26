@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -71,6 +72,13 @@ public class Materiales extends Fragment {
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
         if(request.extencionesMat==true){
             spinnerExtMat.setVisibility(View.VISIBLE);
+        }else{
+
+            Array.detalleBit.clear();
+            Array.detalleBit.add(0, "---Seleccionar---");
+            Array.detalleBit.add(1, "1");
+            ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, Array.detalleBit);
+            descripcionMat.setAdapter(arrayAdapter);
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,11 +26,13 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 public class Configuracion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private Button CS;
     private TextView nombreConfi;
     private Request request = new Request();
     NavigationView barra;
     TextView nombreTec;
+
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -48,8 +51,8 @@ public class Configuracion extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 try {
-                    Util.preferences = getApplicationContext().getSharedPreferences("credenciales", getApplicationContext().MODE_PRIVATE);
-                    Util.preferences.edit().clear().apply();
+                    Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.preferences.edit().clear().commit();
                     SplashActivity.LoginShare=false;
                     Intent intento = new Intent(Configuracion.this, Login.class);
                     startActivity(intento);
@@ -107,10 +110,7 @@ public class Configuracion extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Configuracion.this, Inicio.class);
-            startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-           request.getProximaCita(getApplicationContext());
            request.getOrdenes(getApplicationContext());
 
         } else if (id == R.id.Ordenes_menu) {

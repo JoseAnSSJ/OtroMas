@@ -108,9 +108,9 @@ public class Services {
                         return chain.proceed(newRequest);
                     }
                 })
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -142,10 +142,10 @@ public class Services {
                             .build();
                     return chain.proceed(newRequest);
                 }
-            }).connectTimeout(15, TimeUnit.SECONDS)
-              .readTimeout(15, TimeUnit.SECONDS)
-              .writeTimeout(15, TimeUnit.SECONDS)
-              .build();
+            }).connectTimeout(15, TimeUnit.MINUTES)
+                    .readTimeout(15, TimeUnit.MINUTES)
+                    .writeTimeout(15, TimeUnit.MINUTES)
+                    .build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.NEW_URL)
                     .client(client)
@@ -180,10 +180,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).connectTimeout(15, TimeUnit.SECONDS)
-          .readTimeout(15, TimeUnit.SECONDS)
-          .writeTimeout(15, TimeUnit.SECONDS)
-          .build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -196,8 +196,9 @@ public class Services {
     //Orden de servicio//
     public Service getOrdSerService(final Context context) throws JSONException {
         //POST Body Json
+        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_tecnico", claveTecnico);
+        jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -211,10 +212,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).connectTimeout(15, TimeUnit.SECONDS)
-           .readTimeout(15, TimeUnit.SECONDS)
-           .writeTimeout(15, TimeUnit.SECONDS)
-           .build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -244,7 +245,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -275,7 +279,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -302,7 +309,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -330,7 +340,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -361,7 +374,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -389,7 +405,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -414,7 +433,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -439,7 +461,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -462,7 +487,10 @@ public class Services {
 
                         return chain.proceed(newRequest);
                     }
-                }).build();
+                }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
@@ -490,7 +518,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -516,7 +547,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -542,7 +576,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -567,7 +604,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -592,7 +632,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -622,7 +665,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -649,7 +695,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -681,7 +730,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -713,7 +765,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -740,7 +795,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -770,7 +828,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -795,7 +856,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -820,7 +884,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -846,7 +913,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -871,7 +941,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -896,7 +969,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -927,7 +1003,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -954,7 +1033,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -985,7 +1067,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -998,10 +1083,10 @@ public class Services {
         //POST Body Json
         String ab = "";
         JSONObject jsonObject = new JSONObject();
-        if (mesE < 10) {
-            ab = "0" + mesE;
+        if ((mesE+1) < 10) {
+            ab = "0" + (mesE+1);
         } else {
-            ab = String.valueOf(mesE);
+            ab = String.valueOf(mesE+1);
         }
         String s = diaE + "-" + ab + "-" + +añoE;
         jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
@@ -1034,7 +1119,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1064,7 +1152,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1094,7 +1185,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1125,7 +1219,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1158,7 +1255,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1208,7 +1308,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1236,7 +1339,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1269,7 +1375,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1298,7 +1407,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1328,7 +1440,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1363,7 +1478,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1398,7 +1516,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1429,7 +1550,10 @@ public class Services {
                         .post(body).build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
                 .client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -1463,7 +1587,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1499,7 +1626,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1532,7 +1662,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1569,7 +1702,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1612,7 +1748,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1650,7 +1789,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1701,7 +1843,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1735,7 +1880,10 @@ public class Services {
                         .build();
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -1775,7 +1923,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1820,7 +1971,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1862,7 +2016,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1919,7 +2076,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1960,7 +2120,10 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1971,33 +2134,36 @@ public class Services {
 
         return retrofit.create(Service.class);
     }
-////////////////////
-public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject jsonObject) {
+    ////////////////////
+    public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject jsonObject) {
 
 
-    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
-    final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
-        @Override
-        public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-            //Modificacion del Header
-            Request newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", getToken(context))
-                    .addHeader("Content-Type", "application/json")
-                    .post(body)
-                    .build();
-            return chain.proceed(newRequest);
-        }
-    }).build();
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(Constants.NEW_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    return retrofit.create(Service.class);
-}
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", getToken(context))
+                        .addHeader("Content-Type", "application/json")
+                        .post(body)
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.NEW_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(Service.class);
+    }
     ////////////////////////
     public Service addFirmaService(final Context context) {
         //POST Body Json
@@ -2028,7 +2194,10 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
 
                 return chain.proceed(newRequest);
             }
-        }).build();
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
                 .client(client)
@@ -2064,9 +2233,9 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
 
                 return chain.proceed(newRequest);
             }
-        }).connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NEW_URL)
@@ -2077,6 +2246,12 @@ public Service getDeppMODORDSERServiceVisita(final Context context,JSONObject js
         return retrofit.create(Service.class);
     }
 }
+
+
+
+
+
+
 
 
 

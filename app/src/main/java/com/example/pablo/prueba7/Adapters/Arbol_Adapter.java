@@ -46,6 +46,7 @@ public class Arbol_Adapter extends BaseAdapter {
     public static String dato;
     private Array array = new Array();
     public static int a=0;
+    public static boolean validacionSiguiente=false;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
     public Arbol_Adapter(Context context){

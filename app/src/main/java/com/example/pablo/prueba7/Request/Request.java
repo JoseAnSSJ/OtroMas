@@ -243,8 +243,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
                 Log.d("asd", "asd");
-                if (response.code() == 200) {
 
+                if (response.code() == 200) {
                     try {
                         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                         Util.editor = Util.preferences.edit();
@@ -259,6 +259,7 @@ public class Request extends AppCompatActivity {
                             clave_tecnico = data.get(0).clv_tecnico;
                             nombre_tecnico = data.get(0).tecnico;
                             services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
+                            Util.editor.putInt("clvTec",Integer.parseInt(data.get(0).clv_tecnico));
                             Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                             Util.editor.commit();
                         }
@@ -342,6 +343,8 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
                 if (response.code() == 200) {
+                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.editor = Util.preferences.edit();
                     Example jsonResponse = response.body();
                     try {
                         array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
@@ -352,7 +355,6 @@ public class Request extends AppCompatActivity {
                                 if (dat.get(i).getStatus().equals("Ejecutada")) {
                                     try {
                                         Inicio.OE = dat.get(i).getTotal();
-
                                     } catch (Exception e) {
                                         Inicio.OE = 0;
                                     }
@@ -395,6 +397,12 @@ public class Request extends AppCompatActivity {
                         Inicio.OEP = 0;
                         Inicio.OO = 0;
                     }
+                    Util.editor.putInt("OE", Inicio.OE);
+                    Util.editor.putInt("OP", Inicio.OP);
+                    Util.editor.putInt("OV", Inicio.OV);
+                    Util.editor.putInt("OEP", Inicio.OEP);
+                    Util.editor.putInt("OO", Inicio.OO);
+                    Util.editor.commit();
                     getQuejas(context);
                 } else {
                     ErrorInicioDeSesion(context);
@@ -425,6 +433,8 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
                 if (response.code() == 200) {
+                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.editor = Util.preferences.edit();
                     Example jsonResponse = response.body();
                     array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
                     Iterator<List<Queja>> itData = array.dataque.iterator();
@@ -464,12 +474,18 @@ public class Request extends AppCompatActivity {
                             if (dat.get(i).getStatus().equals("otro")) {
                                 try {
                                     Inicio.RO = dat.get(i).getTotal();
+                                    System.out.println("aaaaaaaaaaaaaa "+ dat.get(i).getTotal());
                                 } catch (Exception e) {
                                     Inicio.RO = 0;
                                 }
                             }
                         }
-
+                        Util.editor.putInt("RE", Inicio.RE);
+                        Util.editor.putInt("RP", Inicio.RP);
+                        Util.editor.putInt("RV", Inicio.RV);
+                        Util.editor.putInt("REP", Inicio.REP);
+                        Util.editor.putInt("RO", Inicio.RO);
+                        Util.editor.commit();
                     }
                     if (SplashActivity.LoginShare == true) {
                         Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
@@ -1356,7 +1372,10 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
                     Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
-                    dialogAsignacion.dismiss();
+                    try{
+                        dialogAsignacion.dismiss();
+                    }catch (Exception e){}
+
                     finish();
                 } else {
                     Toast.makeText(context, "Error al aceptar asignación", Toast.LENGTH_LONG).show();
@@ -1611,14 +1630,16 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
+                    System.out.println("Entra");
                     String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                     if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
                         getChecaCAMDO(context, jsonObjet);
                     } else {
+
                         dialogEjecutar.dismiss();
-                        EjecutarFragment.eject.setEnabled(true);
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
+                        EjecutarFragment.eject.setEnabled(true);
                     }
                 }
             }
@@ -1676,9 +1697,11 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     if (HorasFragment.statusHora.equals("E")) {
+                        System.out.println("ENTRAAAAAAA  E");
                         getDeepMODORDSER(context);
                     }
                     if (HorasFragment.statusHora.equals("V")) {
+                        System.out.println("ENTRAAAAAAA  V");
                         getDeepMODORDSERV(context, jsonObject);
                     }
                 } else {
@@ -1697,6 +1720,7 @@ public class Request extends AppCompatActivity {
     public void getDeepMODORDSER(final Context context) {
         Service service = null;
         try {
+            System.out.println("ENTRAAAAAAA");
             service = services.getDeppMODORDSERService(context);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1705,6 +1729,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                System.out.println(response1.message());
                 if (response1.code() == 200) {
                     getGuardaHora(context);
                 } else {
@@ -1754,6 +1779,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
+
                     getGuardaOrdSerAparatos(context);
                 } else {
                     dialogEjecutar.dismiss();
@@ -1781,6 +1807,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
+
                     addLlenaBitacora(context);
                 } else {
                     dialogEjecutar.dismiss();
@@ -1820,8 +1847,10 @@ public class Request extends AppCompatActivity {
                                 }
                             }
                             if (IS == 1) {
+
                                 GuardaCoordenadas(context);
                             } else {
+                                Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
                                 dialogEjecutar.dismiss();
                                 Intent intent = new Intent(context, Orden.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -1830,6 +1859,7 @@ public class Request extends AppCompatActivity {
                         }
                         if (HorasFragment.statusHora.equals("V")) {
                             dialogEjecutar.dismiss();
+                            Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(context, Orden.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intent);
@@ -1958,7 +1988,9 @@ public class Request extends AppCompatActivity {
                 reintentaB = 0;
 
                 if (response1.code() == 200) {
-                    ConsultaIp(context);
+                    dialogEjecutar.dismiss();
+                    Toast.makeText(context, "Orden ejecutada correctamente", Toast.LENGTH_LONG);
+                    getListOrd(context);
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
@@ -1973,7 +2005,7 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void ConsultaIp(final Context context) {
+  /*  public void ConsultaIp(final Context context) {
         Service service = null;
         try {
             service = services.getConsultaIpService(context);
@@ -1999,6 +2031,7 @@ public class Request extends AppCompatActivity {
                             msgEjecutarOrd.setText(Request.msgComando);
                         } else {
                             if (msgComando.length() > 3) {
+
                                 msgEjecutarOrd.setText(msgComando);
                                 dialogEjecutar.dismiss();
                                 ((Activity) context).finish();
@@ -2050,7 +2083,7 @@ public class Request extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     public void SetCambioAparato(final Context context) {
         Service service = null;
@@ -2363,6 +2396,7 @@ public class Request extends AppCompatActivity {
                             array.listaTabla.add(String.valueOf(dat.get(i).getNoExt()));
                         }
                     }
+                    Log.d("asd",Array.listaTabla.toString());
                     Materiales.scrollViewM.setVisibility(View.VISIBLE);
                     Materiales.tabla.setVisibility(View.VISIBLE);
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);

@@ -41,10 +41,9 @@
           android:layout_height="wrap_content"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="200dp"
-          android:visibility="gone
-">
+          android:visibility="gone">
 
-        <TextView
+        <!-- <TextView
             android:id="@+id/eqwe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +100,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:enabled="false"
             android:text="@string/reiniciar"
-            android:textColor="#000" />
+            android:textColor="#000" />-->
 
       </RelativeLayout>
 

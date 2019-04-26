@@ -62,12 +62,12 @@ public class EjecutarFragment extends Fragment {
         dialogEjecutar= new BarraCargar().showDialog(getContext());
 
         View view = inflater.inflate(R.layout.fragment_ejecutar, container, false);
-        reiniciar = view.findViewById(R.id.restart);
+        //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
-        msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
+       // msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
-        reiniciar.setEnabled(false);
+//        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
 
@@ -118,14 +118,14 @@ public class EjecutarFragment extends Fragment {
 
 
         });
-        reiniciar.setOnClickListener(new View.OnClickListener() {
+/*        reiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogEjecutar.show();
                 request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
             }
-        });
+        });*/
         firmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,18 +176,18 @@ public class EjecutarFragment extends Fragment {
             new AlertDialog.Builder(getContext())
                     .setTitle("Ejecutar Orden")
                     .setMessage("¿Desea Ejecutar Orden?")
-                    .setPositiveButton("CANCELAR",
+                    .setPositiveButton("ACEPTAR",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Ejecutar();
+                                }
+                            })
+                    .setNegativeButton("CANCELAR",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialogEjecutar.dismiss();
-                                }
-                            })
-                    .setNegativeButton("ACEPTAR",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                Ejecutar();
                                 }
                             }).show();
 
@@ -197,6 +197,7 @@ public class EjecutarFragment extends Fragment {
     }
 
     public void Ejecutar(){
+        System.out.println("Ejecutar");
         JSONObject jsonObject = new JSONObject();
         final Calendar c = Calendar.getInstance();
         añoE = c.get(Calendar.YEAR);
@@ -206,6 +207,7 @@ public class EjecutarFragment extends Fragment {
         minutoE = c.get(Calendar.MINUTE);
 
         if (horas.ejecutada == 1) {
+            System.out.println("VAL 1");
             fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
             horaHoy = horaE + ":" + minutoE;
             eject.setEnabled(false);
@@ -228,8 +230,10 @@ public class EjecutarFragment extends Fragment {
                 jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
                 jsonObject.put("Visita1", fechaHoy);
                 jsonObject.put("Visita2", "");
+                System.out.println("VAL 2");
+                request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}
-            request.getValidaOrdSer(getActivity(),jsonObject);
+
         }
         if (horas.visita1 == 1) {
             try{
@@ -247,12 +251,12 @@ public class EjecutarFragment extends Fragment {
                 jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
                 jsonObject.put("Visita1", DeepConsModel.Visita1);
                 jsonObject.put("Visita2", fechaHoy);
+                System.out.println("VAL 3");
+                request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}
-            request.getValidaOrdSer(getActivity(),jsonObject);
         }
+        System.out.println("SALIO");
     }
-
-
 }
 
 

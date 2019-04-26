@@ -64,8 +64,8 @@ if(!isOnline()){
 }else{
     user = usurio.getText().toString() + ":" + contraseña.getText().toString();
     enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
-    guardarPre(getApplicationContext(),usurio.getText().toString(),enco);
-    request.getReviews(getApplicationContext());
+    guardarPre(usurio.getText().toString(),enco);
+    request.getReviews(Login.this);
     /////////////
 dialogLogin.show();
     /////////////
@@ -77,8 +77,8 @@ dialogLogin.show();
         });
 
     }
-    public void guardarPre(Context context,String usario,String encode){
-    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+    public void guardarPre(String usario,String encode){
+    Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
     Util.editor = Util.preferences.edit();
     Util.editor.putString("usuario",usario);
     Util.editor.putString("enco","Basic: " +encode);

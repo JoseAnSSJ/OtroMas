@@ -27,6 +27,7 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import static com.example.pablo.prueba7.Activitys.Inicio.pieChart;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -146,7 +147,7 @@ public class Reportes extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             dialogReportes.show();
-            request.getProximaCita(getApplicationContext());
+            request.getOrdenes(getBaseContext());
         } else if (id == R.id.Ordenes_menu) {
             dialogReportes.show();
             clvorden=0;

@@ -26,6 +26,7 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import static com.example.pablo.prueba7.Activitys.Inicio.pieChart;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -160,7 +161,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             dialogOrdenes.show();
-           request.getProximaCita(getApplicationContext());
+            request.getOrdenes(getBaseContext());
         } else if (id == R.id.Ordenes_menu) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {

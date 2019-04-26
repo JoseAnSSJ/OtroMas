@@ -136,8 +136,8 @@ public class asignado extends AppCompatActivity {
                                     dataChild.setType("file");
                                     dat4.get(c).children.add(dataChild);
                                     selectedStrings.remove(0);
-
                                 }
+
                             }
                         }
                         asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
