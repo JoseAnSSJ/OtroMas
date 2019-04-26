@@ -172,5 +172,14 @@ public interface Service {
     @POST(Constants.URL_VALIDA_FIRMA)
     Call<JsonObject> validFirma();
 
+
+    /////MACWAM///////
+    @POST(Constants.URL_VALIDA_MACWAM)
+    Call<JsonObject> validaMACWAM();
+    @POST(Constants.URL_GET_MACWAM)
+    Call<JsonObject> getMACWAM();
+    @POST(Constants.URL_ASIGNA_MACWAM)
+    Call<JsonObject> asignaMACWAM();
+
 }
 
