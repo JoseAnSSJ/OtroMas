@@ -153,6 +153,7 @@ public class asignacion extends AppCompatActivity {
         eliminarAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int macvariable=0;
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
                 while (Arbol_Adapter.DeletChildren.isEmpty() == false) {
@@ -164,9 +165,10 @@ public class asignacion extends AppCompatActivity {
                                 String abc = dat.get(c).children.get(d).getClv_Aparato() + f;
                                 try{
                                     for(int m=0; m<listaDeMac.size();m++){
-                                        if(listaDeMac.get(m).equals(dat.get(c).Detalle)){
-                                            jsonArrayMAC.remove(m);
-                                            listaDeMac.remove(m);
+                                        if(listaDeMac.get(0).equals(dat.get(c).children.get(m).getClv_Aparato())){
+                                            jsonArrayMAC.remove(0);
+                                            listaDeMac.remove(0);
+                                           // macvariable=macvariable+1;
                                         }
                                     }
                                 }catch (Exception e){}

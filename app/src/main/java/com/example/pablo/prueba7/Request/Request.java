@@ -77,6 +77,7 @@ import com.example.pablo.prueba7.Modelos.GetDeepValidaQuejaCompaniaAdicModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
+import com.example.pablo.prueba7.Modelos.GetMACWAMModel;
 import com.example.pablo.prueba7.Modelos.GetMUESTRATRABAJOSQUEJASListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -94,6 +95,7 @@ import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.ValidaMACWAMMODEL;
 import com.example.pablo.prueba7.Modelos.ValidacionFirma;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
@@ -128,6 +130,10 @@ import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
+import static com.example.pablo.prueba7.Activitys.asignado.MACWAMText;
+import static com.example.pablo.prueba7.Activitys.asignado.constraintLayoutMACWAM;
+import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
+import static com.example.pablo.prueba7.Activitys.asignado.jsonArrayMAC;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
@@ -2769,8 +2775,9 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
                     Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
+                    try{
                     dialogAsignacion.dismiss();
-                    finish();
+                    finish();}catch (Exception e){}
                 } else {
                     ErrorInicioDeSesion(context);
                     Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
