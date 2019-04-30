@@ -77,6 +77,7 @@ import com.example.pablo.prueba7.Modelos.GetDeepValidaQuejaCompaniaAdicModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
+import com.example.pablo.prueba7.Modelos.GetMACWAMModel;
 import com.example.pablo.prueba7.Modelos.GetMUESTRATRABAJOSQUEJASListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -94,6 +95,7 @@ import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.ValidaMACWAMMODEL;
 import com.example.pablo.prueba7.Modelos.ValidacionFirma;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
@@ -128,6 +130,10 @@ import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
 import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
+import static com.example.pablo.prueba7.Activitys.asignado.MACWAMText;
+import static com.example.pablo.prueba7.Activitys.asignado.constraintLayoutMACWAM;
+import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
+import static com.example.pablo.prueba7.Activitys.asignado.jsonArrayMAC;
 import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
@@ -154,7 +160,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
-    public static boolean isnet, firma;
+    public static boolean isnet, firma,MACWAM;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
@@ -1371,12 +1377,19 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    if(MACWAM==true){
+                        JSONObject jsonObject = new JSONObject();
+                        try{
+                            jsonObject.put("RelMacwanList",jsonArrayMAC);
+                        }catch (Exception e){}
+                        AsignaMACWAM(context,jsonObject);
+                    }else{
                     Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
                     try{
                         dialogAsignacion.dismiss();
                     }catch (Exception e){}
-
                     finish();
+                    }
                 } else {
                     Toast.makeText(context, "Error al aceptar asignación", Toast.LENGTH_LONG).show();
                     dialogAsignacion.dismiss();

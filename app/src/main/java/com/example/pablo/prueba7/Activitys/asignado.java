@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -35,9 +36,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+
 public class asignado extends AppCompatActivity {
 
-    private Button escanear, agragar,cancelar;
+    private Button escanear, agragar, cancelar;
     private TextView codigo;
     private String contents;
     public static ListView serviciosAparato;
@@ -52,15 +55,20 @@ public class asignado extends AppCompatActivity {
     public static JSONArray jsonArrayMAC= new JSONArray();
     String clvMACWAM = "";
 
+    public static ArrayList<Integer> listaDeMac = new ArrayList<Integer>();
+
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignado);
-        spinnerAparato=findViewById(R.id.tipo_aparato);
-        spinneraparatoDisponible=findViewById(R.id.aparatoDisponible);
+        spinnerAparato = findViewById(R.id.tipo_aparato);
+        spinneraparatoDisponible = findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);
-        agragar=findViewById(R.id.agregarAsignacionAparato);
-        cancelar=findViewById(R.id.cancelarAsignacionAparato);
+        agragar = findViewById(R.id.agregarAsignacionAparato);
+        cancelar = findViewById(R.id.cancelarAsignacionAparato);
+        constraintLayoutMACWAM = findViewById(R.id.MACWAMConstraint);
+        MACWAMText = findViewById(R.id.MacWam);
+        MACWAMText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(12)});
         request.getTipoAparatos(getApplicationContext());
         constraintLayoutMACWAM = findViewById(R.id.MACWAMConstraint);
         MACWAMText = findViewById(R.id.MacWam);
@@ -69,7 +77,7 @@ public class asignado extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento=new Intent(asignado.this,asignacion.class);
+                Intent intento = new Intent(asignado.this, asignacion.class);
                 startActivity(intento);
                 finish();
             }
@@ -80,8 +88,8 @@ public class asignado extends AppCompatActivity {
                 if (position != 0) {
                     Iterator<List<GetMuestraTipoAparatoListResult>> itdata = array.dataTipoAparatos.iterator();
                     List<GetMuestraTipoAparatoListResult> dat = itdata.next();
-                    detalleSpinner= dat.get(position-1).getCategoria();
-                    idArticuloasignado = dat.get(position-1).getIdArticulo();
+                    detalleSpinner = dat.get(position - 1).getCategoria();
+                    idArticuloasignado = dat.get(position - 1).getIdArticulo();
                     request.getAparatosDisponibles(getApplicationContext());
                     request.getServiciosAparatos(getApplicationContext());
                     JSONObject jsonObject = new JSONObject();
@@ -97,22 +105,22 @@ public class asignado extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position1, long id) {
                             Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData2 = array.dataserviciosAparatos.iterator();
-                                List<GetMuestraServiciosRelTipoAparatoListResult> dat2 = itData2.next();
+                            List<GetMuestraServiciosRelTipoAparatoListResult> dat2 = itData2.next();
 
-                                if(clveAparatoSpinner==0){
-                                    Toast.makeText(getApplicationContext(),"Seleccione un tipo de aparato",Toast.LENGTH_LONG).show();
-                                }else{
-                                    if(dat2.get(position1).baseIdUser==0){
-                                        dat2.get(position1).setBaseIdUser(1);
-                                    }else{
-                                        dat2.get(position1).setBaseIdUser(0);
-                                    }
-                                    if(dat2.get(position1).baseIdUser==1){
-                                        selectedStrings.add(dat2.get(position1).clv_UnicaNet);
-                                    }else{
-                                        selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
-                                    }
+                            if (clveAparatoSpinner == 0) {
+                                Toast.makeText(getApplicationContext(), "Seleccione un tipo de aparato", Toast.LENGTH_LONG).show();
+                            } else {
+                                if (dat2.get(position1).baseIdUser == 0) {
+                                    dat2.get(position1).setBaseIdUser(1);
+                                } else {
+                                    dat2.get(position1).setBaseIdUser(0);
                                 }
+                                if (dat2.get(position1).baseIdUser == 1) {
+                                    selectedStrings.add(dat2.get(position1).clv_UnicaNet);
+                                } else {
+                                    selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
+                                }
+                            }
                         }
 
                     });
@@ -132,16 +140,17 @@ public class asignado extends AppCompatActivity {
                 if (position1 != 0) {
                     Iterator<List<GetMuestraAparatosDisponiblesListResult>> itData1 = array.dataAparatosDisponibles.iterator();
                     List<GetMuestraAparatosDisponiblesListResult> dat1 = itData1.next();
-                    clveAparatoSpinner = dat1.get(position1-1).getClv_Aparato();
-                    nombreSpinner = dat1.get(position1-1).getDescripcion();
+                    clveAparatoSpinner = dat1.get(position1 - 1).getClv_Aparato();
+                    nombreSpinner = dat1.get(position1 - 1).getDescripcion();
                     serviciosAparato.setEnabled(true);
-                }else{
-                    clveAparatoSpinner=0;
-                    nombreSpinner="";
-                    Toast.makeText(getApplicationContext(),"Seleccione un aparato",Toast.LENGTH_LONG).show();
+                } else {
+                    clveAparatoSpinner = 0;
+                    nombreSpinner = "";
+                    Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_LONG).show();
                     serviciosAparato.setEnabled(false);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

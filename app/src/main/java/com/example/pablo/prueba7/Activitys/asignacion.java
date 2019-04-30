@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import static com.example.pablo.prueba7.Activitys.asignado.jsonArrayMAC;
+import static com.example.pablo.prueba7.Activitys.asignado.listaDeMac;
 import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.validacionSiguiente;
 import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 
@@ -151,6 +153,7 @@ public class asignacion extends AppCompatActivity {
         eliminarAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int macvariable=0;
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
                 while (Arbol_Adapter.DeletChildren.isEmpty() == false) {

@@ -11,6 +11,7 @@ public class GetMuestraAparatosDisponiblesListResult {
     @Expose
     private String descripcion;
 
+
     public Integer getClv_Aparato() {
         return clv_Aparato;
     }
