@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -192,5 +197,6 @@
         android:textSize="@dimen/mediano"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
