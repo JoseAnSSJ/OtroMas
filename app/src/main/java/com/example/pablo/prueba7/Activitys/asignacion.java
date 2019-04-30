@@ -124,7 +124,8 @@ public class asignacion extends AppCompatActivity {
                         jsonObject3.put("Nombre", dat.get(c).Nombre);
                         jsonObject3.put("Tipo", dat.get(c).Tipo);
                         jsonObject3.put("Type", dat.get(c).Type);
-                        for (int b = 0; b < dat.get(c).children.size(); b++) {
+                        int hijo=dat.get(c).children.size();
+                        for (int b = 0; b < hijo; b++) {
                             jsonObject4 = new JSONObject();
                             jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
                             jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
