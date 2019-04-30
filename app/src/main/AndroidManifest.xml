@@ -52,7 +52,9 @@
         <activity
             android:name=".Activitys.asignado"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"
+            />
         <activity
             android:name=".Activitys.ExtensionesAdi"
             android:screenOrientation="portrait"
@@ -64,7 +66,9 @@
         <activity
             android:name=".Activitys.Login"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"
+            ></activity>
         <activity
             android:name=".Activitys.CambioDom"
             android:configChanges="screenSize|orientation"

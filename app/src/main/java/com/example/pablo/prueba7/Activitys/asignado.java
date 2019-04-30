@@ -169,7 +169,7 @@ public class asignado extends AppCompatActivity {
                     } else {
                         if (request.MACWAM == true) {
                             if (clvMACWAM.equals("") == true) {
-                                Toast.makeText(getApplicationContext(), "Escriba MACWAM", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
                             } else {
                                 if (clvMACWAM.equals(nombreSpinner) == false) {
                                     if (clvMACWAM.length() == 12) {
@@ -189,10 +189,10 @@ public class asignado extends AppCompatActivity {
 
                                     }
                                     else{
-                                        Toast.makeText(getApplicationContext(), "La MacWam debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
                                     }
                                 }else {
-                                    Toast.makeText(getApplicationContext(), "La MacWam no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
