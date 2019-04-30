@@ -66,5 +66,8 @@ public class Constants {
     public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
     public static final String URL_ADD_FIRMA="AplicacionMovil/InsertaTblFirmaCliente";
     public static final String URL_VALIDA_FIRMA = "AplicacionMovil/TrabajosFirma";
-
+    ////////MACWAM////////////
+    public static final String URL_VALIDA_MACWAM = "AsignaAparatosAlServicio/GetValidaRequiereMacWan";
+    public static final String URL_GET_MACWAM = "AsignaAparatosAlServicio/ConMacWanbyClv_Aparato";
+    public static final String URL_ASIGNA_MACWAM = "AsignaAparatosAlServicio/GetSaveRelMacsTemp";
 }

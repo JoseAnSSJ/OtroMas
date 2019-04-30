@@ -13,6 +13,13 @@ public class GetMuestraTipoAparatoListResult {
     @SerializedName("Categoria")
     @Expose
     public  String categoria;
+    @SerializedName("Letra")
+    @Expose
+    public  String letra;
+
+    public String getLetra() {
+        return letra;
+    }
 
     public String getNombre() {
         return nombre;

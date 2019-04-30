@@ -3,11 +3,15 @@ package com.example.pablo.prueba7.Activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,9 +27,13 @@ import com.example.pablo.prueba7.Request.Request;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class asignado extends AppCompatActivity {
 
@@ -39,6 +47,10 @@ public class asignado extends AppCompatActivity {
     public static int idArticuloasignado, clveAparatoSpinner;
     public static String detalleSpinner, nombreSpinner;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
+    public static ConstraintLayout constraintLayoutMACWAM;
+    public static EditText MACWAMText;
+    public static JSONArray jsonArrayMAC= new JSONArray();
+    String clvMACWAM = "";
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -50,6 +62,9 @@ public class asignado extends AppCompatActivity {
         agragar=findViewById(R.id.agregarAsignacionAparato);
         cancelar=findViewById(R.id.cancelarAsignacionAparato);
         request.getTipoAparatos(getApplicationContext());
+        constraintLayoutMACWAM = findViewById(R.id.MACWAMConstraint);
+        MACWAMText = findViewById(R.id.MacWam);
+        MACWAMText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(12)});
         selectedStrings.clear();
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +84,14 @@ public class asignado extends AppCompatActivity {
                     idArticuloasignado = dat.get(position-1).getIdArticulo();
                     request.getAparatosDisponibles(getApplicationContext());
                     request.getServiciosAparatos(getApplicationContext());
+                    JSONObject jsonObject = new JSONObject();
+                    JSONObject jsonObject1 = new JSONObject();
+                    try {
+                        jsonObject.put("Letra", dat.get(position - 1).letra);
+                        jsonObject1.put("ObjRelMacwan", jsonObject);
+                    } catch (Exception e) {
+                    }
+                    request.ValidaMACWAM(getApplicationContext(), jsonObject1);
                     serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -127,19 +150,91 @@ public class asignado extends AppCompatActivity {
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-if(clveAparatoSpinner==0){
-    Toast.makeText(getApplicationContext(),"Seleccione un aparato",Toast.LENGTH_LONG).show();
-}else{
-    if(selectedStrings.size()==0){
-        Toast.makeText(getApplicationContext(),"No se ha seleccionado nigun medio",Toast.LENGTH_LONG).show();
-    }else{
+                clvMACWAM = String.valueOf(MACWAMText.getText());
+
+                if (clveAparatoSpinner == 0) {
+                    Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_LONG).show();
+                } else {
+                    if (selectedStrings.size() == 0) {
+                        Toast.makeText(getApplicationContext(), "No se ha seleccionado nigun medio", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (request.MACWAM == true) {
+                            if (clvMACWAM.equals("") == true) {
+                                Toast.makeText(getApplicationContext(), "Escriba MACWAM", Toast.LENGTH_LONG).show();
+                            } else {
+                                if (clvMACWAM.equals(nombreSpinner) == false) {
+                                    if (clvMACWAM.length() == 12) {
+                                        JSONObject jsonObjectMACWAM = new JSONObject();
+                                        listaDeMac.add(clveAparatoSpinner);
+                                        try {
+                                            jsonObjectMACWAM.put("Clv_Aparato", clveAparatoSpinner);
+                                            jsonObjectMACWAM.put("MacLan", nombreSpinner);
+                                            jsonObjectMACWAM.put("MacWan", MACWAMText.getText());
+                                            jsonObjectMACWAM.put("Clv_Orden", clvor);
+
+
+                                        } catch (Exception e) {
+                                        }
+                                        jsonArrayMAC.put(jsonObjectMACWAM);
+                                        EjecutarAsignacion();
+
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "La MacWam debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "La MacWam no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        } else {
+                            EjecutarAsignacion();
+                        }
+
+
+                    }
+                }
+
+
+            }
+        });
+      /*  escanear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(asignado.this);
+                scanIntegrator.initiateScan();
+            }
+        });*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (scanningResult != null) {
+            contents = data.getStringExtra("SCAN_RESULT");
+            codigo.setText(contents);
+            codigo.setVisibility(TextView.VISIBLE);
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intento = new Intent(asignado.this, asignacion.class);
+            startActivity(intento);
+            finish();
+        }
+        return true;
+    }
+
+    public void EjecutarAsignacion() {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
-        for(int c=0; c<dat4.size(); c++){
-            for(int d=0; d<selectedStrings.size();d++){
-                int abc=dat4.get(c).getClv_UnicaNet();
-                if(selectedStrings.get(0)==abc){
-                    children dataChild= new children();
+        for (int c = 0; c < dat4.size(); c++) {
+            for (int d = 0; d < selectedStrings.size(); d++) {
+                int abc = dat4.get(c).getClv_UnicaNet();
+                if (selectedStrings.get(0) == abc) {
+                    children dataChild = new children();
                     dataChild.setBaseIdUser(0);
                     dataChild.setBaseRemoteIp(null);
                     dataChild.setClv_Aparato(clveAparatoSpinner);
@@ -157,41 +252,21 @@ if(clveAparatoSpinner==0){
         }
         asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
 
-        Intent intento=new Intent(asignado.this,asignacion.class);
+        Intent intento = new Intent(asignado.this, asignacion.class);
         startActivity(intento);
         finish();
     }
-}
-
-
-
-
+    InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; ++i)
+            {
+                if (!Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890]*").matcher(String.valueOf(source.charAt(i))).matches())
+                {
+                    return "";
+                }
             }
-        });
-      /*  escanear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator scanIntegrator = new IntentIntegrator(asignado.this);
-                scanIntegrator.initiateScan();
-            }
-        });*/
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
-        if (scanningResult != null){
-            contents = data.getStringExtra("SCAN_RESULT");
-            codigo.setText(contents);
-            codigo.setVisibility(TextView.VISIBLE);
+            return null;
         }
-    }
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent intento=new Intent(asignado.this,asignacion.class);
-            startActivity(intento);
-            finish();
-        }
-        return true;
-    }
+    };
 }

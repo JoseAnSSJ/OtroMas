@@ -160,6 +160,15 @@ public class asignacion extends AppCompatActivity {
                         if (dat.get(c).children != null) {
                             for (int d = 0; d < dat.get(c).children.size(); d++) {
                                 String abc = dat.get(c).children.get(d).getClv_Aparato() + f;
+                                try{
+                                    for(int m=0; m<listaDeMac.size();m++){
+                                        if(listaDeMac.get(0).equals(dat.get(c).children.get(m).getClv_Aparato())){
+                                            jsonArrayMAC.remove(0);
+                                            listaDeMac.remove(0);
+                                            // macvariable=macvariable+1;
+                                        }
+                                    }
+                                }catch (Exception e){}
                                 try {
                                     if (Integer.parseInt(abc) == (Arbol_Adapter.DeletChildren.get(0))) {
                                         dat.get(c).children.remove(d);
