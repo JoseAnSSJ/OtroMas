@@ -141,14 +141,15 @@ public class asignacion extends AppCompatActivity {
                         jsonObject3.put("children", jsonArray3);
                         jsonObject3.put("clv_orden", dat.get(c).clv_orden);
                         jsonArray2.put(c, jsonObject3);
-                        request.getAceptatAsignacino(getApplicationContext());
-                        finish();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(asignacion.this, "Error", Toast.LENGTH_LONG);
                         dialogAsignacion.dismiss();
                     }
                 }
+                request.getAceptatAsignacino(getApplicationContext());
+                finish();
             }
         });
         eliminarAparato.setOnClickListener(new View.OnClickListener() {

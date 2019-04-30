@@ -73,7 +73,7 @@
 
         <Spinner
             android:id="@+id/tipo_aparato"
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="@dimen/spinnerA"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -95,7 +95,7 @@
 
         <Spinner
             android:id="@+id/aparatoDisponible"
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="@dimen/spinnerA"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -107,6 +107,7 @@
             android:id="@+id/MACWAMConstraint"
             android:layout_width="match_parent"
             android:layout_height="83dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/aparatoDisponible"
             tools:layout_editor_absoluteX="0dp">

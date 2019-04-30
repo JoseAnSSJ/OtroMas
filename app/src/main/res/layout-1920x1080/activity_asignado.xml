@@ -105,6 +105,7 @@
                 android:id="@+id/MACWAMConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="83dp"
+                android:layout_marginTop="8dp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/aparatoDisponible"
                 tools:layout_editor_absoluteX="0dp">
@@ -127,12 +128,24 @@
                     android:layout_height="@dimen/spinnerA"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:maxLength="12"
                     android:background="@drawable/disenio_spinner"
+                    android:maxLength="12"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
             </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/servicios_a_los_que"
+                android:textSize="@dimen/grande"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/MACWAMConstraint" />
+
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/sss"
