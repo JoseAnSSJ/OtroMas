@@ -240,22 +240,29 @@ public class asignado extends AppCompatActivity {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
         for (int c = 0; c < dat4.size(); c++) {
-            for (int d = 0; d < selectedStrings.size(); d++) {
-                int abc = dat4.get(c).getClv_UnicaNet();
-                if (selectedStrings.get(0) == abc) {
-                    children dataChild = new children();
-                    dataChild.setBaseIdUser(0);
-                    dataChild.setBaseRemoteIp(null);
-                    dataChild.setClv_Aparato(clveAparatoSpinner);
-                    dataChild.setClv_UnicaNet(null);
-                    dataChild.setContratoNet(0);
-                    dataChild.setDetalle(detalleSpinner);
-                    dataChild.setNombre(nombreSpinner);
-                    dataChild.setTipo("A");
-                    dataChild.setType("file");
-                    dat4.get(c).children.add(dataChild);
-                    selectedStrings.remove(0);
+            int asd;
+            for (int d = 0; d <= selectedStrings.size(); d++ ) {
+                int abc ;
+                try{
+                    if (selectedStrings.get(d) == dat4.get(c).getClv_UnicaNet()) {
+                        children dataChild = new children();
+                        dataChild.setBaseIdUser(0);
+                        dataChild.setBaseRemoteIp(null);
+                        dataChild.setClv_Aparato(clveAparatoSpinner);
+                        dataChild.setClv_UnicaNet(null);
+                        dataChild.setContratoNet(0);
+                        dataChild.setDetalle(detalleSpinner);
+                        dataChild.setNombre(nombreSpinner);
+                        dataChild.setTipo("A");
+                        dataChild.setType("file");
+                        dat4.get(c).children.add(dataChild);
+                        selectedStrings.remove(d);
                 }
+                }
+                catch (Exception e){}
+
+
+
 
             }
         }
