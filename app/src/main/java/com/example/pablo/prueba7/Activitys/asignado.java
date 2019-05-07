@@ -262,8 +262,6 @@ public class asignado extends AppCompatActivity {
                 catch (Exception e){}
 
 
-
-
             }
         }
         asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
