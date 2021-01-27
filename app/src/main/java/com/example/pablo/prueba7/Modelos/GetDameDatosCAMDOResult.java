@@ -87,7 +87,37 @@ public class GetDameDatosCAMDOResult {
         Ciudad = ciudad;
     }
 
+    public void setNUMERO(int NUMERO) {
+        this.NUMERO = NUMERO;
+    }
 
+    public void setNum_int(String num_int) {
+        Num_int = num_int;
+    }
+
+    public void setTELEFONO(String TELEFONO) {
+        this.TELEFONO = TELEFONO;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public void setCalleEste(String calleEste) {
+        this.calleEste = calleEste;
+    }
+
+    public void setCalleNorte(String calleNorte) {
+        this.calleNorte = calleNorte;
+    }
+
+    public void setCalleOeste(String calleOeste) {
+        this.calleOeste = calleOeste;
+    }
+
+    public void setCalleSur(String calleSur) {
+        this.calleSur = calleSur;
+    }
 
     public void setColonia(String colonia) {
         this.colonia = colonia;

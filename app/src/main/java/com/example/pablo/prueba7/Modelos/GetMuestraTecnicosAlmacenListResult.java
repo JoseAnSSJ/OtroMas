@@ -18,7 +18,7 @@ public class GetMuestraTecnicosAlmacenListResult {
     private String nombre;
     @SerializedName("clv_Tecnico")
     @Expose
-    private Long clvTecnico;
+    private Integer clvTecnico;
 
     public Long getBaseIdUser() {
         return baseIdUser;
@@ -52,11 +52,11 @@ public class GetMuestraTecnicosAlmacenListResult {
         this.nombre = nombre;
     }
 
-    public Long getClvTecnico() {
+    public Integer getClvTecnico() {
         return clvTecnico;
     }
 
-    public void setClvTecnico(Long clvTecnico) {
+    public void setClvTecnico(Integer clvTecnico) {
         this.clvTecnico = clvTecnico;
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstalacionFragment">
+    tools:context=".Fragments.InstalacionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="10dp"
                 tools:ignore="NotSibling">
 
                 <TextView
@@ -75,20 +75,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginTop="18dp"
                     android:text="Ejecucion"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/ejecureal"
-                    android:layout_width="match_parent"
+                    android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="200dp"
+                    android:layout_marginStart="193dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="34dp"
                     android:focusable="false"
                     android:hint="0/0/0"
                     android:textSize="20sp" />
@@ -165,8 +166,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="13dp"
+                    android:layout_marginStart="10dp"
                     android:text="Hora inicio"
+                    android:textColor="#000"
                     android:textSize="20dp" />
 
                 <TextView
@@ -175,11 +177,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="11dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
                     android:text="Hora fin"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/horaf"
@@ -222,7 +225,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="290dp"
                 android:text="Tecnico Secundario"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#000"/>
 
             <Spinner
                 android:id="@+id/tecnicosec"
@@ -237,7 +241,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="350dp"
+                android:layout_marginStart="10dp"
                 android:textSize="20dp"
+                android:textColor="#000"
                 android:text="Observaciones:"
                 />
             <TextView
@@ -245,6 +251,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="375dp"
                 android:textSize="20dp"
+                android:layout_marginStart="10dp"
                 android:id="@+id/obs"
                 />
             <RelativeLayout
@@ -256,19 +263,24 @@
                     android:id="@+id/txtCoordenadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="Espere..."
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#000"/>
                 <TextView
                     android:id="@+id/txtCoordenadas1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtCoordenadas"
-                    android:text="TextView" />
+                    android:text="Espere..." />
                 <TextView
                     android:id="@+id/txtCoordenadas2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtCoordenadas1"
-                    android:text="TextView" />
+                    android:text="Espere..." />
 
 
             </RelativeLayout>

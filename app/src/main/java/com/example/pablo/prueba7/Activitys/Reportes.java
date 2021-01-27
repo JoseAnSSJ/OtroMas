@@ -1,115 +1,109 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
-import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Request.Request;
 
+import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
+import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
 
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
 import static com.example.pablo.prueba7.Services.Services.opcion;
 
-public class Orden extends AppCompatActivity
-
+public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Request request = new Request();
-    ordenes_adapter_result adapterord;
-    Button cambiodom, cambioapa,ordenb,contratob;
-  public static   ListView ordenes;
-    EditText ordsearch,contsearch;
-
-    Request rqs=new Request();
-
-
+    ListView reportes;
+    Button breporte,bcontrato;
+    EditText reportesearch,contratosearch;
+    quejas_adapter_result adapterqueja;
     @Override
-
-
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
-        setContentView(R.layout.activity_orden);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_reportes);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-        cambiodom = findViewById(R.id.cambiodom);
-        cambioapa = findViewById(R.id.cambioapa);
-        ordenes=findViewById(R.id.listorden);
-        ordenb=findViewById(R.id.borden);
-        contratob=findViewById(R.id.bcontrato);
-        ordsearch=findViewById(R.id.ordsearch);
-        contsearch=findViewById(R.id.contsearch);
         Error.Errores(this);
-
-        ////////////////////////////////////////
-        clvorden=0;
-        opcion=1;
-        cont="";
-        adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc);
-        ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
-/////////////////////////////////////////////
+        reportes=findViewById(R.id.listreporte);
+        breporte=findViewById(R.id.breporte);
+        bcontrato=findViewById(R.id.bcontrato);
+        reportesearch=findViewById(R.id.reportesearch);
+        contratosearch=findViewById(R.id.contsearch);
 
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        ///////////Busqueda de orden/////////////
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        ordenb.setOnClickListener(new View.OnClickListener() {
+        ////////////////////////////////
+        adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ);
+        reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
+        /////////////////////////////////
+        ///////////Busqueda de Reporte/////////////
+
+        breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
 
-                if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
+                if (reportesearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
-                                    "Campo de Orden Vacio", Toast.LENGTH_SHORT);
+                                    "Campo de Reporte vacío", Toast.LENGTH_SHORT);
                     toast1.show();
 
                 }
                 else {
 
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
 
                     opcion=2;
-                    clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd();
+                    clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
+                    request.getListQuejas();
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
-                                    "Orden encontrada", Toast.LENGTH_SHORT);
+                                    "Reporte encontrado", Toast.LENGTH_SHORT);
                     toast1.show();
-
-                    ordenes.setAdapter(adapterord);
+                    //reportesearch.setText(" ");
+                    reportes.setAdapter(adapterqueja);
                 }
             }
         });
 
 //////////////////Busqueda de Contrato//////////////////
-        contratob.setOnClickListener(new View.OnClickListener() {
+        bcontrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (contsearch.getText().toString().trim().equalsIgnoreCase("")){
+                if (contratosearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Campo de Contrato vacio", Toast.LENGTH_SHORT);
@@ -118,40 +112,30 @@ public class Orden extends AppCompatActivity
                 }
                 else {
 
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    Array.statusrc.clear();
-                    Array.contratosrc.clear();
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    Array.statusQ.clear();
+                    Array.contratoQ.clear();
 
                     opcion=3;
-                    cont=(contsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd();
+                    cont=(contratosearch.getText().toString().toLowerCase().trim());
+                    request.getListQuejas();
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Contrato encontrado", Toast.LENGTH_SHORT);
                     toast1.show();
-                    //contsearch.setText(" ");
-                    ordenes.setAdapter(adapterord);
+                    //contratosearch.setText(" ");
+                    reportes.setAdapter(adapterqueja);
                 }
             }
         });
-        //////////////////////////////////////////////
 
-
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView =  findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -171,34 +155,34 @@ public class Orden extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Orden.this, Inicio.class);
+            Intent intent1 = new Intent(Reportes.this, Inicio.class);
             startActivity(intent1);
             //Actualizar la siguente cita y la grafica
-           request.getProximaCita();
-
-                request.getOrdenes();
+            request.getProximaCita();
+            request.getOrdenes();
 
         } else if (id == R.id.Ordenes) {
-            Intent intent1 = new Intent(Orden.this, Orden.class);
+            Intent intent1 = new Intent(Reportes.this, Orden.class);
             clvorden=0;
             opcion=1;
             request.getListOrd();
             startActivity(intent1);
 
-
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Orden.this, Reportes.class);
+            Intent intent1 = new Intent(Reportes.this, Reportes.class);
             clavequeja=0;
             opcion=1;
+            cont="";
             request.getListQuejas();
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {
-            Intent intent1 = new Intent(Orden.this, Configuracion.class);
+            Intent intent1 = new Intent(Reportes.this, Configuracion.class);
             startActivity(intent1);
 
         }
@@ -214,3 +198,4 @@ public class Orden extends AppCompatActivity
         return false;
     }
 }
+

@@ -26,6 +26,9 @@ public class ListadoQuejasAgendadas {
         return clvQueja;
     }
 
+    public void setClvQueja(Integer clvQueja) {
+        this.clvQueja = clvQueja;
+    }
 
     public String getContrato() {
         return contrato;

@@ -20,53 +20,53 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Inicio"
+            android:name=".Activitys.Inicio"
             android:label="Inicio"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"
             >
 
         </activity>
         <activity
-            android:name=".Orden"
+            android:name=".Activitys.Orden"
             android:label="@string/title_activity_orden"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Reportes"
+            android:name=".Activitys.Reportes"
             android:label="@string/title_activity_reportes"
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
-            android:name=".Configuracion"
+            android:name=".Activitys.Configuracion"
             android:label="@string/title_activity_configuracion"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:screenOrientation="portrait"
             ></activity>
 
-        <activity android:name=".MainActivity"
-            android:configChanges="screenSize|orientation"
+        <activity android:name=".Activitys.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             ></activity>
-        <activity android:name=".asignacion"
+        <activity android:name=".Activitys.asignacion"
             android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
-        <activity android:name=".asignado"
+        <activity android:name=".Activitys.asignado"
             android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
-        <activity android:name=".ExtensionesAdi"
+        <activity android:name=".Activitys.ExtensionesAdi"
             android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
-        <activity android:name=".MainReportes"
-            android:configChanges="screenSize|orientation"
+        <activity android:name=".Activitys.MainReportes"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             ></activity>
 
-        <activity android:name=".Login"
+        <activity android:name=".Activitys.Login"
             android:theme="@style/AppTheme.NoActionBar"
 
             >
@@ -76,11 +76,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CambioDom"
+        <activity android:name=".Activitys.CambioDom"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="screenSize|orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             ></activity>
-        <activity android:name=".CambioAparato"
+        <activity android:name=".Activitys.CambioAparato"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>

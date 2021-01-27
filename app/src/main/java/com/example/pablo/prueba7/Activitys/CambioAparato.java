@@ -1,9 +1,10 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloR
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Iterator;
@@ -41,24 +43,19 @@ public class CambioAparato extends AppCompatActivity {
         aparatoAsignar = findViewById(R.id.aparatoAsignar);
 
 
-        ab=CambioAparatoDeepModel.AparatoAsignar;
-        if(ab!=null){
-            request.getDeepCAPAT(getApplicationContext());
-            Login.esperar(2);
 
 
-        }else{
-            request.getCliApa(getApplicationContext());
-            request.getStatusApa(getApplicationContext());
-        }
+        request.getDeepCAPAT(getApplicationContext());
+
+
+
 
 
 
         aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(CambioAparato.this, Orden.class);
-                startActivity(intento1);
+                request.SetCambioAparato(getBaseContext());
             }
         });
         estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -130,17 +127,17 @@ public class CambioAparato extends AppCompatActivity {
         });
     }
 
-public static int obtenerPosicionAC(int abc){
+    public static int obtenerPosicionAC(int abc){
         int position=0;
-    Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
+        Iterator<List<GetListClienteAparatosResult>> itdata = Array.dataCliApa.iterator();
         List<GetListClienteAparatosResult> dat = itdata.next();
-    for(int i=0; i<dat.size(); i++){
-            if(dat.get(i).idArticulo==abc){
+        for(int i=0; i<dat.size(); i++){
+            if(dat.get(i).Clv_Aparato==abc){
                 position = i+1;
             }
         }
         return position;
-}
+    }
     public static int obtenerPosicionSA(Spinner spinner, String abc){
         int position=0;
         Iterator<List<GetSP_StatusAparatosListResult>> itdata = Array.dataStaApa.iterator();
@@ -173,5 +170,11 @@ public static int obtenerPosicionAC(int abc){
             }
         }
         return position;
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

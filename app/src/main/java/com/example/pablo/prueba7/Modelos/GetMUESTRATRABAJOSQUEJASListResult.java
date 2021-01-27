@@ -32,11 +32,14 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
         this.baseIdUser = baseIdUser;
     }
 
+    public Object getBaseRemoteIp() {
+        return baseRemoteIp;
+    }
+
     public void setBaseRemoteIp(Object baseRemoteIp) {
         this.baseRemoteIp = baseRemoteIp;
     }
 
-<<<<<<< HEAD
     public int getCLVTRABAJO() {
         return cLVTRABAJO;
     }
@@ -45,13 +48,21 @@ public class GetMUESTRATRABAJOSQUEJASListResult {
         this.cLVTRABAJO = cLVTRABAJO;
     }
 
-=======
->>>>>>> master
     public String getDESCRIPCION() {
         return dESCRIPCION;
     }
 
+    public void setDESCRIPCION(String dESCRIPCION) {
+        this.dESCRIPCION = dESCRIPCION;
+    }
 
+    public Object getTipSer() {
+        return tipSer;
+    }
+
+    public void setTipSer(Object tipSer) {
+        this.tipSer = tipSer;
+    }
 
 
 

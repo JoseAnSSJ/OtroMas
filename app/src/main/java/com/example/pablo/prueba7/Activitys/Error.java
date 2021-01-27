@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Context;
 import android.os.Looper;

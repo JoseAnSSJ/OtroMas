@@ -10,14 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.MainActivity;
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
-
 import java.util.ArrayList;
-
-
 
 public class ordenes_adapter_result extends BaseAdapter {
 
@@ -75,10 +72,10 @@ public class ordenes_adapter_result extends BaseAdapter {
 
             convertView=inflater.inflate(R.layout.ordenes_list_items,null);
 
-            holder.status=convertView.findViewById(R.id.statusv);
-            holder.orden=convertView.findViewById(R.id.ordenv);
-            holder.contrato1=convertView.findViewById(R.id.contratov);
-            holder.nombre=convertView.findViewById(R.id.nombrev);
+            holder.status=(TextView)convertView.findViewById(R.id.statusv);
+            holder.orden=(Button)convertView.findViewById(R.id.ordenv);
+            holder.contrato1=(TextView)convertView.findViewById(R.id.contratov);
+            holder.nombre=(TextView)convertView.findViewById(R.id.nombrev);
 
             convertView.setTag(holder);
         }

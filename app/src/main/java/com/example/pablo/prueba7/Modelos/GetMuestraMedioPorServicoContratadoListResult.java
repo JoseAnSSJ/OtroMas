@@ -22,9 +22,19 @@ public class GetMuestraMedioPorServicoContratadoListResult {
         return idMedio;
     }
 
+    public boolean isRequiereAcometida() {
+        return requiereAcometida;
+    }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    public void getIdMedio(Integer medio) {
+        this.idMedio = medio;
+    }
+
+    public void setRequiereAcometida(boolean requiereAcometida) {
+        this.requiereAcometida = requiereAcometida;
+    }
 }

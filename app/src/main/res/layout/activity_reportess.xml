@@ -29,18 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="11dp"
             android:layout_marginEnd="4dp"
-            android:textColor="#000"
-            android:text="Tecnico:" />
+            android:text="Tecnico:"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/tecnico1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginStart="185dp"
+            android:layout_marginTop="10dp"
             android:text="Juan Santillan" />
 
         <Button
@@ -52,6 +54,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="15dp"
             android:text="Datos Cliente"
+            android:background="@drawable/boton"
             android:textSize="6dp"
             android:textStyle="bold" />
 
@@ -60,11 +63,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="32dp"
             android:text="Contrato:"
-            android:textColor="#000"
-            android:textStyle="bold" />
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/contrato1"
@@ -72,8 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="165dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="186dp"
+            android:layout_marginTop="33dp"
             android:hint="456-453" />
 
 

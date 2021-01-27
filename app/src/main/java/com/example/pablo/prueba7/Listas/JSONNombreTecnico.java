@@ -13,7 +13,9 @@ public class JSONNombreTecnico {
         return getConTecnicoAgendaResult;
     }
 
-
+    public void setGetConTecnicoAgendaResult(GetConTecnicoAgendaResult getConTecnicoAgendaResult) {
+        this.getConTecnicoAgendaResult = getConTecnicoAgendaResult;
+    }
 
 
 

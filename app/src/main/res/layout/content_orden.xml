@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Orden"
+    tools:context=".Activitys.Orden"
     tools:showIn="@layout/app_bar_orden">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <ListView
             android:id="@+id/listorden"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="574dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="100dp" />
 
@@ -102,7 +102,7 @@
             android:textSize="18dp"
             android:textStyle="bold" />
 
-        <Button
+        <!--<Button
             android:id="@+id/cambiodom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
             android:text="Cambio Aparato"
             android:textSize="10dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="450dp"/>
+            android:layout_marginTop="450dp"/>-->
 
 
     </RelativeLayout>

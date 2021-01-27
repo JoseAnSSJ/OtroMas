@@ -1,4 +1,4 @@
-package com.example.pablo.prueba7;
+package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -43,29 +44,29 @@ public class Inicio extends AppCompatActivity
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_inicio);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        pieChart =findViewById(R.id.pastel);
-        trabajo= findViewById(R.id.proximotrabajo);
-        direccion = findViewById(R.id.direccion);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        pieChart =(PieChart)findViewById(R.id.pastel);
+        trabajo= (TextView)findViewById(R.id.proximotrabajo);
+        direccion = (TextView)findViewById(R.id.direccion);
         setSupportActionBar(toolbar);
 //Clase error
         Error.Errores(this);
 
 
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ///////////////////////////////////////////////////////////////
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -102,6 +103,8 @@ public class Inicio extends AppCompatActivity
             clvorden=0;
             opcion=1;
             request.getListOrd();
+            //request.getTrabajos();
+            //request.getDeepCons();
             startActivity(intent1);
 
             finish();
